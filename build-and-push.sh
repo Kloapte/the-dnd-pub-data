@@ -3,7 +3,7 @@
 # Variables
 APP_NAME=the-dnd-pub-data
 SOURCE_DIR=.
-BUILDER_IMAGE=registry.redhat.io/openjdk/openjdk-21-rhel8
+BUILDER_IMAGE=registry.redhat.io/ubi9/openjdk-21
 REGISTRY=localhost:5000
 IMAGE_NAME=$REGISTRY/$APP_NAME
 
