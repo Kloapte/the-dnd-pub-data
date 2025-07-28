@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: the-dnd-pub-data
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: the-dnd-pub-data
+  template:
+    metadata:
+      labels:
+        app: the-dnd-pub-data
+    spec:
+      containers:
+        - name: the-dnd-pub-data
+          image: localhost:5000/the-dnd-pub-data
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080

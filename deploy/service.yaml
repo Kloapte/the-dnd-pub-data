@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: the-dnd-pub-data
+spec:
+  selector:
+    app: the-dnd-pub-data
+  ports:
+    - protocol: TCP
+      port: 80       # Exposed in-cluster
+      targetPort: 8080  # Port inside the container (Spring Boot)
+  type: LoadBalancer  # Change to ClusterIP or NodePort if needed
