@@ -15,6 +15,6 @@ spec:
       containers:
         - name: the-dnd-pub-data
           image: localhost:5000/the-dnd-pub-data
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
