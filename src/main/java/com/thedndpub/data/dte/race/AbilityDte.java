@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AbilityDte {
+    private String name;
     private ChooseDte choose;
     private int dex;
     private int wis;

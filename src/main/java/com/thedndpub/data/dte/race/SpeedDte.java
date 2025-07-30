@@ -5,9 +5,8 @@ import com.thedndpub.data.dte.race.deserializers.SpeedDtoDeserializer;
 import lombok.Data;
 
 @Data
-@JsonDeserialize(using = SpeedDtoDeserializer.class)
 public class SpeedDte {
-    private int walk;
+    private Integer walk;
     private Integer flySpeed;
     private Boolean flyAvailable;
 }

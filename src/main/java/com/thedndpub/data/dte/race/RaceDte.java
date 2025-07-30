@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.thedndpub.data.dte.race.deserializers.EntryDtoDeserializer;
 import com.thedndpub.data.dte.race.deserializers.ResistDtoDeserializer;
+import com.thedndpub.data.dte.race.deserializers.SpeedDtoDeserializer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +32,7 @@ public class RaceDte {
     private String lineage;
     private List<String> creatureTypeTags;
     private List<String> size;
+    @JsonDeserialize(using = SpeedDtoDeserializer.class)
     private SpeedDte speed;
     private List<AbilityDte> ability;
     private HeightAndWeightDte heightAndWeight;

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thedndpub.data.dte.race.ResistDte;
 import com.thedndpub.data.dte.race.SpeedDte;
 
 import java.io.IOException;
@@ -15,22 +16,28 @@ public class SpeedDtoDeserializer extends JsonDeserializer<SpeedDte> {
         ObjectMapper mapper = (ObjectMapper) p.getCodec();
         JsonNode node = mapper.readTree(p);
 
-        SpeedDte dto = new SpeedDte();
-        JsonNode walkNode = node.get("walk");
-        if(walkNode != null) {
-            dto.setWalk(walkNode.asInt());
-        }
+        SpeedDte dte = new SpeedDte();
 
-        JsonNode flyNode = node.get("fly");
-        if (flyNode != null) {
-            if (flyNode.isInt()) {
-                dto.setFlySpeed(flyNode.asInt());
-                dto.setFlyAvailable(true);
-            } else if (flyNode.isBoolean()) {
-                dto.setFlyAvailable(flyNode.asBoolean());
+        if(node != null && node.isInt()) {
+            dte.setWalk(node.asInt());
+        }
+        else if(node != null && node.isObject()) {
+            JsonNode walkNode = node.get("walk");
+            if (walkNode != null) {
+                dte.setWalk(walkNode.asInt());
+            }
+
+            JsonNode flyNode = node.get("fly");
+            if (flyNode != null) {
+                if (flyNode.isInt()) {
+                    dte.setFlySpeed(flyNode.asInt());
+                    dte.setFlyAvailable(true);
+                } else if (flyNode.isBoolean()) {
+                    dte.setFlyAvailable(flyNode.asBoolean());
+                }
             }
         }
 
-        return dto;
+        return dte;
     }
 }

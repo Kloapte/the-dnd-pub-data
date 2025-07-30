@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class WeaponProficiencyDte {
+    private String name;
     private ChooseDte choose;
     @JsonProperty("battleaxe|phb")
     private boolean battleaxe;
