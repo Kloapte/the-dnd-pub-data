@@ -54,6 +54,12 @@ public class RaceController {
         return this.getRaces().stream().filter(race -> race.getWeaponProficiencies() != null).toList();
     }
 
+
+    @GetMapping("/name/{name}/unmapped")
+    public List<RaceDte> getRaceUnmappedOnName(@PathVariable("name") String name) {
+        return raceService.getAllRaces().stream().filter(race -> race.getName().contains(name)).toList();
+    }
+
     @GetMapping("/subraces")
     public List<SubraceDte> getSubraces() {
         List<SubraceDte> subraces = new ArrayList<>();
@@ -121,5 +127,67 @@ public class RaceController {
             }
         }
         return weapons;
+    }
+
+    @GetMapping("/tools")
+    public List<ToolProficiencyDte> getTools() {
+        List<ToolProficiencyDte> tools = new ArrayList<>();
+        for(RaceDte race : raceService.getAllRaces()) {
+            if(race.getToolProficiencies() != null && !race.getToolProficiencies().isEmpty()) {
+                for(ToolProficiencyDte tool : race.getToolProficiencies()) {
+                    tool.setName(race.getName());
+//                    if(tool) {
+                        tools.add(tool);
+//                    }
+                }
+            }
+        }
+        return tools;
+    }
+
+    @GetMapping("/source")
+    public List<RaceDte> getSources() {
+        List<RaceDte> sources = new ArrayList<>();
+        for(RaceDte race : raceService.getAllRaces()) {
+            if(race.getReprintedAs() != null && race.getReprintedAs().size() > 1) {
+                sources.add(race);
+            }
+        }
+        return sources;
+    }
+
+    @GetMapping("/traits")
+    public List<String> getTypes() {
+        List<String> types = new ArrayList<>();
+        for(RaceDte race : raceService.getAllRaces()) {
+            if(race.getTraitTags() != null && race.getTraitTags().size() > 1) {
+                types.add(race.getName());
+                types.addAll(race.getTraitTags());
+            }
+        }
+        return types;
+    }
+
+    @GetMapping("/conditions")
+    public List<String> getConditions() {
+        List<String> types = new ArrayList<>();
+        for(RaceDte race : raceService.getAllRaces()) {
+            if(race.getImmune() != null) {
+                types.add(race.getName());
+                types.addAll(race.getImmune());
+            }
+        }
+        return types;
+    }
+
+    @GetMapping("/feats")
+    public List<FeatDte> getFeats() {
+        List<FeatDte> feats = new ArrayList<>();
+        for(RaceDte race : raceService.getAllRaces()) {
+            if(race.getFeats() != null) {
+                feats.addAll(race.getFeats());
+            }
+        }
+        return feats;
     }
 }

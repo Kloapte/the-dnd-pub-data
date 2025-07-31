@@ -21,6 +21,7 @@ public enum SourceType {
     VGtM("Volo's Guide to Monsters"),
     VGM("Volo's Guide to Monsters"),
     AI("Acquisitions Incorporated"),
+    IDRotF("Icewind Dale: Rime of the Frostmaiden"),
     UA("Unearthed Arcana"),
     PSK("Princes of the Apocalypse"),
     PSA("Plane Shift: Amonkhet"),
@@ -50,10 +51,10 @@ public enum SourceType {
 
     UNKNOWN("Unknown");
 
-    private final String sourceName;
+    private final String name;
 
-    SourceType(String sourceName) {
-        this.sourceName = sourceName;
+    SourceType(String name) {
+        this.name = name;
     }
 
     public static SourceType fromString(String input) {

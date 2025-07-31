@@ -17,7 +17,7 @@ import java.util.List;
 public class RaceDte {
     private String name;
     private String source;
-    private int page;
+    private Integer page;
     private boolean srd;
     private boolean srd52;
     private boolean basicRules;
@@ -40,6 +40,7 @@ public class RaceDte {
     private int darkvision;
     private int blindsight;
     private List<FeatDte> feats;
+    //Not mapping because just tags, not important
     private List<String> traitTags;
     private List<ToolProficiencyDte> toolProficiencies;
     private List<WeaponProficiencyDte> weaponProficiencies;

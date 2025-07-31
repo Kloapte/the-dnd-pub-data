@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class ToolProficiencyDte {
+    private String name;
     private ChooseDte choose;
     private int anyMusicalInstrument;
     private int anyArtisansTool;

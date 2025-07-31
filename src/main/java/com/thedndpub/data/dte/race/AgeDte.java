@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AgeDte {
-    private int mature;
-    private int max;
+    private Integer mature;
+    private Integer max;
 }
