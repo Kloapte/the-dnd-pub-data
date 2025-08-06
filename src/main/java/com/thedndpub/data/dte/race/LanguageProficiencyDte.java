@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class LanguageProficiencyDte {
+    private String name;
     private ChooseDte choose;
     private int anyStandard;
     private boolean common;
@@ -27,4 +28,8 @@ public class LanguageProficiencyDte {
     private boolean aquan;
     private boolean infernal;
     private boolean abyssal;
+
+    public boolean hasLanguageProficiency() {
+        return common || other || auran || celestial || goblin || sylvan || draconic || dwarvish || elvish || giant || primordial || gnomish || terran || undercommon || orc || halfling || aquan || infernal || abyssal;
+    }
 }

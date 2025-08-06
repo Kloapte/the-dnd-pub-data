@@ -2,13 +2,13 @@ package com.thedndpub.data.dte.race;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.thedndpub.data.dte.race.deserializers.EntryDtoDeserializer;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class EntryDte {
     private String name;
     private String text;

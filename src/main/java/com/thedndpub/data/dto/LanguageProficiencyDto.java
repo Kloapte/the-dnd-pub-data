@@ -1,15 +1,13 @@
 package com.thedndpub.data.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import lombok.Data;
 
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ChoiceDto {
-    private List<String> from;
-    private Integer amountOfBonus;
+public class LanguageProficiencyDto {
+    private List<LanguageProficiencyType> proficiencies;
+    private List<ChoiceDto> choices;
 }

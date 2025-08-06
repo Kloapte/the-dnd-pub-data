@@ -27,8 +27,7 @@ public class RaceDte {
     private List<OtherSourceDte> otherSources;
     private List<OtherSourceDte> additionalSources;
     private List<String> reprintedAs;
-    @JsonIgnore
-    private Object _copy;
+    private CopyDte _copy;
     private String lineage;
     private List<String> creatureTypeTags;
     private List<String> size;

@@ -1,13 +1,11 @@
 package com.thedndpub.data.assemblers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thedndpub.data.dte.race.*;
 import com.thedndpub.data.dto.*;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class RaceAssembler {
@@ -25,9 +23,31 @@ public class RaceAssembler {
         dto.setFeat(this.mapFeats(dte.getFeats()));
         dto.setWeaponProficiencies(this.mapWeaponProficiencies(dte.getWeaponProficiencies()));
         dto.setToolProficiencies(this.mapToolProficiencies(dte.getToolProficiencies()));
+        dto.setSkillProficiencies(this.mapSkillProficiencies(dte.getSkillProficiencies()));
+        dto.setLanguageProficiencies(this.mapLanguageProficiencies(dto.getName(), dte.getLanguageProficiencies()));
+        dto.setArmorProficiencies(this.mapArmorProficiencies(dte.getArmorProficiencies()));
+        dto.setSoundPath(this.mapSound(dte.getSoundClip()));
+        dto.setAdditionalSpells(this.mapAdditionalSpells(dte.getAdditionalSpells()));
+        dto.setEntries(this.mapEntries(dte.getEntries(), dte.getName()));
         return dto;
     }
 
+    public RaceDto mapRaceCopyToDto(RaceDte dte, RaceDto original) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            //Doing this to make a unlinked copy
+            RaceDto copy = mapper.readValue(mapper.writeValueAsString(original), RaceDto.class);
+            copy.setName(dte.getName());
+            copy.setCopyOf(copy.getSource());
+            copy.setSource(this.mapSource(dte));
+            this.implementCopy(copy, dte.get_copy().get_mod());
+
+            return copy;
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private SourceDto mapSource(RaceDte dte) {
         SourceDto dto = new SourceDto();
@@ -142,7 +162,22 @@ public class RaceAssembler {
     private AbilityDto mapAbility(List<AbilityDte> abilitiesDte) {
         AbilityDto ability = new AbilityDto();
         if(abilitiesDte == null || abilitiesDte.isEmpty()) {
-            ability.setChoices(List.of(ChoiceDto.ANY_ABILITY_2(), ChoiceDto.ANY_ABILITY_1(), ChoiceDto.ANY_ABILITY_1()));
+            List<String> options = new ArrayList<>();
+            for(AbilityType type : AbilityType.values()) {
+                options.add(type.name());
+            }
+            ChooseDte choose1Bonus = new ChooseDte();
+            choose1Bonus.setAmount(1);
+            choose1Bonus.setCount(2);
+            choose1Bonus.setFrom(options);
+            ChooseDte choose2Bonus = new ChooseDte();
+            choose2Bonus.setAmount(2);
+            choose2Bonus.setCount(1);
+            choose2Bonus.setFrom(options);
+
+            ability.setChoices(new ArrayList<>());
+            ability.getChoices().addAll(this.mapChoice(choose1Bonus, "ability_any"));
+            ability.getChoices().addAll(this.mapChoice(choose2Bonus, "ability_any"));
         }
         else {
             AbilityDte first = abilitiesDte.getFirst();
@@ -174,8 +209,6 @@ public class RaceAssembler {
     }
 
     private List<ChoiceDto> mapChoice(ChooseDte dte, String type) {
-
-
         List<String> options = new ArrayList<>();
         Integer amount = 1;
         int count = 1;
@@ -185,15 +218,22 @@ public class RaceAssembler {
                     options.add(this.mapAbilityFromShortToLong(option));
                 }
             }
-            case "resist", "feat", "tool_any" -> {
+            case "ability_any" -> {
+                options.addAll(dte.getFrom());
+            }
+            case "resist", "feat", "tool_any", "skill_any", "language_any" -> {
                 amount = null;
                 options.addAll(dte.getFrom());
             }
-            case "tool" -> {
+            case "tool", "skill", "language" -> {
                 amount = null;
                 for(String option : dte.getFrom()) {
                     option = option.replaceAll("'", "").replaceAll(" ", "_");
-                    options.add(ToolProficiencyType.fromString(option).name());
+                    switch (type) {
+                        case "tool" -> options.add(ToolProficiencyType.fromString(option).name());
+                        case "skill" -> options.add(SkillProficiencyType.fromString(option).name());
+                        case "language" -> options.add(LanguageProficiencyType.fromString(option).name());
+                    }
                 }
             }
             case "weapon" -> {
@@ -231,12 +271,12 @@ public class RaceAssembler {
 
     private String mapAbilityFromShortToLong(String abilityName) {
         return switch (abilityName) {
-            case "dex" -> "dexterity";
-            case "str" -> "strength";
-            case "con" -> "constitution";
-            case "wis" -> "wisdom";
-            case "cha" -> "charisma";
-            case "int" -> "intelligence";
+            case "dex" -> AbilityType.DEXTERITY.name();
+            case "str" -> AbilityType.STRENGTH.name();
+            case "con" -> AbilityType.CONSTITUTION.name();
+            case "wis" -> AbilityType.WISDOM.name();
+            case "cha" -> AbilityType.CHARISMA.name();
+            case "int" -> AbilityType.INTELLIGENCE.name();
             default -> "";
         };
     }
@@ -419,14 +459,492 @@ public class RaceAssembler {
         }
         return null;
     }
+
+    private SkillProficiencyDto mapSkillProficiencies(List<SkillProficiencyDte> skillProficienciesDte) {
+        if(skillProficienciesDte != null && !skillProficienciesDte.isEmpty()) {
+            SkillProficiencyDte dte = skillProficienciesDte.getFirst();
+            SkillProficiencyDto skillProficiencyDto = new SkillProficiencyDto();
+            //Choose
+            if(dte.getChoose() != null) {
+                skillProficiencyDto.setChoices(this.mapChoice(dte.getChoose(), "skill"));
+            }
+            //Any
+            if(dte.getAny() > 0) {
+                ChooseDte choose = new ChooseDte();
+                choose.setCount(dte.getAny());
+                choose.setFrom(new ArrayList<>());
+                for(SkillProficiencyType type : SkillProficiencyType.values()) {
+                    choose.getFrom().add(type.name());
+                }
+                skillProficiencyDto.setChoices(this.mapChoice(choose, "skill_any"));
+            }
+            //Losse skills
+            if(dte.hasSkillProficiency()) {
+                skillProficiencyDto.setProficiencies(new ArrayList<>());
+                if (dte.isAcrobatics()) {
+                    skillProficiencyDto.getProficiencies().add(SkillProficiencyType.ACROBATICS);
+                }
+                if(dte.isAthletics()) {
+                    skillProficiencyDto.getProficiencies().add(SkillProficiencyType.ATHLETICS);
+                }
+                if(dte.isIntimidation()) {
+                    skillProficiencyDto.getProficiencies().add(SkillProficiencyType.INTIMIDATION);
+                }
+                if(dte.isStealth()) {
+                    skillProficiencyDto.getProficiencies().add(SkillProficiencyType.STEALTH);
+                }
+                if(dte.isPerformance()) {
+                    skillProficiencyDto.getProficiencies().add(SkillProficiencyType.PERFORMANCE);
+                }
+                if(dte.isPersuasion()) {
+                    skillProficiencyDto.getProficiencies().add(SkillProficiencyType.PERSUASION);
+                }
+                if(dte.isSurvival()) {
+                    skillProficiencyDto.getProficiencies().add(SkillProficiencyType.SURVIVAL);
+                }
+                if(dte.isHistory()) {
+                    skillProficiencyDto.getProficiencies().add(SkillProficiencyType.HISTORY);
+                }
+                if(dte.isNature()) {
+                    skillProficiencyDto.getProficiencies().add(SkillProficiencyType.NATURE);
+                }
+                if(dte.isDeception()) {
+                    skillProficiencyDto.getProficiencies().add(SkillProficiencyType.DECEPTION);
+                }
+                if(dte.isAnimalHandling()) {
+                    skillProficiencyDto.getProficiencies().add(SkillProficiencyType.ANIMAL_HANDLING);
+                }
+                if(dte.isSleightOfHand()) {
+                    skillProficiencyDto.getProficiencies().add(SkillProficiencyType.SLEIGHT_OF_HAND);
+                }
+            }
+
+            return skillProficiencyDto;
+        }
+        return null;
+    }
+
+    private LanguageProficiencyDto mapLanguageProficiencies(String raceName, List<LanguageProficiencyDte> languageProficienciesDte) {
+        LanguageProficiencyDto languageProficiencyDto = new LanguageProficiencyDto();
+
+        if(languageProficienciesDte != null && !languageProficienciesDte.isEmpty()) {
+            LanguageProficiencyDte dte = languageProficienciesDte.getFirst();
+
+            if(dte.getChoose() != null) {
+                languageProficiencyDto.setChoices(this.mapChoice(dte.getChoose(), "language"));
+            }
+            if(dte.getAnyStandard() > 0){
+                ChooseDte choose = new ChooseDte();
+                choose.setCount(dte.getAnyStandard());
+                choose.setFrom(new ArrayList<>());
+                for(LanguageProficiencyType type : LanguageProficiencyType.values()) {
+                    if(type.isStandard()) {
+                        choose.getFrom().add(type.name());
+                    }
+                }
+                languageProficiencyDto.setChoices(this.mapChoice(choose, "language_any"));
+            }
+            if(dte.hasLanguageProficiency()) {
+                languageProficiencyDto.setProficiencies(new ArrayList<>());
+                if(dte.isCommon()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.COMMON);
+                }
+                if(dte.isOther()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.OTHER);
+                }
+                if(dte.isAuran()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.AURAN);
+                }
+                if(dte.isCelestial()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.CELESTIAL);
+                }
+                if(dte.isGoblin()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.GOBLIN);
+                }
+                if(dte.isSylvan()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.SYLVAN);
+                }
+                if(dte.isDraconic()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.DRACONIC);
+                }
+                if(dte.isDwarvish()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.DWARVISH);
+                }
+                if(dte.isElvish()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.ELVISH);
+                }
+                if(dte.isGiant()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.GIANT);
+                }
+                if(dte.isPrimordial()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.PRIMORDIAL);
+                }
+                if(dte.isGnomish()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.GNOMISH);
+                }
+                if(dte.isTerran()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.TERRAN);
+                }
+                if(dte.isUndercommon()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.UNDERCOMMON);
+                }
+                if(dte.isOrc()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.ORC);
+                }
+                if(dte.isHalfling()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.HALFLING);
+                }
+                if(dte.isAquan()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.AQUAN);
+                }
+                if(dte.isInfernal()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.INFERNAL);
+                }
+                if(dte.isAbyssal()) {
+                    languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.ABYSSAL);
+                }
+            }
+
+            return languageProficiencyDto;
+        }
+        else {
+            //Default languages if none are known
+            languageProficiencyDto.setProficiencies(new ArrayList<>());
+
+            ChooseDte chooseDte = new ChooseDte();
+            chooseDte.setCount(1);
+            chooseDte.setFrom(Arrays.stream(LanguageProficiencyType.values()).map(Enum::name).toList());
+            List<ChoiceDto> anyChoices = this.mapChoice(chooseDte, "language_any");
+
+            if(raceName.toLowerCase().contains("dragonborn")) {
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.COMMON);
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.DRACONIC);
+            }
+            else if(raceName.toLowerCase().contains("dwarf")) {
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.COMMON);
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.DWARVISH);
+            }
+            else if(raceName.toLowerCase().contains("half-elf")) {
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.COMMON);
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.ELVISH);
+                languageProficiencyDto.setChoices(anyChoices);
+            }
+            else if(raceName.toLowerCase().contains("elf")) {
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.COMMON);
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.ELVISH);
+            }
+            else if(raceName.toLowerCase().contains("gnome")) {
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.COMMON);
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.GNOMISH);
+            }
+            else if(raceName.toLowerCase().contains("orc")) {
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.COMMON);
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.ORC);
+            }
+            else if(raceName.toLowerCase().contains("halfling")) {
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.COMMON);
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.HALFLING);
+            }
+            else if(raceName.toLowerCase().contains("human")) {
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.COMMON);
+                languageProficiencyDto.setChoices(anyChoices);
+            }
+            else if(raceName.toLowerCase().contains("tiefling")) {
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.COMMON);
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.INFERNAL);
+            }
+            else if(raceName.toLowerCase().contains("aasimar")) {
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.COMMON);
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.CELESTIAL);
+            }
+            else if(raceName.toLowerCase().contains("goliath")) {
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.COMMON);
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.GIANT);
+            }
+            else if(raceName.toLowerCase().contains("genasi")) {
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.COMMON);
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.PRIMORDIAL);
+            }
+
+            if(languageProficiencyDto.getProficiencies().isEmpty()) {
+                languageProficiencyDto.getProficiencies().add(LanguageProficiencyType.COMMON);
+                languageProficiencyDto.setChoices(anyChoices);
+            }
+
+            return languageProficiencyDto;
+        }
+    }
+
+    private List<ArmorProficiencyType> mapArmorProficiencies(List<ArmorProficiencyDte> armorProficienciesDte) {
+        if(armorProficienciesDte != null && !armorProficienciesDte.isEmpty()){
+            List<ArmorProficiencyType> armorProficiencies = new ArrayList<>();
+            ArmorProficiencyDte dte = armorProficienciesDte.getFirst();
+            if(dte.isLight()) {
+                armorProficiencies.add(ArmorProficiencyType.LIGHT);
+            }
+            if(dte.isMedium()) {
+                armorProficiencies.add(ArmorProficiencyType.MEDIUM);
+            }
+
+            return armorProficiencies;
+        }
+        return null;
+    }
+
+    private String mapSound(SoundClipDte dte) {
+        if(dte != null) {
+            return dte.getPath();
+        }
+        return null;
+    }
+
+    private List<AdditionalSpellDto> mapAdditionalSpells(List<AdditionalSpellDte> additionalSpellsDte) {
+        if(additionalSpellsDte != null && !additionalSpellsDte.isEmpty()) {
+            List<AdditionalSpellDto> additionalSpellsDto = new ArrayList<>();
+
+            for(AdditionalSpellDte dte: additionalSpellsDte) {
+                if(dte.getKnown() != null) {
+                    additionalSpellsDto.addAll(this.mapSpellDte(dte.getKnown(), dte.getAbility(), AdditionalSpellType.KNOWN, dte.getName()));
+                }
+                if(dte.getInnate() != null) {
+                    additionalSpellsDto.addAll(this.mapSpellDte(dte.getInnate(), dte.getAbility(), AdditionalSpellType.INNATE, dte.getName()));
+                }
+            }
+
+            return additionalSpellsDto;
+        }
+        return null;
+    }
+
+    private List<AdditionalSpellDto> mapSpellDte(SpellDte dte, SpellAbilityDte abilityDte, AdditionalSpellType type, String subRace) {
+        List<AdditionalSpellDto> additionalSpells = new ArrayList<>();
+        if(dte.getLevel1() != null) {
+            additionalSpells.addAll(this.mapLevelSpellDte(dte.getLevel1(), abilityDte, type, 1, subRace));
+        }
+        if(dte.getLevel3() != null) {
+            additionalSpells.addAll(this.mapLevelSpellDte(dte.getLevel3(), abilityDte, type, 3, subRace));
+        }
+        if(dte.getLevel5() != null) {
+            additionalSpells.addAll(this.mapLevelSpellDte(dte.getLevel5(), abilityDte, type, 5, subRace));
+        }
+        if(dte.getLevelUnknown() != null) {
+            additionalSpells.addAll(this.mapLevelSpellDte(dte.getLevelUnknown(), abilityDte, type, 1, subRace));
+        }
+        return additionalSpells;
+    }
+
+    private List<AdditionalSpellDto> mapLevelSpellDte(LevelSpellKnownDte dte, SpellAbilityDte abilityDte, AdditionalSpellType type, int level, String subRace) {
+        List<AdditionalSpellDto> additionalSpells = new ArrayList<>();
+        if(dte.getSpells() != null && !dte.getSpells().isEmpty()) {
+            for(String spell : dte.getSpells()) {
+                AdditionalSpellDto additionalSpell = new AdditionalSpellDto();
+                additionalSpell.setName(spell);
+                additionalSpell.setType(type);
+                additionalSpell.setDaily(dte.isDaily());
+                additionalSpell.setRest(dte.isRest());
+
+                if(subRace != null) {
+                    additionalSpell.setSubRaceName(subRace);
+                }
+
+                if(dte.getLevel() > 0) {
+                    additionalSpell.setLevel(dte.getLevel());
+                }
+                else {
+                    additionalSpell.setLevel(level);
+                }
+
+                if(abilityDte != null) {
+                    if (abilityDte.getAbility() != null) {
+                        additionalSpell.setAbility(AbilityType.fromString(this.mapAbilityFromShortToLong(abilityDte.getAbility())));
+                    } else if (abilityDte.getChoose() != null) {
+                        additionalSpell.setAbilityChoices(this.mapChoice(abilityDte.getChoose(), "ability"));
+                    }
+                }
+
+                additionalSpells.add(additionalSpell);
+            }
+        }
+        else if(dte.getChoose() != null){
+            ChoiceDto choice = new ChoiceDto();
+            choice.setFrom(List.of(dte.getChoose().split("\\|")[1]));
+
+            AdditionalSpellDto additionalSpell = new AdditionalSpellDto();
+            additionalSpell.setType(type);
+            additionalSpell.setDaily(dte.isDaily());
+            additionalSpell.setRest(dte.isRest());
+            additionalSpell.setSpellChoices(List.of(choice));
+
+            if(abilityDte != null) {
+                if (abilityDte.getAbility() != null) {
+                    additionalSpell.setAbility(AbilityType.fromString(this.mapAbilityFromShortToLong(abilityDte.getAbility())));
+                } else if (abilityDte.getChoose() != null) {
+                    additionalSpell.setAbilityChoices(this.mapChoice(abilityDte.getChoose(), "ability"));
+                }
+            }
+
+        }
+        else {
+            throw new RuntimeException("Unsupported AdditionalLevelSpell");
+        }
+
+        return additionalSpells;
+    }
+
+    private List<EntryDto> mapEntries(List<EntryDte> entriesDte, String race) {
+        List<EntryDto> entries = new ArrayList<>();
+
+        if(entriesDte != null) {
+            for (EntryDte dte : entriesDte) {
+                EntryDto dto;
+                switch (this.determineEntryType(dte)) {
+                    case "entries":
+                        dto = new EntryWithSubDto();
+                        dto.setName(dte.getName());
+                        if(dte.getEntries() != null) {
+                            List<EntryDto> subItems = this.mapEntries(dte.getEntries(), race);
+                            if(subItems != null) {
+                                boolean hasOnlyText = true;
+                                for(EntryDto subItem : subItems) {
+                                    if (!subItem.getType().equals("text")) {
+                                        hasOnlyText = false;
+                                        break;
+                                    }
+                                }
+
+                                if(hasOnlyText) {
+                                    dto = new EntryTextDto();
+                                    dto.setName(dte.getName());
+                                    for(EntryDto subItem : subItems) {
+                                        ((EntryTextDto)dto).getTextItems().addAll(((EntryTextDto)subItem).getTextItems());
+                                    }
+                                }
+                                else {
+                                    ((EntryWithSubDto)dto).getSubItems().addAll(subItems);
+                                }
+                            }
+                        }
+                        entries.add(dto);
+                        break;
+                    case "list":
+                        if(dte.getItems() != null) {
+                            dto = new EntryWithListDto();
+                            dto.setName(dte.getName());
+                            for (EntryDte subEntry : dte.getItems()) {
+                                EntryListItemDto itemDto = new EntryListItemDto();
+                                itemDto.setTitle(subEntry.getName());
+                                if(subEntry.getText() == null) {
+                                    itemDto.setText(subEntry.getEntry());
+                                }
+                                else {
+                                    itemDto.setText(subEntry.getText());
+                                }
+                                ((EntryWithListDto) dto).getListItems().add(itemDto);
+                            }
+                            entries.add(dto);
+                        }
+                        else {
+                            System.out.println("List but no items");
+                        }
+                        break;
+                    case "table":
+                        dto = new EntryWithTableDto();
+                        ((EntryWithTableDto) dto).setTitle(dte.getCaption());
+                        for(int i = 0; i < dte.getColLabels().size(); i++) {
+                            ((EntryWithTableDto) dto).getHeaders().put(i, dte.getColLabels().get(i));
+                        }
+                        for(List<String> rowDte : dte.getRows()) {
+                            HashMap<Integer, String> row = new HashMap<>();
+                            for(int i = 0; i < rowDte.size(); i++) {
+                                row.put(i, rowDte.get(i));
+                            }
+                            ((EntryWithTableDto) dto).getRows().add(row);
+                        }
+                        entries.add(dto);
+                        break;
+                    case "inset":
+                        dto = new EntryTextDto();
+                        dto.setName(dte.getName());
+                        for (EntryDte subEntry : dte.getEntries()) {
+                            ((EntryTextDto) dto).getTextItems().add(subEntry.getText());
+                        }
+                        entries.add(dto);
+                        break;
+                    case "text":
+                        dto = new EntryTextDto();
+                        dto.setName(dte.getName());
+                        ((EntryTextDto) dto).getTextItems().add(dte.getText());
+                        entries.add(dto);
+                        break;
+                }
+            }
+        }
+
+        if(!entries.isEmpty()) {
+            return entries;
+        }
+        else {
+            return null;
+        }
+    }
+
+    private String determineEntryType(EntryDte dte) {
+        if(dte.getType() != null) {
+            switch (dte.getType()) {
+                case "entries":
+                    return "entries";
+                case "list":
+                    return "list";
+                case "table":
+                    return "table";
+                case "inset":
+                    return "inset";
+                default:
+                    if (dte.getText() != null) {
+                        throw new RuntimeException("Unknown type with text: " + dte.getType());
+                    } else {
+                        throw new RuntimeException("Unknown type: " + dte.getType());
+                    }
+            }
+        }
+        else {
+            if (dte.getText() != null) {
+                return "text";
+            } else {
+                throw new RuntimeException("Unknown type for: " + dte.getName());
+            }
+        }
+    }
+
+    private void implementCopy(RaceDto dto, CopyModDte copy) {
+        for(CopyModEntryDte modEntry : copy.getEntries()) {
+
+            if(modEntry.getMode().contains("replace")) {
+                boolean found = false;
+                for(EntryDto entry: dto.getEntries()) {
+                    if(entry.getName() != null && entry.getName().equals(modEntry.getReplace())) {
+                        found = true;
+                        ((EntryTextDto) entry).getTextItems().clear();
+                        for(CopyModEntryItemDte item : modEntry.getItems()) {
+                            ((EntryTextDto) entry).getTextItems().addAll(item.getEntries());
+                        }
+                    }
+                }
+            }
+            else if(modEntry.getMode().contains("append")) {
+                for(CopyModEntryItemDte item : modEntry.getItems()) {
+                    EntryTextDto entryTextDto = new EntryTextDto();
+                    entryTextDto.setName(item.getName());
+                    entryTextDto.setTextItems(item.getEntries());
+                    dto.getEntries().add(entryTextDto);
+                }
+            }
+            else {
+                throw new RuntimeException("Unsupported copy impementation");
+            }
+        }
+    }
 }
 
-//TODO toolprofs
-//TODO skillprofs
-//TODO langprofs
-//TODO armorprofs
-//TODO additionalSpells
-//TODO sound / image
-//TODO entries
 //TODO versions / subraces
-//TOOD copy?
+// --- skillToolLanguageProficiencies

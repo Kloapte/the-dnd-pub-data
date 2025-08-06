@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class SkillProficiencyDte {
+    private String name;
     private ChooseDte choose;
     private int any;
     private boolean perception;
@@ -22,4 +23,8 @@ public class SkillProficiencyDte {
     @JsonProperty("sleight of hand")
     private boolean sleightOfHand;
     private boolean deception;
+
+    public boolean hasSkillProficiency() {
+        return perception || intimidation || stealth || athletics || acrobatics || performance || persuasion || survival || sleightOfHand || animalHandling || history || nature || deception;
+    }
 }
