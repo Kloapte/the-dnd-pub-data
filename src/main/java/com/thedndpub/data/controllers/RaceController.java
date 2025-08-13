@@ -4,10 +4,7 @@ import com.thedndpub.data.assemblers.RaceAssembler;
 import com.thedndpub.data.dte.race.*;
 import com.thedndpub.data.dto.*;
 import com.thedndpub.data.services.RaceService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +26,14 @@ public class RaceController {
         List<RaceDto> races = new ArrayList<>();
 
         List<RaceDte> copyRaces = new ArrayList<>();
-        for(RaceDte race : raceService.getAllRaces()) {
-            if(race.get_copy() == null) {
-                races.add(this.raceAssembler.mapRaceDteToDto(race));
+        for(RaceDte raceDte : raceService.getAllRaces()) {
+            if(raceDte.get_copy() == null) {
+                RaceDto race = this.raceAssembler.mapRaceDteToDto(raceDte);
+                this.addSubraceToParent(race);
+                races.add(race);
             }
             else {
-                copyRaces.add(race);
+                copyRaces.add(raceDte);
             }
         }
 
@@ -60,37 +59,119 @@ public class RaceController {
         return null;
     }
 
-    @GetMapping("/alleenmetentries")
-    public List<RaceDto> getRacesAlleenEntries() {
-        List<RaceDto> races = new ArrayList<>();
-        for(RaceDte race : raceService.getAllRaces()) {
-            RaceDto dto = this.raceAssembler.mapRaceDteToDto(race);
-            if(dto.getEntries() != null) {
-                boolean has = false;
-                for(EntryDto entryDto: dto.getEntries()) {
-                    if (entryDto.getType().equals("subEntries")) {
-                        for(EntryDto subEntry : ((EntryWithSubDto) entryDto).getSubItems()) {
-//                            if(subEntry.getType().equals("table")) {
-//                                has = true;
-//                                break;
-//                            }
-                            if(subEntry.getName() == null) {
-                                has = true;
-                                break;
-                            }
-                        }
-                        if(has) {
-                            break;
-                        }
-                    }
+    private void addSubraceToParent(RaceDto parent) {
+        for(SubraceDto subrace : this.getSubraces()) {
+            if(subrace.getParent().equalsIgnoreCase(parent.getName()) && subrace.getParentSource().equals(parent.getSource().getSource())) {
+                if(parent.getSubraces() == null) {
+                    parent.setSubraces(new ArrayList<>());
                 }
-                if(has) {
-                    races.add(dto);
+
+                parent.getSubraces().add(subrace.getName());
+            }
+        }
+    }
+
+    @GetMapping("/subraces")
+    public List<SubraceDto> getSubraces() {
+        List<SubraceDto> subraces = new ArrayList<>();
+        for(SubraceDte subraceDte : raceService.getAllSubRaces()) {
+            subraces.add(this.raceAssembler.mapSubRaceToRaceDto(subraceDte));
+        }
+
+        return subraces;
+    }
+
+    @GetMapping("/subraces/mapped")
+    public List<RaceDto> getSubracesMapped() {
+        List<RaceDto> mappedSubraces = new ArrayList<>();
+        for(SubraceDto subrace : this.getSubraces()) {
+            RaceDto parent = this.findParentOfSubRace(subrace.getParent(), subrace.getParentSource());
+            mappedSubraces.add(this.raceAssembler.mapSubraceIntoParent(parent, subrace));
+        }
+
+        return mappedSubraces;
+    }
+
+    @GetMapping("/subrace/{name}/map")
+    public RaceDto mapSubRaceIntoParent(@PathVariable("name") String subraceName) {
+        SubraceDto subrace = null;
+        for(SubraceDto possibleSubrace : this.getSubraces()) {
+            if(possibleSubrace.getName().equalsIgnoreCase(subraceName)) {
+                subrace = possibleSubrace;
+                break;
+            }
+        }
+
+        if(subrace != null) {
+            RaceDto parent = this.findParentOfSubRace(subrace.getParent(), subrace.getParentSource());
+            if(parent != null) {
+                System.out.println(parent.getName());
+                return this.raceAssembler.mapSubraceIntoParent(parent, subrace);
+            }
+            else {
+                System.out.println("No parent found");
+            }
+        }
+        else {
+            System.out.println("Subrace not found");
+        }
+        return null;
+    }
+
+    private RaceDto findParentOfSubRace(String parentName, SourceType parentSource) {
+        for(RaceDto race : this.getRaces()) {
+            if(race.getName().equalsIgnoreCase(parentName) && race.getSource().getSource().equals(parentSource)) {
+                return race;
+            }
+        }
+        return null;
+    }
+
+    @GetMapping("/variants/mapped")
+    public List<RaceDto> getVariants() {
+        List<RaceDto> variants = new ArrayList<>();
+        for(RaceDto race : this.getRaces()) {
+            if(race.getVariants() != null) {
+                for(VariantDto variant : race.getVariants()) {
+                    variants.add(this.mapVariantIntoParent(race.getName(), variant.getName()));
                 }
             }
         }
-        return races;
+
+        return variants;
     }
+
+    @GetMapping("/name/{raceName}/variant/{variantName}")
+    public RaceDto mapVariantIntoParent(@PathVariable("raceName") String raceName, @PathVariable("variantName") String variantName) {
+        RaceDto result = null;
+        for(RaceDto race  : this.getRaces()) {
+            if(race.getName().equalsIgnoreCase(raceName) && race.getVariants() != null) {
+                for(VariantDto variant : race.getVariants()) {
+                    if(variant.getName().equalsIgnoreCase(variantName)) {
+                        result = this.raceAssembler.mapVariantIntoParent(race, variant);
+                    }
+                }
+            }
+        }
+
+        if(result == null) {
+            throw new RuntimeException("Parent not found");
+        }
+        else {
+            return result;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     @GetMapping("/unmapped")
     public List<RaceDte> getRacesUnmapped() {
@@ -119,23 +200,37 @@ public class RaceController {
     }
 
     @GetMapping("/versions")
-    public List<SubraceDte> getVersions() {
-        List<SubraceDte> subraces = new ArrayList<>();
-        for(RaceDte race : raceService.getAllRaces()) {
+    public List<VersionDte> getVersions() {
+        System.out.println("Test123");
+        List<VersionDte> versions = new ArrayList<>();
+        for(RaceDte race : raceService.getAllSubRaces()) {
             if(race.get_versions() != null) {
-                for(SubraceDte raceVersion : race.get_versions()) {
-                    raceVersion.setRaceName(race.getName());
-                }
-                subraces.addAll(race.get_versions());
+//                if(race.getName().contains("Dragonborn")) {
+                    for (VersionDte version : race.get_versions()) {
+//                    if(version.getName() != null && version.getName().equals("Goliath; Cloud Giant Ancestry")) {
+//                    if(version.getName() != null && version.getName().equals("Kobold; Craftiness")) {
+//                    if(version.getName() != null && version.getName().equals("Variant; Gifted Aetherborn")) {
+//                    if(version.get_mod() != null && version.get_mod().getEntries() != null) {
+//                        CopyModEntryDte entry = version.get_mod().getEntries().getFirst();
+//                        if(entry.getItems().size() > 1) {
+                        versions.add(version);
+//                        }
+//                    }
+                    }
+//                }
+//                versions.addAll(race.get_versions());
             }
         }
-        return subraces;
+        System.out.println("Size versions : " + versions.size());
+        return versions;
     }
 
 
-    @GetMapping("/subraces")
-    public List<SubraceDte> getSubraces() {
-        return raceService.getAllSubRaces();
+    @GetMapping("/subraces/unmapped")
+    public List<SubraceDte> getSubracesUnmapped() {
+        List<SubraceDte> subRaces = raceService.getAllSubRaces();
+        System.out.println("Amount of subraces: " + subRaces.size());
+        return subRaces;
     }
 
     @GetMapping("/copy")
@@ -428,115 +523,6 @@ public class RaceController {
         System.out.println("Total: " + entries.size());
         System.out.println("SubEntries: " + subEntries.size());
 //        System.out.println("SubSubEntries: " + subSubEntries.size());
-
-        return entries;
-    }
-
-    @GetMapping("/subraceentries")
-    public List<EntryDte> getSubRaceEntries() {
-        List<EntryDte> entries = new ArrayList<>();
-        for(RaceDte race : raceService.getAllSubRaces()) {
-            if(race.getEntries() != null) {
-                entries.addAll(race.getEntries());
-                //215 entries
-                //4 inset
-                //1 text
-                //220 total
-
-                //SubEntries
-                //14 entries
-                //1 list
-                //15 table
-                //233 text
-                //263 total
-
-                //SubSubEntries
-                //2 text
-            }
-        }
-
-        int entryTypes = 0;
-        int listTypes = 0;
-        int tableTypes = 0;
-        int abilityTypes = 0;
-        int itemTypes = 0;
-        int optionsTypes = 0;
-        int insetTypes = 0;
-        int textTypes = 0;
-        int unknownTypes = 0;
-
-        List<EntryDte> subEntries = new ArrayList<>();
-        List<EntryDte> subSubEntries = new ArrayList<>();
-
-        for(EntryDte entryDte : entries) {
-//            if (entryDte.getEntries() != null) {
-//                subEntries.addAll(entryDte.getEntries());
-//            }
-//        }
-//
-//        for(EntryDte entryDte : subEntries){
-            if (entryDte.getEntries() != null) {
-                subEntries.addAll(entryDte.getEntries());
-                System.out.println("Met subEntries: " + entryDte.getName());
-            }
-            if(entryDte.getType() != null) {
-                switch (entryDte.getType()) {
-                    case "entries":
-                        entryTypes++;
-                        break;
-                    case "list":
-                        listTypes++;
-                        break;
-                    case "table":
-                        tableTypes++;
-                        break;
-                    case "ability":
-                        abilityTypes++;
-                        break;
-                    case "item":
-                        itemTypes++;
-                        break;
-                    case "options":
-                        optionsTypes++;
-                        break;
-                    case "inset":
-                        insetTypes++;
-                        break;
-                    default:
-                        if (entryDte.getText() != null) {
-                            textTypes++;
-                        } else {
-                            unknownTypes++;
-                            System.out.println("Unknown type: " + entryDte.getType());
-                        }
-                        break;
-                }
-            }
-            else {
-                if (entryDte.getText() != null) {
-                    textTypes++;
-                    if(entryDte.getName() != null) {
-                        System.out.println("Text type: " + entryDte.getName() + " - " + entryDte.getText());
-                    }
-                }
-                else {
-                    unknownTypes++;
-                    System.out.println("Unknown type: " + entryDte.getName());
-                }
-            }
-        }
-        System.out.println("EntryTypes: " + entryTypes);
-        System.out.println("ListTypes: " + listTypes);
-        System.out.println("TableTypes: " + tableTypes);
-        System.out.println("AbilityTypes: " + abilityTypes);
-        System.out.println("ItemTypes: " + itemTypes);
-        System.out.println("OptionsTypes: " + optionsTypes);
-        System.out.println("InsetTypes: " + insetTypes);
-        System.out.println("TextTypes: " + textTypes);
-        System.out.println("UnkownTypes: " + unknownTypes);
-        System.out.println("Total: " + entries.size());
-        System.out.println("SubEntries: " + subEntries.size());
-        System.out.println("SubSubEntries: " + subSubEntries.size());
 
         return entries;
     }

@@ -7,8 +7,8 @@ import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LanguageProficiencyDto {
-    private List<LanguageProficiencyType> proficiencies;
-    private List<ChoiceDto> choices;
-    private boolean defaultLanguage;
+public class VariantDto {
+    private String name;
+    private SourceType source;
+    List<VariantEntryDto> entries;
 }

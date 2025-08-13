@@ -10,7 +10,6 @@ import java.util.List;
 public class RaceDto {
     private String name;
     private SourceDto source;
-    private String sourceDescription;
     private CreatureTypeDto creatureType;
     private AgeDto age;
     private VisionDto vision;
@@ -24,8 +23,11 @@ public class RaceDto {
     private SkillProficiencyDto skillProficiencies;
     private LanguageProficiencyDto languageProficiencies;
     private List<ArmorProficiencyType> armorProficiencies;
+    private List<ChoiceDto> proficiencies;
     private String soundPath;
     private List<AdditionalSpellDto> additionalSpells;
     private List<EntryDto> entries;
+    private List<VariantDto> variants;
+    private List<String> subraces;
     private SourceDto copyOf;
 }

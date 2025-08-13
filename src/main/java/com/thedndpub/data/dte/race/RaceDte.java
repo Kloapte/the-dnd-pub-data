@@ -59,5 +59,5 @@ public class RaceDte {
     private List<EntryDte> entries;
     private boolean hasFluff;
     private boolean hasFluffImages;
-    private List<SubraceDte> _versions;
+    private List<VersionDte> _versions;
 }

@@ -10,6 +10,7 @@ import java.util.List;
 public class CopyModEntryDte {
     private String mode;
     private String replace;
+    private String names;
     @JsonDeserialize(using = ModEntriesItemDteDeserializer.class)
     private List<CopyModEntryItemDte> items;
 }

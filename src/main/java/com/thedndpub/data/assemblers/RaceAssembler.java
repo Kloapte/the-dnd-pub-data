@@ -10,8 +10,12 @@ import java.util.*;
 @Component
 public class RaceAssembler {
     public RaceDto mapRaceDteToDto(RaceDte dte) {
+        return this.mapRaceDteToDto(dte, dte.getName());
+    }
+
+    public RaceDto mapRaceDteToDto(RaceDte dte, String name) {
         RaceDto dto = new RaceDto();
-        dto.setName(dte.getName());
+        dto.setName(name);
         dto.setSource(this.mapSource(dte));
         dto.setCreatureType(this.mapCreatureType(dte.getCreatureTypes(), dte.getCreatureTypeTags()));
         dto.setAge(this.mapAge(dte.getAge()));
@@ -29,6 +33,7 @@ public class RaceAssembler {
         dto.setSoundPath(this.mapSound(dte.getSoundClip()));
         dto.setAdditionalSpells(this.mapAdditionalSpells(dte.getAdditionalSpells()));
         dto.setEntries(this.mapEntries(dte.getEntries(), dte.getName()));
+        dto.setVariants(this.mapVariants(dte.get_versions()));
         return dto;
     }
 
@@ -499,6 +504,9 @@ public class RaceAssembler {
                 if(dte.isPersuasion()) {
                     skillProficiencyDto.getProficiencies().add(SkillProficiencyType.PERSUASION);
                 }
+                if(dte.isPerception()) {
+                    skillProficiencyDto.getProficiencies().add(SkillProficiencyType.PERCEPTION);
+                }
                 if(dte.isSurvival()) {
                     skillProficiencyDto.getProficiencies().add(SkillProficiencyType.SURVIVAL);
                 }
@@ -519,6 +527,12 @@ public class RaceAssembler {
                 }
             }
 
+            if(skillProficiencyDto.getProficiencies() != null && skillProficiencyDto.getProficiencies().isEmpty()) {
+                skillProficiencyDto.setProficiencies(null);
+            }
+            if(skillProficiencyDto.getProficiencies() == null && skillProficiencyDto.getChoices() == null) {
+                return null;
+            }
             return skillProficiencyDto;
         }
         return null;
@@ -610,6 +624,7 @@ public class RaceAssembler {
         else {
             //Default languages if none are known
             languageProficiencyDto.setProficiencies(new ArrayList<>());
+            languageProficiencyDto.setDefaultLanguage(true);
 
             ChooseDte chooseDte = new ChooseDte();
             chooseDte.setCount(1);
@@ -710,8 +725,12 @@ public class RaceAssembler {
                     additionalSpellsDto.addAll(this.mapSpellDte(dte.getInnate(), dte.getAbility(), AdditionalSpellType.INNATE, dte.getName()));
                 }
             }
-
-            return additionalSpellsDto;
+            if(!additionalSpellsDto.isEmpty()) {
+                return additionalSpellsDto;
+            }
+            else {
+                return null;
+            }
         }
         return null;
     }
@@ -833,7 +852,16 @@ public class RaceAssembler {
                             for (EntryDte subEntry : dte.getItems()) {
                                 EntryListItemDto itemDto = new EntryListItemDto();
                                 itemDto.setTitle(subEntry.getName());
-                                if(subEntry.getText() == null) {
+                                if(subEntry.getEntries() != null) {
+                                    //This is always one for some reason... if not throws an error
+                                    if(subEntry.getEntries().size() > 1) {
+                                        throw new RuntimeException("Has more then one item");
+                                    }
+                                    for(EntryDte subSubEntry : subEntry.getEntries()) {
+                                        itemDto.setText(subSubEntry.getText());
+                                    }
+                                }
+                                else if(subEntry.getText() == null) {
                                     itemDto.setText(subEntry.getEntry());
                                 }
                                 else {
@@ -844,7 +872,7 @@ public class RaceAssembler {
                             entries.add(dto);
                         }
                         else {
-                            System.out.println("List but no items");
+                            throw new RuntimeException("List but no items");
                         }
                         break;
                     case "table":
@@ -920,10 +948,8 @@ public class RaceAssembler {
         for(CopyModEntryDte modEntry : copy.getEntries()) {
 
             if(modEntry.getMode().contains("replace")) {
-                boolean found = false;
                 for(EntryDto entry: dto.getEntries()) {
                     if(entry.getName() != null && entry.getName().equals(modEntry.getReplace())) {
-                        found = true;
                         ((EntryTextDto) entry).getTextItems().clear();
                         for(CopyModEntryItemDte item : modEntry.getItems()) {
                             ((EntryTextDto) entry).getTextItems().addAll(item.getEntries());
@@ -944,7 +970,388 @@ public class RaceAssembler {
             }
         }
     }
+
+    private List<VariantDto> mapVariants(List<VersionDte> versionsDte) {
+        if(versionsDte != null) {
+            //Kobold
+            //Goliath
+            List<VariantDto> variants = new ArrayList<>();
+            for(VersionDte versionDte : versionsDte) {
+                VariantDto variant = new VariantDto();
+                variant.setName(versionDte.getName());
+                if(versionDte.get_mod() != null) {
+                    variant.setEntries(new ArrayList<>());
+                    for(CopyModEntryDte entry : versionDte.get_mod().getEntries()) {
+                        variant.getEntries().add(this.mapEntryVariant(entry));
+                    }
+
+                    variants.add(variant);
+                }
+                else if(versionDte.get_abstract() != null && versionDte.get_implementations() != null) {
+                    List<VersionDte> implementedVersions = this.implementAbstact(versionDte);
+                    variants.addAll(this.mapVariants(implementedVersions));
+                }
+                else {
+                    throw new RuntimeException("Unsupported variant");
+                }
+            }
+
+            return variants;
+        }
+        return null;
+    }
+
+    private VariantEntryDto mapEntryVariant(CopyModEntryDte entry) {
+        VariantEntryDto variantEntryDto = new VariantEntryDto();
+        if(entry.getMode().contains("replace")) {
+            variantEntryDto.setMode("REPLACE");
+            variantEntryDto.setEntryName(entry.getReplace());
+        }
+        else if(entry.getMode().contains("append")) {
+            variantEntryDto.setMode("APPEND");
+            variantEntryDto.setEntryName(entry.getReplace());
+        }
+        else if(entry.getMode().contains("remove")) {
+            variantEntryDto.setMode("REMOVE");
+            variantEntryDto.setEntryName(entry.getNames());
+        }
+        else {
+            throw new RuntimeException("Unsupported mode");
+        }
+
+        if(entry.getItems() != null) {
+            CopyModEntryItemDte item = entry.getItems().getFirst();
+            EntryTextDto textEntry = new EntryTextDto();
+            textEntry.setName(item.getName());
+            textEntry.setTextItems(item.getEntries());
+            variantEntryDto.setReplaceWith(textEntry);
+        }
+
+        return variantEntryDto;
+    }
+
+    private List<VersionDte> implementAbstact(VersionDte dteAbstract) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            List<VersionDte> implementedAbstracts = new ArrayList<>();
+
+            for(ImplementationDte implementationDte : dteAbstract.get_implementations()) {
+                String abstractString = mapper.writeValueAsString(dteAbstract.get_abstract());
+                if(implementationDte.get_variables().getColor() != null) {
+                    abstractString = abstractString.replaceAll("\\{\\{color}}", implementationDte.get_variables().getColor());
+                }
+                if(implementationDte.get_variables().getArea() != null) {
+                    abstractString = abstractString.replaceAll("\\{\\{area}}", implementationDte.get_variables().getArea());
+                }
+                //TODO voor subraces maar is list?
+//                if(implementationDte.get_variables().getResist() != null) {
+//                    abstractString = abstractString.replaceAll("\\{\\{color}}", implementationDte.get_variables().getResist());
+//                }
+                if(implementationDte.get_variables().getDamageType() != null) {
+                    abstractString = abstractString.replaceAll("\\{\\{damageType}}", implementationDte.get_variables().getDamageType());
+                }
+                if(implementationDte.get_variables().getSavingThrow() != null) {
+                    abstractString = abstractString.replaceAll("\\{\\{savingThrow}}", implementationDte.get_variables().getSavingThrow());
+                }
+                implementedAbstracts.add(mapper.readValue(abstractString, VersionDte.class));
+            }
+
+            return implementedAbstracts;
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /// //////////Subraces
+    public SubraceDto mapSubRaceToRaceDto(SubraceDte subraceDte) {
+        String name = subraceDte.getName();
+        if(name == null) {
+            name = subraceDte.getRaceName();
+        }
+        if(subraceDte.getAlias() != null) {
+            name = subraceDte.getAlias().getFirst();
+        }
+        SubraceDto subrace = new SubraceDto(this.mapRaceDteToDto(subraceDte, name));
+        subrace.setParent(subraceDte.getRaceName());
+        subrace.setParentSource(SourceType.fromString(subraceDte.getRaceSource()));
+        subrace.setOverwrite(this.mapOverwrite(subraceDte.getOverwrite()));
+        subrace.setProficiencies(this.mapSkillToolLanguageProficiencies(subraceDte.getSkillToolLanguageProficiencies()));
+        return subrace;
+    }
+
+    private OverwriteDto mapOverwrite(OverwriteDte dte) {
+        if(dte != null) {
+            OverwriteDto overwrite = new OverwriteDto();
+            overwrite.setAbility(dte.isAbility());
+            overwrite.setSkillProficiencies(dte.isSkillProficiencies());
+            overwrite.setLanguageProficiencies(dte.isLanguageProficiencies());
+            return overwrite;
+        }
+        return null;
+    }
+
+    private List<ChoiceDto> mapSkillToolLanguageProficiencies(List<SkillToolLanguageProficienciesDte> dteList) {
+        if(dteList != null) {
+            SkillToolLanguageProficienciesDte dte = dteList.getFirst();
+            List<ChoiceDto> choices = new ArrayList<>();
+
+            for(int i = 0; i < dte.getChoose().getFirst().getCount(); i++) {
+                ChoiceDto choice = new ChoiceDto();
+                List<String> from = new ArrayList<>();
+                for(SkillProficiencyType type : SkillProficiencyType.values()) {
+                    from.add("skill_" + type.name());
+                }
+                for(ToolProficiencyType type : ToolProficiencyType.values()) {
+                    from.add("tool_" + type.name());
+                }
+                choice.setFrom(from);
+                choices.add(choice);
+            }
+
+            return choices;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public RaceDto mapSubraceIntoParent(RaceDto parent, SubraceDto subrace) {
+        //Keep parent as base
+        SubraceDto race = new SubraceDto(parent);
+        //Add name and subrace name together
+        race.setName(parent.getName() + " - " + subrace.getName());
+
+        //Override if applicable in overwrite
+        //If not add on top, except language if default
+        if(subrace.getOverwrite() != null) {
+            if(subrace.getOverwrite().isAbility()) {
+                race.setAbility(subrace.getAbility());
+            }
+            else if(subrace.getAbility() != null) {
+                //adding
+                if(subrace.getAbility().getChoices() != null) {
+                    race.getAbility().getChoices().addAll(subrace.getAbility().getChoices());
+                }
+                if(subrace.getAbility().getCharisma() != null) {
+                    race.getAbility().setCharisma(subrace.getAbility().getCharisma());
+                }
+                if(subrace.getAbility().getConstitution() != null) {
+                    race.getAbility().setConstitution(subrace.getAbility().getConstitution());
+                }
+                if(subrace.getAbility().getStrength() != null) {
+                    race.getAbility().setStrength(subrace.getAbility().getStrength());
+                }
+                if(subrace.getAbility().getDexterity() != null) {
+                    race.getAbility().setDexterity(subrace.getAbility().getDexterity());
+                }
+                if(subrace.getAbility().getIntelligence() != null) {
+                    race.getAbility().setIntelligence(subrace.getAbility().getIntelligence());
+                }
+                if(subrace.getAbility().getWisdom() != null) {
+                    race.getAbility().setWisdom(subrace.getAbility().getWisdom());
+                }
+            }
+
+            if(subrace.getOverwrite().isSkillProficiencies()) {
+                race.setSkillProficiencies(subrace.getSkillProficiencies());
+            }
+            else if(subrace.getSkillProficiencies() != null) {
+                if(subrace.getSkillProficiencies().getChoices() != null) {
+                    race.getSkillProficiencies().setChoices(subrace.getSkillProficiencies().getChoices());
+                }
+
+                if(subrace.getSkillProficiencies().getProficiencies() != null) {
+                    if(race.getSkillProficiencies() == null || race.getSkillProficiencies().getProficiencies() == null) {
+                        race.setSkillProficiencies(new SkillProficiencyDto());
+                        race.getSkillProficiencies().setProficiencies(subrace.getSkillProficiencies().getProficiencies());
+                    }
+                    race.getSkillProficiencies().getProficiencies().addAll(subrace.getSkillProficiencies().getProficiencies());
+                }
+            }
+
+            if(subrace.getOverwrite().isLanguageProficiencies()) {
+                race.setLanguageProficiencies(subrace.getLanguageProficiencies());
+            }
+            else if(subrace.getLanguageProficiencies() != null && !subrace.getLanguageProficiencies().isDefaultLanguage()) {
+                if(subrace.getLanguageProficiencies().getChoices() != null) {
+                    race.getLanguageProficiencies().getChoices().addAll(subrace.getLanguageProficiencies().getChoices());
+                }
+
+                if(subrace.getLanguageProficiencies().getProficiencies() != null) {
+                    race.getLanguageProficiencies().getProficiencies().addAll(subrace.getLanguageProficiencies().getProficiencies());
+                }
+
+            }
+        }
+
+        //proficiencies on top of others (except ones from override)
+        //weapon
+        if(subrace.getWeaponProficiencies() != null) {
+            if(subrace.getWeaponProficiencies().getChoices() != null) {
+                race.getWeaponProficiencies().getChoices().addAll(subrace.getWeaponProficiencies().getChoices());
+            }
+
+            if(subrace.getWeaponProficiencies().getProficiencies() != null) {
+                if(race.getWeaponProficiencies() == null || race.getWeaponProficiencies().getProficiencies() == null) {
+                    race.setWeaponProficiencies(new WeaponProficiencyDto());
+                    race.getWeaponProficiencies().setProficiencies(subrace.getWeaponProficiencies().getProficiencies());
+                }
+                else {
+                    race.getWeaponProficiencies().getProficiencies().addAll(subrace.getWeaponProficiencies().getProficiencies());
+                }
+            }
+        }
+        //tool
+        if(subrace.getToolProficiencies() != null) {
+            if(subrace.getToolProficiencies().getChoices() != null) {
+                if(race.getToolProficiencies() == null || race.getToolProficiencies().getChoices() == null) {
+                    race.setToolProficiencies(new ToolProficiencyDto());
+                    race.getToolProficiencies().setChoices(new ArrayList<>());
+                }
+                race.getToolProficiencies().getChoices().addAll(subrace.getToolProficiencies().getChoices());
+            }
+
+            if(subrace.getToolProficiencies().getProficiencies() != null) {
+                if (race.getToolProficiencies() == null || race.getToolProficiencies().getProficiencies() == null) {
+                    race.setToolProficiencies(new ToolProficiencyDto());
+                    race.getToolProficiencies().setProficiencies(subrace.getToolProficiencies().getProficiencies());
+                }
+                else {
+                    race.getToolProficiencies().getProficiencies().addAll(subrace.getToolProficiencies().getProficiencies());
+                }
+            }
+        }
+        //armor
+        if(subrace.getArmorProficiencies() != null) {
+            if(race.getArmorProficiencies() == null) {
+                race.setArmorProficiencies(subrace.getArmorProficiencies());
+            }
+            else {
+                race.getArmorProficiencies().addAll(subrace.getArmorProficiencies());
+            }
+        }
+
+        //proficiencies choice list
+        if(subrace.getProficiencies() != null) {
+            if(race.getProficiencies() == null) {
+                race.setProficiencies(subrace.getProficiencies());
+            }
+            else {
+                race.getProficiencies().addAll(subrace.getProficiencies());
+            }
+        }
+
+        //override movement only if not estimated
+        if(subrace.getMovement() != null) {
+            if(!subrace.getMovement().isWalkEstimated() && !subrace.getMovement().isFlyEstimated()) {
+                race.setMovement(subrace.getMovement());
+            }
+        }
+
+        //add spells
+        if(subrace.getAdditionalSpells() != null) {
+            if(race.getAdditionalSpells() == null) {
+                race.setAdditionalSpells(subrace.getAdditionalSpells());
+            }
+            else {
+                race.getAdditionalSpells().addAll(subrace.getAdditionalSpells());
+            }
+        }
+
+        //add entries
+        if(subrace.getEntries() != null) {
+            race.getEntries().addAll(subrace.getEntries());
+        }
+
+        //replace variants if present
+        if(subrace.getVariants() != null) {
+            System.out.println("Subrace has variants: " + race.getName());
+            race.setVariants(subrace.getVariants());
+        }
+
+        //Adding modifiers
+        if(subrace.getModifiers() != null) {
+            if(race.getModifiers() == null) {
+                race.setModifiers(subrace.getModifiers());
+            }
+            else {
+                //This never hapens
+                throw new RuntimeException("Parent already had modifiers");
+            }
+        }
+
+        //creature type? --> none have any
+//        if(subrace.getCreatureType() != null) {
+//            System.out.println("Subrace has creature type: " + race.getName());
+//        }
+
+        return race;
+    }
+
+    public RaceDto mapVariantIntoParent(RaceDto parent, VariantDto variant) {
+        parent.setName(mapVariantName(parent.getName(), variant.getName()));
+        if(variant.getSource() != null) {
+            parent.getSource().setSource(variant.getSource());
+            parent.getSource().setDescription(variant.getSource().getName());
+        }
+        List<EntryDto> finalEntries = new ArrayList<>();
+
+        for(VariantEntryDto variantEntryDto : variant.getEntries()) {
+            if(variantEntryDto.getMode().equals("APPEND")) {
+                finalEntries.add(variantEntryDto.getReplaceWith());
+            }
+        }
+
+        variant.getEntries().removeAll(finalEntries);
+
+        for(EntryDto parentEntry : parent.getEntries()) {
+            boolean isModified = false;
+            for(VariantEntryDto variantEntry : variant.getEntries()) {
+                if(variantEntry.getEntryName() != null) {
+                    if (variantEntry.getEntryName().equalsIgnoreCase(parentEntry.getName())) {
+                        if(variantEntry.getMode().equals("REPLACE")) {
+                            isModified = true;
+                            finalEntries.add(variantEntry.getReplaceWith());
+                        }
+
+                        if(variantEntry.getMode().equals("REMOVE")) {
+                            isModified = true;
+                            //this simply makes it so it is not readded and therefore removed
+                        }
+
+                    }
+                }
+            }
+
+            if(!isModified) {
+                finalEntries.add(parentEntry);
+            }
+        }
+
+        parent.setEntries(finalEntries);
+        parent.setVariants(null);
+
+        return parent;
+    }
+
+    private String mapVariantName(String parentName, String variantName) {
+        variantName = variantName.replaceAll(parentName, "");
+        variantName = variantName.replaceAll("Variant;", "");
+        variantName = variantName.replaceAll(";", "");
+        variantName = variantName.replaceAll("Dragonborn", ""); //special for dragonborn names deduplication
+        variantName = variantName.replaceAll("Gem", ""); //special for dragonborn names deduplication
+        variantName = variantName.replaceAll("Metallic", ""); //special for dragonborn names deduplication
+        variantName = variantName.replaceAll("Chromatic", ""); //special for dragonborn names deduplication
+        variantName = variantName.replaceAll("\\(", "");
+        variantName = variantName.replaceAll("\\)", "");
+        variantName = variantName.trim();
+
+
+
+        return parentName + " - " + variantName.replaceAll(" {2}", "");
+    }
 }
 
-//TODO versions / subraces
-// --- skillToolLanguageProficiencies
+//TODO map variant in main race

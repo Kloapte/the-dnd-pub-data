@@ -12,8 +12,5 @@ public class SubraceDte extends RaceDte {
     private String raceName;
     private List<String> alias;
     private String raceSource;
-    private ModDto _mod;
-    private SubraceDte _abstract;
-    private List<ImplementationDte> _implementations;
     private OverwriteDte overwrite;
 }
