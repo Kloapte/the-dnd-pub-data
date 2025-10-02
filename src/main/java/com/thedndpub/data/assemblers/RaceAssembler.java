@@ -1,8 +1,9 @@
 package com.thedndpub.data.assemblers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thedndpub.data.dte.race.*;
-import com.thedndpub.data.dto.*;
+import com.thedndpub.data.dto.race.*;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -39,11 +40,12 @@ public class RaceAssembler {
 
     public RaceDto mapRaceCopyToDto(RaceDte dte, RaceDto original) {
         try {
-            ObjectMapper mapper = new ObjectMapper();
             //Doing this to make a unlinked copy
+            ObjectMapper mapper = new ObjectMapper();
             RaceDto copy = mapper.readValue(mapper.writeValueAsString(original), RaceDto.class);
+
             copy.setName(dte.getName());
-            copy.setCopyOf(copy.getSource());
+            copy.setChildOf(new SubraceSourceDto(original.getName(), original.getSource()));
             copy.setSource(this.mapSource(dte));
             this.implementCopy(copy, dte.get_copy().get_mod());
 
@@ -891,6 +893,7 @@ public class RaceAssembler {
                         entries.add(dto);
                         break;
                     case "inset":
+                        //TODO needs more work with subraces half-elf
                         dto = new EntryTextDto();
                         dto.setName(dte.getName());
                         for (EntryDte subEntry : dte.getEntries()) {
@@ -1117,12 +1120,16 @@ public class RaceAssembler {
         }
     }
 
-    public RaceDto mapSubraceIntoParent(RaceDto parent, SubraceDto subrace) {
+    public RaceDto mapSubraceIntoParent(RaceDto original, SubraceDto subrace) throws JsonProcessingException {
+        //Doing this to make a unlinked copy
+        ObjectMapper mapper = new ObjectMapper();
+        RaceDto parent = mapper.readValue(mapper.writeValueAsString(original), RaceDto.class);
+
         //Keep parent as base
         SubraceDto race = new SubraceDto(parent);
         //Add name and subrace name together
         race.setName(parent.getName() + " - " + subrace.getName());
-
+        race.setChildOf(new SubraceSourceDto(parent.getName(), parent.getSource()));
         //Override if applicable in overwrite
         //If not add on top, except language if default
         if(subrace.getOverwrite() != null) {
@@ -1267,7 +1274,6 @@ public class RaceAssembler {
 
         //replace variants if present
         if(subrace.getVariants() != null) {
-            System.out.println("Subrace has variants: " + race.getName());
             race.setVariants(subrace.getVariants());
         }
 
@@ -1283,14 +1289,14 @@ public class RaceAssembler {
         }
 
         //creature type? --> none have any
-//        if(subrace.getCreatureType() != null) {
-//            System.out.println("Subrace has creature type: " + race.getName());
-//        }
-
         return race;
     }
 
-    public RaceDto mapVariantIntoParent(RaceDto parent, VariantDto variant) {
+    public RaceDto mapVariantIntoParent(RaceDto original, VariantDto variant) throws JsonProcessingException {
+        //Doing this to make a unlinked copy
+        ObjectMapper mapper = new ObjectMapper();
+        RaceDto parent = mapper.readValue(mapper.writeValueAsString(original), RaceDto.class);
+
         parent.setName(mapVariantName(parent.getName(), variant.getName()));
         if(variant.getSource() != null) {
             parent.getSource().setSource(variant.getSource());
