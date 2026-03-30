@@ -5,13 +5,11 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thedndpub.data.dte.race.ChooseDte;
-import com.thedndpub.data.dte.race.LevelSpellKnownDte;
+import com.thedndpub.data.dte.generic.ChooseDte;
 import com.thedndpub.data.dte.race.SpellAbilityDte;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class SpellAbilityDeserializer extends JsonDeserializer<SpellAbilityDte> {
     @Override

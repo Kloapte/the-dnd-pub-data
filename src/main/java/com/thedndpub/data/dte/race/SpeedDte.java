@@ -1,7 +1,5 @@
 package com.thedndpub.data.dte.race;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.thedndpub.data.dte.race.deserializers.SpeedDtoDeserializer;
 import lombok.Data;
 
 @Data

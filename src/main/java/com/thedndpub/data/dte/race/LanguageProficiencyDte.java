@@ -1,5 +1,6 @@
 package com.thedndpub.data.dte.race;
 
+import com.thedndpub.data.dte.generic.ChooseDte;
 import lombok.Getter;
 import lombok.Setter;
 

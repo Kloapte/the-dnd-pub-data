@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 public class EntryWithListDto extends EntryDto {
-    private final List<EntryListItemDto> listItems = new ArrayList<>();
+    private final List<EntryDto> listItems = new ArrayList<>();
 
     public EntryWithListDto() {
         this.setType("list");

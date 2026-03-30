@@ -1,6 +1,5 @@
 package com.thedndpub.data.dte.race;
 
-import com.thedndpub.data.dte.race.deserializers.ModDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

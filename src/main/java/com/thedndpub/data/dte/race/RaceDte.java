@@ -1,11 +1,14 @@
 package com.thedndpub.data.dte.race;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.thedndpub.data.dte.race.deserializers.EntryDtoDeserializer;
-import com.thedndpub.data.dte.race.deserializers.ResistDtoDeserializer;
-import com.thedndpub.data.dte.race.deserializers.SpeedDtoDeserializer;
+import com.thedndpub.data.dte.generic.AbilityDte;
+import com.thedndpub.data.dte.generic.CopyDte;
+import com.thedndpub.data.dte.generic.EntryDte;
+import com.thedndpub.data.dte.generic.OtherSourceDte;
+import com.thedndpub.data.dte.generic.deserializers.EntryDteDeserializer;
+import com.thedndpub.data.dte.race.deserializers.ResistDteDeserializer;
+import com.thedndpub.data.dte.race.deserializers.SpeedDteDeserializer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,7 +34,7 @@ public class RaceDte {
     private String lineage;
     private List<String> creatureTypeTags;
     private List<String> size;
-    @JsonDeserialize(using = SpeedDtoDeserializer.class)
+    @JsonDeserialize(using = SpeedDteDeserializer.class)
     private SpeedDte speed;
     private List<AbilityDte> ability;
     private HeightAndWeightDte heightAndWeight;
@@ -48,14 +51,14 @@ public class RaceDte {
     private List<ArmorProficiencyDte> armorProficiencies;
     private List<AdditionalSpellDte> additionalSpells;
     private List<SkillToolLanguageProficienciesDte> skillToolLanguageProficiencies;
-    @JsonDeserialize(using = ResistDtoDeserializer.class)
+    @JsonDeserialize(using = ResistDteDeserializer.class)
     private ResistDte resist;
     private List<String> immune;
     private List<String> conditionImmune;
     private List<String> vulnerable;
     private SoundClipDte soundClip;
     private SizeEntryDte sizeEntry;
-    @JsonDeserialize(using = EntryDtoDeserializer.class)
+    @JsonDeserialize(using = EntryDteDeserializer.class)
     private List<EntryDte> entries;
     private boolean hasFluff;
     private boolean hasFluffImages;

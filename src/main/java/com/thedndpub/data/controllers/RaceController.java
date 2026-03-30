@@ -1,6 +1,5 @@
 package com.thedndpub.data.controllers;
 
-import com.thedndpub.data.assemblers.RaceAssembler;
 import com.thedndpub.data.dto.EntryMapped;
 import com.thedndpub.data.dto.Placeholder;
 import com.thedndpub.data.dto.race.*;

@@ -8,5 +8,5 @@ import lombok.Data;
 public class VariantEntryDto {
     private String entryName;
     private String mode;
-    private EntryTextDto replaceWith;
+    private EntryDto replaceWith;
 }

@@ -1,6 +1,7 @@
 package com.thedndpub.data.dte.race;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.thedndpub.data.dte.generic.ChooseDte;
 import lombok.Data;
 
 @Data
