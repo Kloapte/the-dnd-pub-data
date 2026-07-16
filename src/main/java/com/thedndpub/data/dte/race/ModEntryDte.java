@@ -1,9 +1,9 @@
 package com.thedndpub.data.dte.race;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.thedndpub.data.dte.generic.EntryDte;
 import com.thedndpub.data.dte.generic.deserializers.EntryDteDeserializer;
 import lombok.Data;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.List;
 

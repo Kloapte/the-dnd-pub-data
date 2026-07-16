@@ -1,25 +1,26 @@
 package com.thedndpub.data.dte.generic.deserializers;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ValueDeserializer;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
-public class LocalDateDeserializer extends JsonDeserializer<LocalDate> {
+public class LocalDateDeserializer extends ValueDeserializer<LocalDate> {
     @Override
-    public LocalDate deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
-        ObjectMapper mapper = (ObjectMapper) p.getCodec();
-        JsonNode node = mapper.readTree(p);
+    public LocalDate deserialize(JsonParser parser, DeserializationContext context) {
+        JsonNode node = context.readTree(parser);
 
         if(node.isTextual()) {
             return LocalDate.parse(node.asText());
         }
         else {
-            throw new RuntimeException("Not a string so can't be LocalDate");
+            throw context.weirdStringException(
+                    node.toString(),
+                    String.class,
+                    "Not a string so can't be LocalDate"
+            );
         }
     }
 }

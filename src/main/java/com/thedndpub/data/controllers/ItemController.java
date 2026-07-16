@@ -26,12 +26,12 @@ public class ItemController {
 
     @GetMapping("/{name}")
     public List<ItemDte> getItemOnName(@PathVariable("name") String name) {
-        List<ItemDte> races = new ArrayList<>();
-        for(ItemDte race: this.getItems()) {
-            if(race.getName().toLowerCase().contains(name.toLowerCase())) {
-                races.add(race);
+        List<ItemDte> items = new ArrayList<>();
+        for(ItemDte item: this.getItems()) {
+            if(item.name().toLowerCase().contains(name.toLowerCase())) {
+                items.add(item);
             }
         }
-        return races;
+        return items;
     }
 }

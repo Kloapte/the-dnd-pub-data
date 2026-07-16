@@ -1,21 +1,18 @@
 package com.thedndpub.data.dte.race.deserializers;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ValueDeserializer;
 import com.thedndpub.data.dte.race.LevelSpellKnownDte;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class SpellKnownDteDeserializer extends JsonDeserializer<LevelSpellKnownDte> {
+public class SpellKnownDteDeserializer extends ValueDeserializer<LevelSpellKnownDte> {
     @Override
-    public LevelSpellKnownDte deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
-        ObjectMapper mapper = (ObjectMapper) p.getCodec();
-        JsonNode node = mapper.readTree(p);
+    public LevelSpellKnownDte deserialize(JsonParser parser, DeserializationContext context) {
+        JsonNode node = context.readTree(parser);
 
         LevelSpellKnownDte dte = new LevelSpellKnownDte();
 
@@ -23,15 +20,16 @@ public class SpellKnownDteDeserializer extends JsonDeserializer<LevelSpellKnownD
             if(node.get("_") != null) {
                 if(node.get("_").isArray()) {
                     dte.setSpells(new ArrayList<>());
-                    for (Iterator<JsonNode> it = node.get("_").elements(); it.hasNext(); ) {
-                        JsonNode stringNode = it.next();
-                        if(stringNode.isObject()) {
+
+                    for (JsonNode stringNode : node.get("_")) {
+                        if (stringNode.isObject()) {
                             dte.setChoose(stringNode.get("choose").asText());
-                            if(stringNode.get("count") != null) {
-                                dte.setCount(stringNode.get("count").asInt());
+
+                            JsonNode countNode = stringNode.get("count");
+                            if (countNode != null) {
+                                dte.setCount(countNode.asInt());
                             }
-                        }
-                        else {
+                        } else {
                             dte.getSpells().add(stringNode.asText());
                         }
                     }
@@ -73,16 +71,17 @@ public class SpellKnownDteDeserializer extends JsonDeserializer<LevelSpellKnownD
         }
         else if(node != null && node.isArray()) {
             dte.setSpells(new ArrayList<>());
-            for (Iterator<JsonNode> it = node.elements(); it.hasNext(); ) {
-                JsonNode stringNode = it.next();
-                if(stringNode.isObject()) {
-                    dte.setChoose(stringNode.get("choose").asText());
-                    dte.setCount(stringNode.get("count").asInt());
-                }
-                else if(stringNode.isTextual()) {
+
+            for (JsonNode stringNode : node) {
+                if (stringNode.isObject()) {
+                    dte.setChoose(stringNode.path("choose").asText());
+
+                    if (stringNode.has("count")) {
+                        dte.setCount(stringNode.path("count").asInt());
+                    }
+                } else if (stringNode.isTextual()) {
                     dte.getSpells().add(stringNode.asText());
-                }
-                else {
+                } else {
                     throw new RuntimeException("Unsupported spell text");
                 }
             }

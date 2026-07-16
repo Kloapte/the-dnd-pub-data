@@ -1,136 +1,150 @@
 package com.thedndpub.data.dte.items;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.thedndpub.data.dte.items.deserializers.*;
-import com.thedndpub.data.dte.generic.OtherSourceDte;
-import com.thedndpub.data.dte.generic.CopyDte;
-import com.thedndpub.data.dte.generic.AbilityDte;
-import com.thedndpub.data.dte.generic.EntryDte;
+import com.thedndpub.data.dte.generic.*;
 import com.thedndpub.data.dte.generic.deserializers.EntryDteDeserializer;
-import lombok.Getter;
-import lombok.Setter;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.List;
 
-@Getter
-@Setter
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class ItemDte {
-    private String name;
-    private String source;
-    private int page;
-    @JsonDeserialize(using = SrdDeserializer.class)
-    private boolean srd;
-    @JsonDeserialize(using = SrdDeserializer.class)
-    private boolean srd52;
-    private boolean basicRules;
-    private boolean basicRules2024;
-    private List<OtherSourceDte> additionalSources;
-    private List<OtherSourceDte> otherSources;
-    @JsonDeserialize(using = ReprintedAsDeserializer.class)
-    private List<String> reprintedAs;
-    private CopyDte _copy;
-    private String baseItem;
-    private String type;
-    private String tier;
-    private String rarity;
-    private Integer value;
-    private String valueRarity;
-    private String strength;
-    private Boolean stealth;
-    private String reqAttune;
-    private List<RequiresAttunementDte> reqAttuneTags;
-    private String reqAttuneAlt;
-    private Integer weight;
-    private String weaponCategory;
-    private Boolean staff;
-    private List<String> property;
-    private List<String> items;
-    private Boolean wondrous;
-    private Boolean tattoo;
-    private Boolean curse;
-    private Boolean poison;
-    private List<String> poisonTypes;
-    private Boolean sentient;
-    private List<String> immune;
-    private List<String> conditionImmune;
-    private List<String> resist;
-    private List<String> vulnerable;
-    private Boolean grantsProficiency;
-    private Boolean grantsLanguage;
-    private ItemSpeedDte modifySpeed;
-    @JsonDeserialize(using = ItemAbilityDeserializer.class)
-    private AbilityDte ability;
-    private String range;
-    private String dmg1;
-    private String dmg2;
-    private String dmgType;
-    private String ammoType;
-    private Integer ac;
-    private Integer crew;
-    private Integer crewMin;
-    private Integer crewMax;
-    private Integer vehAc;
-    private Integer vehHp;
-    private Integer vehSpeed;
-    private Integer vehDmgThresh;
-    private Integer capPassenger;
-    private Integer capCargo;
-    private Integer travelCost;
-    private Integer shippingCost;
-    private Integer reach;
-    private String bonusWeapon;
-    private String bonusWeaponAttack;
-    private String bonusWeaponDamage;
-    private String bonusAc;
-    private String bonusSavingThrow;
-    private String bonusSpellAttack;
-    private String bonusSpellSaveDc;
-    private String bonusProficiencyBonus;
-    private String bonusSavingThrowConcentration;
-    private String bonusAbilityCheck;
-    private Integer critThreshold;
-    @JsonDeserialize(using = ItemFocusDeserializer.class)
-    private List<String> focus;
-    private String recharge;
-    private String rechargeAmount;
-    private String charges;
-    private ContainerCapacityDte containerCapacity;
-    @JsonDeserialize(using = PackContentDeserializer.class)
-    private List<PackContentDte> packContents;
-    private Boolean atomicPackContents;
-    private Integer carryingCapacity;
-    private BarDimensionsDte barDimensions;
-    private Integer speed;
-    private String age;
-    private Boolean hasRefs;
-    @JsonDeserialize(using = EntryDteDeserializer.class)
-    private List<EntryDte> entries;
-    @JsonDeserialize(using = EntryDteDeserializer.class)
-    private List<EntryDte> additionalEntries;
-    private List<String> optionalfeatures;
-    private List<String> lootTables;
-    private List<String> alias;
-    private List<String> miscTags;
-    private List<String> group;
-    @JsonDeserialize(using = MasteryAbilityDeserializer.class)
-    private List<String> mastery;
-    private String scfType;
-    private List<LightDte> light;
-    private Integer spellScrollLevel;
-    @JsonDeserialize(using = AttachedSpellDeserializer.class)
-    private List<ItemAttachedSpellDte> attachedSpells;
-    private Boolean firearm;
-    private String detail1;
-    private String detail2;
-    private String typeAlt;
-    private List<String> seeAlsoVehicle;
-    private List<String> seeAlsoDeck;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public record ItemDte(
 
-    private Boolean itemsHidden; //For itemGroup
-    private String weightNote;
-    private Object dexterityMax; //Always null so can ignore
-    private Boolean hasFluffImages;
-    private Boolean hasFluff;
-}
+        String name,
+        String source,
+        Integer page,
+
+        @JsonDeserialize(using = SrdDeserializer.class)
+        Boolean srd,
+
+        @JsonDeserialize(using = SrdDeserializer.class)
+        Boolean srd52,
+
+        Boolean basicRules,
+        Boolean basicRules2024,
+
+        List<OtherSourceDte> additionalSources,
+        List<OtherSourceDte> otherSources,
+
+        @JsonDeserialize(using = ReprintedAsDeserializer.class)
+        List<String> reprintedAs,
+
+        CopyDte _copy,
+        String baseItem,
+        String type,
+        String tier,
+        String rarity,
+        Integer value,
+        String valueRarity,
+        String strength,
+        Boolean stealth,
+        String reqAttune,
+        List<RequiresAttunementDte> reqAttuneTags,
+        String reqAttuneAlt,
+        Integer weight,
+        String weaponCategory,
+        Boolean staff,
+        List<String> property,
+        List<String> items,
+        Boolean wondrous,
+        Boolean tattoo,
+        Boolean curse,
+        Boolean poison,
+        List<String> poisonTypes,
+        Boolean sentient,
+        List<String> immune,
+        List<String> conditionImmune,
+        List<String> resist,
+        List<String> vulnerable,
+        Boolean grantsProficiency,
+        Boolean grantsLanguage,
+        ItemSpeedDte modifySpeed,
+
+        @JsonDeserialize(using = ItemAbilityDeserializer.class)
+        AbilityDte ability,
+
+        String range,
+        String dmg1,
+        String dmg2,
+        String dmgType,
+        String ammoType,
+        Integer ac,
+        Integer crew,
+        Integer crewMin,
+        Integer crewMax,
+        Integer vehAc,
+        Integer vehHp,
+        Integer vehSpeed,
+        Integer vehDmgThresh,
+        Integer capPassenger,
+        Integer capCargo,
+        Integer travelCost,
+        Integer shippingCost,
+        Integer reach,
+        String bonusWeapon,
+        String bonusWeaponAttack,
+        String bonusWeaponDamage,
+        String bonusAc,
+        String bonusSavingThrow,
+        String bonusSpellAttack,
+        String bonusSpellSaveDc,
+        String bonusProficiencyBonus,
+        String bonusSavingThrowConcentration,
+        String bonusAbilityCheck,
+        Integer critThreshold,
+
+        @JsonDeserialize(using = ItemFocusDeserializer.class)
+        List<String> focus,
+
+        String recharge,
+        String rechargeAmount,
+        String charges,
+        ContainerCapacityDte containerCapacity,
+
+        @JsonDeserialize(using = PackContentDeserializer.class)
+        List<PackContentDte> packContents,
+
+        Boolean atomicPackContents,
+        Integer carryingCapacity,
+        BarDimensionsDte barDimensions,
+        Integer speed,
+        String age,
+        Boolean hasRefs,
+
+        @JsonDeserialize(using = EntryDteDeserializer.class)
+        List<EntryDte> entries,
+
+        @JsonDeserialize(using = EntryDteDeserializer.class)
+        List<EntryDte> additionalEntries,
+
+        List<String> optionalfeatures,
+        List<String> lootTables,
+        List<String> alias,
+        List<String> miscTags,
+        List<String> group,
+
+        @JsonDeserialize(using = MasteryAbilityDeserializer.class)
+        List<String> mastery,
+
+        String scfType,
+        List<LightDte> light,
+        Integer spellScrollLevel,
+
+        @JsonDeserialize(using = AttachedSpellDeserializer.class)
+        List<ItemAttachedSpellDte> attachedSpells,
+
+        Boolean firearm,
+        String detail1,
+        String detail2,
+        String typeAlt,
+        List<String> seeAlsoVehicle,
+        List<String> seeAlsoDeck,
+
+        Boolean itemsHidden,
+        String weightNote,
+        Object dexterityMax,
+        Boolean hasFluffImages,
+        Boolean hasFluff
+
+) {}

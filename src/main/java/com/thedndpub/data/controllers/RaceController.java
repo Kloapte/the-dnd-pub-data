@@ -5,6 +5,7 @@ import com.thedndpub.data.dto.Placeholder;
 import com.thedndpub.data.dto.race.*;
 import com.thedndpub.data.services.RaceService;
 import com.thedndpub.data.util.records.RaceKey;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -34,6 +35,7 @@ public class RaceController {
                 races.add(race);
             }
         }
+
         return races;
     }
 

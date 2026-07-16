@@ -1,7 +1,6 @@
 package com.thedndpub.data.dte.race;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.thedndpub.data.dte.generic.AbilityDte;
 import com.thedndpub.data.dte.generic.CopyDte;
 import com.thedndpub.data.dte.generic.EntryDte;
@@ -11,6 +10,7 @@ import com.thedndpub.data.dte.race.deserializers.ResistDteDeserializer;
 import com.thedndpub.data.dte.race.deserializers.SpeedDteDeserializer;
 import lombok.Getter;
 import lombok.Setter;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.List;
 

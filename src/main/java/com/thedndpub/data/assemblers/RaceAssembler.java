@@ -1,11 +1,10 @@
 package com.thedndpub.data.assemblers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thedndpub.data.dte.generic.*;
 import com.thedndpub.data.dte.race.*;
 import com.thedndpub.data.dto.race.*;
 import org.springframework.stereotype.Component;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.*;
 
@@ -1169,11 +1168,11 @@ public class RaceAssembler {
         }
     }
 
-    public RaceDto mapSubraceIntoParent(RaceDto original, SubraceDto subrace) throws JsonProcessingException {
+    public RaceDto mapSubraceIntoParent(RaceDto original, SubraceDto subrace) {
         //Doing this to make a unlinked copy
         ObjectMapper mapper = new ObjectMapper();
         RaceDto parent = mapper.readValue(mapper.writeValueAsString(original), RaceDto.class);
-
+        
         //Keep parent as base
         SubraceDto race = new SubraceDto(parent);
         //Add name and subrace name together
@@ -1332,7 +1331,7 @@ public class RaceAssembler {
         return race;
     }
 
-    public RaceDto mapVariantIntoParent(RaceDto original, VariantDto variant) throws JsonProcessingException {
+    public RaceDto mapVariantIntoParent(RaceDto original, VariantDto variant) {
         //Doing this to make a unlinked copy
         ObjectMapper mapper = new ObjectMapper();
         RaceDto parent = mapper.readValue(mapper.writeValueAsString(original), RaceDto.class);

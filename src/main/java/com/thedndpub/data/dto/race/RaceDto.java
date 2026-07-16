@@ -1,7 +1,9 @@
 package com.thedndpub.data.dto.race;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.thedndpub.data.dto.race.deserializers.SubRaceSourceDtoDeserializer;
 import lombok.Data;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class RaceDto {
     private List<AdditionalSpellDto> additionalSpells;
     private List<EntryDto> entries;
     private List<VariantDto> variants;
+    @JsonDeserialize(using = SubRaceSourceDtoDeserializer.class)
     private List<SubraceSourceDto> subraces;
     private SubraceSourceDto childOf;
 }

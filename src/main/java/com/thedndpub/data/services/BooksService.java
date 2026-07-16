@@ -1,14 +1,13 @@
 package com.thedndpub.data.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.thedndpub.data.dte.books.BookDte;
 import com.thedndpub.data.dte.books.BooksWrapperDte;
-import com.thedndpub.data.dte.items.ItemDte;
-import com.thedndpub.data.dte.items.ItemsWrapperDte;
 import com.thedndpub.data.util.records.ItemKey;
 import lombok.Getter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -27,8 +26,8 @@ public class BooksService {
     private HashMap<ItemKey, BookDte> makeBooks(BooksWrapperDte wrapper) {
         HashMap<ItemKey, BookDte> books = new HashMap<>();
 
-        for(BookDte bookDte : wrapper.getBook()) {
-            ItemKey key = new ItemKey(bookDte.getName(), bookDte.getSource());
+        for(BookDte bookDte : wrapper.book()) {
+            ItemKey key = new ItemKey(bookDte.name(), bookDte.source());
             books.put(key, bookDte);
         }
 

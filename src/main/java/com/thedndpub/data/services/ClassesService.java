@@ -1,6 +1,6 @@
 package com.thedndpub.data.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import com.thedndpub.data.dte.classes.ClassDte;
 import com.thedndpub.data.dte.classes.ClassWrapperDte;
 import lombok.Getter;

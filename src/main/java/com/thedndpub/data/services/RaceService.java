@@ -1,15 +1,12 @@
 package com.thedndpub.data.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.thedndpub.data.dto.race.*;
+import tools.jackson.databind.ObjectMapper;
 import com.thedndpub.data.assemblers.RaceAssembler;
 import com.thedndpub.data.dte.race.RaceDte;
 import com.thedndpub.data.dte.race.RacesWrapperDte;
 import com.thedndpub.data.dte.race.SubraceDte;
-import com.thedndpub.data.dto.race.RaceDto;
-import com.thedndpub.data.dto.race.SubraceDto;
-import com.thedndpub.data.dto.race.SubraceSourceDto;
-import com.thedndpub.data.dto.race.VariantDto;
 import com.thedndpub.data.util.records.RaceKey;
 import lombok.Getter;
 import org.springframework.core.io.ClassPathResource;
@@ -32,12 +29,13 @@ public class RaceService {
     @Getter
     private final HashMap<RaceKey, RaceDto> variants;
 
-    public RaceService(RaceAssembler raceAssembler) throws JsonProcessingException {
+    public RaceService(RaceAssembler raceAssembler) {
         this.raceAssembler = raceAssembler;
 
         RacesWrapperDte wrapper = loadRacesFromJson();
 
         this.races = makeRaces(wrapper.getRace());
+//        this.subraces = new HashMap<>();
         this.subraces = makeSubraces(wrapper.getSubrace());
         List<RaceDto> combined = new ArrayList<>();
         combined.addAll(this.races.values().stream().toList());
@@ -87,7 +85,7 @@ public class RaceService {
         return new RaceKey(dto.getName(), dto.getSource().getSource().name());
     }
 
-    private HashMap<RaceKey, RaceDto> makeSubraces(List<SubraceDte> subracesDte) throws JsonProcessingException {
+    private HashMap<RaceKey, RaceDto> makeSubraces(List<SubraceDte> subracesDte) {
         HashMap<RaceKey,RaceDto> subraces = new HashMap<>();
         for(SubraceDte subraceDte : subracesDte) {
             SubraceDto subraceDto = this.raceAssembler.mapSubRaceToRaceDto(subraceDte);
@@ -103,14 +101,14 @@ public class RaceService {
                 subraces.putIfAbsent(this.keyFromDto(subrace), subrace);
             }
             else {
-                throw new IllegalStateException("Parent of subrace not found (name=" + subraceDte.getName() + ", source=" + subraceDte.getSource() + ")");
+                throw new IllegalStateException("Parent of subrace not found (name=" + subraceDte.getName() + ", parent=" + subraceDto.getParent() + ", source=" + subraceDte.getSource() + ", parentSource=" + subraceDto.getParentSource().name() + ")");
             }
         }
 
         return subraces;
     }
 
-    private HashMap<RaceKey, RaceDto> makeVariants(List<RaceDto> races) throws JsonProcessingException {
+    private HashMap<RaceKey, RaceDto> makeVariants(List<RaceDto> races) {
         HashMap<RaceKey, RaceDto> variants = new HashMap<>();
         for(RaceDto parent : races) {
             if(parent.getVariants() != null) {

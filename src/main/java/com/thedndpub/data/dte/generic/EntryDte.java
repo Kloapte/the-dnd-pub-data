@@ -1,10 +1,10 @@
 package com.thedndpub.data.dte.generic;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.thedndpub.data.dte.generic.deserializers.EntryRowDeserializer;
 import com.thedndpub.data.dte.generic.deserializers.EntryDteDeserializer;
 import com.thedndpub.data.dte.race.DataDte;
 import lombok.Data;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.List;
 

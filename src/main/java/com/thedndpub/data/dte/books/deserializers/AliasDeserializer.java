@@ -1,25 +1,24 @@
 package com.thedndpub.data.dte.books.deserializers;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ValueDeserializer;
 
-import java.io.IOException;
-import java.time.LocalDate;
+public class AliasDeserializer extends ValueDeserializer<String> {
 
-public class AliasDeserializer extends JsonDeserializer<String> {
     @Override
-    public String deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
-        ObjectMapper mapper = (ObjectMapper) p.getCodec();
-        JsonNode node = mapper.readTree(p);
+    public String deserialize(JsonParser parser, DeserializationContext context) {
+        JsonNode node = context.readTree(parser);
 
-        if(node.isArray() && node.size() == 1) {
+        if (node.isArray() && node.size() == 1) {
             return node.get(0).asText();
         }
-        else {
-            throw new RuntimeException("Not a list");
-        }
+
+        throw context.weirdStringException(
+                node.toString(),
+                String.class,
+                "Alias must be an array containing exactly one value"
+        );
     }
 }

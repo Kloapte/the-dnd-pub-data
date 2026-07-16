@@ -1,22 +1,17 @@
 package com.thedndpub.data.dte.items.deserializers;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thedndpub.data.dte.generic.AbilityDte;
-import com.thedndpub.data.dte.generic.ChooseDte;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ValueDeserializer;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MasteryAbilityDeserializer extends JsonDeserializer<List<String>> {
+public class MasteryAbilityDeserializer extends ValueDeserializer<List<String>> {
     @Override
-    public List<String> deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
-        ObjectMapper mapper = (ObjectMapper) p.getCodec();
-        JsonNode node = mapper.readTree(p);
+    public List<String> deserialize(JsonParser parser, DeserializationContext context) {
+        JsonNode node = context.readTree(parser);
 
         if(node.isArray()) {
             List<String> masteries = new ArrayList<>();

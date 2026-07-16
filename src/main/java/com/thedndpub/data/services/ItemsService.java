@@ -1,11 +1,9 @@
 package com.thedndpub.data.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import com.thedndpub.data.dte.items.ItemDte;
 import com.thedndpub.data.dte.items.ItemsWrapperDte;
-import com.thedndpub.data.dto.race.RaceDto;
 import com.thedndpub.data.util.records.ItemKey;
-import com.thedndpub.data.util.records.RaceKey;
 import lombok.Getter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -17,23 +15,38 @@ import java.util.HashMap;
 public class ItemsService {
     @Getter
     private final HashMap<ItemKey, ItemDte> items;
+    @Getter
+    private final HashMap<ItemKey, ItemDte> itemGroups;
 
     public ItemsService() {
         ItemsWrapperDte wrapper = this.loadItemsFromJson();
 
         this.items = makeItems(wrapper);
+        this.itemGroups = makeItemGroups(wrapper);
     }
 
     private HashMap<ItemKey, ItemDte> makeItems(ItemsWrapperDte wrapper) {
         HashMap<ItemKey, ItemDte> items = new HashMap<>();
 
-        for(ItemDte itemDte : wrapper.getItem()) {
-            ItemKey key = new ItemKey(itemDte.getName(), itemDte.getSource());
+        for(ItemDte itemDte : wrapper.item()) {
+            ItemKey key = new ItemKey(itemDte.name(), itemDte.source());
             items.put(key, itemDte);
         }
 
         return items;
     }
+
+    private HashMap<ItemKey, ItemDte> makeItemGroups(ItemsWrapperDte wrapper) {
+        HashMap<ItemKey, ItemDte> items = new HashMap<>();
+
+        for(ItemDte itemDte : wrapper.itemGroup()) {
+            ItemKey key = new ItemKey(itemDte.name(), itemDte.source());
+            items.put(key, itemDte);
+        }
+
+        return items;
+    }
+
 
     private ItemsWrapperDte loadItemsFromJson() {
         try {

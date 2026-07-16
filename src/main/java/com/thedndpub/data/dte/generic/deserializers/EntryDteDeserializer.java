@@ -1,21 +1,18 @@
 package com.thedndpub.data.dte.generic.deserializers;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ValueDeserializer;
 import com.thedndpub.data.dte.generic.EntryDte;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntryDteDeserializer extends JsonDeserializer<List<EntryDte>> {
+public class EntryDteDeserializer extends ValueDeserializer<List<EntryDte>> {
     @Override
-    public List<EntryDte> deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectMapper mapper = (ObjectMapper) p.getCodec();
-        JsonNode node = mapper.readTree(p);
+    public List<EntryDte> deserialize(JsonParser parser, DeserializationContext context) {
+        JsonNode node = context.readTree(parser);
 
         List<EntryDte> listDto = new ArrayList<>();
 
@@ -27,8 +24,18 @@ public class EntryDteDeserializer extends JsonDeserializer<List<EntryDte>> {
                 listDto.add(dte);
             }
             else if(item.isObject()) {
-                dte = mapper.convertValue(item, EntryDte.class);
-                listDto.add(dte);
+                try {
+                    dte = context.readTreeAsValue(item, EntryDte.class);
+                    listDto.add(dte);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    throw context.weirdStringException(
+                            item.toString(),
+                            String.class,
+                            "Error with EntryDte"
+                    );
+                }
             }
         }
         if(!listDto.isEmpty()) {

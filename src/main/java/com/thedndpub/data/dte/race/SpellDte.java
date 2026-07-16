@@ -1,9 +1,9 @@
 package com.thedndpub.data.dte.race;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.thedndpub.data.dte.race.deserializers.SpellKnownDteDeserializer;
 import lombok.Data;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 @Data
 public class SpellDte {

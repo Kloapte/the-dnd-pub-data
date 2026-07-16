@@ -1,30 +1,27 @@
 package com.thedndpub.data.dte.generic.deserializers;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JavaType;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ValueDeserializer;
 import com.thedndpub.data.dte.generic.CopyModEntryDte;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModEntriesDteDeserializer extends JsonDeserializer<List<CopyModEntryDte>> {
+public class ModEntriesDteDeserializer extends ValueDeserializer<List<CopyModEntryDte>> {
     @Override
-    public List<CopyModEntryDte> deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
-        ObjectMapper mapper = (ObjectMapper) p.getCodec();
-        JsonNode node = mapper.readTree(p);
+    public List<CopyModEntryDte> deserialize(JsonParser parser, DeserializationContext context) {
+        JsonNode node = context.readTree(parser);
 
         List<CopyModEntryDte> dteList = new ArrayList<>();
 
         if (node.isArray()) {
-            dteList = mapper.convertValue(node, new TypeReference<ArrayList<CopyModEntryDte>>() {
-            });
+            JavaType type = context.getTypeFactory().constructCollectionType(ArrayList.class, CopyModEntryDte.class);
+            dteList = context.readTreeAsValue(node, type);
         } else {
-            CopyModEntryDte dte = mapper.convertValue(node, CopyModEntryDte.class);
+            CopyModEntryDte dte = context.readTreeAsValue(node, CopyModEntryDte.class);
             dteList.add(dte);
         }
 

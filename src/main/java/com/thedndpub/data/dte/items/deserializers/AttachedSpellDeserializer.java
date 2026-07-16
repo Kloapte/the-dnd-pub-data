@@ -1,19 +1,16 @@
 package com.thedndpub.data.dte.items.deserializers;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ValueDeserializer;
 import com.thedndpub.data.dte.items.ItemAttachedSpellDte;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public class AttachedSpellDeserializer extends JsonDeserializer<List<ItemAttachedSpellDte>> {
+public class AttachedSpellDeserializer extends ValueDeserializer<List<ItemAttachedSpellDte>> {
     private static final Set<String> ALLOWED_FIELDS = Set.of(
             "charges",
             "limited",
@@ -26,9 +23,8 @@ public class AttachedSpellDeserializer extends JsonDeserializer<List<ItemAttache
     );
 
     @Override
-    public List<ItemAttachedSpellDte> deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
-        ObjectMapper mapper = (ObjectMapper) p.getCodec();
-        JsonNode node = mapper.readTree(p);
+    public List<ItemAttachedSpellDte> deserialize(JsonParser parser, DeserializationContext context) {
+        JsonNode node = context.readTree(parser);
 
         List<ItemAttachedSpellDte> attachedSpells = new ArrayList<>();
         if (node.isArray()) {
@@ -46,13 +42,13 @@ public class AttachedSpellDeserializer extends JsonDeserializer<List<ItemAttache
             String ability = this.getAbility(node);
             if(node.hasNonNull("charges")) {
                 JsonNode chargesNode = node.get("charges");
-                Iterator<String> chargeKeys = chargesNode.fieldNames();
-
-                while (chargeKeys.hasNext()) {
-                    String key = chargeKeys.next();
+                for (var chargeEntry : chargesNode.properties()) {
+                    String key = chargeEntry.getKey();
                     int charges = Integer.parseInt(key);
 
-                    for (JsonNode chargeSubNode : chargesNode.get(key)) {
+                    JsonNode spellsNode = chargeEntry.getValue();
+
+                    for (JsonNode chargeSubNode : spellsNode) {
                         ItemAttachedSpellDte spell = makeAttachedSpell(chargeSubNode, ability);
                         spell.setCharges(charges);
                         attachedSpells.add(spell);
@@ -61,13 +57,11 @@ public class AttachedSpellDeserializer extends JsonDeserializer<List<ItemAttache
             }
             if(node.hasNonNull("limited")) {
                 JsonNode limitedNode = node.get("limited");
-                Iterator<String> limitedKeys = limitedNode.fieldNames();
 
-                while (limitedKeys.hasNext()) {
-                    String key = limitedKeys.next();
-                    int charges = Integer.parseInt(key);
+                for (var limitedEntry : limitedNode.properties()) {
+                    int charges = Integer.parseInt(limitedEntry.getKey());
 
-                    for (JsonNode chargeSubNode : limitedNode.get(key)) {
+                    for (JsonNode chargeSubNode : limitedEntry.getValue()) {
                         ItemAttachedSpellDte spell = makeAttachedSpell(chargeSubNode, ability);
                         spell.setLimitedUses(charges);
                         attachedSpells.add(spell);
@@ -125,10 +119,8 @@ public class AttachedSpellDeserializer extends JsonDeserializer<List<ItemAttache
             }
 
             //Checking if more fields available
-            Iterator<String> fieldNames = node.fieldNames();
-
-            while (fieldNames.hasNext()) {
-                String fieldName = fieldNames.next();
+            for (var entry : node.properties()) {
+                String fieldName = entry.getKey();
 
                 if (!ALLOWED_FIELDS.contains(fieldName)) {
                     throw new RuntimeException(

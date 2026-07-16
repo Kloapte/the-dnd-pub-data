@@ -1,10 +1,10 @@
 package com.thedndpub.data.dte.generic;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.thedndpub.data.dte.generic.deserializers.ChooseDteDeserializer;
 import lombok.Getter;
 import lombok.Setter;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 @Getter
 @Setter

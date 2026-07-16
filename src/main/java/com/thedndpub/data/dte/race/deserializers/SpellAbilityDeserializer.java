@@ -1,21 +1,18 @@
 package com.thedndpub.data.dte.race.deserializers;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ValueDeserializer;
 import com.thedndpub.data.dte.generic.ChooseDte;
 import com.thedndpub.data.dte.race.SpellAbilityDte;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-public class SpellAbilityDeserializer extends JsonDeserializer<SpellAbilityDte> {
+public class SpellAbilityDeserializer extends ValueDeserializer<SpellAbilityDte> {
     @Override
-    public SpellAbilityDte deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
-        ObjectMapper mapper = (ObjectMapper) p.getCodec();
-        JsonNode node = mapper.readTree(p);
+    public SpellAbilityDte deserialize(JsonParser parser, DeserializationContext context) {
+        JsonNode node = context.readTree(parser);
 
         SpellAbilityDte dte = new SpellAbilityDte();
 

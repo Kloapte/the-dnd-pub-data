@@ -1,21 +1,18 @@
 package com.thedndpub.data.dte.generic.deserializers;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ValueDeserializer;
 import com.thedndpub.data.dte.generic.CopyModEntryItemDte;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModEntriesItemDteDeserializer extends JsonDeserializer<List<CopyModEntryItemDte>> {
+public class ModEntriesItemDteDeserializer extends ValueDeserializer<List<CopyModEntryItemDte>> {
     @Override
-    public List<CopyModEntryItemDte> deserialize(JsonParser p, DeserializationContext ctx) throws IOException {
-        ObjectMapper mapper = (ObjectMapper) p.getCodec();
-        JsonNode node = mapper.readTree(p);
+    public List<CopyModEntryItemDte> deserialize(JsonParser parser, DeserializationContext context) {
+        JsonNode node = context.readTree(parser);
 
         List<CopyModEntryItemDte> dteList = new ArrayList<>();
 
@@ -28,7 +25,7 @@ public class ModEntriesItemDteDeserializer extends JsonDeserializer<List<CopyMod
                     entry.setName(subNode.asText());
                     dteList.add(entry);
                 } else {
-                    CopyModEntryItemDte dte = mapper.convertValue(subNode, CopyModEntryItemDte.class);
+                    CopyModEntryItemDte dte = context.readTreeAsValue(subNode, CopyModEntryItemDte.class);
                     dteList.add(dte);
                 }
             }
@@ -40,7 +37,7 @@ public class ModEntriesItemDteDeserializer extends JsonDeserializer<List<CopyMod
                 dteList.add(entry);
             }
             else {
-                CopyModEntryItemDte dte = mapper.convertValue(node, CopyModEntryItemDte.class);
+                CopyModEntryItemDte dte = context.readTreeAsValue(node, CopyModEntryItemDte.class);
                 dteList.add(dte);
             }
         }

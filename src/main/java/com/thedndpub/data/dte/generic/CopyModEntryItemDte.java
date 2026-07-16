@@ -1,8 +1,8 @@
 package com.thedndpub.data.dte.generic;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.thedndpub.data.dte.generic.deserializers.ModEntriesItemDteDeserializer;
 import lombok.Data;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.List;
 
