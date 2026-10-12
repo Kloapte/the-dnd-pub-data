@@ -1,0 +1,2013 @@
+{
+  "classificationDefinitions" : {
+    "GAMEPLAY_CORE" : "Combat and rules mechanics including AC, HP, speed, attacks, damage, saves, spells, defenses, conditions, recharge, and uses.",
+    "GAMEPLAY_DESCRIPTION" : "Rule-bearing descriptive structures such as entries, actions, traits, reactions, and spell text; inline markup is retained.",
+    "PRESENTATION" : "Names, display identity, size, alignment, creature type, and descriptive presentation.",
+    "SOURCE_METADATA" : "Source references, pages, import metadata, and likely 5eTools-specific fields; advisory only.",
+    "UNKNOWN" : "No confident rule matched; manual review needed."
+  },
+  "classificationRules" : {
+    "GAMEPLAY_CORE" : [ "ability", "abilitycheck", "ac", "armorclass", "attack", "attacks", "bonus", "condition", "conditionimmune", "conditioninflict", "cr", "damage", "damageinflict", "dc", "hit", "hitpoints", "hp", "immune", "immunities", "limiteduses", "recharge", "resist", "resistances", "save", "saves", "savingthrow", "speed", "spell", "spellcasting", "spells", "uses", "vulnerable" ],
+    "GAMEPLAY_DESCRIPTION" : [ "action", "actions", "description", "entries", "entrieshigherlevel", "entry", "fluff", "legendary", "reaction", "reactions", "text", "trait", "traits" ],
+    "PRESENTATION" : [ "alignment", "image", "language", "languages", "name", "race", "rarity", "senses", "size", "skill", "skills", "type" ],
+    "SOURCE_METADATA" : [ "_copy", "_meta", "_versions", "basicrules", "foundry", "hasfluff", "page", "source", "sources", "srd", "srd52", "token" ],
+    "configurationProperties" : {
+      "GAMEPLAY_CORE" : "schema.classification.gameplayCore",
+      "GAMEPLAY_DESCRIPTION" : "schema.classification.gameplayDescription",
+      "PRESENTATION" : "schema.classification.presentation",
+      "SOURCE_METADATA" : "schema.classification.metadata"
+    },
+    "matching" : "Case-insensitive exact path segments; earlier categories take precedence in this order: SOURCE_METADATA, GAMEPLAY_CORE, GAMEPLAY_DESCRIPTION, PRESENTATION, UNKNOWN."
+  },
+  "collectionEntityCounts" : {
+    "spell" : 969
+  },
+  "collections" : [ {
+    "collection" : "spell",
+    "contributingFileCount" : 18,
+    "discoveredPropertyPathCount" : 148,
+    "entityCount" : 969,
+    "reportLocations" : [ {
+      "path" : "spells/schema-summary.json",
+      "propertyPathPrefix" : "spell"
+    }, {
+      "path" : "spells/schema-conflicts.json",
+      "propertyPathPrefix" : "spell"
+    }, {
+      "path" : "spells/schema-dynamic-keys.json",
+      "propertyPathPrefix" : "spell"
+    }, {
+      "path" : "spells/schema-gameplay.json",
+      "propertyPathPrefix" : "spell"
+    } ],
+    "sourceFiles" : [ "spells/spells-aag.json", "spells/spells-ai.json", "spells/spells-aitfr-avt.json", "spells/spells-au.json", "spells/spells-bmt.json", "spells/spells-efa.json", "spells/spells-egw.json", "spells/spells-frhof.json", "spells/spells-ftd.json", "spells/spells-ggr.json", "spells/spells-idrotf.json", "spells/spells-llk.json", "spells/spells-phb.json", "spells/spells-sato.json", "spells/spells-scc.json", "spells/spells-tce.json", "spells/spells-xge.json", "spells/spells-xphb.json" ]
+  } ],
+  "configuration" : {
+    "examplesPerType" : 3,
+    "maxDistinctValues" : 20,
+    "maxExampleChars" : 300,
+    "maxExampleDepth" : 6,
+    "maxExampleFields" : 30
+  },
+  "domain" : "spells",
+  "properties" : [ {
+    "arrayCount" : 18,
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_CORE",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 18,
+    "path" : "spell",
+    "types" : {
+      "array" : 18
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_CORE",
+    "javaTypeSuggestion" : "Dedicated Java record",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 969,
+    "path" : "spell[]",
+    "types" : {
+      "object" : 969
+    }
+  }, {
+    "arrayCount" : 57,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_CORE",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 889,
+    "nullCount" : 0,
+    "occurrences" : 57,
+    "path" : "spell[].abilityCheck",
+    "types" : {
+      "array" : 57
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_CORE",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 12,
+    "minStringLength" : 6,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 60,
+    "path" : "spell[].abilityCheck[]",
+    "types" : {
+      "string" : 60
+    }
+  }, {
+    "arrayCount" : 1,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 457,
+    "nullCount" : 0,
+    "occurrences" : 1,
+    "path" : "spell[].additionalSources",
+    "types" : {
+      "array" : 1
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated Java record",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 1,
+    "path" : "spell[].additionalSources[]",
+    "types" : {
+      "object" : 1
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "SOURCE_METADATA",
+    "javaTypeSuggestion" : "Integer or Long (range not inferred)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 1,
+    "path" : "spell[].additionalSources[].page",
+    "types" : {
+      "integer" : 1
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "SOURCE_METADATA",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 3,
+    "minStringLength" : 3,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 1,
+    "path" : "spell[].additionalSources[].source",
+    "types" : {
+      "string" : 1
+    }
+  }, {
+    "arrayCount" : 77,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 889,
+    "nullCount" : 0,
+    "occurrences" : 77,
+    "path" : "spell[].affectsCreatureType",
+    "types" : {
+      "array" : 77
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 11,
+    "minStringLength" : 3,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 428,
+    "path" : "spell[].affectsCreatureType[]",
+    "types" : {
+      "string" : 428
+    }
+  }, {
+    "arrayCount" : 2,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 737,
+    "nullCount" : 0,
+    "occurrences" : 2,
+    "path" : "spell[].alias",
+    "types" : {
+      "array" : 2
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 8,
+    "minStringLength" : 8,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 2,
+    "path" : "spell[].alias[]",
+    "types" : {
+      "string" : 2
+    }
+  }, {
+    "arrayCount" : 643,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 323,
+    "nullCount" : 0,
+    "occurrences" : 643,
+    "path" : "spell[].areaTags",
+    "types" : {
+      "array" : 643
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 2,
+    "minStringLength" : 1,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 677,
+    "path" : "spell[].areaTags[]",
+    "types" : {
+      "string" : 677
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "SOURCE_METADATA",
+    "javaTypeSuggestion" : "Boolean",
+    "missingCount" : 748,
+    "nullCount" : 0,
+    "observedValues" : [ "true" ],
+    "occurrences" : 127,
+    "path" : "spell[].basicRules",
+    "types" : {
+      "boolean" : 127
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Boolean",
+    "missingCount" : 52,
+    "nullCount" : 0,
+    "observedValues" : [ "true" ],
+    "occurrences" : 339,
+    "path" : "spell[].basicRules2024",
+    "types" : {
+      "boolean" : 339
+    }
+  }, {
+    "classifications" : [ "STRUCTURAL_VARIANT" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated Java record",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 969,
+    "path" : "spell[].components",
+    "types" : {
+      "object" : 969
+    }
+  }, {
+    "classifications" : [ "POLYMORPHIC", "OPTIONAL", "STRUCTURAL_VARIANT" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "maxStringLength" : 114,
+    "minStringLength" : 6,
+    "missingCount" : 445,
+    "nullCount" : 0,
+    "occurrences" : 523,
+    "path" : "spell[].components.m",
+    "types" : {
+      "object" : 181,
+      "string" : 342
+    }
+  }, {
+    "classifications" : [ "POLYMORPHIC", "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "maxStringLength" : 8,
+    "minStringLength" : 8,
+    "missingCount" : 96,
+    "nullCount" : 0,
+    "observedValues" : [ "true" ],
+    "occurrences" : 85,
+    "path" : "spell[].components.m.consume",
+    "types" : {
+      "boolean" : 82,
+      "string" : 3
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Integer or Long (range not inferred)",
+    "missingCount" : 9,
+    "nullCount" : 0,
+    "occurrences" : 172,
+    "path" : "spell[].components.m.cost",
+    "types" : {
+      "integer" : 172
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 351,
+    "minStringLength" : 19,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 181,
+    "path" : "spell[].components.m.text",
+    "types" : {
+      "string" : 181
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Boolean",
+    "missingCount" : 962,
+    "nullCount" : 0,
+    "observedValues" : [ "true" ],
+    "occurrences" : 3,
+    "path" : "spell[].components.r",
+    "types" : {
+      "boolean" : 3
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Boolean",
+    "missingCount" : 131,
+    "nullCount" : 0,
+    "observedValues" : [ "true" ],
+    "occurrences" : 838,
+    "path" : "spell[].components.s",
+    "types" : {
+      "boolean" : 838
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Boolean",
+    "missingCount" : 49,
+    "nullCount" : 0,
+    "observedValues" : [ "true" ],
+    "occurrences" : 919,
+    "path" : "spell[].components.v",
+    "types" : {
+      "boolean" : 919
+    }
+  }, {
+    "arrayCount" : 12,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_CORE",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 931,
+    "nullCount" : 0,
+    "occurrences" : 12,
+    "path" : "spell[].conditionImmune",
+    "types" : {
+      "array" : 12
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_CORE",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 10,
+    "minStringLength" : 5,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 18,
+    "path" : "spell[].conditionImmune[]",
+    "types" : {
+      "string" : 18
+    }
+  }, {
+    "arrayCount" : 184,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_CORE",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 782,
+    "nullCount" : 0,
+    "occurrences" : 184,
+    "path" : "spell[].conditionInflict",
+    "types" : {
+      "array" : 184
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_CORE",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 13,
+    "minStringLength" : 5,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 236,
+    "path" : "spell[].conditionInflict[]",
+    "types" : {
+      "string" : 236
+    }
+  }, {
+    "arrayCount" : 17,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 929,
+    "nullCount" : 0,
+    "occurrences" : 17,
+    "path" : "spell[].damageImmune",
+    "types" : {
+      "array" : 17
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 11,
+    "minStringLength" : 4,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 74,
+    "path" : "spell[].damageImmune[]",
+    "types" : {
+      "string" : 74
+    }
+  }, {
+    "arrayCount" : 361,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_CORE",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 601,
+    "nullCount" : 0,
+    "occurrences" : 361,
+    "path" : "spell[].damageInflict",
+    "types" : {
+      "array" : 361
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_CORE",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 11,
+    "minStringLength" : 4,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 503,
+    "path" : "spell[].damageInflict[]",
+    "types" : {
+      "string" : 503
+    }
+  }, {
+    "arrayCount" : 30,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 913,
+    "nullCount" : 0,
+    "occurrences" : 30,
+    "path" : "spell[].damageResist",
+    "types" : {
+      "array" : 30
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 11,
+    "minStringLength" : 4,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 125,
+    "path" : "spell[].damageResist[]",
+    "types" : {
+      "string" : 125
+    }
+  }, {
+    "arrayCount" : 2,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 703,
+    "nullCount" : 0,
+    "occurrences" : 2,
+    "path" : "spell[].damageVulnerable",
+    "types" : {
+      "array" : 2
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 9,
+    "minStringLength" : 4,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 20,
+    "path" : "spell[].damageVulnerable[]",
+    "types" : {
+      "string" : 20
+    }
+  }, {
+    "arrayCount" : 969,
+    "classifications" : [ "HETEROGENEOUS_ARRAY" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 969,
+    "path" : "spell[].duration",
+    "types" : {
+      "array" : 969
+    }
+  }, {
+    "classifications" : [ "STRUCTURAL_VARIANT" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated Java record",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 972,
+    "path" : "spell[].duration[]",
+    "types" : {
+      "object" : 972
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Boolean",
+    "missingCount" : 546,
+    "nullCount" : 0,
+    "observedValues" : [ "true" ],
+    "occurrences" : 423,
+    "path" : "spell[].duration[].concentration",
+    "types" : {
+      "boolean" : 423
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated Java record",
+    "missingCount" : 310,
+    "nullCount" : 0,
+    "occurrences" : 662,
+    "path" : "spell[].duration[].duration",
+    "types" : {
+      "object" : 662
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Integer or Long (range not inferred)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 662,
+    "path" : "spell[].duration[].duration.amount",
+    "types" : {
+      "integer" : 662
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "PRESENTATION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 6,
+    "minStringLength" : 3,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "observedValues" : [ "day", "hour", "minute", "round" ],
+    "occurrences" : 662,
+    "path" : "spell[].duration[].duration.type",
+    "types" : {
+      "string" : 662
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Boolean",
+    "missingCount" : 506,
+    "nullCount" : 0,
+    "observedValues" : [ "true" ],
+    "occurrences" : 3,
+    "path" : "spell[].duration[].duration.upTo",
+    "types" : {
+      "boolean" : 3
+    }
+  }, {
+    "arrayCount" : 28,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 935,
+    "nullCount" : 0,
+    "occurrences" : 28,
+    "path" : "spell[].duration[].ends",
+    "types" : {
+      "array" : 28
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 7,
+    "minStringLength" : 6,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 33,
+    "path" : "spell[].duration[].ends[]",
+    "types" : {
+      "string" : 33
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "PRESENTATION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 9,
+    "minStringLength" : 5,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "observedValues" : [ "instant", "permanent", "special", "timed" ],
+    "occurrences" : 972,
+    "path" : "spell[].duration[].type",
+    "types" : {
+      "string" : 972
+    }
+  }, {
+    "arrayCount" : 969,
+    "classifications" : [ "HETEROGENEOUS_ARRAY" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 969,
+    "path" : "spell[].entries",
+    "types" : {
+      "array" : 969
+    }
+  }, {
+    "arrayCount" : 354,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 615,
+    "nullCount" : 0,
+    "occurrences" : 354,
+    "path" : "spell[].entriesHigherLevel",
+    "types" : {
+      "array" : 354
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Dedicated Java record",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 354,
+    "path" : "spell[].entriesHigherLevel[]",
+    "types" : {
+      "object" : 354
+    }
+  }, {
+    "arrayCount" : 354,
+    "classifications" : [ "HETEROGENEOUS_ARRAY" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 354,
+    "path" : "spell[].entriesHigherLevel[].entries",
+    "types" : {
+      "array" : 354
+    }
+  }, {
+    "classifications" : [ "POLYMORPHIC" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "maxStringLength" : 557,
+    "minStringLength" : 64,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 356,
+    "path" : "spell[].entriesHigherLevel[].entries[]",
+    "types" : {
+      "object" : 1,
+      "string" : 355
+    }
+  }, {
+    "arrayCount" : 1,
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 1,
+    "path" : "spell[].entriesHigherLevel[].entries[].colLabels",
+    "types" : {
+      "array" : 1
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 17,
+    "minStringLength" : 8,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 3,
+    "path" : "spell[].entriesHigherLevel[].entries[].colLabels[]",
+    "types" : {
+      "string" : 3
+    }
+  }, {
+    "arrayCount" : 1,
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 1,
+    "path" : "spell[].entriesHigherLevel[].entries[].colStyles",
+    "types" : {
+      "array" : 1
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 17,
+    "minStringLength" : 5,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 3,
+    "path" : "spell[].entriesHigherLevel[].entries[].colStyles[]",
+    "types" : {
+      "string" : 3
+    }
+  }, {
+    "arrayCount" : 1,
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 1,
+    "path" : "spell[].entriesHigherLevel[].entries[].rows",
+    "types" : {
+      "array" : 1
+    }
+  }, {
+    "arrayCount" : 3,
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 3,
+    "path" : "spell[].entriesHigherLevel[].entries[].rows[]",
+    "types" : {
+      "array" : 3
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 85,
+    "minStringLength" : 2,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 9,
+    "path" : "spell[].entriesHigherLevel[].entries[].rows[][]",
+    "types" : {
+      "string" : 9
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 5,
+    "minStringLength" : 5,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "observedValues" : [ "table" ],
+    "occurrences" : 1,
+    "path" : "spell[].entriesHigherLevel[].entries[].type",
+    "types" : {
+      "string" : 1
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 31,
+    "minStringLength" : 15,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 354,
+    "path" : "spell[].entriesHigherLevel[].name",
+    "types" : {
+      "string" : 354
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 7,
+    "minStringLength" : 7,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "observedValues" : [ "entries" ],
+    "occurrences" : 354,
+    "path" : "spell[].entriesHigherLevel[].type",
+    "types" : {
+      "string" : 354
+    }
+  }, {
+    "classifications" : [ "POLYMORPHIC", "STRUCTURAL_VARIANT" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "maxStringLength" : 1001,
+    "minStringLength" : 28,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 2394,
+    "path" : "spell[].entries[]",
+    "types" : {
+      "object" : 316,
+      "string" : 2078
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 16,
+    "minStringLength" : 6,
+    "missingCount" : 313,
+    "nullCount" : 0,
+    "occurrences" : 3,
+    "path" : "spell[].entries[].by",
+    "types" : {
+      "string" : 3
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 26,
+    "minStringLength" : 4,
+    "missingCount" : 281,
+    "nullCount" : 0,
+    "occurrences" : 22,
+    "path" : "spell[].entries[].caption",
+    "types" : {
+      "string" : 22
+    }
+  }, {
+    "arrayCount" : 27,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 276,
+    "nullCount" : 0,
+    "occurrences" : 27,
+    "path" : "spell[].entries[].colLabels",
+    "types" : {
+      "array" : 27
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 34,
+    "minStringLength" : 2,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 64,
+    "path" : "spell[].entries[].colLabels[]",
+    "types" : {
+      "string" : 64
+    }
+  }, {
+    "arrayCount" : 27,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 276,
+    "nullCount" : 0,
+    "occurrences" : 27,
+    "path" : "spell[].entries[].colStyles",
+    "types" : {
+      "array" : 27
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 25,
+    "minStringLength" : 5,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 64,
+    "path" : "spell[].entries[].colStyles[]",
+    "types" : {
+      "string" : 64
+    }
+  }, {
+    "arrayCount" : 237,
+    "classifications" : [ "OPTIONAL", "HETEROGENEOUS_ARRAY" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 79,
+    "nullCount" : 0,
+    "occurrences" : 237,
+    "path" : "spell[].entries[].entries",
+    "types" : {
+      "array" : 237
+    }
+  }, {
+    "classifications" : [ "POLYMORPHIC" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "maxStringLength" : 925,
+    "minStringLength" : 42,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 273,
+    "path" : "spell[].entries[].entries[]",
+    "types" : {
+      "object" : 4,
+      "string" : 269
+    }
+  }, {
+    "arrayCount" : 4,
+    "classifications" : [ "HETEROGENEOUS_ARRAY" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 4,
+    "path" : "spell[].entries[].entries[].items",
+    "types" : {
+      "array" : 4
+    }
+  }, {
+    "classifications" : [ "POLYMORPHIC" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "maxStringLength" : 198,
+    "minStringLength" : 42,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 26,
+    "path" : "spell[].entries[].entries[].items[]",
+    "types" : {
+      "object" : 10,
+      "string" : 16
+    }
+  }, {
+    "arrayCount" : 10,
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 10,
+    "path" : "spell[].entries[].entries[].items[].entries",
+    "types" : {
+      "array" : 10
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 162,
+    "minStringLength" : 74,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 10,
+    "path" : "spell[].entries[].entries[].items[].entries[]",
+    "types" : {
+      "string" : 10
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 29,
+    "minStringLength" : 4,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 10,
+    "path" : "spell[].entries[].entries[].items[].name",
+    "types" : {
+      "string" : 10
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 4,
+    "minStringLength" : 4,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "observedValues" : [ "item" ],
+    "occurrences" : 10,
+    "path" : "spell[].entries[].entries[].items[].type",
+    "types" : {
+      "string" : 10
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 17,
+    "minStringLength" : 17,
+    "missingCount" : 1,
+    "nullCount" : 0,
+    "occurrences" : 1,
+    "path" : "spell[].entries[].entries[].style",
+    "types" : {
+      "string" : 1
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 4,
+    "minStringLength" : 4,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "observedValues" : [ "list" ],
+    "occurrences" : 4,
+    "path" : "spell[].entries[].entries[].type",
+    "types" : {
+      "string" : 4
+    }
+  }, {
+    "arrayCount" : 52,
+    "classifications" : [ "OPTIONAL", "HETEROGENEOUS_ARRAY" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 256,
+    "nullCount" : 0,
+    "occurrences" : 52,
+    "path" : "spell[].entries[].items",
+    "types" : {
+      "array" : 52
+    }
+  }, {
+    "classifications" : [ "POLYMORPHIC" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "maxStringLength" : 433,
+    "minStringLength" : 9,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 201,
+    "path" : "spell[].entries[].items[]",
+    "types" : {
+      "object" : 48,
+      "string" : 153
+    }
+  }, {
+    "arrayCount" : 48,
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 48,
+    "path" : "spell[].entries[].items[].entries",
+    "types" : {
+      "array" : 48
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 1255,
+    "minStringLength" : 50,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 49,
+    "path" : "spell[].entries[].items[].entries[]",
+    "types" : {
+      "string" : 49
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 19,
+    "minStringLength" : 4,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 48,
+    "path" : "spell[].entries[].items[].name",
+    "types" : {
+      "string" : 48
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 4,
+    "minStringLength" : 4,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "observedValues" : [ "item" ],
+    "occurrences" : 48,
+    "path" : "spell[].entries[].items[].type",
+    "types" : {
+      "string" : 48
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 29,
+    "minStringLength" : 3,
+    "missingCount" : 79,
+    "nullCount" : 0,
+    "occurrences" : 234,
+    "path" : "spell[].entries[].name",
+    "types" : {
+      "string" : 234
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "SOURCE_METADATA",
+    "javaTypeSuggestion" : "Integer or Long (range not inferred)",
+    "missingCount" : 136,
+    "nullCount" : 0,
+    "occurrences" : 1,
+    "path" : "spell[].entries[].page",
+    "types" : {
+      "integer" : 1
+    }
+  }, {
+    "arrayCount" : 27,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 276,
+    "nullCount" : 0,
+    "occurrences" : 27,
+    "path" : "spell[].entries[].rows",
+    "types" : {
+      "array" : 27
+    }
+  }, {
+    "arrayCount" : 146,
+    "classifications" : [ "HETEROGENEOUS_ARRAY" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 146,
+    "path" : "spell[].entries[].rows[]",
+    "types" : {
+      "array" : 146
+    }
+  }, {
+    "classifications" : [ "POLYMORPHIC" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "maxStringLength" : 648,
+    "minStringLength" : 1,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 351,
+    "path" : "spell[].entries[].rows[][]",
+    "types" : {
+      "object" : 29,
+      "string" : 322
+    }
+  }, {
+    "classifications" : [ "STRUCTURAL_VARIANT" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Dedicated Java record",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 29,
+    "path" : "spell[].entries[].rows[][].roll",
+    "types" : {
+      "object" : 29
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Integer or Long (range not inferred)",
+    "missingCount" : 20,
+    "nullCount" : 0,
+    "occurrences" : 9,
+    "path" : "spell[].entries[].rows[][].roll.exact",
+    "types" : {
+      "integer" : 9
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Integer or Long (range not inferred)",
+    "missingCount" : 8,
+    "nullCount" : 0,
+    "occurrences" : 20,
+    "path" : "spell[].entries[].rows[][].roll.max",
+    "types" : {
+      "integer" : 20
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Integer or Long (range not inferred)",
+    "missingCount" : 8,
+    "nullCount" : 0,
+    "occurrences" : 20,
+    "path" : "spell[].entries[].rows[][].roll.min",
+    "types" : {
+      "integer" : 20
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Boolean",
+    "missingCount" : 22,
+    "nullCount" : 0,
+    "observedValues" : [ "true" ],
+    "occurrences" : 3,
+    "path" : "spell[].entries[].rows[][].roll.pad",
+    "types" : {
+      "boolean" : 3
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 4,
+    "minStringLength" : 4,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "observedValues" : [ "cell" ],
+    "occurrences" : 29,
+    "path" : "spell[].entries[].rows[][].type",
+    "types" : {
+      "string" : 29
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "SOURCE_METADATA",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 3,
+    "minStringLength" : 3,
+    "missingCount" : 136,
+    "nullCount" : 0,
+    "occurrences" : 1,
+    "path" : "spell[].entries[].source",
+    "types" : {
+      "string" : 1
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 17,
+    "minStringLength" : 17,
+    "missingCount" : 292,
+    "nullCount" : 0,
+    "occurrences" : 16,
+    "path" : "spell[].entries[].style",
+    "types" : {
+      "string" : 16
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 7,
+    "minStringLength" : 4,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "observedValues" : [ "entries", "inset", "list", "quote", "table" ],
+    "occurrences" : 316,
+    "path" : "spell[].entries[].type",
+    "types" : {
+      "string" : 316
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "SOURCE_METADATA",
+    "javaTypeSuggestion" : "Boolean",
+    "missingCount" : 504,
+    "nullCount" : 0,
+    "observedValues" : [ "true" ],
+    "occurrences" : 1,
+    "path" : "spell[].hasFluff",
+    "types" : {
+      "boolean" : 1
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Boolean",
+    "missingCount" : 878,
+    "nullCount" : 0,
+    "observedValues" : [ "true" ],
+    "occurrences" : 91,
+    "path" : "spell[].hasFluffImages",
+    "types" : {
+      "boolean" : 91
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Integer or Long (range not inferred)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 969,
+    "path" : "spell[].level",
+    "types" : {
+      "integer" : 969
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated Java record",
+    "missingCount" : 885,
+    "nullCount" : 0,
+    "occurrences" : 68,
+    "path" : "spell[].meta",
+    "types" : {
+      "object" : 68
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Boolean",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "observedValues" : [ "true" ],
+    "occurrences" : 68,
+    "path" : "spell[].meta.ritual",
+    "types" : {
+      "boolean" : 68
+    }
+  }, {
+    "arrayCount" : 721,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 248,
+    "nullCount" : 0,
+    "occurrences" : 721,
+    "path" : "spell[].miscTags",
+    "types" : {
+      "array" : 721
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 4,
+    "minStringLength" : 2,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 1255,
+    "path" : "spell[].miscTags[]",
+    "types" : {
+      "string" : 1255
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "PRESENTATION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 34,
+    "minStringLength" : 3,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 969,
+    "path" : "spell[].name",
+    "types" : {
+      "string" : 969
+    }
+  }, {
+    "arrayCount" : 105,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 855,
+    "nullCount" : 0,
+    "occurrences" : 105,
+    "path" : "spell[].otherSources",
+    "types" : {
+      "array" : 105
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated Java record",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 111,
+    "path" : "spell[].otherSources[]",
+    "types" : {
+      "object" : 111
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "SOURCE_METADATA",
+    "javaTypeSuggestion" : "Integer or Long (range not inferred)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 111,
+    "path" : "spell[].otherSources[].page",
+    "types" : {
+      "integer" : 111
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "SOURCE_METADATA",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 9,
+    "minStringLength" : 3,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 111,
+    "path" : "spell[].otherSources[].source",
+    "types" : {
+      "string" : 111
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "SOURCE_METADATA",
+    "javaTypeSuggestion" : "Integer or Long (range not inferred)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 969,
+    "path" : "spell[].page",
+    "types" : {
+      "integer" : 969
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated Java record",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 969,
+    "path" : "spell[].range",
+    "types" : {
+      "object" : 969
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated Java record",
+    "missingCount" : 1,
+    "nullCount" : 0,
+    "occurrences" : 968,
+    "path" : "spell[].range.distance",
+    "types" : {
+      "object" : 968
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Integer or Long (range not inferred)",
+    "missingCount" : 329,
+    "nullCount" : 0,
+    "occurrences" : 639,
+    "path" : "spell[].range.distance.amount",
+    "types" : {
+      "integer" : 639
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "PRESENTATION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 9,
+    "minStringLength" : 4,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "observedValues" : [ "feet", "miles", "self", "sight", "touch", "unlimited" ],
+    "occurrences" : 968,
+    "path" : "spell[].range.distance.type",
+    "types" : {
+      "string" : 968
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "PRESENTATION",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 10,
+    "minStringLength" : 4,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "observedValues" : [ "cone", "cube", "emanation", "hemisphere", "line", "point", "radius", "special", "sphere" ],
+    "occurrences" : 969,
+    "path" : "spell[].range.type",
+    "types" : {
+      "string" : 969
+    }
+  }, {
+    "arrayCount" : 469,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 500,
+    "nullCount" : 0,
+    "occurrences" : 469,
+    "path" : "spell[].referenceSources",
+    "types" : {
+      "array" : 469
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 11,
+    "minStringLength" : 2,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 2658,
+    "path" : "spell[].referenceSources[]",
+    "types" : {
+      "string" : 2658
+    }
+  }, {
+    "arrayCount" : 389,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 493,
+    "nullCount" : 0,
+    "occurrences" : 389,
+    "path" : "spell[].reprintedAs",
+    "types" : {
+      "array" : 389
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 39,
+    "minStringLength" : 8,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 389,
+    "path" : "spell[].reprintedAs[]",
+    "types" : {
+      "string" : 389
+    }
+  }, {
+    "arrayCount" : 406,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_CORE",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 560,
+    "nullCount" : 0,
+    "occurrences" : 406,
+    "path" : "spell[].savingThrow",
+    "types" : {
+      "array" : 406
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "GAMEPLAY_CORE",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 12,
+    "minStringLength" : 6,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 438,
+    "path" : "spell[].savingThrow[]",
+    "types" : {
+      "string" : 438
+    }
+  }, {
+    "arrayCount" : 5,
+    "classifications" : [ "POLYMORPHIC", "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "missingCount" : 871,
+    "nullCount" : 0,
+    "occurrences" : 41,
+    "path" : "spell[].scalingLevelDice",
+    "types" : {
+      "array" : 5,
+      "object" : 36
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 16,
+    "minStringLength" : 6,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 36,
+    "path" : "spell[].scalingLevelDice.label",
+    "types" : {
+      "string" : 36
+    }
+  }, {
+    "classifications" : [ "DYNAMIC_KEYS" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Map<String, T> with a typed value variant; inspect schema-dynamic-keys.json",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 36,
+    "path" : "spell[].scalingLevelDice.scaling",
+    "types" : {
+      "object" : 36
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 4,
+    "minStringLength" : 3,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 36,
+    "path" : "spell[].scalingLevelDice.scaling.1",
+    "types" : {
+      "string" : 36
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 4,
+    "minStringLength" : 3,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 36,
+    "path" : "spell[].scalingLevelDice.scaling.11",
+    "types" : {
+      "string" : 36
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 4,
+    "minStringLength" : 3,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 36,
+    "path" : "spell[].scalingLevelDice.scaling.17",
+    "types" : {
+      "string" : 36
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 4,
+    "minStringLength" : 3,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 36,
+    "path" : "spell[].scalingLevelDice.scaling.5",
+    "types" : {
+      "string" : 36
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated Java record",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 9,
+    "path" : "spell[].scalingLevelDice[]",
+    "types" : {
+      "object" : 9
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 35,
+    "minStringLength" : 15,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 9,
+    "path" : "spell[].scalingLevelDice[].label",
+    "types" : {
+      "string" : 9
+    }
+  }, {
+    "classifications" : [ "DYNAMIC_KEYS" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Map<String, T> with a typed value variant; inspect schema-dynamic-keys.json",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 9,
+    "path" : "spell[].scalingLevelDice[].scaling",
+    "types" : {
+      "object" : 9
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 20,
+    "minStringLength" : 3,
+    "missingCount" : 3,
+    "nullCount" : 0,
+    "occurrences" : 6,
+    "path" : "spell[].scalingLevelDice[].scaling.1",
+    "types" : {
+      "string" : 6
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 26,
+    "minStringLength" : 3,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 9,
+    "path" : "spell[].scalingLevelDice[].scaling.11",
+    "types" : {
+      "string" : 9
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 26,
+    "minStringLength" : 3,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 9,
+    "path" : "spell[].scalingLevelDice[].scaling.17",
+    "types" : {
+      "string" : 9
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 26,
+    "minStringLength" : 3,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 9,
+    "path" : "spell[].scalingLevelDice[].scaling.5",
+    "types" : {
+      "string" : 9
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 1,
+    "minStringLength" : 1,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "observedValues" : [ "A", "C", "D", "E", "I", "N", "T", "V" ],
+    "occurrences" : 969,
+    "path" : "spell[].school",
+    "types" : {
+      "string" : 969
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "SOURCE_METADATA",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 9,
+    "minStringLength" : 2,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 969,
+    "path" : "spell[].source",
+    "types" : {
+      "string" : 969
+    }
+  }, {
+    "arrayCount" : 65,
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 897,
+    "nullCount" : 0,
+    "occurrences" : 65,
+    "path" : "spell[].spellAttack",
+    "types" : {
+      "array" : 65
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 1,
+    "minStringLength" : 1,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 65,
+    "path" : "spell[].spellAttack[]",
+    "types" : {
+      "string" : 65
+    }
+  }, {
+    "classifications" : [ "POLYMORPHIC", "OPTIONAL" ],
+    "gameplayClassification" : "SOURCE_METADATA",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "maxStringLength" : 21,
+    "minStringLength" : 8,
+    "missingCount" : 556,
+    "nullCount" : 0,
+    "observedValues" : [ "true" ],
+    "occurrences" : 319,
+    "path" : "spell[].srd",
+    "types" : {
+      "boolean" : 302,
+      "string" : 17
+    }
+  }, {
+    "classifications" : [ "POLYMORPHIC", "OPTIONAL" ],
+    "gameplayClassification" : "SOURCE_METADATA",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "maxStringLength" : 21,
+    "minStringLength" : 8,
+    "missingCount" : 52,
+    "nullCount" : 0,
+    "observedValues" : [ "true" ],
+    "occurrences" : 339,
+    "path" : "spell[].srd52",
+    "types" : {
+      "boolean" : 322,
+      "string" : 17
+    }
+  }, {
+    "arrayCount" : 969,
+    "classifications" : [ "HETEROGENEOUS_ARRAY" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "List<T> (inspect element types and structural variants)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 969,
+    "path" : "spell[].time",
+    "types" : {
+      "array" : 969
+    }
+  }, {
+    "classifications" : [ "STRUCTURAL_VARIANT" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated Java record",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 971,
+    "path" : "spell[].time[]",
+    "types" : {
+      "object" : 971
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "GAMEPLAY_CORE",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 133,
+    "minStringLength" : 43,
+    "missingCount" : 940,
+    "nullCount" : 0,
+    "occurrences" : 27,
+    "path" : "spell[].time[].condition",
+    "types" : {
+      "string" : 27
+    }
+  }, {
+    "classifications" : [ "OPTIONAL" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 10,
+    "minStringLength" : 10,
+    "missingCount" : 128,
+    "nullCount" : 0,
+    "occurrences" : 2,
+    "path" : "spell[].time[].note",
+    "types" : {
+      "string" : 2
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Integer or Long (range not inferred)",
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 971,
+    "path" : "spell[].time[].number",
+    "types" : {
+      "integer" : 971
+    }
+  }, {
+    "classifications" : [ "SIMPLE" ],
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "String",
+    "maxStringLength" : 8,
+    "minStringLength" : 4,
+    "missingCount" : 0,
+    "nullCount" : 0,
+    "occurrences" : 971,
+    "path" : "spell[].time[].unit",
+    "types" : {
+      "string" : 971
+    }
+  } ],
+  "scanComplete" : true,
+  "scanFailures" : [ ],
+  "sourceFiles" : [ "spells/spells-aag.json", "spells/spells-ai.json", "spells/spells-aitfr-avt.json", "spells/spells-au.json", "spells/spells-bmt.json", "spells/spells-efa.json", "spells/spells-egw.json", "spells/spells-frhof.json", "spells/spells-ftd.json", "spells/spells-ggr.json", "spells/spells-idrotf.json", "spells/spells-llk.json", "spells/spells-phb.json", "spells/spells-sato.json", "spells/spells-scc.json", "spells/spells-tce.json", "spells/spells-xge.json", "spells/spells-xphb.json" ],
+  "structuralVariants" : [ {
+    "classification" : "STRUCTURAL_VARIANT",
+    "path" : "spell[].components",
+    "reason" : "Repeated objects have materially different field sets after excluding one-field optionality.",
+    "variants" : [ {
+      "count" : 481,
+      "fields" : [ "m", "s", "v" ]
+    }, {
+      "count" : 305,
+      "fields" : [ "s", "v" ]
+    }, {
+      "count" : 111,
+      "fields" : [ "v" ]
+    }, {
+      "count" : 28,
+      "fields" : [ "s" ]
+    }, {
+      "count" : 21,
+      "fields" : [ "m", "s" ]
+    } ]
+  }, {
+    "classification" : "STRUCTURAL_VARIANT",
+    "path" : "spell[].components.m",
+    "reason" : "Repeated objects have materially different field sets after excluding one-field optionality.",
+    "variants" : [ {
+      "count" : 96,
+      "fields" : [ "cost", "text" ]
+    }, {
+      "count" : 76,
+      "fields" : [ "consume", "cost", "text" ]
+    }, {
+      "count" : 9,
+      "fields" : [ "consume", "text" ]
+    } ]
+  }, {
+    "classification" : "STRUCTURAL_VARIANT",
+    "path" : "spell[].duration[]",
+    "reason" : "Repeated objects have materially different field sets after excluding one-field optionality.",
+    "variants" : [ {
+      "count" : 423,
+      "fields" : [ "concentration", "duration", "type" ]
+    }, {
+      "count" : 282,
+      "fields" : [ "type" ]
+    }, {
+      "count" : 239,
+      "fields" : [ "duration", "type" ]
+    }, {
+      "count" : 28,
+      "fields" : [ "ends", "type" ]
+    } ]
+  }, {
+    "classification" : "STRUCTURAL_VARIANT",
+    "path" : "spell[].entries[]",
+    "reason" : "Repeated objects have materially different field sets after excluding one-field optionality.",
+    "variants" : [ {
+      "count" : 233,
+      "fields" : [ "entries", "name", "type" ]
+    }, {
+      "count" : 36,
+      "fields" : [ "items", "type" ]
+    }, {
+      "count" : 22,
+      "fields" : [ "caption", "colLabels", "colStyles", "rows", "type" ]
+    }, {
+      "count" : 16,
+      "fields" : [ "items", "style", "type" ]
+    }, {
+      "count" : 5,
+      "fields" : [ "colLabels", "colStyles", "rows", "type" ]
+    } ]
+  }, {
+    "classification" : "STRUCTURAL_VARIANT",
+    "path" : "spell[].entries[].rows[][].roll",
+    "reason" : "Repeated objects have materially different field sets after excluding one-field optionality.",
+    "variants" : [ {
+      "count" : 17,
+      "fields" : [ "max", "min" ]
+    }, {
+      "count" : 9,
+      "fields" : [ "exact" ]
+    }, {
+      "count" : 3,
+      "fields" : [ "max", "min", "pad" ]
+    } ]
+  }, {
+    "classification" : "STRUCTURAL_VARIANT",
+    "path" : "spell[].time[]",
+    "reason" : "Repeated objects have materially different field sets after excluding one-field optionality.",
+    "variants" : [ {
+      "count" : 942,
+      "fields" : [ "number", "unit" ]
+    }, {
+      "count" : 27,
+      "fields" : [ "condition", "number", "unit" ]
+    }, {
+      "count" : 2,
+      "fields" : [ "note", "number", "unit" ]
+    } ]
+  } ],
+  "totalDynamicKeyCandidates" : 2,
+  "totalEntitiesAnalyzed" : 969,
+  "totalFilesAnalyzed" : 18,
+  "totalOptionalProperties" : 57,
+  "totalPolymorphicProperties" : 11,
+  "totalPotentialGameplayProperties" : 64,
+  "totalPotentialInternalMetadataProperties" : 12,
+  "totalPropertyOccurrences" : 43777,
+  "totalUniquePropertyPaths" : 148
+}

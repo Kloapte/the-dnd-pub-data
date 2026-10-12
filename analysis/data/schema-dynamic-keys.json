@@ -1,0 +1,311 @@
+{
+  "candidates" : [ {
+    "affectedObjectOccurrences" : 1,
+    "classification" : "DYNAMIC_KEYS",
+    "confidence" : "MEDIUM",
+    "examples" : [ ],
+    "javaTypeSuggestion" : "Map<String, T> (T depends on observed value variants)",
+    "keyPattern" : "numeric or numeric-with-recharge-suffix",
+    "observedKeyNames" : [ "1", "13", "17", "5", "9" ],
+    "parentPath" : "feat[].additionalSpells[].prepared",
+    "reason" : "Object keys consistently match numeric spell-level or recharge notation.",
+    "valueTypes" : [ "array" ]
+  }, {
+    "affectedObjectOccurrences" : 3,
+    "classification" : "DYNAMIC_KEYS",
+    "confidence" : "HIGH",
+    "examples" : [ {
+      "entity" : "Eye and Hand of Vecna",
+      "entityIndex" : 36,
+      "file" : "items.json",
+      "value" : {
+        "1" : [ "crown of madness", "sleep" ],
+        "2" : [ "clairvoyance", "slow" ],
+        "3" : [ "teleport" ],
+        "4" : [ "disintegrate", "eyebite" ],
+        "5" : [ "dominate monster", "finger of death" ]
+      }
+    }, {
+      "entity" : "Eye and Hand of Vecna",
+      "entityIndex" : 37,
+      "file" : "items.json",
+      "value" : {
+        "1" : [ "crown of madness|xphb", "sleep|xphb" ],
+        "2" : [ "clairvoyance|xphb", "slow|xphb" ],
+        "3" : [ "teleport|xphb" ],
+        "4" : [ "disintegrate|xphb", "eyebite|xphb" ],
+        "5" : [ "dominate monster|xphb", "finger of death|xphb" ]
+      }
+    } ],
+    "javaTypeSuggestion" : "Map<String, T> (T depends on observed value variants)",
+    "keyPattern" : "numeric or numeric-with-recharge-suffix",
+    "observedKeyNames" : [ "1", "2", "3", "4", "5", "6" ],
+    "parentPath" : "itemGroup[].attachedSpells.charges",
+    "reason" : "Object keys consistently match numeric spell-level or recharge notation.",
+    "valueTypes" : [ "array" ]
+  }, {
+    "affectedObjectOccurrences" : 76,
+    "classification" : "DYNAMIC_KEYS",
+    "confidence" : "HIGH",
+    "examples" : [ {
+      "entity" : "Belashyrra's Beholder Crown",
+      "entityIndex" : 189,
+      "file" : "items.json",
+      "value" : {
+        "1" : [ "charm person", "sleep" ],
+        "2" : [ "hold person", "ray of enfeeblement" ],
+        "3" : [ "fear", "slow" ],
+        "5" : [ "telekinesis" ],
+        "6" : [ "disintegrate", "flesh to stone" ],
+        "7" : [ "finger of death" ]
+      }
+    } ],
+    "javaTypeSuggestion" : "Map<String, T> (T depends on observed value variants)",
+    "keyPattern" : "numeric or numeric-with-recharge-suffix",
+    "observedKeyNames" : [ "0", "1", "12", "2", "3", "4", "5", "6", "7", "8" ],
+    "parentPath" : "item[].attachedSpells.charges",
+    "reason" : "Object keys consistently match numeric spell-level or recharge notation.",
+    "valueTypes" : [ "array" ]
+  }, {
+    "affectedObjectOccurrences" : 3,
+    "classification" : "DYNAMIC_KEYS",
+    "confidence" : "HIGH",
+    "examples" : [ {
+      "entity" : "Bracelet of Rock Magic",
+      "entityIndex" : 302,
+      "file" : "items.json",
+      "value" : {
+        "13" : [ "stone shape" ],
+        "3" : [ "flesh to stone" ]
+      }
+    } ],
+    "javaTypeSuggestion" : "Map<String, T> (T depends on observed value variants)",
+    "keyPattern" : "numeric or numeric-with-recharge-suffix",
+    "observedKeyNames" : [ "10", "13", "20", "3", "30", "40" ],
+    "parentPath" : "item[].attachedSpells.limited",
+    "reason" : "Object keys consistently match numeric spell-level or recharge notation.",
+    "valueTypes" : [ "array" ]
+  }, {
+    "affectedObjectOccurrences" : 2,
+    "classification" : "DYNAMIC_KEYS",
+    "confidence" : "MEDIUM",
+    "examples" : [ {
+      "entity" : "Armor of Weightlessness",
+      "entityIndex" : 67,
+      "file" : "magicvariants.json",
+      "value" : {
+        "1" : [ "jump" ],
+        "2" : [ "levitate" ]
+      }
+    } ],
+    "javaTypeSuggestion" : "Map<String, T> (T depends on observed value variants)",
+    "keyPattern" : "numeric or numeric-with-recharge-suffix",
+    "observedKeyNames" : [ "1", "2", "4", "5" ],
+    "parentPath" : "magicvariant[].inherits.attachedSpells.charges",
+    "reason" : "Object keys consistently match numeric spell-level or recharge notation.",
+    "valueTypes" : [ "array" ]
+  }, {
+    "affectedObjectOccurrences" : 8,
+    "classification" : "DYNAMIC_KEYS",
+    "confidence" : "HIGH",
+    "examples" : [ {
+      "entity" : "Elf",
+      "entityIndex" : 38,
+      "file" : "races.json",
+      "value" : {
+        "3" : {
+          "$schemaAnalysisMaxDepthReached" : true
+        },
+        "5" : {
+          "$schemaAnalysisMaxDepthReached" : true
+        }
+      }
+    }, {
+      "entity" : "Elf",
+      "entityIndex" : 38,
+      "file" : "races.json",
+      "value" : {
+        "3" : {
+          "$schemaAnalysisMaxDepthReached" : true
+        },
+        "5" : {
+          "$schemaAnalysisMaxDepthReached" : true
+        }
+      }
+    }, {
+      "entity" : "Elf",
+      "entityIndex" : 40,
+      "file" : "races.json",
+      "value" : {
+        "3" : {
+          "$schemaAnalysisMaxDepthReached" : true
+        },
+        "5" : {
+          "$schemaAnalysisMaxDepthReached" : true
+        }
+      }
+    } ],
+    "javaTypeSuggestion" : "Map<String, T> (T depends on observed value variants)",
+    "keyPattern" : "numeric or numeric-with-recharge-suffix",
+    "observedKeyNames" : [ "3", "5" ],
+    "parentPath" : "race[]._versions[].additionalSpells[].innate",
+    "reason" : "Object keys consistently match numeric spell-level or recharge notation.",
+    "valueTypes" : [ "object" ]
+  }, {
+    "affectedObjectOccurrences" : 22,
+    "classification" : "DYNAMIC_KEYS",
+    "confidence" : "HIGH",
+    "examples" : [ {
+      "entity" : "Aasimar",
+      "entityIndex" : 4,
+      "file" : "races.json",
+      "value" : {
+        "3" : {
+          "daily" : {
+            "1" : [ {
+              "$schemaAnalysisMaxDepthReached" : true
+            } ]
+          }
+        },
+        "5" : {
+          "daily" : {
+            "1" : [ {
+              "$schemaAnalysisMaxDepthReached" : true
+            } ]
+          }
+        }
+      }
+    }, {
+      "entity" : "Deep Gnome",
+      "entityIndex" : 25,
+      "file" : "races.json",
+      "value" : {
+        "3" : {
+          "daily" : {
+            "1" : [ {
+              "$schemaAnalysisMaxDepthReached" : true
+            } ]
+          }
+        },
+        "5" : {
+          "daily" : {
+            "1" : [ {
+              "$schemaAnalysisMaxDepthReached" : true
+            } ]
+          }
+        }
+      }
+    } ],
+    "javaTypeSuggestion" : "Map<String, T> (T depends on observed value variants)",
+    "keyPattern" : "numeric or numeric-with-recharge-suffix",
+    "observedKeyNames" : [ "1", "3", "5" ],
+    "parentPath" : "race[].additionalSpells[].innate",
+    "reason" : "Object keys consistently match numeric spell-level or recharge notation.",
+    "valueTypes" : [ "array", "object" ]
+  }, {
+    "affectedObjectOccurrences" : 2,
+    "classification" : "DYNAMIC_KEYS",
+    "confidence" : "MEDIUM",
+    "examples" : [ ],
+    "javaTypeSuggestion" : "Map<String, T> (T depends on observed value variants)",
+    "keyPattern" : "numeric or numeric-with-recharge-suffix",
+    "observedKeyNames" : [ "1e", "3e" ],
+    "parentPath" : "reward[].additionalSpells[].innate._.limited",
+    "reason" : "Object keys consistently match numeric spell-level or recharge notation.",
+    "valueTypes" : [ "array" ]
+  }, {
+    "affectedObjectOccurrences" : 27,
+    "classification" : "DYNAMIC_KEYS",
+    "confidence" : "HIGH",
+    "examples" : [ {
+      "entity" : "Duergar",
+      "entityIndex" : 10,
+      "file" : "races.json",
+      "value" : {
+        "3" : {
+          "daily" : {
+            "1" : [ {
+              "$schemaAnalysisMaxDepthReached" : true
+            } ]
+          }
+        },
+        "5" : {
+          "daily" : {
+            "1" : [ {
+              "$schemaAnalysisMaxDepthReached" : true
+            } ]
+          }
+        }
+      }
+    }, {
+      "entity" : "Drow",
+      "entityIndex" : 14,
+      "file" : "races.json",
+      "value" : {
+        "3" : {
+          "daily" : {
+            "1" : [ {
+              "$schemaAnalysisMaxDepthReached" : true
+            } ]
+          }
+        },
+        "5" : {
+          "daily" : {
+            "1" : [ {
+              "$schemaAnalysisMaxDepthReached" : true
+            } ]
+          }
+        }
+      }
+    } ],
+    "javaTypeSuggestion" : "Map<String, T> (T depends on observed value variants)",
+    "keyPattern" : "numeric or numeric-with-recharge-suffix",
+    "observedKeyNames" : [ "1", "3", "5" ],
+    "parentPath" : "subrace[].additionalSpells[].innate",
+    "reason" : "Object keys consistently match numeric spell-level or recharge notation.",
+    "valueTypes" : [ "array", "object" ]
+  }, {
+    "affectedObjectOccurrences" : 8,
+    "classification" : "DYNAMIC_KEYS",
+    "confidence" : "HIGH",
+    "examples" : [ {
+      "entity" : "Battle Balloon",
+      "entityIndex" : 5,
+      "file" : "vehicles.json",
+      "value" : {
+        "0" : 0,
+        "1" : 1,
+        "2" : 10,
+        "3" : 20
+      }
+    }, {
+      "entity" : "Galley",
+      "entityIndex" : 11,
+      "file" : "vehicles.json",
+      "value" : {
+        "0" : 0,
+        "1" : 3,
+        "2" : 20,
+        "3" : 40
+      }
+    }, {
+      "entity" : "Keelboat",
+      "entityIndex" : 13,
+      "file" : "vehicles.json",
+      "value" : {
+        "0" : 0,
+        "1" : 1,
+        "2" : 2
+      }
+    } ],
+    "javaTypeSuggestion" : "Map<String, T> (T depends on observed value variants)",
+    "keyPattern" : "numeric or numeric-with-recharge-suffix",
+    "observedKeyNames" : [ "0", "1", "2", "3" ],
+    "parentPath" : "vehicle[].actionThresholds",
+    "reason" : "Object keys consistently match numeric spell-level or recharge notation.",
+    "valueTypes" : [ "integer" ]
+  } ],
+  "domain" : "data",
+  "scanComplete" : true,
+  "scanFailures" : [ ]
+}

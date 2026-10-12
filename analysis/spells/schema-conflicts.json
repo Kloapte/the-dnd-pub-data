@@ -1,0 +1,647 @@
+{
+  "conflicts" : [ {
+    "classification" : "POLYMORPHIC",
+    "examples" : {
+      "object" : [ {
+        "entity" : "Create Spelljamming Helm",
+        "entityIndex" : 2,
+        "file" : "spells/spells-aag.json",
+        "value" : {
+          "consume" : true,
+          "cost" : 500000,
+          "text" : "a crystal rod worth at least 5,000 gp, which the spell consumes"
+        }
+      }, {
+        "entity" : "Incite Greed",
+        "entityIndex" : 6,
+        "file" : "spells/spells-ai.json",
+        "value" : {
+          "cost" : 5000,
+          "text" : "a gem worth at least 50 gp"
+        }
+      }, {
+        "entity" : "Linked Glyphs",
+        "entityIndex" : 10,
+        "file" : "spells/spells-aitfr-avt.json",
+        "value" : {
+          "consume" : true,
+          "cost" : 30000,
+          "text" : "incense and powdered diamond worth at least 300 gp, which the spell consumes"
+        }
+      } ],
+      "string" : [ {
+        "entity" : "Jim's Glowing Coin",
+        "entityIndex" : 7,
+        "file" : "spells/spells-ai.json",
+        "value" : "a coin"
+      }, {
+        "entity" : "Catnap",
+        "entityIndex" : 13,
+        "file" : "spells/spells-au.json",
+        "value" : "a pinch of sand"
+      }, {
+        "entity" : "Detonate",
+        "entityIndex" : 14,
+        "file" : "spells/spells-au.json",
+        "value" : "a piece of tinder"
+      } ]
+    },
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "path" : "spell[].components.m",
+    "totalOccurrences" : 523,
+    "types" : {
+      "object" : 181,
+      "string" : 342
+    }
+  }, {
+    "classification" : "POLYMORPHIC",
+    "examples" : {
+      "boolean" : [ {
+        "entity" : "Create Spelljamming Helm",
+        "entityIndex" : 2,
+        "file" : "spells/spells-aag.json",
+        "value" : true
+      }, {
+        "entity" : "Linked Glyphs",
+        "entityIndex" : 10,
+        "file" : "spells/spells-aitfr-avt.json",
+        "value" : true
+      }, {
+        "entity" : "Hindsight",
+        "entityIndex" : 23,
+        "file" : "spells/spells-au.json",
+        "value" : true
+      } ],
+      "string" : [ {
+        "entity" : "Forbiddance",
+        "entityIndex" : 241,
+        "file" : "spells/spells-phb.json",
+        "value" : "optional"
+      }, {
+        "entity" : "Summon Greater Demon",
+        "entityIndex" : 558,
+        "file" : "spells/spells-xge.json",
+        "value" : "optional"
+      }, {
+        "entity" : "Summon Lesser Demons",
+        "entityIndex" : 559,
+        "file" : "spells/spells-xge.json",
+        "value" : "optional"
+      } ]
+    },
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "path" : "spell[].components.m.consume",
+    "totalOccurrences" : 85,
+    "types" : {
+      "boolean" : 82,
+      "string" : 3
+    }
+  }, {
+    "classification" : "POLYMORPHIC",
+    "examples" : {
+      "object" : [ {
+        "entity" : "Spellfire Storm",
+        "entityIndex" : 79,
+        "file" : "spells/spells-frhof.json",
+        "value" : {
+          "colLabels" : [ "Secondary Casters", "Area of Effect", "Duration" ],
+          "colStyles" : [ "col-2 text-center", "col-8", "col-2" ],
+          "rows" : [ [ {
+            "$schemaAnalysisMaxDepthReached" : true
+          } ], [ {
+            "$schemaAnalysisMaxDepthReached" : true
+          } ], [ {
+            "$schemaAnalysisMaxDepthReached" : true
+          } ] ],
+          "type" : "table"
+        }
+      } ],
+      "string" : [ {
+        "entity" : "Air Bubble",
+        "entityIndex" : 1,
+        "file" : "spells/spells-aag.json",
+        "value" : "When you cast this spell using a spell slot of 3rd level or higher, you can create two additional globes of fresh air for each slot level above 2nd."
+      }, {
+        "entity" : "Distort Value",
+        "entityIndex" : 3,
+        "file" : "spells/spells-ai.json",
+        "value" : "When you cast this spell using a spell slot of 2nd level or higher, the maximum size of the object increases by 1 foot for each slot level above 1st."
+      }, {
+        "entity" : "Fast Friends",
+        "entityIndex" : 4,
+        "file" : "spells/spells-ai.json",
+        "value" : "When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd."
+      } ]
+    },
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "path" : "spell[].entriesHigherLevel[].entries[]",
+    "totalOccurrences" : 356,
+    "types" : {
+      "object" : 1,
+      "string" : 355
+    }
+  }, {
+    "classification" : "POLYMORPHIC",
+    "examples" : {
+      "object" : [ {
+        "entity" : "Gift of Gab",
+        "entityIndex" : 5,
+        "file" : "spells/spells-ai.json",
+        "value" : {
+          "by" : "Môrgæn",
+          "entries" : [ "When I met Jim Darkmagic, I wondered how he got anything done in that outfit. I have since learned that most of his talents involve standing and talking. His outfit is perfect for that." ],
+          "type" : "quote"
+        }
+      }, {
+        "entity" : "Jim's Magic Missile",
+        "entityIndex" : 8,
+        "file" : "spells/spells-ai.json",
+        "value" : {
+          "by" : "Jim Darkmagic",
+          "entries" : [ "Jim's magic missile is an ancient and powerful spell, as well as being the name of my band in Wizard Academy." ],
+          "type" : "quote"
+        }
+      }, {
+        "entity" : "Motivational Speech",
+        "entityIndex" : 9,
+        "file" : "spells/spells-ai.json",
+        "value" : {
+          "by" : "Walnut Dankgrass",
+          "entries" : [ "I once heard a motivational speech by Jim and it was the worst ninety seconds of my life. What does Omin see in him, anyway?" ],
+          "type" : "quote"
+        }
+      } ],
+      "string" : [ {
+        "entity" : "Air Bubble",
+        "entityIndex" : 1,
+        "file" : "spells/spells-aag.json",
+        "value" : "You create a spectral globe around the head of a willing creature you can see within range. The globe is filled with fresh air that lasts until the spell ends. If the creature has more than one head, the globe of air appears around only one of its heads (which is all the creature needs to avoid suff...<truncated>"
+      }, {
+        "entity" : "Create Spelljamming Helm",
+        "entityIndex" : 2,
+        "file" : "spells/spells-aag.json",
+        "value" : "Holding the rod used in the casting of the spell, you touch a Large or smaller chair that is unoccupied. The rod disappears, and the chair is transformed into a {@item spelljamming helm|AAG}."
+      }, {
+        "entity" : "Distort Value",
+        "entityIndex" : 3,
+        "file" : "spells/spells-ai.json",
+        "value" : "Do you need to squeeze a few more gold pieces out of a merchant as you try to sell that weird octopus statue you liberated from the chaos temple? Do you need to downplay the worth of some magical assets when the tax collector stops by? Distort value has you covered."
+      } ]
+    },
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "path" : "spell[].entries[]",
+    "totalOccurrences" : 2394,
+    "types" : {
+      "object" : 316,
+      "string" : 2078
+    }
+  }, {
+    "classification" : "POLYMORPHIC",
+    "examples" : {
+      "object" : [ {
+        "entity" : "Guards and Wards",
+        "entityIndex" : 260,
+        "file" : "spells/spells-phb.json",
+        "value" : {
+          "items" : [ "Place {@spell dancing lights} in four corridors. You can designate a simple program that the lights repeat as long as guards and wards lasts.", "Place {@spell magic mouth} in two locations.", "Place {@spell stinking cloud} in two locations. The vapors appear in the places you designate; they return within 10 minutes if dispersed by wind while guards and wards lasts.", "Place a constant {@spell gust of wind} in one corridor or room.", "Place a {@spell suggestion} in one location. You select an area of up to 5 feet square, and any creature that enters or passes through the area receives the suggestion mentally." ],
+          "type" : "list"
+        }
+      }, {
+        "entity" : "Guards and Wards",
+        "entityIndex" : 749,
+        "file" : "spells/spells-xphb.json",
+        "value" : {
+          "items" : [ "{@spell Dancing Lights|XPHB} in four corridors, with a simple program that the lights repeat as long as Guards and Wards lasts", "{@spell Magic Mouth|XPHB} in two locations", "{@spell Stinking Cloud|XPHB} in two locations (the vapors return within 10 minutes if dispersed while Guards and Wards lasts)", "{@spell Gust of Wind|XPHB} in one corridor or room (the wind blows continuously while the spell lasts)", "{@spell Suggestion|XPHB} in one 5-foot square; any creature that enters that square receives the suggestion mentally" ],
+          "type" : "list"
+        }
+      }, {
+        "entity" : "Hallow",
+        "entityIndex" : 754,
+        "file" : "spells/spells-xphb.json",
+        "value" : {
+          "items" : [ {
+            "$schemaAnalysisMaxDepthReached" : true
+          }, {
+            "$schemaAnalysisMaxDepthReached" : true
+          }, {
+            "$schemaAnalysisMaxDepthReached" : true
+          }, {
+            "$schemaAnalysisMaxDepthReached" : true
+          }, {
+            "$schemaAnalysisMaxDepthReached" : true
+          }, {
+            "$schemaAnalysisMaxDepthReached" : true
+          }, {
+            "$schemaAnalysisMaxDepthReached" : true
+          }, {
+            "$schemaAnalysisMaxDepthReached" : true
+          }, {
+            "$schemaAnalysisMaxDepthReached" : true
+          }, {
+            "$schemaAnalysisMaxDepthReached" : true
+          } ],
+          "style" : "list-hang-notitle",
+          "type" : "list"
+        }
+      } ],
+      "string" : [ {
+        "entity" : "Gift of Gab",
+        "entityIndex" : 5,
+        "file" : "spells/spells-ai.json",
+        "value" : "When I met Jim Darkmagic, I wondered how he got anything done in that outfit. I have since learned that most of his talents involve standing and talking. His outfit is perfect for that."
+      }, {
+        "entity" : "Jim's Magic Missile",
+        "entityIndex" : 8,
+        "file" : "spells/spells-ai.json",
+        "value" : "Jim's magic missile is an ancient and powerful spell, as well as being the name of my band in Wizard Academy."
+      }, {
+        "entity" : "Motivational Speech",
+        "entityIndex" : 9,
+        "file" : "spells/spells-ai.json",
+        "value" : "I once heard a motivational speech by Jim and it was the worst ninety seconds of my life. What does Omin see in him, anyway?"
+      } ]
+    },
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "path" : "spell[].entries[].entries[]",
+    "totalOccurrences" : 273,
+    "types" : {
+      "object" : 4,
+      "string" : 269
+    }
+  }, {
+    "classification" : "POLYMORPHIC",
+    "examples" : {
+      "object" : [ {
+        "entity" : "Hallow",
+        "entityIndex" : 754,
+        "file" : "spells/spells-xphb.json",
+        "value" : {
+          "$schemaAnalysisMaxDepthReached" : true
+        }
+      }, {
+        "entity" : "Hallow",
+        "entityIndex" : 754,
+        "file" : "spells/spells-xphb.json",
+        "value" : {
+          "$schemaAnalysisMaxDepthReached" : true
+        }
+      }, {
+        "entity" : "Hallow",
+        "entityIndex" : 754,
+        "file" : "spells/spells-xphb.json",
+        "value" : {
+          "$schemaAnalysisMaxDepthReached" : true
+        }
+      } ],
+      "string" : [ {
+        "entity" : "Guards and Wards",
+        "entityIndex" : 260,
+        "file" : "spells/spells-phb.json",
+        "value" : "Place {@spell dancing lights} in four corridors. You can designate a simple program that the lights repeat as long as guards and wards lasts."
+      }, {
+        "entity" : "Guards and Wards",
+        "entityIndex" : 260,
+        "file" : "spells/spells-phb.json",
+        "value" : "Place {@spell magic mouth} in two locations."
+      }, {
+        "entity" : "Guards and Wards",
+        "entityIndex" : 260,
+        "file" : "spells/spells-phb.json",
+        "value" : "Place {@spell stinking cloud} in two locations. The vapors appear in the places you designate; they return within 10 minutes if dispersed by wind while guards and wards lasts."
+      } ]
+    },
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "path" : "spell[].entries[].entries[].items[]",
+    "totalOccurrences" : 26,
+    "types" : {
+      "object" : 10,
+      "string" : 16
+    }
+  }, {
+    "classification" : "POLYMORPHIC",
+    "examples" : {
+      "object" : [ {
+        "entity" : "Distorted Distance",
+        "entityIndex" : 16,
+        "file" : "spells/spells-au.json",
+        "value" : {
+          "entries" : [ "The creature makes an Intelligence saving throw. On a failed save, the creature takes {@damage 2d10} Psychic damage, and the {@variantrule Sphere [Area of Effect]|XPHB|Sphere} is {@variantrule Difficult Terrain|XPHB} for it until the end of its turn." ],
+          "name" : "Dizzying Elongation",
+          "type" : "item"
+        }
+      }, {
+        "entity" : "Distorted Distance",
+        "entityIndex" : 16,
+        "file" : "spells/spells-au.json",
+        "value" : {
+          "entries" : [ "The creature's {@variantrule Speed|XPHB} increases by 20 feet until the end of its next turn.", "Until the spell ends, whenever a creature enters the {@variantrule Sphere [Area of Effect]|XPHB|Sphere} or ends its turn there, you can choose for it to receive one of these effects. A creature can be affected by this spell only once per turn." ],
+          "name" : "Shortened Space",
+          "type" : "item"
+        }
+      }, {
+        "entity" : "Alustriel's Mooncloak",
+        "entityIndex" : 63,
+        "file" : "spells/spells-frhof.json",
+        "value" : {
+          "entries" : [ "When you fail a saving throw to avoid or end the {@condition Frightened|XPHB}, {@condition Grappled|XPHB}, or {@condition Restrained|XPHB} condition, you can take a {@variantrule Reaction|XPHB} to succeed on the save instead." ],
+          "name" : "Liberation",
+          "type" : "item"
+        }
+      } ],
+      "string" : [ {
+        "entity" : "Galder's Tower",
+        "entityIndex" : 94,
+        "file" : "spells/spells-llk.json",
+        "value" : "A bedroom with a bed, chairs, chest, and magical fireplace"
+      }, {
+        "entity" : "Galder's Tower",
+        "entityIndex" : 94,
+        "file" : "spells/spells-llk.json",
+        "value" : "A study with desks, books, bookshelves, parchments, ink, and ink pens"
+      }, {
+        "entity" : "Galder's Tower",
+        "entityIndex" : 94,
+        "file" : "spells/spells-llk.json",
+        "value" : "A dining space with a table, chairs, magical fireplace, containers, and cooking utensils"
+      } ]
+    },
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "path" : "spell[].entries[].items[]",
+    "totalOccurrences" : 201,
+    "types" : {
+      "object" : 48,
+      "string" : 153
+    }
+  }, {
+    "classification" : "POLYMORPHIC",
+    "examples" : {
+      "object" : [ {
+        "entity" : "Confusion",
+        "entityIndex" : 156,
+        "file" : "spells/spells-phb.json",
+        "value" : {
+          "roll" : {
+            "$schemaAnalysisMaxDepthReached" : true
+          },
+          "type" : "cell"
+        }
+      }, {
+        "entity" : "Confusion",
+        "entityIndex" : 156,
+        "file" : "spells/spells-phb.json",
+        "value" : {
+          "roll" : {
+            "$schemaAnalysisMaxDepthReached" : true
+          },
+          "type" : "cell"
+        }
+      }, {
+        "entity" : "Confusion",
+        "entityIndex" : 156,
+        "file" : "spells/spells-phb.json",
+        "value" : {
+          "roll" : {
+            "$schemaAnalysisMaxDepthReached" : true
+          },
+          "type" : "cell"
+        }
+      } ],
+      "string" : [ {
+        "entity" : "Reality Break",
+        "entityIndex" : 57,
+        "file" : "spells/spells-egw.json",
+        "value" : "1-2"
+      }, {
+        "entity" : "Reality Break",
+        "entityIndex" : 57,
+        "file" : "spells/spells-egw.json",
+        "value" : "{@b Vision of the Far Realm.} The target takes {@damage 6d12} psychic damage, and it is {@condition stunned} until the end of the turn."
+      }, {
+        "entity" : "Reality Break",
+        "entityIndex" : 57,
+        "file" : "spells/spells-egw.json",
+        "value" : "3-5"
+      } ]
+    },
+    "gameplayClassification" : "GAMEPLAY_DESCRIPTION",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "path" : "spell[].entries[].rows[][]",
+    "totalOccurrences" : 351,
+    "types" : {
+      "object" : 29,
+      "string" : 322
+    }
+  }, {
+    "classification" : "POLYMORPHIC",
+    "examples" : {
+      "array" : [ {
+        "entity" : "Booming Blade",
+        "entityIndex" : 464,
+        "file" : "spells/spells-tce.json",
+        "value" : [ {
+          "label" : "thunder damage on moving",
+          "scaling" : {
+            "1" : "1d8",
+            "11" : "3d8",
+            "17" : "4d8",
+            "5" : "2d8"
+          }
+        }, {
+          "label" : "thunder damage on hit",
+          "scaling" : {
+            "11" : "2d8",
+            "17" : "3d8",
+            "5" : "1d8"
+          }
+        } ]
+      }, {
+        "entity" : "Green-Flame Blade",
+        "entityIndex" : 466,
+        "file" : "spells/spells-tce.json",
+        "value" : [ {
+          "label" : "fire damage to secondary creature",
+          "scaling" : {
+            "1" : "{{spellcasting_mod}}",
+            "11" : "2d8 + {{spellcasting_mod}}",
+            "17" : "3d8 + {{spellcasting_mod}}",
+            "5" : "1d8 + {{spellcasting_mod}}"
+          }
+        }, {
+          "label" : "fire damage on hit",
+          "scaling" : {
+            "11" : "2d8",
+            "17" : "3d8",
+            "5" : "1d8"
+          }
+        } ]
+      }, {
+        "entity" : "Toll the Dead",
+        "entityIndex" : 567,
+        "file" : "spells/spells-xge.json",
+        "value" : [ {
+          "label" : "necrotic damage",
+          "scaling" : {
+            "1" : "1d8",
+            "11" : "3d8",
+            "17" : "4d8",
+            "5" : "2d8"
+          }
+        }, {
+          "label" : "necrotic damage to wounded creature",
+          "scaling" : {
+            "1" : "1d12",
+            "11" : "3d12",
+            "17" : "4d12",
+            "5" : "2d12"
+          }
+        } ]
+      } ],
+      "object" : [ {
+        "entity" : "Sapping Sting",
+        "entityIndex" : 58,
+        "file" : "spells/spells-egw.json",
+        "value" : {
+          "label" : "necrotic damage",
+          "scaling" : {
+            "1" : "1d4",
+            "11" : "3d4",
+            "17" : "4d4",
+            "5" : "2d4"
+          }
+        }
+      }, {
+        "entity" : "Acid Splash",
+        "entityIndex" : 95,
+        "file" : "spells/spells-phb.json",
+        "value" : {
+          "label" : "acid damage",
+          "scaling" : {
+            "1" : "1d6",
+            "11" : "3d6",
+            "17" : "4d6",
+            "5" : "2d6"
+          }
+        }
+      }, {
+        "entity" : "Chill Touch",
+        "entityIndex" : 140,
+        "file" : "spells/spells-phb.json",
+        "value" : {
+          "label" : "necrotic damage",
+          "scaling" : {
+            "1" : "1d8",
+            "11" : "3d8",
+            "17" : "4d8",
+            "5" : "2d8"
+          }
+        }
+      } ]
+    },
+    "gameplayClassification" : "UNKNOWN",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "path" : "spell[].scalingLevelDice",
+    "totalOccurrences" : 41,
+    "types" : {
+      "array" : 5,
+      "object" : 36
+    }
+  }, {
+    "classification" : "POLYMORPHIC",
+    "examples" : {
+      "boolean" : [ {
+        "entity" : "Acid Splash",
+        "entityIndex" : 95,
+        "file" : "spells/spells-phb.json",
+        "value" : true
+      }, {
+        "entity" : "Aid",
+        "entityIndex" : 96,
+        "file" : "spells/spells-phb.json",
+        "value" : true
+      }, {
+        "entity" : "Alarm",
+        "entityIndex" : 97,
+        "file" : "spells/spells-phb.json",
+        "value" : true
+      } ],
+      "string" : [ {
+        "entity" : "Bigby's Hand",
+        "entityIndex" : 125,
+        "file" : "spells/spells-phb.json",
+        "value" : "Arcane Hand"
+      }, {
+        "entity" : "Drawmij's Instant Summons",
+        "entityIndex" : 204,
+        "file" : "spells/spells-phb.json",
+        "value" : "Instant Summons"
+      }, {
+        "entity" : "Evard's Black Tentacles",
+        "entityIndex" : 216,
+        "file" : "spells/spells-phb.json",
+        "value" : "Black Tentacles"
+      } ]
+    },
+    "gameplayClassification" : "SOURCE_METADATA",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "path" : "spell[].srd",
+    "totalOccurrences" : 319,
+    "types" : {
+      "boolean" : 302,
+      "string" : 17
+    }
+  }, {
+    "classification" : "POLYMORPHIC",
+    "examples" : {
+      "boolean" : [ {
+        "entity" : "Acid Splash",
+        "entityIndex" : 579,
+        "file" : "spells/spells-xphb.json",
+        "value" : true
+      }, {
+        "entity" : "Aid",
+        "entityIndex" : 580,
+        "file" : "spells/spells-xphb.json",
+        "value" : true
+      }, {
+        "entity" : "Alarm",
+        "entityIndex" : 581,
+        "file" : "spells/spells-xphb.json",
+        "value" : true
+      } ],
+      "string" : [ {
+        "entity" : "Bigby's Hand",
+        "entityIndex" : 611,
+        "file" : "spells/spells-xphb.json",
+        "value" : "Arcane Hand"
+      }, {
+        "entity" : "Drawmij's Instant Summons",
+        "entityIndex" : 692,
+        "file" : "spells/spells-xphb.json",
+        "value" : "Instant Summons"
+      }, {
+        "entity" : "Evard's Black Tentacles",
+        "entityIndex" : 705,
+        "file" : "spells/spells-xphb.json",
+        "value" : "Black Tentacles"
+      } ]
+    },
+    "gameplayClassification" : "SOURCE_METADATA",
+    "javaTypeSuggestion" : "Dedicated polymorphic record/union with a custom Jackson deserializer",
+    "path" : "spell[].srd52",
+    "totalOccurrences" : 339,
+    "types" : {
+      "boolean" : 322,
+      "string" : 17
+    }
+  } ],
+  "domain" : "spells",
+  "scanComplete" : true,
+  "scanFailures" : [ ]
+}
