@@ -1,6 +1,7 @@
 package com.thedndpub.data.dto.race;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.thedndpub.data.dto.race.deserializers.SubRaceSourceDtoDeserializer;
 import lombok.Data;
 import tools.jackson.databind.annotation.JsonDeserialize;
@@ -9,6 +10,30 @@ import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "name",
+        "source",
+        "creatureType",
+        "age",
+        "vision",
+        "movement",
+        "size",
+        "ability",
+        "modifiers",
+        "feat",
+        "weaponProficiencies",
+        "toolProficiencies",
+        "skillProficiencies",
+        "languageProficiencies",
+        "armorProficiencies",
+        "proficiencies",
+        "soundPath",
+        "additionalSpells",
+        "entries",
+        "variants",
+        "subraces",
+        "childOf"
+})
 public class RaceDto {
     private String name;
     private SourceDto source;

@@ -1172,7 +1172,7 @@ public class RaceAssembler {
         //Doing this to make a unlinked copy
         ObjectMapper mapper = new ObjectMapper();
         RaceDto parent = mapper.readValue(mapper.writeValueAsString(original), RaceDto.class);
-        
+
         //Keep parent as base
         SubraceDto race = new SubraceDto(parent);
         //Add name and subrace name together
