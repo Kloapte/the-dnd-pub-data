@@ -18,7 +18,9 @@ public class SecurityConfig {
     SecurityFilterChain security(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(AbstractHttpConfigurer::disable);
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/api/monsters/**").permitAll());
         return http.build();
     }
 

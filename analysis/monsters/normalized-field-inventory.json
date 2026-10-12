@@ -1189,18 +1189,18 @@
           "value": "[\"Multiattack\"]"
         }
       ],
-      "normalizedDestination": "classification.actionTags",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.actionTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained as source-derived facets",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "Retain source-derived tags; do not regenerate from descriptions.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -1236,18 +1236,18 @@
           "value": "\"Multiattack\""
         }
       ],
-      "normalizedDestination": "classification.actionTags[]",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.actionTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained as source-derived facets",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "Retain source-derived tags; do not regenerate from descriptions.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -1752,18 +1752,18 @@
           "value": "[{\"name\":\"Diabolical Bandit\",\"source\":\"MTF\",\"page\":18},{\"name\":\"Uttolot Elf Bandit\",\"source\":\"EGW\"}]"
         }
       ],
-      "normalizedDestination": "catalog.alternateArt",
-      "rootPropertyJavaType": "List<AlternateArtDto>",
-      "mappingRationale": "asset source/page/name",
+      "normalizedDestination": "Explicitly excluded presentation-only source metadata",
+      "rootPropertyJavaType": null,
+      "mappingRationale": "Retained in resolved source content but intentionally excluded from the public monster API.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "catalog",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "semanticRole": "SOURCE_OR_ASSET_METADATA",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
-      "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
-      "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "dedicatedNestedDto": false,
+      "safeNormalization": "EXCLUDED_FROM_PUBLIC_DTO",
+      "derivationPolicy": "Retain the resolved source property without exposing it through the public DTO.",
+      "coverageStatus": "EXCLUDED_PUBLIC_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -1800,18 +1800,18 @@
           "value": "{\"name\":\"Diabolical Bandit\",\"source\":\"MTF\",\"page\":18}"
         }
       ],
-      "normalizedDestination": "catalog.alternateArt[]",
-      "rootPropertyJavaType": "List<AlternateArtDto>",
-      "mappingRationale": "asset source/page/name",
+      "normalizedDestination": "Explicitly excluded presentation-only source metadata",
+      "rootPropertyJavaType": null,
+      "mappingRationale": "Retained in resolved source content but intentionally excluded from the public monster API.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "catalog",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "semanticRole": "SOURCE_OR_ASSET_METADATA",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
-      "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
-      "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "dedicatedNestedDto": false,
+      "safeNormalization": "EXCLUDED_FROM_PUBLIC_DTO",
+      "derivationPolicy": "Retain the resolved source property without exposing it through the public DTO.",
+      "coverageStatus": "EXCLUDED_PUBLIC_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -1847,18 +1847,18 @@
           "value": "\"Diabolical Bandit\""
         }
       ],
-      "normalizedDestination": "catalog.alternateArt[].name",
-      "rootPropertyJavaType": "List<AlternateArtDto>",
-      "mappingRationale": "asset source/page/name",
+      "normalizedDestination": "Explicitly excluded presentation-only source metadata",
+      "rootPropertyJavaType": null,
+      "mappingRationale": "Retained in resolved source content but intentionally excluded from the public monster API.",
       "scannerClassification": "PRESENTATION",
-      "normalizedGroup": "catalog",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "semanticRole": "SOURCE_OR_ASSET_METADATA",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
-      "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
-      "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "dedicatedNestedDto": false,
+      "safeNormalization": "EXCLUDED_FROM_PUBLIC_DTO",
+      "derivationPolicy": "Retain the resolved source property without exposing it through the public DTO.",
+      "coverageStatus": "EXCLUDED_PUBLIC_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -1894,18 +1894,18 @@
           "value": "18"
         }
       ],
-      "normalizedDestination": "catalog.alternateArt[].page",
-      "rootPropertyJavaType": "List<AlternateArtDto>",
-      "mappingRationale": "asset source/page/name",
+      "normalizedDestination": "Explicitly excluded presentation-only source metadata",
+      "rootPropertyJavaType": null,
+      "mappingRationale": "Retained in resolved source content but intentionally excluded from the public monster API.",
       "scannerClassification": "SOURCE_METADATA",
-      "normalizedGroup": "catalog",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "semanticRole": "SOURCE_OR_ASSET_METADATA",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
-      "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
-      "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "dedicatedNestedDto": false,
+      "safeNormalization": "EXCLUDED_FROM_PUBLIC_DTO",
+      "derivationPolicy": "Retain the resolved source property without exposing it through the public DTO.",
+      "coverageStatus": "EXCLUDED_PUBLIC_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -1941,18 +1941,18 @@
           "value": "\"MTF\""
         }
       ],
-      "normalizedDestination": "catalog.alternateArt[].source",
-      "rootPropertyJavaType": "List<AlternateArtDto>",
-      "mappingRationale": "asset source/page/name",
+      "normalizedDestination": "Explicitly excluded presentation-only source metadata",
+      "rootPropertyJavaType": null,
+      "mappingRationale": "Retained in resolved source content but intentionally excluded from the public monster API.",
       "scannerClassification": "SOURCE_METADATA",
-      "normalizedGroup": "catalog",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "semanticRole": "SOURCE_OR_ASSET_METADATA",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
-      "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
-      "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "dedicatedNestedDto": false,
+      "safeNormalization": "EXCLUDED_FROM_PUBLIC_DTO",
+      "derivationPolicy": "Retain the resolved source property without exposing it through the public DTO.",
+      "coverageStatus": "EXCLUDED_PUBLIC_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -3396,18 +3396,18 @@
           "value": "[\"grappled\"]"
         }
       ],
-      "normalizedDestination": "classification.conditionInflictTags",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.conditionInflict",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "GAMEPLAY_CORE",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "Retain source-derived tags; do not regenerate from descriptions.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": true,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -3443,18 +3443,18 @@
           "value": "\"stunned\""
         }
       ],
-      "normalizedDestination": "classification.conditionInflictTags[]",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.conditionInflict",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "GAMEPLAY_CORE",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "Retain source-derived tags; do not regenerate from descriptions.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": true,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -3491,18 +3491,18 @@
           "value": "[\"charmed\"]"
         }
       ],
-      "normalizedDestination": "classification.legendaryConditionTags",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.legendaryConditionInflict",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": true,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -3538,18 +3538,18 @@
           "value": "\"charmed\""
         }
       ],
-      "normalizedDestination": "classification.legendaryConditionTags[]",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.legendaryConditionInflict",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": true,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -3586,18 +3586,18 @@
           "value": "[\"charmed\"]"
         }
       ],
-      "normalizedDestination": "classification.spellConditionTags",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.spellConditionInflict",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": true,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -3633,18 +3633,18 @@
           "value": "\"charmed\""
         }
       ],
-      "normalizedDestination": "classification.spellConditionTags[]",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.spellConditionInflict",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": true,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -3969,18 +3969,18 @@
           "value": "[\"B\",\"L\"]"
         }
       ],
-      "normalizedDestination": "classification.damageTags",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.damageTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained as source-derived facets",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "Retain source-derived tags; do not regenerate from descriptions.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": true,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -4016,18 +4016,18 @@
           "value": "\"P\""
         }
       ],
-      "normalizedDestination": "classification.damageTags[]",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.damageTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained as source-derived facets",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "Retain source-derived tags; do not regenerate from descriptions.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": true,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -4064,18 +4064,18 @@
           "value": "[\"I\",\"P\"]"
         }
       ],
-      "normalizedDestination": "classification.legendaryDamageTags",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.legendaryDamageTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": true,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -4111,18 +4111,18 @@
           "value": "\"P\""
         }
       ],
-      "normalizedDestination": "classification.legendaryDamageTags[]",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.legendaryDamageTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": true,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -4159,18 +4159,18 @@
           "value": "[\"A\",\"C\"]"
         }
       ],
-      "normalizedDestination": "classification.spellDamageTags",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.spellDamageTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": true,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -4206,18 +4206,18 @@
           "value": "\"C\""
         }
       ],
-      "normalizedDestination": "classification.spellDamageTags[]",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.spellDamageTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": true,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -4537,18 +4537,18 @@
           "value": "1.3"
         }
       ],
-      "normalizedDestination": "catalog.foundryTokenScale",
-      "rootPropertyJavaType": "Double",
-      "mappingRationale": "VTT presentation metadata",
+      "normalizedDestination": "Explicitly excluded presentation-only source metadata",
+      "rootPropertyJavaType": null,
+      "mappingRationale": "Retained in resolved source content but intentionally excluded from the public monster API.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "catalog",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "semanticRole": "SOURCE_OR_ASSET_METADATA",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": false,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
-      "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "safeNormalization": "EXCLUDED_FROM_PUBLIC_DTO",
+      "derivationPolicy": "Retain the resolved source property without exposing it through the public DTO.",
+      "coverageStatus": "EXCLUDED_PUBLIC_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "Polymorphic source shape; use a typed variant or lossless common representation"
     },
@@ -4914,18 +4914,18 @@
           "value": "true"
         }
       ],
-      "normalizedDestination": "catalog.hasFluff",
-      "rootPropertyJavaType": "Boolean",
-      "mappingRationale": "external content availability",
+      "normalizedDestination": "Explicitly excluded presentation-only source metadata",
+      "rootPropertyJavaType": null,
+      "mappingRationale": "Retained in resolved source content but intentionally excluded from the public monster API.",
       "scannerClassification": "SOURCE_METADATA",
-      "normalizedGroup": "catalog",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "semanticRole": "SOURCE_OR_ASSET_METADATA",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": false,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
-      "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "safeNormalization": "EXCLUDED_FROM_PUBLIC_DTO",
+      "derivationPolicy": "Retain the resolved source property without exposing it through the public DTO.",
+      "coverageStatus": "EXCLUDED_PUBLIC_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -4961,18 +4961,18 @@
           "value": "true"
         }
       ],
-      "normalizedDestination": "catalog.hasFluffImages",
-      "rootPropertyJavaType": "Boolean",
-      "mappingRationale": "external content availability",
+      "normalizedDestination": "Explicitly excluded presentation-only source metadata",
+      "rootPropertyJavaType": null,
+      "mappingRationale": "Retained in resolved source content but intentionally excluded from the public monster API.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "catalog",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "semanticRole": "SOURCE_OR_ASSET_METADATA",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": false,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
-      "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "safeNormalization": "EXCLUDED_FROM_PUBLIC_DTO",
+      "derivationPolicy": "Retain the resolved source property without exposing it through the public DTO.",
+      "coverageStatus": "EXCLUDED_PUBLIC_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -5008,18 +5008,18 @@
           "value": "true"
         }
       ],
-      "normalizedDestination": "catalog.hasToken",
-      "rootPropertyJavaType": "Boolean",
-      "mappingRationale": "asset availability",
+      "normalizedDestination": "Explicitly excluded presentation-only source metadata",
+      "rootPropertyJavaType": null,
+      "mappingRationale": "Retained in resolved source content but intentionally excluded from the public monster API.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "catalog",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "semanticRole": "SOURCE_OR_ASSET_METADATA",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": false,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
-      "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "safeNormalization": "EXCLUDED_FROM_PUBLIC_DTO",
+      "derivationPolicy": "Retain the resolved source property without exposing it through the public DTO.",
+      "coverageStatus": "EXCLUDED_PUBLIC_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -6044,18 +6044,18 @@
           "value": "[\"AU\",\"OTH\",\"P\"]"
         }
       ],
-      "normalizedDestination": "classification.languageTags",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.languageTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -6091,18 +6091,18 @@
           "value": "\"AU\""
         }
       ],
-      "normalizedDestination": "classification.languageTags[]",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.languageTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -6750,18 +6750,18 @@
           "value": "[\"MA\",\"RA\"]"
         }
       ],
-      "normalizedDestination": "classification.miscTags",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.miscTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -6797,18 +6797,18 @@
           "value": "\"MW\""
         }
       ],
-      "normalizedDestination": "classification.miscTags[]",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.miscTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -9760,18 +9760,18 @@
           "value": "[\"D\"]"
         }
       ],
-      "normalizedDestination": "classification.senseTags",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.senseTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -9807,18 +9807,18 @@
           "value": "\"D\""
         }
       ],
-      "normalizedDestination": "classification.senseTags[]",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.senseTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -11657,18 +11657,18 @@
           "value": "{\"type\":\"internal\",\"path\":\"bestiary/abjurer.opus\"}"
         }
       ],
-      "normalizedDestination": "catalog.soundClip",
-      "rootPropertyJavaType": "SoundReferenceDto",
-      "mappingRationale": "external audio identity/reference",
+      "normalizedDestination": "Explicitly excluded presentation-only source metadata",
+      "rootPropertyJavaType": null,
+      "mappingRationale": "Retained in resolved source content but intentionally excluded from the public monster API.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "catalog",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "semanticRole": "SOURCE_OR_ASSET_METADATA",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
-      "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
-      "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "dedicatedNestedDto": false,
+      "safeNormalization": "EXCLUDED_FROM_PUBLIC_DTO",
+      "derivationPolicy": "Retain the resolved source property without exposing it through the public DTO.",
+      "coverageStatus": "EXCLUDED_PUBLIC_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -11704,18 +11704,18 @@
           "value": "\"bestiary/abjurer.opus\""
         }
       ],
-      "normalizedDestination": "catalog.soundClip.path",
-      "rootPropertyJavaType": "SoundReferenceDto",
-      "mappingRationale": "external audio identity/reference",
+      "normalizedDestination": "Explicitly excluded presentation-only source metadata",
+      "rootPropertyJavaType": null,
+      "mappingRationale": "Retained in resolved source content but intentionally excluded from the public monster API.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "catalog",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "semanticRole": "SOURCE_OR_ASSET_METADATA",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
-      "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
-      "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "dedicatedNestedDto": false,
+      "safeNormalization": "EXCLUDED_FROM_PUBLIC_DTO",
+      "derivationPolicy": "Retain the resolved source property without exposing it through the public DTO.",
+      "coverageStatus": "EXCLUDED_PUBLIC_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -11751,18 +11751,18 @@
           "value": "\"internal\""
         }
       ],
-      "normalizedDestination": "catalog.soundClip.type",
-      "rootPropertyJavaType": "SoundReferenceDto",
-      "mappingRationale": "external audio identity/reference",
+      "normalizedDestination": "Explicitly excluded presentation-only source metadata",
+      "rootPropertyJavaType": null,
+      "mappingRationale": "Retained in resolved source content but intentionally excluded from the public monster API.",
       "scannerClassification": "PRESENTATION",
-      "normalizedGroup": "catalog",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "semanticRole": "SOURCE_OR_ASSET_METADATA",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
-      "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
-      "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "dedicatedNestedDto": false,
+      "safeNormalization": "EXCLUDED_FROM_PUBLIC_DTO",
+      "derivationPolicy": "Retain the resolved source property without exposing it through the public DTO.",
+      "coverageStatus": "EXCLUDED_PUBLIC_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -18669,18 +18669,18 @@
           "value": "[\"P\"]"
         }
       ],
-      "normalizedDestination": "classification.spellcastingTags",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.spellcastingTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "Retain source-derived tags; do not regenerate from spellcasting.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -18716,18 +18716,18 @@
           "value": "\"P\""
         }
       ],
-      "normalizedDestination": "classification.spellcastingTags[]",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.spellcastingTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "Retain source-derived tags; do not regenerate from spellcasting.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -19045,18 +19045,18 @@
           "value": "\"jameszapata\""
         }
       ],
-      "normalizedDestination": "catalog.tokenCredit",
-      "rootPropertyJavaType": "String",
-      "mappingRationale": "asset attribution",
+      "normalizedDestination": "Explicitly excluded presentation-only source metadata",
+      "rootPropertyJavaType": null,
+      "mappingRationale": "Retained in resolved source content but intentionally excluded from the public monster API.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "catalog",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "semanticRole": "SOURCE_OR_ASSET_METADATA",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": false,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
-      "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "safeNormalization": "EXCLUDED_FROM_PUBLIC_DTO",
+      "derivationPolicy": "Retain the resolved source property without exposing it through the public DTO.",
+      "coverageStatus": "EXCLUDED_PUBLIC_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -19092,18 +19092,18 @@
           "value": "true"
         }
       ],
-      "normalizedDestination": "catalog.customToken",
-      "rootPropertyJavaType": "Boolean",
-      "mappingRationale": "asset metadata",
+      "normalizedDestination": "Explicitly excluded presentation-only source metadata",
+      "rootPropertyJavaType": null,
+      "mappingRationale": "Retained in resolved source content but intentionally excluded from the public monster API.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "catalog",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "semanticRole": "SOURCE_OR_ASSET_METADATA",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": false,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
-      "derivationPolicy": "No independent derivation; preserve source value.",
-      "coverageStatus": "MAPPED",
+      "safeNormalization": "EXCLUDED_FROM_PUBLIC_DTO",
+      "derivationPolicy": "Retain the resolved source property without exposing it through the public DTO.",
+      "coverageStatus": "EXCLUDED_PUBLIC_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -20075,18 +20075,18 @@
           "value": "[\"Spider Climb\"]"
         }
       ],
-      "normalizedDestination": "classification.traitTags",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.traitTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "Retain source-derived tags; do not regenerate from traits.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -20122,18 +20122,18 @@
           "value": "\"Spider Climb\""
         }
       ],
-      "normalizedDestination": "classification.traitTags[]",
+      "normalizedDestination": "NormalizedMonsterRecord.classification.traitTags",
       "rootPropertyJavaType": "Set<String>",
-      "mappingRationale": "source tags retained",
+      "mappingRationale": "Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.",
       "scannerClassification": "UNKNOWN",
-      "normalizedGroup": "classification",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "semanticRole": "SOURCE_DERIVED_CLASSIFICATION_TAG",
       "editionSpecific": false,
       "editionContext": "NO_DIRECT_EDITION_MARKER",
       "dedicatedNestedDto": true,
-      "safeNormalization": "YES_WITH_SOURCE_SHAPE_PRESERVED",
+      "safeNormalization": "YES; retained internally and excluded from the public DTO",
       "derivationPolicy": "Retain source-derived tags; do not regenerate from traits.",
-      "coverageStatus": "MAPPED",
+      "coverageStatus": "INTERNAL_METADATA",
       "gameplayRelevant": false,
       "normalizationRisk": "No observed scalar shape conflict; preserve nested structure and source text"
     },
@@ -25473,8 +25473,8 @@
       "observedTypes": {
         "array": 3138
       },
-      "destination": "classification",
-      "normalizedGroup": "classification",
+      "destination": "NormalizedMonsterRecord",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -25513,8 +25513,8 @@
       "observedTypes": {
         "array": 47
       },
-      "destination": "catalog",
-      "normalizedGroup": "catalog",
+      "destination": "Explicitly excluded presentation-only source metadata",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -25593,8 +25593,8 @@
       "observedTypes": {
         "array": 2057
       },
-      "destination": "classification",
-      "normalizedGroup": "classification",
+      "destination": "NormalizedMonsterRecord",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "scannerClassification": "GAMEPLAY_CORE"
     },
     {
@@ -25603,8 +25603,8 @@
       "observedTypes": {
         "array": 116
       },
-      "destination": "classification",
-      "normalizedGroup": "classification",
+      "destination": "NormalizedMonsterRecord",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -25613,8 +25613,8 @@
       "observedTypes": {
         "array": 744
       },
-      "destination": "classification",
-      "normalizedGroup": "classification",
+      "destination": "NormalizedMonsterRecord",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -25634,8 +25634,8 @@
       "observedTypes": {
         "array": 4799
       },
-      "destination": "classification",
-      "normalizedGroup": "classification",
+      "destination": "NormalizedMonsterRecord",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -25644,8 +25644,8 @@
       "observedTypes": {
         "array": 102
       },
-      "destination": "classification",
-      "normalizedGroup": "classification",
+      "destination": "NormalizedMonsterRecord",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -25654,8 +25654,8 @@
       "observedTypes": {
         "array": 975
       },
-      "destination": "classification",
-      "normalizedGroup": "classification",
+      "destination": "NormalizedMonsterRecord",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -25715,8 +25715,8 @@
         "integer": 6,
         "number": 47
       },
-      "destination": "catalog",
-      "normalizedGroup": "catalog",
+      "destination": "Explicitly excluded presentation-only source metadata",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -25745,8 +25745,8 @@
       "observedTypes": {
         "boolean": 3393
       },
-      "destination": "catalog",
-      "normalizedGroup": "catalog",
+      "destination": "Explicitly excluded presentation-only source metadata",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "scannerClassification": "SOURCE_METADATA"
     },
     {
@@ -25755,8 +25755,8 @@
       "observedTypes": {
         "boolean": 3331
       },
-      "destination": "catalog",
-      "normalizedGroup": "catalog",
+      "destination": "Explicitly excluded presentation-only source metadata",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -25765,8 +25765,8 @@
       "observedTypes": {
         "boolean": 4588
       },
-      "destination": "catalog",
-      "normalizedGroup": "catalog",
+      "destination": "Explicitly excluded presentation-only source metadata",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -25846,8 +25846,8 @@
       "observedTypes": {
         "array": 3857
       },
-      "destination": "classification",
-      "normalizedGroup": "classification",
+      "destination": "NormalizedMonsterRecord",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -25927,8 +25927,8 @@
       "observedTypes": {
         "array": 4725
       },
-      "destination": "classification",
-      "normalizedGroup": "classification",
+      "destination": "NormalizedMonsterRecord",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -26108,8 +26108,8 @@
       "observedTypes": {
         "array": 3232
       },
-      "destination": "classification",
-      "normalizedGroup": "classification",
+      "destination": "NormalizedMonsterRecord",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -26170,8 +26170,8 @@
       "observedTypes": {
         "object": 2479
       },
-      "destination": "catalog",
-      "normalizedGroup": "catalog",
+      "destination": "Explicitly excluded presentation-only source metadata",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -26210,8 +26210,8 @@
       "observedTypes": {
         "array": 1536
       },
-      "destination": "classification",
-      "normalizedGroup": "classification",
+      "destination": "NormalizedMonsterRecord",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -26280,8 +26280,8 @@
       "observedTypes": {
         "string": 47
       },
-      "destination": "catalog",
-      "normalizedGroup": "catalog",
+      "destination": "Explicitly excluded presentation-only source metadata",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -26290,8 +26290,8 @@
       "observedTypes": {
         "boolean": 465
       },
-      "destination": "catalog",
-      "normalizedGroup": "catalog",
+      "destination": "Explicitly excluded presentation-only source metadata",
+      "normalizedGroup": "EXCLUDED_PRESENTATION_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {
@@ -26310,8 +26310,8 @@
       "observedTypes": {
         "array": 2976
       },
-      "destination": "classification",
-      "normalizedGroup": "classification",
+      "destination": "NormalizedMonsterRecord",
+      "normalizedGroup": "INTERNAL_SEARCH_METADATA",
       "scannerClassification": "UNKNOWN"
     },
     {

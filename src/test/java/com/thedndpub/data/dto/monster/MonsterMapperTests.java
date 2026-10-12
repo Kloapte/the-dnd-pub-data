@@ -1,8 +1,21 @@
 package com.thedndpub.data.dto.monster;
 
+import com.thedndpub.data.dto.monster.content.InsetContent;
+import com.thedndpub.data.dto.monster.content.ListContent;
+import com.thedndpub.data.dto.monster.content.MonsterContentDto;
+import com.thedndpub.data.dto.monster.content.PlainText;
+import com.thedndpub.data.dto.monster.content.QuoteContent;
+import com.thedndpub.data.dto.monster.content.RollCell;
+import com.thedndpub.data.dto.monster.content.Section;
+import com.thedndpub.data.dto.monster.content.SpellcastingContent;
+import com.thedndpub.data.dto.monster.content.StructuredCell;
+import com.thedndpub.data.dto.monster.content.TableContent;
+import com.thedndpub.data.dto.monster.content.TextCell;
+import com.thedndpub.data.dto.monster.identity.MonsterId;
+import com.thedndpub.data.dto.monster.identity.Source;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thedndpub.data.dto.monster.MonsterDto.*;
 import com.thedndpub.data.dte.monster.*;
 import org.junit.jupiter.api.Test;
 
@@ -32,6 +45,10 @@ class MonsterMapperTests {
         List<NormalizedMonsterRecord> mapped = mapper.mapRecords(resolved);
         assertEquals(4851, mapped.size());
         assertEquals(4851, mapped.stream().map(x -> x.monster().identity().id()).distinct().count());
+        assertEquals(4851, mapped.stream().filter(x -> x.classification() != null).count());
+        assertTrue(mapped.stream().anyMatch(x -> !x.classification().actionTags().isEmpty()
+                || !x.classification().damageTags().isEmpty()
+                || !x.classification().traitTags().isEmpty()));
         assertEquals(mapped.size(), mapper.mapRecords(resolved.reversed()).size());
         Map<String, String> first = new HashMap<>();
         for (NormalizedMonsterRecord item : mapped) {
@@ -50,7 +67,7 @@ class MonsterMapperTests {
         assertTrue(cat.statistics().languages().explicitNull());
         var familiar = mapped.stream().filter(x -> x.provenance().versionParentId() != null && x.monster().identity().name().startsWith("Battle Familiar")).toList();
         assertEquals(3, familiar.size());
-        var draconicParent = new MonsterDto.MonsterId("5etools:" + Base64.getUrlEncoder().withoutPadding()
+        var draconicParent = new MonsterId("5etools:" + Base64.getUrlEncoder().withoutPadding()
                 .encodeToString("xphb\u0000draconic spirit".getBytes(java.nio.charset.StandardCharsets.UTF_8)));
         var spirit = mapped.stream().filter(x -> draconicParent.equals(x.provenance().versionParentId())).toList();
         assertEquals(5, spirit.size());
@@ -60,7 +77,9 @@ class MonsterMapperTests {
         var zikran = find(mapped, "Zikran", "CM").monster();
         assertFalse(zikran.spellcasting().isEmpty());
         assertTrue(zikran.spellcasting().stream().anyMatch(b -> b.spellLevels().containsKey("1")));
-        assertTrue(mapped.stream().anyMatch(x -> x.monster().defenses().resistances() != null && !x.monster().defenses().resistances().values().isEmpty()
+        assertTrue(mapped.stream().anyMatch(x -> x.monster().defenses() != null
+                && x.monster().defenses().resistances() != null
+                && !x.monster().defenses().resistances().values().isEmpty()
                 && x.monster().defenses().resistances().values().stream().anyMatch(d -> !d.nested().isEmpty())));
         ResolvedMonster absent = fixture("Absent", "TST", "{\"name\":\"Absent\",\"source\":\"TST\"}");
         assertNull(mapper.map(absent).statistics().languages());
@@ -74,11 +93,30 @@ class MonsterMapperTests {
         Set<String> roots = new TreeSet<>();
         for (JsonNode field : inventory.path("properties")) {
             roots.add(field.path("rootProperty").asText());
-            assertEquals("MAPPED", field.path("coverageStatus").asText(), field.path("path").asText() + " lacks a destination");
+            String root = field.path("rootProperty").asText();
+            String expectedStatus = "MAPPED";
+            if (classificationRoots().contains(root)) {
+                expectedStatus = "INTERNAL_METADATA";
+            } else if (excludedPresentationRoots().contains(root)) {
+                expectedStatus = "EXCLUDED_PUBLIC_METADATA";
+            }
+            assertEquals(expectedStatus, field.path("coverageStatus").asText(),
+                    field.path("path").asText() + " has an unexpected coverage status");
             assertFalse(field.path("normalizedDestination").asText().isBlank(), field.path("path").asText());
         }
         assertEquals(92, roots.size());
         assertEquals(roots, MonsterMapper.mappedRootProperties());
+    }
+
+    private Set<String> classificationRoots() {
+        return Set.of("actionTags", "damageTags", "damageTagsLegendary", "damageTagsSpell",
+                "conditionInflict", "conditionInflictLegendary", "conditionInflictSpell", "languageTags",
+                "miscTags", "senseTags", "spellcastingTags", "traitTags");
+    }
+
+    private Set<String> excludedPresentationRoots() {
+        return Set.of("hasFluff", "hasFluffImages", "hasToken", "tokenCustom", "tokenCredit",
+                "foundryTokenScale", "altArt", "soundClip");
     }
 
     @Test

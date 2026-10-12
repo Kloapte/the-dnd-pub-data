@@ -20,6 +20,17 @@ const searchRoots=new Set(['actionTags','damageTags','damageTagsLegendary','dama
 const statMechanics=new Set(['str','dex','con','int','wis','cha','initiative','hp','cr','speed','ac','save','skill','savingThrowForced','savingThrowForcedLegendary','savingThrowForcedSpell']);
 const ruleTags=new Set(['damageTags','damageTagsLegendary','damageTagsSpell','conditionInflict','conditionInflictLegendary','conditionInflictSpell']);
 const editions=new Set(['basicRules','basicRules2024','srd','srd52','dragonAge','dragonCastingColor']);
+const classificationDestinations={
+  actionTags:'actionTags', damageTags:'damageTags', damageTagsLegendary:'legendaryDamageTags',
+  damageTagsSpell:'spellDamageTags', conditionInflict:'conditionInflict',
+  conditionInflictLegendary:'legendaryConditionInflict', conditionInflictSpell:'spellConditionInflict',
+  languageTags:'languageTags', miscTags:'miscTags', senseTags:'senseTags',
+  spellcastingTags:'spellcastingTags', traitTags:'traitTags'
+};
+const excludedPresentationRoots=new Set([
+  'hasFluff','hasFluffImages','hasToken','tokenCustom','tokenCredit',
+  'foundryTokenScale','altArt','soundClip'
+]);
 const nonDedicated=new Set(['name','source','page','alignmentPrefix','dragonAge','dragonCastingColor','isNamedCreature','isNpc','level','summonedByClass','summonedBySpell','summonedBySpellLevel','str','dex','con','int','wis','cha','actionNote','reactionNote','legendaryActions','legendaryActionsLair','legendaryHeader','mythicHeader','reactionHeader','alignmentPrefix','pbNote','sizeNote','basicRules','basicRules2024','familiar','hasFluff','hasFluffImages','hasToken','tokenCredit','tokenCustom','foundryTokenScale','isReprinted','srd','srd52']);
 const classify=(path)=>{
   const candidates=[`monster[].${path}`,`monster.${path}`,path];
@@ -40,12 +51,31 @@ for(const p of data.properties){
   p.safeNormalization=m?'YES_WITH_SOURCE_SHAPE_PRESERVED':'NO_MAPPING';
   p.derivationPolicy=({name:'Generate stable ID from normalized source and name; retain source values.',passive:'Retain imported value; do not recompute from Wisdom.',actionTags:'Retain source-derived tags; do not regenerate from descriptions.',damageTags:'Retain source-derived tags; do not regenerate from descriptions.',conditionInflict:'Retain source-derived tags; do not regenerate from descriptions.',spellcastingTags:'Retain source-derived tags; do not regenerate from spellcasting.',traitTags:'Retain source-derived tags; do not regenerate from traits.',pbNote:'Keep note; only derive proficiency with an explicit edition ruleset.',source:'Stable identity component; do not infer edition from acronym alone.'})[root]??'No independent derivation; preserve source value.';
   p.coverageStatus=m?'MAPPED':'UNRESOLVED';
+  if(classificationDestinations[root]){
+    p.normalizedDestination=`NormalizedMonsterRecord.classification.${classificationDestinations[root]}`;
+    p.mappingRationale='Retained as immutable internal source classification for backend filtering; excluded from public MonsterDto.';
+    p.normalizedGroup='INTERNAL_SEARCH_METADATA';
+    p.semanticRole='SOURCE_DERIVED_CLASSIFICATION_TAG';
+    p.coverageStatus='INTERNAL_METADATA';
+    p.safeNormalization='YES; retained internally and excluded from the public DTO';
+  }else if(excludedPresentationRoots.has(root)){
+    p.normalizedDestination='Explicitly excluded presentation-only source metadata';
+    p.rootPropertyJavaType=null;
+    p.mappingRationale='Retained in resolved source content but intentionally excluded from the public monster API.';
+    p.normalizedGroup='EXCLUDED_PRESENTATION_METADATA';
+    p.semanticRole='SOURCE_OR_ASSET_METADATA';
+    p.dedicatedNestedDto=false;
+    p.derivationPolicy='Retain the resolved source property without exposing it through the public DTO.';
+    p.coverageStatus='EXCLUDED_PUBLIC_METADATA';
+    p.safeNormalization='EXCLUDED_FROM_PUBLIC_DTO';
+    p.gameplayRelevant=false;
+  }
   p.gameplayRelevant=m?(statMechanics.has(root)||['resist','immune','vulnerable','conditionImmune','trait','action','bonus','reaction','legendary','mythic','variant','legendaryActions','legendaryActionsLair','spellcasting','summonedByClass','summonedBySpell','summonedBySpellLevel','familiar','gear','attachedItems'].includes(root)||ruleTags.has(root)):null;
   if(p.explicitNullCount>0)p.normalizationRisk='Preserve explicit null separately from absent and empty';
   else if(Object.keys(p.observedTypes).length>1)p.normalizationRisk='Polymorphic source shape; use a typed variant or lossless common representation';
   else p.normalizationRisk='No observed scalar shape conflict; preserve nested structure and source text';
 }
-const unmapped=data.properties.filter(p=>p.coverageStatus!=='MAPPED').map(p=>p.path);
+const unmapped=data.properties.filter(p=>p.coverageStatus==='UNRESOLVED').map(p=>p.path);
 data.inventoryMethod='Traversed resolved ResolvedMonster.content() after DefaultMonsterCopyResolver and MonsterVersionExpander; presence counts are distinct canonical identities; node/type counts include repeated array elements.';
 data.rootFieldCount=[...new Set(data.properties.map(p=>p.rootProperty))].length;
 data.rootFields=[...new Set(data.properties.map(p=>p.rootProperty))].sort().map(root=>{

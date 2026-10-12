@@ -3,7 +3,64 @@ package com.thedndpub.data.dto.monster;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.thedndpub.data.dto.monster.MonsterDto.*;
+import com.thedndpub.data.dto.monster.catalog.Catalog;
+import com.thedndpub.data.dto.monster.catalog.GearReference;
+import com.thedndpub.data.dto.monster.content.ContentArray;
+import com.thedndpub.data.dto.monster.content.ContentBoolean;
+import com.thedndpub.data.dto.monster.content.ContentNull;
+import com.thedndpub.data.dto.monster.content.ContentNumber;
+import com.thedndpub.data.dto.monster.content.ContentObject;
+import com.thedndpub.data.dto.monster.content.ContentText;
+import com.thedndpub.data.dto.monster.content.ContentValue;
+import com.thedndpub.data.dto.monster.content.InsetContent;
+import com.thedndpub.data.dto.monster.content.ListContent;
+import com.thedndpub.data.dto.monster.content.ListItem;
+import com.thedndpub.data.dto.monster.content.MonsterContentDto;
+import com.thedndpub.data.dto.monster.content.PlainText;
+import com.thedndpub.data.dto.monster.content.QuoteContent;
+import com.thedndpub.data.dto.monster.content.RollCell;
+import com.thedndpub.data.dto.monster.content.Section;
+import com.thedndpub.data.dto.monster.content.SpellcastingContent;
+import com.thedndpub.data.dto.monster.content.StructuredCell;
+import com.thedndpub.data.dto.monster.content.TableCellDto;
+import com.thedndpub.data.dto.monster.content.TableContent;
+import com.thedndpub.data.dto.monster.content.TextCell;
+import com.thedndpub.data.dto.monster.defenses.Defense;
+import com.thedndpub.data.dto.monster.defenses.Defenses;
+import com.thedndpub.data.dto.monster.features.Combat;
+import com.thedndpub.data.dto.monster.features.Feature;
+import com.thedndpub.data.dto.monster.features.Features;
+import com.thedndpub.data.dto.monster.features.VariantReference;
+import com.thedndpub.data.dto.monster.identity.Alignment;
+import com.thedndpub.data.dto.monster.identity.CreatureType;
+import com.thedndpub.data.dto.monster.identity.Identity;
+import com.thedndpub.data.dto.monster.identity.MonsterId;
+import com.thedndpub.data.dto.monster.identity.Reference;
+import com.thedndpub.data.dto.monster.identity.RulesAvailability;
+import com.thedndpub.data.dto.monster.identity.ShortName;
+import com.thedndpub.data.dto.monster.identity.Source;
+import com.thedndpub.data.dto.monster.identity.SourceReference;
+import com.thedndpub.data.dto.monster.identity.Summoning;
+import com.thedndpub.data.dto.monster.identity.TypeTag;
+import com.thedndpub.data.dto.monster.internal.MonsterClassification;
+import com.thedndpub.data.dto.monster.spellcasting.SpellLevel;
+import com.thedndpub.data.dto.monster.spellcasting.SpellReference;
+import com.thedndpub.data.dto.monster.spellcasting.SpellcastingBlock;
+import com.thedndpub.data.dto.monster.statistics.AbilityScores;
+import com.thedndpub.data.dto.monster.statistics.AlternateMovement;
+import com.thedndpub.data.dto.monster.statistics.ArmorClass;
+import com.thedndpub.data.dto.monster.statistics.ChallengeRating;
+import com.thedndpub.data.dto.monster.statistics.HitPoints;
+import com.thedndpub.data.dto.monster.statistics.Initiative;
+import com.thedndpub.data.dto.monster.statistics.Movement;
+import com.thedndpub.data.dto.monster.statistics.MovementValue;
+import com.thedndpub.data.dto.monster.statistics.NullableList;
+import com.thedndpub.data.dto.monster.statistics.PassivePerception;
+import com.thedndpub.data.dto.monster.statistics.SkillAlternatives;
+import com.thedndpub.data.dto.monster.statistics.SkillBonus;
+import com.thedndpub.data.dto.monster.statistics.SkillValue;
+import com.thedndpub.data.dto.monster.statistics.Statistics;
+
 import com.thedndpub.data.dte.monster.*;
 
 import java.math.BigDecimal;
@@ -100,19 +157,10 @@ public final class MonsterMapper {
                 bool(n.get("isNpc"), path + ".isNpc"),
                 textOrNull(n.get("dragonAge"), path + ".dragonAge"),
                 textOrNull(n.get("dragonCastingColor"), path + ".dragonCastingColor"),
-                new Summoning(
-                        textOrNull(n.get("summonedByClass"), path),
-                        textOrNull(n.get("summonedBySpell"), path),
-                        integer(n.get("summonedBySpellLevel"), path)),
+                summoning(n, path),
                 reference(n.get("legendaryGroup"), path + ".legendaryGroup"));
         Statistics stats = new Statistics(
-                new AbilityScores(
-                        integer(n.get("str"), path),
-                        integer(n.get("dex"), path),
-                        integer(n.get("con"), path),
-                        integer(n.get("int"), path),
-                        integer(n.get("wis"), path),
-                        integer(n.get("cha"), path)),
+                abilityScores(n, path),
                 initiative(n.get("initiative"), path + ".initiative"),
                 armorClasses(n.get("ac"), path + ".ac"),
                 hitPoints(n.get("hp"), path + ".hp"),
@@ -129,38 +177,135 @@ public final class MonsterMapper {
                 strings(n.get("savingThrowForcedLegendary"), path),
                 strings(n.get("savingThrowForcedSpell"), path),
                 textOrNull(n.get("pbNote"), path));
-        Defenses defenses = new Defenses(defenses(n, "resist", path), defenses(n, "immune", path), defenses(n, "vulnerable", path), defenses(n, "conditionImmune", path));
-        Features features = new Features(
-                features(n.get("trait"), path + ".trait"),
-                features(n.get("action"), path + ".action"),
-                features(n.get("bonus"), path + ".bonus"),
-                features(n.get("reaction"), path + ".reaction"),
-                features(n.get("legendary"), path + ".legendary"),
-                features(n.get("mythic"), path + ".mythic"),
-                features(n.get("variant"), path + ".variant"),
-                textOrNull(n.get("actionNote"), path),
-                textOrNull(n.get("reactionNote"), path),
-                strings(n.get("legendaryHeader"), path),
-                strings(n.get("mythicHeader"), path),
-                strings(n.get("reactionHeader"), path));
-        Combat combat = new Combat(integer(n.get("legendaryActions"), path), integer(n.get("legendaryActionsLair"), path));
+        Defenses defenses = defenses(n, path);
+        Features features = features(n, path);
+        Combat combat = combat(n, path);
         List<SpellcastingBlock> casting = spellcasting(n.get("spellcasting"), path + ".spellcasting");
-        Classification classification = new Classification(set(n.get("actionTags"), path), set(n.get("damageTags"), path), set(n.get("damageTagsLegendary"), path), set(n.get("damageTagsSpell"), path),
-                set(n.get("conditionInflict"), path), set(n.get("conditionInflictLegendary"), path), set(n.get("conditionInflictSpell"), path), set(n.get("languageTags"), path), set(n.get("miscTags"), path),
-                set(n.get("senseTags"), path), set(n.get("spellcastingTags"), path), set(n.get("traitTags"), path));
-        Catalog catalog = new Catalog(set(n.get("environment"), path), gear(n.get("gear"), path), strings(n.get("attachedItems"), path), set(n.get("treasure"), path), bool(n.get("familiar"), path),
-                bool(n.get("hasFluff"), path), bool(n.get("hasFluffImages"), path), bool(n.get("hasToken"), path), bool(n.get("tokenCustom"), path), textOrNull(n.get("tokenCredit"), path),
-                decimalDouble(n.get("foundryTokenScale"), path), altArt(n.get("altArt"), path), sound(n.get("soundClip"), path), availability, bool(n.get("isReprinted"), path));
-        MonsterDto dto = new MonsterDto(identity, stats, defenses, features, combat, casting, classification, catalog);
+        MonsterClassification classification = classification(n, path);
+        Catalog catalog = catalog(n, path, availability);
+        MonsterDto dto = new MonsterDto(identity, stats, defenses, features, combat, casting, catalog);
         MonsterVersionProvenance vp = r.provenance().generatedVersion();
         MonsterImportProvenance provenance = new MonsterImportProvenance(r.location().filename(), r.location().arrayIndex(), r.identity().name(), r.identity().source(), id(r.copyParent()),
                 vp == null ? null : id(vp.containingMonster()), vp == null ? null : vp.versionDefinitionIndex(), vp == null ? null : vp.implementationIndex(),
                 r.appliedTemplates().stream().map(this::id).toList(), vp == null ? Map.of() : vp.variables());
-        return new NormalizedMonsterRecord(dto, provenance);
+        return new NormalizedMonsterRecord(dto, provenance, classification);
     }
 
     private RulesAvailability availability(JsonNode n) {
-        return new RulesAvailability(bool(n.get("basicRules"), "$"), bool(n.get("basicRules2024"), "$"), bool(n.get("srd"), "$"), bool(n.get("srd52"), "$"), Set.of());
+        Boolean basicRules = bool(n.get("basicRules"), "$");
+        Boolean basicRules2024 = bool(n.get("basicRules2024"), "$");
+        Boolean srd = bool(n.get("srd"), "$");
+        Boolean srd52 = bool(n.get("srd52"), "$");
+        if (basicRules == null && basicRules2024 == null && srd == null && srd52 == null) {
+            return null;
+        }
+        return new RulesAvailability(basicRules, basicRules2024, srd, srd52, Set.of());
+    }
+
+    private AbilityScores abilityScores(ObjectNode n, String path) {
+        AbilityScores scores = new AbilityScores(
+                integer(n.get("str"), path),
+                integer(n.get("dex"), path),
+                integer(n.get("con"), path),
+                integer(n.get("int"), path),
+                integer(n.get("wis"), path),
+                integer(n.get("cha"), path));
+        if (scores.strength() == null && scores.dexterity() == null && scores.constitution() == null
+                && scores.intelligence() == null && scores.wisdom() == null && scores.charisma() == null) {
+            return null;
+        }
+        return scores;
+    }
+
+    private Summoning summoning(ObjectNode n, String path) {
+        String summonedByClass = textOrNull(n.get("summonedByClass"), path);
+        String summonedBySpell = textOrNull(n.get("summonedBySpell"), path);
+        Integer spellLevel = integer(n.get("summonedBySpellLevel"), path);
+        if (isEmpty(summonedByClass) && isEmpty(summonedBySpell) && spellLevel == null) {
+            return null;
+        }
+        return new Summoning(summonedByClass, summonedBySpell, spellLevel);
+    }
+
+    private Defenses defenses(ObjectNode n, String path) {
+        NullableList<Defense> resistances = defenses(n, "resist", path);
+        NullableList<Defense> immunities = defenses(n, "immune", path);
+        NullableList<Defense> vulnerabilities = defenses(n, "vulnerable", path);
+        NullableList<Defense> conditionImmunities = defenses(n, "conditionImmune", path);
+        if (resistances == null && immunities == null && vulnerabilities == null && conditionImmunities == null) {
+            return null;
+        }
+        return new Defenses(resistances, immunities, vulnerabilities, conditionImmunities);
+    }
+
+    private Features features(ObjectNode n, String path) {
+        List<Feature> traits = features(n.get("trait"), path + ".trait");
+        List<Feature> actions = features(n.get("action"), path + ".action");
+        List<Feature> bonusActions = features(n.get("bonus"), path + ".bonus");
+        List<Feature> reactions = features(n.get("reaction"), path + ".reaction");
+        List<Feature> legendaryActions = features(n.get("legendary"), path + ".legendary");
+        List<Feature> mythicActions = features(n.get("mythic"), path + ".mythic");
+        List<Feature> variants = features(n.get("variant"), path + ".variant");
+        String actionNote = textOrNull(n.get("actionNote"), path);
+        String reactionNote = textOrNull(n.get("reactionNote"), path);
+        List<String> legendaryHeader = strings(n.get("legendaryHeader"), path);
+        List<String> mythicHeader = strings(n.get("mythicHeader"), path);
+        List<String> reactionHeader = strings(n.get("reactionHeader"), path);
+
+        if (traits.isEmpty() && actions.isEmpty() && bonusActions.isEmpty() && reactions.isEmpty()
+                && legendaryActions.isEmpty() && mythicActions.isEmpty() && variants.isEmpty()
+                && isEmpty(actionNote) && isEmpty(reactionNote) && legendaryHeader.isEmpty()
+                && mythicHeader.isEmpty() && reactionHeader.isEmpty()) {
+            return null;
+        }
+
+        return new Features(traits, actions, bonusActions, reactions, legendaryActions, mythicActions,
+                variants, actionNote, reactionNote, legendaryHeader, mythicHeader, reactionHeader);
+    }
+
+    private Combat combat(ObjectNode n, String path) {
+        Integer legendaryActions = integer(n.get("legendaryActions"), path);
+        Integer legendaryActionsLair = integer(n.get("legendaryActionsLair"), path);
+        if (legendaryActions == null && legendaryActionsLair == null) {
+            return null;
+        }
+        return new Combat(legendaryActions, legendaryActionsLair);
+    }
+
+    private MonsterClassification classification(ObjectNode n, String path) {
+        return new MonsterClassification(
+                set(n.get("actionTags"), path),
+                set(n.get("damageTags"), path),
+                set(n.get("damageTagsLegendary"), path),
+                set(n.get("damageTagsSpell"), path),
+                set(n.get("conditionInflict"), path),
+                set(n.get("conditionInflictLegendary"), path),
+                set(n.get("conditionInflictSpell"), path),
+                set(n.get("languageTags"), path),
+                set(n.get("miscTags"), path),
+                set(n.get("senseTags"), path),
+                set(n.get("spellcastingTags"), path),
+                set(n.get("traitTags"), path));
+    }
+
+    private Catalog catalog(ObjectNode n, String path, RulesAvailability availability) {
+        Set<String> environments = set(n.get("environment"), path);
+        List<GearReference> gear = gear(n.get("gear"), path);
+        List<String> attachedItems = strings(n.get("attachedItems"), path);
+        Set<String> treasure = set(n.get("treasure"), path);
+        Boolean familiar = bool(n.get("familiar"), path);
+        Boolean reprinted = bool(n.get("isReprinted"), path);
+
+        if (environments.isEmpty() && gear.isEmpty() && attachedItems.isEmpty() && treasure.isEmpty()
+                && familiar == null && availability == null && reprinted == null) {
+            return null;
+        }
+
+        return new Catalog(environments, gear, attachedItems, treasure, familiar, availability, reprinted);
+    }
+
+    private boolean isEmpty(String value) {
+        return value == null || value.isEmpty();
     }
 
     private MonsterId id(MonsterIdentity identity) {
@@ -230,6 +375,10 @@ public final class MonsterMapper {
             sideTags = strings(n.get("sidekickTags"), p);
             sideType = textOrNull(n.get("sidekickType"), p);
         }
+        if (isEmpty(type) && choices.isEmpty() && tags.isEmpty() && isEmpty(swarm) && hidden == null
+                && sideTags.isEmpty() && isEmpty(sideType)) {
+            return null;
+        }
         return new CreatureType(type, choices, List.copyOf(tags), swarm, hidden, sideTags, sideType);
     }
 
@@ -266,7 +415,8 @@ public final class MonsterMapper {
             return new ShortName(n.asBoolean(), null);
         }
         if (n.isTextual()) {
-            return new ShortName(null, n.asText());
+            String value = n.asText();
+            return isEmpty(value) ? null : new ShortName(null, value);
         }
         fail(p, "expected boolean or string");
         return null;
@@ -280,7 +430,13 @@ public final class MonsterMapper {
             return new Initiative(n.intValue(), null, null);
         }
         if (n.isObject()) {
-            return new Initiative(integer(n.get("initiative"), p), integer(n.get("proficiency"), p), textOrNull(n.get("advantage"), p));
+            Integer value = integer(n.get("initiative"), p);
+            Integer proficiency = integer(n.get("proficiency"), p);
+            String advantage = textOrNull(n.get("advantage"), p);
+            if (value == null && proficiency == null && isEmpty(advantage)) {
+                return null;
+            }
+            return new Initiative(value, proficiency, advantage);
         }
         fail(p, "unsupported initiative value");
         return null;
@@ -313,7 +469,13 @@ public final class MonsterMapper {
         if (!n.isObject()) {
             fail(p, "expected object");
         }
-        return new HitPoints(decimal(n.get("average"), p), textOrNull(n.get("formula"), p), textOrNull(n.get("special"), p));
+        BigDecimal average = decimal(n.get("average"), p);
+        String formula = textOrNull(n.get("formula"), p);
+        String special = textOrNull(n.get("special"), p);
+        if (average == null && isEmpty(formula) && isEmpty(special)) {
+            return null;
+        }
+        return new HitPoints(average, formula, special);
     }
 
     private Movement movement(JsonNode n, String p) {
@@ -352,7 +514,16 @@ public final class MonsterMapper {
             }
         }
         JsonNode c = n.get("choose");
-        return new Movement(modes, bool(n.get("canHover"), p), List.copyOf(alt), integer(c == null ? null : c.get("amount"), p), strings(c == null ? null : c.get("from"), p), textOrNull(c == null ? null : c.get("note"), p), textOrNull(n.get("note"), p));
+        Boolean canHover = bool(n.get("canHover"), p);
+        Integer choiceAmount = integer(c == null ? null : c.get("amount"), p);
+        List<String> choiceModes = strings(c == null ? null : c.get("from"), p);
+        String choiceNote = textOrNull(c == null ? null : c.get("note"), p);
+        String note = textOrNull(n.get("note"), p);
+        if (modes.isEmpty() && canHover == null && alt.isEmpty() && choiceAmount == null
+                && choiceModes.isEmpty() && isEmpty(choiceNote) && isEmpty(note)) {
+            return null;
+        }
+        return new Movement(modes, canHover, List.copyOf(alt), choiceAmount, choiceModes, choiceNote, note);
     }
 
     private MovementValue movementValue(JsonNode n, String p) {
@@ -374,10 +545,20 @@ public final class MonsterMapper {
             return null;
         }
         if (n.isTextual() || n.isNumber()) {
-            return new ChallengeRating(n.asText(), null, null, null, null);
+            String value = n.asText();
+            return isEmpty(value) ? null : new ChallengeRating(value, null, null, null, null);
         }
         if (n.isObject()) {
-            return new ChallengeRating(textOrNull(n.get("cr"), p), textOrNull(n.get("coven"), p), textOrNull(n.get("lair"), p), integer(n.get("xp"), p), integer(n.get("lairXP"), p));
+            String value = textOrNull(n.get("cr"), p);
+            String covenValue = textOrNull(n.get("coven"), p);
+            String lairValue = textOrNull(n.get("lair"), p);
+            Integer experience = integer(n.get("xp"), p);
+            Integer lairExperience = integer(n.get("lairXP"), p);
+            if (isEmpty(value) && isEmpty(covenValue) && isEmpty(lairValue)
+                    && experience == null && lairExperience == null) {
+                return null;
+            }
+            return new ChallengeRating(value, covenValue, lairValue, experience, lairExperience);
         }
         fail(p, "unsupported challenge rating");
         return null;
@@ -444,7 +625,8 @@ public final class MonsterMapper {
             return new PassivePerception(n.intValue(), null);
         }
         if (n.isTextual()) {
-            return new PassivePerception(null, n.asText());
+            String value = n.asText();
+            return isEmpty(value) ? null : new PassivePerception(null, value);
         }
         fail(p, "unsupported passive perception");
         return null;
@@ -760,43 +942,21 @@ public final class MonsterMapper {
         return List.copyOf(out);
     }
 
-    private List<AlternateArt> altArt(JsonNode n, String p) {
-        if (n == null || n.isNull()) {
-            return List.of();
-        }
-        if (!n.isArray()) {
-            fail(p + ".altArt", "expected array");
-        }
-        List<AlternateArt> out = new ArrayList<>();
-        for (JsonNode x : n) {
-            out.add(new AlternateArt(textOrNull(x.get("name"), p), textOrNull(x.get("source"), p), integer(x.get("page"), p)));
-        }
-        return List.copyOf(out);
-    }
-
-    private SoundReference sound(JsonNode n, String p) {
-        if (n == null || n.isNull()) {
-            return null;
-        }
-        if (n.isTextual()) {
-            return new SoundReference(null, n.asText());
-        }
-        if (n.isObject()) {
-            return new SoundReference(textOrNull(n.get("type"), p), textOrNull(n.get("path"), p));
-        }
-        fail(p + ".soundClip", "unsupported sound reference");
-        return null;
-    }
-
     private Reference reference(JsonNode n, String p) {
         if (n == null || n.isNull()) {
             return null;
         }
         if (n.isObject()) {
-            return new Reference(textOrNull(n.get("name"), p), textOrNull(n.get("source"), p));
+            String name = textOrNull(n.get("name"), p);
+            String source = textOrNull(n.get("source"), p);
+            if (isEmpty(name) && isEmpty(source)) {
+                return null;
+            }
+            return new Reference(name, source);
         }
         if (n.isTextual()) {
-            return new Reference(n.asText(), null);
+            String name = n.asText();
+            return isEmpty(name) ? null : new Reference(name, null);
         }
         fail(p, "expected reference object or string");
         return null;
@@ -867,11 +1027,6 @@ public final class MonsterMapper {
             fail(p, "expected numeric value");
         }
         return n.decimalValue();
-    }
-
-    private Double decimalDouble(JsonNode n, String p) {
-        BigDecimal x = decimal(n, p);
-        return x == null ? null : x.doubleValue();
     }
 
     private Boolean bool(JsonNode n, String p) {

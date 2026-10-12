@@ -1,6 +1,7 @@
 package com.thedndpub.data.dto.monster;
 
-import com.thedndpub.data.dto.monster.MonsterDto.MonsterId;
+import com.thedndpub.data.dto.monster.identity.MonsterId;
+
 import com.thedndpub.data.dte.monster.MonsterIdentity;
 
 import java.util.List;
