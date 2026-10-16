@@ -48,12 +48,14 @@ public final class MonsterCatalog {
             ObjectMapper objectMapper,
             MonsterCopyResolver copyResolver,
             MonsterVersionExpander versionExpander,
-            MonsterMapper monsterMapper) {
+            MonsterMapper monsterMapper,
+            SourceRegistry sourceRegistry) {
         Objects.requireNonNull(applicationContext, "applicationContext");
         Objects.requireNonNull(objectMapper, "objectMapper");
         Objects.requireNonNull(copyResolver, "copyResolver");
         Objects.requireNonNull(versionExpander, "versionExpander");
         Objects.requireNonNull(monsterMapper, "monsterMapper");
+        Objects.requireNonNull(sourceRegistry, "sourceRegistry");
 
         List<MonsterSourceRecord> sourceRecords = loadSourceRecords(applicationContext, objectMapper);
         List<ResolvedMonster> copiedMonsters = copyResolver.resolveAll(sourceRecords);
@@ -70,10 +72,11 @@ public final class MonsterCatalog {
         List<MonsterSummaryDto> summaryRecords = new ArrayList<>(normalizedMonsters.size());
         for (NormalizedMonsterRecord record : normalizedMonsters) {
             MonsterDto monster = record.monster();
+            validateSourceReferences(monster, sourceRegistry);
             String id = monster.identity().id().value();
             String canonicalIdentity = canonicalIdentity(
                     monster.identity().name(),
-                    monster.identity().source().code());
+                    monster.identity().source().code().code());
 
             if (idIndex.putIfAbsent(id, monster) != null) {
                 throw new IllegalStateException("Duplicate monster ID in normalized catalog: " + id);
@@ -96,6 +99,25 @@ public final class MonsterCatalog {
         monstersByCanonicalIdentity = Collections.unmodifiableMap(new TreeMap<>(identityIndex));
         classificationsById = Collections.unmodifiableMap(new TreeMap<>(classificationIndex));
         summaries = List.copyOf(summaryRecords);
+    }
+
+    private static void validateSourceReferences(MonsterDto monster, SourceRegistry sourceRegistry) {
+        var source = monster.identity().source();
+        requireSource(sourceRegistry, source.code().code());
+        source.otherSources().forEach(reference -> requireSource(sourceRegistry, reference.identity().code()));
+        source.referenceSources().forEach(reference -> requireSource(sourceRegistry, reference.identity().code()));
+        source.reprintedAs().forEach(reference -> {
+            int separator = reference.lastIndexOf('|');
+            if (separator >= 0 && separator < reference.length() - 1) {
+                requireSource(sourceRegistry, reference.substring(separator + 1));
+            }
+        });
+    }
+
+    private static void requireSource(SourceRegistry registry, String sourceCode) {
+        if (registry.find(sourceCode) == null) {
+            throw new IllegalStateException("Source code is missing from Source Registry: " + sourceCode);
+        }
     }
 
     public Map<String, MonsterDto> monstersById() {

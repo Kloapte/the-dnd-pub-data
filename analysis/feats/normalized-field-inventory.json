@@ -1,0 +1,1707 @@
+{
+  "source": "src/main/resources/data/feats.json",
+  "rootCollections": {
+    "feat": {
+      "records": 305,
+      "uniqueNameSourceIdentities": 305
+    }
+  },
+  "observedPropertyPaths": {
+    "feat": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].name": {
+      "count": 305,
+      "types": {
+        "string": 305
+      }
+    },
+    "feat[].source": {
+      "count": 305,
+      "types": {
+        "string": 305
+      }
+    },
+    "feat[].page": {
+      "count": 303,
+      "types": {
+        "number": 303
+      }
+    },
+    "feat[].category": {
+      "count": 197,
+      "types": {
+        "string": 197
+      }
+    },
+    "feat[].prerequisite": {
+      "count": 224,
+      "types": {
+        "array": 224
+      }
+    },
+    "feat[].prerequisite[].campaign": {
+      "count": 31,
+      "types": {
+        "array": 31
+      }
+    },
+    "feat[].skillProficiencies": {
+      "count": 12,
+      "types": {
+        "array": 12
+      }
+    },
+    "feat[].skillProficiencies[].perception": {
+      "count": 2,
+      "types": {
+        "boolean": 2
+      }
+    },
+    "feat[].expertise": {
+      "count": 7,
+      "types": {
+        "array": 7
+      }
+    },
+    "feat[].expertise[].perception": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].senses": {
+      "count": 4,
+      "types": {
+        "array": 4
+      }
+    },
+    "feat[].senses[].blindsight": {
+      "count": 3,
+      "types": {
+        "number": 3
+      }
+    },
+    "feat[].entries": {
+      "count": 305,
+      "types": {
+        "array": 305
+      }
+    },
+    "feat[].entries[].type": {
+      "count": 490,
+      "types": {
+        "string": 490
+      }
+    },
+    "feat[].entries[].name": {
+      "count": 392,
+      "types": {
+        "string": 392
+      }
+    },
+    "feat[].entries[].entries": {
+      "count": 393,
+      "types": {
+        "array": 393
+      }
+    },
+    "feat[].hasFluffImages": {
+      "count": 44,
+      "types": {
+        "boolean": 44
+      }
+    },
+    "feat[].prerequisite[].exclusiveFeatCategory": {
+      "count": 13,
+      "types": {
+        "array": 13
+      }
+    },
+    "feat[].additionalSpells": {
+      "count": 86,
+      "types": {
+        "array": 86
+      }
+    },
+    "feat[].additionalSpells[].ability": {
+      "count": 119,
+      "types": {
+        "string": 40,
+        "object": 79
+      }
+    },
+    "feat[].additionalSpells[].prepared": {
+      "count": 58,
+      "types": {
+        "object": 58
+      }
+    },
+    "feat[].additionalSpells[].prepared._": {
+      "count": 48,
+      "types": {
+        "object": 43,
+        "array": 5
+      }
+    },
+    "feat[].additionalSpells[].prepared._.rest": {
+      "count": 1,
+      "types": {
+        "object": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared._.rest.1": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared._.rest.1[].choose": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].additionalSpells[].known": {
+      "count": 70,
+      "types": {
+        "object": 70
+      }
+    },
+    "feat[].additionalSpells[].known._": {
+      "count": 70,
+      "types": {
+        "array": 70
+      }
+    },
+    "feat[].additionalSpells[].known._[].choose": {
+      "count": 31,
+      "types": {
+        "string": 31
+      }
+    },
+    "feat[].reprintedAs": {
+      "count": 50,
+      "types": {
+        "array": 50
+      }
+    },
+    "feat[].prerequisite[].other": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].ability": {
+      "count": 178,
+      "types": {
+        "array": 178
+      }
+    },
+    "feat[].ability[].con": {
+      "count": 6,
+      "types": {
+        "number": 6
+      }
+    },
+    "feat[].additionalSpells[].innate": {
+      "count": 59,
+      "types": {
+        "object": 59
+      }
+    },
+    "feat[].additionalSpells[].innate._": {
+      "count": 59,
+      "types": {
+        "object": 59
+      }
+    },
+    "feat[].additionalSpells[].innate._.rest": {
+      "count": 1,
+      "types": {
+        "object": 1
+      }
+    },
+    "feat[].additionalSpells[].innate._.rest.1": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].additionalSpells[].innate._.rest.1[].choose": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].entries[].items": {
+      "count": 84,
+      "types": {
+        "array": 84
+      }
+    },
+    "feat[].entries[].caption": {
+      "count": 12,
+      "types": {
+        "string": 12
+      }
+    },
+    "feat[].entries[].colLabels": {
+      "count": 13,
+      "types": {
+        "array": 13
+      }
+    },
+    "feat[].entries[].colStyles": {
+      "count": 13,
+      "types": {
+        "array": 13
+      }
+    },
+    "feat[].entries[].rows": {
+      "count": 13,
+      "types": {
+        "array": 13
+      }
+    },
+    "feat[].entries[].entries[].type": {
+      "count": 19,
+      "types": {
+        "string": 19
+      }
+    },
+    "feat[].entries[].entries[].entries": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].entries[].entries[].entries[].type": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].entries[].entries[].entries[].name": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].entries[].entries[].entries[].entries": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].srd52": {
+      "count": 17,
+      "types": {
+        "boolean": 17
+      }
+    },
+    "feat[].basicRules2024": {
+      "count": 17,
+      "types": {
+        "boolean": 17
+      }
+    },
+    "feat[].prerequisite[].level": {
+      "count": 163,
+      "types": {
+        "number": 159,
+        "object": 4
+      }
+    },
+    "feat[].repeatable": {
+      "count": 5,
+      "types": {
+        "boolean": 5
+      }
+    },
+    "feat[].repeatableHidden": {
+      "count": 5,
+      "types": {
+        "boolean": 5
+      }
+    },
+    "feat[].ability[].choose": {
+      "count": 157,
+      "types": {
+        "object": 157
+      }
+    },
+    "feat[].ability[].choose.from": {
+      "count": 157,
+      "types": {
+        "array": 157
+      }
+    },
+    "feat[].ability[].choose.amount": {
+      "count": 44,
+      "types": {
+        "number": 44
+      }
+    },
+    "feat[].ability[].hidden": {
+      "count": 2,
+      "types": {
+        "boolean": 2
+      }
+    },
+    "feat[].ability[].choose.count": {
+      "count": 1,
+      "types": {
+        "number": 1
+      }
+    },
+    "feat[].prerequisite[].spellcasting2020": {
+      "count": 18,
+      "types": {
+        "boolean": 18
+      }
+    },
+    "feat[].additionalSpells[].prepared.s1": {
+      "count": 8,
+      "types": {
+        "array": 8
+      }
+    },
+    "feat[].additionalSpells[].prepared.s2": {
+      "count": 8,
+      "types": {
+        "array": 8
+      }
+    },
+    "feat[].additionalSpells[].prepared.s3": {
+      "count": 8,
+      "types": {
+        "array": 8
+      }
+    },
+    "feat[].additionalSpells[].prepared.s4": {
+      "count": 8,
+      "types": {
+        "array": 8
+      }
+    },
+    "feat[].additionalSpells[].prepared.s5": {
+      "count": 8,
+      "types": {
+        "array": 8
+      }
+    },
+    "feat[].ability[].cha": {
+      "count": 3,
+      "types": {
+        "number": 3
+      }
+    },
+    "feat[].prerequisite[].ability": {
+      "count": 35,
+      "types": {
+        "array": 35
+      }
+    },
+    "feat[].prerequisite[].ability[].cha": {
+      "count": 4,
+      "types": {
+        "number": 4
+      }
+    },
+    "feat[].prerequisite[].feat": {
+      "count": 45,
+      "types": {
+        "array": 45
+      }
+    },
+    "feat[].additionalSpells[].ability.choose": {
+      "count": 79,
+      "types": {
+        "array": 79
+      }
+    },
+    "feat[].additionalSpells[].innate._.daily": {
+      "count": 56,
+      "types": {
+        "object": 56
+      }
+    },
+    "feat[].additionalSpells[].innate._.daily.1e": {
+      "count": 19,
+      "types": {
+        "array": 19
+      }
+    },
+    "feat[].additionalSpells[].innate._.daily.1e[].choose": {
+      "count": 13,
+      "types": {
+        "string": 10,
+        "object": 3
+      }
+    },
+    "feat[].entries[].style": {
+      "count": 24,
+      "types": {
+        "string": 24
+      }
+    },
+    "feat[].entries[].items[].type": {
+      "count": 38,
+      "types": {
+        "string": 38
+      }
+    },
+    "feat[].entries[].items[].name": {
+      "count": 38,
+      "types": {
+        "string": 38
+      }
+    },
+    "feat[].entries[].items[].entries": {
+      "count": 38,
+      "types": {
+        "array": 38
+      }
+    },
+    "feat[].additionalSpells[].known._[].count": {
+      "count": 23,
+      "types": {
+        "number": 23
+      }
+    },
+    "feat[].prerequisite[].feature": {
+      "count": 12,
+      "types": {
+        "array": 12
+      }
+    },
+    "feat[].toolProficiencies": {
+      "count": 10,
+      "types": {
+        "array": 10
+      }
+    },
+    "feat[].toolProficiencies[].anyArtisansTool": {
+      "count": 2,
+      "types": {
+        "number": 2
+      }
+    },
+    "feat[].additionalSpells[].innate._.daily.1": {
+      "count": 37,
+      "types": {
+        "array": 37
+      }
+    },
+    "feat[].additionalSpells[].innate._.daily.1[].choose": {
+      "count": 32,
+      "types": {
+        "string": 32
+      }
+    },
+    "feat[].prerequisite[].ability[].str": {
+      "count": 8,
+      "types": {
+        "number": 8
+      }
+    },
+    "feat[].prerequisite[].ability[].dex": {
+      "count": 13,
+      "types": {
+        "number": 13
+      }
+    },
+    "feat[].traitTags": {
+      "count": 8,
+      "types": {
+        "array": 8
+      }
+    },
+    "feat[].prerequisite[].otherSummary": {
+      "count": 2,
+      "types": {
+        "object": 2
+      }
+    },
+    "feat[].prerequisite[].otherSummary.entry": {
+      "count": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "feat[].prerequisite[].otherSummary.entrySummary": {
+      "count": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "feat[].ability[].dex": {
+      "count": 6,
+      "types": {
+        "number": 6
+      }
+    },
+    "feat[].ability[].max": {
+      "count": 32,
+      "types": {
+        "number": 32
+      }
+    },
+    "feat[].immune": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "feat[].resist": {
+      "count": 11,
+      "types": {
+        "array": 11
+      }
+    },
+    "feat[].resist[].choose": {
+      "count": 5,
+      "types": {
+        "object": 5
+      }
+    },
+    "feat[].resist[].choose.from": {
+      "count": 5,
+      "types": {
+        "array": 5
+      }
+    },
+    "feat[].resist[].choose.count": {
+      "count": 1,
+      "types": {
+        "number": 1
+      }
+    },
+    "feat[].additionalSpells[].name": {
+      "count": 73,
+      "types": {
+        "string": 73
+      }
+    },
+    "feat[].additionalSpells[].prepared._.will": {
+      "count": 8,
+      "types": {
+        "array": 8
+      }
+    },
+    "feat[].additionalSpells[].prepared._.will[].choose": {
+      "count": 8,
+      "types": {
+        "string": 8
+      }
+    },
+    "feat[].additionalSpells[].prepared._.daily": {
+      "count": 42,
+      "types": {
+        "object": 42
+      }
+    },
+    "feat[].additionalSpells[].prepared._.daily.1": {
+      "count": 38,
+      "types": {
+        "array": 38
+      }
+    },
+    "feat[].additionalSpells[].prepared._.daily.1[].choose": {
+      "count": 9,
+      "types": {
+        "string": 9
+      }
+    },
+    "feat[].entries[].entries[].style": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].entries[].entries[].items": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].entries[].entries[].items[].type": {
+      "count": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "feat[].entries[].entries[].items[].name": {
+      "count": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "feat[].entries[].entries[].items[].entries": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "feat[].conditionImmune": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "feat[].entries[].entries[].caption": {
+      "count": 17,
+      "types": {
+        "string": 17
+      }
+    },
+    "feat[].entries[].entries[].colLabels": {
+      "count": 17,
+      "types": {
+        "array": 17
+      }
+    },
+    "feat[].entries[].entries[].colStyles": {
+      "count": 17,
+      "types": {
+        "array": 17
+      }
+    },
+    "feat[].entries[].entries[].rows": {
+      "count": 17,
+      "types": {
+        "array": 17
+      }
+    },
+    "feat[].skillProficiencies[].athletics": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].acrobatics": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].sleight of hand": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].stealth": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].arcana": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].history": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].investigation": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].nature": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].religion": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].animal handling": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].insight": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].medicine": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].survival": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].deception": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].intimidation": {
+      "count": 2,
+      "types": {
+        "boolean": 2
+      }
+    },
+    "feat[].skillProficiencies[].performance": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].skillProficiencies[].persuasion": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].expertise[].anyProficientSkill": {
+      "count": 5,
+      "types": {
+        "number": 5
+      }
+    },
+    "feat[].expertise[].intimidation": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].senses[].truesight": {
+      "count": 1,
+      "types": {
+        "number": 1
+      }
+    },
+    "feat[].prerequisite[].race": {
+      "count": 18,
+      "types": {
+        "array": 18
+      }
+    },
+    "feat[].prerequisite[].race[].name": {
+      "count": 22,
+      "types": {
+        "string": 22
+      }
+    },
+    "feat[].prerequisite[].spellcastingFeature": {
+      "count": 2,
+      "types": {
+        "boolean": 2
+      }
+    },
+    "feat[].toolProficiencies[].cook's utensils": {
+      "count": 2,
+      "types": {
+        "boolean": 2
+      }
+    },
+    "feat[].entries[].items[].entries[].type": {
+      "count": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "feat[].entries[].items[].entries[].caption": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].entries[].items[].entries[].colLabels": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "feat[].entries[].items[].entries[].colStyles": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "feat[].entries[].items[].entries[].rows": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "feat[].toolProficiencies[].choose": {
+      "count": 1,
+      "types": {
+        "object": 1
+      }
+    },
+    "feat[].toolProficiencies[].choose.from": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].toolProficiencies[].choose.count": {
+      "count": 1,
+      "types": {
+        "number": 1
+      }
+    },
+    "feat[].languageProficiencies": {
+      "count": 7,
+      "types": {
+        "array": 7
+      }
+    },
+    "feat[].languageProficiencies[].draconic": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].languageProficiencies[].any": {
+      "count": 5,
+      "types": {
+        "number": 5
+      }
+    },
+    "feat[].prerequisite[].race[].subrace": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "feat[].additionalSpells[].innate._.will": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "feat[].skillProficiencies[].any": {
+      "count": 2,
+      "types": {
+        "number": 2
+      }
+    },
+    "feat[].optionalfeatureProgression": {
+      "count": 4,
+      "types": {
+        "array": 4
+      }
+    },
+    "feat[].optionalfeatureProgression[].name": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "feat[].optionalfeatureProgression[].featureType": {
+      "count": 4,
+      "types": {
+        "array": 4
+      }
+    },
+    "feat[].optionalfeatureProgression[].progression": {
+      "count": 4,
+      "types": {
+        "object": 4
+      }
+    },
+    "feat[].optionalfeatureProgression[].progression.*": {
+      "count": 4,
+      "types": {
+        "number": 4
+      }
+    },
+    "feat[].prerequisite[].spellcasting": {
+      "count": 3,
+      "types": {
+        "boolean": 3
+      }
+    },
+    "feat[].languageProficiencies[].sylvan": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].prerequisite[].proficiency": {
+      "count": 12,
+      "types": {
+        "array": 12
+      }
+    },
+    "feat[].prerequisite[].proficiency[].weapon": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].srd": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].ability[].str": {
+      "count": 4,
+      "types": {
+        "number": 4
+      }
+    },
+    "feat[].weaponProficiencies": {
+      "count": 4,
+      "types": {
+        "array": 4
+      }
+    },
+    "feat[].weaponProficiencies[].firearms": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].languageProficiencies[].thieves' cant": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].toolProficiencies[].anyMusicalInstrument": {
+      "count": 2,
+      "types": {
+        "number": 2
+      }
+    },
+    "feat[].prerequisite[].proficiency[].armor": {
+      "count": 9,
+      "types": {
+        "string": 9
+      }
+    },
+    "feat[].armorProficiencies": {
+      "count": 6,
+      "types": {
+        "array": 6
+      }
+    },
+    "feat[].armorProficiencies[].heavy": {
+      "count": 2,
+      "types": {
+        "boolean": 2
+      }
+    },
+    "feat[].prerequisite[].level.level": {
+      "count": 4,
+      "types": {
+        "number": 4
+      }
+    },
+    "feat[].prerequisite[].level.class": {
+      "count": 4,
+      "types": {
+        "object": 4
+      }
+    },
+    "feat[].prerequisite[].level.class.name": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "feat[].prerequisite[].level.class.visible": {
+      "count": 4,
+      "types": {
+        "boolean": 4
+      }
+    },
+    "feat[].prerequisite[].background": {
+      "count": 4,
+      "types": {
+        "array": 4
+      }
+    },
+    "feat[].prerequisite[].background[].name": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "feat[].prerequisite[].background[].displayEntry": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "feat[].additionalSpells[].innate._.daily.1e[].choose.from": {
+      "count": 3,
+      "types": {
+        "array": 3
+      }
+    },
+    "feat[].additionalSpells[].innate._.daily.1e[].choose.count": {
+      "count": 3,
+      "types": {
+        "number": 3
+      }
+    },
+    "feat[].prerequisite[].ability[].wis": {
+      "count": 4,
+      "types": {
+        "number": 4
+      }
+    },
+    "feat[].ability[].int": {
+      "count": 3,
+      "types": {
+        "number": 3
+      }
+    },
+    "feat[].prerequisite[].ability[].int": {
+      "count": 6,
+      "types": {
+        "number": 6
+      }
+    },
+    "feat[].skillProficiencies[].choose": {
+      "count": 7,
+      "types": {
+        "object": 7
+      }
+    },
+    "feat[].skillProficiencies[].choose.from": {
+      "count": 7,
+      "types": {
+        "array": 7
+      }
+    },
+    "feat[].bonusSenses": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].bonusSenses[].darkvision": {
+      "count": 1,
+      "types": {
+        "number": 1
+      }
+    },
+    "feat[].armorProficiencies[].light": {
+      "count": 2,
+      "types": {
+        "boolean": 2
+      }
+    },
+    "feat[].armorProficiencies[].shield": {
+      "count": 2,
+      "types": {
+        "boolean": 2
+      }
+    },
+    "feat[].additionalSpells[].prepared._.daily.1e": {
+      "count": 4,
+      "types": {
+        "array": 4
+      }
+    },
+    "feat[].additionalSpells[].prepared._.daily.1e[].choose": {
+      "count": 6,
+      "types": {
+        "string": 6
+      }
+    },
+    "feat[]._versions": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "feat[]._versions[].name": {
+      "count": 9,
+      "types": {
+        "string": 9
+      }
+    },
+    "feat[]._versions[].source": {
+      "count": 9,
+      "types": {
+        "string": 9
+      }
+    },
+    "feat[]._versions[]._mod": {
+      "count": 9,
+      "types": {
+        "object": 9
+      }
+    },
+    "feat[]._versions[]._mod.entries": {
+      "count": 9,
+      "types": {
+        "array": 9
+      }
+    },
+    "feat[]._versions[]._mod.entries[].mode": {
+      "count": 18,
+      "types": {
+        "string": 18
+      }
+    },
+    "feat[]._versions[]._mod.entries[].replace": {
+      "count": 12,
+      "types": {
+        "string": 6,
+        "object": 6
+      }
+    },
+    "feat[]._versions[]._mod.entries[].items": {
+      "count": 12,
+      "types": {
+        "object": 6,
+        "array": 6
+      }
+    },
+    "feat[]._versions[]._mod.entries[].items.name": {
+      "count": 6,
+      "types": {
+        "string": 6
+      }
+    },
+    "feat[]._versions[]._mod.entries[].items.entries": {
+      "count": 6,
+      "types": {
+        "array": 6
+      }
+    },
+    "feat[]._versions[].additionalSpells": {
+      "count": 3,
+      "types": {
+        "array": 3
+      }
+    },
+    "feat[]._versions[].additionalSpells[].ability": {
+      "count": 3,
+      "types": {
+        "object": 3
+      }
+    },
+    "feat[]._versions[].additionalSpells[].ability.choose": {
+      "count": 3,
+      "types": {
+        "array": 3
+      }
+    },
+    "feat[]._versions[].additionalSpells[].innate": {
+      "count": 3,
+      "types": {
+        "object": 3
+      }
+    },
+    "feat[]._versions[].additionalSpells[].innate._": {
+      "count": 3,
+      "types": {
+        "object": 3
+      }
+    },
+    "feat[]._versions[].additionalSpells[].innate._.daily": {
+      "count": 3,
+      "types": {
+        "object": 3
+      }
+    },
+    "feat[]._versions[].additionalSpells[].innate._.daily.1": {
+      "count": 3,
+      "types": {
+        "array": 3
+      }
+    },
+    "feat[]._versions[].additionalSpells[].innate._.daily.1[].choose": {
+      "count": 3,
+      "types": {
+        "string": 3
+      }
+    },
+    "feat[]._versions[].additionalSpells[].known": {
+      "count": 3,
+      "types": {
+        "object": 3
+      }
+    },
+    "feat[]._versions[].additionalSpells[].known._": {
+      "count": 3,
+      "types": {
+        "array": 3
+      }
+    },
+    "feat[]._versions[].additionalSpells[].known._[].choose": {
+      "count": 3,
+      "types": {
+        "string": 3
+      }
+    },
+    "feat[]._versions[].additionalSpells[].known._[].count": {
+      "count": 3,
+      "types": {
+        "number": 3
+      }
+    },
+    "feat[].additionalSpells[].prepared.3": {
+      "count": 7,
+      "types": {
+        "object": 7
+      }
+    },
+    "feat[].additionalSpells[].prepared.3.daily": {
+      "count": 7,
+      "types": {
+        "object": 7
+      }
+    },
+    "feat[].additionalSpells[].prepared.3.daily.1": {
+      "count": 7,
+      "types": {
+        "array": 7
+      }
+    },
+    "feat[].additionalSpells[].expanded": {
+      "count": 12,
+      "types": {
+        "object": 12
+      }
+    },
+    "feat[].additionalSpells[].expanded.s1": {
+      "count": 12,
+      "types": {
+        "array": 12
+      }
+    },
+    "feat[].additionalSpells[].expanded.s2": {
+      "count": 12,
+      "types": {
+        "array": 12
+      }
+    },
+    "feat[].additionalSpells[].expanded.s3": {
+      "count": 12,
+      "types": {
+        "array": 12
+      }
+    },
+    "feat[].additionalSpells[].expanded.s4": {
+      "count": 12,
+      "types": {
+        "array": 12
+      }
+    },
+    "feat[].additionalSpells[].expanded.s5": {
+      "count": 12,
+      "types": {
+        "array": 12
+      }
+    },
+    "feat[].weaponProficiencies[].martial": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].armorProficiencies[].medium": {
+      "count": 2,
+      "types": {
+        "boolean": 2
+      }
+    },
+    "feat[].toolProficiencies[].poisoner's kit": {
+      "count": 2,
+      "types": {
+        "boolean": 2
+      }
+    },
+    "feat[].prerequisite[].featCategory": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].ability[].choose.entry": {
+      "count": 3,
+      "types": {
+        "string": 3
+      }
+    },
+    "feat[].toolProficiencies[].any": {
+      "count": 1,
+      "types": {
+        "number": 1
+      }
+    },
+    "feat[].prerequisite[].proficiency[].weaponGroup": {
+      "count": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "feat[].additionalSpells[].innate._.daily.1[].count": {
+      "count": 7,
+      "types": {
+        "number": 7
+      }
+    },
+    "feat[].savingThrowProficiencies": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "feat[].savingThrowProficiencies[].choose": {
+      "count": 2,
+      "types": {
+        "object": 2
+      }
+    },
+    "feat[].savingThrowProficiencies[].choose.from": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "feat[].additionalSpells[].prepared.1": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared.1[].choose": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared.1[].count": {
+      "count": 1,
+      "types": {
+        "number": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared.5": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared.5[].choose": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared.5[].count": {
+      "count": 1,
+      "types": {
+        "number": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared.9": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared.9[].choose": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared.9[].count": {
+      "count": 1,
+      "types": {
+        "number": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared.13": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared.13[].choose": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared.13[].count": {
+      "count": 1,
+      "types": {
+        "number": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared.17": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared.17[].choose": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared.17[].count": {
+      "count": 1,
+      "types": {
+        "number": 1
+      }
+    },
+    "feat[].additionalSpells[].innate._.ritual": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "feat[].skillToolLanguageProficiencies": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "feat[].skillToolLanguageProficiencies[].choose": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "feat[].skillToolLanguageProficiencies[].choose[].from": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "feat[].skillToolLanguageProficiencies[].choose[].count": {
+      "count": 2,
+      "types": {
+        "number": 2
+      }
+    },
+    "feat[].prerequisite[].ability[].con": {
+      "count": 1,
+      "types": {
+        "number": 1
+      }
+    },
+    "feat[].prerequisite[].race[].displayEntry": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[]._versions[]._mod.entries[].replace.index": {
+      "count": 6,
+      "types": {
+        "number": 6
+      }
+    },
+    "feat[]._versions[]._mod.entries[].names": {
+      "count": 6,
+      "types": {
+        "array": 6
+      }
+    },
+    "feat[].additionalSources": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "feat[].additionalSources[].source": {
+      "count": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "feat[].additionalSources[].page": {
+      "count": 2,
+      "types": {
+        "number": 2
+      }
+    },
+    "feat[].weaponProficiencies[].improvised": {
+      "count": 1,
+      "types": {
+        "boolean": 1
+      }
+    },
+    "feat[].additionalSpells[].prepared._[].choose": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].weaponProficiencies[].choose": {
+      "count": 1,
+      "types": {
+        "object": 1
+      }
+    },
+    "feat[].weaponProficiencies[].choose.fromFilter": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "feat[].weaponProficiencies[].choose.count": {
+      "count": 1,
+      "types": {
+        "number": 1
+      }
+    }
+  },
+  "sourceCodes": [
+    {
+      "code": "ABH",
+      "occurrences": 16,
+      "registryCovered": true
+    },
+    {
+      "code": "AU",
+      "occurrences": 29,
+      "registryCovered": true
+    },
+    {
+      "code": "BGG",
+      "occurrences": 8,
+      "registryCovered": true
+    },
+    {
+      "code": "BMT",
+      "occurrences": 1,
+      "registryCovered": true
+    },
+    {
+      "code": "DSotDQ",
+      "occurrences": 9,
+      "registryCovered": true
+    },
+    {
+      "code": "EEPC",
+      "occurrences": 1,
+      "registryCovered": true
+    },
+    {
+      "code": "EFA",
+      "occurrences": 29,
+      "registryCovered": true
+    },
+    {
+      "code": "ERLW",
+      "occurrences": 2,
+      "registryCovered": true
+    },
+    {
+      "code": "FRHoF",
+      "occurrences": 34,
+      "registryCovered": true
+    },
+    {
+      "code": "FTD",
+      "occurrences": 3,
+      "registryCovered": true
+    },
+    {
+      "code": "LFL",
+      "occurrences": 2,
+      "registryCovered": true
+    },
+    {
+      "code": "MTF",
+      "occurrences": 1,
+      "registryCovered": true
+    },
+    {
+      "code": "PHB",
+      "occurrences": 42,
+      "registryCovered": true
+    },
+    {
+      "code": "PSK",
+      "occurrences": 2,
+      "registryCovered": true
+    },
+    {
+      "code": "PSX",
+      "occurrences": 1,
+      "registryCovered": true
+    },
+    {
+      "code": "RHW",
+      "occurrences": 11,
+      "registryCovered": true
+    },
+    {
+      "code": "SCAG",
+      "occurrences": 1,
+      "registryCovered": true
+    },
+    {
+      "code": "SCC",
+      "occurrences": 2,
+      "registryCovered": true
+    },
+    {
+      "code": "SatO",
+      "occurrences": 7,
+      "registryCovered": true
+    },
+    {
+      "code": "TCE",
+      "occurrences": 15,
+      "registryCovered": true
+    },
+    {
+      "code": "XGE",
+      "occurrences": 15,
+      "registryCovered": true
+    },
+    {
+      "code": "XPHB",
+      "occurrences": 126,
+      "registryCovered": true
+    }
+  ],
+  "categoryCodes": {
+    "D": 22,
+    "G": 104,
+    "O": 35,
+    "F": 13,
+    "S": 13,
+    ":": 2,
+    "P": 1,
+    "E": 32,
+    "B": 32,
+    "R": 1
+  }
+}

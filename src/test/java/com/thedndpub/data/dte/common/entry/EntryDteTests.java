@@ -91,6 +91,10 @@ class EntryDteTests {
         TableEntryDte table = assertInstanceOf(TableEntryDte.class, mapper.readValue("{\"type\":\"table\",\"rows\":[[{\"type\":\"cell\",\"roll\":{\"exact\":4,\"pad\":true}}]]}", EntryDte.class));
         RollTableCellDte roll = assertInstanceOf(RollTableCellDte.class, table.rows().get(0).get(0));
         assertEquals(4, roll.roll().exact());
+        TableEntryDte numericTable = assertInstanceOf(TableEntryDte.class,
+                mapper.readValue("{\"type\":\"table\",\"rows\":[[1,\"result\"]]}", EntryDte.class));
+        assertEquals(1, assertInstanceOf(NumericTableCellDte.class,
+                numericTable.rows().get(0).get(0)).value());
         assertTrue(roll.roll().pad());
     }
 
@@ -98,7 +102,7 @@ class EntryDteTests {
     void rejectsUnknownTypesPropertiesAndMalformedCellsWithPaths() {
         assertBad("{\"type\":\"mystery\"}", "$entry");
         assertBad("{\"type\":\"entries\",\"entries\":[{\"type\":\"entries\",\"oops\":1}]}", "oops");
-        assertBad("{\"type\":\"table\",\"rows\":[[3]]}", "rows[0][0]");
+        assertBad("{\"type\":\"table\",\"rows\":[3]}", "rows[0]");
     }
 
     private void assertBad(String json, String path) {

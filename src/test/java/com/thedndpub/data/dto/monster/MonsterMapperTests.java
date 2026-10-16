@@ -186,7 +186,10 @@ class MonsterMapperTests {
     }
 
     private NormalizedMonsterRecord find(List<NormalizedMonsterRecord> all, String name, String source) {
-        return all.stream().filter(x -> x.monster().identity().name().equalsIgnoreCase(name) && x.monster().identity().source().code().equalsIgnoreCase(source)).findFirst().orElseThrow();
+        return all.stream().filter(x -> x.monster().identity().name().equalsIgnoreCase(name)
+                && x.monster().identity().source().code().code().equalsIgnoreCase(source))
+                .findFirst()
+                .orElseThrow();
     }
 
     private List<MonsterSourceRecord> loadCorpus() throws Exception {

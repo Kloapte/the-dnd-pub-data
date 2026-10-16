@@ -51,6 +51,7 @@ class MonsterDtoSerializationTests {
         assertTrue(json.has("identity"));
         assertFalse(json.has("defenses"));
         assertEquals("Goblin", json.path("identity").path("name").asText());
+        assertEquals("MM", json.path("identity").path("source").path("code").asText());
         assertFalse(json.path("identity").has("alignmentPrefix"));
         assertFalse(json.path("identity").path("source").has("page"));
         assertFalse(json.path("identity").has("aliases"));

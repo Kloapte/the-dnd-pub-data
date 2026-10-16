@@ -1,6 +1,19 @@
 package com.thedndpub.data.controllers;
 
 import com.thedndpub.data.services.MonsterNotFoundException;
+import com.thedndpub.data.services.LanguageNotFoundException;
+import com.thedndpub.data.services.PublicationNotFoundException;
+import com.thedndpub.data.services.SkillNotFoundException;
+import com.thedndpub.data.services.SenseNotFoundException;
+import com.thedndpub.data.services.ConditionNotFoundException;
+import com.thedndpub.data.services.DiseaseNotFoundException;
+import com.thedndpub.data.services.ActionNotFoundException;
+import com.thedndpub.data.services.FeatNotFoundException;
+import com.thedndpub.data.services.OptionalFeatureNotFoundException;
+import com.thedndpub.data.services.ItemNotFoundException;
+import com.thedndpub.data.services.MagicVariantNotFoundException;
+import com.thedndpub.data.services.BackgroundNotFoundException;
+import com.thedndpub.data.services.RaceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -10,8 +23,23 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 @RestControllerAdvice
 public class MonsterApiExceptionHandler {
-    @ExceptionHandler(MonsterNotFoundException.class)
-    public ProblemDetail handleNotFound(MonsterNotFoundException exception) {
+    @ExceptionHandler({
+            MonsterNotFoundException.class,
+            LanguageNotFoundException.class,
+            PublicationNotFoundException.class,
+            SkillNotFoundException.class,
+            SenseNotFoundException.class,
+            ConditionNotFoundException.class,
+            DiseaseNotFoundException.class,
+            ActionNotFoundException.class,
+            FeatNotFoundException.class,
+            OptionalFeatureNotFoundException.class,
+            ItemNotFoundException.class,
+            MagicVariantNotFoundException.class,
+            BackgroundNotFoundException.class,
+            RaceNotFoundException.class
+    })
+    public ProblemDetail handleNotFound(RuntimeException exception) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, exception.getMessage());
     }
 

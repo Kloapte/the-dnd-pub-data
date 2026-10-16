@@ -30,14 +30,16 @@ public final class EntryDeserializer extends JsonDeserializer<EntryDte> {
         }
         String type = string(node, "type", parser, path, true);
         return switch (type) {
-            case "entries", "itemSub", "variantSub", "variantInner" -> {
-                fields(node, Set.of("type", "name", "entry", "entries", "source", "page"), parser, path);
+            case "entries", "itemSub", "variantSub", "variantInner", "itemSpell" -> {
+                fields(node, Set.of("type", "name", "entry", "entries", "source", "page", "data"), parser, path);
                 yield new NamedEntryDte(type, string(node, "name", parser, path, false), string(node, "entry", parser, path, false), children(node, "entries", parser, path),
-                        string(node, "source", parser, path, false), integer(node, "page", parser, path));
+                        string(node, "source", parser, path, false), integer(node, "page", parser, path),
+                        entryMetadata(node.get("data"), parser, path + ".data"));
             }
             case "list" -> {
-                fields(node, Set.of("type", "style", "items"), parser, path);
-                yield new ListEntryDte(string(node, "style", parser, path, false), children(node, "items", parser, path));
+                fields(node, Set.of("type", "style", "columns", "items"), parser, path);
+                yield new ListEntryDte(string(node, "style", parser, path, false),
+                        integer(node, "columns", parser, path), children(node, "items", parser, path));
             }
             case "item" -> {
                 fields(node, Set.of("type", "name", "entry", "entries"), parser, path);
@@ -48,19 +50,29 @@ public final class EntryDeserializer extends JsonDeserializer<EntryDte> {
                 yield new ListItemEntryDte(string(node, "name", parser, path, false), entry, children(node, "entries", parser, path));
             }
             case "table" -> {
-                fields(node, Set.of("type", "caption", "colLabels", "colStyles", "rows", "source", "page"), parser, path);
+                fields(node, Set.of("type", "caption", "colLabels", "colStyles", "rows", "source", "page",
+                        "footnotes", "data", "srd52"), parser, path);
                 yield new TableEntryDte(string(node, "caption", parser, path, false), strings(node, "colLabels", parser, path),
                         strings(node, "colStyles", parser, path), EntryTableCellDeserializer.readRows(node.get("rows"), parser, path + ".rows"),
-                        string(node, "source", parser, path, false), integer(node, "page", parser, path));
+                        string(node, "source", parser, path, false), integer(node, "page", parser, path),
+                        strings(node, "footnotes", parser, path), tableMetadata(node.get("data"), parser, path + ".data"),
+                        bool(node, "srd52", parser, path));
             }
             case "quote" -> {
                 fields(node, Set.of("type", "by", "entries"), parser, path);
                 yield new QuoteEntryDte(string(node, "by", parser, path, false), children(node, "entries", parser, path));
             }
             case "inset" -> {
-                fields(node, Set.of("type", "name", "entries", "source", "page"), parser, path);
+                fields(node, Set.of("type", "name", "entries", "source", "page", "data"), parser, path);
                 yield new InsetEntryDte(string(node, "name", parser, path, false), children(node, "entries", parser, path),
-                        string(node, "source", parser, path, false), integer(node, "page", parser, path));
+                        string(node, "source", parser, path, false), integer(node, "page", parser, path),
+                        entryMetadata(node.get("data"), parser, path + ".data"));
+            }
+            case "section" -> {
+                fields(node, Set.of("type", "name", "id", "entries"), parser, path);
+                yield new SectionEntryDte(string(node, "name", parser, path, false),
+                        string(node, "id", parser, path, false),
+                        children(node, "entries", parser, path));
             }
             default -> throw error(parser, path, "unsupported entry type '" + type + "'");
         };
@@ -125,6 +137,49 @@ public final class EntryDeserializer extends JsonDeserializer<EntryDte> {
             throw error(p, path + "." + key, "must be an integer");
         }
         return v.intValue();
+    }
+
+    private static Boolean bool(JsonNode node, String key, JsonParser parser, String path) throws IOException {
+        JsonNode value = node.get(key);
+        if (value == null || value.isNull()) {
+            return null;
+        }
+        if (!value.isBoolean()) {
+            throw error(parser, path + "." + key, "must be a boolean");
+        }
+        return value.booleanValue();
+    }
+
+    private static EntryTableMetadataDte tableMetadata(JsonNode node, JsonParser parser, String path)
+            throws IOException {
+        if (node == null || node.isNull()) {
+            return null;
+        }
+        fields(node, Set.of("genTables"), parser, path);
+        JsonNode generated = node.get("genTables");
+        if (generated == null || generated.isNull()) {
+            return new EntryTableMetadataDte(null);
+        }
+        fields(generated, Set.of("reprintedAs", "tableInclude", "tableName"), parser, path + ".genTables");
+        List<String> reprintedAs = strings(generated, "reprintedAs", parser, path + ".genTables");
+        Boolean tableInclude = null;
+        JsonNode include = generated.get("tableInclude");
+        if (include != null && !include.isNull()) {
+            if (!include.isBoolean()) {
+                throw error(parser, path + ".genTables.tableInclude", "must be a boolean");
+            }
+            tableInclude = include.booleanValue();
+        }
+        String tableName = string(generated, "tableName", parser, path + ".genTables", false);
+        return new EntryTableMetadataDte(new EntryGeneratedTablesDte(reprintedAs, tableInclude, tableName));
+    }
+
+    private static EntryDataDte entryMetadata(JsonNode node, JsonParser parser, String path) throws IOException {
+        if (node == null || node.isNull()) {
+            return null;
+        }
+        fields(node, Set.of("isFeature", "overwrite"), parser, path);
+        return new EntryDataDte(bool(node, "isFeature", parser, path), string(node, "overwrite", parser, path, false));
     }
 
     static void fields(JsonNode node, Set<String> allowed, JsonParser p, String path) throws IOException {

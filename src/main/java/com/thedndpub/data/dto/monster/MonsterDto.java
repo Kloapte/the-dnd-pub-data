@@ -36,7 +36,6 @@ import com.thedndpub.data.dto.monster.identity.Reference;
 import com.thedndpub.data.dto.monster.identity.RulesAvailability;
 import com.thedndpub.data.dto.monster.identity.ShortName;
 import com.thedndpub.data.dto.monster.identity.Source;
-import com.thedndpub.data.dto.monster.identity.SourceReference;
 import com.thedndpub.data.dto.monster.identity.Summoning;
 import com.thedndpub.data.dto.monster.identity.TypeTag;
 import com.thedndpub.data.dto.monster.spellcasting.SpellLevel;

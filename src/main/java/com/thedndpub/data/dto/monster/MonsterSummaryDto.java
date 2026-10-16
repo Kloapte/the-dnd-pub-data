@@ -28,7 +28,7 @@ public record MonsterSummaryDto(MonsterId id, String name, String source, Set<St
                 ? Set.of()
                 : monster.catalog().environments();
         return new MonsterSummaryDto(monster.identity().id(), monster.identity().name(),
-                monster.identity().source().code(), editionIds,
+                monster.identity().source().code().code(), editionIds,
                 monster.statistics().challengeRating(), monster.identity().sizes(), monster.identity().creatureType(),
                 monster.identity().alignments(), monster.statistics().armorClasses().stream().findFirst().orElse(null),
                 monster.statistics().hitPoints(), environments);

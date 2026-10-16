@@ -1,0 +1,243 @@
+{
+  "source": "src/main/resources/data/actions.json",
+  "rootCollections": {
+    "action": {
+      "records": 48,
+      "uniqueNameSourceIdentities": 48
+    }
+  },
+  "observedPropertyPaths": {
+    "action": {
+      "occurrences": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "action[].name": {
+      "occurrences": 48,
+      "types": {
+        "string": 48
+      }
+    },
+    "action[].source": {
+      "occurrences": 48,
+      "types": {
+        "string": 48
+      }
+    },
+    "action[].page": {
+      "occurrences": 48,
+      "types": {
+        "number": 48
+      }
+    },
+    "action[].srd": {
+      "occurrences": 20,
+      "types": {
+        "boolean": 20
+      }
+    },
+    "action[].basicRules": {
+      "occurrences": 21,
+      "types": {
+        "boolean": 21
+      }
+    },
+    "action[].time": {
+      "occurrences": 47,
+      "types": {
+        "array": 47
+      }
+    },
+    "action[].time[].number": {
+      "occurrences": 44,
+      "types": {
+        "number": 44
+      }
+    },
+    "action[].time[].unit": {
+      "occurrences": 44,
+      "types": {
+        "string": 44
+      }
+    },
+    "action[].entries": {
+      "occurrences": 48,
+      "types": {
+        "array": 48
+      }
+    },
+    "action[].entries[].type": {
+      "occurrences": 11,
+      "types": {
+        "string": 11
+      }
+    },
+    "action[].entries[].name": {
+      "occurrences": 6,
+      "types": {
+        "string": 6
+      }
+    },
+    "action[].entries[].entries": {
+      "occurrences": 9,
+      "types": {
+        "array": 9
+      }
+    },
+    "action[].reprintedAs": {
+      "occurrences": 19,
+      "types": {
+        "array": 19
+      }
+    },
+    "action[].seeAlsoAction": {
+      "occurrences": 11,
+      "types": {
+        "array": 11
+      }
+    },
+    "action[].srd52": {
+      "occurrences": 17,
+      "types": {
+        "boolean": 17
+      }
+    },
+    "action[].entries[].entries[].type": {
+      "occurrences": 9,
+      "types": {
+        "string": 9
+      }
+    },
+    "action[].entries[].entries[].name": {
+      "occurrences": 7,
+      "types": {
+        "string": 7
+      }
+    },
+    "action[].entries[].entries[].entries": {
+      "occurrences": 7,
+      "types": {
+        "array": 7
+      }
+    },
+    "action[].fromVariant": {
+      "occurrences": 8,
+      "types": {
+        "string": 8
+      }
+    },
+    "action[].basicRules2024": {
+      "occurrences": 5,
+      "types": {
+        "boolean": 5
+      }
+    },
+    "action[].reprintedAs[].uid": {
+      "occurrences": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "action[].reprintedAs[].tag": {
+      "occurrences": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "action[].entries[].entries[].caption": {
+      "occurrences": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "action[].entries[].entries[].colLabels": {
+      "occurrences": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "action[].entries[].entries[].colStyles": {
+      "occurrences": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "action[].entries[].entries[].rows": {
+      "occurrences": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "action[].entries[].entries[].items": {
+      "occurrences": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "action[].entries[].caption": {
+      "occurrences": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "action[].entries[].colLabels": {
+      "occurrences": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "action[].entries[].colStyles": {
+      "occurrences": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "action[].entries[].rows": {
+      "occurrences": 2,
+      "types": {
+        "array": 2
+      }
+    }
+  },
+  "entryTypes": [
+    "entries",
+    "inset",
+    "list",
+    "table"
+  ],
+  "markupTagCounts": {
+    "action": 16,
+    "subclassFeature": 1,
+    "status": 11,
+    "book": 8,
+    "variantrule": 30,
+    "skill": 48,
+    "quickref": 1,
+    "condition": 13,
+    "table": 1,
+    "item": 4,
+    "note": 1,
+    "dc": 2,
+    "spell": 1,
+    "dice": 1
+  },
+  "sourceCodes": [
+    {
+      "code": "DMG",
+      "registryCovered": true
+    },
+    {
+      "code": "PHB",
+      "registryCovered": true
+    },
+    {
+      "code": "XGE",
+      "registryCovered": true
+    },
+    {
+      "code": "XPHB",
+      "registryCovered": true
+    }
+  ]
+}

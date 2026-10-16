@@ -1,0 +1,1072 @@
+﻿{
+    "sources":  [
+                    {
+                        "code":  "AAG",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "AATM",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "ABH",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "AI",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "AitFR-AVT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "AitFR-DN",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "AitFR-FCD",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "AitFR-ISF",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "AitFR-THP",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "AL",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "AU",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "AUD",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "AWM",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "AZfyT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "BAM",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "BGDIA",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "BGG",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "BMT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "BQDD",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "BQGT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "CaBoMP",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "CM",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "CoA",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "CoS",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "CRCotN",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DD",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DIP",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DitLCoT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DMG",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DMTCRG",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DoD",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DoSI",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DrDe",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DrDe-ACfaS",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DrDe-BD",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DrDe-BtS",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DrDe-DaS",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DrDe-DotSC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DrDe-FWtVC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DrDe-SD",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DrDe-TDoN",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DrDe-TFV",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DrDe-TWoO",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "DSotDQ",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "EEPC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "EFA",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "EET",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "EFR",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "EGW",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "ERLW",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "ESK",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "FFotR",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "FRAiF",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "FRHoF",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "FS",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "FTD",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "GGR",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "GoS",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "GotSF",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "HAT-LMI",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "HAT-TG",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "HBTD",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "HF",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "HFFotM",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "HFLotT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "HFStCM",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "HftT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "HoL",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "HotB",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "HotDQ",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "IDRotF",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "IMR",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "JttRC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "KftGV",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "KKW",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "LFL",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "LK",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "LLK",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "LMoP",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "LoX",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "LR",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "LRDT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "MaBJoV",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "MCV1SC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "MCV2DC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "MCV3MC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "MCV4EC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "MFF",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "MGELFT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "MisMV1",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "MM",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "MOT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "MPMM",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "MPP",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "MTF",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "NF",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "NRH-ASS",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "NRH-AT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "NRH-AVitW",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "NRH-AWoL",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "NRH-CoI",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "NRH-TCMC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "NRH-TLT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "OGA",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "OotA",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "OoW",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "PaBTSO",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "PaF",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "PHB",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "PotA",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "PSA",
+                        "aliases":  [
+                                        "PS-A"
+                                    ]
+                    },
+                    {
+                        "code":  "PSD",
+                        "aliases":  [
+                                        "PS-D"
+                                    ]
+                    },
+                    {
+                        "code":  "PSI",
+                        "aliases":  [
+                                        "PS-I"
+                                    ]
+                    },
+                    {
+                        "code":  "PSK",
+                        "aliases":  [
+                                        "PS-K"
+                                    ]
+                    },
+                    {
+                        "code":  "PSX",
+                        "aliases":  [
+                                        "PS-X"
+                                    ]
+                    },
+                    {
+                        "code":  "PSZ",
+                        "aliases":  [
+                                        "PS-Z"
+                                    ]
+                    },
+                    {
+                        "code":  "QftIS",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "RHW",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "RMBRE",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "RMR",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "RoT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "RoTOS",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "RtG",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "RWG",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "SAC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "SADS",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "SatO",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "SCAG",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "SCC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "SCC-ARiR",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "SCC-CK",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "SCC-HfMT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "SCC-TMM",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "ScoEE",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "Screen",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "ScreenDungeonKit",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "ScreenSpelljammer",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "ScreenWildernessKit",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "SDW",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "SjA",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "SKT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "SLW",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "TCE",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "TD",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "TftYP",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "TftYP-AtG",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "TftYP-DiT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "TftYP-TFoF",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "TftYP-THSoT",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "TftYP-ToH",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "TftYP-TSC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "TftYP-WPM",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "TLK",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "ToA",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "ToD",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "ToFW",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "ToR",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "TTP",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "US",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "UtHftLH",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "VD",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "VEoR",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "VGM",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "VNotEE",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "VRGR",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "WBtW",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "WDH",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "WDMM",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "WttHC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "XDMG",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "XGE",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "XMM",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "XMtS",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "XPHB",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "XSAC",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "XScreen",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "XScreenRHW",
+                        "aliases":  [
+
+                                    ]
+                    }
+                ]
+}

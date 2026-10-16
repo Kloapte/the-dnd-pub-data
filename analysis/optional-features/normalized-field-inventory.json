@@ -1,0 +1,412 @@
+{
+  "rootCollection": "optionalfeature",
+  "rootRecords": 221,
+  "fieldPaths": {
+    "/name": 221,
+    "/source": 221,
+    "/page": 221,
+    "/srd": 49,
+    "/reprintedAs": 84,
+    "/featureType": 221,
+    "/prerequisite": 95,
+    "/prerequisite[]/spell": 10,
+    "/entries": 221,
+    "/srd52": 38,
+    "/prerequisite[]/spell[]/choose": 3,
+    "/prerequisite[]/spell[]/entry": 3,
+    "/prerequisite[]/spell[]/entrySummary": 3,
+    "/prerequisite[]/level": 71,
+    "/prerequisite[]/level/level": 71,
+    "/prerequisite[]/level/class": 71,
+    "/prerequisite[]/level/class/name": 71,
+    "/prerequisite[]/level/class/source": 30,
+    "/prerequisite[]/level/class/visibleStats": 23,
+    "/entries[]/type": 18,
+    "/entries[]/entries": 6,
+    "/entries[]/entries[]/type": 11,
+    "/entries[]/entries[]/name": 11,
+    "/entries[]/entries[]/entries": 11,
+    "/isClassFeatureVariant": 25,
+    "/consumes": 79,
+    "/consumes/name": 79,
+    "/prerequisite[]/item": 15,
+    "/entries[]/items": 8,
+    "/otherSources": 17,
+    "/otherSources[]/source": 21,
+    "/otherSources[]/page": 21,
+    "/reprintedAs[]/uid": 19,
+    "/reprintedAs[]/tag": 19,
+    "/additionalSpells": 54,
+    "/additionalSpells[]/innate": 50,
+    "/additionalSpells[]/innate/_": 50,
+    "/prerequisite[]/pact": 15,
+    "/skillProficiencies": 1,
+    "/skillProficiencies[]/deception": 1,
+    "/skillProficiencies[]/persuasion": 1,
+    "/additionalSpells[]/innate/_/daily": 12,
+    "/additionalSpells[]/innate/_/daily/1e": 12,
+    "/additionalSpells[]/ability": 19,
+    "/additionalSpells[]/known": 4,
+    "/additionalSpells[]/known/_": 4,
+    "/additionalSpells[]/known/_[]/choose": 4,
+    "/additionalSpells[]/known/_[]/count": 4,
+    "/senses": 3,
+    "/senses[]/blindsight": 1,
+    "/additionalSpells[]/innate/_/ritual": 3,
+    "/additionalSpells[]/innate/_/ritual[]/choose": 1,
+    "/additionalSpells[]/innate/_/ritual[]/count": 1,
+    "/prerequisite[]/level/subclass": 11,
+    "/prerequisite[]/level/subclass/name": 11,
+    "/additionalSpells[]/innate/_/resource": 12,
+    "/additionalSpells[]/innate/_/resource/6": 2,
+    "/additionalSpells[]/resourceName": 12,
+    "/prerequisite[]/otherSummary": 4,
+    "/prerequisite[]/otherSummary/entry": 4,
+    "/prerequisite[]/otherSummary/entrySummary": 4,
+    "/additionalSpells[]/innate/_/resource/3": 2,
+    "/prerequisite[]/optionalfeature": 6,
+    "/additionalSpells[]/innate/_/resource/5": 2,
+    "/consumes/amount": 8,
+    "/additionalSpells[]/innate/_/resource/2": 3,
+    "/additionalSpells[]/innate/_/resource/4": 3,
+    "/prerequisite[]/level/subclass/source": 2,
+    "/hasFluffImages": 1,
+    "/featProgression": 1,
+    "/featProgression[]/name": 1,
+    "/featProgression[]/category": 1,
+    "/featProgression[]/progression": 1,
+    "/featProgression[]/progression/*": 1,
+    "/additionalSpells[]/prepared": 1,
+    "/additionalSpells[]/prepared/_": 1,
+    "/additionalSpells[]/prepared/_[]/choose": 1,
+    "/additionalSpells[]/prepared/_[]/count": 1,
+    "/entries[]/caption": 4,
+    "/entries[]/colLabels": 4,
+    "/entries[]/colStyles": 4,
+    "/entries[]/rows": 4,
+    "/senses[]/darkvision": 1,
+    "/optionalfeatureProgression": 1,
+    "/optionalfeatureProgression[]/name": 1,
+    "/optionalfeatureProgression[]/featureType": 1,
+    "/optionalfeatureProgression[]/progression": 1,
+    "/optionalfeatureProgression[]/progression/*": 1,
+    "/consumes/amountMin": 1,
+    "/consumes/amountMax": 1,
+    "/senses[]/truesight": 1
+  },
+  "types": {
+    "/name": {
+      "string": 221
+    },
+    "/source": {
+      "string": 221
+    },
+    "/page": {
+      "number": 221
+    },
+    "/srd": {
+      "boolean": 49
+    },
+    "/reprintedAs": {
+      "array": 84
+    },
+    "/featureType": {
+      "array": 221
+    },
+    "/prerequisite": {
+      "array": 95
+    },
+    "/prerequisite[]/spell": {
+      "array": 10
+    },
+    "/entries": {
+      "array": 221
+    },
+    "/srd52": {
+      "boolean": 38
+    },
+    "/prerequisite[]/spell[]/choose": {
+      "string": 3
+    },
+    "/prerequisite[]/spell[]/entry": {
+      "string": 3
+    },
+    "/prerequisite[]/spell[]/entrySummary": {
+      "string": 3
+    },
+    "/prerequisite[]/level": {
+      "object": 71
+    },
+    "/prerequisite[]/level/level": {
+      "number": 71
+    },
+    "/prerequisite[]/level/class": {
+      "object": 71
+    },
+    "/prerequisite[]/level/class/name": {
+      "string": 71
+    },
+    "/prerequisite[]/level/class/source": {
+      "string": 30
+    },
+    "/prerequisite[]/level/class/visibleStats": {
+      "boolean": 23
+    },
+    "/entries[]/type": {
+      "string": 18
+    },
+    "/entries[]/entries": {
+      "array": 6
+    },
+    "/entries[]/entries[]/type": {
+      "string": 11
+    },
+    "/entries[]/entries[]/name": {
+      "string": 11
+    },
+    "/entries[]/entries[]/entries": {
+      "array": 11
+    },
+    "/isClassFeatureVariant": {
+      "boolean": 25
+    },
+    "/consumes": {
+      "object": 79
+    },
+    "/consumes/name": {
+      "string": 79
+    },
+    "/prerequisite[]/item": {
+      "array": 15
+    },
+    "/entries[]/items": {
+      "array": 8
+    },
+    "/otherSources": {
+      "array": 17
+    },
+    "/otherSources[]/source": {
+      "string": 21
+    },
+    "/otherSources[]/page": {
+      "number": 21
+    },
+    "/reprintedAs[]/uid": {
+      "string": 19
+    },
+    "/reprintedAs[]/tag": {
+      "string": 19
+    },
+    "/additionalSpells": {
+      "array": 54
+    },
+    "/additionalSpells[]/innate": {
+      "object": 50
+    },
+    "/additionalSpells[]/innate/_": {
+      "array": 23,
+      "object": 27
+    },
+    "/prerequisite[]/pact": {
+      "string": 15
+    },
+    "/skillProficiencies": {
+      "array": 1
+    },
+    "/skillProficiencies[]/deception": {
+      "boolean": 1
+    },
+    "/skillProficiencies[]/persuasion": {
+      "boolean": 1
+    },
+    "/additionalSpells[]/innate/_/daily": {
+      "object": 12
+    },
+    "/additionalSpells[]/innate/_/daily/1e": {
+      "array": 12
+    },
+    "/additionalSpells[]/ability": {
+      "string": 19
+    },
+    "/additionalSpells[]/known": {
+      "object": 4
+    },
+    "/additionalSpells[]/known/_": {
+      "array": 4
+    },
+    "/additionalSpells[]/known/_[]/choose": {
+      "string": 4
+    },
+    "/additionalSpells[]/known/_[]/count": {
+      "number": 4
+    },
+    "/senses": {
+      "array": 3
+    },
+    "/senses[]/blindsight": {
+      "number": 1
+    },
+    "/additionalSpells[]/innate/_/ritual": {
+      "array": 3
+    },
+    "/additionalSpells[]/innate/_/ritual[]/choose": {
+      "string": 1
+    },
+    "/additionalSpells[]/innate/_/ritual[]/count": {
+      "number": 1
+    },
+    "/prerequisite[]/level/subclass": {
+      "object": 11
+    },
+    "/prerequisite[]/level/subclass/name": {
+      "string": 11
+    },
+    "/additionalSpells[]/innate/_/resource": {
+      "object": 12
+    },
+    "/additionalSpells[]/innate/_/resource/6": {
+      "array": 2
+    },
+    "/additionalSpells[]/resourceName": {
+      "string": 12
+    },
+    "/prerequisite[]/otherSummary": {
+      "object": 4
+    },
+    "/prerequisite[]/otherSummary/entry": {
+      "string": 4
+    },
+    "/prerequisite[]/otherSummary/entrySummary": {
+      "string": 4
+    },
+    "/additionalSpells[]/innate/_/resource/3": {
+      "array": 2
+    },
+    "/prerequisite[]/optionalfeature": {
+      "array": 6
+    },
+    "/additionalSpells[]/innate/_/resource/5": {
+      "array": 2
+    },
+    "/consumes/amount": {
+      "number": 8
+    },
+    "/additionalSpells[]/innate/_/resource/2": {
+      "array": 3
+    },
+    "/additionalSpells[]/innate/_/resource/4": {
+      "array": 3
+    },
+    "/prerequisite[]/level/subclass/source": {
+      "string": 2
+    },
+    "/hasFluffImages": {
+      "boolean": 1
+    },
+    "/featProgression": {
+      "array": 1
+    },
+    "/featProgression[]/name": {
+      "string": 1
+    },
+    "/featProgression[]/category": {
+      "array": 1
+    },
+    "/featProgression[]/progression": {
+      "object": 1
+    },
+    "/featProgression[]/progression/*": {
+      "number": 1
+    },
+    "/additionalSpells[]/prepared": {
+      "object": 1
+    },
+    "/additionalSpells[]/prepared/_": {
+      "array": 1
+    },
+    "/additionalSpells[]/prepared/_[]/choose": {
+      "string": 1
+    },
+    "/additionalSpells[]/prepared/_[]/count": {
+      "number": 1
+    },
+    "/entries[]/caption": {
+      "string": 4
+    },
+    "/entries[]/colLabels": {
+      "array": 4
+    },
+    "/entries[]/colStyles": {
+      "array": 4
+    },
+    "/entries[]/rows": {
+      "array": 4
+    },
+    "/senses[]/darkvision": {
+      "number": 1
+    },
+    "/optionalfeatureProgression": {
+      "array": 1
+    },
+    "/optionalfeatureProgression[]/name": {
+      "string": 1
+    },
+    "/optionalfeatureProgression[]/featureType": {
+      "array": 1
+    },
+    "/optionalfeatureProgression[]/progression": {
+      "object": 1
+    },
+    "/optionalfeatureProgression[]/progression/*": {
+      "number": 1
+    },
+    "/consumes/amountMin": {
+      "number": 1
+    },
+    "/consumes/amountMax": {
+      "number": 1
+    },
+    "/senses[]/truesight": {
+      "number": 1
+    }
+  },
+  "primarySourceCounts": {
+    "PHB": 82,
+    "XPHB": 58,
+    "TCE": 47,
+    "XGE": 22,
+    "AU": 8,
+    "EFA": 4
+  },
+  "featureTypeCounts": {
+    "EI": 82,
+    "MV:B": 43,
+    "AI": 16,
+    "FS:F": 11,
+    "FS:R": 7,
+    "AS": 16,
+    "FS:P": 7,
+    "ED": 17,
+    "MM": 20,
+    "RP": 4,
+    "RN": 6,
+    "FS:B": 2,
+    "PB": 4
+  },
+  "prerequisiteFieldCounts": {
+    "spell": 10,
+    "level": 71,
+    "item": 15,
+    "pact": 15,
+    "otherSummary": 4,
+    "optionalfeature": 6
+  },
+  "referencedSourceCounts": {
+    "XPHB": 69,
+    "PHB": 8,
+    "AU": 8,
+    "ERLW": 11,
+    "EFA": 7,
+    "XGE": 2
+  }
+}

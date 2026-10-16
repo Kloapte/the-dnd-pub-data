@@ -21,6 +21,9 @@ public final class EntryTableCellDeserializer extends JsonDeserializer<EntryTabl
         if (node.isTextual()) {
             return new TextTableCellDte(node.textValue());
         }
+        if (node.isIntegralNumber()) {
+            return new NumericTableCellDte(node.intValue());
+        }
         if (!node.isObject()) {
             throw EntryDeserializer.error(parser, path, "must be a string or cell object");
         }
@@ -29,14 +32,18 @@ public final class EntryTableCellDeserializer extends JsonDeserializer<EntryTabl
             throw EntryDeserializer.error(parser, path, "unsupported table cell type '" + type + "'");
         }
         if (type.equals("cell") && node.has("roll")) {
-            EntryDeserializer.fields(node, Set.of("type", "roll"), parser, path);
+            EntryDeserializer.fields(node, Set.of("type", "roll", "entry"), parser, path);
             JsonNode roll = node.get("roll");
             if (!roll.isObject()) {
                 throw EntryDeserializer.error(parser, path + ".roll", "must be an object");
             }
             EntryDeserializer.fields(roll, Set.of("exact", "min", "max", "pad"), parser, path + ".roll");
+            JsonNode entry = node.get("entry");
+            EntryDte parsedEntry = entry == null || entry.isNull() ? null
+                    : EntryDeserializer.read(entry, parser, path + ".entry");
             return new RollTableCellDte(type, new TableRollDte(integer(roll, "exact", parser, path + ".roll"),
-                    integer(roll, "min", parser, path + ".roll"), integer(roll, "max", parser, path + ".roll"), bool(roll, "pad", parser, path + ".roll")));
+                    integer(roll, "min", parser, path + ".roll"), integer(roll, "max", parser, path + ".roll"),
+                    bool(roll, "pad", parser, path + ".roll")), parsedEntry);
         }
         EntryDeserializer.fields(node, Set.of("type", "name", "entries"), parser, path);
         JsonNode entries = node.get("entries");

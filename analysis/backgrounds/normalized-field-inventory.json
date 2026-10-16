@@ -1,0 +1,2980 @@
+{
+  "rootKeys": [
+    "_meta",
+    "background"
+  ],
+  "collections": {
+    "background": {
+      "count": 171
+    }
+  },
+  "propertyPaths": {
+    "_meta.internalCopies": {
+      "count": 2,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1
+      ]
+    },
+    "background": {
+      "count": 1,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        171
+      ]
+    },
+    "background[].name": {
+      "count": 171,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].source": {
+      "count": 171,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].page": {
+      "count": 169,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].edition": {
+      "count": 70,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].ability": {
+      "count": 140,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[].ability[].choose": {
+      "count": 140,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[].ability[].choose.weighted": {
+      "count": 140,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[].ability[].choose.weighted.from": {
+      "count": 280,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(3)",
+        3,
+        "array(3)"
+      ]
+    },
+    "background[].ability[].choose.weighted.weights": {
+      "count": 280,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(3)"
+      ]
+    },
+    "background[].feats": {
+      "count": 168,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].feats[].aberrant dragonmark|efa": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies": {
+      "count": 292,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].skillProficiencies[].history": {
+      "count": 21,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].intimidation": {
+      "count": 13,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies": {
+      "count": 248,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].toolProficiencies[].disguise kit": {
+      "count": 16,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].startingEquipment": {
+      "count": 288,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(2)"
+      ]
+    },
+    "background[].startingEquipment[].a": {
+      "count": 106,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(5)",
+        5,
+        "array(1)"
+      ]
+    },
+    "background[].startingEquipment[].a[].value": {
+      "count": 36,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].startingEquipment[].b": {
+      "count": 106,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].startingEquipment[].b[].value": {
+      "count": 36,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].entries": {
+      "count": 290,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(3)"
+      ]
+    },
+    "background[].entries[].type": {
+      "count": 363,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].entries[].style": {
+      "count": 145,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].entries[].items": {
+      "count": 290,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(5)",
+        5,
+        "array(3)"
+      ]
+    },
+    "background[].entries[].items[].type": {
+      "count": 609,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].entries[].items[].name": {
+      "count": 609,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].entries[].items[].entry": {
+      "count": 606,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].hasFluff": {
+      "count": 170,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].hasFluffImages": {
+      "count": 95,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].srd": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].basicRules": {
+      "count": 7,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].reprintedAs": {
+      "count": 26,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].skillProficiencies[].insight": {
+      "count": 27,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].religion": {
+      "count": 13,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].languageProficiencies": {
+      "count": 112,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].languageProficiencies[].anyStandard": {
+      "count": 49,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].startingEquipment[]._": {
+      "count": 150,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(5)",
+        5,
+        "array(6)"
+      ]
+    },
+    "background[].startingEquipment[]._[].item": {
+      "count": 100,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].startingEquipment[]._[].displayName": {
+      "count": 34,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].startingEquipment[]._[].special": {
+      "count": 92,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].startingEquipment[]._[].quantity": {
+      "count": 5,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].startingEquipment[]._[].containsValue": {
+      "count": 69,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].startingEquipment[].a[].item": {
+      "count": 25,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].startingEquipment[].a[].displayName": {
+      "count": 30,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].startingEquipment[].b[].special": {
+      "count": 11,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].entries[].name": {
+      "count": 216,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].entries[].entries": {
+      "count": 432,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(5)"
+      ]
+    },
+    "background[].entries[].data": {
+      "count": 75,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[].entries[].data.isFeature": {
+      "count": 75,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].entries[].entries[].type": {
+      "count": 274,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].entries[].entries[].colLabels": {
+      "count": 516,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[].entries[].entries[].colStyles": {
+      "count": 516,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[].entries[].entries[].rows": {
+      "count": 516,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(8)",
+        8,
+        "array(6)"
+      ]
+    },
+    "background[].entries[].entries[].rows[]": {
+      "count": 1810,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        2,
+        2,
+        2
+      ]
+    },
+    "background[].srd52": {
+      "count": 4,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].basicRules2024": {
+      "count": 4,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].feats[].magic initiate; cleric|xphb": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].calligrapher's supplies": {
+      "count": 7,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].startingEquipment[].A": {
+      "count": 68,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(6)",
+        6,
+        "array(4)"
+      ]
+    },
+    "background[].startingEquipment[].A[].item": {
+      "count": 97,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].startingEquipment[].A[].displayName": {
+      "count": 22,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].startingEquipment[].A[].quantity": {
+      "count": 23,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].startingEquipment[].A[].value": {
+      "count": 33,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].startingEquipment[].B": {
+      "count": 68,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].startingEquipment[].B[].value": {
+      "count": 34,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].feats[].arcane infiltrator|au": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].arcana": {
+      "count": 13,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].sleight of hand": {
+      "count": 9,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].thieves' tools": {
+      "count": 14,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].feats[].skilled|xphb": {
+      "count": 4,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].survival": {
+      "count": 24,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].cartographer's tools": {
+      "count": 5,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].choose": {
+      "count": 11,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[].toolProficiencies[].choose.from": {
+      "count": 22,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[].entries[].entries[].caption": {
+      "count": 133,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].feats[].crafter|xphb": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].investigation": {
+      "count": 15,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].persuasion": {
+      "count": 23,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].anyArtisansTool": {
+      "count": 16,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].startingEquipment[].A[].equipmentType": {
+      "count": 7,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].feats[].magic initiate|phb": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].fromFeature": {
+      "count": 15,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[].fromFeature.feats": {
+      "count": 15,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].acrobatics": {
+      "count": 11,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].athletics": {
+      "count": 23,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].vehicles (land)": {
+      "count": 8,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].startingEquipment[].a[].special": {
+      "count": 8,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy": {
+      "count": 26,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[]._copy.name": {
+      "count": 26,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy.source": {
+      "count": 26,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].additionalSpells": {
+      "count": 30,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].additionalSpells[].expanded": {
+      "count": 15,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[].additionalSpells[].expanded.s0": {
+      "count": 20,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[].additionalSpells[].expanded.s1": {
+      "count": 30,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[].additionalSpells[].expanded.s2": {
+      "count": 30,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(3)",
+        3,
+        "array(2)"
+      ]
+    },
+    "background[].additionalSpells[].expanded.s3": {
+      "count": 30,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[].additionalSpells[].expanded.s4": {
+      "count": 30,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[].additionalSpells[].expanded.s5": {
+      "count": 30,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].additionalSources": {
+      "count": 26,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].additionalSources[].source": {
+      "count": 13,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].additionalSources[].page": {
+      "count": 13,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[]._copy._mod": {
+      "count": 21,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[]._copy._mod.entries": {
+      "count": 24,
+      "types": [
+        "array",
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[]._copy._mod.entries.mode": {
+      "count": 18,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries.index": {
+      "count": 12,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[]._copy._mod.entries.items": {
+      "count": 23,
+      "types": [
+        "array",
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "array(2)"
+      ]
+    },
+    "background[]._copy._mod.entries.items.name": {
+      "count": 12,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries.items.type": {
+      "count": 13,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries.items.entries": {
+      "count": 24,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(3)"
+      ]
+    },
+    "background[]._copy._mod.entries.items.data": {
+      "count": 12,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[]._copy._mod.entries.items.data.isFeature": {
+      "count": 12,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[]._copy._mod.entries.items[].name": {
+      "count": 10,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries.items[].type": {
+      "count": 10,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries.items[].entries": {
+      "count": 20,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[]._copy._mod.entries.items[].data": {
+      "count": 6,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[]._copy._mod.entries.items[].data.isFeature": {
+      "count": 6,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[]._copy._mod.entries.items[].entries[].type": {
+      "count": 6,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries.items[].entries[].caption": {
+      "count": 4,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries.items[].entries[].colLabels": {
+      "count": 8,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[]._copy._mod.entries.items[].entries[].colStyles": {
+      "count": 8,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[]._copy._mod.entries.items[].entries[].rows": {
+      "count": 8,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(8)",
+        8,
+        "array(6)"
+      ]
+    },
+    "background[]._copy._mod.entries.items[].entries[].rows[]": {
+      "count": 26,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        2,
+        2,
+        2
+      ]
+    },
+    "background[]._copy._mod.entries.replace": {
+      "count": 6,
+      "types": [
+        "object",
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries.items[].entries[].name": {
+      "count": 2,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries.items[].entries[].entries": {
+      "count": 4,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].feats[].arcane eloquence|au": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].deception": {
+      "count": 16,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].perception": {
+      "count": 17,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].languageProficiencies[].choose": {
+      "count": 8,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[].languageProficiencies[].choose.from": {
+      "count": 16,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(4)",
+        4,
+        "array(4)"
+      ]
+    },
+    "background[].toolProficiencies[].anyGamingSet": {
+      "count": 20,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].entries[].entries[].name": {
+      "count": 15,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].entries[].entries[].entries": {
+      "count": 30,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].feats[].tireless reveler|abh": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].gaming set": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].startingEquipment[].a[].equipmentType": {
+      "count": 16,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].skillProficiencies[].performance": {
+      "count": 11,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].forgery kit": {
+      "count": 4,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].startingEquipment[].a[].quantity": {
+      "count": 16,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].startingEquipment[].c": {
+      "count": 2,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1
+      ]
+    },
+    "background[].startingEquipment[].c[].special": {
+      "count": 1,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string"
+      ]
+    },
+    "background[].startingEquipment[].d": {
+      "count": 2,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1
+      ]
+    },
+    "background[].startingEquipment[].d[].special": {
+      "count": 1,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string"
+      ]
+    },
+    "background[].toolProficiencies[].weaver's tools": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].languageProficiencies[].dwarvish": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].startingEquipment[]._[].equipmentType": {
+      "count": 17,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].skillProficiencies[].choose": {
+      "count": 8,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[].skillProficiencies[].choose.from": {
+      "count": 16,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(3)",
+        3,
+        "array(13)"
+      ]
+    },
+    "background[].feats[].transmuted anatomy|au": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].arcane undertaker|au": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].medicine": {
+      "count": 9,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].herbalism kit": {
+      "count": 10,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].stealth": {
+      "count": 15,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].feats[].alert|xphb": {
+      "count": 4,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].feats[].arcane overload|au": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].nature": {
+      "count": 11,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].glassblower's tools": {
+      "count": 3,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].any": {
+      "count": 1,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number"
+      ]
+    },
+    "background[].skillToolLanguageProficiencies": {
+      "count": 2,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(3)",
+        3
+      ]
+    },
+    "background[].skillToolLanguageProficiencies[].anyLanguage": {
+      "count": 2,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number"
+      ]
+    },
+    "background[].skillToolLanguageProficiencies[].anyTool": {
+      "count": 2,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number"
+      ]
+    },
+    "background[].feats[].healer|xphb": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].leatherworker's tools": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].cult of the dragon initiate|frhof": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].emerald enclave fledgling|frhof": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].anyMusicalInstrument": {
+      "count": 10,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].feats[].musician|xphb": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].familiar friend|au": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].skillProficiencies[].animal handling": {
+      "count": 8,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].startingEquipment[]._[].worthValue": {
+      "count": 1,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number"
+      ]
+    },
+    "background[].startingEquipment[].b[].equipmentType": {
+      "count": 5,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].feats[].tough|xphb": {
+      "count": 3,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].carpenter's tools": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].smith's tools": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].prerequisite": {
+      "count": 8,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].prerequisite[].campaign": {
+      "count": 8,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].feats[].scion of the outer planes|sato": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].feats[].strike of the giants|bgg": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].languageProficiencies[].giant": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].poisoner's kit": {
+      "count": 3,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].feats[].magic initiate; druid|xphb": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].feats[].harper agent|frhof": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].survivor|rhw": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].anyFromCategory": {
+      "count": 4,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[].feats[].anyFromCategory.category": {
+      "count": 8,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].otherSources": {
+      "count": 2,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1
+      ]
+    },
+    "background[].otherSources[].source": {
+      "count": 1,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string"
+      ]
+    },
+    "background[].otherSources[].page": {
+      "count": 1,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number"
+      ]
+    },
+    "background[].skillProficiencies[].choose.count": {
+      "count": 3,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].startingEquipment[]._[].value": {
+      "count": 4,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number",
+        "number"
+      ]
+    },
+    "background[].entries[].id": {
+      "count": 2,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string"
+      ]
+    },
+    "background[].feats[].portal jumper|au": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].lucky|xphb": {
+      "count": 4,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].alchemist's supplies": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].tinker's tools": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].brewer's supplies": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].cook's utensils": {
+      "count": 4,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].vehicles (water)": {
+      "count": 5,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].vehicles (air)": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].navigator's tools": {
+      "count": 8,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].entries[].items[].entries": {
+      "count": 6,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].entries[].caption": {
+      "count": 2,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string"
+      ]
+    },
+    "background[].entries[].colLabels": {
+      "count": 4,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[].entries[].colStyles": {
+      "count": 4,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[].entries[].rows": {
+      "count": 4,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(13)",
+        13,
+        "array(12)"
+      ]
+    },
+    "background[].entries[].rows[]": {
+      "count": 25,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        2,
+        2,
+        2
+      ]
+    },
+    "background[].feats[].mark of making|efa": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].mark of sentinel|efa": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].mark of hospitality|efa": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].mark of healing|efa": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].mark of warding|efa": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].mark of storm|efa": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].mark of detection|efa": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].mark of passage|efa": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].mark of shadow|efa": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].feats[].mark of scribing|efa": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].mark of finding|efa": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].mark of handling|efa": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].woodcarver's tools": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].feats[].sharp eye|rhw": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].squire of solamnia|dsotdq": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].entries[].entries[].entries[].type": {
+      "count": 7,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].entries[].entries[].entries[].caption": {
+      "count": 7,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].entries[].entries[].entries[].colLabels": {
+      "count": 14,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[].entries[].entries[].entries[].colStyles": {
+      "count": 14,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(2)",
+        2,
+        "array(2)"
+      ]
+    },
+    "background[].entries[].entries[].entries[].rows": {
+      "count": 14,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(6)",
+        6,
+        "array(6)"
+      ]
+    },
+    "background[].entries[].entries[].entries[].rows[]": {
+      "count": 42,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        2,
+        2,
+        2
+      ]
+    },
+    "background[].feats[].tyro of the gauntlet|frhof": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].lords' alliance agent|frhof": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].strixhaven initiate|scc": {
+      "count": 5,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].fromFeature.additionalSpells": {
+      "count": 5,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].feats[].child of the sun|lfl": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].initiate of high sorcery|dsotdq": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].painter's supplies": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].mason's tools": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].jeweler's tools": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].Skilled|xphb": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].arcane artist|au": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].entries[].entries[].style": {
+      "count": 1,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string"
+      ]
+    },
+    "background[].entries[].entries[].items": {
+      "count": 2,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(12)",
+        12
+      ]
+    },
+    "background[].entries[].entries[].items[].type": {
+      "count": 12,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].entries[].entries[].items[].name": {
+      "count": 12,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[].entries[].entries[].items[].entries": {
+      "count": 24,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(1)"
+      ]
+    },
+    "background[].feats[].purple dragon rook|frhof": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].lucky|phb": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].skilled|phb": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].feats[].alert|phb": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].tough|phb": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].feats[].rune shaper|bgg": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].magic initiate; wizard|xphb": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].tavern brawler|xphb": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].arcane omens|au": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].savage attacker|xphb": {
+      "count": 2,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[].feats[].shadowmoor hexer|lfl": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].spellfire spark|frhof": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].choose.count": {
+      "count": 1,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number"
+      ]
+    },
+    "background[].feats[].vampire's plaything|abh": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].vampire hunter|abh": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[]._copy._mod.entries[].mode": {
+      "count": 5,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries[].replace": {
+      "count": 4,
+      "types": [
+        "object",
+        "string"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries[].replace.index": {
+      "count": 2,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number",
+        "number"
+      ]
+    },
+    "background[]._copy._mod.entries[].items": {
+      "count": 5,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[]._copy._mod.entries[].items.type": {
+      "count": 5,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries[].items.style": {
+      "count": 1,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries[].items.items": {
+      "count": 2,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(3)",
+        3
+      ]
+    },
+    "background[]._copy._mod.entries[].items.items[].type": {
+      "count": 3,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries[].items.items[].name": {
+      "count": 3,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries[].items.items[].entry": {
+      "count": 3,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries[].items.name": {
+      "count": 4,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries[].items.entries": {
+      "count": 8,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(1)",
+        1,
+        "array(2)"
+      ]
+    },
+    "background[]._copy._mod.entries[].items.data": {
+      "count": 3,
+      "types": [
+        "object"
+      ],
+      "examples": [
+        "object",
+        "object",
+        "object"
+      ]
+    },
+    "background[]._copy._mod.entries[].items.data.isFeature": {
+      "count": 3,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean",
+        "boolean",
+        "boolean"
+      ]
+    },
+    "background[]._copy._mod.entries.replace.index": {
+      "count": 1,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number"
+      ]
+    },
+    "background[]._copy._mod.entries.items.style": {
+      "count": 1,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries.items.items": {
+      "count": 2,
+      "types": [
+        "array"
+      ],
+      "examples": [
+        "array(4)",
+        4
+      ]
+    },
+    "background[]._copy._mod.entries.items.items[].type": {
+      "count": 4,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries.items.items[].name": {
+      "count": 4,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries.items.items[].entry": {
+      "count": 4,
+      "types": [
+        "string"
+      ],
+      "examples": [
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    "background[]._copy._mod.entries[].index": {
+      "count": 1,
+      "types": [
+        "number"
+      ],
+      "examples": [
+        "number"
+      ]
+    },
+    "background[].feats[].arcane safeguard|au": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].toolProficiencies[].vehicles (space)": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    },
+    "background[].feats[].zhentarim ruffian|frhof": {
+      "count": 1,
+      "types": [
+        "boolean"
+      ],
+      "examples": [
+        "boolean"
+      ]
+    }
+  }
+}

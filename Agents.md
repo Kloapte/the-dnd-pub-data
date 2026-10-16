@@ -64,15 +64,6 @@ Code must be written as production-quality source code intended to be read, revi
 - Avoid putting multiple independent operations on one line.
 - Use imports rather than unnecessarily verbose fully qualified class names, except where ambiguity requires them.
 
-### TypeScript and Angular
-
-- Follow the project's existing TypeScript and Angular conventions.
-- Use consistent indentation and formatting.
-- Keep component methods, lifecycle hooks, and callbacks readable.
-- Format Angular templates with clear nesting and indentation.
-- Avoid excessively long template expressions.
-- Do not compress HTML, CSS, or TypeScript into dense one-line blocks.
-
 ### Comments and Documentation
 
 - Write comments to explain non-obvious intent, constraints, and important design decisions.
@@ -94,3 +85,70 @@ Before completing a task:
 6. Ensure the final diff is easy for a human reviewer to understand.
 
 **Readable code is a requirement, not an optional cleanup step. Never intentionally produce minified or compressed source code.**
+
+## Java Class Organization
+
+- Use one public top-level class, record, enum, or interface per Java source file.
+- Do not declare DTO records, classes, enums, or interfaces inside other DTOs.
+- Prefer descriptive, domain-specific names such as `SpellIdentityDto`, `MonsterStatisticsDto`, and `ActionEffectDto`.
+- Organize related DTOs into logical packages without excessive package fragmentation.
+- Use Java records for immutable data-transfer objects when appropriate.
+- Use sealed interfaces for well-defined polymorphic models.
+- Prefer strongly typed fields over generic maps, `Object`, or `JsonNode` in application-facing DTOs.
+- Use defensive copies for mutable collections supplied to immutable records.
+- Keep source-specific import models separate from application-facing DTOs.
+- Keep internal import provenance and diagnostics separate from public API responses.
+- Follow the existing Java readability standards: four-space indentation, descriptive names, braces for control flow, and readable multiline methods.
+
+## Jackson Serialization
+
+- Annotate all public API DTO records with `@JsonInclude(JsonInclude.Include.NON_EMPTY)`.
+- Do not use `NON_NULL` for new public API DTOs unless there is a documented reason.
+- Omit null values, empty strings, empty lists, empty sets, and empty maps from public JSON.
+- Preserve meaningful `false` and `0` values.
+- Avoid constructing optional nested DTO records that contain no meaningful values and would serialize as `{}`.
+- Do not modify global Jackson serialization settings merely to clean up one DTO.
+- Preserve source-level distinctions between absent, explicit-null, and empty values internally when relevant.
+- Use dedicated public DTO projections when internal normalized models contain fields that must not be exposed.
+- Add serialization tests for null, empty, nested, and polymorphic DTO behavior.
+
+## D&D Data Import and Normalization
+
+- Treat external D&D datasets as source data, not as the application's permanent domain model.
+- Use the `$dnd-json-mapper` skill when introducing a new imported D&D entity type.
+- Analyze the complete source schema before implementing DTEs or DTOs.
+- Inspect source relationships, copy inheritance, version definitions, and references to other entity types.
+- Design the application-facing DTO model before implementing the mapper.
+- Prefer reusable domain concepts and stable references over duplicating definitions across entities.
+- Preserve the distinction between a reusable definition, a reference to that definition, and an entity-specific configuration.
+- Never invent mechanical values that cannot be established from source data or explicitly documented rules.
+- Preserve unsupported or ambiguous mechanics internally and report them rather than guessing.
+- Do not expose raw source text, internal import metadata, or third-party media paths through public APIs without an explicit publication decision.
+- Record source and licensing metadata where needed for publication decisions. Do not assume that mechanically structured content is automatically free of copyright restrictions.
+
+## REST API Conventions
+
+- Keep controllers thin and delegate business logic to services.
+- Separate source loading, normalization, catalog indexing, querying, and HTTP handling.
+- Use summary DTOs for collection endpoints and detail DTOs for individual resources.
+- Paginate collection endpoints when result sets can grow significantly.
+- Use deterministic sorting and stable identifiers.
+- Use consistent validation and error handling.
+- Prefer explicit, stable API response models rather than exposing framework implementation details.
+- Avoid unnecessary persistence layers for static reference catalogs.
+- Test both service behavior and REST serialization.
+
+## Quality Gates
+
+Before completing data-import work:
+
+1. Confirm the full discovered source corpus is accounted for.
+2. Verify that no supported source records are silently skipped.
+3. Validate deterministic output and unique definition identities.
+4. Test representative polymorphic and unusual source structures.
+5. Test public JSON serialization, including omitted empty properties.
+6. Run focused tests and the full applicable test suite.
+7. Document unsupported source structures, unresolved references, and known limitations.
+8. Report unrelated pre-existing failures separately.
+
+Never compress generated code to reduce token usage or file size.
