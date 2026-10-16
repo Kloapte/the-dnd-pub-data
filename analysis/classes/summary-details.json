@@ -1,0 +1,133 @@
+{
+  "rootEditionCounts": {
+    "class": {
+      "classic": 17,
+      "one": 13
+    },
+    "subclass": {
+      "classic": 130,
+      "(absent)": 130,
+      "one": 70
+    }
+  },
+  "subclassParentSourceCounts": {
+    "TCE": 4,
+    "EFA": 10,
+    "PHB": 120,
+    "XPHB": 190,
+    "UATheMysticClass": 6
+  },
+  "copyTransitions": {
+    "subclass:tce->efa": 4,
+    "subclass:phb->xphb": 120,
+    "subclassFeature:phb->xphb": 75
+  },
+  "tableGroupCounts": {
+    "class:rows": 31,
+    "class:rowsSpellProgression": 16,
+    "subclass:rows": 7,
+    "subclass:rowsSpellProgression": 5
+  },
+  "tableRowLengthCounts": {
+    "20": 59
+  },
+  "ordinaryCellTypes": {
+    "number": 1282,
+    "string": 158,
+    "bonus": 40,
+    "dice": 100,
+    "bonusSpeed": 40
+  },
+  "casterCodes": {
+    "class": {
+      "artificer": 5,
+      "full": 10,
+      "1/2": 2,
+      "pact": 2
+    },
+    "subclass": {
+      "1/3": 5
+    }
+  },
+  "spellQualification": {
+    "qualified": 446,
+    "unqualified": 622
+  },
+  "spellSelectorCount": 186,
+  "spellSelectorDistinctCount": 102,
+  "unresolvedForeignReferences": [
+    {
+      "kind": "item",
+      "uid": "holy symbol|xphb",
+      "owner": "classes/class-cleric.json#/class/1",
+      "locator": "classes/class-cleric.json#/class/1/startingEquipment/defaultData/0/A/3/item",
+      "source": "xphb",
+      "sourceExplicit": true,
+      "matches": 0,
+      "status": "unresolved",
+      "auxiliaryItemGroupMatches": 1
+    },
+    {
+      "kind": "item",
+      "uid": "druidic focus|xphb",
+      "owner": "classes/class-druid.json#/class/1",
+      "locator": "classes/class-druid.json#/class/1/startingEquipment/defaultData/0/A/3/item",
+      "source": "xphb",
+      "sourceExplicit": true,
+      "matches": 0,
+      "status": "unresolved",
+      "auxiliaryItemGroupMatches": 1
+    },
+    {
+      "kind": "item",
+      "uid": "holy symbol|xphb",
+      "owner": "classes/class-paladin.json#/class/1",
+      "locator": "classes/class-paladin.json#/class/1/startingEquipment/defaultData/0/A/4/item",
+      "source": "xphb",
+      "sourceExplicit": true,
+      "matches": 0,
+      "status": "unresolved",
+      "auxiliaryItemGroupMatches": 1
+    }
+  ],
+  "classRootFieldNames": [
+    "additionalSpells",
+    "basicRules",
+    "basicRules2024",
+    "cantripProgression",
+    "casterProgression",
+    "classFeatures",
+    "classTableGroups",
+    "edition",
+    "featProgression",
+    "hasFluff",
+    "hasFluffImages",
+    "hd",
+    "isSidekick",
+    "multiclassing",
+    "name",
+    "optionalfeatureProgression",
+    "otherSources",
+    "page",
+    "preparedSpells",
+    "preparedSpellsChange",
+    "preparedSpellsProgression",
+    "primaryAbility",
+    "proficiency",
+    "reprintedAs",
+    "source",
+    "spellcastingAbility",
+    "spellsKnownProgression",
+    "spellsKnownProgressionFixed",
+    "spellsKnownProgressionFixedAllowLowerLevel",
+    "spellsKnownProgressionFixedByLevel",
+    "srd",
+    "srd52",
+    "startingEquipment",
+    "startingProficiencies",
+    "subclassTitle"
+  ],
+  "allFeatureCount": 2176,
+  "graphEdges": 5065,
+  "copyTargetsAlsoCopies": 0
+}

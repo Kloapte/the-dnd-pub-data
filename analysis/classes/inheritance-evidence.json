@@ -1,0 +1,4365 @@
+{
+  "directives": [
+    {
+      "owner": "classes/class-artificer.json#/subclass/1",
+      "kind": "subclass",
+      "name": "Alchemist",
+      "source": "TCE",
+      "locator": "classes/class-artificer.json#/subclass/1/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Alchemist",
+        "source": "TCE",
+        "shortName": "Alchemist",
+        "className": "Artificer",
+        "classSource": "TCE",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-artificer.json#/subclass/3",
+      "kind": "subclass",
+      "name": "Armorer",
+      "source": "TCE",
+      "locator": "classes/class-artificer.json#/subclass/3/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Armorer",
+        "source": "TCE",
+        "shortName": "Armorer",
+        "className": "Artificer",
+        "classSource": "TCE",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-artificer.json#/subclass/5",
+      "kind": "subclass",
+      "name": "Artillerist",
+      "source": "TCE",
+      "locator": "classes/class-artificer.json#/subclass/5/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Artillerist",
+        "source": "TCE",
+        "shortName": "Artillerist",
+        "className": "Artificer",
+        "classSource": "TCE",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-artificer.json#/subclass/7",
+      "kind": "subclass",
+      "name": "Battle Smith",
+      "source": "TCE",
+      "locator": "classes/class-artificer.json#/subclass/7/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Battle Smith",
+        "source": "TCE",
+        "shortName": "Battle Smith",
+        "className": "Artificer",
+        "classSource": "TCE",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-barbarian.json#/subclass/1",
+      "kind": "subclass",
+      "name": "Path of the Berserker",
+      "source": "PHB",
+      "locator": "classes/class-barbarian.json#/subclass/1/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Path of the Berserker",
+        "source": "PHB",
+        "shortName": "Berserker",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-barbarian.json#/subclass/3",
+      "kind": "subclass",
+      "name": "Path of the Totem Warrior",
+      "source": "PHB",
+      "locator": "classes/class-barbarian.json#/subclass/3/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Path of the Totem Warrior",
+        "source": "PHB",
+        "shortName": "Totem Warrior",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-barbarian.json#/subclass/5",
+      "kind": "subclass",
+      "name": "Path of the Battlerager",
+      "source": "SCAG",
+      "locator": "classes/class-barbarian.json#/subclass/5/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Path of the Battlerager",
+        "source": "SCAG",
+        "shortName": "Battlerager",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-barbarian.json#/subclass/7",
+      "kind": "subclass",
+      "name": "Path of the Ancestral Guardian",
+      "source": "XGE",
+      "locator": "classes/class-barbarian.json#/subclass/7/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Path of the Ancestral Guardian",
+        "source": "XGE",
+        "shortName": "Ancestral Guardian",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-barbarian.json#/subclass/9",
+      "kind": "subclass",
+      "name": "Path of the Storm Herald",
+      "source": "XGE",
+      "locator": "classes/class-barbarian.json#/subclass/9/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Path of the Storm Herald",
+        "source": "XGE",
+        "shortName": "Storm Herald",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-barbarian.json#/subclass/11",
+      "kind": "subclass",
+      "name": "Path of the Zealot",
+      "source": "XGE",
+      "locator": "classes/class-barbarian.json#/subclass/11/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Path of the Zealot",
+        "source": "XGE",
+        "shortName": "Zealot",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-barbarian.json#/subclass/13",
+      "kind": "subclass",
+      "name": "Path of the Beast",
+      "source": "TCE",
+      "locator": "classes/class-barbarian.json#/subclass/13/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Path of the Beast",
+        "source": "TCE",
+        "shortName": "Beast",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-barbarian.json#/subclass/15",
+      "kind": "subclass",
+      "name": "Path of Wild Magic",
+      "source": "TCE",
+      "locator": "classes/class-barbarian.json#/subclass/15/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Path of Wild Magic",
+        "source": "TCE",
+        "shortName": "Wild Magic",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-barbarian.json#/subclass/17",
+      "kind": "subclass",
+      "name": "Path of the Giant",
+      "source": "BGG",
+      "locator": "classes/class-barbarian.json#/subclass/17/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Path of the Giant",
+        "source": "BGG",
+        "shortName": "Giant",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-bard.json#/subclass/1",
+      "kind": "subclass",
+      "name": "College of Lore",
+      "source": "PHB",
+      "locator": "classes/class-bard.json#/subclass/1/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "College of Lore",
+        "source": "PHB",
+        "shortName": "Lore",
+        "className": "Bard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-bard.json#/subclass/3",
+      "kind": "subclass",
+      "name": "College of Valor",
+      "source": "PHB",
+      "locator": "classes/class-bard.json#/subclass/3/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "College of Valor",
+        "source": "PHB",
+        "shortName": "Valor",
+        "className": "Bard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-bard.json#/subclass/5",
+      "kind": "subclass",
+      "name": "College of Glamour",
+      "source": "XGE",
+      "locator": "classes/class-bard.json#/subclass/5/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "College of Glamour",
+        "source": "XGE",
+        "shortName": "Glamour",
+        "className": "Bard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-bard.json#/subclass/7",
+      "kind": "subclass",
+      "name": "College of Swords",
+      "source": "XGE",
+      "locator": "classes/class-bard.json#/subclass/7/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "College of Swords",
+        "source": "XGE",
+        "shortName": "Swords",
+        "className": "Bard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-bard.json#/subclass/9",
+      "kind": "subclass",
+      "name": "College of Whispers",
+      "source": "XGE",
+      "locator": "classes/class-bard.json#/subclass/9/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "College of Whispers",
+        "source": "XGE",
+        "shortName": "Whispers",
+        "className": "Bard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-bard.json#/subclass/11",
+      "kind": "subclass",
+      "name": "College of Creation",
+      "source": "TCE",
+      "locator": "classes/class-bard.json#/subclass/11/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "College of Creation",
+        "source": "TCE",
+        "shortName": "Creation",
+        "className": "Bard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-bard.json#/subclass/13",
+      "kind": "subclass",
+      "name": "College of Eloquence",
+      "source": "TCE",
+      "locator": "classes/class-bard.json#/subclass/13/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "College of Eloquence",
+        "source": "TCE",
+        "shortName": "Eloquence",
+        "className": "Bard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-bard.json#/subclass/15",
+      "kind": "subclass",
+      "name": "College of Spirits",
+      "source": "VRGR",
+      "locator": "classes/class-bard.json#/subclass/15/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "College of Spirits",
+        "source": "VRGR",
+        "shortName": "Spirits",
+        "className": "Bard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/1",
+      "kind": "subclass",
+      "name": "Knowledge Domain",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclass/1/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Knowledge Domain",
+        "source": "PHB",
+        "shortName": "Knowledge",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/3",
+      "kind": "subclass",
+      "name": "Life Domain",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclass/3/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Life Domain",
+        "source": "PHB",
+        "shortName": "Life",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/5",
+      "kind": "subclass",
+      "name": "Light Domain",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclass/5/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Light Domain",
+        "source": "PHB",
+        "shortName": "Light",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/7",
+      "kind": "subclass",
+      "name": "Nature Domain",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclass/7/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Nature Domain",
+        "source": "PHB",
+        "shortName": "Nature",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/9",
+      "kind": "subclass",
+      "name": "Tempest Domain",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclass/9/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Tempest Domain",
+        "source": "PHB",
+        "shortName": "Tempest",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/11",
+      "kind": "subclass",
+      "name": "Trickery Domain",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclass/11/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Trickery Domain",
+        "source": "PHB",
+        "shortName": "Trickery",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/13",
+      "kind": "subclass",
+      "name": "War Domain",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclass/13/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "War Domain",
+        "source": "PHB",
+        "shortName": "War",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/15",
+      "kind": "subclass",
+      "name": "Death Domain",
+      "source": "DMG",
+      "locator": "classes/class-cleric.json#/subclass/15/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Death Domain",
+        "source": "DMG",
+        "shortName": "Death",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/17",
+      "kind": "subclass",
+      "name": "Arcana Domain",
+      "source": "SCAG",
+      "locator": "classes/class-cleric.json#/subclass/17/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Arcana Domain",
+        "source": "SCAG",
+        "shortName": "Arcana",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/19",
+      "kind": "subclass",
+      "name": "Ambition Domain (PSA)",
+      "source": "PSA",
+      "locator": "classes/class-cleric.json#/subclass/19/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Ambition Domain (PSA)",
+        "source": "PSA",
+        "shortName": "Ambition (PSA)",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/21",
+      "kind": "subclass",
+      "name": "Knowledge Domain (PSA)",
+      "source": "PSA",
+      "locator": "classes/class-cleric.json#/subclass/21/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Knowledge Domain (PSA)",
+        "source": "PSA",
+        "shortName": "Knowledge (PSA)",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/23",
+      "kind": "subclass",
+      "name": "Solidarity Domain (PSA)",
+      "source": "PSA",
+      "locator": "classes/class-cleric.json#/subclass/23/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Solidarity Domain (PSA)",
+        "source": "PSA",
+        "shortName": "Solidarity (PSA)",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/25",
+      "kind": "subclass",
+      "name": "Strength Domain (PSA)",
+      "source": "PSA",
+      "locator": "classes/class-cleric.json#/subclass/25/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Strength Domain (PSA)",
+        "source": "PSA",
+        "shortName": "Strength (PSA)",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/27",
+      "kind": "subclass",
+      "name": "Zeal Domain (PSA)",
+      "source": "PSA",
+      "locator": "classes/class-cleric.json#/subclass/27/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Zeal Domain (PSA)",
+        "source": "PSA",
+        "shortName": "Zeal (PSA)",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/29",
+      "kind": "subclass",
+      "name": "Forge Domain",
+      "source": "XGE",
+      "locator": "classes/class-cleric.json#/subclass/29/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Forge Domain",
+        "source": "XGE",
+        "shortName": "Forge",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/31",
+      "kind": "subclass",
+      "name": "Grave Domain",
+      "source": "XGE",
+      "locator": "classes/class-cleric.json#/subclass/31/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Grave Domain",
+        "source": "XGE",
+        "shortName": "Grave",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/33",
+      "kind": "subclass",
+      "name": "Order Domain",
+      "source": "TCE",
+      "locator": "classes/class-cleric.json#/subclass/33/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Order Domain",
+        "source": "TCE",
+        "shortName": "Order",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/35",
+      "kind": "subclass",
+      "name": "Peace Domain",
+      "source": "TCE",
+      "locator": "classes/class-cleric.json#/subclass/35/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Peace Domain",
+        "source": "TCE",
+        "shortName": "Peace",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclass/37",
+      "kind": "subclass",
+      "name": "Twilight Domain",
+      "source": "TCE",
+      "locator": "classes/class-cleric.json#/subclass/37/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Twilight Domain",
+        "source": "TCE",
+        "shortName": "Twilight",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/150",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Touch of Death",
+      "source": "DMG",
+      "locator": "classes/class-cleric.json#/subclassFeature/150/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Touch of Death",
+        "source": "DMG",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Death",
+        "subclassSource": "DMG",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/151",
+      "kind": "subclassFeature",
+      "name": "Death Domain",
+      "source": "DMG",
+      "locator": "classes/class-cleric.json#/subclassFeature/151/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Death Domain",
+        "source": "DMG",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Death",
+        "subclassSource": "DMG",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/158",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Knowledge of the Ages",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclassFeature/158/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Knowledge of the Ages",
+        "source": "PHB",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Knowledge",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/159",
+      "kind": "subclassFeature",
+      "name": "Knowledge Domain",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclassFeature/159/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Knowledge Domain",
+        "source": "PHB",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Knowledge",
+        "subclassSource": "PHB",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/160",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Preserve Life",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclassFeature/160/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Preserve Life",
+        "source": "PHB",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Life",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true,
+          "srd": true,
+          "basicRules": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/161",
+      "kind": "subclassFeature",
+      "name": "Life Domain",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclassFeature/161/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Life Domain",
+        "source": "PHB",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Life",
+        "subclassSource": "PHB",
+        "level": 1,
+        "_preserve": {
+          "page": true,
+          "srd": true,
+          "basicRules": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/162",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Radiance of the Dawn",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclassFeature/162/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Radiance of the Dawn",
+        "source": "PHB",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Light",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/163",
+      "kind": "subclassFeature",
+      "name": "Light Domain",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclassFeature/163/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Light Domain",
+        "source": "PHB",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Light",
+        "subclassSource": "PHB",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/164",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Charm Animals and Plants",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclassFeature/164/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Charm Animals and Plants",
+        "source": "PHB",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Nature",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/165",
+      "kind": "subclassFeature",
+      "name": "Nature Domain",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclassFeature/165/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Nature Domain",
+        "source": "PHB",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Nature",
+        "subclassSource": "PHB",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/166",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Destructive Wrath",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclassFeature/166/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Destructive Wrath",
+        "source": "PHB",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Tempest",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/167",
+      "kind": "subclassFeature",
+      "name": "Tempest Domain",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclassFeature/167/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Tempest Domain",
+        "source": "PHB",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Tempest",
+        "subclassSource": "PHB",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/168",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Invoke Duplicity",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclassFeature/168/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Invoke Duplicity",
+        "source": "PHB",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Trickery",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/169",
+      "kind": "subclassFeature",
+      "name": "Trickery Domain",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclassFeature/169/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Trickery Domain",
+        "source": "PHB",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Trickery",
+        "subclassSource": "PHB",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/170",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Guided Strike",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclassFeature/170/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Guided Strike",
+        "source": "PHB",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "War",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/171",
+      "kind": "subclassFeature",
+      "name": "War Domain",
+      "source": "PHB",
+      "locator": "classes/class-cleric.json#/subclassFeature/171/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "War Domain",
+        "source": "PHB",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "War",
+        "subclassSource": "PHB",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/172",
+      "kind": "subclassFeature",
+      "name": "Ambition Domain (PSA)",
+      "source": "PSA",
+      "locator": "classes/class-cleric.json#/subclassFeature/172/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Ambition Domain (PSA)",
+        "source": "PSA",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Ambition (PSA)",
+        "subclassSource": "PSA",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/173",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Invoke Duplicity",
+      "source": "PSA",
+      "locator": "classes/class-cleric.json#/subclassFeature/173/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Invoke Duplicity",
+        "source": "PSA",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Ambition (PSA)",
+        "subclassSource": "PSA",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/174",
+      "kind": "subclassFeature",
+      "name": "Knowledge Domain (PSA)",
+      "source": "PSA",
+      "locator": "classes/class-cleric.json#/subclassFeature/174/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Knowledge Domain (PSA)",
+        "source": "PSA",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Knowledge (PSA)",
+        "subclassSource": "PSA",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/175",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Preserve Life",
+      "source": "PSA",
+      "locator": "classes/class-cleric.json#/subclassFeature/175/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Preserve Life",
+        "source": "PSA",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Solidarity (PSA)",
+        "subclassSource": "PSA",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/176",
+      "kind": "subclassFeature",
+      "name": "Solidarity Domain (PSA)",
+      "source": "PSA",
+      "locator": "classes/class-cleric.json#/subclassFeature/176/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Solidarity Domain (PSA)",
+        "source": "PSA",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Solidarity (PSA)",
+        "subclassSource": "PSA",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/177",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Feat of Strength",
+      "source": "PSA",
+      "locator": "classes/class-cleric.json#/subclassFeature/177/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Feat of Strength",
+        "source": "PSA",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Strength (PSA)",
+        "subclassSource": "PSA",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/178",
+      "kind": "subclassFeature",
+      "name": "Strength Domain (PSA)",
+      "source": "PSA",
+      "locator": "classes/class-cleric.json#/subclassFeature/178/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Strength Domain (PSA)",
+        "source": "PSA",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Strength (PSA)",
+        "subclassSource": "PSA",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/179",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Consuming Fervor",
+      "source": "PSA",
+      "locator": "classes/class-cleric.json#/subclassFeature/179/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Consuming Fervor",
+        "source": "PSA",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Zeal (PSA)",
+        "subclassSource": "PSA",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/180",
+      "kind": "subclassFeature",
+      "name": "Zeal Domain (PSA)",
+      "source": "PSA",
+      "locator": "classes/class-cleric.json#/subclassFeature/180/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Zeal Domain (PSA)",
+        "source": "PSA",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Zeal (PSA)",
+        "subclassSource": "PSA",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/187",
+      "kind": "subclassFeature",
+      "name": "Arcana Domain",
+      "source": "SCAG",
+      "locator": "classes/class-cleric.json#/subclassFeature/187/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Arcana Domain",
+        "source": "SCAG",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Arcana",
+        "subclassSource": "SCAG",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/188",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Arcane Abjuration",
+      "source": "SCAG",
+      "locator": "classes/class-cleric.json#/subclassFeature/188/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Arcane Abjuration",
+        "source": "SCAG",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Arcana",
+        "subclassSource": "SCAG",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/189",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Order's Demand",
+      "source": "TCE",
+      "locator": "classes/class-cleric.json#/subclassFeature/189/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Order's Demand",
+        "source": "TCE",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Order",
+        "subclassSource": "TCE",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/190",
+      "kind": "subclassFeature",
+      "name": "Order Domain",
+      "source": "TCE",
+      "locator": "classes/class-cleric.json#/subclassFeature/190/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Order Domain",
+        "source": "TCE",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Order",
+        "subclassSource": "TCE",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/191",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Balm of Peace",
+      "source": "TCE",
+      "locator": "classes/class-cleric.json#/subclassFeature/191/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Balm of Peace",
+        "source": "TCE",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Peace",
+        "subclassSource": "TCE",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/192",
+      "kind": "subclassFeature",
+      "name": "Peace Domain",
+      "source": "TCE",
+      "locator": "classes/class-cleric.json#/subclassFeature/192/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Peace Domain",
+        "source": "TCE",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Peace",
+        "subclassSource": "TCE",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/193",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Twilight Sanctuary",
+      "source": "TCE",
+      "locator": "classes/class-cleric.json#/subclassFeature/193/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Twilight Sanctuary",
+        "source": "TCE",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Twilight",
+        "subclassSource": "TCE",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/194",
+      "kind": "subclassFeature",
+      "name": "Twilight Domain",
+      "source": "TCE",
+      "locator": "classes/class-cleric.json#/subclassFeature/194/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Twilight Domain",
+        "source": "TCE",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Twilight",
+        "subclassSource": "TCE",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/195",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Artisan's Blessing",
+      "source": "XGE",
+      "locator": "classes/class-cleric.json#/subclassFeature/195/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Artisan's Blessing",
+        "source": "XGE",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Forge",
+        "subclassSource": "XGE",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/196",
+      "kind": "subclassFeature",
+      "name": "Forge Domain",
+      "source": "XGE",
+      "locator": "classes/class-cleric.json#/subclassFeature/196/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Forge Domain",
+        "source": "XGE",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Forge",
+        "subclassSource": "XGE",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/197",
+      "kind": "subclassFeature",
+      "name": "Channel Divinity: Path to the Grave",
+      "source": "XGE",
+      "locator": "classes/class-cleric.json#/subclassFeature/197/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Channel Divinity: Path to the Grave",
+        "source": "XGE",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Grave",
+        "subclassSource": "XGE",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-cleric.json#/subclassFeature/198",
+      "kind": "subclassFeature",
+      "name": "Grave Domain",
+      "source": "XGE",
+      "locator": "classes/class-cleric.json#/subclassFeature/198/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Grave Domain",
+        "source": "XGE",
+        "className": "Cleric",
+        "classSource": "PHB",
+        "subclassShortName": "Grave",
+        "subclassSource": "XGE",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-druid.json#/subclass/1",
+      "kind": "subclass",
+      "name": "Circle of the Land",
+      "source": "PHB",
+      "locator": "classes/class-druid.json#/subclass/1/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Circle of the Land",
+        "source": "PHB",
+        "shortName": "Land",
+        "className": "Druid",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-druid.json#/subclass/3",
+      "kind": "subclass",
+      "name": "Circle of the Moon",
+      "source": "PHB",
+      "locator": "classes/class-druid.json#/subclass/3/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Circle of the Moon",
+        "source": "PHB",
+        "shortName": "Moon",
+        "className": "Druid",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-druid.json#/subclass/5",
+      "kind": "subclass",
+      "name": "Circle of Dreams",
+      "source": "XGE",
+      "locator": "classes/class-druid.json#/subclass/5/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Circle of Dreams",
+        "source": "XGE",
+        "shortName": "Dreams",
+        "className": "Druid",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-druid.json#/subclass/7",
+      "kind": "subclass",
+      "name": "Circle of the Shepherd",
+      "source": "XGE",
+      "locator": "classes/class-druid.json#/subclass/7/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Circle of the Shepherd",
+        "source": "XGE",
+        "shortName": "Shepherd",
+        "className": "Druid",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-druid.json#/subclass/9",
+      "kind": "subclass",
+      "name": "Circle of Spores",
+      "source": "TCE",
+      "locator": "classes/class-druid.json#/subclass/9/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Circle of Spores",
+        "source": "TCE",
+        "shortName": "Spores",
+        "className": "Druid",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-druid.json#/subclass/11",
+      "kind": "subclass",
+      "name": "Circle of Stars",
+      "source": "TCE",
+      "locator": "classes/class-druid.json#/subclass/11/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Circle of Stars",
+        "source": "TCE",
+        "shortName": "Stars",
+        "className": "Druid",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-druid.json#/subclass/13",
+      "kind": "subclass",
+      "name": "Circle of Wildfire",
+      "source": "TCE",
+      "locator": "classes/class-druid.json#/subclass/13/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Circle of Wildfire",
+        "source": "TCE",
+        "shortName": "Wildfire",
+        "className": "Druid",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-druid.json#/subclassFeature/46",
+      "kind": "subclassFeature",
+      "name": "Circle of the Land",
+      "source": "PHB",
+      "locator": "classes/class-druid.json#/subclassFeature/46/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Circle of the Land",
+        "source": "PHB",
+        "className": "Druid",
+        "classSource": "PHB",
+        "subclassShortName": "Land",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true,
+          "srd": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-druid.json#/subclassFeature/47",
+      "kind": "subclassFeature",
+      "name": "Circle of the Moon",
+      "source": "PHB",
+      "locator": "classes/class-druid.json#/subclassFeature/47/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Circle of the Moon",
+        "source": "PHB",
+        "className": "Druid",
+        "classSource": "PHB",
+        "subclassShortName": "Moon",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-druid.json#/subclassFeature/48",
+      "kind": "subclassFeature",
+      "name": "Circle of Spores",
+      "source": "TCE",
+      "locator": "classes/class-druid.json#/subclassFeature/48/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Circle of Spores",
+        "source": "TCE",
+        "className": "Druid",
+        "classSource": "PHB",
+        "subclassShortName": "Spores",
+        "subclassSource": "TCE",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-druid.json#/subclassFeature/49",
+      "kind": "subclassFeature",
+      "name": "Circle of Stars",
+      "source": "TCE",
+      "locator": "classes/class-druid.json#/subclassFeature/49/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Circle of Stars",
+        "source": "TCE",
+        "className": "Druid",
+        "classSource": "PHB",
+        "subclassShortName": "Stars",
+        "subclassSource": "TCE",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-druid.json#/subclassFeature/50",
+      "kind": "subclassFeature",
+      "name": "Circle of Wildfire",
+      "source": "TCE",
+      "locator": "classes/class-druid.json#/subclassFeature/50/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Circle of Wildfire",
+        "source": "TCE",
+        "className": "Druid",
+        "classSource": "PHB",
+        "subclassShortName": "Wildfire",
+        "subclassSource": "TCE",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-druid.json#/subclassFeature/51",
+      "kind": "subclassFeature",
+      "name": "Circle of Dreams",
+      "source": "XGE",
+      "locator": "classes/class-druid.json#/subclassFeature/51/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Circle of Dreams",
+        "source": "XGE",
+        "className": "Druid",
+        "classSource": "PHB",
+        "subclassShortName": "Dreams",
+        "subclassSource": "XGE",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-druid.json#/subclassFeature/52",
+      "kind": "subclassFeature",
+      "name": "Circle of the Shepherd",
+      "source": "XGE",
+      "locator": "classes/class-druid.json#/subclassFeature/52/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Circle of the Shepherd",
+        "source": "XGE",
+        "className": "Druid",
+        "classSource": "PHB",
+        "subclassShortName": "Shepherd",
+        "subclassSource": "XGE",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-fighter.json#/subclass/1",
+      "kind": "subclass",
+      "name": "Battle Master",
+      "source": "PHB",
+      "locator": "classes/class-fighter.json#/subclass/1/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Battle Master",
+        "source": "PHB",
+        "shortName": "Battle Master",
+        "className": "Fighter",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-fighter.json#/subclass/3",
+      "kind": "subclass",
+      "name": "Champion",
+      "source": "PHB",
+      "locator": "classes/class-fighter.json#/subclass/3/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Champion",
+        "source": "PHB",
+        "shortName": "Champion",
+        "className": "Fighter",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-fighter.json#/subclass/5",
+      "kind": "subclass",
+      "name": "Eldritch Knight",
+      "source": "PHB",
+      "locator": "classes/class-fighter.json#/subclass/5/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Eldritch Knight",
+        "source": "PHB",
+        "shortName": "Eldritch Knight",
+        "className": "Fighter",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-fighter.json#/subclass/7",
+      "kind": "subclass",
+      "name": "Purple Dragon Knight (Banneret)",
+      "source": "SCAG",
+      "locator": "classes/class-fighter.json#/subclass/7/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Purple Dragon Knight (Banneret)",
+        "source": "SCAG",
+        "shortName": "Purple Dragon Knight (Banneret)",
+        "className": "Fighter",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-fighter.json#/subclass/9",
+      "kind": "subclass",
+      "name": "Arcane Archer",
+      "source": "XGE",
+      "locator": "classes/class-fighter.json#/subclass/9/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Arcane Archer",
+        "source": "XGE",
+        "shortName": "Arcane Archer",
+        "className": "Fighter",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-fighter.json#/subclass/11",
+      "kind": "subclass",
+      "name": "Cavalier",
+      "source": "XGE",
+      "locator": "classes/class-fighter.json#/subclass/11/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Cavalier",
+        "source": "XGE",
+        "shortName": "Cavalier",
+        "className": "Fighter",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-fighter.json#/subclass/13",
+      "kind": "subclass",
+      "name": "Samurai",
+      "source": "XGE",
+      "locator": "classes/class-fighter.json#/subclass/13/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Samurai",
+        "source": "XGE",
+        "shortName": "Samurai",
+        "className": "Fighter",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-fighter.json#/subclass/15",
+      "kind": "subclass",
+      "name": "Echo Knight",
+      "source": "EGW",
+      "locator": "classes/class-fighter.json#/subclass/15/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Echo Knight",
+        "source": "EGW",
+        "shortName": "Echo Knight",
+        "className": "Fighter",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-fighter.json#/subclass/17",
+      "kind": "subclass",
+      "name": "Psi Warrior",
+      "source": "TCE",
+      "locator": "classes/class-fighter.json#/subclass/17/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Psi Warrior",
+        "source": "TCE",
+        "shortName": "Psi Warrior",
+        "className": "Fighter",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-fighter.json#/subclass/19",
+      "kind": "subclass",
+      "name": "Rune Knight",
+      "source": "TCE",
+      "locator": "classes/class-fighter.json#/subclass/19/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Rune Knight",
+        "source": "TCE",
+        "shortName": "Rune Knight",
+        "className": "Fighter",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-monk.json#/subclass/1",
+      "kind": "subclass",
+      "name": "Way of Shadow",
+      "source": "PHB",
+      "locator": "classes/class-monk.json#/subclass/1/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Way of Shadow",
+        "source": "PHB",
+        "shortName": "Shadow",
+        "className": "Monk",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-monk.json#/subclass/3",
+      "kind": "subclass",
+      "name": "Way of the Four Elements",
+      "source": "PHB",
+      "locator": "classes/class-monk.json#/subclass/3/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Way of the Four Elements",
+        "source": "PHB",
+        "shortName": "Four Elements",
+        "className": "Monk",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-monk.json#/subclass/5",
+      "kind": "subclass",
+      "name": "Way of the Open Hand",
+      "source": "PHB",
+      "locator": "classes/class-monk.json#/subclass/5/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Way of the Open Hand",
+        "source": "PHB",
+        "shortName": "Open Hand",
+        "className": "Monk",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-monk.json#/subclass/7",
+      "kind": "subclass",
+      "name": "Way of the Long Death",
+      "source": "SCAG",
+      "locator": "classes/class-monk.json#/subclass/7/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Way of the Long Death",
+        "source": "SCAG",
+        "shortName": "Long Death",
+        "className": "Monk",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-monk.json#/subclass/9",
+      "kind": "subclass",
+      "name": "Way of the Drunken Master",
+      "source": "XGE",
+      "locator": "classes/class-monk.json#/subclass/9/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Way of the Drunken Master",
+        "source": "XGE",
+        "shortName": "Drunken Master",
+        "className": "Monk",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-monk.json#/subclass/11",
+      "kind": "subclass",
+      "name": "Way of the Kensei",
+      "source": "XGE",
+      "locator": "classes/class-monk.json#/subclass/11/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Way of the Kensei",
+        "source": "XGE",
+        "shortName": "Kensei",
+        "className": "Monk",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-monk.json#/subclass/13",
+      "kind": "subclass",
+      "name": "Way of the Sun Soul",
+      "source": "XGE",
+      "locator": "classes/class-monk.json#/subclass/13/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Way of the Sun Soul",
+        "source": "XGE",
+        "shortName": "Sun Soul",
+        "className": "Monk",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-monk.json#/subclass/15",
+      "kind": "subclass",
+      "name": "Way of Mercy",
+      "source": "TCE",
+      "locator": "classes/class-monk.json#/subclass/15/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Way of Mercy",
+        "source": "TCE",
+        "shortName": "Mercy",
+        "className": "Monk",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-monk.json#/subclass/17",
+      "kind": "subclass",
+      "name": "Way of the Astral Self",
+      "source": "TCE",
+      "locator": "classes/class-monk.json#/subclass/17/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Way of the Astral Self",
+        "source": "TCE",
+        "shortName": "Astral Self",
+        "className": "Monk",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-monk.json#/subclass/19",
+      "kind": "subclass",
+      "name": "Way of the Ascendant Dragon",
+      "source": "FTD",
+      "locator": "classes/class-monk.json#/subclass/19/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Way of the Ascendant Dragon",
+        "source": "FTD",
+        "shortName": "Ascendant Dragon",
+        "className": "Monk",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-paladin.json#/subclass/1",
+      "kind": "subclass",
+      "name": "Oath of Devotion",
+      "source": "PHB",
+      "locator": "classes/class-paladin.json#/subclass/1/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Oath of Devotion",
+        "source": "PHB",
+        "shortName": "Devotion",
+        "className": "Paladin",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-paladin.json#/subclass/3",
+      "kind": "subclass",
+      "name": "Oath of the Ancients",
+      "source": "PHB",
+      "locator": "classes/class-paladin.json#/subclass/3/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Oath of the Ancients",
+        "source": "PHB",
+        "shortName": "Ancients",
+        "className": "Paladin",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-paladin.json#/subclass/5",
+      "kind": "subclass",
+      "name": "Oath of Vengeance",
+      "source": "PHB",
+      "locator": "classes/class-paladin.json#/subclass/5/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Oath of Vengeance",
+        "source": "PHB",
+        "shortName": "Vengeance",
+        "className": "Paladin",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-paladin.json#/subclass/7",
+      "kind": "subclass",
+      "name": "Oathbreaker",
+      "source": "DMG",
+      "locator": "classes/class-paladin.json#/subclass/7/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Oathbreaker",
+        "source": "DMG",
+        "shortName": "Oathbreaker",
+        "className": "Paladin",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-paladin.json#/subclass/9",
+      "kind": "subclass",
+      "name": "Oath of the Crown",
+      "source": "SCAG",
+      "locator": "classes/class-paladin.json#/subclass/9/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Oath of the Crown",
+        "source": "SCAG",
+        "shortName": "Crown",
+        "className": "Paladin",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-paladin.json#/subclass/11",
+      "kind": "subclass",
+      "name": "Oath of Conquest",
+      "source": "XGE",
+      "locator": "classes/class-paladin.json#/subclass/11/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Oath of Conquest",
+        "source": "XGE",
+        "shortName": "Conquest",
+        "className": "Paladin",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-paladin.json#/subclass/13",
+      "kind": "subclass",
+      "name": "Oath of Redemption",
+      "source": "XGE",
+      "locator": "classes/class-paladin.json#/subclass/13/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Oath of Redemption",
+        "source": "XGE",
+        "shortName": "Redemption",
+        "className": "Paladin",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-paladin.json#/subclass/15",
+      "kind": "subclass",
+      "name": "Oath of Glory",
+      "source": "TCE",
+      "locator": "classes/class-paladin.json#/subclass/15/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Oath of Glory",
+        "source": "TCE",
+        "shortName": "Glory",
+        "className": "Paladin",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-paladin.json#/subclass/17",
+      "kind": "subclass",
+      "name": "Oath of the Watchers",
+      "source": "TCE",
+      "locator": "classes/class-paladin.json#/subclass/17/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Oath of the Watchers",
+        "source": "TCE",
+        "shortName": "Watchers",
+        "className": "Paladin",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-ranger.json#/subclass/1",
+      "kind": "subclass",
+      "name": "Beast Master",
+      "source": "PHB",
+      "locator": "classes/class-ranger.json#/subclass/1/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Beast Master",
+        "source": "PHB",
+        "shortName": "Beast Master",
+        "className": "Ranger",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-ranger.json#/subclass/3",
+      "kind": "subclass",
+      "name": "Hunter",
+      "source": "PHB",
+      "locator": "classes/class-ranger.json#/subclass/3/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Hunter",
+        "source": "PHB",
+        "shortName": "Hunter",
+        "className": "Ranger",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-ranger.json#/subclass/5",
+      "kind": "subclass",
+      "name": "Gloom Stalker",
+      "source": "XGE",
+      "locator": "classes/class-ranger.json#/subclass/5/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Gloom Stalker",
+        "source": "XGE",
+        "shortName": "Gloom Stalker",
+        "className": "Ranger",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-ranger.json#/subclass/7",
+      "kind": "subclass",
+      "name": "Horizon Walker",
+      "source": "XGE",
+      "locator": "classes/class-ranger.json#/subclass/7/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Horizon Walker",
+        "source": "XGE",
+        "shortName": "Horizon Walker",
+        "className": "Ranger",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-ranger.json#/subclass/9",
+      "kind": "subclass",
+      "name": "Monster Slayer",
+      "source": "XGE",
+      "locator": "classes/class-ranger.json#/subclass/9/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Monster Slayer",
+        "source": "XGE",
+        "shortName": "Monster Slayer",
+        "className": "Ranger",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-ranger.json#/subclass/11",
+      "kind": "subclass",
+      "name": "Fey Wanderer",
+      "source": "TCE",
+      "locator": "classes/class-ranger.json#/subclass/11/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Fey Wanderer",
+        "source": "TCE",
+        "shortName": "Fey Wanderer",
+        "className": "Ranger",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-ranger.json#/subclass/13",
+      "kind": "subclass",
+      "name": "Swarmkeeper",
+      "source": "TCE",
+      "locator": "classes/class-ranger.json#/subclass/13/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Swarmkeeper",
+        "source": "TCE",
+        "shortName": "Swarmkeeper",
+        "className": "Ranger",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-ranger.json#/subclass/15",
+      "kind": "subclass",
+      "name": "Drakewarden",
+      "source": "FTD",
+      "locator": "classes/class-ranger.json#/subclass/15/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Drakewarden",
+        "source": "FTD",
+        "shortName": "Drakewarden",
+        "className": "Ranger",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-rogue.json#/subclass/1",
+      "kind": "subclass",
+      "name": "Arcane Trickster",
+      "source": "PHB",
+      "locator": "classes/class-rogue.json#/subclass/1/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Arcane Trickster",
+        "source": "PHB",
+        "shortName": "Arcane Trickster",
+        "className": "Rogue",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-rogue.json#/subclass/3",
+      "kind": "subclass",
+      "name": "Assassin",
+      "source": "PHB",
+      "locator": "classes/class-rogue.json#/subclass/3/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Assassin",
+        "source": "PHB",
+        "shortName": "Assassin",
+        "className": "Rogue",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-rogue.json#/subclass/5",
+      "kind": "subclass",
+      "name": "Thief",
+      "source": "PHB",
+      "locator": "classes/class-rogue.json#/subclass/5/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Thief",
+        "source": "PHB",
+        "shortName": "Thief",
+        "className": "Rogue",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-rogue.json#/subclass/7",
+      "kind": "subclass",
+      "name": "Inquisitive",
+      "source": "XGE",
+      "locator": "classes/class-rogue.json#/subclass/7/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Inquisitive",
+        "source": "XGE",
+        "shortName": "Inquisitive",
+        "className": "Rogue",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-rogue.json#/subclass/9",
+      "kind": "subclass",
+      "name": "Mastermind",
+      "source": "XGE",
+      "locator": "classes/class-rogue.json#/subclass/9/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Mastermind",
+        "source": "XGE",
+        "shortName": "Mastermind",
+        "className": "Rogue",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-rogue.json#/subclass/11",
+      "kind": "subclass",
+      "name": "Scout",
+      "source": "XGE",
+      "locator": "classes/class-rogue.json#/subclass/11/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Scout",
+        "source": "XGE",
+        "shortName": "Scout",
+        "className": "Rogue",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-rogue.json#/subclass/13",
+      "kind": "subclass",
+      "name": "Swashbuckler",
+      "source": "XGE",
+      "locator": "classes/class-rogue.json#/subclass/13/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Swashbuckler",
+        "source": "XGE",
+        "shortName": "Swashbuckler",
+        "className": "Rogue",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-rogue.json#/subclass/15",
+      "kind": "subclass",
+      "name": "Phantom",
+      "source": "TCE",
+      "locator": "classes/class-rogue.json#/subclass/15/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Phantom",
+        "source": "TCE",
+        "shortName": "Phantom",
+        "className": "Rogue",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-rogue.json#/subclass/17",
+      "kind": "subclass",
+      "name": "Soulknife",
+      "source": "TCE",
+      "locator": "classes/class-rogue.json#/subclass/17/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Soulknife",
+        "source": "TCE",
+        "shortName": "Soulknife",
+        "className": "Rogue",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclass/1",
+      "kind": "subclass",
+      "name": "Draconic Bloodline",
+      "source": "PHB",
+      "locator": "classes/class-sorcerer.json#/subclass/1/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Draconic Bloodline",
+        "source": "PHB",
+        "shortName": "Draconic",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclass/3",
+      "kind": "subclass",
+      "name": "Wild Magic",
+      "source": "PHB",
+      "locator": "classes/class-sorcerer.json#/subclass/3/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Wild Magic",
+        "source": "PHB",
+        "shortName": "Wild",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclass/5",
+      "kind": "subclass",
+      "name": "Pyromancer (PSK)",
+      "source": "PSK",
+      "locator": "classes/class-sorcerer.json#/subclass/5/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Pyromancer (PSK)",
+        "source": "PSK",
+        "shortName": "Pyromancer (PSK)",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclass/7",
+      "kind": "subclass",
+      "name": "Divine Soul",
+      "source": "XGE",
+      "locator": "classes/class-sorcerer.json#/subclass/7/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Divine Soul",
+        "source": "XGE",
+        "shortName": "Divine Soul",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclass/9",
+      "kind": "subclass",
+      "name": "Shadow Magic",
+      "source": "XGE",
+      "locator": "classes/class-sorcerer.json#/subclass/9/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Shadow Magic",
+        "source": "XGE",
+        "shortName": "Shadow",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclass/11",
+      "kind": "subclass",
+      "name": "Storm Sorcery",
+      "source": "XGE",
+      "locator": "classes/class-sorcerer.json#/subclass/11/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Storm Sorcery",
+        "source": "XGE",
+        "shortName": "Storm",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclass/13",
+      "kind": "subclass",
+      "name": "Aberrant Mind",
+      "source": "TCE",
+      "locator": "classes/class-sorcerer.json#/subclass/13/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Aberrant Mind",
+        "source": "TCE",
+        "shortName": "Aberrant Mind",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclass/15",
+      "kind": "subclass",
+      "name": "Clockwork Soul",
+      "source": "TCE",
+      "locator": "classes/class-sorcerer.json#/subclass/15/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Clockwork Soul",
+        "source": "TCE",
+        "shortName": "Clockwork Soul",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclass/17",
+      "kind": "subclass",
+      "name": "Lunar Sorcery",
+      "source": "DSotDQ",
+      "locator": "classes/class-sorcerer.json#/subclass/17/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Lunar Sorcery",
+        "source": "DSotDQ",
+        "shortName": "Lunar",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclassFeature/56",
+      "kind": "subclassFeature",
+      "name": "Lunar Sorcery",
+      "source": "DSotDQ",
+      "locator": "classes/class-sorcerer.json#/subclassFeature/56/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Lunar Sorcery",
+        "source": "DSotDQ",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "subclassShortName": "Lunar",
+        "subclassSource": "DSotDQ",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclassFeature/65",
+      "kind": "subclassFeature",
+      "name": "Draconic Bloodline",
+      "source": "PHB",
+      "locator": "classes/class-sorcerer.json#/subclassFeature/65/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Draconic Bloodline",
+        "source": "PHB",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "subclassShortName": "Draconic",
+        "subclassSource": "PHB",
+        "level": 1,
+        "_preserve": {
+          "page": true,
+          "srd": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclassFeature/66",
+      "kind": "subclassFeature",
+      "name": "Wild Magic",
+      "source": "PHB",
+      "locator": "classes/class-sorcerer.json#/subclassFeature/66/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Wild Magic",
+        "source": "PHB",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "subclassShortName": "Wild",
+        "subclassSource": "PHB",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclassFeature/67",
+      "kind": "subclassFeature",
+      "name": "Pyromancer (PSK)",
+      "source": "PSK",
+      "locator": "classes/class-sorcerer.json#/subclassFeature/67/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Pyromancer (PSK)",
+        "source": "PSK",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "subclassShortName": "Pyromancer (PSK)",
+        "subclassSource": "PSK",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclassFeature/74",
+      "kind": "subclassFeature",
+      "name": "Aberrant Mind",
+      "source": "TCE",
+      "locator": "classes/class-sorcerer.json#/subclassFeature/74/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Aberrant Mind",
+        "source": "TCE",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "subclassShortName": "Aberrant Mind",
+        "subclassSource": "TCE",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclassFeature/75",
+      "kind": "subclassFeature",
+      "name": "Clockwork Soul",
+      "source": "TCE",
+      "locator": "classes/class-sorcerer.json#/subclassFeature/75/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Clockwork Soul",
+        "source": "TCE",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "subclassShortName": "Clockwork Soul",
+        "subclassSource": "TCE",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclassFeature/76",
+      "kind": "subclassFeature",
+      "name": "Divine Soul",
+      "source": "XGE",
+      "locator": "classes/class-sorcerer.json#/subclassFeature/76/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Divine Soul",
+        "source": "XGE",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "subclassShortName": "Divine Soul",
+        "subclassSource": "XGE",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclassFeature/77",
+      "kind": "subclassFeature",
+      "name": "Shadow Magic",
+      "source": "XGE",
+      "locator": "classes/class-sorcerer.json#/subclassFeature/77/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Shadow Magic",
+        "source": "XGE",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "subclassShortName": "Shadow",
+        "subclassSource": "XGE",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-sorcerer.json#/subclassFeature/78",
+      "kind": "subclassFeature",
+      "name": "Storm Sorcery",
+      "source": "XGE",
+      "locator": "classes/class-sorcerer.json#/subclassFeature/78/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Storm Sorcery",
+        "source": "XGE",
+        "className": "Sorcerer",
+        "classSource": "PHB",
+        "subclassShortName": "Storm",
+        "subclassSource": "XGE",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclass/1",
+      "kind": "subclass",
+      "name": "The Archfey",
+      "source": "PHB",
+      "locator": "classes/class-warlock.json#/subclass/1/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Archfey",
+        "source": "PHB",
+        "shortName": "Archfey",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclass/3",
+      "kind": "subclass",
+      "name": "The Fiend",
+      "source": "PHB",
+      "locator": "classes/class-warlock.json#/subclass/3/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Fiend",
+        "source": "PHB",
+        "shortName": "Fiend",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclass/5",
+      "kind": "subclass",
+      "name": "The Great Old One",
+      "source": "PHB",
+      "locator": "classes/class-warlock.json#/subclass/5/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Great Old One",
+        "source": "PHB",
+        "shortName": "Great Old One",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclass/7",
+      "kind": "subclass",
+      "name": "The Undying",
+      "source": "SCAG",
+      "locator": "classes/class-warlock.json#/subclass/7/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Undying",
+        "source": "SCAG",
+        "shortName": "Undying",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclass/9",
+      "kind": "subclass",
+      "name": "The Celestial",
+      "source": "XGE",
+      "locator": "classes/class-warlock.json#/subclass/9/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Celestial",
+        "source": "XGE",
+        "shortName": "Celestial",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclass/11",
+      "kind": "subclass",
+      "name": "The Hexblade",
+      "source": "XGE",
+      "locator": "classes/class-warlock.json#/subclass/11/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Hexblade",
+        "source": "XGE",
+        "shortName": "Hexblade",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclass/13",
+      "kind": "subclass",
+      "name": "The Fathomless",
+      "source": "TCE",
+      "locator": "classes/class-warlock.json#/subclass/13/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Fathomless",
+        "source": "TCE",
+        "shortName": "Fathomless",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclass/15",
+      "kind": "subclass",
+      "name": "The Genie",
+      "source": "TCE",
+      "locator": "classes/class-warlock.json#/subclass/15/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Genie",
+        "source": "TCE",
+        "shortName": "Genie",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclass/17",
+      "kind": "subclass",
+      "name": "The Undead",
+      "source": "VRGR",
+      "locator": "classes/class-warlock.json#/subclass/17/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Undead",
+        "source": "VRGR",
+        "shortName": "Undead",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclassFeature/57",
+      "kind": "subclassFeature",
+      "name": "The Archfey",
+      "source": "PHB",
+      "locator": "classes/class-warlock.json#/subclassFeature/57/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Archfey",
+        "source": "PHB",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "subclassShortName": "Archfey",
+        "subclassSource": "PHB",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclassFeature/58",
+      "kind": "subclassFeature",
+      "name": "The Fiend",
+      "source": "PHB",
+      "locator": "classes/class-warlock.json#/subclassFeature/58/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Fiend",
+        "source": "PHB",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "subclassShortName": "Fiend",
+        "subclassSource": "PHB",
+        "level": 1,
+        "_preserve": {
+          "page": true,
+          "srd": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclassFeature/59",
+      "kind": "subclassFeature",
+      "name": "The Great Old One",
+      "source": "PHB",
+      "locator": "classes/class-warlock.json#/subclassFeature/59/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Great Old One",
+        "source": "PHB",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "subclassShortName": "Great Old One",
+        "subclassSource": "PHB",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclassFeature/66",
+      "kind": "subclassFeature",
+      "name": "The Undying",
+      "source": "SCAG",
+      "locator": "classes/class-warlock.json#/subclassFeature/66/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Undying",
+        "source": "SCAG",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "subclassShortName": "Undying",
+        "subclassSource": "SCAG",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclassFeature/67",
+      "kind": "subclassFeature",
+      "name": "The Fathomless",
+      "source": "TCE",
+      "locator": "classes/class-warlock.json#/subclassFeature/67/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Fathomless",
+        "source": "TCE",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "subclassShortName": "Fathomless",
+        "subclassSource": "TCE",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclassFeature/68",
+      "kind": "subclassFeature",
+      "name": "The Genie",
+      "source": "TCE",
+      "locator": "classes/class-warlock.json#/subclassFeature/68/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Genie",
+        "source": "TCE",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "subclassShortName": "Genie",
+        "subclassSource": "TCE",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclassFeature/69",
+      "kind": "subclassFeature",
+      "name": "The Undead",
+      "source": "VRGR",
+      "locator": "classes/class-warlock.json#/subclassFeature/69/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Undead",
+        "source": "VRGR",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "subclassShortName": "Undead",
+        "subclassSource": "VRGR",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclassFeature/70",
+      "kind": "subclassFeature",
+      "name": "The Celestial",
+      "source": "XGE",
+      "locator": "classes/class-warlock.json#/subclassFeature/70/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Celestial",
+        "source": "XGE",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "subclassShortName": "Celestial",
+        "subclassSource": "XGE",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-warlock.json#/subclassFeature/71",
+      "kind": "subclassFeature",
+      "name": "The Hexblade",
+      "source": "XGE",
+      "locator": "classes/class-warlock.json#/subclassFeature/71/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "The Hexblade",
+        "source": "XGE",
+        "className": "Warlock",
+        "classSource": "PHB",
+        "subclassShortName": "Hexblade",
+        "subclassSource": "XGE",
+        "level": 1,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclass/1",
+      "kind": "subclass",
+      "name": "School of Abjuration",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclass/1/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Abjuration",
+        "source": "PHB",
+        "shortName": "Abjuration",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclass/3",
+      "kind": "subclass",
+      "name": "School of Conjuration",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclass/3/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Conjuration",
+        "source": "PHB",
+        "shortName": "Conjuration",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclass/5",
+      "kind": "subclass",
+      "name": "School of Divination",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclass/5/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Divination",
+        "source": "PHB",
+        "shortName": "Divination",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclass/7",
+      "kind": "subclass",
+      "name": "School of Enchantment",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclass/7/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Enchantment",
+        "source": "PHB",
+        "shortName": "Enchantment",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclass/9",
+      "kind": "subclass",
+      "name": "School of Evocation",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclass/9/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Evocation",
+        "source": "PHB",
+        "shortName": "Evocation",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclass/11",
+      "kind": "subclass",
+      "name": "School of Illusion",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclass/11/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Illusion",
+        "source": "PHB",
+        "shortName": "Illusion",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclass/13",
+      "kind": "subclass",
+      "name": "School of Necromancy",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclass/13/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Necromancy",
+        "source": "PHB",
+        "shortName": "Necromancy",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclass/15",
+      "kind": "subclass",
+      "name": "School of Transmutation",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclass/15/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Transmutation",
+        "source": "PHB",
+        "shortName": "Transmutation",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclass/17",
+      "kind": "subclass",
+      "name": "War Magic",
+      "source": "XGE",
+      "locator": "classes/class-wizard.json#/subclass/17/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "War Magic",
+        "source": "XGE",
+        "shortName": "War",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclass/19",
+      "kind": "subclass",
+      "name": "Chronurgy Magic",
+      "source": "EGW",
+      "locator": "classes/class-wizard.json#/subclass/19/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Chronurgy Magic",
+        "source": "EGW",
+        "shortName": "Chronurgy",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclass/21",
+      "kind": "subclass",
+      "name": "Graviturgy Magic",
+      "source": "EGW",
+      "locator": "classes/class-wizard.json#/subclass/21/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Graviturgy Magic",
+        "source": "EGW",
+        "shortName": "Graviturgy",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclass/23",
+      "kind": "subclass",
+      "name": "Bladesinging",
+      "source": "TCE",
+      "locator": "classes/class-wizard.json#/subclass/23/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Bladesinging",
+        "source": "TCE",
+        "shortName": "Bladesinging",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclass/25",
+      "kind": "subclass",
+      "name": "Order of Scribes",
+      "source": "TCE",
+      "locator": "classes/class-wizard.json#/subclass/25/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Order of Scribes",
+        "source": "TCE",
+        "shortName": "Scribes",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclassFeature/107",
+      "kind": "subclassFeature",
+      "name": "Chronurgy Magic",
+      "source": "EGW",
+      "locator": "classes/class-wizard.json#/subclassFeature/107/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Chronurgy Magic",
+        "source": "EGW",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "subclassShortName": "Chronurgy",
+        "subclassSource": "EGW",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclassFeature/108",
+      "kind": "subclassFeature",
+      "name": "Graviturgy Magic",
+      "source": "EGW",
+      "locator": "classes/class-wizard.json#/subclassFeature/108/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Graviturgy Magic",
+        "source": "EGW",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "subclassShortName": "Graviturgy",
+        "subclassSource": "EGW",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclassFeature/115",
+      "kind": "subclassFeature",
+      "name": "School of Abjuration",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclassFeature/115/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Abjuration",
+        "source": "PHB",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "subclassShortName": "Abjuration",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclassFeature/116",
+      "kind": "subclassFeature",
+      "name": "School of Conjuration",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclassFeature/116/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Conjuration",
+        "source": "PHB",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "subclassShortName": "Conjuration",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclassFeature/117",
+      "kind": "subclassFeature",
+      "name": "School of Divination",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclassFeature/117/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Divination",
+        "source": "PHB",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "subclassShortName": "Divination",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclassFeature/118",
+      "kind": "subclassFeature",
+      "name": "School of Enchantment",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclassFeature/118/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Enchantment",
+        "source": "PHB",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "subclassShortName": "Enchantment",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclassFeature/119",
+      "kind": "subclassFeature",
+      "name": "School of Evocation",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclassFeature/119/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Evocation",
+        "source": "PHB",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "subclassShortName": "Evocation",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true,
+          "srd": true,
+          "basicRules": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclassFeature/120",
+      "kind": "subclassFeature",
+      "name": "School of Illusion",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclassFeature/120/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Illusion",
+        "source": "PHB",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "subclassShortName": "Illusion",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclassFeature/121",
+      "kind": "subclassFeature",
+      "name": "School of Necromancy",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclassFeature/121/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Necromancy",
+        "source": "PHB",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "subclassShortName": "Necromancy",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclassFeature/122",
+      "kind": "subclassFeature",
+      "name": "School of Transmutation",
+      "source": "PHB",
+      "locator": "classes/class-wizard.json#/subclassFeature/122/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "School of Transmutation",
+        "source": "PHB",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "subclassShortName": "Transmutation",
+        "subclassSource": "PHB",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclassFeature/123",
+      "kind": "subclassFeature",
+      "name": "Bladesinging",
+      "source": "TCE",
+      "locator": "classes/class-wizard.json#/subclassFeature/123/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Bladesinging",
+        "source": "TCE",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "subclassShortName": "Bladesinging",
+        "subclassSource": "TCE",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclassFeature/124",
+      "kind": "subclassFeature",
+      "name": "Order of Scribes",
+      "source": "TCE",
+      "locator": "classes/class-wizard.json#/subclassFeature/124/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "Order of Scribes",
+        "source": "TCE",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "subclassShortName": "Scribes",
+        "subclassSource": "TCE",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    },
+    {
+      "owner": "classes/class-wizard.json#/subclassFeature/125",
+      "kind": "subclassFeature",
+      "name": "War Magic",
+      "source": "XGE",
+      "locator": "classes/class-wizard.json#/subclassFeature/125/_copy",
+      "directive": "_copy",
+      "value": {
+        "name": "War Magic",
+        "source": "XGE",
+        "className": "Wizard",
+        "classSource": "PHB",
+        "subclassShortName": "War",
+        "subclassSource": "XGE",
+        "level": 2,
+        "_preserve": {
+          "page": true
+        }
+      }
+    }
+  ]
+}
