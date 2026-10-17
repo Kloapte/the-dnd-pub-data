@@ -266,3 +266,42 @@ Prior source and domain findings remain unchanged. New item relationships are im
 - The source has eight recipe tags, one creature tag, one external link, and unit-formatting tags. No tags map to supported resolver targets; Recipes add zero occurrences and expose zero target IDs. The prior resolver totals remain 6,246 (2,517 RESOLVED, 2,054 AMBIGUOUS, 181 UNRESOLVED, 1,494 DEFERRED).
 - `homecrafts.json` contains 20 crochet-pattern records. Homecraft is OUT OF SCOPE by explicit product decision, not a parsing failure or pending technical catalog. It has no catalog or API.
 - The source-purpose and licensing checkpoint, field audit, domain design, reference inventory, implementation, and tests are documented under `analysis/remaining-json/recipes/`.
+
+## Step 7 Batch 3A: Structured Feat mechanics
+
+- Fourteen existing typed Feat field families now reach internal immutable mechanics: 74 authored
+  and effective field occurrences on 59 owners, among 314 definitions. The nine existing versions
+  have no such fields in their parents; synthetic inheritance verifies that expansion preserves
+  all fourteen. No source, identity, reference or public DTO behavior changes.
+- Existing `RaceGrantGroupDto`, `RaceGrantDto`, `RaceGrantChoiceDto` and `RaceResistanceDto` are
+  reusable value shapes without a Race owner. Owning fields still distinguish skill proficiency,
+  expertise, category/count selectors, choices and damage resistance. Their names do not justify
+  flattening choices into grants or inferring target identities.
+- Combined Feat choices retain the source choice filter field, which the narrower Race combined
+  choice DTO lacks. Sense-key maps and literal `*` progression maps use small Feat values; closed
+  sense records and integer Class milestones would lose source distinctions. Progression type
+  labels remain unqualified labels, not selected Optional Feature IDs.
+- Public exposure remains excluded. See
+  [the Batch 3A report](../mechanics/batch-3a-feat-structured-mechanics/IMPLEMENTATION.md) for the
+  reuse assessment, field inventory, exact preservation checks and publication boundary.
+
+## Step 7 Batch 7: Legendary-group support preservation
+
+- Legendary groups are a separate internal support domain: 188 authored roots, 16 copies and
+  21 explicit versions produce 209 support groups, without adding Monster definitions. Their
+  lair/regional/mythic bodies use shared typed EntryDte content, not Monster action/effect models.
+- The one `legendaryGroupTemplate` is distinct from the 66 `monsterTemplate` records. Its observed
+  append/prepend body-array dialect uses a dedicated strict resolver. Monster templates can also
+  change a Monster's group reference; that existing reference remains authoritative. A shared
+  Shadow Dragon name does not establish a dragon-specific group-version relationship.
+- Every inherited/added body entry retains its original group/copy/template pointer and source
+  hash. Existing shared syntax text/evidence structures preserve nested context without assigning
+  copied content to a new authored owner. Copy lineage and version/template lineage stay distinct.
+- All 32 applicable source codes are already registered. Group source occurrences use shared
+  SourceIdentity/SourceReference; nested source qualifiers are preserved and validated separately.
+- All 307 effective Monster references resolve by exact authored name/source to 182 groups;
+  27 additional support groups remain retained. Missing exact associations remain unresolved and
+  duplicate identities fail loading. No name-only fallback or shared resolver adapter is added.
+- Body prose, table results, raw tags and evidence remain internal. No gameplay interpretation,
+  public field, Monster identity or existing resolver occurrence changes. See the
+  [Batch 7 report](../mechanics/batch-7-legendary-groups/IMPLEMENTATION.md).

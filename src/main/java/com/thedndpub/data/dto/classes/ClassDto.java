@@ -10,8 +10,8 @@ public record ClassDto(String id, String name, SourceReference source, String ed
         ClassHitDice hitDice, List<String> savingThrows, List<ClassAbilitySet> primaryAbilities,
         ClassStartingOptions startingOptions, ClassMulticlassOptions multiclassing,
         List<ClassFeatureReferenceDto> features, List<String> subclassIds,
-        List<ClassProgressionTable> tables, List<ClassChoiceProgression> choices,
-        ClassSpellcasting spellcasting, ClassSourceMetadataDto sources,
+        List<ClassProgressionTableDto> tables, List<ClassChoiceProgression> choices,
+        ClassSpellcastingDto spellcasting, ClassSourceMetadataDto sources,
         List<PublicCrossCatalogReferenceDto> crossCatalogReferences) {
     public ClassDto {
         savingThrows = immutable(savingThrows);

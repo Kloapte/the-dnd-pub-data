@@ -110,15 +110,25 @@ public record ItemSourceDte(
         String tier,
         String detail1,
         String detail2,
+        @JsonDeserialize(using = ItemSignedBonusTokenDeserializer.class)
         String bonusAc,
+        @JsonDeserialize(using = ItemSignedBonusTokenDeserializer.class)
         String bonusWeapon,
+        @JsonDeserialize(using = ItemSignedBonusTokenDeserializer.class)
         String bonusWeaponAttack,
+        @JsonDeserialize(using = ItemSignedBonusTokenDeserializer.class)
         String bonusWeaponDamage,
+        @JsonDeserialize(using = ItemSignedBonusTokenDeserializer.class)
         String bonusSpellAttack,
+        @JsonDeserialize(using = ItemSignedBonusTokenDeserializer.class)
         String bonusSpellSaveDc,
+        @JsonDeserialize(using = ItemSignedBonusTokenDeserializer.class)
         String bonusSavingThrow,
+        @JsonDeserialize(using = ItemSignedBonusTokenDeserializer.class)
         String bonusSavingThrowConcentration,
+        @JsonDeserialize(using = ItemSignedBonusTokenDeserializer.class)
         String bonusAbilityCheck,
+        @JsonDeserialize(using = ItemSignedBonusTokenDeserializer.class)
         String bonusProficiencyBonus,
         Integer spellScrollLevel,
         Integer crew,

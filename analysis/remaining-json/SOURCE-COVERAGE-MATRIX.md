@@ -23,8 +23,8 @@ Every file below is discovered recursively under `src/main/resources/data/`. Per
 | `loot.json` | 1 | `artObjects` 10; `dragon` 4; `dragonMundaneItems` 25; `gems` 12; `hoard` 8; `individual` 8; `magicItems` 33 | [Implemented Treasure Tables](treasure-tables/IMPLEMENTATION.md); six named table variants plus shared Dragon row data |
 | `magicvariants.json` | 1 | `magicvariant` 230; `linkedLootTables` is a dynamic object | Implemented variant catalog; linked loot tables are auxiliary |
 | `monsters/bestiary-*.json` | 111 | `monster` 4,560 across bestiaries; `_meta` occurs in 83 files | Implemented monster roots; broad source corpus and copy/version processing |
-| `monsters/legendarygroups.json` | 1 | `legendaryGroup` 188 | Implemented monster support definitions |
-| `monsters/template.json` | 1 | `monsterTemplate` 66; `legendaryGroupTemplate` 1 | Copy/template support file; omitted from prior 173-file coverage manifest |
+| `monsters/legendarygroups.json` | 1 | `legendaryGroup` 188 | Batch 7 internal support catalog: all bodies/copies/versions preserved; 209 expanded support groups, outside Monster definition counts |
+| `monsters/template.json` | 1 | `monsterTemplate` 66; `legendaryGroupTemplate` 1 | Existing Monster templates plus Batch 7 dedicated legendary-group template preservation/application; omitted from prior 173-file coverage manifest |
 | `names.json` | 1 | `name` 10 | Implemented internal Name Tables catalog; metadata-only public projection pending publication review |
 | `objects.json` | 1 | `object` 37 | Implemented Object catalog; source identity is `(source, name)` |
 | `optionalfeatures.json` | 1 | `optionalfeature` 221 | Implemented |

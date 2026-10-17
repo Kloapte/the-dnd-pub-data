@@ -1,0 +1,64 @@
+{
+  "preExistingSrcFilesUnchanged": 1712,
+  "pinnedSourceJsonFilesUnchanged": 175,
+  "originalAssessmentFilesUnchanged": 23,
+  "auditDeterministic": true,
+  "sourceAuditSha256": "2ffca740dfa1d60f03efced5742ce20bc66178a54fab2154fd4821578590e791",
+  "runtime": {
+    "associatedSupportGroups": 182,
+    "authoredRoots": 188,
+    "copyEffectiveRoots": 188,
+    "effectiveBodyEntries": 1005,
+    "effectiveMonsterAssociations": 307,
+    "effectiveMonsterDefinitions": 4851,
+    "expandedSupportGroups": 209,
+    "unresolvedAssociations": 0,
+    "versionAssociations": 1
+  },
+  "tests": {
+    "tests": 484,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "packagedSupportProbe": {
+    "supportGroups": 209,
+    "monsterAssociations": 307,
+    "resourceOriginVerified": true
+  },
+  "unchangedResolverContract": {
+    "occurrences": 6246,
+    "resolved": 2517,
+    "ambiguous": 2054,
+    "unresolved": 181,
+    "deferred": 1494
+  },
+  "newSourceFiles": [
+    "src/main/java/com/thedndpub/data/dte/legendarygroup/LegendaryGroupArrayMode.java",
+    "src/main/java/com/thedndpub/data/dte/legendarygroup/LegendaryGroupArrayModificationDte.java",
+    "src/main/java/com/thedndpub/data/dte/legendarygroup/LegendaryGroupCopyDte.java",
+    "src/main/java/com/thedndpub/data/dte/legendarygroup/LegendaryGroupEntryCopies.java",
+    "src/main/java/com/thedndpub/data/dte/legendarygroup/LegendaryGroupMetadataDte.java",
+    "src/main/java/com/thedndpub/data/dte/legendarygroup/LegendaryGroupModificationsDte.java",
+    "src/main/java/com/thedndpub/data/dte/legendarygroup/LegendaryGroupsFileDte.java",
+    "src/main/java/com/thedndpub/data/dte/legendarygroup/LegendaryGroupSourceDte.java",
+    "src/main/java/com/thedndpub/data/dte/legendarygroup/LegendaryGroupSourceReferenceDte.java",
+    "src/main/java/com/thedndpub/data/dte/legendarygroup/LegendaryGroupTemplateApplicationDte.java",
+    "src/main/java/com/thedndpub/data/dte/legendarygroup/LegendaryGroupTemplateDte.java",
+    "src/main/java/com/thedndpub/data/dte/legendarygroup/LegendaryGroupTemplateReferenceDte.java",
+    "src/main/java/com/thedndpub/data/dte/legendarygroup/LegendaryGroupVersionDte.java",
+    "src/main/java/com/thedndpub/data/dto/monster/support/LegendaryGroupAssociation.java",
+    "src/main/java/com/thedndpub/data/dto/monster/support/LegendaryGroupAssociationStatus.java",
+    "src/main/java/com/thedndpub/data/dto/monster/support/LegendaryGroupAuthoredRecord.java",
+    "src/main/java/com/thedndpub/data/dto/monster/support/LegendaryGroupAuthoredTemplate.java",
+    "src/main/java/com/thedndpub/data/dto/monster/support/LegendaryGroupBodyEntry.java",
+    "src/main/java/com/thedndpub/data/dto/monster/support/LegendaryGroupDefinition.java",
+    "src/main/java/com/thedndpub/data/dto/monster/support/LegendaryGroupId.java",
+    "src/main/java/com/thedndpub/data/dto/monster/support/LegendaryGroupInputs.java",
+    "src/main/java/com/thedndpub/data/dto/monster/support/LegendaryGroupProvenance.java",
+    "src/main/java/com/thedndpub/data/importer/monster/LegendaryGroupResolver.java",
+    "src/main/java/com/thedndpub/data/importer/monster/LegendaryGroupSourceLoader.java",
+    "src/main/java/com/thedndpub/data/services/LegendaryGroupSupportCatalog.java",
+    "src/test/java/com/thedndpub/data/importer/monster/LegendaryGroupSupportCatalogTests.java"
+  ]
+}

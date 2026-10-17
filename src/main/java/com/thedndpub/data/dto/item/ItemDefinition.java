@@ -53,6 +53,7 @@ public record ItemDefinition(
         List<ItemLightDto> lights,
         ItemSpeedModificationDto speedModification,
         Boolean focusEnabled,
+        ItemFocus focus,
         ItemVehicleStatisticsDto vehicleStatistics,
         ItemReferencesDto references,
         String spellcastingFocusType,
@@ -67,7 +68,8 @@ public record ItemDefinition(
         Boolean sentient,
         Boolean cursed,
         Boolean tattoo,
-        Boolean atomicPackContents) {
+        Boolean atomicPackContents,
+        ItemSignedBonuses signedBonuses) {
     public ItemDefinition {
         typeCodes = List.copyOf(typeCodes);
         types = List.copyOf(types);

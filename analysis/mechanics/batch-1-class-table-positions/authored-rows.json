@@ -1,0 +1,1066 @@
+{
+  "countSemantics": "Authored rows with a retained cell following a withheld string; no copy expansion.",
+  "affectedRowCount": 97,
+  "owners": [
+    {
+      "file": "class-artificer.json",
+      "root": "class",
+      "ownerIndex": 1,
+      "name": "Artificer",
+      "source": "EFA",
+      "count": 1,
+      "affectedRows": [
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[0]",
+          "tableIndex": 0,
+          "rowIndex": 0,
+          "sourceWidth": 4,
+          "retainedColumnIndexes": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "file": "class-barbarian.json",
+      "root": "class",
+      "ownerIndex": 0,
+      "name": "Barbarian",
+      "source": "PHB",
+      "count": 20,
+      "affectedRows": [
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[0]",
+          "tableIndex": 0,
+          "rowIndex": 0,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[1]",
+          "tableIndex": 0,
+          "rowIndex": 1,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[2]",
+          "tableIndex": 0,
+          "rowIndex": 2,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[3]",
+          "tableIndex": 0,
+          "rowIndex": 3,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[4]",
+          "tableIndex": 0,
+          "rowIndex": 4,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[5]",
+          "tableIndex": 0,
+          "rowIndex": 5,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[6]",
+          "tableIndex": 0,
+          "rowIndex": 6,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[7]",
+          "tableIndex": 0,
+          "rowIndex": 7,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[8]",
+          "tableIndex": 0,
+          "rowIndex": 8,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[9]",
+          "tableIndex": 0,
+          "rowIndex": 9,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[10]",
+          "tableIndex": 0,
+          "rowIndex": 10,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[11]",
+          "tableIndex": 0,
+          "rowIndex": 11,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[12]",
+          "tableIndex": 0,
+          "rowIndex": 12,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[13]",
+          "tableIndex": 0,
+          "rowIndex": 13,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[14]",
+          "tableIndex": 0,
+          "rowIndex": 14,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[15]",
+          "tableIndex": 0,
+          "rowIndex": 15,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[16]",
+          "tableIndex": 0,
+          "rowIndex": 16,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[17]",
+          "tableIndex": 0,
+          "rowIndex": 17,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[18]",
+          "tableIndex": 0,
+          "rowIndex": 18,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[19]",
+          "tableIndex": 0,
+          "rowIndex": 19,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "file": "class-barbarian.json",
+      "root": "class",
+      "ownerIndex": 1,
+      "name": "Barbarian",
+      "source": "XPHB",
+      "count": 20,
+      "affectedRows": [
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[0]",
+          "tableIndex": 0,
+          "rowIndex": 0,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[1]",
+          "tableIndex": 0,
+          "rowIndex": 1,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[2]",
+          "tableIndex": 0,
+          "rowIndex": 2,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[3]",
+          "tableIndex": 0,
+          "rowIndex": 3,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[4]",
+          "tableIndex": 0,
+          "rowIndex": 4,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[5]",
+          "tableIndex": 0,
+          "rowIndex": 5,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[6]",
+          "tableIndex": 0,
+          "rowIndex": 6,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[7]",
+          "tableIndex": 0,
+          "rowIndex": 7,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[8]",
+          "tableIndex": 0,
+          "rowIndex": 8,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[9]",
+          "tableIndex": 0,
+          "rowIndex": 9,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[10]",
+          "tableIndex": 0,
+          "rowIndex": 10,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[11]",
+          "tableIndex": 0,
+          "rowIndex": 11,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[12]",
+          "tableIndex": 0,
+          "rowIndex": 12,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[13]",
+          "tableIndex": 0,
+          "rowIndex": 13,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[14]",
+          "tableIndex": 0,
+          "rowIndex": 14,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[15]",
+          "tableIndex": 0,
+          "rowIndex": 15,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[16]",
+          "tableIndex": 0,
+          "rowIndex": 16,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[17]",
+          "tableIndex": 0,
+          "rowIndex": 17,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[18]",
+          "tableIndex": 0,
+          "rowIndex": 18,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.class[1].classTableGroups[0].rows[19]",
+          "tableIndex": 0,
+          "rowIndex": 19,
+          "sourceWidth": 3,
+          "retainedColumnIndexes": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "file": "class-fighter.json",
+      "root": "subclass",
+      "ownerIndex": 23,
+      "name": "Psi Warrior",
+      "source": "XPHB",
+      "className": "Fighter",
+      "classSource": "XPHB",
+      "count": 18,
+      "affectedRows": [
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[2]",
+          "tableIndex": 0,
+          "rowIndex": 2,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[3]",
+          "tableIndex": 0,
+          "rowIndex": 3,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[4]",
+          "tableIndex": 0,
+          "rowIndex": 4,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[5]",
+          "tableIndex": 0,
+          "rowIndex": 5,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[6]",
+          "tableIndex": 0,
+          "rowIndex": 6,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[7]",
+          "tableIndex": 0,
+          "rowIndex": 7,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[8]",
+          "tableIndex": 0,
+          "rowIndex": 8,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[9]",
+          "tableIndex": 0,
+          "rowIndex": 9,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[10]",
+          "tableIndex": 0,
+          "rowIndex": 10,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[11]",
+          "tableIndex": 0,
+          "rowIndex": 11,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[12]",
+          "tableIndex": 0,
+          "rowIndex": 12,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[13]",
+          "tableIndex": 0,
+          "rowIndex": 13,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[14]",
+          "tableIndex": 0,
+          "rowIndex": 14,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[15]",
+          "tableIndex": 0,
+          "rowIndex": 15,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[16]",
+          "tableIndex": 0,
+          "rowIndex": 16,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[17]",
+          "tableIndex": 0,
+          "rowIndex": 17,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[18]",
+          "tableIndex": 0,
+          "rowIndex": 18,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[23].subclassTableGroups[0].rows[19]",
+          "tableIndex": 0,
+          "rowIndex": 19,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "file": "class-rogue.json",
+      "root": "subclass",
+      "ownerIndex": 20,
+      "name": "Soulknife",
+      "source": "XPHB",
+      "className": "Rogue",
+      "classSource": "XPHB",
+      "count": 18,
+      "affectedRows": [
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[2]",
+          "tableIndex": 0,
+          "rowIndex": 2,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[3]",
+          "tableIndex": 0,
+          "rowIndex": 3,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[4]",
+          "tableIndex": 0,
+          "rowIndex": 4,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[5]",
+          "tableIndex": 0,
+          "rowIndex": 5,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[6]",
+          "tableIndex": 0,
+          "rowIndex": 6,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[7]",
+          "tableIndex": 0,
+          "rowIndex": 7,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[8]",
+          "tableIndex": 0,
+          "rowIndex": 8,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[9]",
+          "tableIndex": 0,
+          "rowIndex": 9,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[10]",
+          "tableIndex": 0,
+          "rowIndex": 10,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[11]",
+          "tableIndex": 0,
+          "rowIndex": 11,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[12]",
+          "tableIndex": 0,
+          "rowIndex": 12,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[13]",
+          "tableIndex": 0,
+          "rowIndex": 13,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[14]",
+          "tableIndex": 0,
+          "rowIndex": 14,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[15]",
+          "tableIndex": 0,
+          "rowIndex": 15,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[16]",
+          "tableIndex": 0,
+          "rowIndex": 16,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[17]",
+          "tableIndex": 0,
+          "rowIndex": 17,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[18]",
+          "tableIndex": 0,
+          "rowIndex": 18,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        },
+        {
+          "locator": "$.subclass[20].subclassTableGroups[0].rows[19]",
+          "tableIndex": 0,
+          "rowIndex": 19,
+          "sourceWidth": 2,
+          "retainedColumnIndexes": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "file": "class-warlock.json",
+      "root": "class",
+      "ownerIndex": 0,
+      "name": "Warlock",
+      "source": "PHB",
+      "count": 20,
+      "affectedRows": [
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[0]",
+          "tableIndex": 0,
+          "rowIndex": 0,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[1]",
+          "tableIndex": 0,
+          "rowIndex": 1,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[2]",
+          "tableIndex": 0,
+          "rowIndex": 2,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[3]",
+          "tableIndex": 0,
+          "rowIndex": 3,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[4]",
+          "tableIndex": 0,
+          "rowIndex": 4,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[5]",
+          "tableIndex": 0,
+          "rowIndex": 5,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[6]",
+          "tableIndex": 0,
+          "rowIndex": 6,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[7]",
+          "tableIndex": 0,
+          "rowIndex": 7,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[8]",
+          "tableIndex": 0,
+          "rowIndex": 8,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[9]",
+          "tableIndex": 0,
+          "rowIndex": 9,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[10]",
+          "tableIndex": 0,
+          "rowIndex": 10,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[11]",
+          "tableIndex": 0,
+          "rowIndex": 11,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[12]",
+          "tableIndex": 0,
+          "rowIndex": 12,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[13]",
+          "tableIndex": 0,
+          "rowIndex": 13,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[14]",
+          "tableIndex": 0,
+          "rowIndex": 14,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[15]",
+          "tableIndex": 0,
+          "rowIndex": 15,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[16]",
+          "tableIndex": 0,
+          "rowIndex": 16,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[17]",
+          "tableIndex": 0,
+          "rowIndex": 17,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[18]",
+          "tableIndex": 0,
+          "rowIndex": 18,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "locator": "$.class[0].classTableGroups[0].rows[19]",
+          "tableIndex": 0,
+          "rowIndex": 19,
+          "sourceWidth": 5,
+          "retainedColumnIndexes": [
+            0,
+            1,
+            2,
+            4
+          ]
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "file": "class-artificer.json",
+      "sha256": "49dbc64c51b58d54a6dda44105d4d67d6f65e65a67faeeef54bf19e30ab01882"
+    },
+    {
+      "file": "class-barbarian.json",
+      "sha256": "15b090c2ede1cc5a522817bf41d83a890aa194f3d7827f98787e1b05d057f319"
+    },
+    {
+      "file": "class-bard.json",
+      "sha256": "e5041a799e8c720db3a28539c2a25e9d6d821b6229a65fd1484f749ea3978b1d"
+    },
+    {
+      "file": "class-cleric.json",
+      "sha256": "604d81ad5012ca92f56a5aadacdf298a04d4889443e99644d4bf2af46f5a0900"
+    },
+    {
+      "file": "class-druid.json",
+      "sha256": "e320ecf4f19e49acbbc449fcde4f8448bfad4bfc40a56138dced312a52af13a1"
+    },
+    {
+      "file": "class-fighter.json",
+      "sha256": "9c8a328bb03f6ee806d3d993942c2603d02bfc2c61f5306c77b15f9ba05b33ae"
+    },
+    {
+      "file": "class-monk.json",
+      "sha256": "381b5b1a80da79b661b9656d65b266d0bca290cf83d261c5f15ce8d0ecba4ff5"
+    },
+    {
+      "file": "class-mystic.json",
+      "sha256": "5548843ac2943b722099eb19c3745964956fdfc888ff801b0f9ae5f791081a64"
+    },
+    {
+      "file": "class-paladin.json",
+      "sha256": "5c11179b9d410fdf10711e5f3acfec50da831ebc72adca14b3e1c50fbe3f0f22"
+    },
+    {
+      "file": "class-ranger.json",
+      "sha256": "13ace69bc9241b22d74644caacd2b26307a9b4d32df4f0d87994c3d5ff69e154"
+    },
+    {
+      "file": "class-rogue.json",
+      "sha256": "1db96ec24a864369de9138a9d51bdf89e09fdd79f3f2d39c25ac73191f2befa0"
+    },
+    {
+      "file": "class-sidekick.json",
+      "sha256": "8075ac640418e7ea9558a4f173cf11d011020c00d5f8b994eaa33759d5849a7f"
+    },
+    {
+      "file": "class-sorcerer.json",
+      "sha256": "9f17737aa137ca3979b20cdcc7e8b0120c7be293cf9849c2d27c93f2e0e87c79"
+    },
+    {
+      "file": "class-warlock.json",
+      "sha256": "867a945c460be5925df0e6d87238b226912e7f2eb567fde0a88c05179eadbcac"
+    },
+    {
+      "file": "class-wizard.json",
+      "sha256": "833066cec97469353092424ae9878bab1b591c0da782f81625bb3e54850393fe"
+    }
+  ]
+}

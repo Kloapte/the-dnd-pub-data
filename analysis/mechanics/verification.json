@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "inputFingerprint": "090bf7dc89e8aa064a6c48a2e133b6ab673c298fa740cd7233d697a201036cb3",
+  "protectedSourceProductionAndTestFiles": {
+    "count": 1655,
+    "sha256": "97b3fdfde7213eecc09cdf44a87ec13615e4747056c691101d3e4cc2112fa9a0",
+    "changed": 0
+  },
+  "reproducibleGeneratedHashes": {
+    "corpus-evidence.json": "1cb0bee8ceaebe35b43b4bc7e7b6f1cd4be448e42594c292645affc014a9ba2d",
+    "candidate-evidence.json": "43d9e54636a60556f98bc66939ea9d2b727e2ebde4aa7bd12262f58b855a740c",
+    "CORPUS-MECHANICS-INVENTORY.md": "c1a58cee63c93eb34615b3924e16f215a618dc69c3d8547a8860be49ab916de3",
+    "TAG-FREQUENCIES.md": "71e8f8488daae760dc4497005fac9d02154219b7467b692f3da25324b0c8ccbf"
+  },
+  "filesAccountedFor": 175,
+  "definitionCollections": 43,
+  "catalogDomains": 36,
+  "rawDefinitionRecords": 14399,
+  "effectiveDefinitionsFromExistingContracts": 14797,
+  "validatedExamples": 7406,
+  "validatedTagExamples": 1013,
+  "validLocalDocumentationLinks": 75,
+  "tagFamilies": 73,
+  "analysisFilesWhitespaceChecked": 20,
+  "gitDiffCheck": "passed",
+  "stage3FormulaTagParity": {
+    "damage": 642,
+    "dice": 126,
+    "scaledamage": 148,
+    "scaledice": 14
+  },
+  "correctedScalingFieldCount": {
+    "oldArrayOnly": 5,
+    "currentObjects": 36,
+    "currentArrays": 5,
+    "currentTotal": 41
+  },
+  "maven": {
+    "status": "existing-reports-inspected-not-rerun",
+    "suites": 50,
+    "tests": 399,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "referenceBaseline": {
+    "occurrences": 6246,
+    "resolved": 2517,
+    "ambiguous": 2054,
+    "unresolved": 181,
+    "deferred": 1494,
+    "recomputed": false,
+    "basis": "Supplied/current test baseline; all source, resolver, projection and test files hash-unchanged."
+  },
+  "productionChanges": false,
+  "sourceJsonChanges": false,
+  "testChanges": false
+}

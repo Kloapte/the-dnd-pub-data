@@ -1,0 +1,33 @@
+{
+  "sourceJsonHashesUnchanged": 175,
+  "originalProtectedFilesUnchanged": 1680,
+  "assessmentFilesUnchanged": 23,
+  "addedJavaAndTests": [
+    "src/main/java/com/thedndpub/data/mechanics/syntax/AuthoredSyntaxTextWalker.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/BalancedMarkupParser.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/FormulaSyntaxObservation.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/LabelSyntaxObservation.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/MarkupParseResult.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/MarkupSyntaxException.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/MarkupTag.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/ModifierSyntaxObservation.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/OpaqueSyntaxObservation.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/OpaqueTagCategory.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/SyntaxContext.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/SyntaxEvidence.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/SyntaxExpression.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/SyntaxExpressionKind.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/SyntaxObservation.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/SyntaxObservationClassifier.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/SyntaxOrigin.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/SyntaxPointers.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/SyntaxSourceOwner.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/SyntaxSpan.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/SyntaxText.java",
+    "src/main/java/com/thedndpub/data/mechanics/syntax/SyntaxTextLocation.java",
+    "src/test/java/com/thedndpub/data/mechanics/syntax/AuthoredSyntaxTextWalkerTests.java",
+    "src/test/java/com/thedndpub/data/mechanics/syntax/BalancedMarkupParserTests.java",
+    "src/test/java/com/thedndpub/data/mechanics/syntax/SyntaxCorpusTests.java"
+  ],
+  "deterministicCorpusReport": true
+}

@@ -1,0 +1,2163 @@
+[
+  {
+    "file": "analysis/actions/DTO-DESIGN.md",
+    "sha256": "580f18e9541d955ecae1136e80f9f4c8f12c14e29257d258e93b077de3f836a9",
+    "headings": [
+      "# Action DTO design",
+      "## Domain boundary",
+      "## Proposed types",
+      "## Exclusions and open mechanics"
+    ]
+  },
+  {
+    "file": "analysis/actions/DTO-IMPLEMENTATION.md",
+    "sha256": "134d51810ccfa64091b4d5c665b4ba5878e736f857b54e1618253b5def4c5179",
+    "headings": [
+      "# Actions DTO implementation"
+    ]
+  },
+  {
+    "file": "analysis/actions/SOURCE-INVENTORY.md",
+    "sha256": "6476300afecede1943ae6542d34d5085f6f4741fcc0e99a4f98353e0ff059b39",
+    "headings": [
+      "# Actions source inventory",
+      "## Sources and source relationships",
+      "## Fields and optionality",
+      "## Action timing and mechanics",
+      "## Cross-entity markup and publication"
+    ]
+  },
+  {
+    "file": "analysis/backgrounds/DTO-DESIGN.md",
+    "sha256": "66ca94b6887e608171023bbe5f908a7e3ec2ad26e3e7460f8a0da585fba0c2be",
+    "headings": [
+      "# Background DTO Design"
+    ]
+  },
+  {
+    "file": "analysis/backgrounds/DTO-IMPLEMENTATION.md",
+    "sha256": "77b47a09b679ea8a5ba069c37d970557e9cb2e64c018d105541a1b22b2e9f72c",
+    "headings": [
+      "# Background DTO Implementation"
+    ]
+  },
+  {
+    "file": "analysis/backgrounds/EDITION-ANALYSIS.md",
+    "sha256": "ed1d8474ae486ad1b2918a0f3f7aacb7889b25edb42050addcb73c6acd9ab608",
+    "headings": [
+      "# Background Edition Analysis"
+    ]
+  },
+  {
+    "file": "analysis/backgrounds/EQUIPMENT-ANALYSIS.md",
+    "sha256": "34ebe83c639c857dc52dbc7aa1c865e301aeb08e3dbf6aac4152692deda07952",
+    "headings": [
+      "# Background Equipment Analysis"
+    ]
+  },
+  {
+    "file": "analysis/backgrounds/FEATURE-ANALYSIS.md",
+    "sha256": "019454353c9e598682e92028f3014ccdd42775ca729e945f6c948fec3e1ad86c",
+    "headings": [
+      "# Background Feature and Grant Analysis"
+    ]
+  },
+  {
+    "file": "analysis/backgrounds/INHERITANCE-ANALYSIS.md",
+    "sha256": "77f112dce28703aaa68f68178d1af044855995ecc366defab09d3d645c00a92b",
+    "headings": [
+      "# Background Inheritance Analysis"
+    ]
+  },
+  {
+    "file": "analysis/backgrounds/SOURCE-INVENTORY.md",
+    "sha256": "3fccfa3e0d129f1db377b5581b9797cfda0420a0e0c7c3dbd8d08c9111982837",
+    "headings": [
+      "# Background Source Inventory",
+      "## Root data",
+      "## Structured shapes"
+    ]
+  },
+  {
+    "file": "analysis/books/DTO-DESIGN.md",
+    "sha256": "aac132e9e2b71d205448498ab88f133a677bdaa6ba808483771499da8de53dcd",
+    "headings": [
+      "# Shared publication and source-reference design",
+      "## Analysis gate and recommendation",
+      "## Catalog types",
+      "## Shared source reference",
+      "## API projection and content policy",
+      "## Unresolved decisions"
+    ]
+  },
+  {
+    "file": "analysis/books/DTO-IMPLEMENTATION.md",
+    "sha256": "58725f23991e6c1204b6e65dfc70ec9839693f2c37a7587624a49e28573f2baa",
+    "headings": [
+      "# Book catalog implementation status"
+    ]
+  },
+  {
+    "file": "analysis/books/SOURCE-INVENTORY.md",
+    "sha256": "8b9a74e0b11641adcaa457f9cbfc6e17cc95091772eacf5dbb123884c8c88cf0",
+    "headings": [
+      "# Book and publication source inventory",
+      "## Dataset",
+      "## Field and nested-shape inventory",
+      "## Publication categories and editions",
+      "## Existing source-code coverage",
+      "## API suitability and rights"
+    ]
+  },
+  {
+    "file": "analysis/classes/COPY-RESOLUTION-SPEC.md",
+    "sha256": "ed74f98721e668623fb70b3b2c320a4c0668eefec57f6ea2a601c86402aaa45c",
+    "headings": [
+      "# Implemented class copy resolution contract",
+      "## Supported operations",
+      "## Resolution order",
+      "## Protected metadata default",
+      "## Rejections and preservation"
+    ]
+  },
+  {
+    "file": "analysis/classes/CROSS-CATALOG-ANALYSIS.md",
+    "sha256": "be75c8713376f6ed8b4bb34ebc0db7eefec7907891c64d561f92e4b011a7f919",
+    "headings": [
+      "# Cross-catalog reference analysis",
+      "## Classification",
+      "## Structured outcomes",
+      "## Other existing catalogs",
+      "## Source Registry and public boundaries"
+    ]
+  },
+  {
+    "file": "analysis/classes/DISCOVERY-TABLES.md",
+    "sha256": "143dea99d3e3903ba69a50012f9a98c41aae7fa0007e9dec126fb5856d1d4ac0",
+    "headings": [
+      "# Classes Stage A discovery tables",
+      "## Physical files",
+      "## Primary source distribution",
+      "## Class identities and subclass advancement",
+      "## Root fields",
+      "### class",
+      "### subclass",
+      "### classFeature",
+      "### subclassFeature",
+      "## Progression table groups",
+      "## Entry discriminators",
+      "## Structured external references",
+      "## Markup references and directives",
+      "## Source Registry coverage"
+    ]
+  },
+  {
+    "file": "analysis/classes/DTO-API-DESIGN.md",
+    "sha256": "778d1cf246be871a9d189a0c8ac4a23ae452f45b6ddf2e6599d0bb5c00cfdfb1",
+    "headings": [
+      "# Proposed public DTOs and REST API",
+      "## Public representation boundary",
+      "## Detail DTO components",
+      "## Typed child DTOs",
+      "## Tables and safe publication",
+      "## Recommended routes",
+      "## Queries and errors",
+      "## Stage B serialization and service acceptance criteria"
+    ]
+  },
+  {
+    "file": "analysis/classes/DTO-DESIGN.md",
+    "sha256": "870b605cc651259f8b55bc782064acfad011e52bffab6a18171fc8b61f7322fe",
+    "headings": [
+      "# Classes DTO design checkpoint"
+    ]
+  },
+  {
+    "file": "analysis/classes/DTO-IMPLEMENTATION.md",
+    "sha256": "dafc0a02a7c8dda0a4c709c80dc788360be4e333ee405f48105339af9a636d68",
+    "headings": [
+      "# Internal class definition implementation"
+    ]
+  },
+  {
+    "file": "analysis/classes/EDITION-ANALYSIS.md",
+    "sha256": "3fdf9aade1e307a9f0f686052ba409a16ed76e9f06e6535a879a1e9b22b1e317",
+    "headings": [
+      "# Edition distinctions",
+      "## Identity and applicability",
+      "## Class subclass-selection milestones",
+      "## Spellcasting",
+      "## Equipment and proficiencies",
+      "## Resources and class-specific scaling",
+      "## Reprints and replacement limits"
+    ]
+  },
+  {
+    "file": "analysis/classes/FEATURE-GRAPH-ANALYSIS.md",
+    "sha256": "1d725d21a3c5ad45306f89d9c2b3768c7b5cb0b68bf09b4c44d4883191d921bc",
+    "headings": [
+      "# Feature graph discovery",
+      "## Graph boundaries",
+      "## Resolution results",
+      "## Definitions, progression, and content",
+      "## Choices, requirements, and replacements",
+      "## Copy and edition relationships",
+      "## Architecture decision"
+    ]
+  },
+  {
+    "file": "analysis/classes/IDENTITY-ANALYSIS.md",
+    "sha256": "f2436cec2736465008dd8d49a673b651a7f3c9f232fa3c9f4705b3b441f884a8",
+    "headings": [
+      "# Class, subclass, and feature identity",
+      "## Source identity tuples",
+      "## Recommended readable IDs",
+      "## Actual collision results",
+      "## UID grammars and defaults",
+      "## Reprints and source handling"
+    ]
+  },
+  {
+    "file": "analysis/classes/INHERITANCE-ANALYSIS.md",
+    "sha256": "107737757b0eacceaef7cb9b66d32fe732d651ea8365d8e4fcd45bcee6e9a6c8",
+    "headings": [
+      "# Copy and version mechanisms",
+      "## Complete declaration inventory",
+      "## Target resolution and expected candidates",
+      "## Observed semantics and planned resolver contract",
+      "## Unsupported and future operations"
+    ]
+  },
+  {
+    "file": "analysis/classes/NORMALIZED-MODEL-DESIGN.md",
+    "sha256": "b86f9f02d8467ca3292aaffd9cd41b553aa29d06534751df960e6f3307d49897",
+    "headings": [
+      "# Proposed normalized class architecture",
+      "## Pipeline and ownership",
+      "## Four independent definition kinds",
+      "## Import structures",
+      "## Owned value types and sealed variants",
+      "## Spellcasting model",
+      "## Source-field destinations",
+      "## Catalog invariants and diagnostics",
+      "## Decisions tracked into implementation"
+    ]
+  },
+  {
+    "file": "analysis/classes/PROGRESSION-ANALYSIS.md",
+    "sha256": "a9a6719a1a81d29320e93c98893f4864d2ce96b8a92bb7101653fce1fcf6e1d1",
+    "headings": [
+      "# Class level progression",
+      "## Four distinct representations",
+      "## Feature advancement",
+      "## Owned tables",
+      "## Structured progressions",
+      "## Optional feature and feat progression",
+      "## Resources and proficiency bonus"
+    ]
+  },
+  {
+    "file": "analysis/classes/SOURCE-INVENTORY.md",
+    "sha256": "263ee1530d95344a52fd0893eed33b2f8b4a60a9e1c94c6aa2220bea93a66547",
+    "headings": [
+      "# Classes and subclasses: Stage A source inventory",
+      "## Scope and reproducibility",
+      "## Root accounting",
+      "## Sources and editions",
+      "## Representative shapes",
+      "## Counting boundaries",
+      "## Coverage and limitations"
+    ]
+  },
+  {
+    "file": "analysis/classes/SOURCE-REGISTRY-COVERAGE.md",
+    "sha256": "eb7d774534e352aa3c3d4f29448f2dc0f483edcd0967312b66a1707ba9036c77",
+    "headings": [
+      "# Source Registry coverage",
+      "## Distinct identities",
+      "## Confirmed missing source and scoped change",
+      "## Source semantics",
+      "## Validation"
+    ]
+  },
+  {
+    "file": "analysis/classes/SPELLCASTING-ANALYSIS.md",
+    "sha256": "ae91e03e678037aa6c6c7b3c8ca9aaf982ed9697d52041809f737e8a867d4ea9",
+    "headings": [
+      "# Spellcasting source analysis",
+      "## Observed caster metadata",
+      "## Numeric progressions and formulas",
+      "## Slots and Pact Magic",
+      "## Additional spell grants",
+      "## Rituals, focus, lists, and preparation",
+      "## PHB/XPHB differences",
+      "## Normalization before a Spell Catalog"
+    ]
+  },
+  {
+    "file": "analysis/classes/STAGE-A-REPORT.md",
+    "sha256": "0a34087ab4017d423b4561c005c7e08a10da0df5c8b3916dd66a29284d557d97",
+    "headings": [
+      "# Classes and subclasses: Stage A review report",
+      "## Results",
+      "## Recommended implementation architecture",
+      "## Specific Stage B risks and decisions",
+      "## Documents and evidence"
+    ]
+  },
+  {
+    "file": "analysis/classes/STAGE-B-IMPLEMENTATION.md",
+    "sha256": "faa8b7e63aceaadfb7c6d777475274225deb2cfab021dbcb8beb1b0da0730af5",
+    "headings": [
+      "# Classes and subclasses: Stage B implementation",
+      "## Production components",
+      "## Actual counts and graph validation",
+      "## DTE coverage and source fidelity",
+      "## Copy semantics and provenance",
+      "## Progression and spellcasting",
+      "## Starting options and external references",
+      "## Tests and verification",
+      "## Stage C boundary"
+    ]
+  },
+  {
+    "file": "analysis/classes/STAGE-C-IMPLEMENTATION.md",
+    "sha256": "67e37338d78b7f045f3e31eb55490e5ef71a2e370a877067654463ba5ecae7c3",
+    "headings": [
+      "# Classes and subclasses: Stage C implementation",
+      "## Runtime architecture",
+      "## Public DTO projection",
+      "### Step 7 Batch 1: additive progression column positions",
+      "## Graph and references",
+      "## Routes",
+      "## Validation and remaining limits"
+    ]
+  },
+  {
+    "file": "analysis/classes/STARTING-OPTIONS-ANALYSIS.md",
+    "sha256": "20c458f5fd3e1b4d82bbf148ab901a2166b755580111ea54c3d692afb6b10a31",
+    "headings": [
+      "# Proficiencies and starting options",
+      "## Coverage",
+      "## Hit dice and ability requirements",
+      "## Starting and multiclass proficiencies",
+      "## Equipment package grammar",
+      "## Cross-catalog outcomes",
+      "## Edition distinctions"
+    ]
+  },
+  {
+    "file": "analysis/classes/VERIFICATION.md",
+    "sha256": "82a16f677293d299398ad4322b0ae1e4bfd6fb1a1251cdea66a6b31898171dff",
+    "headings": [
+      "# Stage A verification",
+      "## Scope",
+      "## Discovery checks",
+      "## Maven suite",
+      "## Review boundary",
+      "## Stage B final verification"
+    ]
+  },
+  {
+    "file": "analysis/conditions-diseases/DTO-DESIGN.md",
+    "sha256": "9256ed47b131c8cc305120b1e4c6883ea2d29a654c337b3a174f6eda0c6d4bb7",
+    "headings": [
+      "# Conditions and diseases DTO design",
+      "## Architecture decision",
+      "## Models",
+      "## Mechanical boundary"
+    ]
+  },
+  {
+    "file": "analysis/conditions-diseases/DTO-IMPLEMENTATION.md",
+    "sha256": "af71a8797f94991fd6084376a51f711f589abec594e9555c134eee617584995c",
+    "headings": [
+      "# Conditions and diseases implementation"
+    ]
+  },
+  {
+    "file": "analysis/conditions-diseases/SOURCE-INVENTORY.md",
+    "sha256": "78c3086e335f6db0f2c4aa8e3663b9dd738beabfb3f558b8af058c9afdca5a26",
+    "headings": [
+      "# Conditions and diseases source inventory",
+      "## Source identities and relationships",
+      "## Complete observed field inventory",
+      "## Mechanics and descriptive content"
+    ]
+  },
+  {
+    "file": "analysis/domain/DOMAIN-DISCOVERIES.md",
+    "sha256": "8aa6f468b5bccc4f8380e3866478cd386b531fadb95dc26960cef8d067d4f89e",
+    "headings": [
+      "# Traps and Hazards",
+      "# Domain discoveries",
+      "## Vehicles and Vehicle Upgrades",
+      "## Items and Base Items",
+      "## Existing discoveries",
+      "## Magic Variants",
+      "## Backgrounds",
+      "## Races and Species",
+      "## Classes and Subclasses — Stage A discovery only",
+      "## Classes and Subclasses — Stage B internal implementation",
+      "## Classes and Subclasses — Stage C public catalogs and API",
+      "## Spells — Stage A discovery",
+      "## Spells — Stage B typed import and normalization",
+      "## Spells — Stage C public catalog and API",
+      "## Spells — Stage D mechanics investigation and school metadata",
+      "## Cross-Catalog References — Stage A discovery",
+      "## Cross-Catalog References — Stage B1 implementation",
+      "## Cross-Catalog References — Stage B2 implementation",
+      "## Cross-Catalog References — Step 5 public integration",
+      "## Remaining JSON Catalogs — Step 6 inventory",
+      "## Step 6 — Adventure Index and Name Tables",
+      "## Step 6 — Character Creation Options",
+      "## Step 6 — Cults and Boons",
+      "## Step 6 — Objects",
+      "## Step 6 — Bastion Facilities",
+      "## Step 6 — Encounters",
+      "## Step 6 — Rewards",
+      "## Step 6 — Variant Rules",
+      "## Step 6 — Deities",
+      "## Step 6 — Treasure and Loot Tables",
+      "## Step 6 — Recipes and Homecraft scope decision",
+      "## Step 7 Batch 3A: Structured Feat mechanics"
+    ]
+  },
+  {
+    "file": "analysis/ENTRY-MAPPING.md",
+    "sha256": "c6d375ea2879bf2e3a4ffef357ea3a1fc89d0c98646ab407debfe44f6fdade5a",
+    "headings": [
+      "# Shared recursive entry mapping",
+      "## Observed entry nodes",
+      "## Table cells",
+      "## Deliberate domain boundary",
+      "## Validation"
+    ]
+  },
+  {
+    "file": "analysis/feats/DTO-DESIGN.md",
+    "sha256": "6ce16251e279b699d67719b0c781f86720d2fddf902f7bfe47dcda0ce8e40944",
+    "headings": [
+      "# Feat DTO design",
+      "## Definition and identity",
+      "## Catalog architecture decision",
+      "## Structured model",
+      "## Public DTO",
+      "## Boundaries"
+    ]
+  },
+  {
+    "file": "analysis/feats/DTO-IMPLEMENTATION.md",
+    "sha256": "521a27a0c3c3e13a36c055a6b8ae645dc912fdeab9876ad3bc7678061923cf1d",
+    "headings": [
+      "# Feat DTO implementation"
+    ]
+  },
+  {
+    "file": "analysis/feats/SOURCE-INVENTORY.md",
+    "sha256": "a1725f5a0126227f88d3cd6f1dbd766473a3619ea50ec6a8c0b5c958fb30ab62",
+    "headings": [
+      "# Feats source inventory",
+      "## Sources and identity",
+      "## Classifications and availability",
+      "## Prerequisites, ability increases, and choices",
+      "## Other structured properties",
+      "## Entries and cross-entity markup",
+      "## Validation"
+    ]
+  },
+  {
+    "file": "analysis/feats/VERSION-ANALYSIS.md",
+    "sha256": "6d95553881dd7d42127803adaaea6ca132ba6400eefd100e739a3555a9fdc6b4",
+    "headings": [
+      "# Feat `_versions` analysis",
+      "## Records and counts",
+      "## Expansion behavior",
+      "## Mechanics and source overrides",
+      "## Public spell-grant projection",
+      "## Monster infrastructure",
+      "## Evidence and implementation"
+    ]
+  },
+  {
+    "file": "analysis/items/DTO-DESIGN.md",
+    "sha256": "9a7923bd0a6bc8de9eb6dec7c173a7d041eb6da78b46da07961140f4c1b00f0c",
+    "headings": [
+      "# Item DTO design",
+      "## Definition model",
+      "## Structured properties",
+      "## Relationships",
+      "## API"
+    ]
+  },
+  {
+    "file": "analysis/items/DTO-IMPLEMENTATION.md",
+    "sha256": "cbd97a326d6765866b9c4d70c41464528e776a5c3487830f7e39d3d84de20c7f",
+    "headings": [
+      "# Items DTO implementation",
+      "## Coverage and normalization",
+      "## Copies and auxiliary records",
+      "## Public DTOs and REST",
+      "## Source validation and remaining limits"
+    ]
+  },
+  {
+    "file": "analysis/items/INHERITANCE-ANALYSIS.md",
+    "sha256": "0cc10214bdcd4020fb603276241bf3f07b90427ca6319270aef579bc6714c35b",
+    "headings": [
+      "# Item inheritance and variants",
+      "## Counts and semantics",
+      "## Observed operations",
+      "## Version and template behavior"
+    ]
+  },
+  {
+    "file": "analysis/items/ITEM-MODEL-ANALYSIS.md",
+    "sha256": "9b887dbb9be2650aad96ce024d57435ef07700197efd4d003c71b1105d7b7e14",
+    "headings": [
+      "# Relationship between Items and Base Items",
+      "## Decision",
+      "## Evidence"
+    ]
+  },
+  {
+    "file": "analysis/items/SOURCE-INVENTORY.md",
+    "sha256": "dc6d5acfd5c5468ec313fdedbd2ef3f9ca2acd698b0d3f1b298d07604782921b",
+    "headings": [
+      "# Items source inventory",
+      "## Root collections",
+      "## Identity and source coverage",
+      "## Structured and descriptive fields",
+      "## Type and category representation",
+      "## Source-specific shapes"
+    ]
+  },
+  {
+    "file": "analysis/languages/DTO-DESIGN.md",
+    "sha256": "7be5b4293035998613823944597bb82b2630e68c2afd9bd63aad8fef5fbbaafc",
+    "headings": [
+      "# Language DTO design",
+      "## Identity and source model",
+      "## Layers",
+      "## Classification and relationships",
+      "## Public content and publication",
+      "## REST representation"
+    ]
+  },
+  {
+    "file": "analysis/languages/DTO-IMPLEMENTATION.md",
+    "sha256": "dcba888c8c668e57ba32084accbc91674c703a694f2dd7757a7f69b8ffc8f95f",
+    "headings": [
+      "# Language pipeline implementation",
+      "## Coverage",
+      "## Validation"
+    ]
+  },
+  {
+    "file": "analysis/languages/SOURCE-INVENTORY.md",
+    "sha256": "3b9707ad6fd4c67b4b9cb403e8e462fb0ddcd4bae132d340c40e6fb044f62036",
+    "headings": [
+      "# Language source inventory",
+      "## Field inventory",
+      "## Coverage and edge cases",
+      "## Representative forms",
+      "## Cross-entity reference inventory"
+    ]
+  },
+  {
+    "file": "analysis/magic-variants/DOMAIN-MODEL.md",
+    "sha256": "775d2ea610e9eed09d88419775ab0893ebe793e2b513c7e9faec94408e63121c",
+    "headings": [
+      "# Magic Variants Domain Model"
+    ]
+  },
+  {
+    "file": "analysis/magic-variants/DTO-DESIGN.md",
+    "sha256": "002bf258cfaf3b3be9d010055693c935110f1c4fadf54d3e9c75c5e197c0ed05",
+    "headings": [
+      "# Magic Variants DTO Design"
+    ]
+  },
+  {
+    "file": "analysis/magic-variants/DTO-IMPLEMENTATION.md",
+    "sha256": "d034b758e5924fa25fd48ac2dc3c68a9b2f51151f774e1bc44db846a1bd3452e",
+    "headings": [
+      "# Magic Variants DTO Implementation"
+    ]
+  },
+  {
+    "file": "analysis/magic-variants/GENERATION-ANALYSIS.md",
+    "sha256": "28f8c9f786e926625ad538e4cbcdbfebbe71c34fb5c0a2d131d4ecf886f0b532",
+    "headings": [
+      "# Generation Analysis",
+      "## Matching model",
+      "## Measured catalog interaction",
+      "## Decision"
+    ]
+  },
+  {
+    "file": "analysis/magic-variants/SOURCE-INVENTORY.md",
+    "sha256": "1e37a7f71a0a31ad255f4423d866e833b5e2b731b536a0480f31804c6de17bbd",
+    "headings": [
+      "# Magic Variants Source Inventory",
+      "## Root collections",
+      "## Record shapes and fields",
+      "## Source-specific structures"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/batch-1-class-table-positions/DTO-DESIGN.md",
+    "sha256": "ab1516d811544167ec321b3d6760b9db89a9dac37d32ca3ce545e143a4c8105a",
+    "headings": [
+      "# Batch 1 DTO and Compatibility Checkpoint",
+      "## Confirmed source defect",
+      "## Chosen contract, recorded before implementation",
+      "## Compatibility and publication",
+      "## Verification plan"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/batch-1-class-table-positions/IMPLEMENTATION.md",
+    "sha256": "414ee588917a5afecbbbc15b6f70463acbbad73d2dd079ca069fc0e195b61c48",
+    "headings": [
+      "# Step 7 Batch 1: Class/Subclass Progression Column Positions",
+      "## Defect and evidence",
+      "## DTO and compatibility decision",
+      "### Public JSON example",
+      "## Scope and publication boundary",
+      "## Regression coverage",
+      "## Verification results",
+      "## Remaining limitations"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/batch-2-item-focus/DTO-DESIGN.md",
+    "sha256": "d4f8eebfaa9ede90ddfccdd932bd1665ec9f01d20a93d390847bb4b95eeb0fd9",
+    "headings": [
+      "# Batch 2 Internal Focus Design Checkpoint",
+      "## Source evidence and domain boundary",
+      "## Chosen normalized representation",
+      "## Validation and publication"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/batch-2-item-focus/IMPLEMENTATION.md",
+    "sha256": "28f448676e922555a83b2eb0816f864bb12e2a2ce55cd4e3cdc0c56a6096b0aa",
+    "headings": [
+      "# Step 7 Batch 2: Preserve Item Focus Variants",
+      "## Original gap and source audit",
+      "### Raw versus effective coverage",
+      "## Final normalized model",
+      "### Strict source mapping",
+      "## Copy and version handling",
+      "## Public API and publication boundary",
+      "## Tests and verification",
+      "## Remaining limitations"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/batch-3a-feat-structured-mechanics/DTO-DESIGN.md",
+    "sha256": "b68517ca472e0cebcfdc0433c38128528d82be9e70b01cb4221c767fe353b69f",
+    "headings": [
+      "# Batch 3A Internal Mechanics Design Checkpoint",
+      "## Confirmed source",
+      "## Internal model and reuse decision",
+      "## Mapper and publication boundary"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/batch-3a-feat-structured-mechanics/IMPLEMENTATION.md",
+    "sha256": "7a2711199982f7434de5a7b792a42a8a2af31b7788996e0d502e436750e4a7a2",
+    "headings": [
+      "# Step 7 Batch 3A: Structured Feat Mechanics",
+      "## Evidence and original gap",
+      "### Complete field inventory and normalized destinations",
+      "### Reproducible examples",
+      "## Final internal model and mapping",
+      "### Reuse assessment",
+      "## Version inheritance and preserved existing data",
+      "## Public and licensing boundary",
+      "## Tests and verification",
+      "### Separately observed existing HTTP limitation",
+      "## Remaining limitations"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/batch-3b-feat-prerequisites/IMPLEMENTATION.md",
+    "sha256": "139a3c4e078d5f747240796643df571e67d481deecd504458386fdba2023d106",
+    "headings": [
+      "# Step 7 Batch 3B: Structured Feat Proficiency Prerequisites",
+      "## Confirmed source coverage",
+      "## Existing loss and group semantics",
+      "## Internal normalized representation",
+      "## Effective definitions and copy/version handling",
+      "## Compatibility and publication",
+      "## Tests and verification",
+      "## Remaining limitations"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/batch-4-item-signed-bonuses/IMPLEMENTATION.md",
+    "sha256": "356937c8f1f01811d266487bf107f33b51ab9e5437dbea11a55a3b67bf7d737f",
+    "headings": [
+      "# Step 7 Batch 4: Item Signed Bonuses",
+      "## Source audit",
+      "## Effective values and copy inheritance",
+      "## Normalized representation and parsing",
+      "## Compatibility and publication",
+      "## Tests and verification",
+      "## Remaining limitations"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/CORPUS-MECHANICS-INVENTORY.md",
+    "sha256": "c1a58cee63c93eb34615b3924e16f215a618dc69c3d8547a8860be49ab916de3",
+    "headings": [
+      "# Corpus Mechanics Inventory",
+      "## Coverage and existing definitions",
+      "## Per-catalog mechanical disposition",
+      "### Monsters",
+      "### Spells",
+      "### Actions",
+      "### Feats",
+      "### Optional Features",
+      "### Classes",
+      "### Subclasses",
+      "### Class Features",
+      "### Subclass Features",
+      "### Backgrounds",
+      "### Races and Subraces",
+      "### Items and Base Items",
+      "### Magic Variants",
+      "### Conditions",
+      "### Diseases",
+      "### Languages",
+      "### Skills",
+      "### Senses",
+      "### Objects",
+      "### Bastion Facilities",
+      "### Rewards",
+      "### Traps",
+      "### Hazards",
+      "### Vehicles",
+      "### Vehicle Upgrades",
+      "### Variant Rules",
+      "### Treasure Tables",
+      "### Encounters",
+      "### Character Creation Options",
+      "### Cults",
+      "### Boons",
+      "### Deities",
+      "### Name Tables",
+      "### Adventure Index",
+      "### Books",
+      "### Recipes",
+      "## Support and non-effect data",
+      "## What changed since Step 3"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/ENRICHMENT-MODEL.md",
+    "sha256": "50655372bf7a13ad52faa210d2d02bfe99917f17c720bd775b836baff4005881",
+    "headings": [
+      "# Proposed Mechanics Enrichment Model",
+      "## Design boundary",
+      "## Common internal evidence",
+      "## Domain-specific proposals",
+      "## Annotations preserve syntax",
+      "## Concrete source-grounded examples",
+      "### Existing Class cell position",
+      "### Item focus representation",
+      "### Feat mechanics",
+      "### Spell expression with unknown effect association",
+      "### Monster save label",
+      "### Treasure expression",
+      "## Existing models to extend or leave intact",
+      "## Public projection rule"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/EXTRACTION-RELIABILITY.md",
+    "sha256": "60a239b0ce706ec8370edd21a10f42e80fd79b0421f6114eecde40225a104336",
+    "headings": [
+      "# Extraction Reliability",
+      "## Independent confidence dimensions",
+      "## Candidate assessment and coverage",
+      "## How to measure reliability in a future implementation",
+      "## Scanner limitations"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/IMPLEMENTATION-ORDER.md",
+    "sha256": "67090a2dd00fdfc430280b163481a8284aaf857f545beb61c294b0f57bf79ae8",
+    "headings": [
+      "# Ranked Backlog and Proposed Step 7 Batches",
+      "## Prioritization",
+      "## Batch 0: Record publication decisions for existing exposed content",
+      "## Batch 1: Preserve Class/Subclass progression column positions",
+      "## Batch 2: Preserve Item focus variants internally",
+      "## Batch 3A: Normalize existing Feat grant/defense/sense/progression fields",
+      "## Batch 3B: Preserve Feat prerequisite proficiency categories",
+      "## Batch 4: Lossless Item bonus-token normalization",
+      "## Batch 5: Spell syntax annotations only",
+      "## Batch 6: Monster action/usage syntax annotations",
+      "## Batch 7: Seven-record Object attack-container pilot",
+      "## Later bounded batches",
+      "## Deferred semantic work"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/LICENSING-AND-PUBLICATION.md",
+    "sha256": "64626af4d7cf675ff631e0d4ef2593f98d4f400c3af6876bc7732c1cdd02d3c0",
+    "headings": [
+      "# Licensing and Publication Assessment",
+      "## Evidence boundary",
+      "## Five distinct dispositions",
+      "## Per-enrichment publication decisions",
+      "## Provenance is necessary but insufficient",
+      "## Proposed publication assessment record",
+      "## Existing exposure to resolve before broader publication"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/MARKUP-SEMANTICS.md",
+    "sha256": "8161c8973f884c64fb49978a3cc203c8d9c55c25ac18b46cb7f2fdc0d5b10d46",
+    "headings": [
+      "# Markup Semantics and Limits",
+      "## What was observed",
+      "## Relevant syntax families",
+      "## Reproducible cases",
+      "## Parse confidence versus effect confidence"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/NORMALIZATION-GAPS.md",
+    "sha256": "43640264b08674cb9126de157ca7e11f8b5cba603f9e961b282c33d62bf112e1",
+    "headings": [
+      "# Normalization and Public Projection Gaps",
+      "## Method and confidence",
+      "## G1: Class table column positions are lost in the public projection",
+      "## G2: Item focus array values do not reach the normalized definition",
+      "## G3: Feat source mechanics remain import-only",
+      "## G4: Feat prerequisite proficiency categories are flattened",
+      "## G5: Existing Item charge JSON contains raw source markup",
+      "## G6: Optional Feature public prerequisites carry authored text",
+      "## G7: Monster public/internal content boundaries differ from later catalogs",
+      "## G8: Vehicle top-level statistics differ between summary and detail",
+      "## Preserved but intentionally withheld: not defects"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/OPEN-QUESTIONS.md",
+    "sha256": "d93fb6983e0823c9913f9610fd92dfadc8d344e78e8400690ce0229b17873e13",
+    "headings": [
+      "# Open Questions and Recommended Defaults",
+      "## Highest-risk ambiguities",
+      "## Boundaries already decided"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/STEP-7-OVERVIEW.md",
+    "sha256": "fb065d43f84456ca271729726a26c8ff58d49626d19597407007c770e12ca5dd",
+    "headings": [
+      "# Step 7 Mechanics and Publication Analysis",
+      "## Decision and scope",
+      "## Evidence and denominators",
+      "## Classification of findings",
+      "## Findings that change the implementation priorities",
+      "## Deliverables",
+      "## Reproduction",
+      "## Relationship to earlier work",
+      "## Final analysis verification"
+    ]
+  },
+  {
+    "file": "analysis/mechanics/TAG-FREQUENCIES.md",
+    "sha256": "71e8f8488daae760dc4497005fac9d02154219b7467b692f3da25324b0c8ccbf",
+    "headings": [
+      "# Complete Tag Frequencies"
+    ]
+  },
+  {
+    "file": "analysis/monsters/COPY-RESOLUTION-SPEC.md",
+    "sha256": "4064b9eb27434bdb914fd52b8fe9149894b5e7c9c75a219ba8047e643fa5a46a",
+    "headings": [
+      "# Monster copy, modifier, template, and version resolution",
+      "## Executive summary",
+      "## Evidence and scope",
+      "## Copy inheritance and execution order",
+      "### `_preserve`",
+      "## Modifier compatibility matrix",
+      "### Combined monster and template mode count crosswalk",
+      "### Template-introduced mode semantics",
+      "### Modifier ordering, normalization, and unsupported modes",
+      "### Notable examples from the corpus",
+      "## Template findings",
+      "### Source revision and local asset",
+      "### Reference and structural validation",
+      "## Version expansion rules",
+      "### Direct versions",
+      "### Abstract versions and implementations",
+      "### Version identity and metadata",
+      "## Graph results and catalog size",
+      "## Recommended Java architecture",
+      "## Representative fixture plan from this dataset",
+      "## Remaining unknowns and compatibility cautions",
+      "## Readiness for resolver implementation"
+    ]
+  },
+  {
+    "file": "analysis/monsters/COPY-RESOLVER-IMPLEMENTATION.md",
+    "sha256": "714a58379b2d229073ea99eb5c5027b49fae947cbe33028d60c57ee0739912f6",
+    "headings": [
+      "# Monster copy resolver implementation",
+      "## Scope and compatibility reference",
+      "## Implementation structure",
+      "## Modifier handling",
+      "## Version expansion",
+      "## Validation",
+      "## Boundaries for the next milestone"
+    ]
+  },
+  {
+    "file": "analysis/monsters/COPY-VERSIONS-ANALYSIS.md",
+    "sha256": "a1a2cd104c79424a062361faccd1579a470eac2cca87aade1b5dfccd2770b034",
+    "headings": [
+      "# Monster `_copy` and `_versions` analysis",
+      "## Executive summary",
+      "## `_copy` structures",
+      "### Parent references and graph",
+      "## `_mod` operation inventory",
+      "## `_versions` inventory",
+      "## Identity, names, and collisions",
+      "## Expansion and resolution estimate",
+      "## Open questions and recommended resolver sequence",
+      "## Machine-readable artifacts"
+    ]
+  },
+  {
+    "file": "analysis/monsters/DTE-MAPPING.md",
+    "sha256": "5474d60600a1f785fc3f8f0a6e240d7556d33165cb3c3d7e59d18acca729d1fb",
+    "headings": [
+      "# Monster DTE mapping",
+      "## Record groups",
+      "## Observed polymorphism",
+      "## Boundaries and exclusions",
+      "## Validation"
+    ]
+  },
+  {
+    "file": "analysis/monsters/MONSTER-CATALOG-IMPLEMENTATION.md",
+    "sha256": "c2348f9173d0719f1fd95511f09eb0f148c1e2c286eb73fb229b61e8fd329876",
+    "headings": [
+      "# Monster Catalog Implementation",
+      "## Initialization lifecycle",
+      "## Components and indexes",
+      "## API",
+      "### `GET /api/monsters`",
+      "### `GET /api/monsters/{id}`",
+      "### `GET /api/monsters/by-name/{name}?source=MM`",
+      "## Validation",
+      "## Known limitations"
+    ]
+  },
+  {
+    "file": "analysis/monsters/MONSTER-DTO-DESIGN.md",
+    "sha256": "9c3396eeecec3cb4dc5ad0be485f0db086bd6e6654d878437de4d8713f3a3a00",
+    "headings": [
+      "# Normalized Monster DTO design",
+      "## Scope and evidence",
+      "## Proposed public model",
+      "### Supporting records and enums",
+      "## Mapping and null rules",
+      "### Required and optional fields",
+      "## Edition, provenance, and public API boundary",
+      "## Resolved examples",
+      "## Loss risks and decisions",
+      "## Phased implementation plan",
+      "## Readiness"
+    ]
+  },
+  {
+    "file": "analysis/monsters/MONSTER-DTO-IMPLEMENTATION.md",
+    "sha256": "caa2f3d8bf79cf7d1f8be60855a5b2270559b461f0a21b3bc2e79fe064752628",
+    "headings": [
+      "# Monster DTO implementation",
+      "## Scope and pipeline",
+      "## Record groups",
+      "## Mapping and coverage",
+      "## Intentional mapping choices and limitations",
+      "## Validation results",
+      "## Next decisions"
+    ]
+  },
+  {
+    "file": "analysis/optional-features/DTO-DESIGN.md",
+    "sha256": "31417cc50f2f828bfb981eb2e99e922e880a0007438f1d31733c5c1d87e52e8d",
+    "headings": [
+      "# Optional Features DTO design"
+    ]
+  },
+  {
+    "file": "analysis/optional-features/DTO-IMPLEMENTATION.md",
+    "sha256": "a7fc91e407dc3d149a3b74c72cb0b05e8cfacf166fce3ac4a4ea973ebf7e9884",
+    "headings": [
+      "# Optional Features DTO implementation",
+      "## Field coverage matrix",
+      "## Public representation",
+      "## Validation"
+    ]
+  },
+  {
+    "file": "analysis/optional-features/INHERITANCE-ANALYSIS.md",
+    "sha256": "855f15e2a5012126c5e05df669d325d8d465ed4cbec182342f5c42d0e7c01022",
+    "headings": [
+      "# Optional Features inheritance analysis"
+    ]
+  },
+  {
+    "file": "analysis/optional-features/SOURCE-INVENTORY.md",
+    "sha256": "1bece86ec6831c3c748d3689460747a4c11adb00429fe2e1b139e1b6ed65c768",
+    "headings": [
+      "# Optional Features source inventory"
+    ]
+  },
+  {
+    "file": "analysis/races/DTO-DESIGN.md",
+    "sha256": "f3d407cd271bc793469822826bba12c9af29adaa2ce5a963d54ae5ad90623c49",
+    "headings": [
+      "# Race and Species DTO Design and Implementation"
+    ]
+  },
+  {
+    "file": "analysis/races/DTO-IMPLEMENTATION.md",
+    "sha256": "601d847af506ca6fe116aee9937b81b32c08f105e14d5b77f88519a76abfd57f",
+    "headings": [
+      "# Race and Species Pipeline Implementation",
+      "## Normalization",
+      "## Public projection",
+      "## Catalog, service, and API",
+      "## Validation and limitations"
+    ]
+  },
+  {
+    "file": "analysis/races/EDITION-ANALYSIS.md",
+    "sha256": "1c9057c3293ee9f4546c69b2f65209049c7b8a02772136f41694ada63de8b1a8",
+    "headings": [
+      "# Race and Species Edition Analysis"
+    ]
+  },
+  {
+    "file": "analysis/races/INHERITANCE-ANALYSIS.md",
+    "sha256": "c4f86778545065484e657d58ff4346155ff0c386a07fb9f4a2ceb7eb60512ee1",
+    "headings": [
+      "# Race Inheritance and Version Implementation"
+    ]
+  },
+  {
+    "file": "analysis/races/SOURCE-INVENTORY.md",
+    "sha256": "72f4893b6d6bf86a697722e2430b86d292ee308109dfeae508abeecb4cb7d4b8",
+    "headings": [
+      "# Race and Species Source Inventory",
+      "## Corpus",
+      "## Root collections and counts",
+      "## Root field coverage",
+      "## Structured and descriptive content",
+      "## Source references",
+      "## Limitations surfaced by discovery"
+    ]
+  },
+  {
+    "file": "analysis/races/SUBRACE-ANALYSIS.md",
+    "sha256": "d02e8b656cf42bfc27ccd737239e834f1a31fd27e84232c8877b59e64e0918c1",
+    "headings": [
+      "# Subrace, Lineage, and Variant Analysis"
+    ]
+  },
+  {
+    "file": "analysis/races/TRAIT-ANALYSIS.md",
+    "sha256": "660d028487d71b276138bc63eeea778d5e44126e175f204696439d24a3a99cec",
+    "headings": [
+      "# Racial Trait Analysis"
+    ]
+  },
+  {
+    "file": "analysis/references/API-DESIGN.md",
+    "sha256": "6024c65a3e0e4a3bfe06b3633e697f3cf8debc7b4b71317e92011cf88a0fc11c",
+    "headings": [
+      "# Public API Design Proposal",
+      "## Future projection"
+    ]
+  },
+  {
+    "file": "analysis/references/ARCHITECTURE-DESIGN.md",
+    "sha256": "e5e231585c0f1d5ca0577485bb8cb8c39bebfbaa2f4763ed23174571f2c50f5c",
+    "headings": [
+      "# Cross-Catalog Resolver Architecture",
+      "## Proposed boundary",
+      "## Lifecycle recommendation",
+      "## Startup policy",
+      "## Determinism and growth"
+    ]
+  },
+  {
+    "file": "analysis/references/FEATURE-REFERENCE-ANALYSIS.md",
+    "sha256": "7c0db4f14ee70a3a7333be997d387c0e7a9ba7017dcbc2311220427418b50bc4",
+    "headings": [
+      "# Feature and Proficiency Reference Analysis",
+      "## Existing exact graph",
+      "## Other grants and prerequisites"
+    ]
+  },
+  {
+    "file": "analysis/references/IDENTITY-ANALYSIS.md",
+    "sha256": "f00b5506bd77ff82a3cb302b949c43a0f8c9f3f39d3a72f161e9e27ad1c20bec",
+    "headings": [
+      "# Identity Analysis",
+      "## Catalog-owned identity rules",
+      "## Actual collision and ambiguity findings"
+    ]
+  },
+  {
+    "file": "analysis/references/ITEM-REFERENCE-ANALYSIS.md",
+    "sha256": "02fc716638af0a0b21ab0757f584c7f998b05468d6abe82f55bb72e7c3ef179d",
+    "headings": [
+      "# Item Reference Analysis",
+      "## Verified counts",
+      "## Classification rules"
+    ]
+  },
+  {
+    "file": "analysis/references/REFERENCE-INVENTORY.md",
+    "sha256": "e6e64dbd133ab7450c7a42640675a4c502c23eb34eaa16b86590698f1ecfc15f",
+    "headings": [
+      "# Reference Inventory",
+      "## Counting rules",
+      "## Classes machine evidence",
+      "## Reference category distinctions"
+    ]
+  },
+  {
+    "file": "analysis/references/RESOLUTION-SEMANTICS.md",
+    "sha256": "c0d754a981f156fd8382eb48db4db6d97bb03d1d05c8969b1a9eda8d0f23e344",
+    "headings": [
+      "# Resolution Semantics",
+      "## Proposed outcomes",
+      "## Reference semantics",
+      "## Diagnostics"
+    ]
+  },
+  {
+    "file": "analysis/references/SPELL-REFERENCE-ANALYSIS.md",
+    "sha256": "f4f53ae1dd92dca8e95bccda5d558ad38fbb4d1ab9fc7c9ba8c78c0453b3eead",
+    "headings": [
+      "# Spell Reference Analysis",
+      "## Findings",
+      "## Required distinction"
+    ]
+  },
+  {
+    "file": "analysis/references/STAGE-A-REPORT.md",
+    "sha256": "adf8aae4496a7287f4702f20774d3a6e1395df9552f7738f8fc2ebcc529233b9",
+    "headings": [
+      "# Cross-Catalog Reference Discovery — Stage A",
+      "## Scope and conclusion",
+      "## Key findings",
+      "## Documents and evidence",
+      "## Verification"
+    ]
+  },
+  {
+    "file": "analysis/references/STAGE-B1-IMPLEMENTATION.md",
+    "sha256": "04823bb600de9c08f76014877c91790b73bc1f6d9a2ee4c72d432c165c9114b8",
+    "headings": [
+      "# Cross-Catalog Reference Resolver — Stage B1",
+      "## Implemented components",
+      "## Resolution semantics",
+      "## Supported source-authored fields",
+      "## Corpus results",
+      "### Stage A count reconciliation",
+      "## Tests and compatibility",
+      "## Subsequent stage"
+    ]
+  },
+  {
+    "file": "analysis/references/STAGE-B2-IMPLEMENTATION.md",
+    "sha256": "a6328606f94e126c64d691ea5bb1f945922d8478ac58600477ce3e356fb338c0",
+    "headings": [
+      "# Stage B2 — Feat, Optional Feature, Skill, and Language Integration",
+      "## Implementation",
+      "## Extracted references",
+      "## Corpus results",
+      "## Validation and limitations"
+    ]
+  },
+  {
+    "file": "analysis/references/STEP-5-PUBLIC-API-INTEGRATION.md",
+    "sha256": "0044070a16886ba78d2c8f50218817cd12dc7b4982feb5806e15c0fc95bfefb0",
+    "headings": [
+      "# Step 5 — Public Cross-Catalog Reference Integration",
+      "## DTO/API audit and decision",
+      "## Production components",
+      "## Public coverage and corpus counts",
+      "## Example response fragments from the corpus",
+      "## Compatibility and intentional boundaries",
+      "## Tests and verification"
+    ]
+  },
+  {
+    "file": "analysis/references/TEST-STRATEGY.md",
+    "sha256": "e8c10373d48108adb401315012d8f1c4adae7e263e6906296399cbf25964e2cf",
+    "headings": [
+      "# Cross-Catalog Resolver Test Strategy",
+      "## Unit tests",
+      "## Integration and regression tests",
+      "## Corpus validation"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/adventures/FIELD-COVERAGE.md",
+    "sha256": "09f4989c811c8c4243f5b862ae84a942237672daf0119c390050c0259f8c758a",
+    "headings": [
+      "# Adventure field coverage"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/adventures/IMPLEMENTATION.md",
+    "sha256": "231c9649027edf9d97b262542dd07ece37c4ca6994444912dbe11d798373b925",
+    "headings": [
+      "# Adventure Index implementation",
+      "## Scope and evidence",
+      "## Implementation",
+      "## Source Registry",
+      "## Validation"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/bastion-facilities/DTO-DESIGN.md",
+    "sha256": "421ac30edfae4ba65730f407594f34be3b842ae6c28dd0227b6952eb7c4a0128",
+    "headings": [
+      "# Bastion Facility DTO Design Checkpoint",
+      "## Source audit",
+      "## Identity and normalized model",
+      "## Public projections",
+      "## API and behavior boundary",
+      "## Publication boundary"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/bastion-facilities/FIELD-COVERAGE.md",
+    "sha256": "db72629d278fa7b36a6d720d1e08e79e1c74010a82a5aed1f71a759885d2c96c",
+    "headings": [
+      "# Bastion Facilities Field Coverage",
+      "## Root fields",
+      "## Nested fields",
+      "### Prerequisites",
+      "### Hirelings",
+      "### Entry tree",
+      "## Markup tags in entries"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/bastion-facilities/IMPLEMENTATION.md",
+    "sha256": "c1738b84e4bb476560a6f3f786c33a393066d19ad076f0f8d5c007dbb939c645",
+    "headings": [
+      "# Bastion Facilities Catalog Implementation",
+      "## Corpus and identity",
+      "## Typed import and normalized model",
+      "## Public API",
+      "## References and boundaries",
+      "## Verification",
+      "## Recommended next Step 6 catalog"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/bastion-facilities/REFERENCE-INVENTORY.md",
+    "sha256": "cca85c92b4b433a6f8e2b18b7e4ded59abb62a13b44afe87f0dc357c6e42db01",
+    "headings": [
+      "# Bastion Facility Reference Inventory",
+      "## Discovery",
+      "## Metadata retained"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/CATALOG-BOUNDARIES.md",
+    "sha256": "00504dcf63d004357304925d67491f29c945365b09042c73d810579c62d84aaa",
+    "headings": [
+      "# Proposed Catalog Boundaries",
+      "## Shared support versus separate public catalogs"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/character-creation-options/FIELD-COVERAGE.md",
+    "sha256": "b9ec403f42eac4bf3d7365077966ed7fbfc861cbe8efa355bae67a32659f56ed",
+    "headings": [
+      "# Character Creation Options field coverage",
+      "## Shape notes"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/character-creation-options/IMPLEMENTATION.md",
+    "sha256": "d79f7b06ffd6b98b9a05d5743544a779410e6fb0c10ee90247573efbc8ec402d",
+    "headings": [
+      "# Character Creation Options implementation",
+      "## Discovery and identity",
+      "## Typed source and normalized model",
+      "## References and source validation",
+      "## Public API",
+      "## Validation"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/character-creation-options/REFERENCE-INVENTORY.md",
+    "sha256": "3be21913e0668ad56a7a2ff37e2c11fed183e95fdc7841d6857dbb5de2d409c6",
+    "headings": [
+      "# Character Creation Options reference inventory"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/cults-and-boons/FIELD-COVERAGE.md",
+    "sha256": "7a49627a9a8a6a24d5b38b8adc868931a14688e7af79d30f2362686e3a4f6127",
+    "headings": [
+      "# Cults and Boons field coverage"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/cults-and-boons/IMPLEMENTATION.md",
+    "sha256": "e5d305102534b9512838f22e809c1c5b594213925e670ff3ce92ad6aff9b95cf",
+    "headings": [
+      "# Cults and Boons implementation",
+      "## Source audit and design checkpoint",
+      "## Production components",
+      "## Cross-catalog references",
+      "## Source Registry and persistence",
+      "## Endpoints",
+      "## Verification"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/cults-and-boons/REFERENCE-INVENTORY.md",
+    "sha256": "e1e482b43b4d00dfad7a5be2fef17bbeda7492556f38943ea7d8aea0d6eda3e9",
+    "headings": [
+      "# Cults and Boons reference inventory",
+      "## Structured source relationships",
+      "## Explicit markup references",
+      "## Preserved but unsupported markup targets"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/deities/DTO-DESIGN.md",
+    "sha256": "ffea2a027dfa705fc31c0e18b833e1182323c58460947868a58c6e63326e0155",
+    "headings": [
+      "# Deities DTO Design Checkpoint",
+      "## Discovery basis",
+      "## Proposed internal model",
+      "## Public projection",
+      "## References and API behavior"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/deities/FIELD-COVERAGE.md",
+    "sha256": "4fa7f4938518fc2da5a56dd17688cd74c5641cc17cbfdf3cda4d60975ce6dd86",
+    "headings": [
+      "# Deities Field Coverage",
+      "## Root fields",
+      "## Recursive path inventory",
+      "## Nested structure findings"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/deities/IDENTITY-DESIGN.md",
+    "sha256": "199ab50d4f8d8fb9b0dd55912a5c45ca923d57f3344f514b867f2481d45c5475",
+    "headings": [
+      "# Deity Identity Design",
+      "## Selected identity",
+      "## Five PHB `(name, source)` collisions",
+      "## Copy lineage",
+      "## Fallback policy"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/deities/IMPLEMENTATION.md",
+    "sha256": "bbeb8031f847b8498e62dc0263b02b07a712b8f18295800d3b7413e4cfb3df50",
+    "headings": [
+      "# Deities Catalog Implementation",
+      "## Source and identity",
+      "## Typed source and normalized models",
+      "## Structured information and publication boundary",
+      "## References and API",
+      "## Verification"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/deities/REFERENCE-INVENTORY.md",
+    "sha256": "4aae6ce28cb0f0b38beeb4ae6e1d7cf1937910d7fd11c380d6e830c50f9d6318",
+    "headings": [
+      "# Deities Reference Inventory",
+      "## Resolver occurrences added",
+      "## Other observed markup",
+      "## Baseline stability"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/DEPENDENCY-MATRIX.md",
+    "sha256": "2483981ccd02a68131bb88833c8f692a7d6b1d1b552e4c3b938f37fb4b11bb55",
+    "headings": [
+      "# Dependency Matrix",
+      "## Existing resolver reuse"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/encounters/DTO-DESIGN.md",
+    "sha256": "a4465012ee19d96eeb050b2ab721ecb133108c20484e6c25c9e402242c6d1363",
+    "headings": [
+      "## Corpus audit",
+      "## Observed source schema",
+      "## Domain and identity",
+      "## Internal/public split",
+      "## References and behavior",
+      "## Checkpoint status"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/encounters/FIELD-COVERAGE.md",
+    "sha256": "15146934b5a10d98a3aa057367901e2cb0d2cd1c15fb6762aa909f739780a3b8",
+    "headings": [
+      "### Confirmed absences",
+      "### Source distribution"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/encounters/IMPLEMENTATION.md",
+    "sha256": "cd512cb8d1951ce35268aae06c204135a133150909aef39ca93561fc4bc49166",
+    "headings": [
+      "## Scope and domain boundary",
+      "## Identity and provenance",
+      "## Typed import and normalized model",
+      "## Public DTO and licensing",
+      "## API",
+      "## References and deferred mechanics",
+      "## Verification"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/encounters/REFERENCE-INVENTORY.md",
+    "sha256": "7d01310958eab2b5b1326acca3bccfdf29203479c155bf76a625b7cfd7b257c1",
+    "headings": [
+      "## Added resolver occurrences"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/IMPLEMENTATION-ORDER.md",
+    "sha256": "91a19af7e3d6978066cdf19fe044a730e62254f5b1f52a6dd01770d7e733b92d",
+    "headings": [
+      "# Recommended Implementation Order",
+      "## 0. Shared per-catalog contract",
+      "## 1. Adventure publication index and name tables — low complexity, separate decisions",
+      "## 2. Character creation options — medium",
+      "## 3. Cults and boons — medium",
+      "## 4. Objects — medium",
+      "## 5. Bastion facilities — medium",
+      "## 6. Encounters — medium",
+      "## 7. Rewards — high",
+      "## 8. Traps and hazards — high",
+      "## 9. Vehicles and upgrades — high",
+      "## 10. Variant rules — high",
+      "## 11. Deities — high",
+      "## 12. Treasure tables — high",
+      "## 13. Recipes — implemented as a metadata-only catalog; Homecraft excluded",
+      "## Per-stage exit criteria"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/LICENSING-BOUNDARIES.md",
+    "sha256": "6ce25ca9b8cea49ef960e09efa8ca48ce31c8fc7b2e6034c2452028e6587a75f",
+    "headings": [
+      "# Licensing and Publication Boundaries",
+      "## Safe publication policy for the next stages"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/names/FIELD-COVERAGE.md",
+    "sha256": "1f3804609e3278f4c0af5cc9921c9f7ee1236ab53cd9660a7667175e2b42a199",
+    "headings": [
+      "# Name Table field coverage"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/names/IMPLEMENTATION.md",
+    "sha256": "0f12e84d40410dc7a381222e6b11c194515836ba7f7839836c3ebd6e418fc29f",
+    "headings": [
+      "# Name Tables implementation",
+      "## Scope and identity",
+      "## Implementation",
+      "## Validation"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/objects/DTO-DESIGN.md",
+    "sha256": "360b38799460d6c1775d3d7f1be6c23089557b90f3980d2e6b127defe3a5dd4f",
+    "headings": [
+      "# Objects DTO Design",
+      "## Identity and domain boundary",
+      "## Internal model",
+      "## Public projections",
+      "## References and publication"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/objects/FIELD-COVERAGE.md",
+    "sha256": "22539f11e7926d6657176dfaa1e0bfca48e350e2d99ebdc493ecf324de3f84b8",
+    "headings": [
+      "# Objects Field Coverage"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/objects/IMPLEMENTATION.md",
+    "sha256": "ad6fed4808df2a6e282112cd0816c44171f2570251c603c9c19695be99912608",
+    "headings": [
+      "# Objects Catalog Implementation",
+      "## Source audit and identities",
+      "## Model and loading",
+      "## References and API",
+      "## Validation"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/objects/REFERENCE-INVENTORY.md",
+    "sha256": "51c20f364302cbb950bc42083bb28d3276dad687dda94f0db783af5cc15c1505",
+    "headings": [
+      "# Objects Reference Inventory"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/PERSISTENCE-READINESS.md",
+    "sha256": "55710909ee8daae815c52bbea72c48ed51e94eb90ae6aae7264bb66be30cca17",
+    "headings": [
+      "# Persistence and Source Synchronization Readiness",
+      "## Identity/provenance fields to retain",
+      "## Per-family requirements",
+      "## Fingerprints and determinism"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/recipes/DOMAIN-DESIGN.md",
+    "sha256": "7e6133a12e3b77af12888d56db19b899fca4ee6f2e08593cf522d773cc7310ab",
+    "headings": [
+      "# Recipes Domain and Publication Design Checkpoint",
+      "## Decision",
+      "## Domain boundary",
+      "## Identity and provenance",
+      "## Typed internal model",
+      "## Public DTOs",
+      "## REST representation",
+      "## Relationships and licensing"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/recipes/FIELD-COVERAGE.md",
+    "sha256": "3043d5bad79429404cb1680e60e4da0b0dd875e1e2c08cbc0a760e079bf6c6ea",
+    "headings": [
+      "# Recipes Field Coverage"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/recipes/IMPLEMENTATION.md",
+    "sha256": "4c45b5a7e6f313eaa808e89f43c7fa4468c4de258688602e7394557fdee47d68",
+    "headings": [
+      "# Recipes Catalog Implementation",
+      "## Scope and decision",
+      "## Source mapping and normalization",
+      "## API and publication boundary",
+      "## References and licensing",
+      "## Verification"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/recipes/REFERENCE-INVENTORY.md",
+    "sha256": "f1910062a2e9f79a415e971ffeca6f9c36a06a9dd182073f1ae86e2c468ab926",
+    "headings": [
+      "# Recipes Reference Inventory",
+      "## Embedded tags",
+      "## Resolver impact",
+      "## Source lineage"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/recipes/SOURCE-AUDIT.md",
+    "sha256": "439c497d60398c045508b0cda96f61b8df0774e497ea9627606504a14c1a66a2",
+    "headings": [
+      "# Recipes Source Audit",
+      "## Pinned source",
+      "## Purpose and domain evidence",
+      "## Counts and classifications",
+      "## Source validation findings",
+      "## Embedded markup and explicit relationships",
+      "## Audit limitations"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/rewards/DTO-DESIGN.md",
+    "sha256": "b2a2c0eee2cd3fd8aa4909ad83f042e9d94dfa1f66bb6870fe36df20fe426305",
+    "headings": [
+      "# Rewards DTO Design Checkpoint",
+      "## Source findings",
+      "## Proposed source types",
+      "## Normalized catalog model",
+      "## Public projection",
+      "## Reference policy",
+      "## REST representation",
+      "## Licensing and limitations"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/rewards/FIELD-COVERAGE.md",
+    "sha256": "9fb0fd69d9239f6cab74997b3aea0546a4d5a2f13d510e4368e2b7a505ed08e4",
+    "headings": [
+      "# Rewards Field Coverage"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/rewards/IMPLEMENTATION.md",
+    "sha256": "e552b794c84d9c70b4902ff651437b876c599d87414207cf49e997876593bed0",
+    "headings": [
+      "# Rewards Catalog Implementation",
+      "## Corpus and identity",
+      "## Typed import and normalized model",
+      "## Structured data and limits",
+      "## Public API and publication boundary",
+      "## Validation"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/rewards/REFERENCE-INVENTORY.md",
+    "sha256": "2983c84a8ab5c8506b564659bad231e3719d0a5082621cac6af3beb35158cbc4",
+    "headings": [
+      "# Rewards Reference Inventory",
+      "## Explicit supported references",
+      "## Preserved without a target adapter",
+      "## Other observed markup"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/SCHEMA-COMPLEXITY.md",
+    "sha256": "d68821da9e64acf4443611ac5add9c0a6d1ad72a605a080d2ddc6b485abb8f68",
+    "headings": [
+      "# Schema Complexity and Source Findings",
+      "## Evidence scale",
+      "## Cross-corpus observations",
+      "## Schema gate for each future implementation"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/SOURCE-COVERAGE-MATRIX.md",
+    "sha256": "d31d432ec9bb4511cb6b625f9ed2e0aff95e8cf4eecffe500b820a8577ba96d2",
+    "headings": [
+      "# Source Coverage Matrix",
+      "## Completeness classifications",
+      "## Not present in this runtime snapshot"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/STEP-6-INVENTORY.md",
+    "sha256": "2b1e0f8b6a16e3b438dc9482b71e903b81450df5a3a41b7e4363639f26dad456",
+    "headings": [
+      "# Step 6 â€” Remaining JSON Catalog Inventory",
+      "## Scope and method",
+      "## Coverage summary",
+      "## Source, transformation, and identity evidence",
+      "## Files and evidence index",
+      "## Limitations",
+      "## Validation"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/traps-and-hazards/DTO-DESIGN.md",
+    "sha256": "dba31102efa4fde3bd7fc2ed50e86ee727b06eaa4210677501110f18ad767667",
+    "headings": [
+      "# Traps and Hazards DTO Design Checkpoint",
+      "## Source findings",
+      "## Proposed internal types",
+      "## Identity and indexes",
+      "## Public DTOs",
+      "## References and publication",
+      "## HTTP representation",
+      "## Confirmed limitations"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/traps-and-hazards/FIELD-COVERAGE.md",
+    "sha256": "4f7e5b95ac5dcb9a03dbf3593f056d1aef03b6629325e60ce7686997051d9422",
+    "headings": [
+      "# Trap and Hazard Field Coverage",
+      "## Trap",
+      "## Hazard",
+      "## Root-level field presence",
+      "## Confirmed absences",
+      "## Typed interpretation"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/traps-and-hazards/IMPLEMENTATION.md",
+    "sha256": "0065063697d6b25955d26e8961dde6d71f4d9cfc27562e2e226664d0d2f707e9",
+    "headings": [
+      "# Traps and Hazards Catalog Implementation",
+      "## Corpus and identity",
+      "## Types and preserved mechanics",
+      "## Public API and licensing",
+      "## References and boundaries",
+      "## Verification"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/traps-and-hazards/REFERENCE-INVENTORY.md",
+    "sha256": "d4eab847d3b95e97a5101891730f968af6bb79b77b9e38ad09a75b7aae2b18eb",
+    "headings": [
+      "# Trap and Hazard Reference Inventory",
+      "## Authored structured references",
+      "## Tagged text",
+      "## Unsupported or deferred targets"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/treasure-tables/DOMAIN-DESIGN.md",
+    "sha256": "a09216d7347961f8e0cf3deb25729413b017bc608c1710a5183a32501c297f9a",
+    "headings": [
+      "# Treasure and Loot Table Domain Design",
+      "## Source checkpoint",
+      "## Boundaries",
+      "## Identity checkpoint",
+      "## Source structures and mechanics",
+      "## References and publication boundary"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/treasure-tables/DTO-DESIGN.md",
+    "sha256": "5af280a5a1b67bdcb93cd3e574bd76de5869f0dd0f495244fe2987fccb68d36d",
+    "headings": [
+      "# Treasure Tables DTO Design Checkpoint",
+      "## Internal normalized types",
+      "## Public projection",
+      "## Identity and lookup",
+      "## API",
+      "## Publication decision"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/treasure-tables/FIELD-COVERAGE.md",
+    "sha256": "4b69d2a1e151e7526a44c4a5c57e0b9f494506212b5428076c9051d9fb0ffa5f",
+    "headings": [
+      "# Treasure and Loot Tables Field Coverage",
+      "## Root collections",
+      "## Complete nested paths",
+      "## Optional and empty variants",
+      "## Roll range audit"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/treasure-tables/IMPLEMENTATION.md",
+    "sha256": "f0e8f7ce323965d09cac7a189debd84420ac8870904240b408811d2b96ea7b80",
+    "headings": [
+      "# Treasure and Loot Tables Implementation",
+      "## Source and counts",
+      "## Domain and identity",
+      "## Typed source and normalized data",
+      "## Table semantics preserved",
+      "## Public DTOs and REST API",
+      "## References and publication boundary",
+      "## Verification"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/treasure-tables/REFERENCE-INVENTORY.md",
+    "sha256": "4a1dcb6a982b1ca2245829718c46c278c05a98a32cf17cdaf7100c20d7513030",
+    "headings": [
+      "# Treasure Tables Reference Inventory",
+      "## Explicit Item relationships",
+      "## New resolver occurrences",
+      "## No inferred relationships"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/variant-rules/DTO-DESIGN.md",
+    "sha256": "a64a66d7f080dafd0bd5111733b6011dbe6a269fa8c41018b07db1e212857dda",
+    "headings": [
+      "# Variant Rules DTO Design Checkpoint",
+      "## Source-backed design",
+      "## Identity",
+      "## Normalized model",
+      "## Entry type extension checkpoint",
+      "## Cross-catalog references and licensing",
+      "## REST representation",
+      "## Proceeding decision"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/variant-rules/FIELD-COVERAGE.md",
+    "sha256": "c5e5bccc04905eaf33195c928b9e2ab665f18776c9e5ad895da5d8869d16c313",
+    "headings": [
+      "# Variant Rules Field Coverage",
+      "## Root collections and distributions",
+      "## Nested entry node variants",
+      "## Complete field path/type inventory",
+      "## Optional values, references, and media"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/variant-rules/IMPLEMENTATION.md",
+    "sha256": "78d63e00f0cfffe81ddf0ebd3dbe31b1f65e0dab4ab49c269560b2cb60fdd9e9",
+    "headings": [
+      "## Source and identity",
+      "## Typed import and internal model",
+      "## Public API and licensing",
+      "## Cross-catalog references",
+      "## Verification"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/variant-rules/REFERENCE-INVENTORY.md",
+    "sha256": "49cc19515e2c58beee98d4f170501625c62a2deb440b73b2192ae9a47a37908b",
+    "headings": [
+      "## Authored reference and lineage fields",
+      "## Complete markup tag inventory",
+      "## Source qualification"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/vehicles-and-upgrades/DTO-DESIGN.md",
+    "sha256": "a01463f18cba1114da54c8fa9d15d0997d15f4a9b90ccc7d6932f42f1929a222",
+    "headings": [
+      "# Vehicles and Vehicle Upgrades DTO Design Checkpoint",
+      "## Source audit",
+      "## Public DTO decision",
+      "## Catalog/API design",
+      "## Reference checkpoint"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/vehicles-and-upgrades/FIELD-COVERAGE.md",
+    "sha256": "b670dc376ee48e59470c77269ab4cc8c55e1efb0705794c90fe05962f97f3544",
+    "headings": [
+      "# Vehicles and Vehicle Upgrades Field Coverage",
+      "## Root collections",
+      "## Observed paths and JSON types",
+      "### `vehicle`",
+      "### `vehicleUpgrade`",
+      "## Optional and heterogeneous fields"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/vehicles-and-upgrades/IMPLEMENTATION.md",
+    "sha256": "1876bd0e1de630a250c3cc1ca17d86cf0187afa520e1e3677813946af499257f",
+    "headings": [
+      "# Vehicles and Vehicle Upgrades Implementation",
+      "## Scope and source",
+      "## Identity and provenance",
+      "## Typed import and normalized definitions",
+      "## Public projections and API",
+      "## References and publication boundaries",
+      "## Verification"
+    ]
+  },
+  {
+    "file": "analysis/remaining-json/vehicles-and-upgrades/REFERENCE-INVENTORY.md",
+    "sha256": "6339a32a4e32cc176687277d4674702447700ab70a1a67d292d947be9c470e44",
+    "headings": [
+      "# Vehicles and Vehicle Upgrades Reference Inventory",
+      "## Structured and markup evidence",
+      "## Unsupported and non-reference forms",
+      "## Public reference projection"
+    ]
+  },
+  {
+    "file": "analysis/SCHEMA-REPORTS.md",
+    "sha256": "eac955e65365d158f85b10b7b43cbbf1a78bcaacabffd1808fba565c1f70d173",
+    "headings": [
+      "# JSON schema analysis reports",
+      "## Reports"
+    ]
+  },
+  {
+    "file": "analysis/senses/DTO-DESIGN.md",
+    "sha256": "5bc6002a930bfaf57810803b3aba9605ac47d73de7268c7c6f49368320ae5fa8",
+    "headings": [
+      "# Sense DTO Design",
+      "## Concepts",
+      "## Mechanics and source content",
+      "## Reuse and future relationships",
+      "## API"
+    ]
+  },
+  {
+    "file": "analysis/senses/DTO-IMPLEMENTATION.md",
+    "sha256": "586037ce7e4ecc5cb1a1f31fe998dcb7311547dd6418077e9d4717c9f2e33728",
+    "headings": [
+      "# Sense DTO Implementation"
+    ]
+  },
+  {
+    "file": "analysis/senses/SOURCE-INVENTORY.md",
+    "sha256": "95bd2377885b385f7ca921e47a9739fad92247f46b0a41aa158c1c61d710dda2",
+    "headings": [
+      "# Senses Source Inventory",
+      "## Corpus",
+      "## Fields",
+      "## Sources and relationships",
+      "## Mechanics and presentation",
+      "## Copy/version/reprint",
+      "## Monster cross-entity observation"
+    ]
+  },
+  {
+    "file": "analysis/skills/DTO-DESIGN.md",
+    "sha256": "eaaef60281809f1f0f95a3f4f6cab66eba4a37516db11101ac42ccde1cfcd5c9",
+    "headings": [
+      "# Skills DTO and domain design",
+      "## Source-backed model",
+      "## Typed import and provenance",
+      "## Normalized definitions and public projection",
+      "## Character mechanics and cross-entity boundaries",
+      "## Catalog and API behavior"
+    ]
+  },
+  {
+    "file": "analysis/skills/DTO-IMPLEMENTATION.md",
+    "sha256": "1f37d5d6dad51dd637fadea0210db6953a6a69ae0c9579eb8d12a1cc18e238ca",
+    "headings": [
+      "# Skills DTO implementation",
+      "## Imported corpus",
+      "## Types and mapping",
+      "## Catalog, service, and endpoints",
+      "## Validation",
+      "## Limits"
+    ]
+  },
+  {
+    "file": "analysis/skills/SOURCE-INVENTORY.md",
+    "sha256": "b2044a263fed7aa850a186c2081ccce27904b6af5f611baf04b5d652a9c7cfce",
+    "headings": [
+      "# Skills source inventory",
+      "## Corpus",
+      "## Fields and coverage",
+      "## Mechanics and cross-entity references",
+      "## Edge cases and handling"
+    ]
+  },
+  {
+    "file": "analysis/sources/SOURCE-INVENTORY.md",
+    "sha256": "77776874cf77ee383c692be4d7cc1a05d702ac66e244fa259c6cbe3203266414",
+    "headings": [
+      "## Scope and counts",
+      "## Deduplicated inventory",
+      "## Unresolved and ambiguous references",
+      "## Evidence and limits"
+    ]
+  },
+  {
+    "file": "analysis/sources/SOURCE-REGISTRY-DESIGN.md",
+    "sha256": "cc0ee792b07c1aa392c281a298e282439fb079f7f9eaa2ee6e08eecc06e9cd45",
+    "headings": [
+      "## Purpose",
+      "## Model boundaries",
+      "## Registry keys and aliases",
+      "## Entity integration",
+      "## Evidence policy and public JSON"
+    ]
+  },
+  {
+    "file": "analysis/sources/SOURCE-REGISTRY-IMPLEMENTATION.md",
+    "sha256": "03eddec86858aa77aba65bf93fce78506de071ec4b223d608b83fe9f01533e8d",
+    "headings": [
+      "## Changes",
+      "## Coverage",
+      "## API impact",
+      "## Validation",
+      "## Known limitations"
+    ]
+  },
+  {
+    "file": "analysis/spells/CASTING-ANALYSIS.md",
+    "sha256": "6e6f44f75c0dc5424aec7cb36d3b6e7201f52f1aaf6a55f5279a4e7c7ba19981",
+    "headings": [
+      "# Casting metadata analysis"
+    ]
+  },
+  {
+    "file": "analysis/spells/COPY-VERSION-ANALYSIS.md",
+    "sha256": "587087345d7169b9a78a132167d081f72fe324e8808803fb764d3eb3c1267f33",
+    "headings": [
+      "# Copy and version analysis"
+    ]
+  },
+  {
+    "file": "analysis/spells/CROSS-CATALOG-ANALYSIS.md",
+    "sha256": "6c10c086bcd3a1c10d5ca86732d1f7f9a168d659d8c3fcd4f13c2c62ad0b2e79",
+    "headings": [
+      "# Cross-catalog spell reference feasibility",
+      "## Reference classes",
+      "## Existing catalog findings"
+    ]
+  },
+  {
+    "file": "analysis/spells/DTE-MAPPING.md",
+    "sha256": "528fc57206984e66e71a3b6121f8ecb84c3397f9457dffabd676d2ad5219d57f",
+    "headings": [
+      "# Spell DTE mapping",
+      "## Preserved fields",
+      "## Deliberately excluded properties",
+      "## Polymorphic representations",
+      "## Validation"
+    ]
+  },
+  {
+    "file": "analysis/spells/DTO-API-DESIGN.md",
+    "sha256": "df5aef6bd541ceda15f80fdf0ee108d0dc693add27226e33682fd311ead37498",
+    "headings": [
+      "# Proposed public Spell API",
+      "## Stage C implementation",
+      "## Stage D implementation and investigation"
+    ]
+  },
+  {
+    "file": "analysis/spells/EDITION-ANALYSIS.md",
+    "sha256": "6c567d9eddb983f4808c73456418c7ebf922420c3f5a0e40bb0248b878284bb6",
+    "headings": [
+      "# Edition analysis"
+    ]
+  },
+  {
+    "file": "analysis/spells/IDENTITY-ANALYSIS.md",
+    "sha256": "a43ce012c4d16af83bce9a3444bdf9f57c5e25af8aa240e00f99d373b7a7a836",
+    "headings": [
+      "# Spell identity and edition analysis",
+      "## Identity evidence",
+      "## Edition behavior",
+      "## Collision outcomes"
+    ]
+  },
+  {
+    "file": "analysis/spells/INLINE-MARKUP-INVENTORY.md",
+    "sha256": "8ce268084c73d468790bb26c7b6c52c6521c8f84277d9d74d8fc881807459c8c",
+    "headings": [
+      "# Inline Spell Markup Inventory",
+      "## Mechanical-tag details"
+    ]
+  },
+  {
+    "file": "analysis/spells/MECHANICS-ANALYSIS.md",
+    "sha256": "beae9177098f3563e3c23c1a5af39ed223d06a67f69fab51f530e8484044d923",
+    "headings": [
+      "# Structured mechanics analysis"
+    ]
+  },
+  {
+    "file": "analysis/spells/MECHANICS-EXTRACTION-DESIGN.md",
+    "sha256": "a3ca968f2e2fe63745f92ce228ed5ce1bd41a9b12c7653d344d227f2b7eaa58b",
+    "headings": [
+      "# Proposed Spell Mechanics Extraction Design",
+      "## Boundary",
+      "## Suggested immutable records",
+      "## Context retention",
+      "## Safe and unsafe projection",
+      "## Curation integration boundary"
+    ]
+  },
+  {
+    "file": "analysis/spells/NORMALIZED-MODEL-DESIGN.md",
+    "sha256": "7b6243f1f98d96351dc728ea028f6e1d45e02a59d8b5b7648cb666555d5d749c",
+    "headings": [
+      "# Normalized Spell model design and Stage B result",
+      "## Definition and references",
+      "## Typed values supported by evidence",
+      "## Not normalized as mechanics"
+    ]
+  },
+  {
+    "file": "analysis/spells/SCALING-ANALYSIS.md",
+    "sha256": "f3d3508b005c5eb91d9e3a36a6658183a991140caef782bb75729c4ee27e6848",
+    "headings": [
+      "# Scaling and higher-level casting analysis"
+    ]
+  },
+  {
+    "file": "analysis/spells/SCHOOL-METADATA-IMPLEMENTATION.md",
+    "sha256": "e677f5201a116f69cfa045777d02651051cd5fec9605b23820180ffc8f48586f",
+    "headings": [
+      "# Spell School Metadata Implementation",
+      "## Backend mapping",
+      "## API compatibility",
+      "## Verification"
+    ]
+  },
+  {
+    "file": "analysis/spells/SOURCE-INVENTORY.md",
+    "sha256": "7197638dac68925916896aa6c04668552898a42ab88792c4779a2014c1b40583",
+    "headings": [
+      "# Spell source inventory"
+    ]
+  },
+  {
+    "file": "analysis/spells/SOURCE-REGISTRY-ANALYSIS.md",
+    "sha256": "98b14f68b8db3c8973d08449d7d5f14b0747f822cc7979252f6cdebee5c1678c",
+    "headings": [
+      "# Source Registry coverage"
+    ]
+  },
+  {
+    "file": "analysis/spells/SPELL-LIST-ANALYSIS.md",
+    "sha256": "6fe4c9ac6e4b657cf08fcd7e68917a28fbde4cdb33642d6f656a6b2f5d3e336d",
+    "headings": [
+      "# Spell list and eligibility analysis"
+    ]
+  },
+  {
+    "file": "analysis/spells/STAGE-A-REPORT.md",
+    "sha256": "8ffa4b876956fb6d4e6427efeb5cb8d1c41c183672163e3c95da6d35673c5523",
+    "headings": [
+      "# Spells pipeline: Stage A report",
+      "## Findings",
+      "## Architecture recommendation",
+      "## Existing code observed",
+      "## Risks and Stage B decisions",
+      "## Documents and verification"
+    ]
+  },
+  {
+    "file": "analysis/spells/STAGE-B-IMPLEMENTATION.md",
+    "sha256": "eb93263693d844fb7e42a8f63bcde9decc40ee08b2ada54f7e25b067f29f3276",
+    "headings": [
+      "# Spells pipeline: Stage B implementation",
+      "## Scope",
+      "## Components",
+      "## Corpus validation",
+      "## Normalized structured data",
+      "## Tests and verification",
+      "## Stage C and known boundaries"
+    ]
+  },
+  {
+    "file": "analysis/spells/STAGE-C-IMPLEMENTATION.md",
+    "sha256": "b865c957e245079811b1038f4f6ce643daccdd19bc8404cc58a5ad4f8af592dd",
+    "headings": [
+      "# Spells pipeline: Stage C implementation",
+      "## Public components",
+      "## Catalog and query behavior",
+      "## Structured coverage and limits",
+      "## Verification"
+    ]
+  },
+  {
+    "file": "analysis/spells/STAGE-D-MECHANICS-INVESTIGATION.md",
+    "sha256": "57e3a24e9efe6001a1927f4ed4b9b8596ddeca77782fd7eb883b7be484f7740d",
+    "headings": [
+      "# Stage D — Spell Mechanics Investigation",
+      "## Scope and method",
+      "## Corpus findings",
+      "### Dedicated fields versus entries",
+      "## Required examples",
+      "## What is safe to expose now",
+      "## School metadata implementation",
+      "## Recommended next step"
+    ]
+  }
+]

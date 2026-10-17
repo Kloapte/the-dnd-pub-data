@@ -22,9 +22,28 @@ All IDs are the Stage B source-aware IDs. Startup rejects duplicate IDs and brok
 
 Class and subclass DTOs expose parent/source identities, edition labels where authored, source relationships, starting and multiclass options, lightweight feature references, structured choices, spellcasting metadata, and normalized progressions. Classes contain subclass IDs rather than nested subclass definitions. Subclasses retain their exact Stage B parent class ID. Feature DTOs are independently addressable and expose parent IDs, level, direct progression order when that order is explicitly present, variant classification, consumption metadata, and typed feature/external references and choice candidates. No replacement target is exposed: Stage A found variant flags but no explicit replacement-target relationships.
 
-The public projection omits normalized descriptive entry trees, import provenance, copy instructions, availability flags, raw media paths, and feature presentation content. Class-owned table rows preserve level associations and non-presentation cell kinds (`NUMBER`, `BONUS`, `DICE`, `SPEED_BONUS`); `PRESENTATION_TEXT` cells are omitted. Markup-bearing column labels become positional `Column N` labels so table cells keep their positions without publishing renderer instructions. The currently normalized feature-entry tables and prose are not projected because their headings/values are presentation content. This is a documented public projection limit; the source-normalized structures remain available internally. Proficiency prose restrictions are omitted while structured grants and optional flags remain. `false` and `0` are retained.
+The public projection omits normalized descriptive entry trees, import provenance, copy instructions, availability flags, raw media paths, and feature presentation content. Class-owned table rows preserve level associations and non-presentation cell kinds (`NUMBER`, `BONUS`, `DICE`, `SPEED_BONUS`); `PRESENTATION_TEXT` cells are omitted. Markup-bearing column labels become positional `Column N` labels without publishing renderer instructions. The currently normalized feature-entry tables and prose are not projected because their headings/values are presentation content. This is a documented public projection limit; the source-normalized structures remain available internally. Proficiency prose restrictions are omitted while structured grants and optional flags remain. `false` and `0` are retained.
 
 The DTOs reuse Stage B typed values for mechanics whose meaning is identical, including spellcasting, equipment groups, proficiency choices, and typed progression cells. They do not serialize Stage B definitions, provenance, or source entry nodes directly.
+
+### Step 7 Batch 1: additive progression column positions
+
+Progression rows now expose `positionedCells` alongside the unchanged compact `cells` array.
+Each positioned value contains its original zero-based `columnIndex`, `kind`, and the same safe
+`number`, `dice`, and `rollable` properties where present. Use `positionedCells` to associate values
+with the existing `columns`; compact list indexes do not identify source columns when text was
+withheld. This applies to Class and Subclass `tables`, and `spellcasting.slotTables` and
+`spellcasting.pactTables`.
+
+For PHB Barbarian's first row, the existing `cells` remains `[{"kind":"BONUS","number":2}]`;
+the additive `positionedCells` is `[{"columnIndex":1,"kind":"BONUS","number":2}]`. The source
+text at column zero remains withheld. Fully withheld and empty rows omit both empty arrays.
+Index zero, numeric zero and Boolean false remain serialized. No route or summary contract changes.
+Public Java carriers are now `ClassProgressionTableDto`, `ClassProgressionTableRowDto`, and
+`ClassSpellcastingDto`; internal normalized table and spellcasting types are unchanged.
+
+See [Batch 1 implementation](../mechanics/batch-1-class-table-positions/IMPLEMENTATION.md) for
+the six affected roots, compatibility decision, corpus regression checks and verification.
 
 ## Graph and references
 

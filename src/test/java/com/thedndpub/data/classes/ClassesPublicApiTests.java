@@ -137,7 +137,7 @@ class ClassesPublicApiTests {
 
     @Test
     void publicSpellAndEquipmentReferencesRetainDeferredIdentities() {
-        List<ClassSpellcasting> spellcasting = new java.util.ArrayList<>();
+        List<ClassSpellcastingDto> spellcasting = new java.util.ArrayList<>();
         classes.findAll().stream().map(mapper::detail).map(ClassDto::spellcasting)
                 .filter(java.util.Objects::nonNull).forEach(spellcasting::add);
         subclasses.findAll().stream().map(mapper::detail).map(SubclassDto::spellcasting)

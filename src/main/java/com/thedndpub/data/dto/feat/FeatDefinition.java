@@ -19,7 +19,9 @@ public record FeatDefinition(
         List<FeatAdditionalSpell> additionalSpells,
         List<EntryDte> entries,
         boolean variant,
-        FeatId parentId) {
+        FeatId parentId,
+        FeatMechanics mechanics,
+        List<FeatPrerequisiteProficiencyGroup> structuredProficiencyPrerequisites) {
     public FeatDefinition {
         prerequisites = List.copyOf(prerequisites);
         abilityIncreases = List.copyOf(abilityIncreases);
@@ -27,5 +29,7 @@ public record FeatDefinition(
         reprintedAs = List.copyOf(reprintedAs);
         additionalSpells = List.copyOf(additionalSpells);
         entries = List.copyOf(entries);
+        structuredProficiencyPrerequisites = structuredProficiencyPrerequisites == null
+                ? null : List.copyOf(structuredProficiencyPrerequisites);
     }
 }

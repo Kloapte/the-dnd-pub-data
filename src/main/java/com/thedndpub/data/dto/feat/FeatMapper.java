@@ -48,7 +48,9 @@ public final class FeatMapper {
                 mapAdditionalSpells(source.additionalSpells()),
                 source.entries() == null ? List.of() : source.entries(),
                 expanded.isVariant(),
-                expanded.isVariant() ? idFor(expanded.parentName(), expanded.parentSource()) : null);
+                expanded.isVariant() ? idFor(expanded.parentName(), expanded.parentSource()) : null,
+                FeatMechanicsMapper.map(source),
+                mapStructuredProficiencyPrerequisites(source));
     }
 
     public FeatId idFor(String name, String source) {
@@ -115,6 +117,27 @@ public final class FeatMapper {
                             .toList(),
                     group.spellcasting(), group.spellcasting2020(), group.spellcastingFeature());
         }).toList();
+    }
+
+    private static List<FeatPrerequisiteProficiencyGroup> mapStructuredProficiencyPrerequisites(FeatDte source) {
+        if (source.prerequisite() == null) {
+            return null;
+        }
+
+        List<FeatPrerequisiteProficiencyGroup> groups = new ArrayList<>();
+        for (int alternativeIndex = 0; alternativeIndex < source.prerequisite().size(); alternativeIndex++) {
+            var prerequisite = source.prerequisite().get(alternativeIndex);
+            if (prerequisite.proficiency() == null) {
+                continue;
+            }
+
+            List<FeatProficiencyPrerequisite> requirements = prerequisite.proficiency().stream()
+                    .map(value -> new FeatProficiencyPrerequisite(
+                            value.armor(), value.weapon(), value.weaponGroup()))
+                    .toList();
+            groups.add(new FeatPrerequisiteProficiencyGroup(alternativeIndex, requirements));
+        }
+        return groups.isEmpty() ? null : List.copyOf(groups);
     }
 
     private static FeatLevelRequirementDto mapLevel(FeatLevelPrerequisiteDte level) {

@@ -4,6 +4,7 @@ import com.thedndpub.data.dto.source.SourceReference;
 import com.thedndpub.data.dte.item.ItemAttunementTagDte;
 import com.thedndpub.data.dte.item.ItemNumberTextDte;
 import com.thedndpub.data.dte.item.ItemSourceDte;
+import com.thedndpub.data.dte.item.ItemStringListDte;
 import com.thedndpub.data.dte.item.ItemTypeDte;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +33,7 @@ public final class ItemMapper {
         ItemNumberTextDte chargeCount = value(item.charges(), resolved, ItemSourceDte::charges);
         ItemNumberTextDte rechargeAmount = value(item.rechargeAmount(), resolved, ItemSourceDte::rechargeAmount);
         ItemAttunementDto attunement = attunement(item, resolved);
+        ItemStringListDte focus = value(item.focus(), resolved, ItemSourceDte::focus);
         String sourceCode = require(item.source(), "item source");
         String name = require(item.name(), "item name");
         return new ItemDefinition(
@@ -89,7 +91,8 @@ public final class ItemMapper {
                 protection(item, resolved),
                 lights(value(item.light(), resolved, ItemSourceDte::light)),
                 speedModification(value(item.modifySpeed(), resolved, ItemSourceDte::modifySpeed)),
-                focusEnabled(value(item.focus(), resolved, ItemSourceDte::focus)),
+                focusEnabled(focus),
+                focus(focus),
                 vehicleStatistics(item, resolved),
                 references(item, resolved),
                 value(item.scfType(), resolved, ItemSourceDte::scfType),
@@ -104,7 +107,8 @@ public final class ItemMapper {
                 value(item.sentient(), resolved, ItemSourceDte::sentient),
                 value(item.curse(), resolved, ItemSourceDte::curse),
                 value(item.tattoo(), resolved, ItemSourceDte::tattoo),
-                value(item.atomicPackContents(), resolved, ItemSourceDte::atomicPackContents));
+                value(item.atomicPackContents(), resolved, ItemSourceDte::atomicPackContents),
+                signedBonuses(item, resolved));
     }
 
     public ItemVariantMatchData mapVariantMatchData(ItemDefinition definition, ResolvedItemDte resolved) {
@@ -242,6 +246,33 @@ public final class ItemMapper {
                 .allMatch(java.util.Objects::isNull) ? null : value;
     }
 
+    private static ItemSignedBonuses signedBonuses(ItemSourceDte item, ResolvedItemDte resolved) {
+        ItemSignedBonuses result = new ItemSignedBonuses(
+                signedBonus(value(item.bonusAc(), resolved, ItemSourceDte::bonusAc), "bonusAc"),
+                signedBonus(value(item.bonusWeapon(), resolved, ItemSourceDte::bonusWeapon), "bonusWeapon"),
+                signedBonus(value(item.bonusWeaponAttack(), resolved, ItemSourceDte::bonusWeaponAttack),
+                        "bonusWeaponAttack"),
+                signedBonus(value(item.bonusWeaponDamage(), resolved, ItemSourceDte::bonusWeaponDamage),
+                        "bonusWeaponDamage"),
+                signedBonus(value(item.bonusSpellAttack(), resolved, ItemSourceDte::bonusSpellAttack),
+                        "bonusSpellAttack"),
+                signedBonus(value(item.bonusSpellSaveDc(), resolved, ItemSourceDte::bonusSpellSaveDc),
+                        "bonusSpellSaveDc"),
+                signedBonus(value(item.bonusSavingThrow(), resolved, ItemSourceDte::bonusSavingThrow),
+                        "bonusSavingThrow"),
+                signedBonus(value(item.bonusSavingThrowConcentration(), resolved,
+                        ItemSourceDte::bonusSavingThrowConcentration), "bonusSavingThrowConcentration"),
+                signedBonus(value(item.bonusAbilityCheck(), resolved, ItemSourceDte::bonusAbilityCheck),
+                        "bonusAbilityCheck"),
+                signedBonus(value(item.bonusProficiencyBonus(), resolved, ItemSourceDte::bonusProficiencyBonus),
+                        "bonusProficiencyBonus"));
+        return result.isEmpty() ? null : result;
+    }
+
+    private static ItemSignedBonus signedBonus(String token, String sourceField) {
+        return ItemSignedBonusParser.parse(token, sourceField);
+    }
+
     private static ItemProtectionDto protection(ItemSourceDte item, ResolvedItemDte resolved) {
         List<String> resistance = list(value(item.resist(), resolved, ItemSourceDte::resist));
         List<String> immunity = list(value(item.immune(), resolved, ItemSourceDte::immune));
@@ -280,8 +311,18 @@ public final class ItemMapper {
         return Map.copyOf(result);
     }
 
-    private static Boolean focusEnabled(com.thedndpub.data.dte.item.ItemStringListDte focus) {
+    private static Boolean focusEnabled(ItemStringListDte focus) {
         return focus == null ? null : focus.enabled();
+    }
+
+    private static ItemFocus focus(ItemStringListDte focus) {
+        if (focus == null) {
+            return null;
+        }
+        if (focus.enabled() != null) {
+            return new ItemBooleanFocus(focus.enabled());
+        }
+        return new ItemClassFocus(focus.values());
     }
 
     private static ItemVehicleStatisticsDto vehicleStatistics(ItemSourceDte item, ResolvedItemDte resolved) {

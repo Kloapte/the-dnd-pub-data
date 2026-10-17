@@ -166,12 +166,26 @@ public final class ClassPublicMapper {
                 unlock.gainSubclassFeature(), unlock.gainSubclassFeatureHasContent(), unlock.tableDisplayName());
     }
 
-    private static List<ClassProgressionTable> safeTables(List<ClassProgressionTable> tables) {
-        return tables.stream().map(table -> new ClassProgressionTable(
+    private static List<ClassProgressionTableDto> safeTables(List<ClassProgressionTable> tables) {
+        return tables.stream().map(table -> new ClassProgressionTableDto(
                 table.order(), table.kind(), safeLabel(table.title()), safeColumns(table.columns()),
-                table.rows().stream().map(row -> new ClassTableRow(row.level(), row.cells().stream()
-                        .filter(cell -> cell.kind() != ClassTableCellKind.PRESENTATION_TEXT).toList())).toList(),
+                table.rows().stream().map(ClassPublicMapper::safeRow).toList(),
                 table.subclasses())).toList();
+    }
+
+    private static ClassProgressionTableRowDto safeRow(ClassTableRow row) {
+        List<ClassTableCell> cells = new ArrayList<>();
+        List<ClassPositionedTableCellDto> positionedCells = new ArrayList<>();
+        for (int columnIndex = 0; columnIndex < row.cells().size(); columnIndex++) {
+            ClassTableCell cell = row.cells().get(columnIndex);
+            if (cell.kind() == ClassTableCellKind.PRESENTATION_TEXT) {
+                continue;
+            }
+            cells.add(cell);
+            positionedCells.add(new ClassPositionedTableCellDto(
+                    columnIndex, cell.kind(), cell.number(), cell.dice(), cell.rollable()));
+        }
+        return new ClassProgressionTableRowDto(row.level(), cells, positionedCells);
     }
 
     private static List<String> safeColumns(List<String> columns) {
@@ -205,11 +219,11 @@ public final class ClassPublicMapper {
         return value.substring(0, start) + display + value.substring(end + 1);
     }
 
-    private static ClassSpellcasting safeSpellcasting(ClassSpellcasting value) {
+    private static ClassSpellcastingDto safeSpellcasting(ClassSpellcasting value) {
         if (value == null) {
             return null;
         }
-        return new ClassSpellcasting(value.casterProgression(), value.ability(), value.cantrips(), value.known(),
+        return new ClassSpellcastingDto(value.casterProgression(), value.ability(), value.cantrips(), value.known(),
                 value.prepared(), value.preparedExpression(), value.preparedChange(), value.fixedKnown(),
                 value.fixedAllowLowerLevel(), value.fixedByLevel(), safeTables(value.slotTables()),
                 safeTables(value.pactTables()), value.additionalSpells());
