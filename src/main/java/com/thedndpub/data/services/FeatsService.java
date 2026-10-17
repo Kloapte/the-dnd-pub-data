@@ -2,6 +2,7 @@ package com.thedndpub.data.services;
 
 import com.thedndpub.data.dto.feat.FeatDto;
 import com.thedndpub.data.dto.feat.FeatSummaryDto;
+import com.thedndpub.data.references.PublicReferenceProjection;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +12,11 @@ import java.util.Objects;
 @Service
 public final class FeatsService {
     private final FeatCatalog catalog;
+    private final PublicReferenceProjection references;
 
-    public FeatsService(FeatCatalog catalog) {
+    public FeatsService(FeatCatalog catalog, PublicReferenceProjection references) {
         this.catalog = Objects.requireNonNull(catalog, "catalog");
+        this.references = Objects.requireNonNull(references, "references");
     }
 
     public List<FeatSummaryDto> findFeats(String name, String source, String category) {
@@ -35,7 +38,7 @@ public final class FeatsService {
         if (feat == null) {
             throw new FeatNotFoundException("No feat found with ID '" + id + "'");
         }
-        return FeatDto.from(feat);
+        return FeatDto.from(feat).withCrossCatalogReferences(references.forOwner("feat", id));
     }
 
     public List<FeatDto> findByName(String name, String source) {
@@ -46,7 +49,8 @@ public final class FeatsService {
         List<FeatDto> matches = catalog.findByName(name).stream()
                 .filter(feat -> normalizedSource == null
                         || feat.source().identity().code().toLowerCase(Locale.ROOT).equals(normalizedSource))
-                .map(FeatDto::from)
+                .map(feat -> FeatDto.from(feat).withCrossCatalogReferences(
+                        references.forOwner("feat", feat.id().value())))
                 .toList();
         if (matches.isEmpty()) {
             throw new FeatNotFoundException("No feat found with name '" + name + "'");

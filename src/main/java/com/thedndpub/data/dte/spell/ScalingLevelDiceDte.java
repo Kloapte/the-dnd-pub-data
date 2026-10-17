@@ -1,6 +1,9 @@
 package com.thedndpub.data.dte.spell;
 
-import java.util.Map;
+import java.util.List;
 
-public record ScalingLevelDiceDte(String label, Map<String, String> scaling) {
+public record ScalingLevelDiceDte(String label, List<ScalingLevelDiceValueDte> scaling) {
+    public ScalingLevelDiceDte {
+        scaling = List.copyOf(scaling);
+    }
 }

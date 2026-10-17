@@ -45,12 +45,15 @@ class SourceRegistryTests {
 
     @Test
     void registersEveryDiscoveredSourceCodeAndPublicationStatus() {
-        assertEquals(179, registry.size());
+        assertEquals(181, registry.size());
         assertEquals(66, registry.publicationCount());
-        assertEquals(113, registry.size() - registry.publicationCount());
+        assertEquals(115, registry.size() - registry.publicationCount());
+        assertNotNull(registry.find("HFDoMM"));
+        assertEquals(null, registry.find("HFDoMM").publication());
         assertEquals(PublicationMetadataStatus.AVAILABLE, registry.find("PHB").publicationMetadataStatus());
         assertEquals(PublicationMetadataStatus.UNAVAILABLE,
                 registry.find("DSotDQ").publicationMetadataStatus());
+        assertEquals(PublicationMetadataStatus.UNAVAILABLE, registry.find("PiP").publicationMetadataStatus());
         for (var source : registry.records()) {
             assertNotNull(registry.find(source.identity().code()));
         }
@@ -118,7 +121,7 @@ class SourceRegistryTests {
             ClassPathResource resource = new ClassPathResource("data/sources/registry.json", classLoader);
             try (InputStream input = resource.getInputStream()) {
                 JsonNode json = objectMapper.readTree(input);
-                assertEquals(179, json.get("sources").size());
+                assertEquals(181, json.get("sources").size());
             }
         }
     }

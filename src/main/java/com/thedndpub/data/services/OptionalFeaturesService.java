@@ -2,6 +2,7 @@ package com.thedndpub.data.services;
 
 import com.thedndpub.data.dto.optionalfeature.OptionalFeatureDto;
 import com.thedndpub.data.dto.optionalfeature.OptionalFeatureSummaryDto;
+import com.thedndpub.data.references.PublicReferenceProjection;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.Locale;
 @Service
 public final class OptionalFeaturesService {
     private final OptionalFeatureCatalog catalog;
+    private final PublicReferenceProjection references;
 
-    public OptionalFeaturesService(OptionalFeatureCatalog catalog) {
+    public OptionalFeaturesService(OptionalFeatureCatalog catalog, PublicReferenceProjection references) {
         this.catalog = catalog;
+        this.references = references;
     }
 
     public List<OptionalFeatureSummaryDto> find(String name, String source, String featureType) {
@@ -30,13 +33,15 @@ public final class OptionalFeaturesService {
         if (value == null) {
             throw new OptionalFeatureNotFoundException("No optional feature found with ID '" + id + "'");
         }
-        return OptionalFeatureDto.from(value);
+        return OptionalFeatureDto.from(value).withCrossCatalogReferences(
+                references.forOwner("optional-feature", id));
     }
 
     public List<OptionalFeatureDto> byName(String name, String source) {
         List<OptionalFeatureDto> matches = catalog.findByName(name).stream()
                 .filter(value -> source == null || value.source().identity().code().equalsIgnoreCase(source))
-                .map(OptionalFeatureDto::from).toList();
+                .map(value -> OptionalFeatureDto.from(value).withCrossCatalogReferences(
+                        references.forOwner("optional-feature", value.id()))).toList();
         if (matches.isEmpty()) {
             throw new OptionalFeatureNotFoundException("No optional feature found with name '" + name + "'");
         }

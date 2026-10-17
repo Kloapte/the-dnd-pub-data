@@ -4,5 +4,11 @@ import java.util.List;
 
 public record TableEntryDte(String caption, List<String> colLabels, List<String> colStyles,
                             List<List<EntryTableCellDte>> rows, String source, Integer page,
-                            List<String> footnotes, EntryTableMetadataDte data, Boolean srd52) implements EntryDte {
+                            List<String> footnotes, EntryTableMetadataDte data, Boolean srd52,
+                            Boolean isNameGenerator) implements EntryDte {
+    public TableEntryDte(String caption, List<String> colLabels, List<String> colStyles,
+            List<List<EntryTableCellDte>> rows, String source, Integer page,
+            List<String> footnotes, EntryTableMetadataDte data, Boolean srd52) {
+        this(caption, colLabels, colStyles, rows, source, page, footnotes, data, srd52, null);
+    }
 }

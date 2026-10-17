@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.thedndpub.data.dte.reward.RewardInlineObjectStatblockDte;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,16 +31,42 @@ public final class EntryDeserializer extends JsonDeserializer<EntryDte> {
         }
         String type = string(node, "type", parser, path, true);
         return switch (type) {
+            case "statblockInline" -> {
+                fields(node, Set.of("type", "statblockType", "statblockData"), parser, path);
+                if (!"object".equals(string(node, "statblockType", parser, path, true))) {
+                    throw error(parser, path + ".statblockType", "must be the observed value 'object'");
+                }
+                JsonNode statblock = node.get("statblockData");
+                if (statblock == null || !statblock.isObject()) {
+                    throw error(parser, path + ".statblockData", "must be an object");
+                }
+                fields(statblock, Set.of("name", "isNpc", "source", "page", "size", "objectType",
+                        "creatureType", "hp", "speed", "immune", "conditionImmune"), parser,
+                        path + ".statblockData");
+                if (statblock.has("speed") && !statblock.get("speed").isNull()) {
+                    fields(statblock.get("speed"), Set.of("walk"), parser, path + ".statblockData.speed");
+                }
+                yield new RewardInlineStatblockEntryDte(
+                        parser.getCodec().treeToValue(node.get("statblockData"),
+                                RewardInlineObjectStatblockDte.class));
+            }
             case "entries", "itemSub", "variantSub", "variantInner", "itemSpell" -> {
-                fields(node, Set.of("type", "name", "entry", "entries", "source", "page", "data"), parser, path);
-                yield new NamedEntryDte(type, string(node, "name", parser, path, false), string(node, "entry", parser, path, false), children(node, "entries", parser, path),
+                fields(node, Set.of("type", "name", "entry", "entries", "source", "page", "data", "id"),
+                        parser, path);
+                yield new NamedEntryDte(
+                        type,
+                        string(node, "name", parser, path, false),
+                        string(node, "entry", parser, path, false),
+                        children(node, "entries", parser, path),
                         string(node, "source", parser, path, false), integer(node, "page", parser, path),
-                        entryMetadata(node.get("data"), parser, path + ".data"));
+                        entryMetadata(node.get("data"), parser, path + ".data"),
+                        string(node, "id", parser, path, false));
             }
             case "list" -> {
-                fields(node, Set.of("type", "style", "columns", "items"), parser, path);
+                fields(node, Set.of("type", "style", "columns", "items", "name"), parser, path);
                 yield new ListEntryDte(string(node, "style", parser, path, false),
-                        integer(node, "columns", parser, path), children(node, "items", parser, path));
+                        integer(node, "columns", parser, path), children(node, "items", parser, path),
+                        string(node, "name", parser, path, false));
             }
             case "item" -> {
                 fields(node, Set.of("type", "name", "entry", "entries"), parser, path);
@@ -47,20 +74,26 @@ public final class EntryDeserializer extends JsonDeserializer<EntryDte> {
                 if (node.has("entry") && node.has("entries")) {
                     throw error(parser, path, "cannot contain both entry and entries");
                 }
-                yield new ListItemEntryDte(string(node, "name", parser, path, false), entry, children(node, "entries", parser, path));
+                yield new ListItemEntryDte(
+                        string(node, "name", parser, path, false), entry, children(node, "entries", parser, path));
             }
             case "table" -> {
                 fields(node, Set.of("type", "caption", "colLabels", "colStyles", "rows", "source", "page",
-                        "footnotes", "data", "srd52"), parser, path);
-                yield new TableEntryDte(string(node, "caption", parser, path, false), strings(node, "colLabels", parser, path),
-                        strings(node, "colStyles", parser, path), EntryTableCellDeserializer.readRows(node.get("rows"), parser, path + ".rows"),
+                        "footnotes", "data", "srd52", "isNameGenerator"), parser, path);
+                yield new TableEntryDte(
+                        string(node, "caption", parser, path, false), strings(node, "colLabels", parser, path),
+                        strings(node, "colStyles", parser, path),
+                        EntryTableCellDeserializer.readRows(node.get("rows"), parser, path + ".rows"),
                         string(node, "source", parser, path, false), integer(node, "page", parser, path),
-                        strings(node, "footnotes", parser, path), tableMetadata(node.get("data"), parser, path + ".data"),
-                        bool(node, "srd52", parser, path));
+                        strings(node, "footnotes", parser, path),
+                        tableMetadata(node.get("data"), parser, path + ".data"),
+                        bool(node, "srd52", parser, path),
+                        bool(node, "isNameGenerator", parser, path));
             }
             case "quote" -> {
                 fields(node, Set.of("type", "by", "entries"), parser, path);
-                yield new QuoteEntryDte(string(node, "by", parser, path, false), children(node, "entries", parser, path));
+                yield new QuoteEntryDte(
+                        string(node, "by", parser, path, false), children(node, "entries", parser, path));
             }
             case "inset" -> {
                 fields(node, Set.of("type", "name", "entries", "source", "page", "data"), parser, path);
@@ -74,8 +107,44 @@ public final class EntryDeserializer extends JsonDeserializer<EntryDte> {
                         string(node, "id", parser, path, false),
                         children(node, "entries", parser, path));
             }
+            case "inline" -> {
+                fields(node, Set.of("type", "entries"), parser, path);
+                yield new InlineEntryDte(children(node, "entries", parser, path));
+            }
+            case "link" -> {
+                fields(node, Set.of("type", "entry", "href"), parser, path);
+                yield new LinkEntryDte(
+                        string(node, "entry", parser, path, true),
+                        href(node.get("href"), parser, path + ".href"));
+            }
+            case "image" -> {
+                fields(node, Set.of("type", "href", "title", "width", "height", "credit"), parser, path);
+                yield new ImageEntryDte(
+                        href(node.get("href"), parser, path + ".href"),
+                        string(node, "title", parser, path, false),
+                        integer(node, "width", parser, path),
+                        integer(node, "height", parser, path),
+                        string(node, "credit", parser, path, false));
+            }
+            case "insetReadaloud" -> {
+                fields(node, Set.of("type", "name", "entries"), parser, path);
+                yield new ReadaloudEntryDte(
+                        string(node, "name", parser, path, false),
+                        children(node, "entries", parser, path));
+            }
             default -> throw error(parser, path, "unsupported entry type '" + type + "'");
         };
+    }
+
+    private static EntryHrefDte href(JsonNode node, JsonParser parser, String path) throws IOException {
+        if (node == null || !node.isObject()) {
+            throw error(parser, path, "must be an object");
+        }
+        fields(node, Set.of("type", "path", "hash"), parser, path);
+        return new EntryHrefDte(
+                string(node, "type", parser, path, true),
+                string(node, "path", parser, path, true),
+                string(node, "hash", parser, path, false));
     }
 
     private static List<EntryDte> children(JsonNode node, String key, JsonParser p, String path) throws IOException {

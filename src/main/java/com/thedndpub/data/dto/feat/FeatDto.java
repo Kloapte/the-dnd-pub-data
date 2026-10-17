@@ -1,6 +1,7 @@
 package com.thedndpub.data.dto.feat;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.thedndpub.data.dto.references.PublicCrossCatalogReferenceDto;
 import com.thedndpub.data.dto.source.SourceReference;
 import java.util.List;
 import java.util.Map;
@@ -16,18 +17,29 @@ public record FeatDto(
         List<FeatAbilityIncreaseDto> abilityIncreases,
         List<FeatReferenceDto> reprintedAs,
         Boolean repeatable,
-        List<FeatAdditionalSpellDto> additionalSpells) {
+        List<FeatAdditionalSpellDto> additionalSpells,
+        List<PublicCrossCatalogReferenceDto> crossCatalogReferences) {
     public FeatDto {
         prerequisites = List.copyOf(prerequisites);
         abilityIncreases = List.copyOf(abilityIncreases);
         reprintedAs = List.copyOf(reprintedAs);
         additionalSpells = List.copyOf(additionalSpells);
+        crossCatalogReferences = List.copyOf(crossCatalogReferences);
     }
 
     public static FeatDto from(FeatDefinition feat) {
+        return from(feat, List.of());
+    }
+
+    public static FeatDto from(FeatDefinition feat, List<PublicCrossCatalogReferenceDto> crossCatalogReferences) {
         return new FeatDto(feat.id(), feat.name(), feat.source(), feat.category(),
                 feat.prerequisites(), feat.abilityIncreases(), feat.reprintedAs(), feat.repeatable(),
-                feat.additionalSpells().stream().map(FeatDto::spellDto).toList());
+                feat.additionalSpells().stream().map(FeatDto::spellDto).toList(), crossCatalogReferences);
+    }
+
+    public FeatDto withCrossCatalogReferences(List<PublicCrossCatalogReferenceDto> references) {
+        return new FeatDto(id, name, source, category, prerequisites, abilityIncreases, reprintedAs, repeatable,
+                additionalSpells, references);
     }
 
     private static FeatAdditionalSpellDto spellDto(FeatAdditionalSpell spell) {

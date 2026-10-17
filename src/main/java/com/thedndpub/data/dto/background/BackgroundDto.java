@@ -1,6 +1,7 @@
 package com.thedndpub.data.dto.background;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.thedndpub.data.dto.references.PublicCrossCatalogReferenceDto;
 import com.thedndpub.data.dto.source.SourceReference;
 import com.thedndpub.data.dte.background.BackgroundGrantGroupDte;
 
@@ -26,7 +27,8 @@ public record BackgroundDto(
         List<BackgroundPrerequisiteDto> prerequisites,
         List<SourceReference> additionalSources,
         List<SourceReference> otherSources,
-        List<BackgroundReprintDto> reprintedAs) {
+        List<BackgroundReprintDto> reprintedAs,
+        List<PublicCrossCatalogReferenceDto> crossCatalogReferences) {
     public BackgroundDto {
         abilityChoices = List.copyOf(abilityChoices);
         skillProficiencies = List.copyOf(skillProficiencies);
@@ -43,5 +45,13 @@ public record BackgroundDto(
         additionalSources = List.copyOf(additionalSources);
         otherSources = List.copyOf(otherSources);
         reprintedAs = List.copyOf(reprintedAs);
+        crossCatalogReferences = List.copyOf(crossCatalogReferences);
+    }
+
+    public BackgroundDto withCrossCatalogReferences(List<PublicCrossCatalogReferenceDto> references) {
+        return new BackgroundDto(id, name, source, edition, abilityChoices, skillProficiencies, toolProficiencies,
+                languageProficiencies, skillToolLanguageProficiencies, featGrants, feats, startingEquipment,
+                features, characteristicTables, additionalSpells, prerequisites, additionalSources, otherSources,
+                reprintedAs, references);
     }
 }

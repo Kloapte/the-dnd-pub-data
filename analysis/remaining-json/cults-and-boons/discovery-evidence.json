@@ -1,0 +1,703 @@
+{
+  "sourcePath": "src/main/resources/data/cultsboons.json",
+  "sha256": "035f9ed3cf1a9bb7f60cd0d52727da317de4ac286adf79ed0fd9f7292fdabd02",
+  "rootCollections": {
+    "cult": {
+      "definitionCount": 30,
+      "sourceCounts": {
+        "MTF": 15,
+        "MPMM": 10,
+        "PSD": 1,
+        "PotA": 4
+      },
+      "typeCounts": {
+        "Diabolical": 13,
+        "Elder Evil": 5,
+        "Demonic": 8,
+        "Elemental": 4
+      },
+      "rootFieldOccurrences": {
+        "name": 30,
+        "source": 30,
+        "page": 30,
+        "type": 30,
+        "entries": 30,
+        "otherSources": 4,
+        "goal": 9,
+        "cultists": 10,
+        "signatureSpells": 10,
+        "reprintedAs": 2
+      },
+      "duplicateNameSourceIdentities": [],
+      "namesRepeatedAcrossSources": [
+        {
+          "name": "cult of geryon",
+          "count": 2,
+          "sources": [
+            "MPMM",
+            "MTF"
+          ]
+        },
+        {
+          "name": "cult of zariel",
+          "count": 2,
+          "sources": [
+            "MPMM",
+            "MTF"
+          ]
+        }
+      ]
+    },
+    "boon": {
+      "definitionCount": 12,
+      "sourceCounts": {
+        "MTF": 12
+      },
+      "typeCounts": {
+        "Demonic": 12
+      },
+      "rootFieldOccurrences": {
+        "name": 12,
+        "source": 12,
+        "page": 12,
+        "type": 12,
+        "entries": 12,
+        "reprintedAs": 8,
+        "abilityEntry": 8,
+        "signatureSpells": 8
+      },
+      "duplicateNameSourceIdentities": [],
+      "namesRepeatedAcrossSources": []
+    }
+  },
+  "fieldPaths": {
+    "$": {
+      "occurrences": 1,
+      "types": {
+        "object": 1
+      }
+    },
+    "$.cult": {
+      "occurrences": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "$.boon": {
+      "occurrences": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "$.cult[]": {
+      "occurrences": 30,
+      "types": {
+        "object": 30
+      }
+    },
+    "$.cult[].name": {
+      "occurrences": 30,
+      "types": {
+        "string": 30
+      }
+    },
+    "$.cult[].source": {
+      "occurrences": 30,
+      "types": {
+        "string": 30
+      }
+    },
+    "$.cult[].page": {
+      "occurrences": 30,
+      "types": {
+        "number": 30
+      }
+    },
+    "$.cult[].type": {
+      "occurrences": 30,
+      "types": {
+        "string": 30
+      }
+    },
+    "$.cult[].entries": {
+      "occurrences": 30,
+      "types": {
+        "array": 30
+      }
+    },
+    "$.cult[].entries[]": {
+      "occurrences": 79,
+      "types": {
+        "string": 37,
+        "object": 42
+      }
+    },
+    "$.cult[].entries[].type": {
+      "occurrences": 42,
+      "types": {
+        "string": 42
+      }
+    },
+    "$.cult[].entries[].name": {
+      "occurrences": 29,
+      "types": {
+        "string": 29
+      }
+    },
+    "$.cult[].entries[].entries": {
+      "occurrences": 42,
+      "types": {
+        "array": 42
+      }
+    },
+    "$.cult[].entries[].entries[]": {
+      "occurrences": 53,
+      "types": {
+        "string": 31,
+        "object": 22
+      }
+    },
+    "$.cult[].otherSources": {
+      "occurrences": 4,
+      "types": {
+        "array": 4
+      }
+    },
+    "$.cult[].otherSources[]": {
+      "occurrences": 4,
+      "types": {
+        "object": 4
+      }
+    },
+    "$.cult[].otherSources[].source": {
+      "occurrences": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "$.cult[].otherSources[].page": {
+      "occurrences": 4,
+      "types": {
+        "number": 4
+      }
+    },
+    "$.cult[].goal": {
+      "occurrences": 9,
+      "types": {
+        "object": 9
+      }
+    },
+    "$.cult[].goal.entry": {
+      "occurrences": 9,
+      "types": {
+        "string": 9
+      }
+    },
+    "$.cult[].cultists": {
+      "occurrences": 10,
+      "types": {
+        "object": 10
+      }
+    },
+    "$.cult[].cultists.entry": {
+      "occurrences": 10,
+      "types": {
+        "string": 10
+      }
+    },
+    "$.cult[].signatureSpells": {
+      "occurrences": 10,
+      "types": {
+        "object": 10
+      }
+    },
+    "$.cult[].signatureSpells.entry": {
+      "occurrences": 10,
+      "types": {
+        "string": 10
+      }
+    },
+    "$.cult[].entries[].entries[].type": {
+      "occurrences": 22,
+      "types": {
+        "string": 22
+      }
+    },
+    "$.cult[].entries[].entries[].name": {
+      "occurrences": 18,
+      "types": {
+        "string": 18
+      }
+    },
+    "$.cult[].entries[].entries[].entries": {
+      "occurrences": 22,
+      "types": {
+        "array": 22
+      }
+    },
+    "$.cult[].entries[].entries[].entries[]": {
+      "occurrences": 43,
+      "types": {
+        "string": 27,
+        "object": 16
+      }
+    },
+    "$.cult[].reprintedAs": {
+      "occurrences": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "$.cult[].reprintedAs[]": {
+      "occurrences": 2,
+      "types": {
+        "string": 1,
+        "object": 1
+      }
+    },
+    "$.cult[].entries[].entries[].entries[].type": {
+      "occurrences": 16,
+      "types": {
+        "string": 16
+      }
+    },
+    "$.cult[].entries[].entries[].entries[].entries": {
+      "occurrences": 16,
+      "types": {
+        "array": 16
+      }
+    },
+    "$.cult[].entries[].entries[].entries[].entries[]": {
+      "occurrences": 39,
+      "types": {
+        "object": 8,
+        "string": 31
+      }
+    },
+    "$.cult[].entries[].entries[].entries[].entries[].type": {
+      "occurrences": 8,
+      "types": {
+        "string": 8
+      }
+    },
+    "$.cult[].entries[].entries[].entries[].entries[].name": {
+      "occurrences": 8,
+      "types": {
+        "string": 8
+      }
+    },
+    "$.cult[].entries[].entries[].entries[].entries[].entries": {
+      "occurrences": 8,
+      "types": {
+        "array": 8
+      }
+    },
+    "$.cult[].entries[].entries[].entries[].entries[].entries[]": {
+      "occurrences": 8,
+      "types": {
+        "string": 8
+      }
+    },
+    "$.cult[].entries[].entries[].entries[].name": {
+      "occurrences": 12,
+      "types": {
+        "string": 12
+      }
+    },
+    "$.cult[].reprintedAs[].tag": {
+      "occurrences": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "$.cult[].reprintedAs[].uid": {
+      "occurrences": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "$.boon[]": {
+      "occurrences": 12,
+      "types": {
+        "object": 12
+      }
+    },
+    "$.boon[].name": {
+      "occurrences": 12,
+      "types": {
+        "string": 12
+      }
+    },
+    "$.boon[].source": {
+      "occurrences": 12,
+      "types": {
+        "string": 12
+      }
+    },
+    "$.boon[].page": {
+      "occurrences": 12,
+      "types": {
+        "number": 12
+      }
+    },
+    "$.boon[].type": {
+      "occurrences": 12,
+      "types": {
+        "string": 12
+      }
+    },
+    "$.boon[].entries": {
+      "occurrences": 12,
+      "types": {
+        "array": 12
+      }
+    },
+    "$.boon[].entries[]": {
+      "occurrences": 31,
+      "types": {
+        "string": 12,
+        "object": 19
+      }
+    },
+    "$.boon[].entries[].type": {
+      "occurrences": 19,
+      "types": {
+        "string": 19
+      }
+    },
+    "$.boon[].entries[].name": {
+      "occurrences": 19,
+      "types": {
+        "string": 19
+      }
+    },
+    "$.boon[].entries[].entries": {
+      "occurrences": 19,
+      "types": {
+        "array": 19
+      }
+    },
+    "$.boon[].entries[].entries[]": {
+      "occurrences": 21,
+      "types": {
+        "string": 21
+      }
+    },
+    "$.boon[].reprintedAs": {
+      "occurrences": 8,
+      "types": {
+        "array": 8
+      }
+    },
+    "$.boon[].reprintedAs[]": {
+      "occurrences": 8,
+      "types": {
+        "object": 8
+      }
+    },
+    "$.boon[].reprintedAs[].tag": {
+      "occurrences": 8,
+      "types": {
+        "string": 8
+      }
+    },
+    "$.boon[].reprintedAs[].uid": {
+      "occurrences": 8,
+      "types": {
+        "string": 8
+      }
+    },
+    "$.boon[].abilityEntry": {
+      "occurrences": 8,
+      "types": {
+        "string": 8
+      }
+    },
+    "$.boon[].signatureSpells": {
+      "occurrences": 8,
+      "types": {
+        "object": 8
+      }
+    },
+    "$.boon[].signatureSpells.entry": {
+      "occurrences": 8,
+      "types": {
+        "string": 8
+      }
+    }
+  },
+  "identities": {},
+  "sourceOccurrences": {
+    "$.cult[].source": {
+      "MTF": 15,
+      "MPMM": 10,
+      "PSD": 1,
+      "PotA": 4
+    },
+    "$.cult[].otherSources[].source": {
+      "MPMM": 4
+    },
+    "$.boon[].source": {
+      "MTF": 12
+    }
+  },
+  "reprintReferences": [
+    {
+      "family": "cult",
+      "uid": "Cult of Geryon|MPMM",
+      "shape": "string"
+    },
+    {
+      "family": "cult",
+      "uid": "Cult of Zariel|MPMM",
+      "tag": "boon",
+      "shape": "tagged-object"
+    },
+    {
+      "family": "boon",
+      "uid": "Cult of Baphomet|MPMM",
+      "tag": "boon",
+      "shape": "tagged-object"
+    },
+    {
+      "family": "boon",
+      "uid": "Cult of Demogorgon|MPMM",
+      "tag": "boon",
+      "shape": "tagged-object"
+    },
+    {
+      "family": "boon",
+      "uid": "Cult of Fraz-Urb'luu|MPMM",
+      "tag": "boon",
+      "shape": "tagged-object"
+    },
+    {
+      "family": "boon",
+      "uid": "Cult of Graz'zt|MPMM",
+      "tag": "boon",
+      "shape": "tagged-object"
+    },
+    {
+      "family": "boon",
+      "uid": "Cult of Juiblex|MPMM",
+      "tag": "boon",
+      "shape": "tagged-object"
+    },
+    {
+      "family": "boon",
+      "uid": "Cult of Orcus|MPMM",
+      "tag": "boon",
+      "shape": "tagged-object"
+    },
+    {
+      "family": "boon",
+      "uid": "Cult of Yeenoghu|MPMM",
+      "tag": "boon",
+      "shape": "tagged-object"
+    },
+    {
+      "family": "boon",
+      "uid": "Cult of Zuggtmoy|MPMM",
+      "tag": "boon",
+      "shape": "tagged-object"
+    }
+  ],
+  "markupTags": {
+    "deity": {
+      "occurrences": 1,
+      "roots": 0,
+      "samples": [
+        "Asmodeus|Faerûnian|scag"
+      ],
+      "argumentPartCounts": {
+        "3": 1
+      }
+    },
+    "condition": {
+      "occurrences": 21,
+      "roots": 0,
+      "samples": [
+        "incapacitated",
+        "poisoned",
+        "invisible",
+        "charmed",
+        "frightened"
+      ],
+      "argumentPartCounts": {
+        "1": 21
+      }
+    },
+    "dc": {
+      "occurrences": 7,
+      "roots": 0,
+      "samples": [
+        "15",
+        "10"
+      ],
+      "argumentPartCounts": {
+        "1": 7
+      }
+    },
+    "damage": {
+      "occurrences": 5,
+      "roots": 0,
+      "samples": [
+        "3d10",
+        "3d6",
+        "1d4"
+      ],
+      "argumentPartCounts": {
+        "1": 5
+      }
+    },
+    "spell": {
+      "occurrences": 65,
+      "roots": 0,
+      "samples": [
+        "Minor illusion",
+        "disguise self",
+        "phantasmal force",
+        "major image",
+        "Chill touch"
+      ],
+      "argumentPartCounts": {
+        "1": 65
+      }
+    },
+    "creature": {
+      "occurrences": 95,
+      "roots": 0,
+      "samples": [
+        "acolyte||acolytes",
+        "cultist||cultists",
+        "cult fanatic||cult fanatics",
+        "mage||mages",
+        "priest||priests"
+      ],
+      "argumentPartCounts": {
+        "1": 69,
+        "2": 1,
+        "3": 25
+      }
+    },
+    "skill": {
+      "occurrences": 4,
+      "roots": 0,
+      "samples": [
+        "Insight",
+        "Perception"
+      ],
+      "argumentPartCounts": {
+        "1": 4
+      }
+    },
+    "recharge": {
+      "occurrences": 3,
+      "roots": 0,
+      "samples": [
+        "5",
+        "6"
+      ],
+      "argumentPartCounts": {
+        "1": 3
+      }
+    },
+    "dice": {
+      "occurrences": 2,
+      "roots": 0,
+      "samples": [
+        "d10"
+      ],
+      "argumentPartCounts": {
+        "1": 2
+      }
+    },
+    "quickref": {
+      "occurrences": 2,
+      "roots": 0,
+      "samples": [
+        "Cover||3||total cover"
+      ],
+      "argumentPartCounts": {
+        "5": 2
+      }
+    },
+    "filter": {
+      "occurrences": 1,
+      "roots": 0,
+      "samples": [
+        "simple or martial weapon|items|source=phb|category=basic|type=martial weapon;simple weapon"
+      ],
+      "argumentPartCounts": {
+        "5": 1
+      }
+    },
+    "item": {
+      "occurrences": 5,
+      "roots": 0,
+      "samples": [
+        "Ironfang|PotA",
+        "Drown|PotA",
+        "Tinderstrike|PotA",
+        "Windvane|PotA"
+      ],
+      "argumentPartCounts": {
+        "2": 5
+      }
+    },
+    "atk": {
+      "occurrences": 1,
+      "roots": 0,
+      "samples": [
+        "mw"
+      ],
+      "argumentPartCounts": {
+        "1": 1
+      }
+    },
+    "i": {
+      "occurrences": 1,
+      "roots": 0,
+      "samples": [
+        "Melee Weapon Attack"
+      ],
+      "argumentPartCounts": {
+        "1": 1
+      }
+    }
+  },
+  "markupSourceCodes": {
+    "scag": {
+      "occurrences": 1,
+      "tags": {
+        "deity": 1
+      }
+    },
+    "vgm": {
+      "occurrences": 1,
+      "tags": {
+        "creature": 1
+      }
+    },
+    "phb": {
+      "occurrences": 1,
+      "tags": {
+        "filter": 1
+      }
+    },
+    "PotA": {
+      "occurrences": 5,
+      "tags": {
+        "item": 5
+      }
+    }
+  },
+  "referenceShapes": {
+    "deity": 1,
+    "creature": 2,
+    "item": 5
+  },
+  "transformationFields": {},
+  "explicitNullOccurrences": 0,
+  "emptyValueOccurrences": {}
+}

@@ -2,6 +2,7 @@ package com.thedndpub.data.dto.item;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.thedndpub.data.dto.source.SourceReference;
+import com.thedndpub.data.dto.references.PublicCrossCatalogReferenceDto;
 
 import java.util.List;
 
@@ -69,7 +70,8 @@ public record ItemDto(
         Boolean sentient,
         Boolean cursed,
         Boolean tattoo,
-        Boolean atomicPackContents) {
+        Boolean atomicPackContents,
+        List<PublicCrossCatalogReferenceDto> crossCatalogReferences) {
     public ItemDto {
         typeCodes = List.copyOf(typeCodes);
         types = List.copyOf(types);
@@ -83,9 +85,14 @@ public record ItemDto(
         referenceSources = List.copyOf(referenceSources);
         reprintedAs = List.copyOf(reprintedAs);
         lights = List.copyOf(lights);
+        crossCatalogReferences = List.copyOf(crossCatalogReferences);
     }
 
     public static ItemDto from(ItemDefinition item) {
+        return from(item, List.of());
+    }
+
+    public static ItemDto from(ItemDefinition item, List<PublicCrossCatalogReferenceDto> crossCatalogReferences) {
         return new ItemDto(item.id(), item.name(), item.source(), item.definitionKind(), item.typeCodes(),
                 item.alternateTypeCode(), item.types(), item.rarity(), item.valueRarity(), item.weight(), item.valueCopper(), item.baseItem(),
                 item.weaponCategory(), item.damage(), item.range(), item.reload(), item.ammunitionType(),
@@ -99,6 +106,18 @@ public record ItemDto(
                 item.focusEnabled(), item.vehicleStatistics(), item.references(), item.spellcastingFocusType(),
                 item.rarityTier(), item.itemAge(), item.detailOne(), item.detailTwo(), item.spellScrollLevel(),
                 item.criticalThreshold(), item.poison(), item.staff(), item.sentient(), item.cursed(),
-                item.tattoo(), item.atomicPackContents());
+                item.tattoo(), item.atomicPackContents(), crossCatalogReferences);
+    }
+
+    public ItemDto withCrossCatalogReferences(List<PublicCrossCatalogReferenceDto> crossCatalogReferences) {
+        return new ItemDto(id, name, source, definitionKind, typeCodes, alternateTypeCode, types, rarity,
+                valueRarity, weight, valueCopper, baseItem, weaponCategory, damage, range, reload, ammunitionType,
+                properties, masteries, armorClass, strengthRequirement, dexterityMaximum, stealthDisadvantage,
+                attunement, charges, attachedSpells, containerCapacity, packContents, groups, classifications,
+                wondrous, weapon, armor, firearm, grantsProficiency, grantsLanguage, speed, carryingCapacity,
+                additionalSources, secondarySources, referenceSources, reprintedAs, ability, bonuses, protection,
+                lights, speedModification, focusEnabled, vehicleStatistics, references, spellcastingFocusType,
+                rarityTier, itemAge, detailOne, detailTwo, spellScrollLevel, criticalThreshold, poison, staff,
+                sentient, cursed, tattoo, atomicPackContents, crossCatalogReferences);
     }
 }

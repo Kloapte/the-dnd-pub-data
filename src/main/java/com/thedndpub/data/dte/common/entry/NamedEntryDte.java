@@ -6,8 +6,13 @@ import java.util.List;
  * Named recursive prose entry; retains the source type (entries/itemSub/variantSub/variantInner).
  */
 public record NamedEntryDte(String type, String name, String entry, List<EntryDte> entries,
-                            String source, Integer page, EntryDataDte data) implements EntryDte {
+                            String source, Integer page, EntryDataDte data, String id) implements EntryDte {
+    public NamedEntryDte(String type, String name, String entry, List<EntryDte> entries,
+            String source, Integer page, EntryDataDte data) {
+        this(type, name, entry, entries, source, page, data, null);
+    }
+
     public NamedEntryDte(String type, String name, String entry, List<EntryDte> entries, String source, Integer page) {
-        this(type, name, entry, entries, source, page, null);
+        this(type, name, entry, entries, source, page, null, null);
     }
 }

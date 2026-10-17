@@ -183,7 +183,7 @@ class ClassesPublicApiTests {
         var sample = new ClassFeatureDto("class-feature:test:phb:sample:0:zero", "Zero",
                 new com.thedndpub.data.dto.source.SourceReference("PHB", 0), "class:phb:sample", 0, 0,
                 false, new ClassFeatureMechanicsDto(List.of(), List.of(), List.of(), List.of(),
-                new ClassFeatureConsumption("resource", 0, 0, 0)), null);
+                new ClassFeatureConsumption("resource", 0, 0, 0)), null, List.of());
         JsonNode json = objectMapper.readTree(objectMapper.writeValueAsBytes(sample));
         assertEquals(0, json.path("source").path("page").intValue());
         assertEquals(0, json.path("level").intValue());

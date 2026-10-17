@@ -108,6 +108,10 @@ public final class LanguageCatalog {
         return definitionsById.get(id);
     }
 
+    public List<NormalizedLanguageDefinition> definitions() {
+        return List.copyOf(definitionsById.values());
+    }
+
     public NormalizedLanguageDefinition findByNameAndSource(String name, String source) {
         return definitionsByNameAndSource.get(canonicalIdentity(name, source));
     }

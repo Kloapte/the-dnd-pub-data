@@ -22,7 +22,7 @@ public final class ClassPublicMapper {
                 safeStarting(value.startingOptions()), safeMulticlass(value.multiclassing()),
                 value.features().stream().map(ClassPublicMapper::featureReference).toList(),
                 value.subclasses().stream().map(SubclassId::value).toList(), safeTables(value.tables()),
-                value.choices(), safeSpellcasting(value.spellcasting()), sources(value.sources()));
+                value.choices(), safeSpellcasting(value.spellcasting()), sources(value.sources()), List.of());
     }
 
     public SubclassSummaryDto summary(SubclassDefinition value) {
@@ -35,7 +35,7 @@ public final class ClassPublicMapper {
                 value.parentClassId().value(), value.declaredEdition(),
                 value.features().stream().map(ClassPublicMapper::featureReference).toList(),
                 safeTables(value.tables()), value.choices(),
-                safeSpellcasting(value.spellcasting()), sources(value.sources()));
+                safeSpellcasting(value.spellcasting()), sources(value.sources()), List.of());
     }
 
     public ClassFeatureSummaryDto summary(ClassFeatureDefinition value, Integer order) {
@@ -50,13 +50,13 @@ public final class ClassPublicMapper {
 
     public ClassFeatureDto detail(ClassFeatureDefinition value, Integer order) {
         return new ClassFeatureDto(value.id().value(), value.name(), value.source(), value.parentClassId().value(),
-                value.level(), order, value.variant(), mechanics(value), sources(value.sources()));
+                value.level(), order, value.variant(), mechanics(value), sources(value.sources()), List.of());
     }
 
     public SubclassFeatureDto detail(SubclassFeatureDefinition value, Integer order) {
         return new SubclassFeatureDto(value.id().value(), value.name(), value.source(), value.parentClassId().value(),
                 value.parentSubclassId().value(), value.level(), order, value.variant(), mechanics(value),
-                sources(value.sources()));
+                sources(value.sources()), List.of());
     }
 
     private static ClassFeatureMechanicsDto mechanics(ClassFeatureDefinition value) {

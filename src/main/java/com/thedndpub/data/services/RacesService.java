@@ -4,6 +4,7 @@ import com.thedndpub.data.dto.race.RaceDefinitionKind;
 import com.thedndpub.data.dto.race.RaceDto;
 import com.thedndpub.data.dto.race.RaceMapper;
 import com.thedndpub.data.dto.race.RaceSummaryDto;
+import com.thedndpub.data.references.PublicReferenceProjection;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +14,12 @@ import java.util.Locale;
 public final class RacesService {
     private final RaceCatalog catalog;
     private final RaceMapper mapper;
+    private final PublicReferenceProjection references;
 
-    public RacesService(RaceCatalog catalog, RaceMapper mapper) {
+    public RacesService(RaceCatalog catalog, RaceMapper mapper, PublicReferenceProjection references) {
         this.catalog = catalog;
         this.mapper = mapper;
+        this.references = references;
     }
 
     public List<RaceSummaryDto> find(String name, String source, String definitionKind) {
@@ -34,14 +37,16 @@ public final class RacesService {
         if (definition == null) {
             throw new RaceNotFoundException("No race definition found with ID '" + id + "'");
         }
-        return mapper.toDto(definition);
+        return mapper.toDto(definition).withCrossCatalogReferences(
+                references.forOwner(ownerCatalog(definition), id));
     }
 
     public List<RaceDto> byName(String name, String source) {
         List<RaceDto> matches = catalog.findByName(name).stream()
                 .filter(definition -> source == null
                         || definition.source().identity().code().equalsIgnoreCase(source))
-                .map(mapper::toDto)
+                .map(definition -> mapper.toDto(definition).withCrossCatalogReferences(
+                        references.forOwner(ownerCatalog(definition), definition.id().value())))
                 .toList();
         if (matches.isEmpty()) {
             throw new RaceNotFoundException("No race definition found with name '" + name + "'");
@@ -58,5 +63,9 @@ public final class RacesService {
         } catch (IllegalArgumentException exception) {
             throw new IllegalArgumentException("definitionKind must be RACE or SUBRACE", exception);
         }
+    }
+
+    private static String ownerCatalog(com.thedndpub.data.dto.race.RaceDefinition definition) {
+        return definition.kind() == RaceDefinitionKind.SUBRACE ? "subrace" : "race";
     }
 }

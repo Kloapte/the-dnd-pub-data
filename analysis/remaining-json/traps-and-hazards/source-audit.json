@@ -1,0 +1,1017 @@
+{
+  "roots": {
+    "trap": {
+      "type": "array",
+      "count": 37
+    },
+    "hazard": {
+      "type": "array",
+      "count": 73
+    }
+  },
+  "pathStats": {
+    "trap": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "trap[]": {
+      "count": 37,
+      "types": {
+        "object": 37
+      }
+    },
+    "trap[].name": {
+      "count": 37,
+      "types": {
+        "string": 37
+      }
+    },
+    "trap[].source": {
+      "count": 37,
+      "types": {
+        "string": 37
+      }
+    },
+    "trap[].page": {
+      "count": 37,
+      "types": {
+        "number": 37
+      }
+    },
+    "trap[].trapHazType": {
+      "count": 37,
+      "types": {
+        "string": 37
+      }
+    },
+    "trap[].rating": {
+      "count": 25,
+      "types": {
+        "array": 25
+      }
+    },
+    "trap[].rating[]": {
+      "count": 26,
+      "types": {
+        "object": 26
+      }
+    },
+    "trap[].rating[].tier": {
+      "count": 26,
+      "types": {
+        "number": 26
+      }
+    },
+    "trap[].rating[].threat": {
+      "count": 26,
+      "types": {
+        "string": 26
+      }
+    },
+    "trap[].entries": {
+      "count": 37,
+      "types": {
+        "array": 37
+      }
+    },
+    "trap[].entries[]": {
+      "count": 112,
+      "types": {
+        "object": 42,
+        "string": 70
+      }
+    },
+    "trap[].entries[].type": {
+      "count": 42,
+      "types": {
+        "string": 42
+      }
+    },
+    "trap[].entries[].entries": {
+      "count": 42,
+      "types": {
+        "array": 42
+      }
+    },
+    "trap[].entries[].entries[]": {
+      "count": 60,
+      "types": {
+        "string": 54,
+        "object": 6
+      }
+    },
+    "trap[].entries[].name": {
+      "count": 39,
+      "types": {
+        "string": 39
+      }
+    },
+    "trap[].hasFluffImages": {
+      "count": 5,
+      "types": {
+        "boolean": 5
+      }
+    },
+    "trap[].effect": {
+      "count": 10,
+      "types": {
+        "array": 10
+      }
+    },
+    "trap[].effect[]": {
+      "count": 10,
+      "types": {
+        "string": 10
+      }
+    },
+    "trap[].trigger": {
+      "count": 22,
+      "types": {
+        "array": 22
+      }
+    },
+    "trap[].trigger[]": {
+      "count": 22,
+      "types": {
+        "string": 22
+      }
+    },
+    "trap[].countermeasures": {
+      "count": 14,
+      "types": {
+        "array": 14
+      }
+    },
+    "trap[].countermeasures[]": {
+      "count": 18,
+      "types": {
+        "string": 14,
+        "object": 4
+      }
+    },
+    "trap[].srd": {
+      "count": 8,
+      "types": {
+        "boolean": 8
+      }
+    },
+    "trap[].reprintedAs": {
+      "count": 7,
+      "types": {
+        "array": 7
+      }
+    },
+    "trap[].reprintedAs[]": {
+      "count": 8,
+      "types": {
+        "string": 8
+      }
+    },
+    "trap[].srd52": {
+      "count": 8,
+      "types": {
+        "boolean": 8
+      }
+    },
+    "trap[].duration": {
+      "count": 8,
+      "types": {
+        "array": 8
+      }
+    },
+    "trap[].duration[]": {
+      "count": 8,
+      "types": {
+        "object": 8
+      }
+    },
+    "trap[].duration[].type": {
+      "count": 8,
+      "types": {
+        "string": 8
+      }
+    },
+    "trap[].entries[].entries[].type": {
+      "count": 6,
+      "types": {
+        "string": 6
+      }
+    },
+    "trap[].entries[].entries[].colLabels": {
+      "count": 5,
+      "types": {
+        "array": 5
+      }
+    },
+    "trap[].entries[].entries[].colLabels[]": {
+      "count": 15,
+      "types": {
+        "string": 15
+      }
+    },
+    "trap[].entries[].entries[].colStyles": {
+      "count": 5,
+      "types": {
+        "array": 5
+      }
+    },
+    "trap[].entries[].entries[].colStyles[]": {
+      "count": 15,
+      "types": {
+        "string": 15
+      }
+    },
+    "trap[].entries[].entries[].rows": {
+      "count": 5,
+      "types": {
+        "array": 5
+      }
+    },
+    "trap[].entries[].entries[].rows[]": {
+      "count": 15,
+      "types": {
+        "array": 15
+      }
+    },
+    "trap[].entries[].entries[].rows[][]": {
+      "count": 45,
+      "types": {
+        "string": 45
+      }
+    },
+    "trap[].hauntBonus": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "trap[].initiative": {
+      "count": 4,
+      "types": {
+        "number": 4
+      }
+    },
+    "trap[].eActive": {
+      "count": 4,
+      "types": {
+        "array": 4
+      }
+    },
+    "trap[].eActive[]": {
+      "count": 8,
+      "types": {
+        "string": 4,
+        "object": 4
+      }
+    },
+    "trap[].eActive[].type": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "trap[].eActive[].style": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "trap[].eActive[].items": {
+      "count": 4,
+      "types": {
+        "array": 4
+      }
+    },
+    "trap[].eActive[].items[]": {
+      "count": 9,
+      "types": {
+        "object": 9
+      }
+    },
+    "trap[].eActive[].items[].type": {
+      "count": 9,
+      "types": {
+        "string": 9
+      }
+    },
+    "trap[].eActive[].items[].name": {
+      "count": 9,
+      "types": {
+        "string": 9
+      }
+    },
+    "trap[].eActive[].items[].entry": {
+      "count": 8,
+      "types": {
+        "string": 8
+      }
+    },
+    "trap[].eDynamic": {
+      "count": 4,
+      "types": {
+        "array": 4
+      }
+    },
+    "trap[].eDynamic[]": {
+      "count": 8,
+      "types": {
+        "string": 4,
+        "object": 4
+      }
+    },
+    "trap[].eDynamic[].type": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "trap[].eDynamic[].style": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "trap[].eDynamic[].items": {
+      "count": 4,
+      "types": {
+        "array": 4
+      }
+    },
+    "trap[].eDynamic[].items[]": {
+      "count": 7,
+      "types": {
+        "object": 7
+      }
+    },
+    "trap[].eDynamic[].items[].type": {
+      "count": 7,
+      "types": {
+        "string": 7
+      }
+    },
+    "trap[].eDynamic[].items[].name": {
+      "count": 7,
+      "types": {
+        "string": 7
+      }
+    },
+    "trap[].eDynamic[].items[].entry": {
+      "count": 7,
+      "types": {
+        "string": 7
+      }
+    },
+    "trap[].eConstant": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "trap[].eConstant[]": {
+      "count": 4,
+      "types": {
+        "string": 2,
+        "object": 2
+      }
+    },
+    "trap[].eConstant[].type": {
+      "count": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "trap[].eConstant[].style": {
+      "count": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "trap[].eConstant[].items": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "trap[].eConstant[].items[]": {
+      "count": 4,
+      "types": {
+        "object": 4
+      }
+    },
+    "trap[].eConstant[].items[].type": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "trap[].eConstant[].items[].name": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "trap[].eConstant[].items[].entry": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "trap[].countermeasures[].type": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "trap[].countermeasures[].style": {
+      "count": 4,
+      "types": {
+        "string": 4
+      }
+    },
+    "trap[].countermeasures[].items": {
+      "count": 4,
+      "types": {
+        "array": 4
+      }
+    },
+    "trap[].countermeasures[].items[]": {
+      "count": 17,
+      "types": {
+        "object": 17
+      }
+    },
+    "trap[].countermeasures[].items[].type": {
+      "count": 17,
+      "types": {
+        "string": 17
+      }
+    },
+    "trap[].countermeasures[].items[].name": {
+      "count": 17,
+      "types": {
+        "string": 17
+      }
+    },
+    "trap[].countermeasures[].items[].entry": {
+      "count": 16,
+      "types": {
+        "string": 16
+      }
+    },
+    "trap[].eActive[].items[].entries": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "trap[].eActive[].items[].entries[]": {
+      "count": 2,
+      "types": {
+        "string": 1,
+        "object": 1
+      }
+    },
+    "trap[].eActive[].items[].entries[].type": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "trap[].eActive[].items[].entries[].caption": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "trap[].eActive[].items[].entries[].colLabels": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "trap[].eActive[].items[].entries[].colLabels[]": {
+      "count": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "trap[].eActive[].items[].entries[].colStyles": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "trap[].eActive[].items[].entries[].colStyles[]": {
+      "count": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "trap[].eActive[].items[].entries[].rows": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "trap[].eActive[].items[].entries[].rows[]": {
+      "count": 6,
+      "types": {
+        "array": 6
+      }
+    },
+    "trap[].eActive[].items[].entries[].rows[][]": {
+      "count": 12,
+      "types": {
+        "string": 12
+      }
+    },
+    "trap[].duration[].condition": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "trap[].initiativeNote": {
+      "count": 1,
+      "types": {
+        "string": 1
+      }
+    },
+    "trap[].countermeasures[].items[].entries": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "trap[].countermeasures[].items[].entries[]": {
+      "count": 3,
+      "types": {
+        "string": 3
+      }
+    },
+    "trap[].entries[].entries[].entries": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "trap[].entries[].entries[].entries[]": {
+      "count": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "hazard": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "hazard[]": {
+      "count": 73,
+      "types": {
+        "object": 73
+      }
+    },
+    "hazard[].name": {
+      "count": 73,
+      "types": {
+        "string": 73
+      }
+    },
+    "hazard[].source": {
+      "count": 73,
+      "types": {
+        "string": 73
+      }
+    },
+    "hazard[].rating": {
+      "count": 21,
+      "types": {
+        "array": 21
+      }
+    },
+    "hazard[].rating[]": {
+      "count": 26,
+      "types": {
+        "object": 26
+      }
+    },
+    "hazard[].rating[].tier": {
+      "count": 26,
+      "types": {
+        "number": 26
+      }
+    },
+    "hazard[].rating[].threat": {
+      "count": 26,
+      "types": {
+        "string": 26
+      }
+    },
+    "hazard[].entries": {
+      "count": 73,
+      "types": {
+        "array": 73
+      }
+    },
+    "hazard[].entries[]": {
+      "count": 187,
+      "types": {
+        "string": 159,
+        "object": 28
+      }
+    },
+    "hazard[].page": {
+      "count": 68,
+      "types": {
+        "number": 68
+      }
+    },
+    "hazard[].trapHazType": {
+      "count": 40,
+      "types": {
+        "string": 40
+      }
+    },
+    "hazard[].entries[].type": {
+      "count": 28,
+      "types": {
+        "string": 28
+      }
+    },
+    "hazard[].entries[].name": {
+      "count": 19,
+      "types": {
+        "string": 19
+      }
+    },
+    "hazard[].entries[].entries": {
+      "count": 19,
+      "types": {
+        "array": 19
+      }
+    },
+    "hazard[].entries[].entries[]": {
+      "count": 26,
+      "types": {
+        "string": 21,
+        "object": 5
+      }
+    },
+    "hazard[].reprintedAs": {
+      "count": 15,
+      "types": {
+        "array": 15
+      }
+    },
+    "hazard[].reprintedAs[]": {
+      "count": 15,
+      "types": {
+        "string": 15
+      }
+    },
+    "hazard[].srd52": {
+      "count": 14,
+      "types": {
+        "boolean": 14
+      }
+    },
+    "hazard[].entries[].caption": {
+      "count": 8,
+      "types": {
+        "string": 8
+      }
+    },
+    "hazard[].entries[].colLabels": {
+      "count": 8,
+      "types": {
+        "array": 8
+      }
+    },
+    "hazard[].entries[].colLabels[]": {
+      "count": 19,
+      "types": {
+        "string": 19
+      }
+    },
+    "hazard[].entries[].colStyles": {
+      "count": 8,
+      "types": {
+        "array": 8
+      }
+    },
+    "hazard[].entries[].colStyles[]": {
+      "count": 19,
+      "types": {
+        "string": 19
+      }
+    },
+    "hazard[].entries[].rows": {
+      "count": 8,
+      "types": {
+        "array": 8
+      }
+    },
+    "hazard[].entries[].rows[]": {
+      "count": 59,
+      "types": {
+        "array": 59
+      }
+    },
+    "hazard[].entries[].rows[][]": {
+      "count": 130,
+      "types": {
+        "string": 130
+      }
+    },
+    "hazard[].hasFluffImages": {
+      "count": 3,
+      "types": {
+        "boolean": 3
+      }
+    },
+    "hazard[].entries[].entries[].type": {
+      "count": 5,
+      "types": {
+        "string": 5
+      }
+    },
+    "hazard[].entries[].entries[].colLabels": {
+      "count": 5,
+      "types": {
+        "array": 5
+      }
+    },
+    "hazard[].entries[].entries[].colLabels[]": {
+      "count": 14,
+      "types": {
+        "string": 14
+      }
+    },
+    "hazard[].entries[].entries[].colStyles": {
+      "count": 5,
+      "types": {
+        "array": 5
+      }
+    },
+    "hazard[].entries[].entries[].colStyles[]": {
+      "count": 14,
+      "types": {
+        "string": 14
+      }
+    },
+    "hazard[].entries[].entries[].rows": {
+      "count": 5,
+      "types": {
+        "array": 5
+      }
+    },
+    "hazard[].entries[].entries[].rows[]": {
+      "count": 15,
+      "types": {
+        "array": 15
+      }
+    },
+    "hazard[].entries[].entries[].rows[][]": {
+      "count": 42,
+      "types": {
+        "string": 42
+      }
+    },
+    "hazard[].otherSources": {
+      "count": 2,
+      "types": {
+        "array": 2
+      }
+    },
+    "hazard[].otherSources[]": {
+      "count": 2,
+      "types": {
+        "object": 2
+      }
+    },
+    "hazard[].otherSources[].source": {
+      "count": 2,
+      "types": {
+        "string": 2
+      }
+    },
+    "hazard[].otherSources[].page": {
+      "count": 2,
+      "types": {
+        "number": 2
+      }
+    },
+    "hazard[].entries[].page": {
+      "count": 1,
+      "types": {
+        "number": 1
+      }
+    },
+    "hazard[].entries[].items": {
+      "count": 1,
+      "types": {
+        "array": 1
+      }
+    },
+    "hazard[].entries[].items[]": {
+      "count": 3,
+      "types": {
+        "string": 3
+      }
+    }
+  },
+  "trap": {
+    "count": 37,
+    "topLevelFieldPresence": {
+      "name": 37,
+      "source": 37,
+      "page": 37,
+      "trapHazType": 37,
+      "rating": 25,
+      "entries": 37,
+      "hasFluffImages": 5,
+      "effect": 10,
+      "trigger": 22,
+      "countermeasures": 14,
+      "srd": 8,
+      "reprintedAs": 7,
+      "srd52": 8,
+      "duration": 8,
+      "hauntBonus": 4,
+      "initiative": 4,
+      "eActive": 4,
+      "eDynamic": 4,
+      "eConstant": 2,
+      "initiativeNote": 1
+    },
+    "sourceDistribution": {
+      "AZfyT": 1,
+      "BMT": 3,
+      "DMG": 8,
+      "RtG": 1,
+      "VRGR": 4,
+      "XDMG": 8,
+      "XGE": 12
+    },
+    "names": [
+      "Balance and Ruin",
+      "Bear Trap",
+      "Collapsing Roof",
+      "Collapsing Roof",
+      "Crossbow Trap",
+      "Danse Macabre",
+      "Death Fog Trap",
+      "Faceless Malice",
+      "Falling Net",
+      "Falling Net",
+      "Falling Portcullis",
+      "Fiery Blast Trap",
+      "Fire-Breathing Statue",
+      "Fire-Casting Statue",
+      "Hidden Pit",
+      "Icon of the Lower Aerial Kingdoms",
+      "Malfunctioning Phase Transference Emitter",
+      "Morbid Memory",
+      "Net Trap",
+      "Path of Blades",
+      "Pit Trap",
+      "Pits",
+      "Poison Darts",
+      "Poison Needle",
+      "Poison Needle Trap",
+      "Poisoned Darts",
+      "Poisoned Needle",
+      "Poisoned Tempest",
+      "Rolling Sphere",
+      "Rolling Stone",
+      "Scything Blade Trap",
+      "Sleep of Ages Trap",
+      "Sphere of Annihilation",
+      "Sphere of Crushing Doom",
+      "Spiked Pit",
+      "Surface of the Sun",
+      "Test of the Empty Moon"
+    ],
+    "typeDistribution": {
+      "CMPX": 4,
+      "HAUNT": 4,
+      "MAG": 3,
+      "MECH": 8,
+      "SMPL": 10,
+      "TRP": 8
+    }
+  },
+  "hazard": {
+    "count": 73,
+    "topLevelFieldPresence": {
+      "name": 73,
+      "source": 73,
+      "rating": 21,
+      "entries": 73,
+      "page": 68,
+      "trapHazType": 40,
+      "reprintedAs": 15,
+      "srd52": 14,
+      "hasFluffImages": 3,
+      "otherSources": 2
+    },
+    "sourceDistribution": {
+      "BGDIA": 1,
+      "DMG": 16,
+      "FRAiF": 10,
+      "IDRotF": 2,
+      "NF": 5,
+      "TCE": 7,
+      "VGM": 2,
+      "XDMG": 25,
+      "XPHB": 5
+    },
+    "names": [
+      "Arcane Effluence",
+      "Avalanche",
+      "Avalanche",
+      "Bile Lichen",
+      "Blizzard",
+      "Brown Mold",
+      "Brown Mold",
+      "Burning",
+      "Calim Sandstorm",
+      "Dead Magic Zone",
+      "Deep Water",
+      "Dehydration",
+      "Demon Ichor",
+      "Desecrated Ground",
+      "Extreme Cold",
+      "Extreme Cold",
+      "Extreme Heat",
+      "Extreme Heat",
+      "Falling",
+      "Falling into Water",
+      "Falling onto a Creature",
+      "Fireball Fungus",
+      "Flame Storm",
+      "Flaywind",
+      "Frigid Water",
+      "Frigid Water",
+      "Glittermoss",
+      "Green Slime",
+      "Green Slime",
+      "Hailstorm",
+      "Heavy Precipitation",
+      "Heavy Precipitation",
+      "High Altitude",
+      "High Altitude",
+      "Howling Wind",
+      "Improvised Damage",
+      "Improvised Damage",
+      "Inferno",
+      "Lightning Strikes",
+      "Magical Mirage",
+      "Malnutrition",
+      "Necrotic Tempest",
+      "Nonmagical Mirage",
+      "Planar Effects",
+      "Poisonous Gas",
+      "Psionic Field",
+      "Quicksand",
+      "Quicksand Pit",
+      "Razorvine",
+      "Razorvine",
+      "River Styx",
+      "Rockslide",
+      "Rot Grub",
+      "Russet Mold",
+      "Shadowbark",
+      "Sinkhole",
+      "Slippery Ice",
+      "Slippery Ice",
+      "Strong Wind",
+      "Strong Wind",
+      "Suffocation",
+      "Thin Ice",
+      "Thin Ice",
+      "Thrym's Howl",
+      "Vicious Vine",
+      "Webs",
+      "Webs",
+      "Wild Magic Zone",
+      "Wildstorm",
+      "Witchbriars",
+      "Yellow Mold",
+      "Yellow Mold",
+      "Zlanic Chardalyn"
+    ],
+    "typeDistribution": {
+      "(none)": 33,
+      "ENV": 19,
+      "EST": 4,
+      "GEN": 2,
+      "WLD": 10,
+      "WTH": 5
+    }
+  }
+}

@@ -170,6 +170,7 @@ class RacePipelineTests {
                 List.of(),
                 List.of(),
                 List.of(),
+                List.of(),
                 List.of());
 
         JsonNode json = objectMapper.readTree(objectMapper.writeValueAsBytes(sample));

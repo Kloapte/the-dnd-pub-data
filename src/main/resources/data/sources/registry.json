@@ -385,6 +385,12 @@
                                     ]
                     },
                     {
+                        "code":  "HFDoMM",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
                         "code":  "HFFotM",
                         "aliases":  [
 
@@ -656,6 +662,12 @@
                     },
                     {
                         "code":  "PHB",
+                        "aliases":  [
+
+                                    ]
+                    },
+                    {
+                        "code":  "PiP",
                         "aliases":  [
 
                                     ]

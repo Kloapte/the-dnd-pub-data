@@ -103,6 +103,43 @@ class SpellDteTests {
     }
 
     @Test
+    void preservesSourceCatalogAndAvailabilityMetadataIncludingFalseAndZero() throws Exception {
+        SpellDte spell = mapper.readValue("""
+                {"name":"Metadata","level":0,"source":"TST","school":"A","page":0,
+                 "basicRules":false,"basicRules2024":true,"hasFluff":false,"hasFluffImages":true,
+                 "time":[],"range":{"type":"point"},"duration":[],
+                 "components":{"v":false,"s":true,"m":{"text":"a mote","cost":0,"consume":false}},
+                 "entries":[]}
+                """, SpellDte.class);
+
+        assertEquals(Boolean.FALSE, spell.basicRules());
+        assertEquals(Boolean.TRUE, spell.basicRules2024());
+        assertEquals(Boolean.FALSE, spell.hasFluff());
+        assertEquals(Boolean.TRUE, spell.hasFluffImages());
+        assertEquals(0, spell.level());
+        assertEquals(0, spell.page());
+        assertEquals(Boolean.FALSE, spell.components().v());
+        MaterialDetailsDte material = assertInstanceOf(MaterialDetailsDte.class, spell.components().m());
+        assertEquals(0, material.cost());
+        assertEquals(new ConsumeFlagDte(false), material.consume());
+    }
+
+    @Test
+    void representsScalingAsOrderedTypedLevelValues() throws Exception {
+        SpellDte spell = mapper.readValue("""
+                {"name":"Scaling","level":0,"source":"TST","school":"A","page":1,
+                 "time":[],"range":{"type":"point"},"duration":[],"components":{},
+                 "scalingLevelDice":{"label":"Damage","scaling":{"1":"1d6","5":"2d6"}},
+                 "entries":[]}
+                """, SpellDte.class);
+
+        assertEquals(List.of(
+                new ScalingLevelDiceValueDte("1", "1d6"),
+                new ScalingLevelDiceValueDte("5", "2d6")),
+                spell.scalingLevelDice().getFirst().scaling());
+    }
+
+    @Test
     void preservesRecursiveEntriesInlineMarkupAndTableRollCells() throws Exception {
         SpellDte spell = mapper.readValue("""
                 {"name":"Entries","level":1,"source":"TST","school":"A","page":1,
@@ -146,6 +183,16 @@ class SpellDteTests {
                 com.fasterxml.jackson.databind.JsonMappingException.class,
                 () -> mapper.readValue(unknownEntryType, SpellDte.class));
         assertTrue(typeError.getMessage().contains("future-entry"));
+
+        String malformedScaling = """
+                {"name":"Bad Scaling","level":0,"source":"TST","school":"A","page":1,
+                 "time":[],"range":{"type":"point"},"duration":[],"components":{},
+                 "scalingLevelDice":{"label":"Damage","scaling":{"1":2}},"entries":[]}
+                """;
+        com.fasterxml.jackson.databind.JsonMappingException scalingError = assertThrows(
+                com.fasterxml.jackson.databind.JsonMappingException.class,
+                () -> mapper.readValue(malformedScaling, SpellDte.class));
+        assertTrue(scalingError.getMessage().contains("must be a string"));
     }
 
     private static String jsonPath(Exception error) {

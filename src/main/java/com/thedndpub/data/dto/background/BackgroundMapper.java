@@ -28,7 +28,9 @@ public final class BackgroundMapper {
     private final ItemCatalog itemCatalog;
     private final FeatCatalog featCatalog;
 
-    public BackgroundMapper(ItemCatalog itemCatalog, FeatCatalog featCatalog) {
+    public BackgroundMapper(
+            ItemCatalog itemCatalog,
+            FeatCatalog featCatalog) {
         this.itemCatalog = itemCatalog;
         this.featCatalog = featCatalog;
     }
@@ -80,7 +82,8 @@ public final class BackgroundMapper {
                 definition.effectiveRecord().prerequisite() == null ? List.of()
                         : definition.effectiveRecord().prerequisite().stream()
                         .map(value -> new BackgroundPrerequisiteDto(value.campaign())).toList(),
-                definition.additionalSources(), definition.otherSources(), mapReprints(definition.reprintedAs()));
+                definition.additionalSources(), definition.otherSources(), mapReprints(definition.reprintedAs()),
+                List.of());
     }
 
     public BackgroundSummaryDto toSummary(BackgroundDefinition definition) {

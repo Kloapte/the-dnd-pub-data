@@ -122,6 +122,10 @@ public final class FeatCatalog {
         return byId.get(id);
     }
 
+    public List<FeatDefinition> definitions() {
+        return List.copyOf(byId.values());
+    }
+
     public List<FeatDefinition> findByName(String name) {
         return byName.getOrDefault(normalize(name), List.of());
     }

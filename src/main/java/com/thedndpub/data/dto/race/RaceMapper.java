@@ -94,7 +94,7 @@ public final class RaceMapper {
                 mapOverwrites(mechanics.overwrite()),
                 mapSources(additionalSources),
                 mapSources(otherSources),
-                mapReprints(reprints));
+                mapReprints(reprints), List.of());
     }
 
     public RaceSummaryDto toSummary(RaceDefinition definition) {

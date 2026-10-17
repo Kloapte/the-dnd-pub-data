@@ -13,6 +13,7 @@ import com.thedndpub.data.dto.classes.SubclassFeatureDefinition;
 import com.thedndpub.data.dto.classes.SubclassFeatureDto;
 import com.thedndpub.data.dto.classes.SubclassFeatureSummaryDto;
 import com.thedndpub.data.dto.classes.SubclassSummaryDto;
+import com.thedndpub.data.references.PublicReferenceProjection;
 import org.springframework.stereotype.Service;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -29,15 +30,18 @@ public final class ClassesService {
     private final SubclassFeatureCatalog subclassFeatures;
     private final ClassDomainIndex index;
     private final ClassPublicMapper mapper;
+    private final PublicReferenceProjection references;
 
     public ClassesService(ClassCatalog classes, SubclassCatalog subclasses, ClassFeatureCatalog classFeatures,
-            SubclassFeatureCatalog subclassFeatures, ClassDomainIndex index, ClassPublicMapper mapper) {
+            SubclassFeatureCatalog subclassFeatures, ClassDomainIndex index, ClassPublicMapper mapper,
+            PublicReferenceProjection references) {
         this.classes = classes;
         this.subclasses = subclasses;
         this.classFeatures = classFeatures;
         this.subclassFeatures = subclassFeatures;
         this.index = index;
         this.mapper = mapper;
+        this.references = references;
     }
 
     public List<ClassSummaryDto> findClasses(String name, String source) {
@@ -47,13 +51,15 @@ public final class ClassesService {
     }
 
     public ClassDto classById(String id) {
-        return mapper.detail(required(classes.findById(id), "class", id));
+        ClassDefinition value = required(classes.findById(id), "class", id);
+        return mapper.detail(value).withCrossCatalogReferences(references.forOwner("class", id));
     }
 
     public List<ClassDto> classesByName(String name, String source) {
         return requireMatches(classes.findByName(name).stream().filter(value -> exact(value.name(), name)
                 && (source == null || value.source().identity().code().equalsIgnoreCase(source)))
-                .map(mapper::detail).toList(), "class", name);
+                .map(value -> mapper.detail(value).withCrossCatalogReferences(
+                        references.forOwner("class", value.id().value()))).toList(), "class", name);
     }
 
     public List<SubclassSummaryDto> findSubclasses(String name, String source, String classId) {
@@ -64,13 +70,15 @@ public final class ClassesService {
     }
 
     public SubclassDto subclassById(String id) {
-        return mapper.detail(required(subclasses.findById(id), "subclass", id));
+        SubclassDefinition value = required(subclasses.findById(id), "subclass", id);
+        return mapper.detail(value).withCrossCatalogReferences(references.forOwner("subclass", id));
     }
 
     public List<SubclassDto> subclassesByName(String name, String source) {
         return requireMatches(subclasses.findByName(name).stream().filter(value -> exact(value.name(), name)
                 && (source == null || value.source().identity().code().equalsIgnoreCase(source)))
-                .map(mapper::detail).toList(), "subclass", name);
+                .map(value -> mapper.detail(value).withCrossCatalogReferences(
+                        references.forOwner("subclass", value.id().value()))).toList(), "subclass", name);
     }
 
     public List<SubclassSummaryDto> subclassesOf(String classId) {
@@ -93,13 +101,15 @@ public final class ClassesService {
 
     public ClassFeatureDto classFeatureById(String id) {
         ClassFeatureDefinition value = required(classFeatures.findById(id), "class feature", id);
-        return mapper.detail(value, index.order(id));
+        return mapper.detail(value, index.order(id)).withCrossCatalogReferences(
+                references.forOwner("class-feature", id));
     }
 
     public List<ClassFeatureDto> classFeaturesByName(String name, String source) {
         return requireMatches(classFeatures.findByName(name).stream().filter(value -> exact(value.name(), name)
                 && (source == null || value.source().identity().code().equalsIgnoreCase(source)))
-                .map(value -> mapper.detail(value, index.order(value.id().value()))).toList(), "class feature", name);
+                .map(value -> mapper.detail(value, index.order(value.id().value())).withCrossCatalogReferences(
+                        references.forOwner("class-feature", value.id().value()))).toList(), "class feature", name);
     }
 
     public List<SubclassFeatureSummaryDto> findSubclassFeatures(
@@ -118,13 +128,15 @@ public final class ClassesService {
 
     public SubclassFeatureDto subclassFeatureById(String id) {
         SubclassFeatureDefinition value = required(subclassFeatures.findById(id), "subclass feature", id);
-        return mapper.detail(value, index.order(id));
+        return mapper.detail(value, index.order(id)).withCrossCatalogReferences(
+                references.forOwner("subclass-feature", id));
     }
 
     public List<SubclassFeatureDto> subclassFeaturesByName(String name, String source) {
         return requireMatches(subclassFeatures.findByName(name).stream().filter(value -> exact(value.name(), name)
                 && (source == null || value.source().identity().code().equalsIgnoreCase(source)))
-                .map(value -> mapper.detail(value, index.order(value.id().value())))
+                .map(value -> mapper.detail(value, index.order(value.id().value())).withCrossCatalogReferences(
+                        references.forOwner("subclass-feature", value.id().value())))
                 .toList(), "subclass feature", name);
     }
 

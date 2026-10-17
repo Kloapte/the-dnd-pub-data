@@ -110,6 +110,10 @@ public final class SkillCatalog {
         return definitionsById.get(id);
     }
 
+    public List<SkillDefinition> definitions() {
+        return List.copyOf(definitionsById.values());
+    }
+
     public SkillDefinition findByNameAndSource(String name, String source) {
         return definitionsByNameAndSource.get(canonicalIdentity(name, source));
     }

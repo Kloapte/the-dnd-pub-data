@@ -3,6 +3,7 @@ package com.thedndpub.data.dto.race;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.thedndpub.data.dto.feat.FeatAdditionalSpellDto;
 import com.thedndpub.data.dto.source.SourceReference;
+import com.thedndpub.data.dto.references.PublicCrossCatalogReferenceDto;
 
 import java.util.List;
 
@@ -42,7 +43,8 @@ public record RaceDto(
         List<RaceOverwriteDto> overwrites,
         List<SourceReference> additionalSources,
         List<SourceReference> otherSources,
-        List<RaceReprintDto> reprintedAs) {
+        List<RaceReprintDto> reprintedAs,
+        List<PublicCrossCatalogReferenceDto> crossCatalogReferences) {
     public RaceDto {
         creatureTypes = immutable(creatureTypes);
         creatureTypeTags = immutable(creatureTypeTags);
@@ -67,9 +69,19 @@ public record RaceDto(
         additionalSources = immutable(additionalSources);
         otherSources = immutable(otherSources);
         reprintedAs = immutable(reprintedAs);
+        crossCatalogReferences = immutable(crossCatalogReferences);
     }
 
     private static <T> List<T> immutable(List<T> values) {
         return values == null ? List.of() : List.copyOf(values);
+    }
+
+    public RaceDto withCrossCatalogReferences(List<PublicCrossCatalogReferenceDto> references) {
+        return new RaceDto(id, name, source, definitionKind, parent, edition, creatureTypes, creatureTypeTags, size,
+                movement, abilities, skillProficiencies, toolProficiencies, weaponProficiencies,
+                armorProficiencies, languageProficiencies, skillToolLanguageProficiencies, featGrants,
+                darkvision, blindsight, damageResistances, damageImmunities, damageVulnerabilities,
+                conditionImmunities, additionalSpells, traitNames, traitTags, aliases, lineage, age,
+                heightAndWeight, overwrites, additionalSources, otherSources, reprintedAs, references);
     }
 }

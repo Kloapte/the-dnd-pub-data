@@ -8,9 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +17,9 @@ import java.util.Map;
  */
 public final class ScalingLevelDiceDeserializer extends JsonDeserializer<List<ScalingLevelDiceDte>> {
     @Override
-    public List<ScalingLevelDiceDte> deserialize(JsonParser parser, DeserializationContext context) throws IOException {
+    public List<ScalingLevelDiceDte> deserialize(
+            JsonParser parser,
+            DeserializationContext context) throws IOException {
         JsonNode node = parser.getCodec().readTree(parser);
         List<ScalingLevelDiceDte> values = new ArrayList<>();
         if (node.isObject()) {
@@ -39,7 +39,9 @@ public final class ScalingLevelDiceDeserializer extends JsonDeserializer<List<Sc
         return List.copyOf(values);
     }
 
-    private static ScalingLevelDiceDte readOne(JsonNode node, JsonParser parser) throws IOException {
+    private static ScalingLevelDiceDte readOne(
+            JsonNode node,
+            JsonParser parser) throws IOException {
         JsonNode label = node.get("label");
         if (label == null || !label.isTextual()) {
             throw JsonMappingException.from(parser,
@@ -50,7 +52,7 @@ public final class ScalingLevelDiceDeserializer extends JsonDeserializer<List<Sc
             throw JsonMappingException.from(parser,
                     "spell.scalingLevelDice.scaling must be an object keyed by level");
         }
-        Map<String, String> scaling = new LinkedHashMap<>();
+        List<ScalingLevelDiceValueDte> scaling = new ArrayList<>();
         Iterator<Map.Entry<String, JsonNode>> fields = scalingNode.fields();
         while (fields.hasNext()) {
             var field = fields.next();
@@ -58,7 +60,7 @@ public final class ScalingLevelDiceDeserializer extends JsonDeserializer<List<Sc
                 throw JsonMappingException.from(parser,
                         "spell.scalingLevelDice.scaling." + field.getKey() + " must be a string");
             }
-            scaling.put(field.getKey(), field.getValue().textValue());
+            scaling.add(new ScalingLevelDiceValueDte(field.getKey(), field.getValue().textValue()));
         }
         Iterator<String> names = node.fieldNames();
         while (names.hasNext()) {
@@ -68,6 +70,6 @@ public final class ScalingLevelDiceDeserializer extends JsonDeserializer<List<Sc
                         "Unexpected spell.scalingLevelDice property '" + name + "'");
             }
         }
-        return new ScalingLevelDiceDte(label.textValue(), Collections.unmodifiableMap(scaling));
+        return new ScalingLevelDiceDte(label.textValue(), scaling);
     }
 }

@@ -96,6 +96,10 @@ public final class OptionalFeatureCatalog {
         return byId.get(id);
     }
 
+    public List<OptionalFeatureDefinition> definitions() {
+        return List.copyOf(byId.values());
+    }
+
     public List<OptionalFeatureDefinition> findByName(String name) {
         return byName.getOrDefault(normalize(name), List.of());
     }

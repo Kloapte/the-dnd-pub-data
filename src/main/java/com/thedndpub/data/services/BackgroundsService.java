@@ -3,6 +3,7 @@ package com.thedndpub.data.services;
 import com.thedndpub.data.dto.background.BackgroundDto;
 import com.thedndpub.data.dto.background.BackgroundMapper;
 import com.thedndpub.data.dto.background.BackgroundSummaryDto;
+import com.thedndpub.data.references.PublicReferenceProjection;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +13,15 @@ import java.util.Locale;
 public final class BackgroundsService {
     private final BackgroundCatalog catalog;
     private final BackgroundMapper mapper;
+    private final PublicReferenceProjection references;
 
-    public BackgroundsService(BackgroundCatalog catalog, BackgroundMapper mapper) {
+    public BackgroundsService(
+            BackgroundCatalog catalog,
+            BackgroundMapper mapper,
+            PublicReferenceProjection references) {
         this.catalog = catalog;
         this.mapper = mapper;
+        this.references = references;
     }
 
     public List<BackgroundSummaryDto> find(String name, String source) {
@@ -31,14 +37,15 @@ public final class BackgroundsService {
         if (definition == null) {
             throw new BackgroundNotFoundException("No background found with ID '" + id + "'");
         }
-        return mapper.toDto(definition);
+        return mapper.toDto(definition).withCrossCatalogReferences(references.forOwner("background", id));
     }
 
     public List<BackgroundDto> byName(String name, String source) {
         List<BackgroundDto> matches = catalog.findByName(name).stream()
                 .filter(definition -> source == null
                         || definition.source().identity().code().equalsIgnoreCase(source))
-                .map(mapper::toDto)
+                .map(definition -> mapper.toDto(definition).withCrossCatalogReferences(
+                        references.forOwner("background", definition.id().value())))
                 .toList();
         if (matches.isEmpty()) {
             throw new BackgroundNotFoundException("No background found with name '" + name + "'");

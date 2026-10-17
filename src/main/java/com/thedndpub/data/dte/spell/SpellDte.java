@@ -1,6 +1,5 @@
 package com.thedndpub.data.dte.spell;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.thedndpub.data.dte.common.entry.EntryDte;
@@ -10,12 +9,13 @@ import java.util.List;
 /**
  * Faithful typed import representation of a 5eTools spell.
  */
-@JsonIgnoreProperties(value = {"basicRules", "basicRules2024", "hasFluff", "hasFluffImages"})
 public record SpellDte(
         List<String> abilityCheck,
         List<String> affectsCreatureType,
         List<String> alias,
         List<String> areaTags,
+        Boolean basicRules,
+        Boolean basicRules2024,
         SpellComponentsDte components,
         List<String> conditionImmune,
         List<String> conditionInflict,
@@ -26,6 +26,8 @@ public record SpellDte(
         List<SpellDurationDte> duration,
         List<EntryDte> entries,
         List<EntryDte> entriesHigherLevel,
+        Boolean hasFluff,
+        Boolean hasFluffImages,
         Integer level,
         SpellMetaDte meta,
         List<String> miscTags,

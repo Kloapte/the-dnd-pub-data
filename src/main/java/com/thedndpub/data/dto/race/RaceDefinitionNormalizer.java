@@ -823,10 +823,11 @@ public final class RaceDefinitionNormalizer {
         if (entry instanceof NamedEntryDte named) {
             return new NamedEntryDte(named.type(), replace(named.name(), pattern, replacement),
                     replace(named.entry(), pattern, replacement), replaceText(named.entries(), pattern, replacement),
-                    named.source(), named.page(), named.data());
+                    named.source(), named.page(), named.data(), named.id());
         }
         if (entry instanceof ListEntryDte list) {
-            return new ListEntryDte(list.style(), list.columns(), replaceText(list.items(), pattern, replacement));
+            return new ListEntryDte(
+                    list.style(), list.columns(), replaceText(list.items(), pattern, replacement), list.name());
         }
         if (entry instanceof ListItemEntryDte item) {
             return new ListItemEntryDte(replace(item.name(), pattern, replacement),
@@ -850,7 +851,8 @@ public final class RaceDefinitionNormalizer {
                     .toList();
             return new TableEntryDte(replace(table.caption(), pattern, replacement),
                     replace(table.colLabels(), pattern, replacement), table.colStyles(), rows, table.source(),
-                    table.page(), replace(table.footnotes(), pattern, replacement), table.data(), table.srd52());
+                    table.page(), replace(table.footnotes(), pattern, replacement), table.data(), table.srd52(),
+                    table.isNameGenerator());
         }
         return entry;
     }

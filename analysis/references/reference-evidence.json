@@ -1,0 +1,52 @@
+{
+  "stage": "A",
+  "evidenceScope": "Current documented full-corpus discovery outputs; counts retain their per-report units.",
+  "classes": {
+    "evidenceFile": "../classes/cross-catalog-references.json",
+    "markupOccurrences": 5684,
+    "structuredOccurrences": 3997,
+    "selectorOccurrences": 186,
+    "foreignResolutionOccurrences": 1658,
+    "authoredFeatureReferences": 2339,
+    "effectiveFeatureReferences": 2725,
+    "spellReferences": {
+      "directOccurrences": 1068,
+      "sourceQualifiedExact": 446,
+      "unqualifiedMultipleCandidates": 620,
+      "unqualifiedSingleCurrentCandidate": 2,
+      "choiceCandidatesExact": 3
+    },
+    "items": {
+      "occurrences": 169,
+      "concreteExact": 166,
+      "deferredGroups": 3
+    }
+  },
+  "backgrounds": {
+    "itemReferencesResolved": 718,
+    "itemReferencesUnresolved": 8,
+    "itemReferencesAmbiguous": 0,
+    "itemTextOrTypeDescriptors": 204,
+    "distinctUnresolvedItemUids": 3,
+    "rootsWithFeatReferences": 84,
+    "distinctQualifiedFeatUids": 61,
+    "rootsWithAdditionalSpellGroups": 15
+  },
+  "items": {
+    "itemDefinitions": 2512,
+    "baseItemDefinitions": 230,
+    "itemToBaseItemReferences": 241,
+    "auxiliaryItemGroups": 119
+  },
+  "magicVariants": {
+    "genericRules": 225,
+    "potentialRuleItemMatches": 12663,
+    "itemSpecificTransforms": 5,
+    "absentBaseItemAnchors": 2
+  },
+  "spells": {
+    "definitions": 969,
+    "reprintReferences": 389
+  },
+  "countingNote": "Do not sum these values: they mix owner roots, reference occurrences, distinct UIDs, and candidate matches."
+}

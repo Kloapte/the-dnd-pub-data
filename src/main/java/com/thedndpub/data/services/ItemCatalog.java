@@ -3,6 +3,7 @@ package com.thedndpub.data.services;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thedndpub.data.dto.item.ItemCopyResolver;
+import com.thedndpub.data.dto.item.ItemBaseItemReference;
 import com.thedndpub.data.dto.item.ItemDefinition;
 import com.thedndpub.data.dto.item.ItemDefinitionKind;
 import com.thedndpub.data.dto.item.ItemImportProvenance;
@@ -42,6 +43,7 @@ public final class ItemCatalog {
     private final List<ItemSummaryDto> summaries;
     private final List<ItemVariantMatchData> variantMatchData;
     private final Map<String, ItemImportProvenance> importProvenance;
+    private final List<ItemBaseItemReference> authoredBaseItemReferences;
     private final ItemAuxiliaryData auxiliaryData;
     private final int itemRootCount;
     private final int baseItemRootCount;
@@ -110,6 +112,13 @@ public final class ItemCatalog {
                 .thenComparing(ItemVariantMatchData::itemId));
         variantMatchData = List.copyOf(matchDataBuilder);
         importProvenance = Collections.unmodifiableMap(provenance);
+        authoredBaseItemReferences = provenance.entrySet().stream()
+                .filter(entry -> entry.getValue().sourceRecord().baseItem() != null
+                        && !entry.getValue().sourceRecord().baseItem().isBlank())
+                .map(entry -> new ItemBaseItemReference(
+                        entry.getKey(), entry.getValue().sourceRecord().baseItem()))
+                .sorted(Comparator.comparing(ItemBaseItemReference::ownerItemId))
+                .toList();
         auxiliaryData = new ItemAuxiliaryData(items, baseItems);
         itemRootCount = items.item().size();
         baseItemRootCount = baseItems.baseitem().size();
@@ -142,6 +151,10 @@ public final class ItemCatalog {
 
     public ItemDefinition findById(String id) {
         return byId.get(id);
+    }
+
+    public List<ItemBaseItemReference> authoredBaseItemReferences() {
+        return authoredBaseItemReferences;
     }
 
     public List<ItemDefinition> findByName(String name) {
