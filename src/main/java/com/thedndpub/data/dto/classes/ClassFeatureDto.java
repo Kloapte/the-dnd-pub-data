@@ -8,13 +8,22 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public record ClassFeatureDto(String id, String name, SourceReference source, String parentClassId,
         int level, Integer order, Boolean variant, ClassFeatureMechanicsDto mechanics, ClassSourceMetadataDto sources,
-        List<PublicCrossCatalogReferenceDto> crossCatalogReferences) {
+        List<PublicCrossCatalogReferenceDto> crossCatalogReferences,
+        ClassChoiceProjectionStatus choiceProjectionStatus) {
     public ClassFeatureDto {
         crossCatalogReferences = crossCatalogReferences == null ? List.of() : List.copyOf(crossCatalogReferences);
     }
 
+    /** Retains the previous Java constructor; callers without content cannot establish a status. */
+    public ClassFeatureDto(String id, String name, SourceReference source, String parentClassId,
+            int level, Integer order, Boolean variant, ClassFeatureMechanicsDto mechanics,
+            ClassSourceMetadataDto sources, List<PublicCrossCatalogReferenceDto> crossCatalogReferences) {
+        this(id, name, source, parentClassId, level, order, variant, mechanics, sources,
+                crossCatalogReferences, null);
+    }
+
     public ClassFeatureDto withCrossCatalogReferences(List<PublicCrossCatalogReferenceDto> references) {
         return new ClassFeatureDto(id, name, source, parentClassId, level, order, variant, mechanics, sources,
-                references);
+                references, choiceProjectionStatus);
     }
 }

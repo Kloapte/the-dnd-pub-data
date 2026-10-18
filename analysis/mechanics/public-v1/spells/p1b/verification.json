@@ -1,0 +1,20 @@
+{
+  "allCandidateOccurrencesReconciled": 708,
+  "candidateOwners": 402,
+  "missingOrDuplicateOccurrenceIdentities": 0,
+  "pinnedSourceHashesVerifiedByBuilder": 175,
+  "preExistingFileHashesUnchanged": 2163,
+  "protectedInputManifestSha256": "c9f02611e9f82a362804f41afc7019067995dc0913bbb99221b4630ae67dba23",
+  "generatedOutputsDeterministic": true,
+  "generatedOutputSha256": {
+    "occurrence-crosswalk.json": "114a8f3d14b7d9eb57f25d712242b68abbf3903945dbe7917400943f9d369ae4",
+    "coverage.json": "6c9f3689c98369269de98fae51eff96ac4e7c9904379f18ac0f400d40ec5dfe7",
+    "srd-spell-rosters.json": "5553cc055144cfe2d987619b3c36a6d4255f12cf0c878a4d9c9686556eeb4b05"
+  },
+  "productionAndTestsUnchanged": true,
+  "existingAssessmentEvidenceUnchanged": true,
+  "authorizedReleaseObservations": 0,
+  "exactVersionSpecificAttributionStatementsVerified": 3,
+  "reusedLicensedPositionsWithinAnOwner": 0,
+  "mavenRun": false
+}

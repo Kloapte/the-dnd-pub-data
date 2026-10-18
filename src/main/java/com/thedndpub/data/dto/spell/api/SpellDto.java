@@ -20,11 +20,32 @@ public record SpellDto(
         List<SpellDurationDto> durations,
         SpellMechanicsDto mechanics,
         List<SpellScalingDto> scaling,
-        SpellSourceRelationshipsDto sourceRelationships) {
+        SpellSourceRelationshipsDto sourceRelationships,
+        SpellFormulaProjectionStatus formulaProjectionStatus) {
     public SpellDto {
         aliases = List.copyOf(aliases);
         castingTimes = List.copyOf(castingTimes);
         durations = List.copyOf(durations);
         scaling = List.copyOf(scaling);
+    }
+
+    /** Legacy construction has no formula index and therefore cannot claim a projection status. */
+    public SpellDto(
+            String id,
+            String name,
+            SourceReference source,
+            List<String> aliases,
+            Integer level,
+            SpellSchoolDto school,
+            List<SpellCastingTimeDto> castingTimes,
+            Boolean ritual,
+            SpellRangeDto range,
+            SpellComponentsDto components,
+            List<SpellDurationDto> durations,
+            SpellMechanicsDto mechanics,
+            List<SpellScalingDto> scaling,
+            SpellSourceRelationshipsDto sourceRelationships) {
+        this(id, name, source, aliases, level, school, castingTimes, ritual, range, components,
+                durations, mechanics, scaling, sourceRelationships, null);
     }
 }

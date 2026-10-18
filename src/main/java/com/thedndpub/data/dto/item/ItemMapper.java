@@ -3,6 +3,7 @@ package com.thedndpub.data.dto.item;
 import com.thedndpub.data.dto.source.SourceReference;
 import com.thedndpub.data.dte.item.ItemAttunementTagDte;
 import com.thedndpub.data.dte.item.ItemNumberTextDte;
+import com.thedndpub.data.dte.item.ItemRechargeDte;
 import com.thedndpub.data.dte.item.ItemSourceDte;
 import com.thedndpub.data.dte.item.ItemStringListDte;
 import com.thedndpub.data.dte.item.ItemTypeDte;
@@ -32,6 +33,8 @@ public final class ItemMapper {
                 value(item.mastery(), resolved, ItemSourceDte::mastery);
         ItemNumberTextDte chargeCount = value(item.charges(), resolved, ItemSourceDte::charges);
         ItemNumberTextDte rechargeAmount = value(item.rechargeAmount(), resolved, ItemSourceDte::rechargeAmount);
+        ItemRechargeDte rechargeField = effectiveRechargeField(item, resolved);
+        String recharge = effectiveRechargeValue(item, resolved);
         ItemAttunementDto attunement = attunement(item, resolved);
         ItemStringListDte focus = value(item.focus(), resolved, ItemSourceDte::focus);
         String sourceCode = require(item.source(), "item source");
@@ -66,7 +69,7 @@ public final class ItemMapper {
                 chargeCount == null && rechargeAmount == null ? null : new ItemChargeDto(
                         chargeCount == null ? null : chargeCount.number(),
                         chargeCount == null ? null : chargeCount.text(),
-                        value(item.recharge(), resolved, ItemSourceDte::recharge),
+                        recharge,
                         rechargeAmount == null ? null : rechargeAmount.number(),
                         rechargeAmount == null ? null : rechargeAmount.text()),
                 attachedSpells(value(item.attachedSpells(), resolved, ItemSourceDte::attachedSpells)),
@@ -108,7 +111,8 @@ public final class ItemMapper {
                 value(item.curse(), resolved, ItemSourceDte::curse),
                 value(item.tattoo(), resolved, ItemSourceDte::tattoo),
                 value(item.atomicPackContents(), resolved, ItemSourceDte::atomicPackContents),
-                signedBonuses(item, resolved));
+                signedBonuses(item, resolved),
+                standaloneRecharge(item, resolved, chargeCount, rechargeAmount, rechargeField));
     }
 
     public ItemVariantMatchData mapVariantMatchData(ItemDefinition definition, ResolvedItemDte resolved) {
@@ -267,6 +271,59 @@ public final class ItemMapper {
                 signedBonus(value(item.bonusProficiencyBonus(), resolved, ItemSourceDte::bonusProficiencyBonus),
                         "bonusProficiencyBonus"));
         return result.isEmpty() ? null : result;
+    }
+
+    private static ItemRechargeDeclaration standaloneRecharge(
+            ItemSourceDte item,
+            ResolvedItemDte resolved,
+            ItemNumberTextDte chargeCount,
+            ItemNumberTextDte rechargeAmount,
+            ItemRechargeDte rechargeField) {
+        if (chargeCount != null || rechargeAmount != null || rechargeField == null || !rechargeField.present()) {
+            return null;
+        }
+
+        ItemSourceDte authoredOwner = rechargeOwner(item, resolved);
+        return new ItemRechargeDeclaration(
+                rechargeField.value(),
+                authoredOwner.name(),
+                new SourceReference(authoredOwner.source(), authoredOwner.page()));
+    }
+
+    private static ItemSourceDte rechargeOwner(ItemSourceDte item, ResolvedItemDte resolved) {
+        for (ResolvedItemDte current = resolved; current != null; current = current.copiedFrom()) {
+            ItemRechargeDte field = current.source().recharge();
+            if (field != null && field.present()) {
+                return current.source();
+            }
+        }
+        throw new IllegalStateException("Resolved Item recharge value has no authored source owner: " + item.name());
+    }
+
+    private static ItemRechargeDte effectiveRechargeField(ItemSourceDte item, ResolvedItemDte resolved) {
+        if (item.recharge() != null && item.recharge().present()) {
+            return item.recharge();
+        }
+        for (ResolvedItemDte parent = resolved.copiedFrom(); parent != null; parent = parent.copiedFrom()) {
+            ItemRechargeDte inherited = parent.source().recharge();
+            if (inherited != null && inherited.present()) {
+                return inherited;
+            }
+        }
+        return null;
+    }
+
+    private static String effectiveRechargeValue(ItemSourceDte item, ResolvedItemDte resolved) {
+        if (item.recharge() != null && item.recharge().value() != null) {
+            return item.recharge().value();
+        }
+        for (ResolvedItemDte parent = resolved.copiedFrom(); parent != null; parent = parent.copiedFrom()) {
+            ItemRechargeDte inherited = parent.source().recharge();
+            if (inherited != null && inherited.value() != null) {
+                return inherited.value();
+            }
+        }
+        return null;
     }
 
     private static ItemSignedBonus signedBonus(String token, String sourceField) {

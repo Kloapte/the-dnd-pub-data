@@ -1,8 +1,8 @@
 package com.thedndpub.data.dte.item;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.thedndpub.data.dte.common.entry.EntryDte;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.thedndpub.data.dte.common.entry.EntryDte;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ public record ItemSourceDte(
         List<ItemAttunementTagDte> reqAttuneTags,
         String reqAttuneAlt,
         ItemNumberTextDte charges,
-        String recharge,
+        ItemRechargeDte recharge,
         ItemNumberTextDte rechargeAmount,
         @JsonDeserialize(using = ItemAttachedSpellsDeserializer.class) ItemAttachedSpellsDte attachedSpells,
         ItemAbilityDte ability,

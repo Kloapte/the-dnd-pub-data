@@ -1,0 +1,4252 @@
+{
+  "sourceSha256" : "6f809882bd02807a32012e3d1a9cf14ae65b1816ed8a956f64a7c32ccd79afc8",
+  "definitionCount" : 37,
+  "definitions" : [ {
+    "id" : "object:WDMM:animated-ghaunadaur-statue",
+    "ownerPointer" : "/object/0",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:HBTD:automatic-ballista",
+    "ownerPointer" : "/object/1",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:DMG:ballista",
+    "ownerPointer" : "/object/2",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:XDMG:ballista",
+    "ownerPointer" : "/object/3",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:DSotDQ:boilerdrak",
+    "ownerPointer" : "/object/4",
+    "actionWrapperCount" : 2
+  }, {
+    "id" : "object:DMG:cannon",
+    "ownerPointer" : "/object/5",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:XDMG:cannon",
+    "ownerPointer" : "/object/6",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:RMBRE:captain-a-hole",
+    "ownerPointer" : "/object/7",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:HBTD:clockwork-trebuchet",
+    "ownerPointer" : "/object/8",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:HBTD:decrepit-mangonel",
+    "ownerPointer" : "/object/9",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:EFA:eldritch-cannon",
+    "ownerPointer" : "/object/10",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:TCE:eldritch-cannon-flamethrower",
+    "ownerPointer" : "/object/11",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:TCE:eldritch-cannon-force-ballista",
+    "ownerPointer" : "/object/12",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:TCE:eldritch-cannon-protector",
+    "ownerPointer" : "/object/13",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:HBTD:enchanted-ballista",
+    "ownerPointer" : "/object/14",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:XDMG:flamethrower-coach",
+    "ownerPointer" : "/object/15",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:HBTD:forge-launcher",
+    "ownerPointer" : "/object/16",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:DMG:generic-object",
+    "ownerPointer" : "/object/17",
+    "actionWrapperCount" : 0
+  }, {
+    "id" : "object:DSotDQ:gnomeflinger",
+    "ownerPointer" : "/object/18",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:TftYP:gulthias-tree",
+    "ownerPointer" : "/object/19",
+    "actionWrapperCount" : 0
+  }, {
+    "id" : "object:IDRotF:ice-troll-heart",
+    "ownerPointer" : "/object/20",
+    "actionWrapperCount" : 0
+  }, {
+    "id" : "object:XDMG:keg-launcher",
+    "ownerPointer" : "/object/21",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:XDMG:lightning-cannon",
+    "ownerPointer" : "/object/22",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:DMG:mangonel",
+    "ownerPointer" : "/object/23",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:XDMG:mangonel",
+    "ownerPointer" : "/object/24",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:DMG:ram",
+    "ownerPointer" : "/object/25",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:XDMG:ram",
+    "ownerPointer" : "/object/26",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:DMG:siege-tower",
+    "ownerPointer" : "/object/27",
+    "actionWrapperCount" : 0
+  }, {
+    "id" : "object:XDMG:siege-tower",
+    "ownerPointer" : "/object/28",
+    "actionWrapperCount" : 0
+  }, {
+    "id" : "object:JttRC:spirit-blister",
+    "ownerPointer" : "/object/29",
+    "actionWrapperCount" : 0
+  }, {
+    "id" : "object:HBTD:storm-cannon",
+    "ownerPointer" : "/object/30",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:DMG:suspended-cauldron",
+    "ownerPointer" : "/object/31",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:XDMG:suspended-cauldron",
+    "ownerPointer" : "/object/32",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:RMBRE:the-head",
+    "ownerPointer" : "/object/33",
+    "actionWrapperCount" : 0
+  }, {
+    "id" : "object:DMG:trebuchet",
+    "ownerPointer" : "/object/34",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:XDMG:trebuchet",
+    "ownerPointer" : "/object/35",
+    "actionWrapperCount" : 1
+  }, {
+    "id" : "object:BMT:unborn-palanquin",
+    "ownerPointer" : "/object/36",
+    "actionWrapperCount" : 0
+  } ],
+  "tags" : [ {
+    "ownerPointer" : "/object/0",
+    "pointer" : "/object/0/actionEntries/0/entries/0/attackEntries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/0",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/0/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/0/actionEntries/0",
+      "authoredType" : "actions"
+    }, {
+      "jsonPointer" : "/object/0/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/0/actionEntries/0/entries/0",
+      "authoredType" : "attack"
+    }, {
+      "jsonPointer" : "/object/0/actionEntries/0/entries/0/attackEntries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "206bd442f74e8f916f039305e9ffb3f3cab73bc9d74012a75bc6e135337a9799",
+    "textUtf16Length" : 43,
+    "startInclusive" : 0,
+    "endExclusive" : 10,
+    "originalText" : "{@hit +10}",
+    "name" : "hit",
+    "rawArgumentText" : " +10",
+    "arguments" : [ "+10" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "+10",
+      "kind" : "SIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/0",
+    "pointer" : "/object/0/actionEntries/0/entries/0/hitEntries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/0",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/0/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/0/actionEntries/0",
+      "authoredType" : "actions"
+    }, {
+      "jsonPointer" : "/object/0/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/0/actionEntries/0/entries/0",
+      "authoredType" : "attack"
+    }, {
+      "jsonPointer" : "/object/0/actionEntries/0/entries/0/hitEntries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "44dee2c763a870503075b49b80eef1cfc6493690274b301ec611e3243b99b1bc",
+    "textUtf16Length" : 39,
+    "startInclusive" : 4,
+    "endExclusive" : 21,
+    "originalText" : "{@damage 2d6 + 5}",
+    "name" : "damage",
+    "rawArgumentText" : " 2d6 + 5",
+    "arguments" : [ "2d6 + 5" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "2d6 + 5",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/1",
+    "pointer" : "/object/1/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/1",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/1/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "55dafcaaa90329af96e40b77964c5ba00c9e0ab5a35f75080aa486d3f4d2dc44",
+    "textUtf16Length" : 124,
+    "startInclusive" : 43,
+    "endExclusive" : 65,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/1",
+    "pointer" : "/object/1/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/1",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/1/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/1/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/1/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "10938e36e2660e3747632758fee6b45ab1dd5333e7c87ecb47c70f0326d0bd5b",
+    "textUtf16Length" : 78,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@atkr r}",
+    "name" : "atkr",
+    "rawArgumentText" : " r",
+    "arguments" : [ "r" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/1",
+    "pointer" : "/object/1/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/1",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/1/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/1/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/1/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "10938e36e2660e3747632758fee6b45ab1dd5333e7c87ecb47c70f0326d0bd5b",
+    "textUtf16Length" : 78,
+    "startInclusive" : 10,
+    "endExclusive" : 18,
+    "originalText" : "{@hit 6}",
+    "name" : "hit",
+    "rawArgumentText" : " 6",
+    "arguments" : [ "6" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "6",
+      "kind" : "UNSIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/1",
+    "pointer" : "/object/1/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/1",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/1/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/1/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/1/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "10938e36e2660e3747632758fee6b45ab1dd5333e7c87ecb47c70f0326d0bd5b",
+    "textUtf16Length" : 78,
+    "startInclusive" : 38,
+    "endExclusive" : 42,
+    "originalText" : "{@h}",
+    "name" : "h",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/1",
+    "pointer" : "/object/1/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/1",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/1/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/1/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/1/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "10938e36e2660e3747632758fee6b45ab1dd5333e7c87ecb47c70f0326d0bd5b",
+    "textUtf16Length" : 78,
+    "startInclusive" : 46,
+    "endExclusive" : 60,
+    "originalText" : "{@damage 4d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 4d10",
+    "arguments" : [ "4d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "4d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/2",
+    "pointer" : "/object/2/actionEntries/0/entries/0/attackEntries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/2",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/2/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/2/actionEntries/0",
+      "authoredType" : "actions"
+    }, {
+      "jsonPointer" : "/object/2/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/2/actionEntries/0/entries/0",
+      "authoredType" : "attack"
+    }, {
+      "jsonPointer" : "/object/2/actionEntries/0/entries/0/attackEntries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "f9f70c64ddf584c80c290e12fc0aee38678d6b52480fcb8334cbdbcee0fa2f91",
+    "textUtf16Length" : 48,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@hit +6}",
+    "name" : "hit",
+    "rawArgumentText" : " +6",
+    "arguments" : [ "+6" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "+6",
+      "kind" : "SIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/2",
+    "pointer" : "/object/2/actionEntries/0/entries/0/hitEntries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/2",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/2/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/2/actionEntries/0",
+      "authoredType" : "actions"
+    }, {
+      "jsonPointer" : "/object/2/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/2/actionEntries/0/entries/0",
+      "authoredType" : "attack"
+    }, {
+      "jsonPointer" : "/object/2/actionEntries/0/entries/0/hitEntries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "d1a103b47f63947b0817b0fe02a6811405bf6edac21d2916c0f0e578bc98a61f",
+    "textUtf16Length" : 36,
+    "startInclusive" : 4,
+    "endExclusive" : 18,
+    "originalText" : "{@damage 3d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 3d10",
+    "arguments" : [ "3d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "3d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/3",
+    "pointer" : "/object/3/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/3",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/3/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "28d1109d20b22d3135129b76418af3b016186be4a4538cfc1ad3cf32865908a0",
+    "textUtf16Length" : 235,
+    "startInclusive" : 89,
+    "endExclusive" : 111,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/3",
+    "pointer" : "/object/3/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/3",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/3/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "28d1109d20b22d3135129b76418af3b016186be4a4538cfc1ad3cf32865908a0",
+    "textUtf16Length" : 235,
+    "startInclusive" : 151,
+    "endExclusive" : 173,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/3",
+    "pointer" : "/object/3/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/3",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/3/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/3/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/3/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "d33e3730e9af2e91bf0ec7a8d5559255b8cbf292df84200c608160275367b79d",
+    "textUtf16Length" : 78,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@atkr r}",
+    "name" : "atkr",
+    "rawArgumentText" : " r",
+    "arguments" : [ "r" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/3",
+    "pointer" : "/object/3/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/3",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/3/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/3/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/3/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "d33e3730e9af2e91bf0ec7a8d5559255b8cbf292df84200c608160275367b79d",
+    "textUtf16Length" : 78,
+    "startInclusive" : 10,
+    "endExclusive" : 18,
+    "originalText" : "{@hit 6}",
+    "name" : "hit",
+    "rawArgumentText" : " 6",
+    "arguments" : [ "6" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "6",
+      "kind" : "UNSIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/3",
+    "pointer" : "/object/3/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/3",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/3/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/3/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/3/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "d33e3730e9af2e91bf0ec7a8d5559255b8cbf292df84200c608160275367b79d",
+    "textUtf16Length" : 78,
+    "startInclusive" : 38,
+    "endExclusive" : 42,
+    "originalText" : "{@h}",
+    "name" : "h",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/3",
+    "pointer" : "/object/3/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/3",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/3/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/3/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/3/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "d33e3730e9af2e91bf0ec7a8d5559255b8cbf292df84200c608160275367b79d",
+    "textUtf16Length" : 78,
+    "startInclusive" : 46,
+    "endExclusive" : 60,
+    "originalText" : "{@damage 3d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 3d10",
+    "arguments" : [ "3d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "3d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/4",
+    "pointer" : "/object/4/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/4",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/4/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "6e3217a8000753f6f9bfd8e43de3c706dd288382b76587a92bf48104ac01888b",
+    "textUtf16Length" : 361,
+    "startInclusive" : 256,
+    "endExclusive" : 267,
+    "originalText" : "{@dice d20}",
+    "name" : "dice",
+    "rawArgumentText" : " d20",
+    "arguments" : [ "d20" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "d20",
+      "kind" : "OPAQUE_OR_SYMBOLIC"
+    }
+  }, {
+    "ownerPointer" : "/object/4",
+    "pointer" : "/object/4/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/4",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/4/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/4/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/4/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "3aa1be36f401ec02dee56cf57ac6b7ea0e8b3d4d50356631a520aa35d67f69a7",
+    "textUtf16Length" : 220,
+    "startInclusive" : 87,
+    "endExclusive" : 95,
+    "originalText" : "{@dc 15}",
+    "name" : "dc",
+    "rawArgumentText" : " 15",
+    "arguments" : [ "15" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/4",
+    "pointer" : "/object/4/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/4",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/4/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/4/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/4/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "3aa1be36f401ec02dee56cf57ac6b7ea0e8b3d4d50356631a520aa35d67f69a7",
+    "textUtf16Length" : 220,
+    "startInclusive" : 131,
+    "endExclusive" : 145,
+    "originalText" : "{@damage 5d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 5d10",
+    "arguments" : [ "5d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "5d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/4",
+    "pointer" : "/object/4/actionEntries/1/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/4",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/4/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/4/actionEntries/1",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/4/actionEntries/1/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "f3b1ab8c81e2675e28b9ff2b2ad6aab300d30041b52c2c0f19685e5ac2f15a5f",
+    "textUtf16Length" : 241,
+    "startInclusive" : 108,
+    "endExclusive" : 116,
+    "originalText" : "{@dc 15}",
+    "name" : "dc",
+    "rawArgumentText" : " 15",
+    "arguments" : [ "15" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/4",
+    "pointer" : "/object/4/actionEntries/1/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/4",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/4/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/4/actionEntries/1",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/4/actionEntries/1/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "f3b1ab8c81e2675e28b9ff2b2ad6aab300d30041b52c2c0f19685e5ac2f15a5f",
+    "textUtf16Length" : 241,
+    "startInclusive" : 152,
+    "endExclusive" : 166,
+    "originalText" : "{@damage 5d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 5d10",
+    "arguments" : [ "5d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "5d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/5",
+    "pointer" : "/object/5/actionEntries/0/entries/0/attackEntries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/5",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/5/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/5/actionEntries/0",
+      "authoredType" : "actions"
+    }, {
+      "jsonPointer" : "/object/5/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/5/actionEntries/0/entries/0",
+      "authoredType" : "attack"
+    }, {
+      "jsonPointer" : "/object/5/actionEntries/0/entries/0/attackEntries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "fc45f82a521828a01799bef0827fdfb60b742e8a8a7060a90f98c72a4422aac7",
+    "textUtf16Length" : 50,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@hit +6}",
+    "name" : "hit",
+    "rawArgumentText" : " +6",
+    "arguments" : [ "+6" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "+6",
+      "kind" : "SIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/5",
+    "pointer" : "/object/5/actionEntries/0/entries/0/hitEntries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/5",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/5/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/5/actionEntries/0",
+      "authoredType" : "actions"
+    }, {
+      "jsonPointer" : "/object/5/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/5/actionEntries/0/entries/0",
+      "authoredType" : "attack"
+    }, {
+      "jsonPointer" : "/object/5/actionEntries/0/entries/0/hitEntries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "eaeb4b6f1a9acd6446829d9ec77d0eea9f597ee004488ac3cbb2655690b1a78d",
+    "textUtf16Length" : 39,
+    "startInclusive" : 4,
+    "endExclusive" : 18,
+    "originalText" : "{@damage 8d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 8d10",
+    "arguments" : [ "8d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "8d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/6",
+    "pointer" : "/object/6/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/6",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/6/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "9b324b577189a098d63a6136166e7043c3fef5c0e75f5c0d45205b202e7d79d2",
+    "textUtf16Length" : 323,
+    "startInclusive" : 180,
+    "endExclusive" : 202,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/6",
+    "pointer" : "/object/6/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/6",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/6/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "9b324b577189a098d63a6136166e7043c3fef5c0e75f5c0d45205b202e7d79d2",
+    "textUtf16Length" : 323,
+    "startInclusive" : 242,
+    "endExclusive" : 264,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/6",
+    "pointer" : "/object/6/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/6",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/6/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/6/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/6/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "3d6869a6ec98385b508b58adfbed3d3d629386a11682eec464852027b9770525",
+    "textUtf16Length" : 83,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@atkr r}",
+    "name" : "atkr",
+    "rawArgumentText" : " r",
+    "arguments" : [ "r" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/6",
+    "pointer" : "/object/6/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/6",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/6/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/6/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/6/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "3d6869a6ec98385b508b58adfbed3d3d629386a11682eec464852027b9770525",
+    "textUtf16Length" : 83,
+    "startInclusive" : 10,
+    "endExclusive" : 18,
+    "originalText" : "{@hit 6}",
+    "name" : "hit",
+    "rawArgumentText" : " 6",
+    "arguments" : [ "6" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "6",
+      "kind" : "UNSIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/6",
+    "pointer" : "/object/6/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/6",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/6/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/6/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/6/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "3d6869a6ec98385b508b58adfbed3d3d629386a11682eec464852027b9770525",
+    "textUtf16Length" : 83,
+    "startInclusive" : 40,
+    "endExclusive" : 44,
+    "originalText" : "{@h}",
+    "name" : "h",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/6",
+    "pointer" : "/object/6/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/6",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/6/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/6/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/6/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "3d6869a6ec98385b508b58adfbed3d3d629386a11682eec464852027b9770525",
+    "textUtf16Length" : 83,
+    "startInclusive" : 48,
+    "endExclusive" : 62,
+    "originalText" : "{@damage 8d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 8d10",
+    "arguments" : [ "8d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "8d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/7",
+    "pointer" : "/object/7/actionEntries/0/entries/0/attackEntries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/7",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/7/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/7/actionEntries/0",
+      "authoredType" : "actions"
+    }, {
+      "jsonPointer" : "/object/7/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/7/actionEntries/0/entries/0",
+      "authoredType" : "attack"
+    }, {
+      "jsonPointer" : "/object/7/actionEntries/0/entries/0/attackEntries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "55d6673cc71af06b223c5a3bfd08afea13d919ea278165f78aad208128a9b838",
+    "textUtf16Length" : 43,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@hit +5}",
+    "name" : "hit",
+    "rawArgumentText" : " +5",
+    "arguments" : [ "+5" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "+5",
+      "kind" : "SIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/7",
+    "pointer" : "/object/7/actionEntries/0/entries/0/hitEntries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/7",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/7/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/7/actionEntries/0",
+      "authoredType" : "actions"
+    }, {
+      "jsonPointer" : "/object/7/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/7/actionEntries/0/entries/0",
+      "authoredType" : "attack"
+    }, {
+      "jsonPointer" : "/object/7/actionEntries/0/entries/0/hitEntries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "16b59c7760b42f3197359e5fd6306794294ea9f01d1272724a6c741e4de4a6c9",
+    "textUtf16Length" : 37,
+    "startInclusive" : 3,
+    "endExclusive" : 16,
+    "originalText" : "{@damage 1d6}",
+    "name" : "damage",
+    "rawArgumentText" : " 1d6",
+    "arguments" : [ "1d6" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "1d6",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/8",
+    "pointer" : "/object/8/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/8",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/8/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "6d043a2cc081197965eeb51d66b7d3701be008fa33f3bfebf23100344fccf729",
+    "textUtf16Length" : 139,
+    "startInclusive" : 56,
+    "endExclusive" : 78,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/8",
+    "pointer" : "/object/8/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/8",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/8/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/8/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/8/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "b96f7e8a2b093d8abdadae5e396993a7c752cad15e1505fbdc1621c5a3c900ea",
+    "textUtf16Length" : 128,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@atkr r}",
+    "name" : "atkr",
+    "rawArgumentText" : " r",
+    "arguments" : [ "r" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/8",
+    "pointer" : "/object/8/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/8",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/8/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/8/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/8/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "b96f7e8a2b093d8abdadae5e396993a7c752cad15e1505fbdc1621c5a3c900ea",
+    "textUtf16Length" : 128,
+    "startInclusive" : 10,
+    "endExclusive" : 18,
+    "originalText" : "{@hit 5}",
+    "name" : "hit",
+    "rawArgumentText" : " 5",
+    "arguments" : [ "5" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "5",
+      "kind" : "UNSIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/8",
+    "pointer" : "/object/8/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/8",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/8/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/8/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/8/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "b96f7e8a2b093d8abdadae5e396993a7c752cad15e1505fbdc1621c5a3c900ea",
+    "textUtf16Length" : 128,
+    "startInclusive" : 93,
+    "endExclusive" : 107,
+    "originalText" : "{@damage 5d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 5d10",
+    "arguments" : [ "5d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "5d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/9",
+    "pointer" : "/object/9/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/9",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/9/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "fb403147b1454df81da6b044ab7ce1e10047878817879ea95fb84791c72b1452",
+    "textUtf16Length" : 181,
+    "startInclusive" : 41,
+    "endExclusive" : 63,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/9",
+    "pointer" : "/object/9/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/9",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/9/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "fb403147b1454df81da6b044ab7ce1e10047878817879ea95fb84791c72b1452",
+    "textUtf16Length" : 181,
+    "startInclusive" : 100,
+    "endExclusive" : 122,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/9",
+    "pointer" : "/object/9/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/9",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/9/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/9/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/9/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "02d7763fce4a029c567d0ce39626f62dc72e6c8439f7610ebf485a9b0a03291d",
+    "textUtf16Length" : 161,
+    "startInclusive" : 92,
+    "endExclusive" : 131,
+    "originalText" : "{@creature Swarm of Crawling Claws|XMM}",
+    "name" : "creature",
+    "rawArgumentText" : " Swarm of Crawling Claws|XMM",
+    "arguments" : [ "Swarm of Crawling Claws", "XMM" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/10",
+    "pointer" : "/object/10/hp/special",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/10",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/hp",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "96ed5ad1b503b7fbada94d56dff96ddad8d42bd26901242c2606f7a36763382b",
+    "textUtf16Length" : 108,
+    "startInclusive" : 34,
+    "endExclusive" : 55,
+    "originalText" : "{@spell Mending|XPHB}",
+    "name" : "spell",
+    "rawArgumentText" : " Mending|XPHB",
+    "arguments" : [ "Mending", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/10",
+    "pointer" : "/object/10/hp/special",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/10",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/hp",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "96ed5ad1b503b7fbada94d56dff96ddad8d42bd26901242c2606f7a36763382b",
+    "textUtf16Length" : 108,
+    "startInclusive" : 79,
+    "endExclusive" : 90,
+    "originalText" : "{@dice 2d6}",
+    "name" : "dice",
+    "rawArgumentText" : " 2d6",
+    "arguments" : [ "2d6" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "2d6",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/10",
+    "pointer" : "/object/10/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/10",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "0b6dd6daff863973151741facfaa5daa2a14a2c1a288d54d38d96440c43ae13e",
+    "textUtf16Length" : 107,
+    "startInclusive" : 0,
+    "endExclusive" : 107,
+    "originalText" : "{@note Created by the {@subclassFeature Eldritch Cannon|Artificer|EFA|Artillerist|EFA|3} subclass feature.}",
+    "name" : "note",
+    "rawArgumentText" : " Created by the {@subclassFeature Eldritch Cannon|Artificer|EFA|Artillerist|EFA|3} subclass feature.",
+    "arguments" : [ "Created by the {@subclassFeature Eldritch Cannon|Artificer|EFA|Artillerist|EFA|3} subclass feature." ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 1
+  }, {
+    "ownerPointer" : "/object/10",
+    "pointer" : "/object/10/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/10",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "0b6dd6daff863973151741facfaa5daa2a14a2c1a288d54d38d96440c43ae13e",
+    "textUtf16Length" : 107,
+    "startInclusive" : 22,
+    "endExclusive" : 88,
+    "originalText" : "{@subclassFeature Eldritch Cannon|Artificer|EFA|Artillerist|EFA|3}",
+    "name" : "subclassFeature",
+    "rawArgumentText" : " Eldritch Cannon|Artificer|EFA|Artillerist|EFA|3",
+    "arguments" : [ "Eldritch Cannon", "Artificer", "EFA", "Artillerist", "EFA", "3" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/10",
+    "pointer" : "/object/10/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/10",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "79efa36f6ce0441037d4267fe3106fd32bac3c475addb3ff7cd303ef12cf0cae",
+    "textUtf16Length" : 204,
+    "startInclusive" : 5,
+    "endExclusive" : 37,
+    "originalText" : "{@variantrule Bonus Action|XPHB}",
+    "name" : "variantrule",
+    "rawArgumentText" : " Bonus Action|XPHB",
+    "arguments" : [ "Bonus Action", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/10",
+    "pointer" : "/object/10/actionEntries/0/entries/1/items/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/10",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1",
+      "authoredType" : "list"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items/0",
+      "authoredType" : "item"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "85b41dcc4d7ef0b666e4a09ebb9ee5687e1d0b0a651ee8a3f4c8926aa0059225",
+    "textUtf16Length" : 384,
+    "startInclusive" : 36,
+    "endExclusive" : 82,
+    "originalText" : "{@variantrule Cone [Area of Effect]|XPHB|Cone}",
+    "name" : "variantrule",
+    "rawArgumentText" : " Cone [Area of Effect]|XPHB|Cone",
+    "arguments" : [ "Cone [Area of Effect]", "XPHB", "Cone" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/10",
+    "pointer" : "/object/10/actionEntries/0/entries/1/items/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/10",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1",
+      "authoredType" : "list"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items/0",
+      "authoredType" : "item"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "85b41dcc4d7ef0b666e4a09ebb9ee5687e1d0b0a651ee8a3f4c8926aa0059225",
+    "textUtf16Length" : 384,
+    "startInclusive" : 150,
+    "endExclusive" : 168,
+    "originalText" : "{@dcYourSpellSave}",
+    "name" : "dcYourSpellSave",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/10",
+    "pointer" : "/object/10/actionEntries/0/entries/1/items/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/10",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1",
+      "authoredType" : "list"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items/0",
+      "authoredType" : "item"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "85b41dcc4d7ef0b666e4a09ebb9ee5687e1d0b0a651ee8a3f4c8926aa0059225",
+    "textUtf16Length" : 384,
+    "startInclusive" : 177,
+    "endExclusive" : 190,
+    "originalText" : "{@damage 2d8}",
+    "name" : "damage",
+    "rawArgumentText" : " 2d8",
+    "arguments" : [ "2d8" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "2d8",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/10",
+    "pointer" : "/object/10/actionEntries/0/entries/1/items/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/10",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1",
+      "authoredType" : "list"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items/0",
+      "authoredType" : "item"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "85b41dcc4d7ef0b666e4a09ebb9ee5687e1d0b0a651ee8a3f4c8926aa0059225",
+    "textUtf16Length" : 384,
+    "startInclusive" : 289,
+    "endExclusive" : 335,
+    "originalText" : "{@variantrule Cone [Area of Effect]|XPHB|Cone}",
+    "name" : "variantrule",
+    "rawArgumentText" : " Cone [Area of Effect]|XPHB|Cone",
+    "arguments" : [ "Cone [Area of Effect]", "XPHB", "Cone" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/10",
+    "pointer" : "/object/10/actionEntries/0/entries/1/items/1/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/10",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1",
+      "authoredType" : "list"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items/1",
+      "authoredType" : "item"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items/1/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "8e48fc45a51023adabc4dda0e2f43f9bcd005ad38a419bf98bbdd0597cbb9814",
+    "textUtf16Length" : 239,
+    "startInclusive" : 131,
+    "endExclusive" : 144,
+    "originalText" : "{@damage 2d8}",
+    "name" : "damage",
+    "rawArgumentText" : " 2d8",
+    "arguments" : [ "2d8" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "2d8",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/10",
+    "pointer" : "/object/10/actionEntries/0/entries/1/items/2/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/10",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1",
+      "authoredType" : "list"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items/2",
+      "authoredType" : "item"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items/2/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "65dc4ad2caf9499dd782b677864cae9eb9b9802cb07751fb1d7312d6ed775a55",
+    "textUtf16Length" : 247,
+    "startInclusive" : 137,
+    "endExclusive" : 177,
+    "originalText" : "{@variantrule Temporary Hit Points|XPHB}",
+    "name" : "variantrule",
+    "rawArgumentText" : " Temporary Hit Points|XPHB",
+    "arguments" : [ "Temporary Hit Points", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/10",
+    "pointer" : "/object/10/actionEntries/0/entries/1/items/2/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/10",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1",
+      "authoredType" : "list"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items/2",
+      "authoredType" : "item"
+    }, {
+      "jsonPointer" : "/object/10/actionEntries/0/entries/1/items/2/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "65dc4ad2caf9499dd782b677864cae9eb9b9802cb07751fb1d7312d6ed775a55",
+    "textUtf16Length" : 247,
+    "startInclusive" : 187,
+    "endExclusive" : 198,
+    "originalText" : "{@dice 1d8}",
+    "name" : "dice",
+    "rawArgumentText" : " 1d8",
+    "arguments" : [ "1d8" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "1d8",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/11",
+    "pointer" : "/object/11/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/11",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/11/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "b01d5a05e89854cc307f603064033606585cfb87f8688785a7dfcd77a5cf91c0",
+    "textUtf16Length" : 107,
+    "startInclusive" : 0,
+    "endExclusive" : 107,
+    "originalText" : "{@note Created by the {@subclassFeature Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3} subclass feature.}",
+    "name" : "note",
+    "rawArgumentText" : " Created by the {@subclassFeature Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3} subclass feature.",
+    "arguments" : [ "Created by the {@subclassFeature Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3} subclass feature." ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 1
+  }, {
+    "ownerPointer" : "/object/11",
+    "pointer" : "/object/11/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/11",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/11/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "b01d5a05e89854cc307f603064033606585cfb87f8688785a7dfcd77a5cf91c0",
+    "textUtf16Length" : 107,
+    "startInclusive" : 22,
+    "endExclusive" : 88,
+    "originalText" : "{@subclassFeature Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3}",
+    "name" : "subclassFeature",
+    "rawArgumentText" : " Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3",
+    "arguments" : [ "Eldritch Cannon", "Artificer", "TCE", "Artillerist", "TCE", "3" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/11",
+    "pointer" : "/object/11/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/11",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/11/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/11/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/11/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "fec5604a455093d48081f0fc37f7f1546b8b1a8dd8c08eec0fcc3fa054ccf37b",
+    "textUtf16Length" : 341,
+    "startInclusive" : 169,
+    "endExclusive" : 182,
+    "originalText" : "{@damage 2d8}",
+    "name" : "damage",
+    "rawArgumentText" : " 2d8",
+    "arguments" : [ "2d8" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "2d8",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/12",
+    "pointer" : "/object/12/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/12",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/12/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "b01d5a05e89854cc307f603064033606585cfb87f8688785a7dfcd77a5cf91c0",
+    "textUtf16Length" : 107,
+    "startInclusive" : 0,
+    "endExclusive" : 107,
+    "originalText" : "{@note Created by the {@subclassFeature Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3} subclass feature.}",
+    "name" : "note",
+    "rawArgumentText" : " Created by the {@subclassFeature Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3} subclass feature.",
+    "arguments" : [ "Created by the {@subclassFeature Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3} subclass feature." ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 1
+  }, {
+    "ownerPointer" : "/object/12",
+    "pointer" : "/object/12/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/12",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/12/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "b01d5a05e89854cc307f603064033606585cfb87f8688785a7dfcd77a5cf91c0",
+    "textUtf16Length" : 107,
+    "startInclusive" : 22,
+    "endExclusive" : 88,
+    "originalText" : "{@subclassFeature Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3}",
+    "name" : "subclassFeature",
+    "rawArgumentText" : " Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3",
+    "arguments" : [ "Eldritch Cannon", "Artificer", "TCE", "Artillerist", "TCE", "3" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/12",
+    "pointer" : "/object/12/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/12",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/12/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/12/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/12/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "015a7c4f7c4d0184228e322aa4c4d40eeccfb4ada452e8cdd02e1f6f2c3f07b8",
+    "textUtf16Length" : 241,
+    "startInclusive" : 133,
+    "endExclusive" : 146,
+    "originalText" : "{@damage 2d8}",
+    "name" : "damage",
+    "rawArgumentText" : " 2d8",
+    "arguments" : [ "2d8" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "2d8",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/13",
+    "pointer" : "/object/13/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/13",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/13/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "b01d5a05e89854cc307f603064033606585cfb87f8688785a7dfcd77a5cf91c0",
+    "textUtf16Length" : 107,
+    "startInclusive" : 0,
+    "endExclusive" : 107,
+    "originalText" : "{@note Created by the {@subclassFeature Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3} subclass feature.}",
+    "name" : "note",
+    "rawArgumentText" : " Created by the {@subclassFeature Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3} subclass feature.",
+    "arguments" : [ "Created by the {@subclassFeature Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3} subclass feature." ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 1
+  }, {
+    "ownerPointer" : "/object/13",
+    "pointer" : "/object/13/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/13",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/13/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "b01d5a05e89854cc307f603064033606585cfb87f8688785a7dfcd77a5cf91c0",
+    "textUtf16Length" : 107,
+    "startInclusive" : 22,
+    "endExclusive" : 88,
+    "originalText" : "{@subclassFeature Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3}",
+    "name" : "subclassFeature",
+    "rawArgumentText" : " Eldritch Cannon|Artificer|TCE|Artillerist|TCE|3",
+    "arguments" : [ "Eldritch Cannon", "Artificer", "TCE", "Artillerist", "TCE", "3" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/13",
+    "pointer" : "/object/13/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/13",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/13/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/13/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/13/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "ea26bbfd51ff29dc9a6adbd5ea68116eb9143e6fe2e2b45654cd12a49cf33b22",
+    "textUtf16Length" : 218,
+    "startInclusive" : 159,
+    "endExclusive" : 172,
+    "originalText" : "{@damage 1d8}",
+    "name" : "damage",
+    "rawArgumentText" : " 1d8",
+    "arguments" : [ "1d8" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "1d8",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/14",
+    "pointer" : "/object/14/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/14",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/14/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "467d40ff6cb636751b15f3378257ea6376af97ca6a2626cd76fd6b246a054fbb",
+    "textUtf16Length" : 125,
+    "startInclusive" : 44,
+    "endExclusive" : 66,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/14",
+    "pointer" : "/object/14/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/14",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/14/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/14/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/14/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "10938e36e2660e3747632758fee6b45ab1dd5333e7c87ecb47c70f0326d0bd5b",
+    "textUtf16Length" : 78,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@atkr r}",
+    "name" : "atkr",
+    "rawArgumentText" : " r",
+    "arguments" : [ "r" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/14",
+    "pointer" : "/object/14/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/14",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/14/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/14/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/14/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "10938e36e2660e3747632758fee6b45ab1dd5333e7c87ecb47c70f0326d0bd5b",
+    "textUtf16Length" : 78,
+    "startInclusive" : 10,
+    "endExclusive" : 18,
+    "originalText" : "{@hit 6}",
+    "name" : "hit",
+    "rawArgumentText" : " 6",
+    "arguments" : [ "6" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "6",
+      "kind" : "UNSIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/14",
+    "pointer" : "/object/14/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/14",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/14/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/14/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/14/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "10938e36e2660e3747632758fee6b45ab1dd5333e7c87ecb47c70f0326d0bd5b",
+    "textUtf16Length" : 78,
+    "startInclusive" : 38,
+    "endExclusive" : 42,
+    "originalText" : "{@h}",
+    "name" : "h",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/14",
+    "pointer" : "/object/14/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/14",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/14/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/14/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/14/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "10938e36e2660e3747632758fee6b45ab1dd5333e7c87ecb47c70f0326d0bd5b",
+    "textUtf16Length" : 78,
+    "startInclusive" : 46,
+    "endExclusive" : 60,
+    "originalText" : "{@damage 4d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 4d10",
+    "arguments" : [ "4d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "4d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/15",
+    "pointer" : "/object/15/entries/1",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/15",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/15/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "47691e3011fdc7f29e34f44349e85de85cc41ae65a4421d86817b23a43bcd8f8",
+    "textUtf16Length" : 332,
+    "startInclusive" : 231,
+    "endExclusive" : 271,
+    "originalText" : "{@table Cover|XPHB|Three-Quarters Cover}",
+    "name" : "table",
+    "rawArgumentText" : " Cover|XPHB|Three-Quarters Cover",
+    "arguments" : [ "Cover", "XPHB", "Three-Quarters Cover" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/15",
+    "pointer" : "/object/15/entries/2",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/15",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/15/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "35d3db0aa3229af97de68f5a61d7057a8b54b0e09a265c4b48dc017b42a43fd6",
+    "textUtf16Length" : 270,
+    "startInclusive" : 88,
+    "endExclusive" : 110,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/15",
+    "pointer" : "/object/15/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/15",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/15/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/15/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/15/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "eed91028fdef69394528c16833aa2682d734323b677cc264948fe8f8b00c6f8b",
+    "textUtf16Length" : 233,
+    "startInclusive" : 0,
+    "endExclusive" : 14,
+    "originalText" : "{@actSave dex}",
+    "name" : "actSave",
+    "rawArgumentText" : " dex",
+    "arguments" : [ "dex" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/15",
+    "pointer" : "/object/15/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/15",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/15/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/15/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/15/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "eed91028fdef69394528c16833aa2682d734323b677cc264948fe8f8b00c6f8b",
+    "textUtf16Length" : 233,
+    "startInclusive" : 15,
+    "endExclusive" : 23,
+    "originalText" : "{@dc 15}",
+    "name" : "dc",
+    "rawArgumentText" : " 15",
+    "arguments" : [ "15" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/15",
+    "pointer" : "/object/15/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/15",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/15/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/15/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/15/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "eed91028fdef69394528c16833aa2682d734323b677cc264948fe8f8b00c6f8b",
+    "textUtf16Length" : 233,
+    "startInclusive" : 70,
+    "endExclusive" : 116,
+    "originalText" : "{@variantrule Line [Area of Effect]|XPHB|Line}",
+    "name" : "variantrule",
+    "rawArgumentText" : " Line [Area of Effect]|XPHB|Line",
+    "arguments" : [ "Line [Area of Effect]", "XPHB", "Line" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/15",
+    "pointer" : "/object/15/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/15",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/15/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/15/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/15/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "eed91028fdef69394528c16833aa2682d734323b677cc264948fe8f8b00c6f8b",
+    "textUtf16Length" : 233,
+    "startInclusive" : 118,
+    "endExclusive" : 132,
+    "originalText" : "{@actSaveFail}",
+    "name" : "actSaveFail",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/15",
+    "pointer" : "/object/15/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/15",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/15/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/15/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/15/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "eed91028fdef69394528c16833aa2682d734323b677cc264948fe8f8b00c6f8b",
+    "textUtf16Length" : 233,
+    "startInclusive" : 137,
+    "endExclusive" : 150,
+    "originalText" : "{@damage 4d6}",
+    "name" : "damage",
+    "rawArgumentText" : " 4d6",
+    "arguments" : [ "4d6" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "4d6",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/15",
+    "pointer" : "/object/15/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/15",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/15/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/15/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/15/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "eed91028fdef69394528c16833aa2682d734323b677cc264948fe8f8b00c6f8b",
+    "textUtf16Length" : 233,
+    "startInclusive" : 198,
+    "endExclusive" : 215,
+    "originalText" : "{@actSaveSuccess}",
+    "name" : "actSaveSuccess",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/16",
+    "pointer" : "/object/16/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/16",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/16/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "2f86d5304499b56965c81e6b2383a33cb8e335c15317f1ad9d82746235a943ea",
+    "textUtf16Length" : 121,
+    "startInclusive" : 39,
+    "endExclusive" : 61,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/16",
+    "pointer" : "/object/16/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/16",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/16/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/16/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/16/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "0ed3013556867b359105826d5a61b0d24d886ccfcf88e7c626c845494892d159",
+    "textUtf16Length" : 241,
+    "startInclusive" : 0,
+    "endExclusive" : 14,
+    "originalText" : "{@actSave dex}",
+    "name" : "actSave",
+    "rawArgumentText" : " dex",
+    "arguments" : [ "dex" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/16",
+    "pointer" : "/object/16/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/16",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/16/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/16/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/16/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "0ed3013556867b359105826d5a61b0d24d886ccfcf88e7c626c845494892d159",
+    "textUtf16Length" : 241,
+    "startInclusive" : 15,
+    "endExclusive" : 23,
+    "originalText" : "{@dc 15}",
+    "name" : "dc",
+    "rawArgumentText" : " 15",
+    "arguments" : [ "15" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/16",
+    "pointer" : "/object/16/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/16",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/16/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/16/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/16/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "0ed3013556867b359105826d5a61b0d24d886ccfcf88e7c626c845494892d159",
+    "textUtf16Length" : 241,
+    "startInclusive" : 59,
+    "endExclusive" : 109,
+    "originalText" : "{@variantrule Sphere [Area of Effect]|XPHB|Sphere}",
+    "name" : "variantrule",
+    "rawArgumentText" : " Sphere [Area of Effect]|XPHB|Sphere",
+    "arguments" : [ "Sphere [Area of Effect]", "XPHB", "Sphere" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/16",
+    "pointer" : "/object/16/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/16",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/16/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/16/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/16/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "0ed3013556867b359105826d5a61b0d24d886ccfcf88e7c626c845494892d159",
+    "textUtf16Length" : 241,
+    "startInclusive" : 164,
+    "endExclusive" : 178,
+    "originalText" : "{@actSaveFail}",
+    "name" : "actSaveFail",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/16",
+    "pointer" : "/object/16/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/16",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/16/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/16/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/16/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "0ed3013556867b359105826d5a61b0d24d886ccfcf88e7c626c845494892d159",
+    "textUtf16Length" : 241,
+    "startInclusive" : 183,
+    "endExclusive" : 196,
+    "originalText" : "{@damage 4d6}",
+    "name" : "damage",
+    "rawArgumentText" : " 4d6",
+    "arguments" : [ "4d6" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "4d6",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/16",
+    "pointer" : "/object/16/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/16",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/16/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/16/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/16/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "0ed3013556867b359105826d5a61b0d24d886ccfcf88e7c626c845494892d159",
+    "textUtf16Length" : 241,
+    "startInclusive" : 211,
+    "endExclusive" : 228,
+    "originalText" : "{@actSaveSuccess}",
+    "name" : "actSaveSuccess",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/18",
+    "pointer" : "/object/18/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/18",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/18/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "ad5bab2c543ff542f0a232d9a73078a99378ed93d2bd8eb93852829a90b3b11f",
+    "textUtf16Length" : 485,
+    "startInclusive" : 152,
+    "endExclusive" : 176,
+    "originalText" : "{@item narycrash|DSotDQ}",
+    "name" : "item",
+    "rawArgumentText" : " narycrash|DSotDQ",
+    "arguments" : [ "narycrash", "DSotDQ" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/18",
+    "pointer" : "/object/18/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/18",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/18/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "ad5bab2c543ff542f0a232d9a73078a99378ed93d2bd8eb93852829a90b3b11f",
+    "textUtf16Length" : 485,
+    "startInclusive" : 186,
+    "endExclusive" : 243,
+    "originalText" : "{@adventure \"Adventuring Gear\"|DSotDQ|8|Adventuring Gear}",
+    "name" : "adventure",
+    "rawArgumentText" : " \"Adventuring Gear\"|DSotDQ|8|Adventuring Gear",
+    "arguments" : [ "\"Adventuring Gear\"", "DSotDQ", "8", "Adventuring Gear" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/18",
+    "pointer" : "/object/18/actionEntries/0/entries/1",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/18",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/18/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/18/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/18/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "03494fe4a1c3ef20269897d2eebeb94ea02c07cd4d803eca5ec8788e4dda26ca",
+    "textUtf16Length" : 177,
+    "startInclusive" : 92,
+    "endExclusive" : 105,
+    "originalText" : "{@damage 1d6}",
+    "name" : "damage",
+    "rawArgumentText" : " 1d6",
+    "arguments" : [ "1d6" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "1d6",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/19",
+    "pointer" : "/object/19/entries/0/entries/1",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/19",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/19/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/19/entries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/19/entries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "a29a42bfed0b91b99a651034f763af0103c3dc79ecff553602bb7869946cc889",
+    "textUtf16Length" : 272,
+    "startInclusive" : 169,
+    "endExclusive" : 200,
+    "originalText" : "{@condition blinded||blindness}",
+    "name" : "condition",
+    "rawArgumentText" : " blinded||blindness",
+    "arguments" : [ "blinded", "", "blindness" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/19",
+    "pointer" : "/object/19/entries/0/entries/1",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/19",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/19/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/19/entries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/19/entries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "a29a42bfed0b91b99a651034f763af0103c3dc79ecff553602bb7869946cc889",
+    "textUtf16Length" : 272,
+    "startInclusive" : 202,
+    "endExclusive" : 233,
+    "originalText" : "{@condition deafened||deafness}",
+    "name" : "condition",
+    "rawArgumentText" : " deafened||deafness",
+    "arguments" : [ "deafened", "", "deafness" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/19",
+    "pointer" : "/object/19/entries/0/entries/2",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/19",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/19/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/19/entries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/19/entries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "544f541c98f8eb9cd95dfd57e18f64d5f5a9e3f7caf3cea35861cafb8cc00393",
+    "textUtf16Length" : 258,
+    "startInclusive" : 151,
+    "endExclusive" : 162,
+    "originalText" : "{@dice 1d4}",
+    "name" : "dice",
+    "rawArgumentText" : " 1d4",
+    "arguments" : [ "1d4" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "1d4",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/20",
+    "pointer" : "/object/20/entries/0/entries/1/items/1",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/20",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/20/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/20/entries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/20/entries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/20/entries/0/entries/1",
+      "authoredType" : "list"
+    }, {
+      "jsonPointer" : "/object/20/entries/0/entries/1/items",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "95b141888158a59aa76a2a3178693709a45635e747785dcc1aac6a2e1af13c9c",
+    "textUtf16Length" : 255,
+    "startInclusive" : 124,
+    "endExclusive" : 148,
+    "originalText" : "{@spell control weather}",
+    "name" : "spell",
+    "rawArgumentText" : " control weather",
+    "arguments" : [ "control weather" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/20",
+    "pointer" : "/object/20/entries/0/entries/1/items/2",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/20",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/20/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/20/entries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/20/entries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/20/entries/0/entries/1",
+      "authoredType" : "list"
+    }, {
+      "jsonPointer" : "/object/20/entries/0/entries/1/items",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "305b898ce6545ef1f383e5554603b6cb1f47ce5205d1f4ebc9b02dbeb247bf9e",
+    "textUtf16Length" : 248,
+    "startInclusive" : 135,
+    "endExclusive" : 155,
+    "originalText" : "{@hazard Brown Mold}",
+    "name" : "hazard",
+    "rawArgumentText" : " Brown Mold",
+    "arguments" : [ "Brown Mold" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/20",
+    "pointer" : "/object/20/entries/0/entries/1/items/2",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/20",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/20/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/20/entries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/20/entries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/20/entries/0/entries/1",
+      "authoredType" : "list"
+    }, {
+      "jsonPointer" : "/object/20/entries/0/entries/1/items",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "305b898ce6545ef1f383e5554603b6cb1f47ce5205d1f4ebc9b02dbeb247bf9e",
+    "textUtf16Length" : 248,
+    "startInclusive" : 164,
+    "endExclusive" : 198,
+    "originalText" : "{@book Dungeon Master's Guide|DMG}",
+    "name" : "book",
+    "rawArgumentText" : " Dungeon Master's Guide|DMG",
+    "arguments" : [ "Dungeon Master's Guide", "DMG" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/20",
+    "pointer" : "/object/20/entries/0/entries/1/items/3",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/20",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/20/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/20/entries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/20/entries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/20/entries/0/entries/1",
+      "authoredType" : "list"
+    }, {
+      "jsonPointer" : "/object/20/entries/0/entries/1/items",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "3acae28cb8eb227d0bb150eb194edc07172a95569e8465e1811d4c8b4daf0da1",
+    "textUtf16Length" : 257,
+    "startInclusive" : 154,
+    "endExclusive" : 216,
+    "originalText" : "{@item Potion of Cold Resistance||potion of resistance (cold)}",
+    "name" : "item",
+    "rawArgumentText" : " Potion of Cold Resistance||potion of resistance (cold)",
+    "arguments" : [ "Potion of Cold Resistance", "", "potion of resistance (cold)" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/21",
+    "pointer" : "/object/21/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/21",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/21/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "a42aec66b887da8325061b1bffdc34acb9edf7f15e8d7071a992c882ca600904",
+    "textUtf16Length" : 242,
+    "startInclusive" : 100,
+    "endExclusive" : 122,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/21",
+    "pointer" : "/object/21/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/21",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/21/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "a42aec66b887da8325061b1bffdc34acb9edf7f15e8d7071a992c882ca600904",
+    "textUtf16Length" : 242,
+    "startInclusive" : 162,
+    "endExclusive" : 184,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/21",
+    "pointer" : "/object/21/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/21",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/21/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/21/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/21/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "6c65f2a07b2c99223cf5bf210d0c3ff6a3461866012b2f5581f7a90031f64e4c",
+    "textUtf16Length" : 243,
+    "startInclusive" : 0,
+    "endExclusive" : 14,
+    "originalText" : "{@actSave con}",
+    "name" : "actSave",
+    "rawArgumentText" : " con",
+    "arguments" : [ "con" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/21",
+    "pointer" : "/object/21/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/21",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/21/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/21/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/21/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "6c65f2a07b2c99223cf5bf210d0c3ff6a3461866012b2f5581f7a90031f64e4c",
+    "textUtf16Length" : 243,
+    "startInclusive" : 15,
+    "endExclusive" : 23,
+    "originalText" : "{@dc 15}",
+    "name" : "dc",
+    "rawArgumentText" : " 15",
+    "arguments" : [ "15" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/21",
+    "pointer" : "/object/21/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/21",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/21/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/21/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/21/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "6c65f2a07b2c99223cf5bf210d0c3ff6a3461866012b2f5581f7a90031f64e4c",
+    "textUtf16Length" : 243,
+    "startInclusive" : 59,
+    "endExclusive" : 109,
+    "originalText" : "{@variantrule Sphere [Area of Effect]|XPHB|Sphere}",
+    "name" : "variantrule",
+    "rawArgumentText" : " Sphere [Area of Effect]|XPHB|Sphere",
+    "arguments" : [ "Sphere [Area of Effect]", "XPHB", "Sphere" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/21",
+    "pointer" : "/object/21/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/21",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/21/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/21/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/21/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "6c65f2a07b2c99223cf5bf210d0c3ff6a3461866012b2f5581f7a90031f64e4c",
+    "textUtf16Length" : 243,
+    "startInclusive" : 164,
+    "endExclusive" : 178,
+    "originalText" : "{@actSaveFail}",
+    "name" : "actSaveFail",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/21",
+    "pointer" : "/object/21/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/21",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/21/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/21/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/21/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "6c65f2a07b2c99223cf5bf210d0c3ff6a3461866012b2f5581f7a90031f64e4c",
+    "textUtf16Length" : 243,
+    "startInclusive" : 183,
+    "endExclusive" : 196,
+    "originalText" : "{@damage 4d6}",
+    "name" : "damage",
+    "rawArgumentText" : " 4d6",
+    "arguments" : [ "4d6" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "4d6",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/21",
+    "pointer" : "/object/21/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/21",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/21/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/21/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/21/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "6c65f2a07b2c99223cf5bf210d0c3ff6a3461866012b2f5581f7a90031f64e4c",
+    "textUtf16Length" : 243,
+    "startInclusive" : 213,
+    "endExclusive" : 230,
+    "originalText" : "{@actSaveSuccess}",
+    "name" : "actSaveSuccess",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/22",
+    "pointer" : "/object/22/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/22",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/22/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "1fe7a50d4e4a95e3e6a3ccff0682abd98e2753972282a36b2428cea063f2bee3",
+    "textUtf16Length" : 276,
+    "startInclusive" : 191,
+    "endExclusive" : 213,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/22",
+    "pointer" : "/object/22/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/22",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/22/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/22/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/22/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "a0976d1d99e78336c222c7c4535ce847260e9ec39ce5ab7c683f0ec6952d0d68",
+    "textUtf16Length" : 81,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@atkr r}",
+    "name" : "atkr",
+    "rawArgumentText" : " r",
+    "arguments" : [ "r" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/22",
+    "pointer" : "/object/22/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/22",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/22/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/22/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/22/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "a0976d1d99e78336c222c7c4535ce847260e9ec39ce5ab7c683f0ec6952d0d68",
+    "textUtf16Length" : 81,
+    "startInclusive" : 10,
+    "endExclusive" : 18,
+    "originalText" : "{@hit 6}",
+    "name" : "hit",
+    "rawArgumentText" : " 6",
+    "arguments" : [ "6" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "6",
+      "kind" : "UNSIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/22",
+    "pointer" : "/object/22/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/22",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/22/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/22/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/22/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "a0976d1d99e78336c222c7c4535ce847260e9ec39ce5ab7c683f0ec6952d0d68",
+    "textUtf16Length" : 81,
+    "startInclusive" : 40,
+    "endExclusive" : 44,
+    "originalText" : "{@h}",
+    "name" : "h",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/22",
+    "pointer" : "/object/22/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/22",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/22/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/22/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/22/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "a0976d1d99e78336c222c7c4535ce847260e9ec39ce5ab7c683f0ec6952d0d68",
+    "textUtf16Length" : 81,
+    "startInclusive" : 48,
+    "endExclusive" : 62,
+    "originalText" : "{@damage 4d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 4d10",
+    "arguments" : [ "4d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "4d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/23",
+    "pointer" : "/object/23/actionEntries/0/entries/0/attackEntries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/23",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/23/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/23/actionEntries/0",
+      "authoredType" : "actions"
+    }, {
+      "jsonPointer" : "/object/23/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/23/actionEntries/0/entries/0",
+      "authoredType" : "attack"
+    }, {
+      "jsonPointer" : "/object/23/actionEntries/0/entries/0/attackEntries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "ab5ba3465f61f698d194f8b879f78fc0eb1d601db43c7550e3e6a646d149a401",
+    "textUtf16Length" : 89,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@hit +5}",
+    "name" : "hit",
+    "rawArgumentText" : " +5",
+    "arguments" : [ "+5" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "+5",
+      "kind" : "SIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/23",
+    "pointer" : "/object/23/actionEntries/0/entries/0/hitEntries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/23",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/23/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/23/actionEntries/0",
+      "authoredType" : "actions"
+    }, {
+      "jsonPointer" : "/object/23/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/23/actionEntries/0/entries/0",
+      "authoredType" : "attack"
+    }, {
+      "jsonPointer" : "/object/23/actionEntries/0/entries/0/hitEntries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "bdb0c621c856a3b0c9df4a720edc0d9faab114f563f76f448ba1c218666c7473",
+    "textUtf16Length" : 39,
+    "startInclusive" : 4,
+    "endExclusive" : 18,
+    "originalText" : "{@damage 5d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 5d10",
+    "arguments" : [ "5d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "5d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/24",
+    "pointer" : "/object/24/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/24",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/24/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "e4f4a25cf5148fbdf84669d8430831ea4916b68815aa388f86605fcc6e781db1",
+    "textUtf16Length" : 287,
+    "startInclusive" : 137,
+    "endExclusive" : 159,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/24",
+    "pointer" : "/object/24/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/24",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/24/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "e4f4a25cf5148fbdf84669d8430831ea4916b68815aa388f86605fcc6e781db1",
+    "textUtf16Length" : 287,
+    "startInclusive" : 201,
+    "endExclusive" : 223,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/24",
+    "pointer" : "/object/24/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/24",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/24/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/24/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/24/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "9461619a7d14f74bce959085e7e42b8283d724c7da4bd479182ccb0a43a40db9",
+    "textUtf16Length" : 127,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@atkr r}",
+    "name" : "atkr",
+    "rawArgumentText" : " r",
+    "arguments" : [ "r" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/24",
+    "pointer" : "/object/24/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/24",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/24/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/24/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/24/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "9461619a7d14f74bce959085e7e42b8283d724c7da4bd479182ccb0a43a40db9",
+    "textUtf16Length" : 127,
+    "startInclusive" : 10,
+    "endExclusive" : 18,
+    "originalText" : "{@hit 5}",
+    "name" : "hit",
+    "rawArgumentText" : " 5",
+    "arguments" : [ "5" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "5",
+      "kind" : "UNSIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/24",
+    "pointer" : "/object/24/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/24",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/24/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/24/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/24/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "9461619a7d14f74bce959085e7e42b8283d724c7da4bd479182ccb0a43a40db9",
+    "textUtf16Length" : 127,
+    "startInclusive" : 84,
+    "endExclusive" : 88,
+    "originalText" : "{@h}",
+    "name" : "h",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/24",
+    "pointer" : "/object/24/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/24",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/24/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/24/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/24/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "9461619a7d14f74bce959085e7e42b8283d724c7da4bd479182ccb0a43a40db9",
+    "textUtf16Length" : 127,
+    "startInclusive" : 92,
+    "endExclusive" : 106,
+    "originalText" : "{@damage 5d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 5d10",
+    "arguments" : [ "5d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "5d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/25",
+    "pointer" : "/object/25/entries/2",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/25",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/25/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "a9ba17178e14adf6ef2992b2fbcfba8fa6e492ace1a0563757247f56e6a16f5f",
+    "textUtf16Length" : 173,
+    "startInclusive" : 112,
+    "endExclusive" : 145,
+    "originalText" : "{@quickref Cover||3||total cover}",
+    "name" : "quickref",
+    "rawArgumentText" : " Cover||3||total cover",
+    "arguments" : [ "Cover", "", "3", "", "total cover" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/25",
+    "pointer" : "/object/25/actionEntries/0/entries/0/attackEntries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/25",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/25/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/25/actionEntries/0",
+      "authoredType" : "actions"
+    }, {
+      "jsonPointer" : "/object/25/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/25/actionEntries/0/entries/0",
+      "authoredType" : "attack"
+    }, {
+      "jsonPointer" : "/object/25/actionEntries/0/entries/0/attackEntries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "f63198dbeef8ec711cbbe97fabc4535083f500cca398241856b7953cba809272",
+    "textUtf16Length" : 42,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@hit +8}",
+    "name" : "hit",
+    "rawArgumentText" : " +8",
+    "arguments" : [ "+8" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "+8",
+      "kind" : "SIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/25",
+    "pointer" : "/object/25/actionEntries/0/entries/0/hitEntries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/25",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/25/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/25/actionEntries/0",
+      "authoredType" : "actions"
+    }, {
+      "jsonPointer" : "/object/25/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/25/actionEntries/0/entries/0",
+      "authoredType" : "attack"
+    }, {
+      "jsonPointer" : "/object/25/actionEntries/0/entries/0/hitEntries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "c77b4d7b66430e02fcd66b173b4dbb2009951a45138508278a7efcf1a10891a8",
+    "textUtf16Length" : 39,
+    "startInclusive" : 4,
+    "endExclusive" : 18,
+    "originalText" : "{@damage 3d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 3d10",
+    "arguments" : [ "3d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "3d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/26",
+    "pointer" : "/object/26/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/26",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/26/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "ebe103a3440792ac2f43db3ac53baa98fa675a1bc6bc7f240828dc9175b8960f",
+    "textUtf16Length" : 283,
+    "startInclusive" : 209,
+    "endExclusive" : 231,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/26",
+    "pointer" : "/object/26/entries/1",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/26",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/26/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "0448043672f11b9eb256769924632e81fdd1a16844080a8819afef3c1d836d86",
+    "textUtf16Length" : 114,
+    "startInclusive" : 37,
+    "endExclusive" : 68,
+    "originalText" : "{@table Cover|XPHB|Total Cover}",
+    "name" : "table",
+    "rawArgumentText" : " Cover|XPHB|Total Cover",
+    "arguments" : [ "Cover", "XPHB", "Total Cover" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/26",
+    "pointer" : "/object/26/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/26",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/26/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/26/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/26/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "2e593af5d8280ac1df9332b9698a94c6de27dc427ce2e73cb73ff26480cdc5d8",
+    "textUtf16Length" : 75,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@atkr m}",
+    "name" : "atkr",
+    "rawArgumentText" : " m",
+    "arguments" : [ "m" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/26",
+    "pointer" : "/object/26/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/26",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/26/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/26/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/26/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "2e593af5d8280ac1df9332b9698a94c6de27dc427ce2e73cb73ff26480cdc5d8",
+    "textUtf16Length" : 75,
+    "startInclusive" : 10,
+    "endExclusive" : 18,
+    "originalText" : "{@hit 8}",
+    "name" : "hit",
+    "rawArgumentText" : " 8",
+    "arguments" : [ "8" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "8",
+      "kind" : "UNSIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/26",
+    "pointer" : "/object/26/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/26",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/26/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/26/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/26/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "2e593af5d8280ac1df9332b9698a94c6de27dc427ce2e73cb73ff26480cdc5d8",
+    "textUtf16Length" : 75,
+    "startInclusive" : 32,
+    "endExclusive" : 36,
+    "originalText" : "{@h}",
+    "name" : "h",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/26",
+    "pointer" : "/object/26/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/26",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/26/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/26/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/26/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "2e593af5d8280ac1df9332b9698a94c6de27dc427ce2e73cb73ff26480cdc5d8",
+    "textUtf16Length" : 75,
+    "startInclusive" : 40,
+    "endExclusive" : 54,
+    "originalText" : "{@damage 3d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 3d10",
+    "arguments" : [ "3d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "3d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/27",
+    "pointer" : "/object/27/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/27",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/27/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "353afd904aa09b36d28568e22c611e1dbc0c2473bc25430797de2fb2169711b6",
+    "textUtf16Length" : 379,
+    "startInclusive" : 314,
+    "endExclusive" : 347,
+    "originalText" : "{@quickref Cover||3||total cover}",
+    "name" : "quickref",
+    "rawArgumentText" : " Cover||3||total cover",
+    "arguments" : [ "Cover", "", "3", "", "total cover" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/28",
+    "pointer" : "/object/28/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/28",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/28/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "c73261af28762b83b06d1fe2f9c10e2ccf8ace0f4627b58e0c79fb33c6326a58",
+    "textUtf16Length" : 406,
+    "startInclusive" : 314,
+    "endExclusive" : 345,
+    "originalText" : "{@table Cover|XPHB|Total Cover}",
+    "name" : "table",
+    "rawArgumentText" : " Cover|XPHB|Total Cover",
+    "arguments" : [ "Cover", "XPHB", "Total Cover" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/29",
+    "pointer" : "/object/29/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/29",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/29/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "032691024da0debf84656465e684728713c6aba92a45fb3b8d5cd3c99f950ecb",
+    "textUtf16Length" : 145,
+    "startInclusive" : 81,
+    "endExclusive" : 144,
+    "originalText" : "{@adventure a spectral figure appears|JttRC|10|Memory of Peace}",
+    "name" : "adventure",
+    "rawArgumentText" : " a spectral figure appears|JttRC|10|Memory of Peace",
+    "arguments" : [ "a spectral figure appears", "JttRC", "10", "Memory of Peace" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/30",
+    "pointer" : "/object/30/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/30",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/30/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "b1de6a9acec9989e8f3d531cfdc09696e7cc24bab1c41f5c298acc0cda6bafb0",
+    "textUtf16Length" : 117,
+    "startInclusive" : 35,
+    "endExclusive" : 57,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/30",
+    "pointer" : "/object/30/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/30",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/30/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/30/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/30/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "ece165512b54285eeba2afeaf013783a48651791ae0e36dde1eba0c9bcebe979",
+    "textUtf16Length" : 79,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@atkr r}",
+    "name" : "atkr",
+    "rawArgumentText" : " r",
+    "arguments" : [ "r" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/30",
+    "pointer" : "/object/30/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/30",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/30/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/30/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/30/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "ece165512b54285eeba2afeaf013783a48651791ae0e36dde1eba0c9bcebe979",
+    "textUtf16Length" : 79,
+    "startInclusive" : 10,
+    "endExclusive" : 18,
+    "originalText" : "{@hit 6}",
+    "name" : "hit",
+    "rawArgumentText" : " 6",
+    "arguments" : [ "6" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "6",
+      "kind" : "UNSIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/30",
+    "pointer" : "/object/30/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/30",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/30/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/30/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/30/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "ece165512b54285eeba2afeaf013783a48651791ae0e36dde1eba0c9bcebe979",
+    "textUtf16Length" : 79,
+    "startInclusive" : 38,
+    "endExclusive" : 42,
+    "originalText" : "{@h}",
+    "name" : "h",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/30",
+    "pointer" : "/object/30/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/30",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/30/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/30/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/30/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "ece165512b54285eeba2afeaf013783a48651791ae0e36dde1eba0c9bcebe979",
+    "textUtf16Length" : 79,
+    "startInclusive" : 46,
+    "endExclusive" : 60,
+    "originalText" : "{@damage 4d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 4d10",
+    "arguments" : [ "4d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "4d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/31",
+    "pointer" : "/object/31/entries/1",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/31",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/31/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "eb5e788672321935150d36edd572aa33ea8161ab94f6b0a80ca7a0ed88c88630",
+    "textUtf16Length" : 106,
+    "startInclusive" : 60,
+    "endExclusive" : 81,
+    "originalText" : "{@hazard green slime}",
+    "name" : "hazard",
+    "rawArgumentText" : " green slime",
+    "arguments" : [ "green slime" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/31",
+    "pointer" : "/object/31/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/31",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/31/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/31/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/31/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "b4a9d56a89ce2ec0aabc053cf3d2a030a9c59c19bf61d5ed513a4651d8ccc308",
+    "textUtf16Length" : 246,
+    "startInclusive" : 114,
+    "endExclusive" : 122,
+    "originalText" : "{@dc 15}",
+    "name" : "dc",
+    "rawArgumentText" : " 15",
+    "arguments" : [ "15" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/31",
+    "pointer" : "/object/31/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/31",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/31/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/31/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/31/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "b4a9d56a89ce2ec0aabc053cf3d2a030a9c59c19bf61d5ed513a4651d8ccc308",
+    "textUtf16Length" : 246,
+    "startInclusive" : 158,
+    "endExclusive" : 171,
+    "originalText" : "{@damage 3d6}",
+    "name" : "damage",
+    "rawArgumentText" : " 3d6",
+    "arguments" : [ "3d6" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "3d6",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/32",
+    "pointer" : "/object/32/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/32",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/32/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "902ddba91c7308368bd8c7122c8dbdfd29e80e989a271f53d90d869f92ffa9ac",
+    "textUtf16Length" : 265,
+    "startInclusive" : 188,
+    "endExclusive" : 210,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/32",
+    "pointer" : "/object/32/entries/1",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/32",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/32/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "2880e0a2dc7d357679494988e9cf5918d2820937dcde08b15238310b184f5cc8",
+    "textUtf16Length" : 195,
+    "startInclusive" : 105,
+    "endExclusive" : 131,
+    "originalText" : "{@hazard green slime|XDMG}",
+    "name" : "hazard",
+    "rawArgumentText" : " green slime|XDMG",
+    "arguments" : [ "green slime", "XDMG" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/32",
+    "pointer" : "/object/32/entries/1",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/32",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/32/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "2880e0a2dc7d357679494988e9cf5918d2820937dcde08b15238310b184f5cc8",
+    "textUtf16Length" : 195,
+    "startInclusive" : 138,
+    "endExclusive" : 168,
+    "originalText" : "{@book Hazards|XDMG|2|Hazards}",
+    "name" : "book",
+    "rawArgumentText" : " Hazards|XDMG|2|Hazards",
+    "arguments" : [ "Hazards", "XDMG", "2", "Hazards" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/32",
+    "pointer" : "/object/32/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/32",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/32/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/32/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/32/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "540eb3856b0de0bfd1fba48904cb74d7dc478ceff718af2fdcc145fe88235f54",
+    "textUtf16Length" : 165,
+    "startInclusive" : 0,
+    "endExclusive" : 14,
+    "originalText" : "{@actSave dex}",
+    "name" : "actSave",
+    "rawArgumentText" : " dex",
+    "arguments" : [ "dex" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/32",
+    "pointer" : "/object/32/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/32",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/32/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/32/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/32/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "540eb3856b0de0bfd1fba48904cb74d7dc478ceff718af2fdcc145fe88235f54",
+    "textUtf16Length" : 165,
+    "startInclusive" : 15,
+    "endExclusive" : 23,
+    "originalText" : "{@dc 15}",
+    "name" : "dc",
+    "rawArgumentText" : " 15",
+    "arguments" : [ "15" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/32",
+    "pointer" : "/object/32/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/32",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/32/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/32/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/32/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "540eb3856b0de0bfd1fba48904cb74d7dc478ceff718af2fdcc145fe88235f54",
+    "textUtf16Length" : 165,
+    "startInclusive" : 88,
+    "endExclusive" : 102,
+    "originalText" : "{@actSaveFail}",
+    "name" : "actSaveFail",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/32",
+    "pointer" : "/object/32/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/32",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/32/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/32/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/32/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "540eb3856b0de0bfd1fba48904cb74d7dc478ceff718af2fdcc145fe88235f54",
+    "textUtf16Length" : 165,
+    "startInclusive" : 107,
+    "endExclusive" : 120,
+    "originalText" : "{@damage 3d6}",
+    "name" : "damage",
+    "rawArgumentText" : " 3d6",
+    "arguments" : [ "3d6" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "3d6",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/32",
+    "pointer" : "/object/32/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/32",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/32/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/32/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/32/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "540eb3856b0de0bfd1fba48904cb74d7dc478ceff718af2fdcc145fe88235f54",
+    "textUtf16Length" : 165,
+    "startInclusive" : 135,
+    "endExclusive" : 152,
+    "originalText" : "{@actSaveSuccess}",
+    "name" : "actSaveSuccess",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/34",
+    "pointer" : "/object/34/actionEntries/0/entries/0/attackEntries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/34",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/34/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/34/actionEntries/0",
+      "authoredType" : "actions"
+    }, {
+      "jsonPointer" : "/object/34/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/34/actionEntries/0/entries/0",
+      "authoredType" : "attack"
+    }, {
+      "jsonPointer" : "/object/34/actionEntries/0/entries/0/attackEntries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "c1d8a138e761b8dd038340745b37269d7dc57e7e728c8505a3cf1efc68c04a75",
+    "textUtf16Length" : 91,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@hit +5}",
+    "name" : "hit",
+    "rawArgumentText" : " +5",
+    "arguments" : [ "+5" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "+5",
+      "kind" : "SIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/34",
+    "pointer" : "/object/34/actionEntries/0/entries/0/hitEntries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/34",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/34/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/34/actionEntries/0",
+      "authoredType" : "actions"
+    }, {
+      "jsonPointer" : "/object/34/actionEntries/0/entries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/34/actionEntries/0/entries/0",
+      "authoredType" : "attack"
+    }, {
+      "jsonPointer" : "/object/34/actionEntries/0/entries/0/hitEntries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "eaeb4b6f1a9acd6446829d9ec77d0eea9f597ee004488ac3cbb2655690b1a78d",
+    "textUtf16Length" : 39,
+    "startInclusive" : 4,
+    "endExclusive" : 18,
+    "originalText" : "{@damage 8d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 8d10",
+    "arguments" : [ "8d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "8d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/35",
+    "pointer" : "/object/35/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/35",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/35/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "aa984e9ee93baa40e06a109b871cbce102c23b8ef2cbd0a42eb7bfea845b80a0",
+    "textUtf16Length" : 284,
+    "startInclusive" : 133,
+    "endExclusive" : 155,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/35",
+    "pointer" : "/object/35/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/35",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/35/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "aa984e9ee93baa40e06a109b871cbce102c23b8ef2cbd0a42eb7bfea845b80a0",
+    "textUtf16Length" : 284,
+    "startInclusive" : 197,
+    "endExclusive" : 219,
+    "originalText" : "{@action Utilize|XPHB}",
+    "name" : "action",
+    "rawArgumentText" : " Utilize|XPHB",
+    "arguments" : [ "Utilize", "XPHB" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/35",
+    "pointer" : "/object/35/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/35",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/35/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/35/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/35/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "9d5665d2a0f6e58d1c8f53d126dbe69de74f5d207daeda54698433c1bf8c0b8e",
+    "textUtf16Length" : 129,
+    "startInclusive" : 0,
+    "endExclusive" : 9,
+    "originalText" : "{@atkr r}",
+    "name" : "atkr",
+    "rawArgumentText" : " r",
+    "arguments" : [ "r" ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/35",
+    "pointer" : "/object/35/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/35",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/35/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/35/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/35/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "9d5665d2a0f6e58d1c8f53d126dbe69de74f5d207daeda54698433c1bf8c0b8e",
+    "textUtf16Length" : 129,
+    "startInclusive" : 10,
+    "endExclusive" : 18,
+    "originalText" : "{@hit 5}",
+    "name" : "hit",
+    "rawArgumentText" : " 5",
+    "arguments" : [ "5" ],
+    "observationType" : "ModifierSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "5",
+      "kind" : "UNSIGNED_INTEGER"
+    }
+  }, {
+    "ownerPointer" : "/object/35",
+    "pointer" : "/object/35/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/35",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/35/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/35/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/35/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "9d5665d2a0f6e58d1c8f53d126dbe69de74f5d207daeda54698433c1bf8c0b8e",
+    "textUtf16Length" : 129,
+    "startInclusive" : 86,
+    "endExclusive" : 90,
+    "originalText" : "{@h}",
+    "name" : "h",
+    "rawArgumentText" : "",
+    "arguments" : [ ],
+    "observationType" : "LabelSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/35",
+    "pointer" : "/object/35/actionEntries/0/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/35",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/35/actionEntries",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/35/actionEntries/0",
+      "authoredType" : "entries"
+    }, {
+      "jsonPointer" : "/object/35/actionEntries/0/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "9d5665d2a0f6e58d1c8f53d126dbe69de74f5d207daeda54698433c1bf8c0b8e",
+    "textUtf16Length" : 129,
+    "startInclusive" : 94,
+    "endExclusive" : 108,
+    "originalText" : "{@damage 8d10}",
+    "name" : "damage",
+    "rawArgumentText" : " 8d10",
+    "arguments" : [ "8d10" ],
+    "observationType" : "FormulaSyntaxObservation",
+    "childTagCount" : 0,
+    "expression" : {
+      "authoredToken" : "8d10",
+      "kind" : "DICE_NOTATION"
+    }
+  }, {
+    "ownerPointer" : "/object/36",
+    "pointer" : "/object/36/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/36",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/36/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "5c191e9de48ea4728ddf267d322a139d227246a86374dfb608bda169e8c81fff",
+    "textUtf16Length" : 243,
+    "startInclusive" : 97,
+    "endExclusive" : 130,
+    "originalText" : "{@creature mezzoloth||mezzoloths}",
+    "name" : "creature",
+    "rawArgumentText" : " mezzoloth||mezzoloths",
+    "arguments" : [ "mezzoloth", "", "mezzoloths" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  }, {
+    "ownerPointer" : "/object/36",
+    "pointer" : "/object/36/entries/0",
+    "hierarchy" : [ {
+      "jsonPointer" : "/object/36",
+      "authoredType" : null
+    }, {
+      "jsonPointer" : "/object/36/entries",
+      "authoredType" : null
+    } ],
+    "origin" : "AUTHORED",
+    "textSha256" : "5c191e9de48ea4728ddf267d322a139d227246a86374dfb608bda169e8c81fff",
+    "textUtf16Length" : 243,
+    "startInclusive" : 176,
+    "endExclusive" : 200,
+    "originalText" : "{@creature Malaxxix|BMT}",
+    "name" : "creature",
+    "rawArgumentText" : " Malaxxix|BMT",
+    "arguments" : [ "Malaxxix", "BMT" ],
+    "observationType" : "OpaqueSyntaxObservation",
+    "childTagCount" : 0
+  } ],
+  "actionsPreserved" : 37,
+  "publicActionsOmitted" : 37,
+  "typedAttacksReconstructed" : 7
+}

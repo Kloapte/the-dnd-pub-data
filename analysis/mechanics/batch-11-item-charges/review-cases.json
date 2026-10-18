@@ -1,0 +1,1176 @@
+{
+  "status": "PROPOSED_GOLD_SET_NOT_INDEPENDENTLY_ADJUDICATED",
+  "exhaustiveCoverageOracle": "source-evidence inventory: all 220 field/tag observations, plus explicit scalar fields",
+  "reviewCoverage": "All 35 fieldless marker owners manually classified; contextual labels are abstentions",
+  "fieldlessReviews": [
+    {
+      "ownerPointer": "/item/1532",
+      "name": "Planar Key",
+      "source": "AitFR-THP",
+      "classification": "OWN_CHARGE_RULE_IN_PROSE",
+      "reason": "Own charge quantities/use are described, but no dedicated root charge fields exist.",
+      "leafPointers": [
+        "/item/1532/entries/1",
+        "/item/1532/entries/2"
+      ]
+    },
+    {
+      "ownerPointer": "/item/1664",
+      "name": "Powered Armor",
+      "source": "LLK",
+      "classification": "OWN_CHARGE_RULE_IN_PROSE",
+      "reason": "Own charge quantities/use are described, but no dedicated root charge fields exist.",
+      "leafPointers": [
+        "/item/1664/entries/4/items/0",
+        "/item/1664/entries/4/items/1",
+        "/item/1664/entries/4/items/2",
+        "/item/1664/entries/4/items/3",
+        "/item/1664/entries/4/items/4",
+        "/item/1664/entries/4/items/5",
+        "/item/1664/entries/5",
+        "/item/1664/entries/6/entries/4/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/1819",
+      "name": "Ring of Three Wishes",
+      "source": "DMG",
+      "classification": "OWN_CHARGE_RULE_IN_PROSE",
+      "reason": "Own charge quantities/use are described, but no dedicated root charge fields exist.",
+      "leafPointers": [
+        "/item/1819/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/1820",
+      "name": "Ring of Three Wishes",
+      "source": "XDMG",
+      "classification": "OWN_CHARGE_RULE_IN_PROSE",
+      "reason": "Own charge quantities/use are described, but no dedicated root charge fields exist.",
+      "leafPointers": [
+        "/item/1820/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/2086",
+      "name": "Soul Coin",
+      "source": "BGDIA",
+      "classification": "OWN_CHARGE_RULE_IN_PROSE",
+      "reason": "Own charge quantities/use are described, but no dedicated root charge fields exist.",
+      "leafPointers": [
+        "/item/2086/entries/2/entries/0",
+        "/item/2086/entries/3/entries/0",
+        "/item/2086/entries/3/entries/1"
+      ]
+    },
+    {
+      "ownerPointer": "/item/2163",
+      "name": "Staff of Charming",
+      "source": "DMG",
+      "classification": "OWN_CHARGE_RULE_IN_PROSE",
+      "reason": "Own charge quantities/use are described, but no dedicated root charge fields exist.",
+      "leafPointers": [
+        "/item/2163/entries/0",
+        "/item/2163/entries/1",
+        "/item/2163/entries/2"
+      ]
+    },
+    {
+      "ownerPointer": "/item/2379",
+      "name": "Vial of Thought Capture",
+      "source": "AZfyT",
+      "classification": "OWN_CHARGE_RULE_IN_PROSE",
+      "reason": "Own charge quantities/use are described, but no dedicated root charge fields exist.",
+      "leafPointers": [
+        "/item/2379/entries/2"
+      ]
+    },
+    {
+      "ownerPointer": "/item/2445",
+      "name": "Waythe",
+      "source": "TftYP",
+      "classification": "DELEGATED_CHARGE_RULE_IN_PROSE",
+      "reason": "Own recovery/risk description refers to another Item function; no independently authored count.",
+      "leafPointers": [
+        "/item/2445/entries/2"
+      ]
+    },
+    {
+      "ownerPointer": "/item/86",
+      "name": "Amulet of Protection from Turning",
+      "source": "TftYP",
+      "classification": "OTHER_USE_OR_RECHARGE_RULE",
+      "reason": "Uses, cooldown, creature breath recharge, or restoration is described; not a demonstrated Item charge pool.",
+      "leafPointers": [
+        "/item/86/entries/1"
+      ]
+    },
+    {
+      "ownerPointer": "/item/103",
+      "name": "Arcane Cannon",
+      "source": "EGW",
+      "classification": "OTHER_USE_OR_RECHARGE_RULE",
+      "reason": "Uses, cooldown, creature breath recharge, or restoration is described; not a demonstrated Item charge pool.",
+      "leafPointers": [
+        "/item/103/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/157",
+      "name": "Balloon Pack",
+      "source": "PotA",
+      "classification": "OTHER_USE_OR_RECHARGE_RULE",
+      "reason": "Uses, cooldown, creature breath recharge, or restoration is described; not a demonstrated Item charge pool.",
+      "leafPointers": [
+        "/item/157/entries/2"
+      ]
+    },
+    {
+      "ownerPointer": "/item/212",
+      "name": "Black Dragon Mask",
+      "source": "HotDQ",
+      "classification": "OTHER_USE_OR_RECHARGE_RULE",
+      "reason": "Uses, cooldown, creature breath recharge, or restoration is described; not a demonstrated Item charge pool.",
+      "leafPointers": [
+        "/item/212/entries/3/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/252",
+      "name": "Blue Dragon Mask",
+      "source": "RoTOS",
+      "classification": "OTHER_USE_OR_RECHARGE_RULE",
+      "reason": "Uses, cooldown, creature breath recharge, or restoration is described; not a demonstrated Item charge pool.",
+      "leafPointers": [
+        "/item/252/entries/3/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/920",
+      "name": "Green Dragon Mask",
+      "source": "RoTOS",
+      "classification": "OTHER_USE_OR_RECHARGE_RULE",
+      "reason": "Uses, cooldown, creature breath recharge, or restoration is described; not a demonstrated Item charge pool.",
+      "leafPointers": [
+        "/item/920/entries/3/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/1378",
+      "name": "Nautiloid",
+      "source": "AAG",
+      "classification": "OTHER_USE_OR_RECHARGE_RULE",
+      "reason": "Uses, cooldown, creature breath recharge, or restoration is described; not a demonstrated Item charge pool.",
+      "leafPointers": [
+        "/item/1378/entries/1"
+      ]
+    },
+    {
+      "ownerPointer": "/item/1733",
+      "name": "Red Dragon Mask",
+      "source": "RoTOS",
+      "classification": "OTHER_USE_OR_RECHARGE_RULE",
+      "reason": "Uses, cooldown, creature breath recharge, or restoration is described; not a demonstrated Item charge pool.",
+      "leafPointers": [
+        "/item/1733/entries/3/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/2446",
+      "name": "Weird Tank",
+      "source": "PotA",
+      "classification": "OTHER_USE_OR_RECHARGE_RULE",
+      "reason": "Uses, cooldown, creature breath recharge, or restoration is described; not a demonstrated Item charge pool.",
+      "leafPointers": [
+        "/item/2446/entries/2"
+      ]
+    },
+    {
+      "ownerPointer": "/item/2462",
+      "name": "White Dragon Mask",
+      "source": "RoTOS",
+      "classification": "OTHER_USE_OR_RECHARGE_RULE",
+      "reason": "Uses, cooldown, creature breath recharge, or restoration is described; not a demonstrated Item charge pool.",
+      "leafPointers": [
+        "/item/2462/entries/3/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/102",
+      "name": "Arcane Battery",
+      "source": "NF",
+      "classification": "OTHER_ITEM_CHARGE_RULE",
+      "reason": "Recovery or inspection concerns another Item; do not assign its charges to this source owner.",
+      "leafPointers": [
+        "/item/102/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/564",
+      "name": "Deck of Many More Things",
+      "source": "BMT",
+      "classification": "OTHER_ITEM_CHARGE_RULE",
+      "reason": "Recovery or inspection concerns another Item; do not assign its charges to this source owner.",
+      "leafPointers": [
+        "/item/564/entries/27/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/2507",
+      "name": "Ythryn Mythallar",
+      "source": "IDRotF",
+      "classification": "OTHER_ITEM_CHARGE_RULE",
+      "reason": "Recovery or inspection concerns another Item; do not assign its charges to this source owner.",
+      "leafPointers": [
+        "/item/2507/entries/3/items/1"
+      ]
+    },
+    {
+      "ownerPointer": "/item/410",
+      "name": "Charred Wand of Magic Missiles",
+      "source": "WDH",
+      "classification": "COPY_INHERITS_CHARGES",
+      "reason": "Authored modification describes charges; actual scalar fields come from the copied parent.",
+      "leafPointers": [
+        "/item/410/_copy/_mod/entries/items"
+      ]
+    },
+    {
+      "ownerPointer": "/item/1276",
+      "name": "Manual of Bodily Health",
+      "source": "DMG",
+      "classification": "CHARGED_WORD_NOT_CHARGE_POOL",
+      "reason": "Charged-with-magic/crystals language does not establish a charge resource.",
+      "leafPointers": [
+        "/item/1276/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/1277",
+      "name": "Manual of Bodily Health",
+      "source": "XDMG",
+      "classification": "CHARGED_WORD_NOT_CHARGE_POOL",
+      "reason": "Charged-with-magic/crystals language does not establish a charge resource.",
+      "leafPointers": [
+        "/item/1277/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/1282",
+      "name": "Manual of Gainful Exercise",
+      "source": "DMG",
+      "classification": "CHARGED_WORD_NOT_CHARGE_POOL",
+      "reason": "Charged-with-magic/crystals language does not establish a charge resource.",
+      "leafPointers": [
+        "/item/1282/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/1283",
+      "name": "Manual of Gainful Exercise",
+      "source": "XDMG",
+      "classification": "CHARGED_WORD_NOT_CHARGE_POOL",
+      "reason": "Charged-with-magic/crystals language does not establish a charge resource.",
+      "leafPointers": [
+        "/item/1283/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/1286",
+      "name": "Manual of Quickness of Action",
+      "source": "DMG",
+      "classification": "CHARGED_WORD_NOT_CHARGE_POOL",
+      "reason": "Charged-with-magic/crystals language does not establish a charge resource.",
+      "leafPointers": [
+        "/item/1286/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/1287",
+      "name": "Manual of Quickness of Action",
+      "source": "XDMG",
+      "classification": "CHARGED_WORD_NOT_CHARGE_POOL",
+      "reason": "Charged-with-magic/crystals language does not establish a charge resource.",
+      "leafPointers": [
+        "/item/1287/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/1690",
+      "name": "Psionic Rod of the Honed Mind",
+      "source": "AU",
+      "classification": "CHARGED_WORD_NOT_CHARGE_POOL",
+      "reason": "Charged-with-magic/crystals language does not establish a charge resource.",
+      "leafPointers": [
+        "/item/1690/_copy/_mod/entries/items/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/2317",
+      "name": "Tome of Clear Thought",
+      "source": "DMG",
+      "classification": "CHARGED_WORD_NOT_CHARGE_POOL",
+      "reason": "Charged-with-magic/crystals language does not establish a charge resource.",
+      "leafPointers": [
+        "/item/2317/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/2318",
+      "name": "Tome of Clear Thought",
+      "source": "XDMG",
+      "classification": "CHARGED_WORD_NOT_CHARGE_POOL",
+      "reason": "Charged-with-magic/crystals language does not establish a charge resource.",
+      "leafPointers": [
+        "/item/2318/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/2319",
+      "name": "Tome of Leadership and Influence",
+      "source": "DMG",
+      "classification": "CHARGED_WORD_NOT_CHARGE_POOL",
+      "reason": "Charged-with-magic/crystals language does not establish a charge resource.",
+      "leafPointers": [
+        "/item/2319/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/2320",
+      "name": "Tome of Leadership and Influence",
+      "source": "XDMG",
+      "classification": "CHARGED_WORD_NOT_CHARGE_POOL",
+      "reason": "Charged-with-magic/crystals language does not establish a charge resource.",
+      "leafPointers": [
+        "/item/2320/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/2325",
+      "name": "Tome of Understanding",
+      "source": "DMG",
+      "classification": "CHARGED_WORD_NOT_CHARGE_POOL",
+      "reason": "Charged-with-magic/crystals language does not establish a charge resource.",
+      "leafPointers": [
+        "/item/2325/entries/0"
+      ]
+    },
+    {
+      "ownerPointer": "/item/2326",
+      "name": "Tome of Understanding",
+      "source": "XDMG",
+      "classification": "CHARGED_WORD_NOT_CHARGE_POOL",
+      "reason": "Charged-with-magic/crystals language does not establish a charge resource.",
+      "leafPointers": [
+        "/item/2326/entries/0"
+      ]
+    }
+  ],
+  "labels": [
+    {
+      "id": "G01",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/43/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/43/rechargeAmount",
+        "span": [
+          0,
+          12
+        ],
+        "token": "{@dice 1d20}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G02",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/56/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/56/rechargeAmount",
+        "span": [
+          0,
+          11
+        ],
+        "token": "{@dice 1d3}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G03",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/74/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/74/rechargeAmount",
+        "span": [
+          0,
+          11
+        ],
+        "token": "{@dice 1d6}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G04",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/188/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/188/rechargeAmount",
+        "span": [
+          0,
+          15
+        ],
+        "token": "{@dice 1d6 + 3}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G05",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/192/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/192/rechargeAmount",
+        "span": [
+          0,
+          15
+        ],
+        "token": "{@dice 1d6 + 1}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G06",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/227/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/227/rechargeAmount",
+        "span": [
+          0,
+          15
+        ],
+        "token": "{@dice 2d8 + 4}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G07",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/316/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/316/rechargeAmount",
+        "span": [
+          0,
+          11
+        ],
+        "token": "{@dice 1d4}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G08",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/576/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/576/rechargeAmount",
+        "span": [
+          0,
+          11
+        ],
+        "token": "{@dice 1d8}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G09",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/589/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/589/rechargeAmount",
+        "span": [
+          0,
+          15
+        ],
+        "token": "{@dice 1d6 + 4}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G10",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/625/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/625/rechargeAmount",
+        "span": [
+          0,
+          12
+        ],
+        "token": "{@dice 1d10}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G11",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/658/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/658/rechargeAmount",
+        "span": [
+          0,
+          15
+        ],
+        "token": "{@dice 1d4 + 1}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G12",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/735/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/735/rechargeAmount",
+        "span": [
+          0,
+          15
+        ],
+        "token": "{@dice 1d4 + 4}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G13",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/1443/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/1443/rechargeAmount",
+        "span": [
+          0,
+          15
+        ],
+        "token": "{@dice 1d4 + 2}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G14",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/1447/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/1447/rechargeAmount",
+        "span": [
+          0,
+          15
+        ],
+        "token": "{@dice 1d4 + 3}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G15",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/1798/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/1798/rechargeAmount",
+        "span": [
+          0,
+          15
+        ],
+        "token": "{@dice 1d4 - 1}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G16",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/1882/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/1882/rechargeAmount",
+        "span": [
+          0,
+          11
+        ],
+        "token": "{@dice 6d6}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G17",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/2164/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2164/rechargeAmount",
+        "span": [
+          0,
+          15
+        ],
+        "token": "{@dice 1d8 + 2}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G18",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/2189/rechargeAmount"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2189/rechargeAmount",
+        "span": [
+          0,
+          15
+        ],
+        "token": "{@dice 4d6 + 2}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Exact shared-parser span under an explicitly authored charge/recovery field; no evaluation."
+    },
+    {
+      "id": "G19",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/2224/charges"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2224/charges",
+        "span": [
+          0,
+          15
+        ],
+        "token": "{@dice 1d6 + 1}"
+      },
+      "relation": "FIELD_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "AUTHORED_FIELD_SYNTAX_POSITIVE",
+      "reason": "Same dice syntax in a count field must remain distinct from rechargeAmount field syntax."
+    },
+    {
+      "id": "G20",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/2224"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2224/charges"
+      },
+      "relation": "HAS_AUTHORED_COUNT_EXPRESSION",
+      "reliability": "DIRECT_STRUCTURE",
+      "decision": "ACCEPT",
+      "scope": "EXISTING_STRUCTURED_BASELINE",
+      "reason": "Preserve the exact source field/value; it does not establish an evaluated resource rule."
+    },
+    {
+      "id": "G21",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/1175"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/1175/rechargeAmount"
+      },
+      "relation": "HAS_AUTHORED_TEXT_AMOUNT",
+      "reliability": "DIRECT_STRUCTURE",
+      "decision": "ACCEPT",
+      "scope": "EXISTING_STRUCTURED_BASELINE",
+      "reason": "Preserve the exact source field/value; it does not establish an evaluated resource rule."
+    },
+    {
+      "id": "G22",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/978"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/978/recharge"
+      },
+      "relation": "HAS_AUTHORED_RECHARGE_CODE",
+      "reliability": "DIRECT_STRUCTURE",
+      "decision": "ACCEPT",
+      "scope": "EXISTING_STRUCTURED_BASELINE",
+      "reason": "Preserve the exact source field/value; it does not establish an evaluated resource rule."
+    },
+    {
+      "id": "G23",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/2168"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2168/recharge"
+      },
+      "relation": "HAS_AUTHORED_RECHARGE_CODE",
+      "reliability": "DIRECT_STRUCTURE",
+      "decision": "ACCEPT",
+      "scope": "EXISTING_STRUCTURED_BASELINE",
+      "reason": "Preserve the exact source field/value; it does not establish an evaluated resource rule."
+    },
+    {
+      "id": "G24",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/1823"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/1823/recharge"
+      },
+      "relation": "HAS_AUTHORED_RECHARGE_CODE",
+      "reliability": "DIRECT_STRUCTURE",
+      "decision": "ACCEPT",
+      "scope": "EXISTING_STRUCTURED_BASELINE",
+      "reason": "Preserve the exact source field/value; it does not establish an evaluated resource rule."
+    },
+    {
+      "id": "G25",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/145"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/145/recharge"
+      },
+      "relation": "HAS_AUTHORED_RECHARGE_CODE",
+      "reliability": "DIRECT_STRUCTURE",
+      "decision": "ACCEPT",
+      "scope": "EXISTING_STRUCTURED_BASELINE",
+      "reason": "Preserve the exact source field/value; it does not establish an evaluated resource rule."
+    },
+    {
+      "id": "G26",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/102/entries/0"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/102/entries/0",
+        "span": [
+          266,
+          281
+        ],
+        "token": "{@dice 1d4 + 1}"
+      },
+      "relation": "ENTRY_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "ENTRY_SYNTAX_CONTROL_OUTSIDE_INITIAL_SCOPE",
+      "reason": "Syntax membership is observable, irrespective of gameplay purpose."
+    },
+    {
+      "id": "G27",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/102/entries/0",
+        "span": [
+          266,
+          281
+        ],
+        "token": "{@dice 1d4 + 1}"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/102"
+      },
+      "relation": "FORMULA_IS_OWNER_RECHARGE",
+      "reliability": "PROSE_INFERENCE",
+      "decision": "ABSTAIN",
+      "scope": "SEMANTIC_ABSTENTION",
+      "reason": "Formula concerns another Item, not the battery own charge recovery."
+    },
+    {
+      "id": "G28",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/145/entries/1"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/145/entries/1",
+        "span": [
+          168,
+          178
+        ],
+        "token": "{@dice d8}"
+      },
+      "relation": "ENTRY_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "ENTRY_SYNTAX_CONTROL_OUTSIDE_INITIAL_SCOPE",
+      "reason": "Syntax membership is observable, irrespective of gameplay purpose."
+    },
+    {
+      "id": "G29",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/145/entries/1",
+        "span": [
+          168,
+          178
+        ],
+        "token": "{@dice d8}"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/145"
+      },
+      "relation": "FORMULA_IS_OWNER_RECHARGE",
+      "reliability": "PROSE_INFERENCE",
+      "decision": "ABSTAIN",
+      "scope": "SEMANTIC_ABSTENTION",
+      "reason": "Creature selection dice are not the bag recharge amount."
+    },
+    {
+      "id": "G30",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/2163/entries/2"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2163/entries/2",
+        "span": [
+          18,
+          33
+        ],
+        "token": "{@dice 1d8 + 2}"
+      },
+      "relation": "ENTRY_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "ENTRY_SYNTAX_CONTROL_OUTSIDE_INITIAL_SCOPE",
+      "reason": "Syntax membership is observable, irrespective of gameplay purpose."
+    },
+    {
+      "id": "G31",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/2163/entries/2",
+        "span": [
+          18,
+          33
+        ],
+        "token": "{@dice 1d8 + 2}"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2163"
+      },
+      "relation": "FORMULA_IS_OWNER_RECHARGE",
+      "reliability": "PROSE_INFERENCE",
+      "decision": "ABSTAIN",
+      "scope": "SEMANTIC_ABSTENTION",
+      "reason": "Recovery and last-charge destruction dice share one text leaf."
+    },
+    {
+      "id": "G32",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/2163/entries/2"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2163/entries/2",
+        "span": [
+          104,
+          115
+        ],
+        "token": "{@dice d20}"
+      },
+      "relation": "ENTRY_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "ENTRY_SYNTAX_CONTROL_OUTSIDE_INITIAL_SCOPE",
+      "reason": "Syntax membership is observable, irrespective of gameplay purpose."
+    },
+    {
+      "id": "G33",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/2163/entries/2",
+        "span": [
+          104,
+          115
+        ],
+        "token": "{@dice d20}"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2163"
+      },
+      "relation": "FORMULA_IS_OWNER_RECHARGE",
+      "reliability": "PROSE_INFERENCE",
+      "decision": "ABSTAIN",
+      "scope": "SEMANTIC_ABSTENTION",
+      "reason": "Recovery and last-charge destruction dice share one text leaf."
+    },
+    {
+      "id": "G34",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/2168/entries/1/entries/1"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2168/entries/1/entries/1",
+        "span": [
+          46,
+          57
+        ],
+        "token": "{@dice d20}"
+      },
+      "relation": "ENTRY_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "ENTRY_SYNTAX_CONTROL_OUTSIDE_INITIAL_SCOPE",
+      "reason": "Syntax membership is observable, irrespective of gameplay purpose."
+    },
+    {
+      "id": "G35",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/2168/entries/1/entries/1",
+        "span": [
+          46,
+          57
+        ],
+        "token": "{@dice d20}"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2168"
+      },
+      "relation": "FORMULA_IS_OWNER_RECHARGE",
+      "reliability": "PROSE_INFERENCE",
+      "decision": "ABSTAIN",
+      "scope": "SEMANTIC_ABSTENTION",
+      "reason": "Conditional last-charge roll and recovery require branch interpretation."
+    },
+    {
+      "id": "G36",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/2168/entries/1/entries/1"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2168/entries/1/entries/1",
+        "span": [
+          234,
+          245
+        ],
+        "token": "{@dice 1d6}"
+      },
+      "relation": "ENTRY_CONTAINS_FORMULA",
+      "reliability": "TAG_SYNTAX",
+      "decision": "ACCEPT",
+      "scope": "ENTRY_SYNTAX_CONTROL_OUTSIDE_INITIAL_SCOPE",
+      "reason": "Syntax membership is observable, irrespective of gameplay purpose."
+    },
+    {
+      "id": "G37",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/2168/entries/1/entries/1",
+        "span": [
+          234,
+          245
+        ],
+        "token": "{@dice 1d6}"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2168"
+      },
+      "relation": "FORMULA_IS_OWNER_RECHARGE",
+      "reliability": "PROSE_INFERENCE",
+      "decision": "ABSTAIN",
+      "scope": "SEMANTIC_ABSTENTION",
+      "reason": "Conditional last-charge roll and recovery require branch interpretation."
+    },
+    {
+      "id": "G38",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/410"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2408/rechargeAmount",
+        "span": [
+          0,
+          15
+        ],
+        "token": "{@dice 1d6 + 1}"
+      },
+      "relation": "INHERITS_SOURCE_FIELD_FORMULA",
+      "reliability": "DIRECT_STRUCTURE",
+      "decision": "ACCEPT",
+      "scope": "OPTIONAL_EFFECTIVE_PROVENANCE_REVIEW",
+      "reason": "The verified scalar copy chain preserves the parent origin, not a fabricated child pointer."
+    },
+    {
+      "id": "G39",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/589/attachedSpells/charges"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/589/attachedSpells/charges/0"
+      },
+      "relation": "HAS_LITERAL_SCHEDULE_BUCKET",
+      "reliability": "DIRECT_STRUCTURE",
+      "decision": "ACCEPT",
+      "scope": "EXISTING_STRUCTURED_BASELINE",
+      "reason": "Preserve the literal zero key; no expenditure or selected spell is inferred."
+    },
+    {
+      "id": "G40",
+      "subject": {
+        "resource": "data/items.json",
+        "pointer": "/item/410"
+      },
+      "object": {
+        "resource": "data/items.json",
+        "pointer": "/item/2408/rechargeAmount",
+        "span": [
+          0,
+          15
+        ],
+        "token": "{@dice 1d6 + 1}"
+      },
+      "relation": "FORMULA_IS_AUTHORED_LOCALLY",
+      "reliability": "UNSUPPORTED",
+      "decision": "REJECT",
+      "scope": "ORIGIN_NEGATIVE",
+      "reason": "The valid formula endpoint belongs to the parent, not this child; never manufacture a child-local span."
+    }
+  ]
+}

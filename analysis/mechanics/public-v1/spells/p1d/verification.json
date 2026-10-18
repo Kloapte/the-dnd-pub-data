@@ -1,0 +1,53 @@
+{
+  "dataset": "5eTools v2.37.0",
+  "sourceFilesUnchanged": 175,
+  "candidateManifestSha256": "a52c938bae6c2b86f5c2941b3c4784dd05d31f809a5694b1c0213ddcc698f950",
+  "candidateCount": 250,
+  "candidateOwners": 195,
+  "pendingCandidates": 250,
+  "excludedCandidates": 458,
+  "originalCandidatesReconciled": 708,
+  "productionDecisions": 0,
+  "authorizedObservations": 0,
+  "publicStatuses": {
+    "NONE_OBSERVED": 547,
+    "WITHHELD": 422
+  },
+  "spellIdentities": 969,
+  "formulaObservations": 930,
+  "resolver": {
+    "RESOLVED": 2517,
+    "AMBIGUOUS": 2054,
+    "UNRESOLVED": 181,
+    "DEFERRED": 1494
+  },
+  "priorReviewInputFingerprints": "UNCHANGED",
+  "deterministicRuntimeExport": "PASS",
+  "maven": {
+    "tests": 561,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "newP1dTests": 22,
+    "suites": 67
+  },
+  "packaged": {
+    "packagedStartup": "PASS",
+    "internalStartupValidation": "PASS",
+    "candidates": 250,
+    "pendingCandidates": 250,
+    "productionDecisionArtifacts": 0,
+    "authorizedObservations": 0,
+    "spellSummaries": 969,
+    "fireballStatus": "WITHHELD",
+    "shieldStatus": "NONE_OBSERVED",
+    "formulaPayloadPublished": false,
+    "testFixturesPackaged": false
+  },
+  "runtimeResourceFingerprints": {
+    "policy.json": "66ecdbbcd5591d94fb6d90c602b4e78e2318042357fb326f7ae92d7d5c099891",
+    "candidates.json": "4a8d59bdff5bb342313f0d87f38c460651b0764f1e653e3eb4a0beeb98756853",
+    "evidence.json": "43d44b2acdfd1e3737abd89a3b2fb4d1ce039ec68d874669ae40162bf4e22b84",
+    "notices.json": "56fc317ee5342e2b519b44bd6e39ab0ce5291df77ab95d64c7929fdf621db066"
+  }
+}

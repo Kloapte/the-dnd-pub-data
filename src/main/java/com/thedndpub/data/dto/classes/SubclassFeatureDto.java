@@ -9,13 +9,23 @@ import java.util.List;
 public record SubclassFeatureDto(String id, String name, SourceReference source, String parentClassId,
         String parentSubclassId, int level, Integer order, Boolean variant,
         ClassFeatureMechanicsDto mechanics, ClassSourceMetadataDto sources,
-        List<PublicCrossCatalogReferenceDto> crossCatalogReferences) {
+        List<PublicCrossCatalogReferenceDto> crossCatalogReferences,
+        ClassChoiceProjectionStatus choiceProjectionStatus) {
     public SubclassFeatureDto {
         crossCatalogReferences = crossCatalogReferences == null ? List.of() : List.copyOf(crossCatalogReferences);
     }
 
+    /** Retains the previous Java constructor; callers without content cannot establish a status. */
+    public SubclassFeatureDto(String id, String name, SourceReference source, String parentClassId,
+            String parentSubclassId, int level, Integer order, Boolean variant,
+            ClassFeatureMechanicsDto mechanics, ClassSourceMetadataDto sources,
+            List<PublicCrossCatalogReferenceDto> crossCatalogReferences) {
+        this(id, name, source, parentClassId, parentSubclassId, level, order, variant, mechanics, sources,
+                crossCatalogReferences, null);
+    }
+
     public SubclassFeatureDto withCrossCatalogReferences(List<PublicCrossCatalogReferenceDto> references) {
         return new SubclassFeatureDto(id, name, source, parentClassId, parentSubclassId, level, order, variant,
-                mechanics, sources, references);
+                mechanics, sources, references, choiceProjectionStatus);
     }
 }

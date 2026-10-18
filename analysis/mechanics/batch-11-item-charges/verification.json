@@ -1,0 +1,10 @@
+{
+  "protectedExistingFilesUnchanged": 2124,
+  "pinnedSourceHashesUnchanged": 175,
+  "sourceSpanChecks": 2090,
+  "allParsedItemTagSpansCheckedInJava": 7926,
+  "mavenRun": false,
+  "reportedTestBaseline": 518,
+  "reportedResolverBaseline": 6246,
+  "note": "No production, test, prior analysis or resolver bytes changed; runtime outcome suite not rerun"
+}

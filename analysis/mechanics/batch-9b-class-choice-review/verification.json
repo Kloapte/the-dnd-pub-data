@@ -1,0 +1,26 @@
+{
+  "unchangedSourceJsonFiles": 175,
+  "protectedTreesUnchanged": {
+    "src": {
+      "fileCount": 1748,
+      "sha256": "10604a96485b9b6e27948c206efb96d4edacb9a9c90d38b79e89a7e8aa43bf68"
+    },
+    "analysis/mechanics/batch-9-class-completeness": {
+      "fileCount": 3,
+      "sha256": "eb500c8c12476a08eeaedf95cfc37cc77fe753c3362e166807230fea8d5ed861"
+    },
+    "analysis/mechanics/batch-9a-class-choice-completeness": {
+      "fileCount": 8,
+      "sha256": "44a81247ec78bf000eea285bdfc38979735cc3f6f10cd9d9250528a02e659211"
+    },
+    "analysis/mechanics/entry-assessment": {
+      "fileCount": 23,
+      "sha256": "aefa01e4842c5d69fe9396c9288bee59badfc9eb9860d4917e9f90f7e7f92808"
+    },
+    "analysis/mechanics/IMPLEMENTATION-ORDER.md": {
+      "fileCount": 1,
+      "sha256": "be8e5e03c1debec7679cc2dbad906a35690e160ffb2d71a0d69e75bc990ac576"
+    }
+  },
+  "productionTestResolverAndPriorAuditChanges": 0
+}

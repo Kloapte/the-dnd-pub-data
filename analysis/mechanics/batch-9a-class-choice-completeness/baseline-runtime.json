@@ -1,0 +1,12 @@
+{
+  "choiceProjectionStatuses" : {
+    "NOT_PRESENT" : 2176
+  },
+  "classDomainDefinitions" : 2536,
+  "classDomainIdentitiesSha256" : "8c4924d8280df9e8eec0f35fa9d8d6d4f58f6a59d97862ba3cf70b97e99509ee",
+  "classResourceUrl" : "jar:file:///C:/Users/Erik/workspaces/git/the-dnd-pub-data/target/dnd-pub-data-0.0.1-SNAPSHOT.jar!/BOOT-INF/classes/data/classes/class-wizard.json",
+  "legacyPublicClassDomainSha256" : "e0a23d5e00be6e7596698f6580557461e497ddb48b403a3bc95aff0f7bccb0df",
+  "normalizedClassDomainSha256" : "fec61e02109b8d8dc53e42be0c13e12ebdf1fc5126745bcdab5c969bdc1df2e0",
+  "resolverOccurrences" : 6246,
+  "resolverSha256" : "bdd0c7e036b87b211456b43a463a6781a0a7754aab638b0fbc6f5050a1f48036"
+}

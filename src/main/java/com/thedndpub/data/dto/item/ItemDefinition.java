@@ -69,7 +69,8 @@ public record ItemDefinition(
         Boolean cursed,
         Boolean tattoo,
         Boolean atomicPackContents,
-        ItemSignedBonuses signedBonuses) {
+        ItemSignedBonuses signedBonuses,
+        ItemRechargeDeclaration standaloneRecharge) {
     public ItemDefinition {
         typeCodes = List.copyOf(typeCodes);
         types = List.copyOf(types);

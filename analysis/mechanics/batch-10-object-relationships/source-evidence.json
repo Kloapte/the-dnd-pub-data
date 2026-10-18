@@ -1,0 +1,858 @@
+{
+  "corpus": "Repository-pinned 5eTools v2.37.0",
+  "resource": "src/main/resources/data/objects.json",
+  "resourceSha256": "6f809882bd02807a32012e3d1a9cf14ae65b1816ed8a956f64a7c32ccd79afc8",
+  "offsetUnit": "UTF-16 code units in decoded string; [startInclusive, endExclusive)",
+  "rawObjectRoots": 37,
+  "sourceFilesStructurallyScanned": 175,
+  "allCorpusAttackLocations": [
+    {
+      "file": "src/main/resources/data/objects.json",
+      "pointer": "/object/0/actionEntries/0/entries/0"
+    },
+    {
+      "file": "src/main/resources/data/objects.json",
+      "pointer": "/object/2/actionEntries/0/entries/0"
+    },
+    {
+      "file": "src/main/resources/data/objects.json",
+      "pointer": "/object/5/actionEntries/0/entries/0"
+    },
+    {
+      "file": "src/main/resources/data/objects.json",
+      "pointer": "/object/7/actionEntries/0/entries/0"
+    },
+    {
+      "file": "src/main/resources/data/objects.json",
+      "pointer": "/object/23/actionEntries/0/entries/0"
+    },
+    {
+      "file": "src/main/resources/data/objects.json",
+      "pointer": "/object/25/actionEntries/0/entries/0"
+    },
+    {
+      "file": "src/main/resources/data/objects.json",
+      "pointer": "/object/34/actionEntries/0/entries/0"
+    }
+  ],
+  "effectiveObjects": 37,
+  "copiesVersionsTemplates": 0,
+  "typedAttackContainers": 7,
+  "typedAttackOwners": 7,
+  "attackContainersWithMultipleFormulas": 0,
+  "attackContainersWithNestedEntryObjects": 0,
+  "attackContainersWithNestedTags": 0,
+  "contentTypeCountsAcrossAllObjectRoots": {
+    "actions": 7,
+    "attack": 7,
+    "entries": 34,
+    "list": 2,
+    "item": 3,
+    "table": 2
+  },
+  "allObjectTagCount": 147,
+  "typedAttackTagCount": 14,
+  "inventory": [
+    {
+      "key": "A1",
+      "id": "object:WDMM:animated-ghaunadaur-statue",
+      "name": "Animated Ghaunadaur Statue",
+      "source": "WDMM",
+      "page": 250,
+      "srd": null,
+      "ownerPointer": "/object/0",
+      "pointer": "/object/0/actionEntries/0/entries/0",
+      "actionName": "Claw",
+      "parentType": "actions",
+      "attackType": "MW",
+      "attackEntryCount": 1,
+      "hitEntryCount": 1,
+      "tags": [
+        {
+          "ownerPointer": "/object/0",
+          "pointer": "/object/0/actionEntries/0/entries/0/attackEntries/0",
+          "hierarchy": [
+            {
+              "jsonPointer": "/object/0",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/0/actionEntries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/0/actionEntries/0",
+              "authoredType": "actions"
+            },
+            {
+              "jsonPointer": "/object/0/actionEntries/0/entries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/0/actionEntries/0/entries/0",
+              "authoredType": "attack"
+            },
+            {
+              "jsonPointer": "/object/0/actionEntries/0/entries/0/attackEntries",
+              "authoredType": null
+            }
+          ],
+          "origin": "AUTHORED",
+          "textSha256": "206bd442f74e8f916f039305e9ffb3f3cab73bc9d74012a75bc6e135337a9799",
+          "textUtf16Length": 43,
+          "startInclusive": 0,
+          "endExclusive": 10,
+          "originalText": "{@hit +10}",
+          "name": "hit",
+          "rawArgumentText": " +10",
+          "arguments": [
+            "+10"
+          ],
+          "observationType": "ModifierSyntaxObservation",
+          "childTagCount": 0,
+          "expression": {
+            "authoredToken": "+10",
+            "kind": "SIGNED_INTEGER"
+          }
+        },
+        {
+          "ownerPointer": "/object/0",
+          "pointer": "/object/0/actionEntries/0/entries/0/hitEntries/0",
+          "hierarchy": [
+            {
+              "jsonPointer": "/object/0",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/0/actionEntries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/0/actionEntries/0",
+              "authoredType": "actions"
+            },
+            {
+              "jsonPointer": "/object/0/actionEntries/0/entries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/0/actionEntries/0/entries/0",
+              "authoredType": "attack"
+            },
+            {
+              "jsonPointer": "/object/0/actionEntries/0/entries/0/hitEntries",
+              "authoredType": null
+            }
+          ],
+          "origin": "AUTHORED",
+          "textSha256": "44dee2c763a870503075b49b80eef1cfc6493690274b301ec611e3243b99b1bc",
+          "textUtf16Length": 39,
+          "startInclusive": 4,
+          "endExclusive": 21,
+          "originalText": "{@damage 2d6 + 5}",
+          "name": "damage",
+          "rawArgumentText": " 2d6 + 5",
+          "arguments": [
+            "2d6 + 5"
+          ],
+          "observationType": "FormulaSyntaxObservation",
+          "childTagCount": 0,
+          "expression": {
+            "authoredToken": "2d6 + 5",
+            "kind": "DICE_NOTATION"
+          }
+        }
+      ],
+      "internalPreservation": "EXACT_TYPED_ACTION_EQUALITY",
+      "publicRepresentation": "ACTIONS_INTENTIONALLY_OMITTED"
+    },
+    {
+      "key": "A2",
+      "id": "object:DMG:ballista",
+      "name": "Ballista",
+      "source": "DMG",
+      "page": 255,
+      "srd": null,
+      "ownerPointer": "/object/2",
+      "pointer": "/object/2/actionEntries/0/entries/0",
+      "actionName": "Bolt",
+      "parentType": "actions",
+      "attackType": "RW",
+      "attackEntryCount": 1,
+      "hitEntryCount": 1,
+      "tags": [
+        {
+          "ownerPointer": "/object/2",
+          "pointer": "/object/2/actionEntries/0/entries/0/attackEntries/0",
+          "hierarchy": [
+            {
+              "jsonPointer": "/object/2",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/2/actionEntries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/2/actionEntries/0",
+              "authoredType": "actions"
+            },
+            {
+              "jsonPointer": "/object/2/actionEntries/0/entries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/2/actionEntries/0/entries/0",
+              "authoredType": "attack"
+            },
+            {
+              "jsonPointer": "/object/2/actionEntries/0/entries/0/attackEntries",
+              "authoredType": null
+            }
+          ],
+          "origin": "AUTHORED",
+          "textSha256": "f9f70c64ddf584c80c290e12fc0aee38678d6b52480fcb8334cbdbcee0fa2f91",
+          "textUtf16Length": 48,
+          "startInclusive": 0,
+          "endExclusive": 9,
+          "originalText": "{@hit +6}",
+          "name": "hit",
+          "rawArgumentText": " +6",
+          "arguments": [
+            "+6"
+          ],
+          "observationType": "ModifierSyntaxObservation",
+          "childTagCount": 0,
+          "expression": {
+            "authoredToken": "+6",
+            "kind": "SIGNED_INTEGER"
+          }
+        },
+        {
+          "ownerPointer": "/object/2",
+          "pointer": "/object/2/actionEntries/0/entries/0/hitEntries/0",
+          "hierarchy": [
+            {
+              "jsonPointer": "/object/2",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/2/actionEntries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/2/actionEntries/0",
+              "authoredType": "actions"
+            },
+            {
+              "jsonPointer": "/object/2/actionEntries/0/entries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/2/actionEntries/0/entries/0",
+              "authoredType": "attack"
+            },
+            {
+              "jsonPointer": "/object/2/actionEntries/0/entries/0/hitEntries",
+              "authoredType": null
+            }
+          ],
+          "origin": "AUTHORED",
+          "textSha256": "d1a103b47f63947b0817b0fe02a6811405bf6edac21d2916c0f0e578bc98a61f",
+          "textUtf16Length": 36,
+          "startInclusive": 4,
+          "endExclusive": 18,
+          "originalText": "{@damage 3d10}",
+          "name": "damage",
+          "rawArgumentText": " 3d10",
+          "arguments": [
+            "3d10"
+          ],
+          "observationType": "FormulaSyntaxObservation",
+          "childTagCount": 0,
+          "expression": {
+            "authoredToken": "3d10",
+            "kind": "DICE_NOTATION"
+          }
+        }
+      ],
+      "internalPreservation": "EXACT_TYPED_ACTION_EQUALITY",
+      "publicRepresentation": "ACTIONS_INTENTIONALLY_OMITTED"
+    },
+    {
+      "key": "A3",
+      "id": "object:DMG:cannon",
+      "name": "Cannon",
+      "source": "DMG",
+      "page": 255,
+      "srd": null,
+      "ownerPointer": "/object/5",
+      "pointer": "/object/5/actionEntries/0/entries/0",
+      "actionName": "Cannon Ball",
+      "parentType": "actions",
+      "attackType": "RW",
+      "attackEntryCount": 1,
+      "hitEntryCount": 1,
+      "tags": [
+        {
+          "ownerPointer": "/object/5",
+          "pointer": "/object/5/actionEntries/0/entries/0/attackEntries/0",
+          "hierarchy": [
+            {
+              "jsonPointer": "/object/5",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/5/actionEntries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/5/actionEntries/0",
+              "authoredType": "actions"
+            },
+            {
+              "jsonPointer": "/object/5/actionEntries/0/entries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/5/actionEntries/0/entries/0",
+              "authoredType": "attack"
+            },
+            {
+              "jsonPointer": "/object/5/actionEntries/0/entries/0/attackEntries",
+              "authoredType": null
+            }
+          ],
+          "origin": "AUTHORED",
+          "textSha256": "fc45f82a521828a01799bef0827fdfb60b742e8a8a7060a90f98c72a4422aac7",
+          "textUtf16Length": 50,
+          "startInclusive": 0,
+          "endExclusive": 9,
+          "originalText": "{@hit +6}",
+          "name": "hit",
+          "rawArgumentText": " +6",
+          "arguments": [
+            "+6"
+          ],
+          "observationType": "ModifierSyntaxObservation",
+          "childTagCount": 0,
+          "expression": {
+            "authoredToken": "+6",
+            "kind": "SIGNED_INTEGER"
+          }
+        },
+        {
+          "ownerPointer": "/object/5",
+          "pointer": "/object/5/actionEntries/0/entries/0/hitEntries/0",
+          "hierarchy": [
+            {
+              "jsonPointer": "/object/5",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/5/actionEntries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/5/actionEntries/0",
+              "authoredType": "actions"
+            },
+            {
+              "jsonPointer": "/object/5/actionEntries/0/entries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/5/actionEntries/0/entries/0",
+              "authoredType": "attack"
+            },
+            {
+              "jsonPointer": "/object/5/actionEntries/0/entries/0/hitEntries",
+              "authoredType": null
+            }
+          ],
+          "origin": "AUTHORED",
+          "textSha256": "eaeb4b6f1a9acd6446829d9ec77d0eea9f597ee004488ac3cbb2655690b1a78d",
+          "textUtf16Length": 39,
+          "startInclusive": 4,
+          "endExclusive": 18,
+          "originalText": "{@damage 8d10}",
+          "name": "damage",
+          "rawArgumentText": " 8d10",
+          "arguments": [
+            "8d10"
+          ],
+          "observationType": "FormulaSyntaxObservation",
+          "childTagCount": 0,
+          "expression": {
+            "authoredToken": "8d10",
+            "kind": "DICE_NOTATION"
+          }
+        }
+      ],
+      "internalPreservation": "EXACT_TYPED_ACTION_EQUALITY",
+      "publicRepresentation": "ACTIONS_INTENTIONALLY_OMITTED"
+    },
+    {
+      "key": "A4",
+      "id": "object:RMBRE:captain-a-hole",
+      "name": "Captain A-Hole",
+      "source": "RMBRE",
+      "page": 21,
+      "srd": null,
+      "ownerPointer": "/object/7",
+      "pointer": "/object/7/actionEntries/0/entries/0",
+      "actionName": "Cannon",
+      "parentType": "actions",
+      "attackType": "RW",
+      "attackEntryCount": 1,
+      "hitEntryCount": 1,
+      "tags": [
+        {
+          "ownerPointer": "/object/7",
+          "pointer": "/object/7/actionEntries/0/entries/0/attackEntries/0",
+          "hierarchy": [
+            {
+              "jsonPointer": "/object/7",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/7/actionEntries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/7/actionEntries/0",
+              "authoredType": "actions"
+            },
+            {
+              "jsonPointer": "/object/7/actionEntries/0/entries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/7/actionEntries/0/entries/0",
+              "authoredType": "attack"
+            },
+            {
+              "jsonPointer": "/object/7/actionEntries/0/entries/0/attackEntries",
+              "authoredType": null
+            }
+          ],
+          "origin": "AUTHORED",
+          "textSha256": "55d6673cc71af06b223c5a3bfd08afea13d919ea278165f78aad208128a9b838",
+          "textUtf16Length": 43,
+          "startInclusive": 0,
+          "endExclusive": 9,
+          "originalText": "{@hit +5}",
+          "name": "hit",
+          "rawArgumentText": " +5",
+          "arguments": [
+            "+5"
+          ],
+          "observationType": "ModifierSyntaxObservation",
+          "childTagCount": 0,
+          "expression": {
+            "authoredToken": "+5",
+            "kind": "SIGNED_INTEGER"
+          }
+        },
+        {
+          "ownerPointer": "/object/7",
+          "pointer": "/object/7/actionEntries/0/entries/0/hitEntries/0",
+          "hierarchy": [
+            {
+              "jsonPointer": "/object/7",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/7/actionEntries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/7/actionEntries/0",
+              "authoredType": "actions"
+            },
+            {
+              "jsonPointer": "/object/7/actionEntries/0/entries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/7/actionEntries/0/entries/0",
+              "authoredType": "attack"
+            },
+            {
+              "jsonPointer": "/object/7/actionEntries/0/entries/0/hitEntries",
+              "authoredType": null
+            }
+          ],
+          "origin": "AUTHORED",
+          "textSha256": "16b59c7760b42f3197359e5fd6306794294ea9f01d1272724a6c741e4de4a6c9",
+          "textUtf16Length": 37,
+          "startInclusive": 3,
+          "endExclusive": 16,
+          "originalText": "{@damage 1d6}",
+          "name": "damage",
+          "rawArgumentText": " 1d6",
+          "arguments": [
+            "1d6"
+          ],
+          "observationType": "FormulaSyntaxObservation",
+          "childTagCount": 0,
+          "expression": {
+            "authoredToken": "1d6",
+            "kind": "DICE_NOTATION"
+          }
+        }
+      ],
+      "internalPreservation": "EXACT_TYPED_ACTION_EQUALITY",
+      "publicRepresentation": "ACTIONS_INTENTIONALLY_OMITTED"
+    },
+    {
+      "key": "A5",
+      "id": "object:DMG:mangonel",
+      "name": "Mangonel",
+      "source": "DMG",
+      "page": 255,
+      "srd": null,
+      "ownerPointer": "/object/23",
+      "pointer": "/object/23/actionEntries/0/entries/0",
+      "actionName": "Mangonel Stone",
+      "parentType": "actions",
+      "attackType": "RW",
+      "attackEntryCount": 1,
+      "hitEntryCount": 1,
+      "tags": [
+        {
+          "ownerPointer": "/object/23",
+          "pointer": "/object/23/actionEntries/0/entries/0/attackEntries/0",
+          "hierarchy": [
+            {
+              "jsonPointer": "/object/23",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/23/actionEntries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/23/actionEntries/0",
+              "authoredType": "actions"
+            },
+            {
+              "jsonPointer": "/object/23/actionEntries/0/entries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/23/actionEntries/0/entries/0",
+              "authoredType": "attack"
+            },
+            {
+              "jsonPointer": "/object/23/actionEntries/0/entries/0/attackEntries",
+              "authoredType": null
+            }
+          ],
+          "origin": "AUTHORED",
+          "textSha256": "ab5ba3465f61f698d194f8b879f78fc0eb1d601db43c7550e3e6a646d149a401",
+          "textUtf16Length": 89,
+          "startInclusive": 0,
+          "endExclusive": 9,
+          "originalText": "{@hit +5}",
+          "name": "hit",
+          "rawArgumentText": " +5",
+          "arguments": [
+            "+5"
+          ],
+          "observationType": "ModifierSyntaxObservation",
+          "childTagCount": 0,
+          "expression": {
+            "authoredToken": "+5",
+            "kind": "SIGNED_INTEGER"
+          }
+        },
+        {
+          "ownerPointer": "/object/23",
+          "pointer": "/object/23/actionEntries/0/entries/0/hitEntries/0",
+          "hierarchy": [
+            {
+              "jsonPointer": "/object/23",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/23/actionEntries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/23/actionEntries/0",
+              "authoredType": "actions"
+            },
+            {
+              "jsonPointer": "/object/23/actionEntries/0/entries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/23/actionEntries/0/entries/0",
+              "authoredType": "attack"
+            },
+            {
+              "jsonPointer": "/object/23/actionEntries/0/entries/0/hitEntries",
+              "authoredType": null
+            }
+          ],
+          "origin": "AUTHORED",
+          "textSha256": "bdb0c621c856a3b0c9df4a720edc0d9faab114f563f76f448ba1c218666c7473",
+          "textUtf16Length": 39,
+          "startInclusive": 4,
+          "endExclusive": 18,
+          "originalText": "{@damage 5d10}",
+          "name": "damage",
+          "rawArgumentText": " 5d10",
+          "arguments": [
+            "5d10"
+          ],
+          "observationType": "FormulaSyntaxObservation",
+          "childTagCount": 0,
+          "expression": {
+            "authoredToken": "5d10",
+            "kind": "DICE_NOTATION"
+          }
+        }
+      ],
+      "internalPreservation": "EXACT_TYPED_ACTION_EQUALITY",
+      "publicRepresentation": "ACTIONS_INTENTIONALLY_OMITTED"
+    },
+    {
+      "key": "A6",
+      "id": "object:DMG:ram",
+      "name": "Ram",
+      "source": "DMG",
+      "page": 255,
+      "srd": null,
+      "ownerPointer": "/object/25",
+      "pointer": "/object/25/actionEntries/0/entries/0",
+      "actionName": "Ram",
+      "parentType": "actions",
+      "attackType": "MW",
+      "attackEntryCount": 1,
+      "hitEntryCount": 1,
+      "tags": [
+        {
+          "ownerPointer": "/object/25",
+          "pointer": "/object/25/actionEntries/0/entries/0/attackEntries/0",
+          "hierarchy": [
+            {
+              "jsonPointer": "/object/25",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/25/actionEntries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/25/actionEntries/0",
+              "authoredType": "actions"
+            },
+            {
+              "jsonPointer": "/object/25/actionEntries/0/entries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/25/actionEntries/0/entries/0",
+              "authoredType": "attack"
+            },
+            {
+              "jsonPointer": "/object/25/actionEntries/0/entries/0/attackEntries",
+              "authoredType": null
+            }
+          ],
+          "origin": "AUTHORED",
+          "textSha256": "f63198dbeef8ec711cbbe97fabc4535083f500cca398241856b7953cba809272",
+          "textUtf16Length": 42,
+          "startInclusive": 0,
+          "endExclusive": 9,
+          "originalText": "{@hit +8}",
+          "name": "hit",
+          "rawArgumentText": " +8",
+          "arguments": [
+            "+8"
+          ],
+          "observationType": "ModifierSyntaxObservation",
+          "childTagCount": 0,
+          "expression": {
+            "authoredToken": "+8",
+            "kind": "SIGNED_INTEGER"
+          }
+        },
+        {
+          "ownerPointer": "/object/25",
+          "pointer": "/object/25/actionEntries/0/entries/0/hitEntries/0",
+          "hierarchy": [
+            {
+              "jsonPointer": "/object/25",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/25/actionEntries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/25/actionEntries/0",
+              "authoredType": "actions"
+            },
+            {
+              "jsonPointer": "/object/25/actionEntries/0/entries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/25/actionEntries/0/entries/0",
+              "authoredType": "attack"
+            },
+            {
+              "jsonPointer": "/object/25/actionEntries/0/entries/0/hitEntries",
+              "authoredType": null
+            }
+          ],
+          "origin": "AUTHORED",
+          "textSha256": "c77b4d7b66430e02fcd66b173b4dbb2009951a45138508278a7efcf1a10891a8",
+          "textUtf16Length": 39,
+          "startInclusive": 4,
+          "endExclusive": 18,
+          "originalText": "{@damage 3d10}",
+          "name": "damage",
+          "rawArgumentText": " 3d10",
+          "arguments": [
+            "3d10"
+          ],
+          "observationType": "FormulaSyntaxObservation",
+          "childTagCount": 0,
+          "expression": {
+            "authoredToken": "3d10",
+            "kind": "DICE_NOTATION"
+          }
+        }
+      ],
+      "internalPreservation": "EXACT_TYPED_ACTION_EQUALITY",
+      "publicRepresentation": "ACTIONS_INTENTIONALLY_OMITTED"
+    },
+    {
+      "key": "A7",
+      "id": "object:DMG:trebuchet",
+      "name": "Trebuchet",
+      "source": "DMG",
+      "page": 256,
+      "srd": null,
+      "ownerPointer": "/object/34",
+      "pointer": "/object/34/actionEntries/0/entries/0",
+      "actionName": "Trebuchet Stone",
+      "parentType": "actions",
+      "attackType": "RW",
+      "attackEntryCount": 1,
+      "hitEntryCount": 1,
+      "tags": [
+        {
+          "ownerPointer": "/object/34",
+          "pointer": "/object/34/actionEntries/0/entries/0/attackEntries/0",
+          "hierarchy": [
+            {
+              "jsonPointer": "/object/34",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/34/actionEntries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/34/actionEntries/0",
+              "authoredType": "actions"
+            },
+            {
+              "jsonPointer": "/object/34/actionEntries/0/entries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/34/actionEntries/0/entries/0",
+              "authoredType": "attack"
+            },
+            {
+              "jsonPointer": "/object/34/actionEntries/0/entries/0/attackEntries",
+              "authoredType": null
+            }
+          ],
+          "origin": "AUTHORED",
+          "textSha256": "c1d8a138e761b8dd038340745b37269d7dc57e7e728c8505a3cf1efc68c04a75",
+          "textUtf16Length": 91,
+          "startInclusive": 0,
+          "endExclusive": 9,
+          "originalText": "{@hit +5}",
+          "name": "hit",
+          "rawArgumentText": " +5",
+          "arguments": [
+            "+5"
+          ],
+          "observationType": "ModifierSyntaxObservation",
+          "childTagCount": 0,
+          "expression": {
+            "authoredToken": "+5",
+            "kind": "SIGNED_INTEGER"
+          }
+        },
+        {
+          "ownerPointer": "/object/34",
+          "pointer": "/object/34/actionEntries/0/entries/0/hitEntries/0",
+          "hierarchy": [
+            {
+              "jsonPointer": "/object/34",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/34/actionEntries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/34/actionEntries/0",
+              "authoredType": "actions"
+            },
+            {
+              "jsonPointer": "/object/34/actionEntries/0/entries",
+              "authoredType": null
+            },
+            {
+              "jsonPointer": "/object/34/actionEntries/0/entries/0",
+              "authoredType": "attack"
+            },
+            {
+              "jsonPointer": "/object/34/actionEntries/0/entries/0/hitEntries",
+              "authoredType": null
+            }
+          ],
+          "origin": "AUTHORED",
+          "textSha256": "eaeb4b6f1a9acd6446829d9ec77d0eea9f597ee004488ac3cbb2655690b1a78d",
+          "textUtf16Length": 39,
+          "startInclusive": 4,
+          "endExclusive": 18,
+          "originalText": "{@damage 8d10}",
+          "name": "damage",
+          "rawArgumentText": " 8d10",
+          "arguments": [
+            "8d10"
+          ],
+          "observationType": "FormulaSyntaxObservation",
+          "childTagCount": 0,
+          "expression": {
+            "authoredToken": "8d10",
+            "kind": "DICE_NOTATION"
+          }
+        }
+      ],
+      "internalPreservation": "EXACT_TYPED_ACTION_EQUALITY",
+      "publicRepresentation": "ACTIONS_INTENTIONALLY_OMITTED"
+    }
+  ],
+  "goldLabelCount": 80,
+  "goldLabelCounts": {
+    "DIRECT_STRUCTURE:ACCEPT": 21,
+    "TAG_SYNTAX:ACCEPT": 17,
+    "LOCAL_CONTEXT:ABSTAIN": 8,
+    "PROSE_INFERENCE:ABSTAIN": 17,
+    "UNSUPPORTED:ABSTAIN": 8,
+    "DIRECT_STRUCTURE:REJECT": 9
+  },
+  "scope": "Exact structural attack inventory; semantic labels are a review proposal, not extractor output"
+}

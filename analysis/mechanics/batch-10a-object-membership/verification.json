@@ -1,0 +1,30 @@
+{
+  "sourceHashesUnchanged": 175,
+  "preExistingFilesUnchanged": 2105,
+  "existingFileException": "Approved implementation-order update only; existing production/tests unchanged",
+  "fullMavenTests": 518,
+  "addedTests": 14,
+  "gold": {
+    "labels": 80,
+    "eligibleTruePositives": 35,
+    "eligibleFalsePositives": 0,
+    "eligibleFalseNegatives": 0,
+    "structuralTrueNegatives": 9,
+    "abstentions": 33,
+    "excludedPositiveControls": 3,
+    "eligiblePrecision": 1,
+    "eligibleRecall": 1
+  },
+  "packagedClasspathEqual": true,
+  "objectDefinitionsAndPublicJsonEqualToBaseline": true,
+  "resolverFullFingerprintUnchanged": true,
+  "resolverOccurrences": 6246,
+  "resolverOutcomes": {
+    "AMBIGUOUS": 2054,
+    "DEFERRED": 1494,
+    "RESOLVED": 2517,
+    "UNRESOLVED": 181
+  },
+  "memberships": 63,
+  "membershipSha256": "42eaee2693ba4a8f6d7cbe3a2d288ac7dfe249c97ef488676d9b842c9721d2a0"
+}

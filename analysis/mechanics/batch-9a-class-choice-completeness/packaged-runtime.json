@@ -1,0 +1,216 @@
+{
+  "choiceProjectionStatuses" : {
+    "COMPLETE" : 36,
+    "NONE" : 2136,
+    "PARTIAL" : 2,
+    "WITHHELD" : 2
+  },
+  "choiceReconciliation" : [ {
+    "sourceLocator" : "data/classes/class-fighter.json#/classFeature/0",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "class-feature:phb:phb:fighter:1:fighting-style",
+    "name" : "Fighting Style"
+  }, {
+    "sourceLocator" : "data/classes/class-paladin.json#/classFeature/3",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "class-feature:phb:phb:paladin:2:fighting-style",
+    "name" : "Fighting Style"
+  }, {
+    "sourceLocator" : "data/classes/class-ranger.json#/classFeature/4",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "class-feature:phb:phb:ranger:2:fighting-style",
+    "name" : "Fighting Style"
+  }, {
+    "sourceLocator" : "data/classes/class-sorcerer.json#/classFeature/5",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "class-feature:phb:phb:sorcerer:3:metamagic",
+    "name" : "Metamagic"
+  }, {
+    "sourceLocator" : "data/classes/class-warlock.json#/classFeature/3",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "class-feature:phb:phb:warlock:3:pact-boon",
+    "name" : "Pact Boon"
+  }, {
+    "sourceLocator" : "data/classes/class-sorcerer.json#/classFeature/6",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "class-feature:tce:phb:sorcerer:3:metamagic-options",
+    "name" : "Metamagic Options"
+  }, {
+    "sourceLocator" : "data/classes/class-cleric.json#/classFeature/24",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "class-feature:xphb:xphb:cleric:1:divine-order",
+    "name" : "Divine Order"
+  }, {
+    "sourceLocator" : "data/classes/class-cleric.json#/classFeature/35",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "class-feature:xphb:xphb:cleric:7:blessed-strikes",
+    "name" : "Blessed Strikes"
+  }, {
+    "sourceLocator" : "data/classes/class-druid.json#/classFeature/21",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "class-feature:xphb:xphb:druid:1:primal-order",
+    "name" : "Primal Order"
+  }, {
+    "sourceLocator" : "data/classes/class-druid.json#/classFeature/30",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "class-feature:xphb:xphb:druid:7:elemental-fury",
+    "name" : "Elemental Fury"
+  }, {
+    "sourceLocator" : "data/classes/class-sorcerer.json#/classFeature/24",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "class-feature:xphb:xphb:sorcerer:2:metamagic-options",
+    "name" : "Metamagic Options"
+  }, {
+    "sourceLocator" : "data/classes/class-warlock.json#/classFeature/18",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "class-feature:xphb:xphb:warlock:1:eldritch-invocation-options",
+    "name" : "Eldritch Invocation Options"
+  }, {
+    "sourceLocator" : "data/classes/class-fighter.json#/subclassFeature/92",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:au:xphb:fighter:au:arcane-archer:3:arcane-shot-options",
+    "name" : "Arcane Shot Options"
+  }, {
+    "sourceLocator" : "data/classes/class-barbarian.json#/subclassFeature/31",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:phb:phb:barbarian:phb:totem-warrior:14:totemic-attunement",
+    "name" : "Totemic Attunement"
+  }, {
+    "sourceLocator" : "data/classes/class-barbarian.json#/subclassFeature/18",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:phb:phb:barbarian:phb:totem-warrior:3:totem-spirit",
+    "name" : "Totem Spirit"
+  }, {
+    "sourceLocator" : "data/classes/class-barbarian.json#/subclassFeature/24",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:phb:phb:barbarian:phb:totem-warrior:6:aspect-of-the-beast",
+    "name" : "Aspect of the Beast"
+  }, {
+    "sourceLocator" : "data/classes/class-fighter.json#/subclassFeature/10",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:phb:phb:fighter:phb:battle-master:3:maneuvers",
+    "name" : "Maneuvers"
+  }, {
+    "sourceLocator" : "data/classes/class-monk.json#/subclassFeature/8",
+    "choiceProjectionStatus" : "PARTIAL",
+    "id" : "subclass-feature:phb:phb:monk:phb:four-elements:3:elemental-disciplines",
+    "name" : "Elemental Disciplines"
+  }, {
+    "sourceLocator" : "data/classes/class-ranger.json#/subclassFeature/21",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:phb:phb:ranger:phb:hunter:11:multiattack",
+    "name" : "Multiattack"
+  }, {
+    "sourceLocator" : "data/classes/class-ranger.json#/subclassFeature/26",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:phb:phb:ranger:phb:hunter:15:superior-hunter-s-defense",
+    "name" : "Superior Hunter's Defense"
+  }, {
+    "sourceLocator" : "data/classes/class-ranger.json#/subclassFeature/14",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:phb:phb:ranger:phb:hunter:3:hunter-s-prey",
+    "name" : "Hunter's Prey"
+  }, {
+    "sourceLocator" : "data/classes/class-ranger.json#/subclassFeature/17",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:phb:phb:ranger:phb:hunter:7:defensive-tactics",
+    "name" : "Defensive Tactics"
+  }, {
+    "sourceLocator" : "data/classes/class-wizard.json#/subclassFeature/27",
+    "choiceProjectionStatus" : "WITHHELD",
+    "id" : "subclass-feature:phb:phb:wizard:phb:divination:10:the-third-eye",
+    "name" : "The Third Eye"
+  }, {
+    "sourceLocator" : "data/classes/class-wizard.json#/subclassFeature/58",
+    "choiceProjectionStatus" : "WITHHELD",
+    "id" : "subclass-feature:phb:phb:wizard:phb:transmutation:14:master-transmuter",
+    "name" : "Master Transmuter"
+  }, {
+    "sourceLocator" : "data/classes/class-fighter.json#/subclassFeature/9",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:tce:phb:fighter:phb:battle-master:3:maneuver-options",
+    "name" : "Maneuver Options"
+  }, {
+    "sourceLocator" : "data/classes/class-fighter.json#/subclassFeature/45",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:tce:phb:fighter:tce:psi-warrior:3:psionic-power",
+    "name" : "Psionic Power"
+  }, {
+    "sourceLocator" : "data/classes/class-fighter.json#/subclassFeature/48",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:tce:phb:fighter:tce:psi-warrior:7:telekinetic-adept",
+    "name" : "Telekinetic Adept"
+  }, {
+    "sourceLocator" : "data/classes/class-fighter.json#/subclassFeature/55",
+    "choiceProjectionStatus" : "PARTIAL",
+    "id" : "subclass-feature:tce:phb:fighter:tce:rune-knight:3:rune-carver",
+    "name" : "Rune Carver"
+  }, {
+    "sourceLocator" : "data/classes/class-rogue.json#/subclassFeature/27",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:tce:phb:rogue:tce:soulknife:3:psionic-power",
+    "name" : "Psionic Power"
+  }, {
+    "sourceLocator" : "data/classes/class-rogue.json#/subclassFeature/31",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:tce:phb:rogue:tce:soulknife:9:soul-blades",
+    "name" : "Soul Blades"
+  }, {
+    "sourceLocator" : "data/classes/class-warlock.json#/subclassFeature/30",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:tce:phb:warlock:tce:genie:1:genie-s-vessel",
+    "name" : "Genie's Vessel"
+  }, {
+    "sourceLocator" : "data/classes/class-barbarian.json#/subclassFeature/67",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:xge:phb:barbarian:xge:storm-herald:14:raging-storm",
+    "name" : "Raging Storm"
+  }, {
+    "sourceLocator" : "data/classes/class-barbarian.json#/subclassFeature/58",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:xge:phb:barbarian:xge:storm-herald:3:storm-aura",
+    "name" : "Storm Aura"
+  }, {
+    "sourceLocator" : "data/classes/class-barbarian.json#/subclassFeature/62",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:xge:phb:barbarian:xge:storm-herald:6:storm-soul",
+    "name" : "Storm Soul"
+  }, {
+    "sourceLocator" : "data/classes/class-bard.json#/subclassFeature/36",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:xge:phb:bard:xge:swords:3:blade-flourish",
+    "name" : "Blade Flourish"
+  }, {
+    "sourceLocator" : "data/classes/class-bard.json#/subclassFeature/38",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:xge:phb:bard:xge:swords:3:fighting-style",
+    "name" : "Fighting Style"
+  }, {
+    "sourceLocator" : "data/classes/class-fighter.json#/subclassFeature/66",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:xge:phb:fighter:xge:arcane-archer:3:arcane-shot-options",
+    "name" : "Arcane Shot Options"
+  }, {
+    "sourceLocator" : "data/classes/class-monk.json#/subclassFeature/45",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:xge:phb:monk:xge:drunken-master:6:tipsy-sway",
+    "name" : "Tipsy Sway"
+  }, {
+    "sourceLocator" : "data/classes/class-monk.json#/subclassFeature/51",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:xge:phb:monk:xge:kensei:3:path-of-the-kensei",
+    "name" : "Path of the Kensei"
+  }, {
+    "sourceLocator" : "data/classes/class-fighter.json#/subclassFeature/107",
+    "choiceProjectionStatus" : "COMPLETE",
+    "id" : "subclass-feature:xphb:xphb:fighter:xphb:battle-master:3:maneuver-options",
+    "name" : "Maneuver Options"
+  } ],
+  "classDomainDefinitions" : 2536,
+  "classDomainIdentitiesSha256" : "8c4924d8280df9e8eec0f35fa9d8d6d4f58f6a59d97862ba3cf70b97e99509ee",
+  "classResourceUrl" : "jar:file:///C:/Users/Erik/workspaces/git/the-dnd-pub-data/target/dnd-pub-data-0.0.1-SNAPSHOT.jar!/BOOT-INF/classes/data/classes/class-wizard.json",
+  "legacyPublicClassDomainSha256" : "e0a23d5e00be6e7596698f6580557461e497ddb48b403a3bc95aff0f7bccb0df",
+  "normalizedClassDomainSha256" : "fec61e02109b8d8dc53e42be0c13e12ebdf1fc5126745bcdab5c969bdc1df2e0",
+  "resolverOccurrences" : 6246,
+  "resolverSha256" : "bdd0c7e036b87b211456b43a463a6781a0a7754aab638b0fbc6f5050a1f48036"
+}

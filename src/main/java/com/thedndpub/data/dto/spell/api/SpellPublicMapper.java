@@ -7,12 +7,27 @@ import com.thedndpub.data.dto.spell.SpellMaterialDetails;
 import com.thedndpub.data.dto.spell.SpellMaterialText;
 import com.thedndpub.data.dto.spell.SpellSchool;
 import com.thedndpub.data.dto.source.SourceReference;
+import com.thedndpub.data.services.SpellFormulaProjectionCatalog;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public final class SpellPublicMapper {
+    private final SpellFormulaProjectionCatalog formulaProjection;
+
+    /** Standalone legacy mapping leaves status unavailable rather than assuming no observations. */
+    public SpellPublicMapper() {
+        formulaProjection = null;
+    }
+
+    @Autowired
+    public SpellPublicMapper(SpellFormulaProjectionCatalog formulaProjection) {
+        this.formulaProjection = Objects.requireNonNull(formulaProjection, "formulaProjection");
+    }
+
     public SpellSummaryDto summary(SpellDefinition spell) {
         List<SpellCastingTimeDto> castingTimes = spell.castingTimes().stream()
                 .map(time -> new SpellCastingTimeDto(
@@ -64,7 +79,8 @@ public final class SpellPublicMapper {
                                 .map(value -> new SpellScalingValueDto(value.levelKey(), value.formula()))
                                 .toList()))
                         .toList(),
-                sourceRelationships(spell));
+                sourceRelationships(spell),
+                formulaProjection == null ? null : formulaProjection.statusFor(spell.id()));
     }
 
     private SpellRangeDto range(SpellDefinition spell) {

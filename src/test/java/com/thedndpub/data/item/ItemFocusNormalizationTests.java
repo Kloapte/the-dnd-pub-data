@@ -97,6 +97,7 @@ class ItemFocusNormalizationTests {
         existingNormalized.forEach(value -> {
             ((ObjectNode) value).remove("focus");
             ((ObjectNode) value).remove("signedBonuses");
+            ((ObjectNode) value).remove("standaloneRecharge");
         });
         Map<String, List<String>> eligibleItems = new TreeMap<>();
         for (var variant : variants.definitions()) {
@@ -106,7 +107,7 @@ class ItemFocusNormalizationTests {
                     .filter(item -> !MagicVariantMatcher.isExcluded(source.excludes(), item))
                     .map(item -> item.itemId()).toList());
         }
-        // Captured before production changes; only the new internal focus component is excluded.
+        // Captured before internal-only Item normalization additions; those components are tested separately.
         assertFingerprint("36ede70df35319da3fb1613c7c59a61594972320518ca2afc832f3c3ba5f4978", identities);
         assertFingerprint("2342fb27f7ceb0c1510b1c3e1c9ea41185eaad796ec9116e89dad12868bf8be5", existingNormalized);
         assertFingerprint("5ef6a9e613eddba8a0ced7604832f41b04fc358dfc873e8a065c045a8153dd2d",

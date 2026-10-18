@@ -50,13 +50,14 @@ public final class ClassPublicMapper {
 
     public ClassFeatureDto detail(ClassFeatureDefinition value, Integer order) {
         return new ClassFeatureDto(value.id().value(), value.name(), value.source(), value.parentClassId().value(),
-                value.level(), order, value.variant(), mechanics(value), sources(value.sources()), List.of());
+                value.level(), order, value.variant(), mechanics(value), sources(value.sources()), List.of(),
+                ClassChoiceProjection.status(value.content()));
     }
 
     public SubclassFeatureDto detail(SubclassFeatureDefinition value, Integer order) {
         return new SubclassFeatureDto(value.id().value(), value.name(), value.source(), value.parentClassId().value(),
                 value.parentSubclassId().value(), value.level(), order, value.variant(), mechanics(value),
-                sources(value.sources()), List.of());
+                sources(value.sources()), List.of(), ClassChoiceProjection.status(value.content()));
     }
 
     private static ClassFeatureMechanicsDto mechanics(ClassFeatureDefinition value) {

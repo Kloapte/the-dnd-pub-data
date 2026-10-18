@@ -23,7 +23,7 @@ proposals requiring separate authorization.
 | 7 (implemented: Batch 6) | Spell internal formula adapter | 969 authored roots; 930 formula tags on 422 owners | Deterministic syntax; effect semantics mostly unknown | Low/medium | Internal only; useful audit/search foundation | Shared foundation; exact owner/context coverage; effective annotations not materialized |
 | 8 (implemented: Batch 7) | Legendary-group support preservation | 188 authored / 209 expanded support groups; 16 copies / 21 versions / one template | DIRECT ordered body preservation | Medium | Internal only; no new public content | Exact original entry provenance; 307 effective Monster associations; no resolver additions |
 | 9 (implemented: Batch 8) | Monster internal syntax adapter | 4,560 raw / 4,851 effective owners; 57,534 authored-source tags | Deterministic syntax/owner context | Medium/high | Internal only; no public change | Shared foundation; effective origin intentionally not materialized |
-| 10 | Class ability/choice completeness review | 29 typed declarations / 40 option nodes | DIRECT mapper audit | Low/medium | Public changes need separate review | Preserve options and distinguish withheld content from absence |
+| 10 (complete: Batch 9 audit; implemented: Batch 9A) | Class ability/choice completeness | 29 typed declarations / 40 option nodes | DIRECT mapper audit and typed projection | Low/medium | Approved additive completeness enum only | 36 COMPLETE / two PARTIAL / two WITHHELD; existing alternatives unchanged |
 | 11 | Object attack/hit structural pilot | Seven explicit attack-container roots | Exact structure; contextual association needs gold set | Low/medium | Internal first; limited but testable | Seven-record review set; no prose-derived riders/targets |
 | 12 | Item charge syntax/public projection review | 220 roots forwarding raw tag text | Syntax deterministic; field role explicit | Medium | Review required; removes ambiguity only through approved contract | Existing consumers and rights decision, typed-expression test set |
 | 13 | Treasure quantity representation | 20 definitions / 62 coin fields | Typed owner role; source-specific grammar review | Low/medium | Internal normalization only; public tables require review | Exact ranges/order/amount strings; no roll or filter execution |
@@ -281,7 +281,13 @@ failures/errors/skips. All 175 source JSON hashes, 4,851 Monster IDs, 209 suppor
 reads the new index directly from packaged classes/resources; the application JAR smoke and
 `git diff --check` pass.
 
-## Proposed Batch 9: Class ability/choice completeness review
+## Batch 9: Class ability/choice completeness review
+
+**Status: ANALYSIS COMPLETE.** See the
+[Batch 9 assessment](batch-9-class-completeness/ASSESSMENT.md). All 29 ability declarations and
+40 option nodes are preserved internally. Public choices comprise 36 complete reference lists,
+two lists omitting labels/required metadata, and two withheld text-based choices. No internal
+normalization fix is needed.
 
 **Exact scope:** trace 29 existing typed ability declarations and 40 option nodes through DTEs,
 normalized structures and public projection. Confirm how preserved but withheld choices are
@@ -290,6 +296,23 @@ represented. This is a completeness review before any separately approved contra
 **Acceptance:** source/model/projection evidence for every declaration/option and an explicit
 publication/compatibility decision list. No guaranteed grant, eligibility rule or option-prose
 publication is inferred.
+
+## Batch 9A: Public Class choice completeness
+
+**Status: IMPLEMENTED and verified.** See the
+[Batch 9A implementation report](batch-9a-class-choice-completeness/IMPLEMENTATION.md).
+Class/Subclass Feature detail DTOs add `choiceProjectionStatus`: `NONE`, `COMPLETE`, `PARTIAL`,
+or `WITHHELD`. Across 2,176 effective features, 2,136 have no typed choices; all 40 audited nodes
+reconcile as 36 complete, two partial and two withheld. The Third Eye and Master Transmuter
+communicate choice presence without exposing any alternatives or adding empty mechanics objects.
+
+Existing public JSON fields and all 222 option references remain unchanged. Legacy Java constructor
+signatures are retained; counts, labels, required markers, reference fallbacks and ability declarations
+are not newly exposed. Full Maven package passes 504 tests (11 added), the isolated packaged-JAR
+probe passes, all 175 source hashes and original assessment evidence remain unchanged, and Class
+identity/normalized/public legacy fingerprints plus all 6,246 resolver results match the baseline.
+`git diff --check` passes. Labels, required metadata and source-default review remain separate work;
+Batch 9B has not been started.
 
 ## Proposed Batch 10: Seven-record Object attack-container pilot
 
@@ -307,8 +330,50 @@ damage types or effect application from prose. Object/Monster/Item identities re
 
 ## Later bounded batches
 
-1. **Item charge syntax/publication:** 220 raw roots, a reviewed typed-expression projection and
-   explicit consumer migration; do not execute recharge or broaden raw-text exposure.
+### Batch 10A implemented: internal Object evidence membership
+
+Verified after the analysis-only Batch 10 pilot. The immutable internal index covers all seven typed Object
+attack containers with 63 source-membership records: 35 eligible gold edges and 28 intermediate section/member
+and member/tag links. All 80 gold labels reconcile: 35 TP, zero FP/FN, nine rejected boundary claims,
+33 abstentions and three positive controls outside adapter scope. No gameplay interpretation or public changes.
+Full Maven package: 518 passing tests (504 + 14); packaged-JAR index, Object/public fingerprints, all 6,246
+resolver results and 175 source hashes verified unchanged. See
+[Batch 10A implementation](batch-10a-object-membership/IMPLEMENTATION.md).
+
+### Batch 11A implemented: standalone Item recharge declarations
+
+The internal `ItemRechargeDeclaration` preserves the exact authored `recharge` string, owner
+name and source/page when an effective Item has no count or recharge amount. The 28 omitted source
+declarations are all strings equal to `dawn`; all 28 remain distinct and present in the effective
+catalog. Existing charge records still use `ItemChargeDto`, and public Item DTOs do not project the
+new internal field. No scalar recharge `_mod` or Item version exists; tests cover existing copy
+inheritance and a local child override.
+
+The full Maven package passes **522 tests** (518 baseline + 4). All 2,742 Item/Base Item IDs,
+existing Item public JSON, Magic Variant behavior and 6,246 resolver outcomes remain unchanged.
+All 175 source hashes match the pre-Batch-10A snapshot, packaged application startup passes, and
+`git diff --check` passes. See the [Batch 11A report](batch-11a-item-recharge/IMPLEMENTATION.md).
+
+### Batch 11B implemented: internal Item charge syntax index
+
+The immutable authored-source index reuses Batch 5's parser, classifier, evidence locations and
+syntax observations. Across all 2,512 authored Item roots it retains 1,391 tagged observations:
+one `charges` field tag, 219 `rechargeAmount` field tags, 469 entry formulas with an explicit
+charge-field or same-entry lexical context, and 702 other tags in charge-marked entry strings.
+It associates no formula with a recharge, expenditure, resource owner or effect. The index is
+authored-only because effective Item copy transformations do not retain exact source spans.
+
+Seven new tests pass. Full Maven package passes **529 tests** (522 baseline + 7). Startup from the
+packaged JAR succeeds, all 175 pinned source hashes match, the existing 6,246 resolver results
+retain their outcome distribution, and `git diff --check` passes. No public Item DTO, REST contract,
+Item identity or existing normalized mechanic changed. See the
+[Batch 11B implementation report](batch-11b-item-charge-syntax/IMPLEMENTATION.md).
+
+### Remaining Step 7 candidates
+
+1. **Item charge syntax publication review:** consider whether any source-linked syntax metadata
+   merits public projection under a separate publication review. Batch 11B is internal-only; do
+   not expose raw expressions or execute recharge without explicit review.
 2. **Vehicle detail consistency:** eight roots / 12 AC/HP fields already projected by summary;
    evaluate an additive detail projection reusing current safe types. No component movement
    numbers are authored in `VehicleMovementSpeedDte`.
