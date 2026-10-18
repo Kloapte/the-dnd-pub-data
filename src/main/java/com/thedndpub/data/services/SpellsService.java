@@ -5,6 +5,7 @@ import com.thedndpub.data.dto.spell.SpellSchool;
 import com.thedndpub.data.dto.spell.api.SpellDto;
 import com.thedndpub.data.dto.spell.api.SpellPublicMapper;
 import com.thedndpub.data.dto.spell.api.SpellSummaryDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.Normalizer;
@@ -17,10 +18,18 @@ import java.util.function.Predicate;
 public final class SpellsService {
     private final SpellCatalog catalog;
     private final SpellPublicMapper mapper;
+    private final SpellMechanicsInspectionCatalog inspection;
 
     public SpellsService(SpellCatalog catalog, SpellPublicMapper mapper) {
+        this(catalog, mapper, null);
+    }
+
+    @Autowired
+    public SpellsService(
+            SpellCatalog catalog, SpellPublicMapper mapper, SpellMechanicsInspectionCatalog inspection) {
         this.catalog = Objects.requireNonNull(catalog, "catalog");
         this.mapper = Objects.requireNonNull(mapper, "mapper");
+        this.inspection = inspection;
     }
 
     public List<SpellSummaryDto> findSpells(
@@ -53,25 +62,55 @@ public final class SpellsService {
     }
 
     public SpellDto findById(String id) {
+        return findById(id, null);
+    }
+
+    public SpellDto findById(String id, String include) {
+        boolean includeInspection = includesInspection(include);
         SpellDefinition spell = catalog.findById(id);
         if (spell == null) {
             throw new SpellNotFoundException("No spell found with ID '" + id + "'");
         }
-        return mapper.detail(spell);
+        return detail(spell, includeInspection);
     }
 
     public List<SpellDto> findByName(String name, String source) {
+        return findByName(name, source, null);
+    }
+
+    public List<SpellDto> findByName(String name, String source, String include) {
+        boolean includeInspection = includesInspection(include);
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Spell name is required");
         }
         List<SpellDto> matches = catalog.findByName(name).stream()
                 .filter(spell -> source == null || equalsIgnoreCase(spell.source().identity().code(), source))
-                .map(mapper::detail)
+                .map(spell -> detail(spell, includeInspection))
                 .toList();
         if (matches.isEmpty()) {
             throw new SpellNotFoundException("No spell found with name '" + name + "'");
         }
         return matches;
+    }
+
+    private SpellDto detail(SpellDefinition spell, boolean includeInspection) {
+        if (!includeInspection) {
+            return mapper.detail(spell);
+        }
+        if (inspection == null) {
+            throw new IllegalStateException("Spell inspection catalog is unavailable");
+        }
+        return mapper.detail(spell, inspection.findById(spell.id()));
+    }
+
+    private static boolean includesInspection(String include) {
+        if (include == null) {
+            return false;
+        }
+        if (!include.equals("interpretedMechanics")) {
+            throw new IllegalArgumentException("Unsupported Spell include; expected interpretedMechanics");
+        }
+        return true;
     }
 
     private Boolean concentration(SpellDefinition spell) {

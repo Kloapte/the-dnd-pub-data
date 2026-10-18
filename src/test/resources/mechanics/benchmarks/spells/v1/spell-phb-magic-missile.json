@@ -1,0 +1,228 @@
+{
+  "schemaVersion" : "1",
+  "id" : "spell-benchmark:phb:magic-missile",
+  "revision" : {
+    "number" : 1,
+    "contentSha256" : "070acc5d10b2bbdee67ed121a4efd1027dd719ddd907d87ea5fa77db74eb1abd"
+  },
+  "owner" : {
+    "domain" : "SPELL",
+    "id" : "spell:phb:magic-missile",
+    "source" : {
+      "source" : "PHB",
+      "page" : 257
+    }
+  },
+  "source" : {
+    "datasetVersion" : "5eTools v2.37.0",
+    "resourcePath" : "data/spells/spells-phb.json",
+    "resourceSha256" : "c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a"
+  },
+  "ownerPointer" : "/spell/213",
+  "mechanics" : [ ],
+  "formulas" : [ {
+    "reference" : {
+      "kind" : "FORMULA_SYNTAX",
+      "id" : "spell:phb:magic-missile:formula:0",
+      "spellId" : {
+        "value" : "spell:phb:magic-missile"
+      },
+      "occurrenceIndex" : 0,
+      "source" : {
+        "datasetVersion" : "5eTools v2.37.0",
+        "resourcePath" : "data/spells/spells-phb.json",
+        "resourceSha256" : "c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a"
+      },
+      "evidence" : {
+        "location" : {
+          "owner" : {
+            "resourcePath" : "data/spells/spells-phb.json",
+            "resourceSha256" : "c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a",
+            "collection" : "spell",
+            "jsonPointer" : "/spell/213"
+          },
+          "jsonPointer" : "/spell/213/entries/0",
+          "hierarchy" : [ {
+            "jsonPointer" : "/spell/213",
+            "authoredType" : null
+          }, {
+            "jsonPointer" : "/spell/213/entries",
+            "authoredType" : null
+          } ],
+          "origin" : "AUTHORED"
+        },
+        "span" : {
+          "startInclusive" : 134,
+          "endExclusive" : 151
+        }
+      }
+    },
+    "exactToken" : "{@damage 1d4 + 1}"
+  } ],
+  "deferred" : [ {
+    "id" : "per-projectile",
+    "candidateFamily" : "DAMAGE",
+    "concept" : "PROJECTILE_DAMAGE",
+    "proposedConstraint" : "1d4 + 1 force damage is per dart, not the entire spell; three darts initially.",
+    "adjudicationQuestion" : "The canonical model cannot preserve per-projectile ownership; no proposed DamageMechanic is emitted.",
+    "expectedReason" : "FAMILY_NOT_IMPLEMENTED",
+    "evidence" : [ {
+      "kind" : "TEXT_SPAN",
+      "id" : "text-2106365663ba1e83",
+      "source" : {
+        "source" : "PHB",
+        "page" : 257
+      },
+      "syntax" : {
+        "location" : {
+          "owner" : {
+            "resourcePath" : "data/spells/spells-phb.json",
+            "resourceSha256" : "c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a",
+            "collection" : "spell",
+            "jsonPointer" : "/spell/213"
+          },
+          "jsonPointer" : "/spell/213/entries/0",
+          "hierarchy" : [ {
+            "jsonPointer" : "/spell/213",
+            "authoredType" : null
+          }, {
+            "jsonPointer" : "/spell/213/entries",
+            "authoredType" : null
+          } ],
+          "origin" : "AUTHORED"
+        },
+        "span" : {
+          "startInclusive" : 121,
+          "endExclusive" : 178
+        }
+      },
+      "textSha256" : "2ef8acfe0fea64459536ca6f633c1d5b332d21530ee93a97d8dd16c1c3cfd5f1",
+      "origin" : "AUTHORED",
+      "authoredOwner" : {
+        "domain" : "SPELL",
+        "id" : "spell:phb:magic-missile",
+        "source" : {
+          "source" : "PHB",
+          "page" : 257
+        }
+      }
+    } ]
+  }, {
+    "id" : "distribution",
+    "candidateFamily" : "UNDETERMINED",
+    "concept" : "PROJECTILE_DISTRIBUTION",
+    "proposedConstraint" : "Darts strike simultaneously and can be distributed to one or several visible creatures in range.",
+    "adjudicationQuestion" : "No projectile allocation, selected targets, total damage or attack execution is inferred.",
+    "expectedReason" : "FAMILY_NOT_IMPLEMENTED",
+    "evidence" : [ {
+      "kind" : "TEXT_SPAN",
+      "id" : "text-821d355c1c35a8b1",
+      "source" : {
+        "source" : "PHB",
+        "page" : 257
+      },
+      "syntax" : {
+        "location" : {
+          "owner" : {
+            "resourcePath" : "data/spells/spells-phb.json",
+            "resourceSha256" : "c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a",
+            "collection" : "spell",
+            "jsonPointer" : "/spell/213"
+          },
+          "jsonPointer" : "/spell/213/entries/0",
+          "hierarchy" : [ {
+            "jsonPointer" : "/spell/213",
+            "authoredType" : null
+          }, {
+            "jsonPointer" : "/spell/213/entries",
+            "authoredType" : null
+          } ],
+          "origin" : "AUTHORED"
+        },
+        "span" : {
+          "startInclusive" : 180,
+          "endExclusive" : 215
+        }
+      },
+      "textSha256" : "2ef8acfe0fea64459536ca6f633c1d5b332d21530ee93a97d8dd16c1c3cfd5f1",
+      "origin" : "AUTHORED",
+      "authoredOwner" : {
+        "domain" : "SPELL",
+        "id" : "spell:phb:magic-missile",
+        "source" : {
+          "source" : "PHB",
+          "page" : 257
+        }
+      }
+    } ]
+  }, {
+    "id" : "slot-scaling",
+    "candidateFamily" : "UNDETERMINED",
+    "concept" : "PROJECTILE_SCALING",
+    "proposedConstraint" : "One additional dart per slot level above 1 when using slot level 2 or higher.",
+    "adjudicationQuestion" : "Projectile scaling is not a formula observation or supported payload.",
+    "expectedReason" : "FAMILY_NOT_IMPLEMENTED",
+    "evidence" : [ {
+      "kind" : "TEXT_SPAN",
+      "id" : "text-433cf1ec0a59839b",
+      "source" : {
+        "source" : "PHB",
+        "page" : 257
+      },
+      "syntax" : {
+        "location" : {
+          "owner" : {
+            "resourcePath" : "data/spells/spells-phb.json",
+            "resourceSha256" : "c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a",
+            "collection" : "spell",
+            "jsonPointer" : "/spell/213"
+          },
+          "jsonPointer" : "/spell/213/entriesHigherLevel/0/entries/0",
+          "hierarchy" : [ {
+            "jsonPointer" : "/spell/213",
+            "authoredType" : null
+          }, {
+            "jsonPointer" : "/spell/213/entriesHigherLevel",
+            "authoredType" : null
+          }, {
+            "jsonPointer" : "/spell/213/entriesHigherLevel/0",
+            "authoredType" : "entries"
+          }, {
+            "jsonPointer" : "/spell/213/entriesHigherLevel/0/entries",
+            "authoredType" : null
+          } ],
+          "origin" : "AUTHORED"
+        },
+        "span" : {
+          "startInclusive" : 0,
+          "endExclusive" : 130
+        }
+      },
+      "textSha256" : "b75d235ff41dba95848854426d790f3ae2ca88a378c5492da1bf582a97289f1a",
+      "origin" : "AUTHORED",
+      "authoredOwner" : {
+        "domain" : "SPELL",
+        "id" : "spell:phb:magic-missile",
+        "source" : {
+          "source" : "PHB",
+          "page" : 257
+        }
+      }
+    } ]
+  } ],
+  "prohibitions" : [ {
+    "id" : "no-cross-edition-evidence",
+    "rule" : "NO_FOREIGN_SOURCE_EVIDENCE",
+    "family" : null,
+    "rationale" : "Never reuse PHB and XPHB evidence or original source locations interchangeably."
+  }, {
+    "id" : "no-invented-mechanics",
+    "rule" : "NO_UNEXPECTED_CLAIMS",
+    "family" : null,
+    "rationale" : "No calculated final AC, guaranteed attack negation, broad immunity, invented targets/triggers or effects; only the exact bounded proposed claims may be compared as supported assertions."
+  } ],
+  "review" : {
+    "state" : "PENDING_HUMAN_REVIEW",
+    "humanDecision" : null
+  }
+}

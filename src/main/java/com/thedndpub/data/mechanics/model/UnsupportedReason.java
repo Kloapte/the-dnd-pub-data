@@ -1,0 +1,10 @@
+package com.thedndpub.data.mechanics.model;
+
+public enum UnsupportedReason {
+    NO_SUPPORTED_PATTERN,
+    FAMILY_NOT_IMPLEMENTED,
+    AMBIGUOUS_INTERPRETATION,
+    PROVENANCE_UNAVAILABLE,
+    CONFLICTING_PROPOSALS,
+    UNSUPPORTED_SYNTAX
+}

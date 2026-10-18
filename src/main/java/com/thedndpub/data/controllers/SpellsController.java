@@ -36,20 +36,21 @@ public final class SpellsController {
     }
 
     @GetMapping("/{id}")
-    public SpellDto byId(@PathVariable String id) {
-        return service.findById(id);
+    public SpellDto byId(@PathVariable String id, @RequestParam(required = false) String include) {
+        return service.findById(id, include);
     }
 
     @GetMapping("/by-name/{name}")
     public List<SpellDto> byName(
             @PathVariable String name,
             @RequestParam(required = false) String source,
+            @RequestParam(required = false) String include,
             HttpServletRequest request) {
         String marker = "/api/spells/by-name/";
         String requestUri = request.getRequestURI();
         String requestedName = requestUri.startsWith(marker)
                 ? UriUtils.decode(requestUri.substring(marker.length()), StandardCharsets.UTF_8)
                 : name;
-        return service.findByName(requestedName, source);
+        return service.findByName(requestedName, source, include);
     }
 }

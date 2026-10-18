@@ -1,0 +1,930 @@
+{
+  "schemaVersion" : "1",
+  "id" : "spell-benchmark:xphb:shield",
+  "revision" : {
+    "number" : 1,
+    "contentSha256" : "10933360189f2d848a21470d0e9a70873b243afb2f6d984cb1913587c9cd226e"
+  },
+  "owner" : {
+    "domain" : "SPELL",
+    "id" : "spell:xphb:shield",
+    "source" : {
+      "source" : "XPHB",
+      "page" : 316
+    }
+  },
+  "source" : {
+    "datasetVersion" : "5eTools v2.37.0",
+    "resourcePath" : "data/spells/spells-xphb.json",
+    "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9"
+  },
+  "ownerPointer" : "/spell/304",
+  "mechanics" : [ {
+    "key" : "activation",
+    "family" : "REACTION_ACTIVATION",
+    "patternId" : "shield-reaction-v1",
+    "payload" : {
+      "kind" : "REACTION_ACTIVATION",
+      "cost" : {
+        "amount" : 1
+      },
+      "trigger" : {
+        "kind" : "ANY",
+        "alternatives" : [ {
+          "kind" : "HIT_BY_ATTACK",
+          "event" : "ATTACK_ROLL_HIT"
+        }, {
+          "kind" : "TARGETED_BY_SPELL",
+          "spell" : {
+            "authoredName" : "Magic Missile",
+            "form" : "PROSE_MENTION",
+            "resolution" : "NOT_ATTEMPTED"
+          }
+        } ]
+      }
+    },
+    "context" : {
+      "subject" : {
+        "kind" : "CASTER"
+      },
+      "bindings" : [ ]
+    },
+    "completeness" : "COMPLETE_WITHIN_CLAIM",
+    "evidence" : [ {
+      "evidence" : {
+        "kind" : "STRUCTURED_FIELD",
+        "id" : "field-6b8cab851132eb87",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "owner" : {
+          "resourcePath" : "data/spells/spells-xphb.json",
+          "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+          "collection" : "spell",
+          "jsonPointer" : "/spell/304"
+        },
+        "jsonPointer" : "/spell/304/time/0/number",
+        "hierarchy" : [ {
+          "jsonPointer" : "/spell/304",
+          "authoredType" : null
+        }, {
+          "jsonPointer" : "/spell/304/time",
+          "authoredType" : null
+        }, {
+          "jsonPointer" : "/spell/304/time/0",
+          "authoredType" : null
+        } ],
+        "valueSha256" : "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/payload/cost/amount",
+      "role" : "VALUE"
+    }, {
+      "evidence" : {
+        "kind" : "STRUCTURED_FIELD",
+        "id" : "field-42654a74c04c1d06",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "owner" : {
+          "resourcePath" : "data/spells/spells-xphb.json",
+          "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+          "collection" : "spell",
+          "jsonPointer" : "/spell/304"
+        },
+        "jsonPointer" : "/spell/304/time/0/unit",
+        "hierarchy" : [ {
+          "jsonPointer" : "/spell/304",
+          "authoredType" : null
+        }, {
+          "jsonPointer" : "/spell/304/time",
+          "authoredType" : null
+        }, {
+          "jsonPointer" : "/spell/304/time/0",
+          "authoredType" : null
+        } ],
+        "valueSha256" : "76daf20234c671e4f522fac013b40874a69952b8a50e6d49c246022a9c78384b",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/payload",
+      "role" : "EFFECT_ROLE"
+    }, {
+      "evidence" : {
+        "kind" : "TEXT_SPAN",
+        "id" : "text-fcbc45b353ca004f",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "syntax" : {
+          "location" : {
+            "owner" : {
+              "resourcePath" : "data/spells/spells-xphb.json",
+              "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+              "collection" : "spell",
+              "jsonPointer" : "/spell/304"
+            },
+            "jsonPointer" : "/spell/304/time/0/condition",
+            "hierarchy" : [ {
+              "jsonPointer" : "/spell/304",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/time",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/time/0",
+              "authoredType" : null
+            } ],
+            "origin" : "AUTHORED"
+          },
+          "span" : {
+            "startInclusive" : 0,
+            "endExclusive" : 88
+          }
+        },
+        "textSha256" : "e1a684e60370d0b4a2f0475b387e62e81fe91019d170e8ef96207026e3c9d560",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/payload/trigger",
+      "role" : "QUALIFIER"
+    }, {
+      "evidence" : {
+        "kind" : "TEXT_SPAN",
+        "id" : "text-a54b4eed5846dd1e",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "syntax" : {
+          "location" : {
+            "owner" : {
+              "resourcePath" : "data/spells/spells-xphb.json",
+              "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+              "collection" : "spell",
+              "jsonPointer" : "/spell/304"
+            },
+            "jsonPointer" : "/spell/304/time/0/condition",
+            "hierarchy" : [ {
+              "jsonPointer" : "/spell/304",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/time",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/time/0",
+              "authoredType" : null
+            } ],
+            "origin" : "AUTHORED"
+          },
+          "span" : {
+            "startInclusive" : 20,
+            "endExclusive" : 31
+          }
+        },
+        "textSha256" : "e1a684e60370d0b4a2f0475b387e62e81fe91019d170e8ef96207026e3c9d560",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/context/subject",
+      "role" : "QUALIFIER"
+    } ]
+  }, {
+    "key" : "ac-bonus",
+    "family" : "ARMOR_CLASS_MODIFIER",
+    "patternId" : "shield-ac-v1",
+    "payload" : {
+      "kind" : "ARMOR_CLASS_MODIFIER",
+      "amount" : {
+        "kind" : "INTEGER_MODIFIER",
+        "value" : 5,
+        "authoredToken" : "+5"
+      }
+    },
+    "context" : {
+      "subject" : {
+        "kind" : "CASTER"
+      },
+      "bindings" : [ {
+        "kind" : "ACTIVATED_BY",
+        "claimKey" : "activation"
+      }, {
+        "kind" : "APPLIES_FOR_DURATION",
+        "duration" : {
+          "kind" : "UNTIL_TURN_BOUNDARY",
+          "actor" : "CASTER",
+          "boundary" : "START_OF_NEXT_TURN"
+        }
+      }, {
+        "kind" : "INCLUDES_TRIGGERING_ATTACK"
+      } ]
+    },
+    "completeness" : "COMPLETE_WITHIN_CLAIM",
+    "evidence" : [ {
+      "evidence" : {
+        "kind" : "TEXT_SPAN",
+        "id" : "text-e7c1879731091f59",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "syntax" : {
+          "location" : {
+            "owner" : {
+              "resourcePath" : "data/spells/spells-xphb.json",
+              "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+              "collection" : "spell",
+              "jsonPointer" : "/spell/304"
+            },
+            "jsonPointer" : "/spell/304/entries/0",
+            "hierarchy" : [ {
+              "jsonPointer" : "/spell/304",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/entries",
+              "authoredType" : null
+            } ],
+            "origin" : "AUTHORED"
+          },
+          "span" : {
+            "startInclusive" : 102,
+            "endExclusive" : 116
+          }
+        },
+        "textSha256" : "adc31a76a4ee23223090988f51a2159d64d86cb4362547b1946fbae2273093c4",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/payload",
+      "role" : "EFFECT_ROLE"
+    }, {
+      "evidence" : {
+        "kind" : "TEXT_SPAN",
+        "id" : "text-f398448e69871aef",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "syntax" : {
+          "location" : {
+            "owner" : {
+              "resourcePath" : "data/spells/spells-xphb.json",
+              "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+              "collection" : "spell",
+              "jsonPointer" : "/spell/304"
+            },
+            "jsonPointer" : "/spell/304/entries/0",
+            "hierarchy" : [ {
+              "jsonPointer" : "/spell/304",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/entries",
+              "authoredType" : null
+            } ],
+            "origin" : "AUTHORED"
+          },
+          "span" : {
+            "startInclusive" : 91,
+            "endExclusive" : 99
+          }
+        },
+        "textSha256" : "adc31a76a4ee23223090988f51a2159d64d86cb4362547b1946fbae2273093c4",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/context/subject",
+      "role" : "QUALIFIER"
+    }, {
+      "evidence" : {
+        "kind" : "TEXT_SPAN",
+        "id" : "text-fcbc45b353ca004f",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "syntax" : {
+          "location" : {
+            "owner" : {
+              "resourcePath" : "data/spells/spells-xphb.json",
+              "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+              "collection" : "spell",
+              "jsonPointer" : "/spell/304"
+            },
+            "jsonPointer" : "/spell/304/time/0/condition",
+            "hierarchy" : [ {
+              "jsonPointer" : "/spell/304",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/time",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/time/0",
+              "authoredType" : null
+            } ],
+            "origin" : "AUTHORED"
+          },
+          "span" : {
+            "startInclusive" : 0,
+            "endExclusive" : 88
+          }
+        },
+        "textSha256" : "e1a684e60370d0b4a2f0475b387e62e81fe91019d170e8ef96207026e3c9d560",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/context/bindings/0",
+      "role" : "QUALIFIER"
+    }, {
+      "evidence" : {
+        "kind" : "TEXT_SPAN",
+        "id" : "text-bf9b55e7a698c9db",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "syntax" : {
+          "location" : {
+            "owner" : {
+              "resourcePath" : "data/spells/spells-xphb.json",
+              "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+              "collection" : "spell",
+              "jsonPointer" : "/spell/304"
+            },
+            "jsonPointer" : "/spell/304/entries/0",
+            "hierarchy" : [ {
+              "jsonPointer" : "/spell/304",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/entries",
+              "authoredType" : null
+            } ],
+            "origin" : "AUTHORED"
+          },
+          "span" : {
+            "startInclusive" : 56,
+            "endExclusive" : 89
+          }
+        },
+        "textSha256" : "adc31a76a4ee23223090988f51a2159d64d86cb4362547b1946fbae2273093c4",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/context/bindings/1",
+      "role" : "QUALIFIER"
+    }, {
+      "evidence" : {
+        "kind" : "TEXT_SPAN",
+        "id" : "text-482e566b2f70dafb",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "syntax" : {
+          "location" : {
+            "owner" : {
+              "resourcePath" : "data/spells/spells-xphb.json",
+              "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+              "collection" : "spell",
+              "jsonPointer" : "/spell/304"
+            },
+            "jsonPointer" : "/spell/304/entries/0",
+            "hierarchy" : [ {
+              "jsonPointer" : "/spell/304",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/entries",
+              "authoredType" : null
+            } ],
+            "origin" : "AUTHORED"
+          },
+          "span" : {
+            "startInclusive" : 118,
+            "endExclusive" : 157
+          }
+        },
+        "textSha256" : "adc31a76a4ee23223090988f51a2159d64d86cb4362547b1946fbae2273093c4",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/context/bindings/2",
+      "role" : "QUALIFIER"
+    } ]
+  }, {
+    "key" : "structured-duration",
+    "family" : "DURATION",
+    "patternId" : "spell-declared-duration-v1",
+    "payload" : {
+      "kind" : "EFFECT_DURATION",
+      "specification" : {
+        "kind" : "DECLARED_SPELL_DURATION",
+        "spellId" : {
+          "value" : "spell:xphb:shield"
+        },
+        "durationIndex" : 0,
+        "source" : {
+          "datasetVersion" : "5eTools v2.37.0",
+          "resourcePath" : "data/spells/spells-xphb.json",
+          "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9"
+        }
+      }
+    },
+    "context" : {
+      "subject" : {
+        "kind" : "CASTER"
+      },
+      "bindings" : [ ]
+    },
+    "completeness" : "COMPLETE_WITHIN_CLAIM",
+    "evidence" : [ {
+      "evidence" : {
+        "kind" : "STRUCTURED_FIELD",
+        "id" : "field-123cbea97058c7c8",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "owner" : {
+          "resourcePath" : "data/spells/spells-xphb.json",
+          "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+          "collection" : "spell",
+          "jsonPointer" : "/spell/304"
+        },
+        "jsonPointer" : "/spell/304/duration/0",
+        "hierarchy" : [ {
+          "jsonPointer" : "/spell/304",
+          "authoredType" : null
+        }, {
+          "jsonPointer" : "/spell/304/duration",
+          "authoredType" : null
+        } ],
+        "valueSha256" : "35bb9a82e78491b17919eabb1c80d1f6ca4b3fc16ff507cff9d6634752e66540",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/payload",
+      "role" : "EFFECT_ROLE"
+    }, {
+      "evidence" : {
+        "kind" : "STRUCTURED_FIELD",
+        "id" : "field-c7c5cf28589f1d0e",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "owner" : {
+          "resourcePath" : "data/spells/spells-xphb.json",
+          "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+          "collection" : "spell",
+          "jsonPointer" : "/spell/304"
+        },
+        "jsonPointer" : "/spell/304/range/distance/type",
+        "hierarchy" : [ {
+          "jsonPointer" : "/spell/304",
+          "authoredType" : null
+        }, {
+          "jsonPointer" : "/spell/304/range",
+          "authoredType" : "point"
+        }, {
+          "jsonPointer" : "/spell/304/range/distance",
+          "authoredType" : "self"
+        } ],
+        "valueSha256" : "3a6b7e48a80f82687aa017a52f22122dd8a20e2a5c4f1c6b40a41c46054ffd05",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/context/subject",
+      "role" : "QUALIFIER"
+    } ]
+  }, {
+    "key" : "turn-boundary",
+    "family" : "DURATION",
+    "patternId" : "shield-turn-boundary-v1",
+    "payload" : {
+      "kind" : "EFFECT_DURATION",
+      "specification" : {
+        "kind" : "UNTIL_TURN_BOUNDARY",
+        "actor" : "CASTER",
+        "boundary" : "START_OF_NEXT_TURN"
+      }
+    },
+    "context" : {
+      "subject" : {
+        "kind" : "CASTER"
+      },
+      "bindings" : [ ]
+    },
+    "completeness" : "COMPLETE_WITHIN_CLAIM",
+    "evidence" : [ {
+      "evidence" : {
+        "kind" : "TEXT_SPAN",
+        "id" : "text-bf9b55e7a698c9db",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "syntax" : {
+          "location" : {
+            "owner" : {
+              "resourcePath" : "data/spells/spells-xphb.json",
+              "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+              "collection" : "spell",
+              "jsonPointer" : "/spell/304"
+            },
+            "jsonPointer" : "/spell/304/entries/0",
+            "hierarchy" : [ {
+              "jsonPointer" : "/spell/304",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/entries",
+              "authoredType" : null
+            } ],
+            "origin" : "AUTHORED"
+          },
+          "span" : {
+            "startInclusive" : 56,
+            "endExclusive" : 89
+          }
+        },
+        "textSha256" : "adc31a76a4ee23223090988f51a2159d64d86cb4362547b1946fbae2273093c4",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/payload",
+      "role" : "EFFECT_ROLE"
+    }, {
+      "evidence" : {
+        "kind" : "TEXT_SPAN",
+        "id" : "text-444edda27a2f0716",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "syntax" : {
+          "location" : {
+            "owner" : {
+              "resourcePath" : "data/spells/spells-xphb.json",
+              "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+              "collection" : "spell",
+              "jsonPointer" : "/spell/304"
+            },
+            "jsonPointer" : "/spell/304/entries/0",
+            "hierarchy" : [ {
+              "jsonPointer" : "/spell/304",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/entries",
+              "authoredType" : null
+            } ],
+            "origin" : "AUTHORED"
+          },
+          "span" : {
+            "startInclusive" : 75,
+            "endExclusive" : 89
+          }
+        },
+        "textSha256" : "adc31a76a4ee23223090988f51a2159d64d86cb4362547b1946fbae2273093c4",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/context/subject",
+      "role" : "QUALIFIER"
+    } ]
+  }, {
+    "key" : "magic-missile-protection",
+    "family" : "SPELL_DAMAGE_PREVENTION",
+    "patternId" : "shield-special-interaction-v1",
+    "payload" : {
+      "kind" : "SPELL_DAMAGE_PREVENTION",
+      "spell" : {
+        "authoredName" : "Magic Missile",
+        "authoredSource" : "XPHB",
+        "form" : "TAG_REFERENCE",
+        "resolution" : "NOT_ATTEMPTED"
+      }
+    },
+    "context" : {
+      "subject" : {
+        "kind" : "CASTER"
+      },
+      "bindings" : [ {
+        "kind" : "ACTIVATED_BY",
+        "claimKey" : "activation"
+      }, {
+        "kind" : "APPLIES_FOR_DURATION",
+        "duration" : {
+          "kind" : "UNTIL_TURN_BOUNDARY",
+          "actor" : "CASTER",
+          "boundary" : "START_OF_NEXT_TURN"
+        }
+      } ]
+    },
+    "completeness" : "COMPLETE_WITHIN_CLAIM",
+    "evidence" : [ {
+      "evidence" : {
+        "kind" : "TEXT_SPAN",
+        "id" : "text-be6b7baa3cc07bda",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "syntax" : {
+          "location" : {
+            "owner" : {
+              "resourcePath" : "data/spells/spells-xphb.json",
+              "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+              "collection" : "spell",
+              "jsonPointer" : "/spell/304"
+            },
+            "jsonPointer" : "/spell/304/entries/0",
+            "hierarchy" : [ {
+              "jsonPointer" : "/spell/304",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/entries",
+              "authoredType" : null
+            } ],
+            "origin" : "AUTHORED"
+          },
+          "span" : {
+            "startInclusive" : 163,
+            "endExclusive" : 214
+          }
+        },
+        "textSha256" : "adc31a76a4ee23223090988f51a2159d64d86cb4362547b1946fbae2273093c4",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/payload",
+      "role" : "EFFECT_ROLE"
+    }, {
+      "evidence" : {
+        "kind" : "TEXT_SPAN",
+        "id" : "text-6e5bdb166728e964",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "syntax" : {
+          "location" : {
+            "owner" : {
+              "resourcePath" : "data/spells/spells-xphb.json",
+              "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+              "collection" : "spell",
+              "jsonPointer" : "/spell/304"
+            },
+            "jsonPointer" : "/spell/304/entries/0",
+            "hierarchy" : [ {
+              "jsonPointer" : "/spell/304",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/entries",
+              "authoredType" : null
+            } ],
+            "origin" : "AUTHORED"
+          },
+          "span" : {
+            "startInclusive" : 163,
+            "endExclusive" : 171
+          }
+        },
+        "textSha256" : "adc31a76a4ee23223090988f51a2159d64d86cb4362547b1946fbae2273093c4",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/context/subject",
+      "role" : "QUALIFIER"
+    }, {
+      "evidence" : {
+        "kind" : "TEXT_SPAN",
+        "id" : "text-fcbc45b353ca004f",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "syntax" : {
+          "location" : {
+            "owner" : {
+              "resourcePath" : "data/spells/spells-xphb.json",
+              "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+              "collection" : "spell",
+              "jsonPointer" : "/spell/304"
+            },
+            "jsonPointer" : "/spell/304/time/0/condition",
+            "hierarchy" : [ {
+              "jsonPointer" : "/spell/304",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/time",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/time/0",
+              "authoredType" : null
+            } ],
+            "origin" : "AUTHORED"
+          },
+          "span" : {
+            "startInclusive" : 0,
+            "endExclusive" : 88
+          }
+        },
+        "textSha256" : "e1a684e60370d0b4a2f0475b387e62e81fe91019d170e8ef96207026e3c9d560",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/context/bindings/0",
+      "role" : "QUALIFIER"
+    }, {
+      "evidence" : {
+        "kind" : "TEXT_SPAN",
+        "id" : "text-bf9b55e7a698c9db",
+        "source" : {
+          "source" : "XPHB",
+          "page" : 316
+        },
+        "syntax" : {
+          "location" : {
+            "owner" : {
+              "resourcePath" : "data/spells/spells-xphb.json",
+              "resourceSha256" : "442544a91aad1181cbad78d49cfa48f9ced7d8b048dbc781e32fa6fefc6278b9",
+              "collection" : "spell",
+              "jsonPointer" : "/spell/304"
+            },
+            "jsonPointer" : "/spell/304/entries/0",
+            "hierarchy" : [ {
+              "jsonPointer" : "/spell/304",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/304/entries",
+              "authoredType" : null
+            } ],
+            "origin" : "AUTHORED"
+          },
+          "span" : {
+            "startInclusive" : 56,
+            "endExclusive" : 89
+          }
+        },
+        "textSha256" : "adc31a76a4ee23223090988f51a2159d64d86cb4362547b1946fbae2273093c4",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:xphb:shield",
+          "source" : {
+            "source" : "XPHB",
+            "page" : 316
+          }
+        }
+      },
+      "claimPath" : "/context/bindings/1",
+      "role" : "QUALIFIER"
+    } ]
+  } ],
+  "formulas" : [ ],
+  "deferred" : [ ],
+  "prohibitions" : [ {
+    "id" : "no-damage-formula",
+    "rule" : "NO_FAMILY",
+    "family" : "DAMAGE",
+    "rationale" : "Shield does not author a damage formula or an applied damage effect."
+  }, {
+    "id" : "no-invented-save",
+    "rule" : "NO_FAMILY",
+    "family" : "SAVING_THROW_REQUIREMENT",
+    "rationale" : "No saving throw is authored."
+  }, {
+    "id" : "no-inferred-resolution",
+    "rule" : "NO_RESOLVED_SPELL_REFERENCES",
+    "family" : null,
+    "rationale" : "No resolver evidence is established for these proposed mentions; never qualify the XPHB prose trigger."
+  }, {
+    "id" : "no-cross-edition-evidence",
+    "rule" : "NO_FOREIGN_SOURCE_EVIDENCE",
+    "family" : null,
+    "rationale" : "Never reuse PHB and XPHB evidence or original source locations interchangeably."
+  }, {
+    "id" : "no-invented-mechanics",
+    "rule" : "NO_UNEXPECTED_CLAIMS",
+    "family" : null,
+    "rationale" : "No calculated final AC, guaranteed attack negation, broad immunity, invented targets/triggers or effects; only the exact bounded proposed claims may be compared as supported assertions."
+  } ],
+  "review" : {
+    "state" : "PENDING_HUMAN_REVIEW",
+    "humanDecision" : null
+  }
+}

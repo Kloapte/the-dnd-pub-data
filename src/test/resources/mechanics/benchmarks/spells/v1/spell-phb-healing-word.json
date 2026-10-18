@@ -1,0 +1,297 @@
+{
+  "schemaVersion" : "1",
+  "id" : "spell-benchmark:phb:healing-word",
+  "revision" : {
+    "number" : 1,
+    "contentSha256" : "71dedda31dfc6b9521f30776aea1644651e893121cae1f5ae94a267e86e16fae"
+  },
+  "owner" : {
+    "domain" : "SPELL",
+    "id" : "spell:phb:healing-word",
+    "source" : {
+      "source" : "PHB",
+      "page" : 250
+    }
+  },
+  "source" : {
+    "datasetVersion" : "5eTools v2.37.0",
+    "resourcePath" : "data/spells/spells-phb.json",
+    "resourceSha256" : "c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a"
+  },
+  "ownerPointer" : "/spell/175",
+  "mechanics" : [ {
+    "key" : "healing",
+    "family" : "HEALING",
+    "patternId" : "healing-word-amount-v1",
+    "payload" : {
+      "kind" : "HEALING",
+      "amount" : {
+        "kind" : "SUM",
+        "terms" : [ {
+          "kind" : "DICE",
+          "count" : 1,
+          "sides" : 4,
+          "modifier" : 0
+        }, {
+          "kind" : "SYMBOLIC",
+          "symbol" : "CASTER_SPELLCASTING_ABILITY_MODIFIER"
+        } ]
+      },
+      "mode" : "RESTORE_HIT_POINTS"
+    },
+    "context" : {
+      "subject" : {
+        "kind" : "UNKNOWN",
+        "reason" : "NOT_INTERPRETED"
+      },
+      "bindings" : [ ]
+    },
+    "completeness" : "PARTIAL",
+    "evidence" : [ {
+      "evidence" : {
+        "kind" : "TEXT_SPAN",
+        "id" : "text-8cee16b4281ea4b4",
+        "source" : {
+          "source" : "PHB",
+          "page" : 250
+        },
+        "syntax" : {
+          "location" : {
+            "owner" : {
+              "resourcePath" : "data/spells/spells-phb.json",
+              "resourceSha256" : "c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a",
+              "collection" : "spell",
+              "jsonPointer" : "/spell/175"
+            },
+            "jsonPointer" : "/spell/175/entries/0",
+            "hierarchy" : [ {
+              "jsonPointer" : "/spell/175",
+              "authoredType" : null
+            }, {
+              "jsonPointer" : "/spell/175/entries",
+              "authoredType" : null
+            } ],
+            "origin" : "AUTHORED"
+          },
+          "span" : {
+            "startInclusive" : 56,
+            "endExclusive" : 132
+          }
+        },
+        "textSha256" : "273621890b2352306d662560454e97ec2cd6b0ef850e0e2cdb23c99a5a244c0c",
+        "origin" : "AUTHORED",
+        "authoredOwner" : {
+          "domain" : "SPELL",
+          "id" : "spell:phb:healing-word",
+          "source" : {
+            "source" : "PHB",
+            "page" : 250
+          }
+        }
+      },
+      "claimPath" : "/payload",
+      "role" : "EFFECT_ROLE"
+    } ]
+  } ],
+  "formulas" : [ {
+    "reference" : {
+      "kind" : "FORMULA_SYNTAX",
+      "id" : "spell:phb:healing-word:formula:0",
+      "spellId" : {
+        "value" : "spell:phb:healing-word"
+      },
+      "occurrenceIndex" : 0,
+      "source" : {
+        "datasetVersion" : "5eTools v2.37.0",
+        "resourcePath" : "data/spells/spells-phb.json",
+        "resourceSha256" : "c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a"
+      },
+      "evidence" : {
+        "location" : {
+          "owner" : {
+            "resourcePath" : "data/spells/spells-phb.json",
+            "resourceSha256" : "c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a",
+            "collection" : "spell",
+            "jsonPointer" : "/spell/175"
+          },
+          "jsonPointer" : "/spell/175/entries/0",
+          "hierarchy" : [ {
+            "jsonPointer" : "/spell/175",
+            "authoredType" : null
+          }, {
+            "jsonPointer" : "/spell/175/entries",
+            "authoredType" : null
+          } ],
+          "origin" : "AUTHORED"
+        },
+        "span" : {
+          "startInclusive" : 84,
+          "endExclusive" : 95
+        }
+      }
+    },
+    "exactToken" : "{@dice 1d4}"
+  }, {
+    "reference" : {
+      "kind" : "FORMULA_SYNTAX",
+      "id" : "spell:phb:healing-word:formula:1",
+      "spellId" : {
+        "value" : "spell:phb:healing-word"
+      },
+      "occurrenceIndex" : 1,
+      "source" : {
+        "datasetVersion" : "5eTools v2.37.0",
+        "resourcePath" : "data/spells/spells-phb.json",
+        "resourceSha256" : "c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a"
+      },
+      "evidence" : {
+        "location" : {
+          "owner" : {
+            "resourcePath" : "data/spells/spells-phb.json",
+            "resourceSha256" : "c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a",
+            "collection" : "spell",
+            "jsonPointer" : "/spell/175"
+          },
+          "jsonPointer" : "/spell/175/entriesHigherLevel/0/entries/0",
+          "hierarchy" : [ {
+            "jsonPointer" : "/spell/175",
+            "authoredType" : null
+          }, {
+            "jsonPointer" : "/spell/175/entriesHigherLevel",
+            "authoredType" : null
+          }, {
+            "jsonPointer" : "/spell/175/entriesHigherLevel/0",
+            "authoredType" : "entries"
+          }, {
+            "jsonPointer" : "/spell/175/entriesHigherLevel/0/entries",
+            "authoredType" : null
+          } ],
+          "origin" : "AUTHORED"
+        },
+        "span" : {
+          "startInclusive" : 93,
+          "endExclusive" : 117
+        }
+      }
+    },
+    "exactToken" : "{@scaledice 1d4|1-9|1d4}"
+  } ],
+  "deferred" : [ {
+    "id" : "target-restrictions",
+    "candidateFamily" : "HEALING",
+    "concept" : "TARGET_RESTRICTIONS",
+    "proposedConstraint" : "One chosen visible creature in range; no effect on undead or constructs.",
+    "adjudicationQuestion" : "Target selection and exclusions lack a complete canonical representation.",
+    "expectedReason" : "FAMILY_NOT_IMPLEMENTED",
+    "evidence" : [ {
+      "kind" : "TEXT_SPAN",
+      "id" : "text-e4a261a78f8c1f86",
+      "source" : {
+        "source" : "PHB",
+        "page" : 250
+      },
+      "syntax" : {
+        "location" : {
+          "owner" : {
+            "resourcePath" : "data/spells/spells-phb.json",
+            "resourceSha256" : "c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a",
+            "collection" : "spell",
+            "jsonPointer" : "/spell/175"
+          },
+          "jsonPointer" : "/spell/175/entries/0",
+          "hierarchy" : [ {
+            "jsonPointer" : "/spell/175",
+            "authoredType" : null
+          }, {
+            "jsonPointer" : "/spell/175/entries",
+            "authoredType" : null
+          } ],
+          "origin" : "AUTHORED"
+        },
+        "span" : {
+          "startInclusive" : 0,
+          "endExclusive" : 183
+        }
+      },
+      "textSha256" : "273621890b2352306d662560454e97ec2cd6b0ef850e0e2cdb23c99a5a244c0c",
+      "origin" : "AUTHORED",
+      "authoredOwner" : {
+        "domain" : "SPELL",
+        "id" : "spell:phb:healing-word",
+        "source" : {
+          "source" : "PHB",
+          "page" : 250
+        }
+      }
+    } ]
+  }, {
+    "id" : "slot-scaling",
+    "candidateFamily" : "HEALING",
+    "concept" : "SLOT_SCALING",
+    "proposedConstraint" : "Add 1d4 per slot level above 1 when using slot level 2 or higher.",
+    "adjudicationQuestion" : "Do not truncate the base amount to a dice token or evaluate the symbolic modifier.",
+    "expectedReason" : "FAMILY_NOT_IMPLEMENTED",
+    "evidence" : [ {
+      "kind" : "TEXT_SPAN",
+      "id" : "text-bcde882819368a5e",
+      "source" : {
+        "source" : "PHB",
+        "page" : 250
+      },
+      "syntax" : {
+        "location" : {
+          "owner" : {
+            "resourcePath" : "data/spells/spells-phb.json",
+            "resourceSha256" : "c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a",
+            "collection" : "spell",
+            "jsonPointer" : "/spell/175"
+          },
+          "jsonPointer" : "/spell/175/entriesHigherLevel/0/entries/0",
+          "hierarchy" : [ {
+            "jsonPointer" : "/spell/175",
+            "authoredType" : null
+          }, {
+            "jsonPointer" : "/spell/175/entriesHigherLevel",
+            "authoredType" : null
+          }, {
+            "jsonPointer" : "/spell/175/entriesHigherLevel/0",
+            "authoredType" : "entries"
+          }, {
+            "jsonPointer" : "/spell/175/entriesHigherLevel/0/entries",
+            "authoredType" : null
+          } ],
+          "origin" : "AUTHORED"
+        },
+        "span" : {
+          "startInclusive" : 0,
+          "endExclusive" : 148
+        }
+      },
+      "textSha256" : "17efd20d17b9c4456eb27187b0bb844078b557cb25c987fb2d5575ce90d629a4",
+      "origin" : "AUTHORED",
+      "authoredOwner" : {
+        "domain" : "SPELL",
+        "id" : "spell:phb:healing-word",
+        "source" : {
+          "source" : "PHB",
+          "page" : 250
+        }
+      }
+    } ]
+  } ],
+  "prohibitions" : [ {
+    "id" : "no-cross-edition-evidence",
+    "rule" : "NO_FOREIGN_SOURCE_EVIDENCE",
+    "family" : null,
+    "rationale" : "Never reuse PHB and XPHB evidence or original source locations interchangeably."
+  }, {
+    "id" : "no-invented-mechanics",
+    "rule" : "NO_UNEXPECTED_CLAIMS",
+    "family" : null,
+    "rationale" : "No calculated final AC, guaranteed attack negation, broad immunity, invented targets/triggers or effects; only the exact bounded proposed claims may be compared as supported assertions."
+  } ],
+  "review" : {
+    "state" : "PENDING_HUMAN_REVIEW",
+    "humanDecision" : null
+  }
+}

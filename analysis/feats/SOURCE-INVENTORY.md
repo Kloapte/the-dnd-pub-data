@@ -1,6 +1,6 @@
 # Feats source inventory
 
-Analyzed all of `src/main/resources/data/feats.json`. The root contains one collection, `feat`, with **305 records and 305 unique `(name, source)` identities**. The [normalized field inventory](nnormalized-field-inventory.json) records every observed property path and JSON value type, including nested entry, prerequisite, spell-grant, proficiency, and version structures.
+Analyzed all of `src/main/resources/data/feats.json`. The root contains one collection, `feat`, with **305 records and 305 unique `(name, source)` identities**. The [normalized field inventory](normalized-field-inventory.json) records every observed property path and JSON value type, including nested entry, prerequisite, spell-grant, proficiency, and version structures.
 
 ## Sources and identity
 

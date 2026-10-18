@@ -7,6 +7,7 @@ import com.thedndpub.data.dto.spell.SpellMaterialDetails;
 import com.thedndpub.data.dto.spell.SpellMaterialText;
 import com.thedndpub.data.dto.spell.SpellSchool;
 import com.thedndpub.data.dto.source.SourceReference;
+import com.thedndpub.data.mechanics.inspection.SpellMechanicsInspectionDto;
 import com.thedndpub.data.services.SpellFormulaProjectionCatalog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -49,6 +50,10 @@ public final class SpellPublicMapper {
     }
 
     public SpellDto detail(SpellDefinition spell) {
+        return detail(spell, null);
+    }
+
+    public SpellDto detail(SpellDefinition spell, SpellMechanicsInspectionDto inspection) {
         return new SpellDto(
                 spell.id().value(),
                 spell.identity().name(),
@@ -80,7 +85,8 @@ public final class SpellPublicMapper {
                                 .toList()))
                         .toList(),
                 sourceRelationships(spell),
-                formulaProjection == null ? null : formulaProjection.statusFor(spell.id()));
+                formulaProjection == null ? null : formulaProjection.statusFor(spell.id()),
+                inspection);
     }
 
     private SpellRangeDto range(SpellDefinition spell) {
