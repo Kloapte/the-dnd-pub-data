@@ -7,6 +7,7 @@ import com.thedndpub.data.mechanics.model.ArmorClassModifierMechanic;
 import com.thedndpub.data.mechanics.model.CasterSubject;
 import com.thedndpub.data.mechanics.model.CoverageStatus;
 import com.thedndpub.data.mechanics.model.DamageMechanic;
+import com.thedndpub.data.mechanics.model.DamageOutcome;
 import com.thedndpub.data.mechanics.model.DiceAmount;
 import com.thedndpub.data.mechanics.model.DurationUnit;
 import com.thedndpub.data.mechanics.model.EffectDurationMechanic;
@@ -392,7 +393,7 @@ class BenchmarkComparisonTests {
         var outcome = (AppliesOnSaveOutcome) damage.context().bindings().getFirst();
         var wrong = BenchmarkTestDocuments.record(fixture, expectation, damage.payload(), new MechanicContext(
                 damage.context().subject(), List.of(new AppliesOnSaveOutcome(outcome.savingThrow(), SaveOutcome.SUCCESS,
-                outcome.evidenceIds()))), expectation.evidence());
+                DamageOutcome.HALF_DAMAGE, outcome.evidenceIds()))), expectation.evidence());
         var records = original.interpretations().stream().map(value -> value.id().equals(damage.id()) ? wrong : value).toList();
         var report = compare(fixture, BenchmarkTestDocuments.document(fixture, records, original.evidence(),
                 original.unsupported(), CoverageStatus.PARTIAL));

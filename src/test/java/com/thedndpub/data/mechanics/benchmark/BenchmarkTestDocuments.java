@@ -79,8 +79,10 @@ final class BenchmarkTestDocuments {
             result.add(switch (binding) {
                 case ExpectedActivation activation -> new ActivatedBy(reference(records.get(activation.claimKey())), ids);
                 case ExpectedDuration duration -> new AppliesForDuration(duration.duration(), ids);
-                case ExpectedSaveOutcome outcome -> new AppliesOnSaveOutcome(reference(records.get(outcome.claimKey())),
-                        outcome.outcome(), ids);
+                case ExpectedSaveOutcome outcome -> outcome.damageOutcome() == null
+                        ? new AppliesOnSaveOutcome(reference(records.get(outcome.claimKey())), outcome.outcome(), ids)
+                        : new AppliesOnSaveOutcome(reference(records.get(outcome.claimKey())), outcome.outcome(),
+                                outcome.damageOutcome(), ids);
                 case ExpectedTriggeringAttack ignored -> new IncludesTriggeringAttack(ids);
             });
         }

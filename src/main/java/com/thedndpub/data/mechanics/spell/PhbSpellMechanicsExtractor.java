@@ -8,6 +8,10 @@ import com.thedndpub.data.mechanics.model.Ability;
 import com.thedndpub.data.mechanics.model.AmountSymbol;
 import com.thedndpub.data.mechanics.model.AppliesOnSaveOutcome;
 import com.thedndpub.data.mechanics.model.DamageMechanic;
+import com.thedndpub.data.mechanics.model.ConditionChangeMechanic;
+import com.thedndpub.data.mechanics.model.ConditionName;
+import com.thedndpub.data.mechanics.model.ConditionOperation;
+import com.thedndpub.data.mechanics.model.DamageOutcome;
 import com.thedndpub.data.mechanics.model.DiceAmount;
 import com.thedndpub.data.mechanics.model.EvidenceRole;
 import com.thedndpub.data.mechanics.model.FixedAbility;
@@ -23,6 +27,8 @@ import com.thedndpub.data.mechanics.model.MechanicsDocument;
 import com.thedndpub.data.mechanics.model.ModelChecks;
 import com.thedndpub.data.mechanics.model.ProcessingState;
 import com.thedndpub.data.mechanics.model.SaveOutcome;
+import com.thedndpub.data.mechanics.model.ScalingEffect;
+import com.thedndpub.data.mechanics.model.SpellSlotScalingMechanic;
 import com.thedndpub.data.mechanics.model.SavingThrowRequirementMechanic;
 import com.thedndpub.data.mechanics.model.SumAmount;
 import com.thedndpub.data.mechanics.model.SymbolicAmount;
@@ -48,7 +54,17 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
             "spell:phb:cone-of-cold",
             "spell:phb:shatter",
             "spell:phb:lightning-bolt",
-            "spell:phb:circle-of-death");
+            "spell:phb:circle-of-death",
+            "spell:phb:blight",
+            "spell:phb:chain-lightning",
+            "spell:phb:cloudkill",
+            "spell:phb:fire-storm",
+            "spell:phb:hellish-rebuke",
+            "spell:phb:incendiary-cloud",
+            "spell:phb:insect-plague",
+            "spell:phb:moonbeam",
+            "spell:phb:flaming-sphere",
+            "spell:phb:wind-wall");
     private static final Set<String> HEALING_OWNERS = Set.of(
             "spell:phb:healing-word",
             "spell:phb:cure-wounds",
@@ -79,12 +95,14 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
 
     @Override
     public String patternId() {
-        return "phb-damage-and-healing-v1";
+        return "phb-damage-healing-and-conditions-v1";
     }
 
     @Override
     public boolean supports(SpellDefinition spell) {
-        return OWNERS.contains(spell.id().value());
+        return OWNERS.contains(spell.id().value()) || spell.source().identity().code().equalsIgnoreCase("PHB")
+                && (!spell.mechanics().conditionsInflicted().isEmpty()
+                || !spell.mechanics().conditionImmunities().isEmpty());
     }
 
     @Override
@@ -101,6 +119,8 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
         verifyEntries(spell.entriesHigherLevel(), "/entriesHigherLevel", source);
         source.verifyTextList("/savingThrow", spell.mechanics().savingThrows());
         source.verifyTextList("/damageInflict", spell.mechanics().damageInflicted());
+        source.verifyTextList("/conditionInflict", spell.mechanics().conditionsInflicted());
+        source.verifyTextList("/conditionImmune", spell.mechanics().conditionImmunities());
         String adapterId = PREVIOUSLY_PROCESSED_OWNERS.contains(spell.id().value())
                 ? "phb-spell-pilot" : "phb-spell-patterns";
         var assembly = new SpellMechanicsAssembly(source, original, adapterId);
@@ -109,18 +129,26 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
                     () -> savingThrow(spell, source, assembly));
             assembly.attempt("fireball-damage-v1", MechanicFamily.DAMAGE,
                     () -> damage(spell, source, assembly, save));
-            defer(assembly, source, "successful-save-half", MechanicFamily.DAMAGE, BODY, SUCCESS);
             defer(assembly, source, "area-targets", MechanicFamily.UNDETERMINED, BODY, AREA);
-            defer(assembly, source, "slot-scaling", MechanicFamily.DAMAGE, HIGHER, null);
+            assembly.attempt("slot-scaling-v1", MechanicFamily.SPELL_SLOT_SCALING,
+                    () -> slotScaling(spell, source, assembly));
         } else if (spell.id().value().equals("spell:phb:healing-word")) {
             assembly.attempt("healing-word-amount-v1", MechanicFamily.HEALING,
                     () -> healing(spell, source, assembly));
             defer(assembly, source, "target-restrictions", MechanicFamily.HEALING, BODY, null);
-            defer(assembly, source, "slot-scaling", MechanicFamily.HEALING, HIGHER, null);
+            assembly.attempt("slot-scaling-v1", MechanicFamily.SPELL_SLOT_SCALING,
+                    () -> slotScaling(spell, source, assembly));
         } else if (DAMAGE_OWNERS.contains(spell.id().value())) {
             extractGeneralDamage(spell, source, assembly);
-        } else {
+        } else if (HEALING_OWNERS.contains(spell.id().value())) {
             extractGeneralHealing(spell, source, assembly);
+        }
+        extractConditions(spell, source, assembly);
+        if (!spell.entriesHigherLevel().isEmpty()
+                && !spell.id().value().equals("spell:phb:fireball")
+                && !spell.id().value().equals("spell:phb:healing-word")) {
+            assembly.attempt("slot-scaling-v1", MechanicFamily.SPELL_SLOT_SCALING,
+                    () -> slotScaling(spell, source, assembly));
         }
         String root = source.source().jsonPointer();
         return assembly.finish(List.of(root + "/entries", root + "/entriesHigherLevel",
@@ -128,18 +156,83 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
                 List.of(root + "/entries", root + "/entriesHigherLevel"));
     }
 
+    private void extractConditions(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                   SpellMechanicsAssembly assembly) {
+        for (String raw : spell.mechanics().conditionsInflicted()) {
+            conditionClaim(raw, ConditionOperation.APPLY, spell, source, assembly, "/conditionInflict");
+        }
+        for (String raw : spell.mechanics().conditionImmunities()) {
+            conditionClaim(raw, ConditionOperation.GRANT_IMMUNITY, spell, source, assembly, "/conditionImmune");
+        }
+    }
+
+    private void conditionClaim(String raw, ConditionOperation operation, SpellDefinition spell,
+                                SpellMechanicsEvidenceSource source, SpellMechanicsAssembly assembly, String field) {
+        String operationId = operation.name().toLowerCase(java.util.Locale.ROOT).replace('_', '-');
+        assembly.attempt("condition-" + operationId + "-" + raw, MechanicFamily.CONDITION,
+                () -> conditionRecord(raw, operation, spell, source, assembly, field));
+    }
+
+    private MechanicRecord conditionRecord(String raw, ConditionOperation operation, SpellDefinition spell,
+                                           SpellMechanicsEvidenceSource source, SpellMechanicsAssembly assembly,
+                                           String field) {
+        String operationId = operation.name().toLowerCase(java.util.Locale.ROOT).replace('_', '-');
+        ConditionName condition;
+        try {
+            condition = ConditionName.valueOf(raw.toUpperCase(java.util.Locale.ROOT));
+        } catch (IllegalArgumentException exception) {
+            throw new SpellPatternMismatch(UnsupportedReason.UNSUPPORTED_SYNTAX, field);
+        }
+        var fieldEvidence = source.fieldEvidence(field + "/" +
+                (operation == ConditionOperation.APPLY ? spell.mechanics().conditionsInflicted().indexOf(raw)
+                        : spell.mechanics().conditionImmunities().indexOf(raw)));
+        var qualifiers = new java.util.ArrayList<String>();
+        var associations = new java.util.ArrayList<MechanicEvidenceAssociation>();
+        associations.add(MechanicEvidenceAssociation.of(fieldEvidence, "/payload", EvidenceRole.EFFECT_ROLE));
+        String conditionTag = "{@condition " + raw;
+        for (int index = 0; index < spell.entries().size(); index++) {
+            String pointer = "/entries/" + index;
+            try {
+                String authoredText = source.text(pointer).text();
+                int tagPosition = authoredText.toLowerCase(java.util.Locale.ROOT)
+                        .indexOf(conditionTag.toLowerCase(java.util.Locale.ROOT));
+                if (tagPosition < 0) {
+                    continue;
+                }
+                int start = Math.max(authoredText.lastIndexOf('.', tagPosition),
+                        authoredText.lastIndexOf(';', tagPosition)) + 1;
+                int end = authoredText.indexOf('.', tagPosition);
+                if (end < 0) {
+                    end = authoredText.length();
+                }
+                String phrase = authoredText.substring(start, end).trim();
+                if (!phrase.isEmpty() && !qualifiers.contains(phrase)) {
+                    var qualifierEvidence = source.textEvidence(pointer, phrase);
+                    qualifiers.add(phrase);
+                    associations.add(MechanicEvidenceAssociation.of(qualifierEvidence, "/payload/qualifiers",
+                            EvidenceRole.QUALIFIER));
+                }
+            } catch (SpellPatternMismatch ignored) {
+                // Nested entries require a dedicated evidence path and are not flattened here.
+            }
+        }
+        return assembly.claim("condition-" + operationId + "-" + raw,
+                "condition-explicit-metadata-v1", new ConditionChangeMechanic(operation, condition, qualifiers),
+                unknownContext(), associations,
+                true, MechanicsCompleteness.PARTIAL);
+    }
+
     private void extractGeneralDamage(
             SpellDefinition spell,
             SpellMechanicsEvidenceSource source,
             SpellMechanicsAssembly assembly) {
+        String bodyPointer = generalDamagePointer(spell, source);
         MechanicRecord save = assembly.attempt("save-requirement-v1", MechanicFamily.SAVING_THROW_REQUIREMENT,
-                () -> generalSavingThrow(spell, source, assembly));
-        assembly.attempt("damage-on-failed-save-v1", MechanicFamily.DAMAGE,
-                () -> generalFailedSaveDamage(spell, source, assembly, save));
-        String halfDamage = findHalfDamageClause(source.text(BODY).text());
-        if (halfDamage != null) {
-            defer(assembly, source, "successful-save-half", MechanicFamily.DAMAGE, BODY, halfDamage);
-        } else {
+                () -> generalSavingThrow(spell, source, assembly, bodyPointer));
+        MechanicRecord damage = assembly.attempt("damage-on-failed-save-v1", MechanicFamily.DAMAGE,
+                () -> generalFailedSaveDamage(spell, source, assembly, save, bodyPointer));
+        if (damage != null && damage.context().bindings().stream().noneMatch(binding ->
+                binding instanceof AppliesOnSaveOutcome outcome && outcome.outcome() == SaveOutcome.SUCCESS)) {
             assembly.abstain("successful-save-outcome", MechanicFamily.DAMAGE,
                     UnsupportedReason.NO_SUPPORTED_PATTERN, BODY);
         }
@@ -148,19 +241,20 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
     private MechanicRecord generalSavingThrow(
             SpellDefinition spell,
             SpellMechanicsEvidenceSource source,
-            SpellMechanicsAssembly assembly) {
-        String text = source.text(BODY).text();
+            SpellMechanicsAssembly assembly,
+            String bodyPointer) {
+        String text = source.text(bodyPointer).text();
         Matcher matcher = Pattern.compile(
-                "\\bmust make a (Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma) saving throw\\b")
+                "\\bmust make (?:a )?(Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma) saving throw\\b")
                 .matcher(text);
-        require(matcher.find(), BODY);
+        require(matcher.find(), bodyPointer);
         String authoredAbility = matcher.group(1);
-        require(!matcher.find(), BODY);
+        require(!matcher.find(), bodyPointer);
         List<String> abilities = spell.mechanics().savingThrows();
         require(abilities != null && abilities.size() == 1, "/savingThrow");
         Ability ability = ability(abilities.getFirst());
-        require(authoredAbility.equalsIgnoreCase(ability.name()), BODY);
-        TextMechanicsEvidence saveText = source.textEvidence(BODY, authoredAbility + " saving throw");
+        require(authoredAbility.equalsIgnoreCase(ability.name()), bodyPointer);
+        TextMechanicsEvidence saveText = source.textEvidence(bodyPointer, authoredAbility + " saving throw");
         return assembly.claim("saving-throw", "save-requirement-v1",
                 new SavingThrowRequirementMechanic(new FixedAbility(ability),
                         new UnknownSaveDifficulty(UnknownValueReason.NOT_AUTHORED)), unknownContext(), List.of(
@@ -173,28 +267,74 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
             SpellDefinition spell,
             SpellMechanicsEvidenceSource source,
             SpellMechanicsAssembly assembly,
-            MechanicRecord save) {
-        require(save != null, BODY);
-        String text = source.text(BODY).text();
-        MarkupTag tag = singleFormula(source, "damage");
+            MechanicRecord save,
+            String bodyPointer) {
+        require(save != null, bodyPointer);
+        String text = source.text(bodyPointer).text();
+        MarkupTag tag = singleFormula(source, bodyPointer, "damage");
         List<String> types = spell.mechanics().damageInflicted();
         require(types != null && types.size() == 1, "/damageInflict");
         String type = types.getFirst();
         String role = damageRole(text, tag, type);
-        require(role != null, BODY);
-        requireSaveAndDamageAreLocallyRelated(text, tag);
-        Matcher failedSave = Pattern.compile("(?i)on a failed save").matcher(role);
-        require(failedSave.find(), BODY);
-        var outcome = source.textEvidence(BODY, failedSave.group());
-        TextMechanicsEvidence damageText = source.textEvidence(BODY, role);
+        require(role != null, bodyPointer);
+        requireSaveAndDamageAreLocallyRelated(text, tag, bodyPointer);
+        DamageSaveOutcomeEvidence outcomes = saveOutcomeEvidence(save, source, role, bodyPointer);
+        TextMechanicsEvidence damageText = source.textEvidence(bodyPointer, role);
         return assembly.claim("failed-save-damage", "damage-on-failed-save-v1",
                 new DamageMechanic(dice(tag, BODY), new FixedDamageType(type)),
-                new MechanicContext(new UnknownSubject(UnknownValueReason.NOT_INTERPRETED), List.of(
-                        new AppliesOnSaveOutcome(save.revision().reference(save.id()), SaveOutcome.FAILURE,
-                                List.of(outcome.id())))), List.of(
-                        MechanicEvidenceAssociation.of(damageText, "/payload", EvidenceRole.EFFECT_ROLE),
-                        MechanicEvidenceAssociation.of(outcome, "/context/bindings/0", EvidenceRole.QUALIFIER)),
+                new MechanicContext(new UnknownSubject(UnknownValueReason.NOT_INTERPRETED), outcomes.bindings()),
+                combineEvidence(damageText, outcomes.evidence()),
                 false, MechanicsCompleteness.PARTIAL);
+    }
+
+    private DamageSaveOutcomeEvidence saveOutcomeEvidence(
+            MechanicRecord save,
+            SpellMechanicsEvidenceSource source,
+            String damageRole,
+            String bodyPointer) {
+        Matcher failedSave = Pattern.compile("(?i)on a failed save").matcher(damageRole);
+        require(failedSave.find() && !failedSave.find(), bodyPointer);
+        var failedEvidence = source.textEvidence(bodyPointer, "on a failed save");
+        var bindings = new java.util.ArrayList<com.thedndpub.data.mechanics.model.MechanicContextBinding>();
+        var associations = new java.util.ArrayList<MechanicEvidenceAssociation>();
+        bindings.add(new AppliesOnSaveOutcome(save.revision().reference(save.id()), SaveOutcome.FAILURE,
+                DamageOutcome.FULL_DAMAGE, List.of(failedEvidence.id())));
+        associations.add(MechanicEvidenceAssociation.of(failedEvidence, "/context/bindings/0",
+                EvidenceRole.QUALIFIER));
+
+        String sourceText = source.text(bodyPointer).text();
+        Matcher success = Pattern.compile("(?i)(?:or\\s+)?(?:half(?: as much)? damage|no damage)"
+                        + " on a successful (?:save|one)|on a successful (?:save|one),\\s*"
+                        + "(?:a target|the target|a creature|the creature|it) takes "
+                        + "(?:half(?: as much)? damage|no damage)")
+                .matcher(sourceText);
+        if (success.find()) {
+            String phrase = success.group();
+            Matcher successfulOutcome = Pattern.compile("(?i)successful (?:save|one)").matcher(sourceText);
+            require(!success.find() && successfulOutcome.find() && !successfulOutcome.find(), bodyPointer);
+            DamageOutcome result = phrase.toLowerCase(java.util.Locale.ROOT).contains("no damage")
+                    ? DamageOutcome.NO_DAMAGE : DamageOutcome.HALF_DAMAGE;
+            var successEvidence = source.textEvidence(bodyPointer, phrase);
+            bindings.add(new AppliesOnSaveOutcome(save.revision().reference(save.id()), SaveOutcome.SUCCESS,
+                    result, List.of(successEvidence.id())));
+            associations.add(MechanicEvidenceAssociation.of(successEvidence, "/context/bindings/1",
+                    EvidenceRole.QUALIFIER));
+        }
+        return new DamageSaveOutcomeEvidence(List.copyOf(bindings), List.copyOf(associations));
+    }
+
+    private List<MechanicEvidenceAssociation> combineEvidence(
+            TextMechanicsEvidence damageEvidence,
+            List<MechanicEvidenceAssociation> outcomeEvidence) {
+        var result = new java.util.ArrayList<MechanicEvidenceAssociation>();
+        result.add(MechanicEvidenceAssociation.of(damageEvidence, "/payload", EvidenceRole.EFFECT_ROLE));
+        result.addAll(outcomeEvidence);
+        return List.copyOf(result);
+    }
+
+    private record DamageSaveOutcomeEvidence(
+            List<com.thedndpub.data.mechanics.model.MechanicContextBinding> bindings,
+            List<MechanicEvidenceAssociation> evidence) {
     }
 
     private MechanicRecord generalHealing(
@@ -229,6 +369,73 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
                 () -> generalHealing(spell, source, assembly));
     }
 
+    private String generalDamagePointer(SpellDefinition spell, SpellMechanicsEvidenceSource source) {
+        List<String> candidates = new java.util.ArrayList<>();
+        for (int index = 0; index < spell.entries().size(); index++) {
+            if (!(spell.entries().get(index) instanceof TextEntryDte)) {
+                continue;
+            }
+            String pointer = "/entries/" + index;
+            try {
+                MarkupTag tag = singleFormula(source, pointer, "damage");
+                String text = source.text(pointer).text();
+                if (spell.mechanics().damageInflicted().size() == 1
+                        && damageRole(text, tag, spell.mechanics().damageInflicted().getFirst()) != null
+                        && Pattern.compile("\\bmust make (?:a )?(?:Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma) saving throw\\b")
+                                .matcher(text).results().count() == 1) {
+                    candidates.add(pointer);
+                }
+            } catch (SpellPatternMismatch mismatch) {
+                // Other text entries are outside this bounded damage pattern.
+            }
+        }
+        require(candidates.size() == 1, "/entries");
+        return candidates.getFirst();
+    }
+
+    private MechanicRecord slotScaling(
+            SpellDefinition spell,
+            SpellMechanicsEvidenceSource source,
+            SpellMechanicsAssembly assembly) {
+        require(!spell.entriesHigherLevel().isEmpty(), "/entriesHigherLevel");
+        String pointer = HIGHER;
+        String text = source.text(pointer).text();
+        Matcher matcher = Pattern.compile("(?i)(?:the )?(damage|healing|hit points) increases by \\{@(damage|dice|scaledamage|scaledice) ([1-9][0-9]*d[1-9][0-9]*)(?:\\|[^|}]+\\|([1-9][0-9]*d[1-9][0-9]*))?} for each slot level above ([1-9][0-9]*)(?:st|nd|rd|th)")
+                .matcher(text);
+        require(matcher.find(), pointer);
+        String effectWord = matcher.group(1);
+        String tagName = matcher.group(2);
+        String formula = matcher.group(4) == null ? matcher.group(3) : matcher.group(4);
+        int authoredBase = Integer.parseInt(matcher.group(5));
+        require(!matcher.find(), pointer);
+        ScalingEffect effect = effectWord.equalsIgnoreCase("damage")
+                ? ScalingEffect.DAMAGE : ScalingEffect.HEALING;
+        require(spell.level() != null && spell.level() == authoredBase, pointer);
+        Matcher applicability = Pattern.compile(
+                "(?i)cast this spell using a spell slot of ([1-9][0-9]*)(?:st|nd|rd|th) level or higher")
+                .matcher(text);
+        require(applicability.find(), pointer);
+        int minimumCastingSlotLevel = Integer.parseInt(applicability.group(1));
+        require(!applicability.find() && minimumCastingSlotLevel == authoredBase + 1, pointer);
+        MarkupTag tag;
+        try {
+            tag = new BalancedMarkupParser().parse(source.text(pointer)).tags().stream()
+                    .filter(value -> value.name().equals(tagName) && !value.arguments().isEmpty()
+                            && (value.name().equals("scaledamage") || value.name().equals("scaledice")
+                                    ? value.arguments().size() == 3 && value.arguments().get(2).equals(formula)
+                                    : value.arguments().getFirst().equals(formula)))
+                    .findFirst().orElseThrow(() -> new SpellPatternMismatch(UnsupportedReason.NO_SUPPORTED_PATTERN, pointer));
+        } catch (MarkupSyntaxException exception) {
+            throw new SpellPatternMismatch(UnsupportedReason.UNSUPPORTED_SYNTAX, pointer);
+        }
+        var evidence = source.textEvidence(pointer, text);
+        return assembly.claim("slot-scaling", "spell-slot-scaling-v1",
+                new SpellSlotScalingMechanic(effect, diceExpression(formula, pointer), authoredBase,
+                        minimumCastingSlotLevel, 1), unknownContext(),
+                List.of(MechanicEvidenceAssociation.of(evidence, "/payload", EvidenceRole.EFFECT_ROLE)),
+                false, MechanicsCompleteness.PARTIAL);
+    }
+
     private String damageRole(String text, MarkupTag tag, String damageType) {
         String formula = tag.originalText();
         int index = text.indexOf(formula);
@@ -245,7 +452,8 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
         String subject = "(?:a target|the target|a creature|the creature|it)";
         boolean recognized = Pattern.compile("(?is)(?:on a failed save,\\s*)?" + subject
                 + " takes\\s+" + escaped + "\\s+" + type
-                + " damage(?: on a failed save)?(?:, or half as much damage on a successful (?:save|one))?")
+                + " damage(?: on a failed save)?(?:, or (?:half(?: as much)? damage|no damage)"
+                + " on a successful (?:save|one))?(?:\\s+(?:and|but)\\b[^.]*)?")
                 .matcher(clause).matches();
         if (!recognized || !clause.toLowerCase(java.util.Locale.ROOT).contains("on a failed save")) {
             return null;
@@ -253,28 +461,17 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
         return clause;
     }
 
-    private void requireSaveAndDamageAreLocallyRelated(String text, MarkupTag tag) {
+    private void requireSaveAndDamageAreLocallyRelated(String text, MarkupTag tag, String bodyPointer) {
         Matcher savingThrow = Pattern.compile(
-                "\\bmust make a (?:Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma) saving throw\\b")
+                "\\bmust make (?:a )?(?:Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma) saving throw\\b")
                 .matcher(text);
-        require(savingThrow.find(), BODY);
+        require(savingThrow.find(), bodyPointer);
         int saveEnd = savingThrow.end();
-        require(!savingThrow.find(), BODY);
+        require(!savingThrow.find(), bodyPointer);
         int formulaStart = text.indexOf(tag.originalText());
-        require(formulaStart > saveEnd, BODY);
+        require(formulaStart > saveEnd, bodyPointer);
         String between = text.substring(saveEnd, formulaStart);
-        require(between.chars().filter(character -> character == '.').count() <= 1, BODY);
-    }
-
-    private String findHalfDamageClause(String text) {
-        Matcher matcher = Pattern.compile(
-                        "(?i)(?:or )?half (?:as much|the) damage(?: on a successful (?:save|one))?")
-                .matcher(text);
-        if (!matcher.find()) {
-            return null;
-        }
-        String clause = matcher.group();
-        return text.indexOf(clause, matcher.end()) >= 0 ? null : clause;
+        require(between.chars().filter(character -> character == '.').count() <= 1, bodyPointer);
     }
 
     private Ability ability(String authored) {
@@ -314,24 +511,24 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
         require(save != null, "/savingThrow");
         MarkupTag tag = fireballBody(spell, source);
         require(spell.mechanics().damageInflicted().equals(List.of("fire")), "/damageInflict");
-        var outcome = source.textEvidence(BODY, FAILURE);
-        String role = "A target takes " + tag.originalText() + " fire damage " + FAILURE;
+        String role = damageRole(source.text(BODY).text(), tag, "fire");
+        require(role != null, BODY);
+        DamageSaveOutcomeEvidence outcomes = saveOutcomeEvidence(save, source, role, BODY);
         return assembly.claim("failed-save-damage", "fireball-damage-v1",
                 new DamageMechanic(dice(tag, BODY), new FixedDamageType(spell.mechanics().damageInflicted().getFirst())),
-                new MechanicContext(new UnknownSubject(UnknownValueReason.NOT_INTERPRETED), List.of(
-                        new AppliesOnSaveOutcome(save.revision().reference(save.id()), SaveOutcome.FAILURE,
-                                List.of(outcome.id())))), List.of(
-                        MechanicEvidenceAssociation.of(source.textEvidence(BODY, role), "/payload", EvidenceRole.EFFECT_ROLE),
-                        MechanicEvidenceAssociation.of(outcome, "/context/bindings/0", EvidenceRole.QUALIFIER)),
+                new MechanicContext(new UnknownSubject(UnknownValueReason.NOT_INTERPRETED), outcomes.bindings()),
+                combineEvidence(source.textEvidence(BODY, role), outcomes.evidence()),
                 false, MechanicsCompleteness.PARTIAL);
     }
 
     private MarkupTag fireballBody(SpellDefinition spell, SpellMechanicsEvidenceSource source) {
         require(spell.entries().size() == 2 && spell.entries().getFirst() instanceof TextEntryDte, "/entries");
         MarkupTag tag = singleFormula(source, "damage");
-        String expected = FIREBALL_INTRO + "Each creature in a " + AREA + " centered on that point " + SAVE
-                + ". A target takes " + tag.originalText() + " fire damage " + FAILURE + ", or " + SUCCESS + ".";
-        require(source.text(BODY).text().equals(expected), BODY);
+        String prefix = FIREBALL_INTRO + "Each creature in a " + AREA + " centered on that point " + SAVE
+                + ". A target takes " + tag.originalText() + " fire damage " + FAILURE + ", or ";
+        String body = source.text(BODY).text();
+        require(body.startsWith(prefix) && (body.substring(prefix.length()).equals(SUCCESS + ".")
+                || body.substring(prefix.length()).equals("no damage on a successful one.")), BODY);
         return tag;
     }
 
@@ -350,20 +547,28 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
     }
 
     private MarkupTag singleFormula(SpellMechanicsEvidenceSource source, String name) {
+        return singleFormula(source, BODY, name);
+    }
+
+    private MarkupTag singleFormula(SpellMechanicsEvidenceSource source, String pointer, String name) {
         try {
-            List<MarkupTag> tags = new BalancedMarkupParser().parse(source.text(BODY)).tags();
-            require(tags.size() == 1, BODY);
+            List<MarkupTag> tags = new BalancedMarkupParser().parse(source.text(pointer)).tags();
+            require(tags.size() == 1, pointer);
             MarkupTag tag = tags.getFirst();
-            require(tag.name().equals(name) && tag.arguments().size() == 1 && tag.children().isEmpty(), BODY);
-            dice(tag, BODY);
+            require(tag.name().equals(name) && tag.arguments().size() == 1 && tag.children().isEmpty(), pointer);
+            dice(tag, pointer);
             return tag;
         } catch (MarkupSyntaxException exception) {
-            throw new SpellPatternMismatch(UnsupportedReason.UNSUPPORTED_SYNTAX, BODY);
+            throw new SpellPatternMismatch(UnsupportedReason.UNSUPPORTED_SYNTAX, pointer);
         }
     }
 
     private DiceAmount dice(MarkupTag tag, String pointer) {
-        Matcher match = DICE.matcher(tag.arguments().getFirst());
+        return diceExpression(tag.arguments().getFirst(), pointer);
+    }
+
+    private DiceAmount diceExpression(String expression, String pointer) {
+        Matcher match = DICE.matcher(expression);
         require(match.matches(), pointer);
         try {
             return new DiceAmount(Integer.parseInt(match.group(1)), Integer.parseInt(match.group(2)), 0);

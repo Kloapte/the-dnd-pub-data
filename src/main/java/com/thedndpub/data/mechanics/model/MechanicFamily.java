@@ -8,5 +8,7 @@ public enum MechanicFamily {
     DAMAGE,
     HEALING,
     SAVING_THROW_REQUIREMENT,
+    SPELL_SLOT_SCALING,
+    CONDITION,
     UNDETERMINED
 }

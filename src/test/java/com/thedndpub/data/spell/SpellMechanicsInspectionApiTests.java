@@ -13,6 +13,7 @@ import com.thedndpub.data.mechanics.inspection.FormulaObservationInspectionDto;
 import com.thedndpub.data.mechanics.inspection.MechanicsInspectionAvailability;
 import com.thedndpub.data.mechanics.inspection.TextEvidenceLocatorDto;
 import com.thedndpub.data.mechanics.model.CatalogDomain;
+import com.thedndpub.data.mechanics.model.ConditionChangeMechanic;
 import com.thedndpub.data.mechanics.model.CoverageStatus;
 import com.thedndpub.data.mechanics.model.MechanicsDocument;
 import com.thedndpub.data.mechanics.model.MechanicsHashes;
@@ -71,6 +72,44 @@ class SpellMechanicsInspectionApiTests {
     }
 
     @Test
+    void explicitConditionMechanicsAreAvailableThroughPrivateInspectionWithExactEvidence() {
+        var conditionClaims = inspection.documents().stream()
+                .flatMap(document -> document.interpretations().stream())
+                .filter(claim -> claim.payload() instanceof ConditionChangeMechanic)
+                .toList();
+        assertFalse(conditionClaims.isEmpty());
+        assertEquals(conditionClaims.size(), conditionClaims.stream().map(claim -> claim.id().value()).distinct().count());
+        assertTrue(conditionClaims.stream().anyMatch(claim ->
+                ((ConditionChangeMechanic) claim.payload()).operation()
+                        == com.thedndpub.data.mechanics.model.ConditionOperation.APPLY));
+        assertTrue(conditionClaims.stream().anyMatch(claim ->
+                ((ConditionChangeMechanic) claim.payload()).operation()
+                        == com.thedndpub.data.mechanics.model.ConditionOperation.GRANT_IMMUNITY));
+        assertTrue(conditionClaims.stream().flatMap(claim ->
+                        ((ConditionChangeMechanic) claim.payload()).qualifiers().stream())
+                .anyMatch(value -> value.toLowerCase(java.util.Locale.ROOT).contains("saving throw")));
+        assertTrue(conditionClaims.stream().flatMap(claim ->
+                        ((ConditionChangeMechanic) claim.payload()).qualifiers().stream())
+                .anyMatch(value -> value.toLowerCase(java.util.Locale.ROOT).contains("until")
+                        || value.toLowerCase(java.util.Locale.ROOT).contains("for the duration")));
+        for (var claim : conditionClaims) {
+            var condition = (ConditionChangeMechanic) claim.payload();
+            assertNotNull(condition.operation());
+            assertNotNull(condition.condition());
+            if (!condition.qualifiers().isEmpty()) {
+                assertTrue(claim.evidenceAssociations().stream().anyMatch(association ->
+                        association.role() == com.thedndpub.data.mechanics.model.EvidenceRole.QUALIFIER));
+            }
+            assertTrue(claim.evidenceAssociations().stream().anyMatch(association ->
+                    association.role() == com.thedndpub.data.mechanics.model.EvidenceRole.EFFECT_ROLE));
+            assertEquals(com.thedndpub.data.mechanics.review.MechanicsReviewStatus.PENDING_REVIEW,
+                    claim.review().recordedStatus());
+            assertEquals(com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW,
+                    claim.licensing().status());
+        }
+    }
+
+    @Test
     void registeredOwnersAreProcessedAndOtherOwnersRemainUnattemptedWithAllObservations() throws Exception {
         assertEquals(969, inspection.size());
         assertEquals(969, inspection.documents().size());
@@ -93,21 +132,39 @@ class SpellMechanicsInspectionApiTests {
             } else if (definition.id().value().equals("spell:phb:fireball")
                     || definition.id().value().equals("spell:phb:healing-word")) {
                 processedOwners++;
-                int expected = definition.id().value().equals("spell:phb:fireball") ? 2 : 1;
+                int expected = definition.id().value().equals("spell:phb:fireball") ? 3 : 2;
                 assertEquals(ProcessingState.PROCESSED, result.processing().state());
                 assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
                 assertEquals(expected, result.interpretations().size());
                 assertEquals(expected, result.reviewSummary().needsMechanicsReview());
                 assertEquals(0, result.reviewSummary().pendingReview());
-                assertEquals(expected + 1, result.unsupported().size());
+                assertEquals(1, result.unsupported().size());
             } else if (java.util.Set.of("spell:phb:burning-hands", "spell:phb:cone-of-cold",
                     "spell:phb:shatter", "spell:phb:lightning-bolt", "spell:phb:circle-of-death",
+                    "spell:phb:blight", "spell:phb:chain-lightning", "spell:phb:cloudkill",
+                    "spell:phb:fire-storm", "spell:phb:hellish-rebuke", "spell:phb:incendiary-cloud",
+                    "spell:phb:insect-plague", "spell:phb:moonbeam", "spell:phb:flaming-sphere",
+                    "spell:phb:wind-wall",
                     "spell:phb:cure-wounds", "spell:phb:mass-cure-wounds", "spell:phb:mass-healing-word",
                     "spell:phb:prayer-of-healing").contains(definition.id().value())) {
                 processedOwners++;
                 assertEquals(ProcessingState.PROCESSED, result.processing().state());
                 assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
-                assertFalse(result.interpretations().isEmpty());
+                assertTrue(!result.interpretations().isEmpty()
+                        || result.coverage().status() == CoverageStatus.NONE_SUPPORTED);
+                assertEquals(result.interpretations().size(), result.reviewSummary().needsMechanicsReview());
+                assertEquals(0, result.reviewSummary().verified());
+                assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
+                        == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
+            } else if (definition.source().identity().code().equalsIgnoreCase("PHB")
+                    && (!definition.mechanics().conditionsInflicted().isEmpty()
+                    || !definition.mechanics().conditionImmunities().isEmpty())) {
+                processedOwners++;
+                assertEquals(ProcessingState.PROCESSED, result.processing().state());
+                assertTrue(result.coverage().status() == CoverageStatus.PARTIAL
+                        || result.coverage().status() == CoverageStatus.NONE_SUPPORTED);
+                assertTrue(!result.interpretations().isEmpty()
+                        || result.coverage().status() == CoverageStatus.NONE_SUPPORTED);
                 assertEquals(result.interpretations().size(), result.reviewSummary().needsMechanicsReview());
                 assertEquals(0, result.reviewSummary().verified());
                 assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
@@ -141,8 +198,8 @@ class SpellMechanicsInspectionApiTests {
             }
         }
         assertEquals(930, observations);
-        assertEquals(13, processedOwners);
-        assertEquals(956, inspection.size() - processedOwners);
+        assertEquals(87, processedOwners);
+        assertEquals(882, inspection.size() - processedOwners);
         assertEquals(422, ownersWithObservations);
         assertEquals(547, inspection.size() - ownersWithObservations);
         assertTrue(publication.index().authorizedObservations().isEmpty());
@@ -287,7 +344,7 @@ class SpellMechanicsInspectionApiTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.interpretedMechanics.processing.state").value("PROCESSED"))
                 .andExpect(jsonPath("$.interpretedMechanics.coverage.status").value("PARTIAL"))
-                .andExpect(jsonPath("$.interpretedMechanics.interpretations.length()").value(2))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations.length()").value(3))
                 .andExpect(jsonPath("$.interpretedMechanics.observations.length()").value(2));
     }
 
@@ -297,20 +354,62 @@ class SpellMechanicsInspectionApiTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.interpretedMechanics.processing.state").value("PROCESSED"))
                 .andExpect(jsonPath("$.interpretedMechanics.coverage.status").value("PARTIAL"))
-                .andExpect(jsonPath("$.interpretedMechanics.unsupported.length()").value(3))
+                .andExpect(jsonPath("$.interpretedMechanics.unsupported.length()").value(1))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.ability.ability").value("DEXTERITY"))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.difficulty.kind").value("UNKNOWN"))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].payload.amount.count").value(8))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].payload.amount.sides").value(6))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].payload.damageType.authoredCode").value("fire"))
-                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[0].outcome").value("FAILURE"));
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[0].outcome").value("FAILURE"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[0].damageOutcome")
+                        .value("FULL_DAMAGE"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[1].outcome")
+                        .value("SUCCESS"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[1].damageOutcome")
+                        .value("HALF_DAMAGE"));
+    }
+
+    @Test
+    void expandedSpellInspectionExposesTypedDamageSaveOutcomeAndScaling() throws Exception {
+        mvc.perform(get("/api/spells/spell:phb:blight").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.interpretedMechanics.processing.state").value("PROCESSED"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.ability.ability")
+                        .value("CONSTITUTION"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].payload.amount.count").value(8))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[0].damageOutcome")
+                        .value("FULL_DAMAGE"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[1].damageOutcome")
+                        .value("HALF_DAMAGE"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[2].payload.effect").value("DAMAGE"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[2].payload.increment.count").value(1))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[2].payload.increment.sides").value(8));
+    }
+
+    @Test
+    void conditionApplicationAndImmunityAppearInPrivateSpellInspection() throws Exception {
+        mvc.perform(get("/api/spells/spell:phb:charm-person").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.kind")
+                        .value("CONDITION_CHANGE"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.operation")
+                        .value("APPLY"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.condition")
+                        .value("CHARMED"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].review.recordedStatus")
+                        .value("PENDING_REVIEW"));
+        mvc.perform(get("/api/spells/spell:phb:freedom-of-movement")
+                        .param("include", "interpretedMechanics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.operation")
+                        .value("GRANT_IMMUNITY"));
     }
 
     @Test
     void healingWordInspectionRetainsBothAmountTermsWithoutEvaluatingTheModifier() throws Exception {
         mvc.perform(get("/api/spells/spell:phb:healing-word").param("include", "interpretedMechanics"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.interpretedMechanics.interpretations.length()").value(1))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations.length()").value(2))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.amount.kind").value("SUM"))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.amount.terms[0].count").value(1))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.amount.terms[0].sides").value(4))
@@ -318,7 +417,7 @@ class SpellMechanicsInspectionApiTests {
                         .value("CASTER_SPELLCASTING_ABILITY_MODIFIER"))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].review.recordedStatus").value("PENDING_REVIEW"))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].licensing.status").value("NEEDS_REVIEW"))
-                .andExpect(jsonPath("$.interpretedMechanics.unsupported.length()").value(2));
+                .andExpect(jsonPath("$.interpretedMechanics.unsupported.length()").value(1));
     }
 
     @Test

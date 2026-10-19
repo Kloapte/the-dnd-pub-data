@@ -1,6 +1,6 @@
 # The DnD Pub Data Backend — Development Roadmap
 
-> **Status:** Authoritative working roadmap, 18 October 2026. Step 7.2 and Steps 7.3.1–7.3.3 are implemented. Step 7.4.1 has added bounded PHB damage/save and healing patterns for nine additional Spells; 13 of 969 owners are processed, all partially. All six benchmark fixtures await human review, so authoritative benchmark acceptance remains outstanding.
+> **Status:** Authoritative working roadmap, 19 October 2026. Step 7.2 and Steps 7.3.1–7.3.3 are implemented. Step 7.4.3 is PARTIAL after batch 7.4.3A: 87 of 969 Spell owners are processed with 155 typed mechanics. All six benchmark fixtures await human review, so authoritative benchmark acceptance remains outstanding.
 >
 > **Scope:** Java / Spring Boot data backend and its supporting evidence, tests, and APIs. Angular UI, Keycloak integration, persistence, and public internet deployment are future work unless explicitly authorized.
 
@@ -227,11 +227,31 @@ the other 956 remain NOT_ATTEMPTED. See the
 All new claims remain pending mechanics review and NEEDS_REVIEW for licensing. Existing pending
 benchmark fixtures are unchanged and remain candidate-only evidence.
 
-#### 7.4.2. Bounded Spell pattern expansion and adjudication — PLANNED
+#### 7.4.2. Bounded Spell pattern expansion and adjudication — COMPLETE
 
 Choose the next narrow extraction scope from explicit unsupported or unassessed findings and
 reviewer feedback. Keep unsupported outcomes visible; do not introduce broad scaling, condition,
 resistance or arbitrary prose interpretation without evidence and model support.
+
+The completed bounded expansion adds reusable damage and save-outcome interpretation for ten
+additional PHB Spell owners. The catalog now processes 23 of 969 Spell owners and contains 64 typed
+mechanics, including 17 slot-scaling claims. All new mechanics remain pending review and NEEDS_REVIEW
+for licensing. Other effect riders, ambiguous or multiple damage clauses, and unrecognized scaling
+wording remain unsupported or unattempted. See the
+[7.4.2 implementation report](../analysis/mechanics/step-7/7.4.2-spell-damage-healing-scaling.md).
+Do not begin 7.4.3B or 7.4.4 as part of this batch.
+
+#### 7.4.3. Spell modifiers, conditions and status effects — PARTIAL
+
+Batch 7.4.3A adds the typed `ConditionChangeMechanic` and a bounded PHB mapping for explicit
+`conditionInflict` and `conditionImmune` source classifications. It processes 64 additional owners,
+bringing the catalog to 87 processed owners and 155 typed mechanics, including 91 condition claims.
+Application, removal and immunity have distinct operations; this batch extracts application and
+immunity only. Claims remain partial, pending review and NEEDS_REVIEW for licensing. Exact source
+fields and available same-sentence qualifier text are retained; target context, typed save/trigger
+dependencies, recurring saves, concentration and complex endings remain unsupported. See the
+[7.4.3A implementation report](../analysis/mechanics/step-7/7.4.3A-spell-conditions-status-effects.md).
+Step 7.4.3 remains PARTIAL; do not begin 7.4.3B or 7.4.4 without authorization.
 
 ### 7.5. Monster mechanics interpretation — PLANNED
 
@@ -320,8 +340,8 @@ For every numbered batch:
 
 ## Immediate next action
 
-**Step 7.4.1 implementation is complete.** Step 7.4.2 is the next planned batch. The six benchmark
-fixtures still require human review before authoritative benchmark acceptance; there is no approved
-gold set or independently validated extractor accuracy. Candidate diagnostics do not constitute
-mechanics verification or publication permission. Do not modify P1D or begin Keycloak, database or
-frontend work from this mechanics batch.
+**Step 7.4.3 is PARTIAL after batch 7.4.3A.** The six benchmark fixtures still require human review before
+authoritative benchmark acceptance; there is no approved gold set or independently validated
+extractor accuracy. Candidate diagnostics do not constitute mechanics verification or publication
+permission. Do not begin 7.4.3B or 7.4.4 as part of this batch or modify P1D,
+Keycloak, database or frontend work from this mechanics batch.

@@ -29,7 +29,11 @@ class MechanicsValuesTests {
                 new HealingMechanic(new SumAmount(List.of(new DiceAmount(1, 4, 0),
                         new SymbolicAmount(AmountSymbol.CASTER_SPELLCASTING_ABILITY_MODIFIER))), HealingMode.RESTORE_HIT_POINTS),
                 new SavingThrowRequirementMechanic(new FixedAbility(Ability.DEXTERITY),
-                        new UnknownSaveDifficulty(UnknownValueReason.NOT_AUTHORED)));
+                        new UnknownSaveDifficulty(UnknownValueReason.NOT_AUTHORED)),
+                new ConditionChangeMechanic(ConditionOperation.APPLY, ConditionName.CHARMED,
+                        List.of("on a failed Wisdom saving throw")),
+                new ConditionChangeMechanic(ConditionOperation.REMOVE, ConditionName.POISONED, List.of()),
+                new ConditionChangeMechanic(ConditionOperation.GRANT_IMMUNITY, ConditionName.FRIGHTENED, List.of()));
     }
 
     static SpellMentionReference unresolvedSpell() {

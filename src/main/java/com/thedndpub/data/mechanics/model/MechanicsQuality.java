@@ -29,6 +29,7 @@ final class MechanicsQuality {
                         "Wholly unknown damage belongs in unsupported constructs");
             }
             case HealingMechanic healing -> amount(healing.amount(), "/payload/amount", findings);
+            case SpellSlotScalingMechanic scaling -> amount(scaling.increment(), "/payload/increment", findings);
             case SavingThrowRequirementMechanic save -> {
                 if (save.ability() instanceof UnknownAbility) {
                     add(findings, MechanicsFindingCode.UNKNOWN_ABILITY, "/payload/ability");
@@ -40,11 +41,13 @@ final class MechanicsQuality {
             case ReactionActivationMechanic reaction -> trigger(reaction.trigger(), "/payload/trigger", findings);
             case SpellDamagePreventionMechanic protection -> spell(protection.spell(), "/payload/spell", findings);
             case EffectDurationMechanic duration -> duration(duration.specification(), "/payload/specification", findings);
+            case ConditionChangeMechanic ignored -> {
+            }
             case ArmorClassModifierMechanic ignored -> {
                 // A symbolic modifier is an identified variable, not an unresolved numeric calculation.
             }
         }
-        Map<MechanicRevisionReference, SaveOutcome> saveOutcomes = new HashMap<>();
+        Map<MechanicRevisionReference, Map<SaveOutcome, DamageOutcome>> saveOutcomes = new HashMap<>();
         DurationSpecification previousDuration = null;
         for (int index = 0; index < content.context().bindings().size(); index++) {
             MechanicContextBinding binding = content.context().bindings().get(index);
@@ -56,8 +59,9 @@ final class MechanicsQuality {
                 }
                 previousDuration = timing.duration();
             } else if (binding instanceof AppliesOnSaveOutcome outcome) {
-                SaveOutcome previous = saveOutcomes.putIfAbsent(outcome.savingThrow(), outcome.outcome());
-                if (previous != null && previous != outcome.outcome()) {
+                DamageOutcome previous = saveOutcomes.computeIfAbsent(outcome.savingThrow(), ignored -> new HashMap<>())
+                        .putIfAbsent(outcome.outcome(), outcome.damageOutcome());
+                if (previous != null && previous != outcome.damageOutcome()) {
                     add(findings, MechanicsFindingCode.CONTRADICTORY_RELATIONSHIPS, path);
                 }
             }

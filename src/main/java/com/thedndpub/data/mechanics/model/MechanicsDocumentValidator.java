@@ -162,6 +162,8 @@ final class MechanicsDocumentValidator {
                 ModelChecks.require(target == null || target.payload() instanceof ReactionActivationMechanic,
                         "Activation binding must reference an activation mechanic");
             } else if (binding instanceof AppliesOnSaveOutcome outcome) {
+                ModelChecks.require(record.payload() instanceof DamageMechanic,
+                        "Save damage outcome must be attached to a damage mechanic");
                 MechanicRecord target = current(records, outcome.savingThrow());
                 ModelChecks.require(target == null || target.payload() instanceof SavingThrowRequirementMechanic,
                         "Save outcome binding must reference a save requirement");

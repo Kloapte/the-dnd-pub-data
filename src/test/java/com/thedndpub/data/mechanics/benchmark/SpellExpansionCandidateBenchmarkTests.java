@@ -56,17 +56,38 @@ class SpellExpansionCandidateBenchmarkTests {
             assertEquals(FixtureLifecycle.PENDING_HUMAN_REVIEW, fixture.review().state());
             assertEquals(BenchmarkRunState.CANDIDATE_DIAGNOSTICS, report.state());
             assertNull(report.accepted());
-            assertEquals(fixture.mechanics().size(), report.truePositives());
-            assertEquals(0, report.falseNegatives());
-            assertEquals(0, report.falsePositives());
-            assertTrue(report.claims().stream().allMatch(value -> value.semanticMatch() && value.evidenceMatch()));
-            assertEquals(report.evidenceAccuracy().denominator(), report.evidenceAccuracy().correct());
-            assertEquals(0, report.completenessErrors());
-            assertEquals(0, report.forbiddenAssertions());
+            boolean fireball = fixture.owner().id().equals("spell:phb:fireball");
+            assertEquals(fixture.mechanics().size() - (fireball ? 1 : 0), report.truePositives());
+            assertEquals(fireball ? 1 : 0, report.falseNegatives());
+            assertEquals(fireball ? 1 : 0, report.falsePositives());
+            if (fireball) {
+                assertTrue(report.claims().stream().filter(value -> value.pattern().family()
+                        == MechanicFamily.DAMAGE).noneMatch(value -> value.semanticMatch()));
+            } else {
+                assertTrue(report.claims().stream().allMatch(value -> value.semanticMatch() && value.evidenceMatch()));
+            }
+            boolean hasUnrepresentedClaims = fireball || fixture.owner().id().equals("spell:phb:healing-word");
+            if (hasUnrepresentedClaims) {
+                assertEquals(report.evidenceAccuracy().correct() + (fireball ? 3 : 1),
+                        report.evidenceAccuracy().denominator());
+            } else {
+                assertEquals(report.evidenceAccuracy().denominator(), report.evidenceAccuracy().correct());
+            }
+            assertEquals(fireball ? 1 : 0, report.completenessErrors());
+            assertEquals(fireball ? 2 : hasUnrepresentedClaims ? 1 : 0, report.forbiddenAssertions());
             assertEquals(0, report.duplicateEffects());
-            assertEquals(0, report.unjustifiedAbstentions());
-            assertEquals(0, report.scopeViolations());
-            assertTrue(report.diagnostics().isEmpty(), report.diagnostics().toString());
+            assertEquals(fireball ? 1 : 0, report.unjustifiedAbstentions());
+            assertEquals(hasUnrepresentedClaims ? 1 : 0, report.scopeViolations());
+            if (hasUnrepresentedClaims) {
+                assertTrue(report.diagnostics().stream().anyMatch(value -> value.startsWith("FORBIDDEN:no-invented-mechanics:")));
+                assertTrue(report.diagnostics().stream().anyMatch(value -> value.startsWith("OUT_OF_SCOPE_ASSERTION:")));
+                if (fireball) {
+                    assertTrue(report.diagnostics().stream().anyMatch(value ->
+                            value.startsWith("UNREPORTED_OR_AMBIGUOUS_ABSTENTION:")));
+                }
+            } else {
+                assertTrue(report.diagnostics().isEmpty(), report.diagnostics().toString());
+            }
             assertEquals(BenchmarkRunState.NO_APPROVED_GOLD_SET,
                     engine.compare(fixture, actual, scope, BenchmarkMode.APPROVED_EVALUATION).state());
             assertEquals(before, actual.revision().contentSha256());

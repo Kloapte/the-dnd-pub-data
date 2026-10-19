@@ -22,6 +22,7 @@ import com.thedndpub.data.mechanics.model.MechanicsReferenceDisposition;
 import com.thedndpub.data.mechanics.model.ReactionActivationMechanic;
 import com.thedndpub.data.mechanics.model.SavingThrowRequirementMechanic;
 import com.thedndpub.data.mechanics.model.SpellDamagePreventionMechanic;
+import com.thedndpub.data.mechanics.model.SpellSlotScalingMechanic;
 import com.thedndpub.data.mechanics.model.SpellMentionReference;
 import com.thedndpub.data.mechanics.model.StructuredFieldMechanicsEvidence;
 import com.thedndpub.data.mechanics.model.TargetedBySpellTrigger;
@@ -46,6 +47,8 @@ final class BenchmarkSemantics {
             case DamageMechanic ignored -> MechanicFamily.DAMAGE;
             case HealingMechanic ignored -> MechanicFamily.HEALING;
             case SavingThrowRequirementMechanic ignored -> MechanicFamily.SAVING_THROW_REQUIREMENT;
+            case SpellSlotScalingMechanic ignored -> MechanicFamily.SPELL_SLOT_SCALING;
+            case com.thedndpub.data.mechanics.model.ConditionChangeMechanic ignored -> MechanicFamily.CONDITION;
         };
     }
 
@@ -64,6 +67,8 @@ final class BenchmarkSemantics {
                         && duration.duration().equals(actualDuration.duration());
                 case ExpectedSaveOutcome outcome -> binding instanceof AppliesOnSaveOutcome actualOutcome
                         && outcome.outcome() == actualOutcome.outcome()
+                        && (outcome.damageOutcome() == null
+                                || outcome.damageOutcome() == actualOutcome.damageOutcome())
                         && exactReference(assigned.get(outcome.claimKey()), actualOutcome.savingThrow());
                 case ExpectedTriggeringAttack ignored -> binding instanceof IncludesTriggeringAttack;
             };
@@ -107,7 +112,9 @@ final class BenchmarkSemantics {
                 case AppliesForDuration duration -> second instanceof AppliesForDuration other
                         && duration.duration().equals(other.duration());
                 case AppliesOnSaveOutcome outcome -> second instanceof AppliesOnSaveOutcome other
-                        && outcome.outcome() == other.outcome() && outcome.savingThrow().equals(other.savingThrow());
+                        && outcome.outcome() == other.outcome()
+                        && outcome.damageOutcome() == other.damageOutcome()
+                        && outcome.savingThrow().equals(other.savingThrow());
                 case IncludesTriggeringAttack ignored -> second instanceof IncludesTriggeringAttack;
             };
             if (!same) {

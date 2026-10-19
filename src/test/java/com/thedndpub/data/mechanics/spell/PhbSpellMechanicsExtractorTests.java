@@ -6,6 +6,7 @@ import com.thedndpub.data.mechanics.model.AmountSymbol;
 import com.thedndpub.data.mechanics.model.AppliesOnSaveOutcome;
 import com.thedndpub.data.mechanics.model.CoverageStatus;
 import com.thedndpub.data.mechanics.model.DamageMechanic;
+import com.thedndpub.data.mechanics.model.DamageOutcome;
 import com.thedndpub.data.mechanics.model.DiceAmount;
 import com.thedndpub.data.mechanics.model.FixedAbility;
 import com.thedndpub.data.mechanics.model.FixedDamageType;
@@ -18,7 +19,9 @@ import com.thedndpub.data.mechanics.model.MechanicsHashes;
 import com.thedndpub.data.mechanics.model.MechanicsLicensingStatus;
 import com.thedndpub.data.mechanics.model.ProcessingState;
 import com.thedndpub.data.mechanics.model.SaveOutcome;
+import com.thedndpub.data.mechanics.model.ScalingEffect;
 import com.thedndpub.data.mechanics.model.SavingThrowRequirementMechanic;
+import com.thedndpub.data.mechanics.model.SpellSlotScalingMechanic;
 import com.thedndpub.data.mechanics.model.StructuredFieldMechanicsEvidence;
 import com.thedndpub.data.mechanics.model.SumAmount;
 import com.thedndpub.data.mechanics.model.SymbolicAmount;
@@ -42,6 +45,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -92,17 +97,24 @@ class PhbSpellMechanicsExtractorTests {
     }
 
     @Test
-    void fireballPreservesEightD6FireDamageOnFailureOnly() throws IOException {
+    void fireballBindsFullFailureAndHalfSuccessToTheSameSaveAndDamageEffect() throws IOException {
         var document = extract(input("fireball"));
-        assertEquals(2, document.interpretations().size());
+        assertEquals(3, document.interpretations().size());
         var record = claim(document, "fireball-damage-v1");
         var damage = assertInstanceOf(DamageMechanic.class, record.payload());
         assertEquals(new DiceAmount(8, 6, 0), damage.amount());
         assertEquals(new FixedDamageType("fire"), damage.damageType());
         var outcome = assertInstanceOf(AppliesOnSaveOutcome.class, record.context().bindings().getFirst());
         assertEquals(SaveOutcome.FAILURE, outcome.outcome());
+        assertEquals(DamageOutcome.FULL_DAMAGE, outcome.damageOutcome());
+        var successfulOutcome = assertInstanceOf(AppliesOnSaveOutcome.class, record.context().bindings().get(1));
+        assertEquals(SaveOutcome.SUCCESS, successfulOutcome.outcome());
+        assertEquals(DamageOutcome.HALF_DAMAGE, successfulOutcome.damageOutcome());
         var save = claim(document, "fireball-save-v1");
         assertEquals(save.revision().reference(save.id()), outcome.savingThrow());
+        assertEquals(outcome.savingThrow(), successfulOutcome.savingThrow());
+        assertTrue(record.evidenceAssociations().stream().anyMatch(value -> value.claimPath().equals("/context/bindings/1")
+                && value.role() == com.thedndpub.data.mechanics.model.EvidenceRole.QUALIFIER));
         assertInstanceOf(UnknownSubject.class, record.context().subject());
         assertEquals(MechanicsCompleteness.PARTIAL, record.assessment().completeness());
     }
@@ -131,11 +143,45 @@ class PhbSpellMechanicsExtractorTests {
                             .findFirst().orElseThrow().context().bindings().getFirst());
             assertEquals(save.id(), outcome.savingThrow().id(), slug);
             assertEquals(SaveOutcome.FAILURE, outcome.outcome(), slug);
+            assertEquals(DamageOutcome.FULL_DAMAGE, outcome.damageOutcome(), slug);
+            var successfulOutcome = assertInstanceOf(AppliesOnSaveOutcome.class,
+                    document.interpretations().stream().filter(value -> value.payload() instanceof DamageMechanic)
+                            .findFirst().orElseThrow().context().bindings().get(1));
+            assertEquals(SaveOutcome.SUCCESS, successfulOutcome.outcome(), slug);
+            assertEquals(DamageOutcome.HALF_DAMAGE, successfulOutcome.damageOutcome(), slug);
+            assertEquals(save.id(), successfulOutcome.savingThrow().id(), slug);
             assertEquals(MechanicsCompleteness.PARTIAL, document.interpretations().stream()
                     .filter(value -> value.payload() instanceof DamageMechanic)
                     .findFirst().orElseThrow().assessment().completeness(), slug);
-            assertTrue(document.unsupported().stream().anyMatch(value -> value.id().contains("successful-save-half")), slug);
+            assertFalse(document.unsupported().stream().anyMatch(value -> value.id().contains("successful-save-half")), slug);
         });
+    }
+
+    @Test
+    void explicitNoDamageOnSuccessfulSaveIsTypedAndBoundToTheSameSave() throws IOException {
+        var input = input("fireball").changed(mapper, root -> root.withArray("entries").set(0,
+                mapper.getNodeFactory().textNode(root.at("/entries/0").textValue()
+                        .replace("half as much damage on a successful one", "no damage on a successful one"))));
+        var document = extract(input);
+        var damage = document.interpretations().stream().filter(value -> value.payload() instanceof DamageMechanic)
+                .findFirst().orElseThrow();
+        assertEquals(2, damage.context().bindings().size());
+        var success = (AppliesOnSaveOutcome) damage.context().bindings().get(1);
+        assertEquals(SaveOutcome.SUCCESS, success.outcome());
+        assertEquals(DamageOutcome.NO_DAMAGE, success.damageOutcome());
+        assertEquals(claim(document, "fireball-save-v1").revision().reference(
+                claim(document, "fireball-save-v1").id()), success.savingThrow());
+    }
+
+    @Test
+    void ambiguousOrUnsupportedSuccessWordingDoesNotCreateATypedDamageOutcome() throws IOException {
+        var input = input("fireball").changed(mapper, root -> root.withArray("entries").set(0,
+                mapper.getNodeFactory().textNode(root.at("/entries/0").textValue()
+                        .replace("half as much damage on a successful one", "the target might avoid the damage"))));
+        var document = extract(input);
+        assertFalse(document.interpretations().stream().anyMatch(value -> value.payload() instanceof DamageMechanic));
+        assertTrue(document.unsupported().stream().anyMatch(value -> value.reason()
+                == UnsupportedReason.NO_SUPPORTED_PATTERN));
     }
 
     @Test
@@ -148,28 +194,86 @@ class PhbSpellMechanicsExtractorTests {
     }
 
     @Test
-    void fireballReportsHalfDamageAreaAndScalingAsUnsupported() throws IOException {
+    void fireballKeepsAreaUnsupportedWhileTypingItsHalfDamageOutcomeAndSlotScaling() throws IOException {
         var document = extract(input("fireball"));
-        assertEquals(3, document.unsupported().size());
-        assertEquals(java.util.List.of("successful-save-half", "area-targets", "slot-scaling"),
+        assertEquals(java.util.List.of("area-targets"),
                 document.unsupported().stream().map(value -> value.id()).toList());
         assertTrue(document.unsupported().stream().allMatch(value -> value.reason() == UnsupportedReason.FAMILY_NOT_IMPLEMENTED));
         assertEquals(CoverageStatus.PARTIAL, document.coverage().status());
-        assertEquals(3, document.coverage().unsupportedCount());
+        assertEquals(1, document.coverage().unsupportedCount());
         assertFalse(document.coverage().unassessedSourcePaths().isEmpty());
         assertEquals(1, document.interpretations().stream().filter(value -> value.payload() instanceof DamageMechanic).count());
+        var scaling = document.interpretations().stream().map(MechanicRecord::payload)
+                .filter(SpellSlotScalingMechanic.class::isInstance).map(SpellSlotScalingMechanic.class::cast)
+                .findFirst().orElseThrow();
+        assertEquals(ScalingEffect.DAMAGE, scaling.effect());
+        assertEquals(new DiceAmount(1, 6, 0), scaling.increment());
+        assertEquals(3, scaling.baseSlotLevel());
+        assertEquals(4, scaling.minimumCastingSlotLevel());
+        assertEquals(1, scaling.slotLevelInterval());
+    }
+
+    @Test
+    void allSeventeenScalingClaimsPreserveSourceIncrementApplicabilityIntervalAndEvidence() throws IOException {
+        Map<String, String> increments = Map.ofEntries(
+                Map.entry("fireball", "1d6"),
+                Map.entry("healing-word", "1d4"),
+                Map.entry("burning-hands", "1d6"),
+                Map.entry("cone-of-cold", "1d8"),
+                Map.entry("shatter", "1d8"),
+                Map.entry("lightning-bolt", "1d6"),
+                Map.entry("circle-of-death", "2d6"),
+                Map.entry("cure-wounds", "1d8"),
+                Map.entry("mass-cure-wounds", "1d8"),
+                Map.entry("mass-healing-word", "1d4"),
+                Map.entry("prayer-of-healing", "1d8"),
+                Map.entry("blight", "1d8"),
+                Map.entry("cloudkill", "1d8"),
+                Map.entry("hellish-rebuke", "1d10"),
+                Map.entry("insect-plague", "1d10"),
+                Map.entry("moonbeam", "1d10"),
+                Map.entry("flaming-sphere", "1d6"));
+        var healingOwners = java.util.Set.of("healing-word", "cure-wounds", "mass-cure-wounds",
+                "mass-healing-word", "prayer-of-healing");
+        assertEquals(17, increments.size());
+        for (var entry : increments.entrySet()) {
+            var input = input(entry.getKey());
+            var document = extract(input);
+            var claim = document.interpretations().stream()
+                    .filter(value -> value.payload() instanceof SpellSlotScalingMechanic).findFirst().orElseThrow();
+            var scaling = (SpellSlotScalingMechanic) claim.payload();
+            assertEquals(healingOwners.contains(entry.getKey()) ? ScalingEffect.HEALING : ScalingEffect.DAMAGE,
+                    scaling.effect(), entry.getKey());
+            Matcher formula = Pattern.compile("([1-9][0-9]*)d([1-9][0-9]*)").matcher(entry.getValue());
+            assertTrue(formula.matches(), entry.getKey());
+            assertEquals(new DiceAmount(Integer.parseInt(formula.group(1)), Integer.parseInt(formula.group(2)), 0),
+                    scaling.increment(), entry.getKey());
+            assertEquals(input.spell().level(), scaling.baseSlotLevel(), entry.getKey());
+            assertEquals(input.spell().level() + 1, scaling.minimumCastingSlotLevel(), entry.getKey());
+            assertEquals(1, scaling.slotLevelInterval(), entry.getKey());
+            var association = claim.evidenceAssociations().getFirst();
+            var evidence = document.evidence().stream().filter(value -> value.id().equals(association.evidenceId()))
+                    .map(TextMechanicsEvidence.class::cast).findFirst().orElseThrow();
+            String sourceText = mapper.readTree(input.bytes())
+                    .at(evidence.syntax().location().jsonPointer()).textValue();
+            String excerpt = evidence.syntax().span().extract(sourceText);
+            assertTrue(excerpt.contains("cast this spell using a spell slot"), entry.getKey());
+            assertTrue(excerpt.contains("for each slot level above"), entry.getKey());
+            assertTrue(excerpt.contains(entry.getValue()), entry.getKey());
+            assertEquals(MechanicsCompleteness.PARTIAL, claim.assessment().completeness());
+        }
     }
 
     @Test
     void healingWordPreservesTheOrderedDiceAndSymbolicSum() throws IOException {
         var document = extract(input("healing-word"));
-        assertEquals(1, document.interpretations().size());
+        assertEquals(2, document.interpretations().size());
         var healing = assertInstanceOf(HealingMechanic.class, document.interpretations().getFirst().payload());
         var sum = assertInstanceOf(SumAmount.class, healing.amount());
         assertEquals(new DiceAmount(1, 4, 0), sum.terms().get(0));
         assertEquals(new SymbolicAmount(AmountSymbol.CASTER_SPELLCASTING_ABILITY_MODIFIER), sum.terms().get(1));
         assertEquals(HealingMode.RESTORE_HIT_POINTS, healing.mode());
-        assertEquals(2, document.unsupported().size());
+        assertEquals(1, document.unsupported().size());
         assertEquals(MechanicsCompleteness.PARTIAL, document.interpretations().getFirst().assessment().completeness());
     }
 
@@ -190,7 +294,9 @@ class PhbSpellMechanicsExtractorTests {
     void everyEvidenceLocationFingerprintAndUtf16SpanReconstructsItsOwnOwner() throws IOException {
         for (String slug : java.util.List.of("fireball", "healing-word", "burning-hands", "cone-of-cold",
                 "shatter", "lightning-bolt", "circle-of-death", "cure-wounds", "mass-cure-wounds",
-                "mass-healing-word", "prayer-of-healing")) {
+                "mass-healing-word", "prayer-of-healing", "blight", "chain-lightning", "cloudkill",
+                "fire-storm", "hellish-rebuke", "incendiary-cloud", "insect-plague", "moonbeam",
+                "flaming-sphere", "wind-wall")) {
             var input = input(slug);
             var document = extract(input);
             var original = mapper.readTree(input.bytes());
@@ -219,8 +325,8 @@ class PhbSpellMechanicsExtractorTests {
                 mapper.getNodeFactory().textNode(root.at("/entries/0").textValue()
                         .replace("spellcasting ability modifier", "spellcasting modifier"))));
         var document = extract(input);
-        assertTrue(document.interpretations().isEmpty());
-        assertEquals(CoverageStatus.NONE_SUPPORTED, document.coverage().status());
+        assertFalse(document.interpretations().stream().anyMatch(value -> value.payload() instanceof DamageMechanic));
+        assertEquals(CoverageStatus.PARTIAL, document.coverage().status());
         assertTrue(document.unsupported().stream().anyMatch(value -> value.reason()
                 == UnsupportedReason.NO_SUPPORTED_PATTERN));
     }
@@ -231,9 +337,9 @@ class PhbSpellMechanicsExtractorTests {
                 mapper.getNodeFactory().textNode(root.at("/entries/0").textValue()
                         .replace(" + your spellcasting ability modifier", ""))));
         var document = extract(input);
-        assertTrue(document.interpretations().isEmpty());
-        assertEquals(CoverageStatus.NONE_SUPPORTED, document.coverage().status());
-        assertEquals(3, document.unsupported().size());
+        assertFalse(document.interpretations().stream().anyMatch(value -> value.payload() instanceof HealingMechanic));
+        assertEquals(CoverageStatus.PARTIAL, document.coverage().status());
+        assertEquals(2, document.unsupported().size());
     }
 
     @Test
@@ -241,8 +347,9 @@ class PhbSpellMechanicsExtractorTests {
         var input = input("fireball").changed(mapper, root -> root.withArray("entries").set(0,
                 mapper.getNodeFactory().textNode(root.at("/entries/0").textValue().replace("on a failed save", "on any save"))));
         var document = extract(input);
-        assertTrue(document.interpretations().isEmpty());
-        assertEquals(5, document.unsupported().size());
+        assertFalse(document.interpretations().stream()
+                .anyMatch(value -> value.payload() instanceof DamageMechanic));
+        assertEquals(3, document.unsupported().size());
     }
 
     @Test
@@ -250,7 +357,8 @@ class PhbSpellMechanicsExtractorTests {
         for (String replacement : java.util.List.of("{@damage 8d6|extra}", "{@damage 8d6", "{@dice 8d6}", "{@damage PBd6}")) {
             var input = input("fireball").changed(mapper, root -> root.withArray("entries").set(0,
                     mapper.getNodeFactory().textNode(root.at("/entries/0").textValue().replace("{@damage 8d6}", replacement))));
-            assertTrue(extract(input).interpretations().isEmpty(), replacement);
+            assertFalse(extract(input).interpretations().stream()
+                    .anyMatch(value -> value.payload() instanceof DamageMechanic), replacement);
         }
     }
 
@@ -268,9 +376,9 @@ class PhbSpellMechanicsExtractorTests {
         var input = input("fireball");
         var missing = input.changed(mapper, root -> root.remove("entries"));
         var document = extract(missing);
-        assertTrue(document.interpretations().isEmpty());
-        assertTrue(document.evidence().stream().allMatch(value -> value instanceof StructuredFieldMechanicsEvidence
-                || ((TextMechanicsEvidence) value).syntax().location().jsonPointer().contains("entriesHigherLevel")));
+        assertFalse(document.interpretations().stream().anyMatch(value -> value.payload() instanceof DamageMechanic));
+        assertFalse(document.evidence().isEmpty());
+        assertEquals(document.evidence().size(), document.evidence().stream().map(value -> value.id()).distinct().count());
         assertThrows(IllegalArgumentException.class, () -> new PhbSpellMechanicsExtractor().extract(input.spell(),
                 new SpellMechanicsEvidenceSource(input.spell(), missing.owner(), missing.bytes(), mapper), missing.seed()));
     }
@@ -304,11 +412,11 @@ class PhbSpellMechanicsExtractorTests {
     }
 
     @Test
-    void registeredPatternsProcessThirteenOwnersAndPreserveAllFormulaObservations() {
+    void registeredPatternsProcessConditionOwnersAndPreserveAllFormulaObservations() {
         assertEquals(969, inspection.size());
-        assertEquals(13, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.PROCESSED).count());
-        assertEquals(956, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.NOT_ATTEMPTED).count());
-        assertEquals(27, inspection.documents().stream().mapToInt(value -> value.interpretations().size()).sum());
+        assertEquals(87, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.PROCESSED).count());
+        assertEquals(882, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.NOT_ATTEMPTED).count());
+        assertEquals(155, inspection.documents().stream().mapToInt(value -> value.interpretations().size()).sum());
         assertEquals(930, inspection.documents().stream().mapToInt(value -> value.observations().size()).sum());
         for (String slug : java.util.List.of("fireball", "healing-word")) {
             var id = spells.findById("spell:phb:" + slug).id();
@@ -323,7 +431,7 @@ class PhbSpellMechanicsExtractorTests {
                 "circle-of-death")) {
             var document = inspection.findById(spells.findById("spell:phb:" + slug).id());
             assertEquals(ProcessingState.PROCESSED, document.processing().state(), slug);
-            assertEquals(2, document.interpretations().size(), slug);
+            assertEquals(3, document.interpretations().size(), slug);
             assertTrue(document.interpretations().stream().allMatch(value ->
                     value.review().recordedStatus().name().equals("PENDING_REVIEW")
                             && value.review().effectiveStatus().name().equals("NEEDS_MECHANICS_REVIEW")
@@ -339,17 +447,46 @@ class PhbSpellMechanicsExtractorTests {
         for (String slug : java.util.List.of("cure-wounds", "mass-cure-wounds", "mass-healing-word", "prayer-of-healing")) {
             var document = inspection.findById(spells.findById("spell:phb:" + slug).id());
             assertEquals(ProcessingState.PROCESSED, document.processing().state(), slug);
-            assertEquals(1, document.interpretations().size(), slug);
-            var claim = document.interpretations().getFirst();
+            assertEquals(2, document.interpretations().size(), slug);
+            var claim = document.interpretations().stream()
+                    .filter(value -> value.payload() instanceof HealingMechanic).findFirst().orElseThrow();
             assertEquals("PENDING_REVIEW", claim.review().recordedStatus().name(), slug);
             assertEquals("NEEDS_MECHANICS_REVIEW", claim.review().effectiveStatus().name(), slug);
             assertEquals("NEEDS_REVIEW", claim.licensing().status().name(), slug);
-            assertInstanceOf(com.thedndpub.data.mechanics.model.HealingMechanic.class,
-                    document.interpretations().getFirst().payload());
-            assertTrue(document.interpretations().getFirst().evidenceAssociations().stream()
+            assertInstanceOf(com.thedndpub.data.mechanics.model.HealingMechanic.class, claim.payload());
+            assertTrue(claim.evidenceAssociations().stream()
                     .anyMatch(value -> value.role()
                             == com.thedndpub.data.mechanics.model.EvidenceRole.EFFECT_ROLE), slug);
             assertTrue(document.evidence().stream().allMatch(value -> evidenceId(value).startsWith("spell-")), slug);
+        }
+    }
+
+    @Test
+    void expandedDamageOwnersExposeTypedSaveDamageAndEvidenceBoundOutcomes() {
+        var newOwners = java.util.List.of("blight", "chain-lightning", "cloudkill", "fire-storm",
+                "hellish-rebuke", "incendiary-cloud", "insect-plague", "moonbeam",
+                "flaming-sphere", "wind-wall");
+        for (String slug : newOwners) {
+            var document = inspection.findById(spells.findById("spell:phb:" + slug).id());
+            assertEquals(ProcessingState.PROCESSED, document.processing().state(), slug);
+            var save = document.interpretations().stream()
+                    .filter(value -> value.payload() instanceof SavingThrowRequirementMechanic)
+                    .findFirst().orElseThrow(() -> new AssertionError(slug + " missing save"));
+            var damage = document.interpretations().stream()
+                    .filter(value -> value.payload() instanceof DamageMechanic)
+                    .findFirst().orElseThrow(() -> new AssertionError(slug + " missing damage: "
+                            + document.unsupported().stream().map(value -> value.id() + "=" + value.reason()).toList()));
+            var outcomes = damage.context().bindings().stream().filter(AppliesOnSaveOutcome.class::isInstance)
+                    .map(AppliesOnSaveOutcome.class::cast).toList();
+            assertTrue(outcomes.stream().anyMatch(value -> value.outcome() == SaveOutcome.FAILURE
+                    && value.damageOutcome() == DamageOutcome.FULL_DAMAGE
+                    && value.savingThrow().id().equals(save.id())), slug);
+            assertTrue(outcomes.stream().anyMatch(value -> value.outcome() == SaveOutcome.SUCCESS
+                    && value.damageOutcome() == DamageOutcome.HALF_DAMAGE
+                    && value.savingThrow().id().equals(save.id())), slug);
+            assertFalse(damage.evidenceAssociations().isEmpty(), slug);
+            assertEquals("PENDING_REVIEW", damage.review().recordedStatus().name(), slug);
+            assertEquals("NEEDS_REVIEW", damage.licensing().status().name(), slug);
         }
     }
 

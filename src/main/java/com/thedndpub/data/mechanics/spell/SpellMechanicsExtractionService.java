@@ -46,6 +46,8 @@ public final class SpellMechanicsExtractionService {
         }
         ModelChecks.require(sourceOwners.keySet().equals(owners.keySet()), "Extraction source owner set mismatch");
         var seen = new HashSet<SpellId>();
+        long expectedPhbOwners = definitions.stream().filter(definition ->
+                patterns.find(definition) instanceof PhbSpellMechanicsExtractor).count();
         Map<String, byte[]> sourceBytesByResource = new HashMap<>();
         List<MechanicsDocument> result = new ArrayList<>();
         int processedShieldOwners = 0;
@@ -80,8 +82,8 @@ public final class SpellMechanicsExtractionService {
         ModelChecks.require(seen.equals(owners.keySet()), "Missing extraction documents");
         ModelChecks.require(processedShieldOwners == ShieldMechanicsEdition.values().length,
                 "The pinned Shield pilot requires both authoritative source owners");
-        ModelChecks.require(processedPhbOwners == 11,
-                "The pinned PHB pattern set requires its eleven authoritative owners");
+        ModelChecks.require(processedPhbOwners == expectedPhbOwners && processedPhbOwners >= 21,
+                "The PHB pattern set requires every explicitly supported owner");
         result.sort(Comparator.comparing(document -> document.owner().id()));
         return List.copyOf(result);
     }

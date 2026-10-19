@@ -250,6 +250,14 @@ class MechanicsDocumentTests {
                 new MechanicContext(new CasterSubject(), List.of(new AppliesOnSaveOutcome(
                         target.revision().reference(target.id()), SaveOutcome.FAILURE, List.of("body")))), complete(), shieldBody());
         assertThrows(IllegalArgumentException.class, () -> document(List.of(target, wrongBinding)));
+        var validSave = proposal(PHB, "valid-save", new SavingThrowRequirementMechanic(
+                new FixedAbility(Ability.DEXTERITY), new FixedSaveDifficulty(12)), ac().context(), complete(),
+                shieldBody());
+        var wrongEffect = proposal(PHB, "non-damage-save-outcome", ac().payload(),
+                new MechanicContext(new CasterSubject(), List.of(new AppliesOnSaveOutcome(
+                        validSave.revision().reference(validSave.id()), SaveOutcome.FAILURE,
+                        DamageOutcome.FULL_DAMAGE, List.of("body")))), complete(), shieldBody());
+        assertThrows(IllegalArgumentException.class, () -> document(List.of(validSave, wrongEffect)));
         var activation = proposal(PHB, "activation", new ReactionActivationMechanic(new ReactionActionCost(1),
                 new HitByAttackTrigger(AttackEventKind.ATTACK_HIT)), ac().context(), complete(), shieldBody());
         var bound = proposal(PHB, "ac-bonus", ac().payload(), new MechanicContext(new CasterSubject(), List.of(
@@ -264,16 +272,32 @@ class MechanicsDocumentTests {
     }
 
     @Test
-    void contradictorySaveOutcomeBindingsCannotBeVerified() {
+    void distinctRollOutcomesAreValidButConflictingDamageResultsForOneRollCannotBeVerified() {
         var save = proposal(PHB, "save", new SavingThrowRequirementMechanic(new FixedAbility(Ability.DEXTERITY),
                 new FixedSaveDifficulty(12)), ac().context(), complete(), shieldBody());
+        assertThrows(IllegalArgumentException.class, () -> new AppliesOnSaveOutcome(
+                save.revision().reference(save.id()), SaveOutcome.FAILURE,
+                DamageOutcome.HALF_DAMAGE, List.of("body")));
+        assertThrows(IllegalArgumentException.class, () -> new AppliesOnSaveOutcome(
+                save.revision().reference(save.id()), SaveOutcome.SUCCESS,
+                DamageOutcome.FULL_DAMAGE, List.of("body")));
         var context = new MechanicContext(new CasterSubject(), List.of(
-                new AppliesOnSaveOutcome(save.revision().reference(save.id()), SaveOutcome.FAILURE, List.of("body")),
-                new AppliesOnSaveOutcome(save.revision().reference(save.id()), SaveOutcome.SUCCESS, List.of("body"))));
+                new AppliesOnSaveOutcome(save.revision().reference(save.id()), SaveOutcome.FAILURE,
+                        DamageOutcome.FULL_DAMAGE, List.of("body")),
+                new AppliesOnSaveOutcome(save.revision().reference(save.id()), SaveOutcome.SUCCESS,
+                        DamageOutcome.HALF_DAMAGE, List.of("body"))));
         var damage = proposal(PHB, "damage", new DamageMechanic(new DiceAmount(1, 4, 0), new FixedDamageType("fire")),
                 context, complete(), shieldBody());
-        assertEquals(MechanicsReviewStatus.NEEDS_MECHANICS_REVIEW,
+        assertEquals(MechanicsReviewStatus.VERIFIED,
                 reviewed(damage, MechanicsReviewAction.VERIFY, false).review().effectiveStatus());
+
+        var conflicting = proposal(PHB, "conflicting-damage", damage.payload(), new MechanicContext(new CasterSubject(),
+                List.of(new AppliesOnSaveOutcome(save.revision().reference(save.id()), SaveOutcome.SUCCESS,
+                                DamageOutcome.HALF_DAMAGE, List.of("body")),
+                        new AppliesOnSaveOutcome(save.revision().reference(save.id()), SaveOutcome.SUCCESS,
+                                DamageOutcome.NO_DAMAGE, List.of("body")))), complete(), shieldBody());
+        assertEquals(MechanicsReviewStatus.NEEDS_MECHANICS_REVIEW,
+                reviewed(conflicting, MechanicsReviewAction.VERIFY, false).review().effectiveStatus());
     }
 
     @Test
