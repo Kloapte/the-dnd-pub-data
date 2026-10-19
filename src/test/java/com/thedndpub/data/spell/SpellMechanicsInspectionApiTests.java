@@ -187,7 +187,12 @@ class SpellMechanicsInspectionApiTests {
                     "spell:phb:prayer-of-healing",
                     "spell:phb:shield-of-faith", "spell:phb:mage-armor", "spell:phb:barkskin",
                     "spell:phb:longstrider", "spell:phb:bless", "spell:phb:bane",
-                    "spell:phb:protection-from-energy", "spell:phb:stoneskin").contains(definition.id().value())) {
+                    "spell:phb:protection-from-energy", "spell:phb:stoneskin",
+                    "spell:phb:acid-splash", "spell:phb:arms-of-hadar", "spell:phb:call-lightning",
+                    "spell:phb:calm-emotions", "spell:phb:disintegrate", "spell:phb:dissonant-whispers",
+                    "spell:phb:ice-storm", "spell:phb:thunderwave",
+                    "spell:phb:greater-restoration", "spell:phb:lesser-restoration",
+                    "spell:phb:power-word-heal").contains(definition.id().value())) {
                 processedOwners++;
                 assertEquals(ProcessingState.PROCESSED, result.processing().state());
                 assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
@@ -239,8 +244,8 @@ class SpellMechanicsInspectionApiTests {
             }
         }
         assertEquals(930, observations);
-        assertEquals(95, processedOwners);
-        assertEquals(874, inspection.size() - processedOwners);
+        assertEquals(106, processedOwners);
+        assertEquals(863, inspection.size() - processedOwners);
         assertEquals(422, ownersWithObservations);
         assertEquals(547, inspection.size() - ownersWithObservations);
         assertTrue(publication.index().authorizedObservations().isEmpty());
@@ -458,13 +463,13 @@ class SpellMechanicsInspectionApiTests {
     void conditionApplicationAndImmunityAppearInPrivateSpellInspection() throws Exception {
         mvc.perform(get("/api/spells/spell:phb:charm-person").param("include", "interpretedMechanics"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.kind")
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].payload.kind")
                         .value("CONDITION_CHANGE"))
-                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.operation")
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].payload.operation")
                         .value("APPLY"))
-                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.condition")
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].payload.condition")
                         .value("CHARMED"))
-                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].review.recordedStatus")
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].review.recordedStatus")
                         .value("PENDING_REVIEW"));
         mvc.perform(get("/api/spells/spell:phb:freedom-of-movement")
                         .param("include", "interpretedMechanics"))

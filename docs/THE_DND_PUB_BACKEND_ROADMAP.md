@@ -1,6 +1,6 @@
 # The DnD Pub Data Backend — Development Roadmap
 
-> **Status:** Authoritative working roadmap, 19 October 2026. Step 7.2 and Steps 7.3.1–7.3.3 are implemented. Step 7.4.3 is PARTIAL after batch 7.4.3C: 95 of 969 Spell owners are processed with 171 typed mechanics. All six benchmark fixtures await human review, so authoritative benchmark acceptance remains outstanding.
+> **Status:** Authoritative working roadmap, 19 October 2026. Step 7.2 and Steps 7.3.1–7.3.3 are implemented. Step 7.4.3 remains PARTIAL after batch 7.4.3C. Step 7.4.4 is IN PROGRESS with 7.4.4A, 7.4.4B, and 7.4.4C complete: 106 of 969 Spell owners are processed with 228 typed mechanics; all six benchmark fixtures await human review, so authoritative benchmark acceptance remains outstanding.
 >
 > **Scope:** Java / Spring Boot data backend and its supporting evidence, tests, and APIs. Angular UI, Keycloak integration, persistence, and public internet deployment are future work unless explicitly authorized.
 
@@ -272,8 +272,93 @@ damage immunity extraction and the wider modifier/resistance corpus remain unsup
 unattempted. Absorb Elements is absent from the pinned PHB source and was skipped. All new claims
 remain pending mechanics review and NEEDS_REVIEW for licensing. See the
 [7.4.3C implementation report](../analysis/mechanics/step-7/7.4.3C-spell-modifiers-resistances-protection.md).
-Step 7.4.3 remains PARTIAL because planned modifier and protective effect coverage is bounded; do not
-begin 7.4.4 without authorization.
+Step 7.4.3 remains PARTIAL because planned modifier and protective effect coverage is bounded.
+
+#### 7.4.4. Corpus-wide Spell capability and interpretation — IN PROGRESS
+
+##### 7.4.4A. Corpus-wide Spell extraction capability inventory — COMPLETE
+
+The offline, deterministic inventory assesses all 969 source-aware Spell identities against the
+existing Shield and PHB extraction patterns. The refreshed inventory records 103 currently processed
+owners, 272 potential typed claims, and 57 convertible but unprocessed owners. Classifications are
+0 SUPPORTED, 160 PARTIALLY_SUPPORTED, 428 UNSUPPORTED based on source-authored structured mechanic
+classifications without a matching pattern, and 381 NOT_ASSESSED where evidence is insufficient.
+The original 7.4.4A result (95 processed, 171 claims, 493 unsupported) is preserved in the baseline
+files. The inventory distinguishes capability from processing, preserves PHB/XPHB identities, and
+isolates failures per owner. Its current reports are
+[JSON](../analysis/mechanics/step-7/7.4.4A-spell-capability-inventory.json) and
+[Markdown](../analysis/mechanics/step-7/7.4.4A-spell-capability-inventory.md). This read-only assessment
+does not activate corpus-wide production extraction, alter REST behavior, or change review or
+publication decisions.
+
+##### 7.4.4B. Generalize saving-throw and damage extraction — COMPLETE
+
+Investigation of the inventory grouped repeated PHB gaps into explicit save clauses, damage clauses
+split across adjacent sentences, source-tagged multi-component damage, and simple typed amounts.
+Reusable patterns now cover `must make` / `must succeed on` saves with local subject context, explicit
+failed-save damage and successful-save half/no outcomes, multiple typed damage components, dice and
+dice-plus-integer amounts, and existing unambiguous single-type slot scaling. Ambiguous component
+scaling, repeated saves, conditional triggers and unrelated riders remain unrepresented.
+
+The offline inventory finds 65 newly convertible Spell owners and 101 additional potential claims
+versus the preserved baseline. Saving-throw and damage structured-gap reason counts each fell by 72;
+39 save-classified and 44 damage-classified owners from those groups now yield claims. Eight
+representative owners were added to bounded production matching: Acid Splash, Arms of Hadar,
+Call Lightning, Calm Emotions, Disintegrate, Dissonant Whispers, Ice Storm and Thunderwave. This
+increases processed owners by eight and production claims by 19 (95 to 103 owners; 171 to 190 claims).
+No regressions were found among previously processed owners. Classifications now stand at 0
+SUPPORTED, 160 PARTIALLY_SUPPORTED, 428 UNSUPPORTED and 381 NOT_ASSESSED. All eight new owners remain
+partial; no completeness is inferred from claim count.
+
+The inventory cannot currently assign SUPPORTED: canonical assembly coverage always leaves `/entries`
+unassessed and marks emitted claims PARTIAL. This coverage limitation is documented but not redesigned.
+The current 7.4.4A reports are regenerated; their original baseline is preserved separately. The
+[before/after comparison](../analysis/mechanics/step-7/7.4.4B-saving-throw-damage-comparison.md)
+includes claim and classification transitions. Review and licensing defaults remain unchanged, and
+no REST contracts, benchmark fixtures, pinned JSON or publication decisions changed.
+
+At the completion of 7.4.4B, condition generalization, full-corpus production activation, Step 7.5,
+and frontend work remained out of scope for that batch. Condition work is recorded in the separately
+authorized 7.4.4C section below.
+
+##### 7.4.4C. Generalize Spell condition extraction — COMPLETE
+
+PHB condition handling now reuses the existing typed saving-throw and condition bindings for any
+single-ability save whose source explicitly connects failure to an inflicted condition. One save claim
+is reused across linked conditions; generic target scopes are retained where stated; ambiguous
+multi-ability relationships abstain. Explicit condition removal is generalized for condition-ending
+clauses, one-condition choice lists, and named effects that impose conditions. Negations, protection,
+prerequisites, and other unclear references remain unsupported rather than becoming unconditional
+`APPLY` claims.
+
+The bounded production additions are Greater Restoration, Lesser Restoration, and Power Word Heal.
+The three owners add ten condition-removal claims; 26 existing condition owners gain typed save
+requirements. Production coverage rises from 103 owners / 190 claims to 106 owners / 228 claims.
+The offline inventory assesses all 969 identities and records 310 potential claims, with 57
+convertible but unprocessed owners. Classifications are 0 SUPPORTED, 163 PARTIALLY_SUPPORTED, 440
+UNSUPPORTED, and 366 NOT_ASSESSED. No previously processed owner lost candidate claims, and there
+were no per-Spell extraction failures. The existing structured condition gap remains 131 owners;
+newly assessed tag-only ambiguity has explicit diagnostics. Claims remain partial, pending human
+review, and `NEEDS_REVIEW` for licensing. The private inspection contract remains compatible.
+
+The follow-up correction groups Lesser Restoration's four typed `REMOVE` conditions as one-of-four
+alternatives and Greater Restoration's charmed/petrified removals as one-of-two. The former retains
+an explicit unmodeled disease option; Greater Restoration's other remedy types remain unmodeled.
+Power Word Heal's four removals remain independent. This adds two choice-group claims while keeping
+all existing removal claim IDs and private REST compatibility. The C inventory now reports 310
+potential claims and 228 production claims; classifications remain 0 SUPPORTED, 163
+PARTIALLY_SUPPORTED, 440 UNSUPPORTED, and 366 NOT_ASSESSED. The correction adds two claims, no newly
+convertible owners, and no classification changes. Focused tests pass (62), and the full
+Maven suite passes (790); repeated inventory outputs are byte-identical and `git diff --check` passes.
+
+The refreshed current inventory remains at the [7.4.4A report paths](../analysis/mechanics/step-7/7.4.4A-spell-capability-inventory.md);
+the original A baseline and B comparison are preserved. A B inventory snapshot and the [C condition
+comparison](../analysis/mechanics/step-7/7.4.4C-condition-extraction-comparison.md) record before/after
+results. The [7.4.4C implementation report](../analysis/mechanics/step-7/7.4.4C-condition-extraction-generalization.md)
+documents source patterns and limitations. Canonical coverage still leaves `/entries` unassessed, so
+no candidate reaches SUPPORTED; coverage tracking was not redesigned. Step 7.4.3 remains PARTIAL and
+parent Step 7.4.4 remains IN PROGRESS. Verification: focused extractor/inventory/private REST tests,
+790 passing Maven tests, deterministic repeated report output, and `git diff --check`.
 
 ### 7.5. Monster mechanics interpretation — PLANNED
 
@@ -362,8 +447,8 @@ For every numbered batch:
 
 ## Immediate next action
 
-**Step 7.4.3 is PARTIAL after batch 7.4.3C.** The six benchmark fixtures still require human review before
-authoritative benchmark acceptance; there is no approved gold set or independently validated
+**Step 7.4.3 remains PARTIAL after batch 7.4.3C.** The six benchmark fixtures still require human review
+before authoritative benchmark acceptance; there is no approved gold set or independently validated
 extractor accuracy. Candidate diagnostics do not constitute mechanics verification or publication
-permission. Do not begin 7.4.4 as part of this batch or modify P1D,
-Keycloak, database or frontend work from this mechanics batch.
+permission. Step 7.4.4 is IN PROGRESS with 7.4.4C complete. Stop at 7.4.4C; do not begin later
+mechanic families, corpus-wide production activation, Step 7.5, database, or frontend work.

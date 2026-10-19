@@ -18,8 +18,16 @@ final class SpellMechanicsPatternRegistry {
     }
 
     SpellMechanicsPattern find(SpellDefinition spell) {
+        return find(spell, false);
+    }
+
+    SpellMechanicsPattern findForInventory(SpellDefinition spell) {
+        return find(spell, true);
+    }
+
+    private SpellMechanicsPattern find(SpellDefinition spell, boolean inventory) {
         List<SpellMechanicsPattern> matches = patterns.stream()
-                .filter(pattern -> pattern.supports(spell))
+                .filter(pattern -> inventory ? pattern.supportsForInventory(spell) : pattern.supports(spell))
                 .toList();
         ModelChecks.require(matches.size() <= 1, "Spell patterns overlap for " + spell.id().value());
         return matches.isEmpty() ? null : matches.getFirst();

@@ -55,6 +55,23 @@ final class SpellMechanicsAssembly {
         }
     }
 
+    List<MechanicRecord> attemptMany(
+            String pattern,
+            MechanicFamily family,
+            Supplier<List<MechanicRecord>> extraction) {
+        try {
+            List<MechanicRecord> result = List.copyOf(extraction.get());
+            records.addAll(result);
+            return result;
+        } catch (SpellPatternMismatch mismatch) {
+            var anchor = source.availableAncestor(mismatch.relativePointer());
+            String prefix = adapter.equals("shield-pilot") ? "shield" : adapter;
+            unsupported.add(new UnsupportedMechanicsConstruct(prefix + "-unsupported:" + pattern, family,
+                    mismatch.reason(), List.of(anchor.id()), List.of()));
+            return List.of();
+        }
+    }
+
     MechanicRecord claim(String slot, String pattern, MechanicPayload payload, MechanicContext context,
                          List<MechanicEvidenceAssociation> associations, boolean directStructured) {
         return claim(slot, pattern, payload, context, associations, directStructured,

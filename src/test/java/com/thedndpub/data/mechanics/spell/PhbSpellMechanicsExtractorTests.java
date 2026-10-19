@@ -74,6 +74,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.function.Function;
@@ -148,6 +149,200 @@ class PhbSpellMechanicsExtractorTests {
                 && value.role() == com.thedndpub.data.mechanics.model.EvidenceRole.QUALIFIER));
         assertInstanceOf(UnknownSubject.class, record.context().subject());
         assertEquals(MechanicsCompleteness.PARTIAL, record.assessment().completeness());
+    }
+
+    @Test
+    void generalizedConditionRemovalExtractsExplicitTargetsAndDoesNotApplyMentionedConditions()
+            throws IOException {
+        var lesser = extract(input("lesser-restoration"));
+        var lesserRemovals = lesser.interpretations().stream()
+                .filter(record -> record.payload() instanceof ConditionChangeMechanic).toList();
+        assertEquals(4, lesserRemovals.size());
+        assertTrue(lesserRemovals.stream().allMatch(record ->
+                ((ConditionChangeMechanic) record.payload()).operation() == ConditionOperation.REMOVE));
+        assertTrue(lesserRemovals.stream().allMatch(record ->
+                ((ConditionChangeMechanic) record.payload()).qualifiers().stream()
+                        .anyMatch(value -> value.contains("end either one disease"))));
+        assertTrue(lesserRemovals.stream().allMatch(record ->
+                record.context().subject() instanceof SpellTargetSubject subject
+                        && subject.scope() == TargetScope.SINGLE_TARGET_CREATURE));
+        assertTrue(lesserRemovals.stream().allMatch(record -> record.evidenceAssociations().stream()
+                .anyMatch(value -> value.claimPath().equals("/payload/qualifiers"))));
+        assertTrue(lesserRemovals.stream().allMatch(record -> record.derivation().sources()
+                .equals(lesser.sources())));
+        assertEquals(4, lesserRemovals.stream().map(record -> record.id().value()).distinct().count());
+        var lesserChoiceRecord = lesser.interpretations().stream()
+                .filter(record -> record.payload() instanceof ConditionChoiceMechanic).findFirst().orElseThrow();
+        var lesserChoice = (ConditionChoiceMechanic) lesserChoiceRecord.payload();
+        assertEquals(ConditionOperation.REMOVE, lesserChoice.operation());
+        assertEquals(Set.of(ConditionName.BLINDED, ConditionName.DEAFENED,
+                        ConditionName.PARALYZED, ConditionName.POISONED), Set.copyOf(lesserChoice.alternatives()));
+        assertEquals(1, lesserChoice.choicesToSelect());
+        assertTrue(lesserRemovals.stream().allMatch(record -> {
+            ConditionChangeMechanic payload = (ConditionChangeMechanic) record.payload();
+            return lesserChoiceRecord.revision().reference(lesserChoiceRecord.id()).equals(payload.choiceGroup());
+        }), "The four removal claims must share an exclusive selection group");
+        assertTrue(lesser.unsupported().stream().anyMatch(item ->
+                item.id().equals("condition-removal-unmodeled-disease-option")),
+                "The disease alternative must remain visible as unmodeled");
+
+        var greater = extract(input("greater-restoration"));
+        assertEquals(Set.of(ConditionName.CHARMED, ConditionName.PETRIFIED), greater.interpretations().stream()
+                .filter(record -> record.payload() instanceof ConditionChangeMechanic)
+                .map(record -> (ConditionChangeMechanic) record.payload())
+                .filter(payload -> payload.operation() == ConditionOperation.REMOVE)
+                .map(ConditionChangeMechanic::condition).collect(Collectors.toSet()));
+        var greaterChoiceRecord = greater.interpretations().stream()
+                .filter(record -> record.payload() instanceof ConditionChoiceMechanic).findFirst().orElseThrow();
+        var greaterChoice = (ConditionChoiceMechanic) greaterChoiceRecord.payload();
+        assertEquals(ConditionOperation.REMOVE, greaterChoice.operation());
+        assertEquals(Set.of(ConditionName.CHARMED, ConditionName.PETRIFIED),
+                Set.copyOf(greaterChoice.alternatives()));
+        assertEquals(1, greaterChoice.choicesToSelect());
+        assertTrue(greater.interpretations().stream()
+                .filter(record -> record.payload() instanceof ConditionChangeMechanic)
+                .map(record -> (ConditionChangeMechanic) record.payload())
+                .filter(payload -> payload.operation() == ConditionOperation.REMOVE)
+                .allMatch(payload -> greaterChoiceRecord.revision().reference(greaterChoiceRecord.id())
+                        .equals(payload.choiceGroup())));
+        assertTrue(greater.unsupported().stream().anyMatch(item ->
+                item.id().equals("condition-removal-unmodeled-alternatives")));
+        assertTrue(greater.unsupported().stream().anyMatch(item -> item.id().contains("exhaustion")));
+
+        var powerWord = extract(input("power-word-heal"));
+        assertEquals(Set.of(ConditionName.CHARMED, ConditionName.FRIGHTENED,
+                        ConditionName.PARALYZED, ConditionName.STUNNED),
+                powerWord.interpretations().stream()
+                        .filter(record -> record.payload() instanceof ConditionChangeMechanic)
+                        .map(record -> (ConditionChangeMechanic) record.payload())
+                        .filter(payload -> payload.operation() == ConditionOperation.REMOVE)
+                        .map(ConditionChangeMechanic::condition).collect(Collectors.toSet()));
+        assertTrue(powerWord.interpretations().stream()
+                .noneMatch(record -> record.payload() instanceof ConditionChoiceMechanic),
+                "Power Word Heal ends its listed conditions independently");
+        assertTrue(powerWord.interpretations().stream()
+                .filter(record -> record.payload() instanceof ConditionChangeMechanic)
+                .map(record -> (ConditionChangeMechanic) record.payload())
+                .filter(payload -> payload.operation() == ConditionOperation.REMOVE)
+                .allMatch(payload -> payload.choiceGroup() == null));
+        assertTrue(powerWord.unsupported().stream().anyMatch(item -> item.id().contains("prone")),
+                "Standing up is not generalized into a condition removal without an explicit ending clause");
+    }
+
+    @Test
+    void generalizedConditionSaveDependencyReusesOneTypedSaveAndAbstainsForMultipleSaveAbilities()
+            throws IOException {
+        var web = extract(input("web"));
+        var webSaves = web.interpretations().stream()
+                .filter(record -> record.payload() instanceof SavingThrowRequirementMechanic).toList();
+        assertEquals(1, webSaves.size());
+        var restrained = condition(web, ConditionName.RESTRAINED);
+        assertConditionSave(restrained, webSaves.getFirst(), SaveOutcome.FAILURE);
+        assertTrue(restrained.context().subject() instanceof SpellTargetSubject subject
+                && subject.scope() == TargetScope.AREA_AFFECTED_CREATURES);
+        assertEquals(1, web.interpretations().stream()
+                .filter(record -> record.payload() instanceof SavingThrowRequirementMechanic).count(),
+                "The same save clause must not create duplicate typed saves");
+
+        var earthquake = extract(input("earthquake"));
+        assertTrue(earthquake.interpretations().stream()
+                .noneMatch(record -> record.payload() instanceof SavingThrowRequirementMechanic));
+        assertTrue(earthquake.unsupported().stream().anyMatch(record ->
+                record.id().equals("condition-save-dependency")
+                        && record.reason() == UnsupportedReason.AMBIGUOUS_INTERPRETATION));
+
+        var blindingSmite = extract(input("blinding-smite"));
+        var smiteSave = blindingSmite.interpretations().stream()
+                .filter(record -> record.payload() instanceof SavingThrowRequirementMechanic).toList();
+        assertEquals(1, smiteSave.size());
+        assertConditionSave(condition(blindingSmite, ConditionName.BLINDED), smiteSave.getFirst(),
+                SaveOutcome.FAILURE);
+        assertTrue(blindingSmite.interpretations().stream()
+                .noneMatch(record -> record.payload() instanceof DamageMechanic),
+                "The condition save must not be reused as a damage dependency for this on-hit damage effect");
+    }
+
+    @Test
+    void generalizedSaveAndDamagePatternsCoverRepresentativeStructures() throws IOException {
+        var acidSplash = extract(input("acid-splash"));
+        assertEquals(2, acidSplash.interpretations().size());
+        var acidSave = acidSplash.interpretations().stream()
+                .filter(record -> record.payload() instanceof SavingThrowRequirementMechanic).findFirst().orElseThrow();
+        assertEquals(new FixedAbility(Ability.DEXTERITY),
+                ((SavingThrowRequirementMechanic) acidSave.payload()).ability());
+        var acidDamage = acidSplash.interpretations().stream()
+                .filter(record -> record.payload() instanceof DamageMechanic).findFirst().orElseThrow();
+        assertEquals(new DiceAmount(1, 6, 0), ((DamageMechanic) acidDamage.payload()).amount());
+        var acidBinding = assertInstanceOf(AppliesOnSaveOutcome.class, acidDamage.context().bindings().getFirst());
+        assertEquals(SaveOutcome.FAILURE, acidBinding.outcome());
+        assertEquals(DamageOutcome.FULL_DAMAGE, acidBinding.damageOutcome());
+        assertEquals(acidSave.revision().reference(acidSave.id()), acidBinding.savingThrow());
+        assertTrue(acidDamage.evidenceAssociations().stream().allMatch(association ->
+                acidSplash.evidence().stream().anyMatch(evidence -> evidence.id().equals(association.evidenceId()))));
+        assertTrue(acidSplash.interpretations().stream().allMatch(record ->
+                record.derivation().sources().equals(acidSplash.sources())));
+        assertTrue(acidSplash.interpretations().stream().allMatch(record ->
+                record.review().recordedStatus().name().equals("PENDING_REVIEW")
+                        && record.licensing().status().name().equals("NEEDS_REVIEW")));
+        assertEquals(acidSplash.interpretations().stream().map(MechanicRecord::id).toList(),
+                extract(input("acid-splash")).interpretations().stream().map(MechanicRecord::id).toList());
+
+        var armsOfHadar = extract(input("arms-of-hadar"));
+        var armsDamage = armsOfHadar.interpretations().stream()
+                .filter(record -> record.payload() instanceof DamageMechanic).findFirst().orElseThrow();
+        assertEquals(2, armsDamage.context().bindings().size());
+        assertEquals(DamageOutcome.HALF_DAMAGE,
+                assertInstanceOf(AppliesOnSaveOutcome.class, armsDamage.context().bindings().get(1)).damageOutcome());
+        assertEquals(1, armsOfHadar.interpretations().stream()
+                .filter(record -> record.payload() instanceof SpellSlotScalingMechanic).count());
+
+        var iceStorm = extract(input("ice-storm"));
+        var iceDamage = iceStorm.interpretations().stream()
+                .filter(record -> record.payload() instanceof DamageMechanic).toList();
+        assertEquals(2, iceDamage.size());
+        assertEquals(List.of("bludgeoning", "cold"), iceDamage.stream()
+                .map(record -> ((FixedDamageType) ((DamageMechanic) record.payload()).damageType()).authoredCode())
+                .sorted().toList());
+        assertTrue(iceDamage.stream().allMatch(record -> record.context().bindings().stream()
+                .anyMatch(binding -> binding instanceof AppliesOnSaveOutcome outcome
+                        && outcome.damageOutcome() == DamageOutcome.HALF_DAMAGE)));
+
+        var calmEmotions = extract(input("calm-emotions"));
+        assertEquals(1, calmEmotions.interpretations().size());
+        assertInstanceOf(SavingThrowRequirementMechanic.class, calmEmotions.interpretations().getFirst().payload());
+
+        var disintegrate = extract(input("disintegrate"));
+        var disintegrateDamage = disintegrate.interpretations().stream()
+                .filter(record -> record.payload() instanceof DamageMechanic).findFirst().orElseThrow();
+        assertEquals(new SumAmount(List.of(new DiceAmount(10, 6, 0), new IntegerAmount(40))),
+                ((DamageMechanic) disintegrateDamage.payload()).amount());
+    }
+
+    @Test
+    void generalizedSavePatternAbstainsWhenSourceWordingDoesNotMatch() throws IOException {
+        var changed = input("acid-splash").changed(mapper, root -> root.withArray("entries").set(0,
+                mapper.getNodeFactory().textNode("A target faces a Dexterity saving throw when affected.")));
+        var document = extract(changed);
+        assertTrue(document.interpretations().isEmpty());
+        assertTrue(document.unsupported().stream().anyMatch(value ->
+                value.candidateFamily() == com.thedndpub.data.mechanics.model.MechanicFamily.SAVING_THROW_REQUIREMENT));
+    }
+
+    @Test
+    void generalizedDamagePatternAbstainsOnUnsupportedAmountAndOfflineMatchingStaysBounded() throws IOException {
+        var changed = input("acid-splash").changed(mapper, root -> root.withArray("entries").set(0,
+                mapper.getNodeFactory().textNode("The target must succeed on a Dexterity saving throw or take "
+                        + "{@damage 1d6+1d4} acid damage.")));
+        var document = extract(changed);
+        assertEquals(1, document.interpretations().size());
+        assertInstanceOf(SavingThrowRequirementMechanic.class, document.interpretations().getFirst().payload());
+        assertTrue(document.unsupported().stream().anyMatch(value ->
+                value.candidateFamily() == com.thedndpub.data.mechanics.model.MechanicFamily.DAMAGE));
+
+        var unrelated = spells.findById("spell:phb:poison-spray");
+        var extractor = new PhbSpellMechanicsExtractor();
+        assertFalse(extractor.supports(unrelated));
+        assertTrue(extractor.supportsForInventory(unrelated));
     }
 
     @Test
@@ -754,9 +949,9 @@ class PhbSpellMechanicsExtractorTests {
     @Test
     void registeredPatternsProcessConditionOwnersAndPreserveAllFormulaObservations() {
         assertEquals(969, inspection.size());
-        assertEquals(95, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.PROCESSED).count());
-        assertEquals(874, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.NOT_ATTEMPTED).count());
-        assertEquals(171, inspection.documents().stream().mapToInt(value -> value.interpretations().size()).sum());
+        assertEquals(106, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.PROCESSED).count());
+        assertEquals(863, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.NOT_ATTEMPTED).count());
+        assertEquals(228, inspection.documents().stream().mapToInt(value -> value.interpretations().size()).sum());
         assertEquals(930, inspection.documents().stream().mapToInt(value -> value.observations().size()).sum());
         for (String slug : java.util.List.of("fireball", "healing-word")) {
             var id = spells.findById("spell:phb:" + slug).id();

@@ -11,6 +11,7 @@ and historical investigations, not additional authorization to implement their p
 | --- | --- |
 | Current architecture and conventions | [Documentation index](../docs/README.md) |
 | Mechanics model and active implementation references | [Active mechanics index](active/mechanics/README.md) |
+| Current corpus-wide Spell capability assessment | [7.4.4A–C inventory and comparisons](mechanics/step-7/7.4.4C-condition-extraction-comparison.md) |
 | Cross-catalog discoveries | [Domain discoveries](domain/DOMAIN-DISCOVERIES.md) |
 | Completed source-family coverage | [Source coverage matrix](remaining-json/SOURCE-COVERAGE-MATRIX.md) |
 | Source registry conventions | [Source registry design](sources/SOURCE-REGISTRY-DESIGN.md) |

@@ -6,6 +6,7 @@ import com.thedndpub.data.dte.common.entry.NamedEntryDte;
 import com.thedndpub.data.dte.common.entry.TextEntryDte;
 import com.thedndpub.data.dto.spell.SpellDefinition;
 import com.thedndpub.data.mechanics.model.Ability;
+import com.thedndpub.data.mechanics.model.AmountExpression;
 import com.thedndpub.data.mechanics.model.AmountSymbol;
 import com.thedndpub.data.mechanics.model.AppliesOnSaveOutcome;
 import com.thedndpub.data.mechanics.model.AppliesWhen;
@@ -72,6 +73,7 @@ import com.thedndpub.data.mechanics.syntax.MarkupTag;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -111,10 +113,25 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
             "spell:phb:protection-from-energy", "spell:phb:stoneskin");
     private static final Set<String> PREVIOUSLY_PROCESSED_OWNERS = Set.of(
             "spell:phb:fireball", "spell:phb:healing-word");
+    private static final Set<String> GENERALIZED_SAVE_DAMAGE_OWNERS = Set.of(
+            "spell:phb:acid-splash",
+            "spell:phb:arms-of-hadar",
+            "spell:phb:call-lightning",
+            "spell:phb:calm-emotions",
+            "spell:phb:disintegrate",
+            "spell:phb:dissonant-whispers",
+            "spell:phb:ice-storm",
+            "spell:phb:thunderwave");
+    private static final Set<String> GENERALIZED_CONDITION_REMOVAL_OWNERS = Set.of(
+            "spell:phb:greater-restoration",
+            "spell:phb:lesser-restoration",
+            "spell:phb:power-word-heal");
     private static final Set<String> OWNERS;
     private static final String BODY = "/entries/0";
     private static final String HIGHER = "/entriesHigherLevel/0/entries/0";
     private static final Pattern DICE = Pattern.compile("([1-9][0-9]*)d([1-9][0-9]*)");
+    private static final Pattern CONDITION_TAG = Pattern.compile(
+            "(?i)\\{@condition\\s+([a-z]+)(?:\\|[^}]*)?}");
     private static final Pattern EXCLUSIVE_CONDITION_CHOICE = Pattern.compile(
             "(?i)either\\s+\\{@condition\\s+([a-z]+)(?:\\|[^}]*)?}\\s+or\\s+"
                     + "\\{@condition\\s+([a-z]+)(?:\\|[^}]*)?}\\s*\\(your choice\\)");
@@ -142,15 +159,48 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
 
     @Override
     public boolean supports(SpellDefinition spell) {
+        return usesLegacyImplementation(spell) || GENERALIZED_SAVE_DAMAGE_OWNERS.contains(spell.id().value())
+                || GENERALIZED_CONDITION_REMOVAL_OWNERS.contains(spell.id().value());
+    }
+
+    @Override
+    public boolean supportsForInventory(SpellDefinition spell) {
+        return supports(spell) || spell.source().identity().code().equalsIgnoreCase("PHB")
+                && (!spell.mechanics().savingThrows().isEmpty() || !spell.mechanics().damageInflicted().isEmpty()
+                || containsConditionTag(spell.entries()) || containsConditionTag(spell.entriesHigherLevel()));
+    }
+
+    private boolean usesLegacyImplementation(SpellDefinition spell) {
         return OWNERS.contains(spell.id().value()) || spell.source().identity().code().equalsIgnoreCase("PHB")
                 && (!spell.mechanics().conditionsInflicted().isEmpty()
                 || !spell.mechanics().conditionImmunities().isEmpty());
     }
 
+    private MechanicsDocument extractGeneralizedSaveAndDamage(
+            SpellDefinition spell,
+            SpellMechanicsEvidenceSource source,
+            MechanicsDocument original) {
+        return PhbSaveDamageGeneralizer.extract(spell, source, original);
+    }
+
     @Override
     public MechanicsDocument extract(SpellDefinition spell, SpellMechanicsEvidenceSource source,
                                      MechanicsDocument original) {
-        ModelChecks.require(supports(spell), "Unsupported PHB extraction owner");
+        ModelChecks.require(supports(spell), "Unsupported PHB production extraction owner");
+        return extractSupported(spell, source, original);
+    }
+
+    @Override
+    public MechanicsDocument extractForInventory(
+            SpellDefinition spell,
+            SpellMechanicsEvidenceSource source,
+            MechanicsDocument original) {
+        ModelChecks.require(supportsForInventory(spell), "Unsupported PHB inventory extraction owner");
+        return extractSupported(spell, source, original);
+    }
+
+    private MechanicsDocument extractSupported(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                                MechanicsDocument original) {
         ModelChecks.require(original.owner().equals(source.owner())
                         && original.owner().id().equals(spell.id().value())
                         && original.sources().equals(List.of(source.source().revision())),
@@ -163,6 +213,15 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
         source.verifyTextList("/damageInflict", spell.mechanics().damageInflicted());
         source.verifyTextList("/conditionInflict", spell.mechanics().conditionsInflicted());
         source.verifyTextList("/conditionImmune", spell.mechanics().conditionImmunities());
+        if (!usesLegacyImplementation(spell)) {
+            if ((GENERALIZED_CONDITION_REMOVAL_OWNERS.contains(spell.id().value())
+                    || containsConditionTag(spell.entries()))
+                    && spell.mechanics().savingThrows().isEmpty()
+                    && spell.mechanics().damageInflicted().isEmpty()) {
+                return extractConditionRemovals(spell, source, original);
+            }
+            return extractGeneralizedSaveAndDamage(spell, source, original);
+        }
         String adapterId = PREVIOUSLY_PROCESSED_OWNERS.contains(spell.id().value())
                 ? "phb-spell-pilot" : "phb-spell-patterns";
         var assembly = new SpellMechanicsAssembly(source, original, adapterId);
@@ -199,6 +258,200 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
         return assembly.finish(List.of(root + "/entries", root + "/entriesHigherLevel",
                         root + "/savingThrow", root + "/damageInflict"),
                 List.of(root + "/entries", root + "/entriesHigherLevel"));
+    }
+
+    private MechanicsDocument extractConditionRemovals(SpellDefinition spell,
+                                                       SpellMechanicsEvidenceSource source,
+                                                       MechanicsDocument original) {
+        var assembly = new SpellMechanicsAssembly(source, original, "phb-condition-removal-patterns");
+        List<LocatedText> entries = locatedEntries(spell.entries(), "/entries", source);
+        Set<String> emitted = new HashSet<>();
+        Set<String> assessed = new HashSet<>();
+        LocatedPhrase spellTarget = genericConditionTarget(entries);
+        ConditionRemovalChoice removalChoice = conditionRemovalChoice(entries);
+        MechanicRevisionReference choiceGroup = null;
+        if (removalChoice != null) {
+            MechanicRecord choice = assembly.attempt(removalChoice.slot(), MechanicFamily.CONDITION, () -> {
+                var associations = new ArrayList<MechanicEvidenceAssociation>();
+                associations.add(MechanicEvidenceAssociation.of(
+                        source.textEvidence(removalChoice.selectionPointer(), removalChoice.selectionPhrase()),
+                        "/payload/choicesToSelect", EvidenceRole.QUALIFIER));
+                for (int index = 0; index < removalChoice.conditions().size(); index++) {
+                    String raw = removalChoice.conditions().get(index);
+                    Matcher tag = Pattern.compile("(?i)\\{@condition\\s+" + Pattern.quote(raw)
+                            + "(?:\\|[^}]*)?}").matcher(removalChoice.alternativesText());
+                    if (tag.find()) {
+                        associations.add(MechanicEvidenceAssociation.of(
+                                source.textEvidence(removalChoice.alternativesPointer(), tag.group()),
+                                "/payload/alternatives/" + index, EvidenceRole.VALUE));
+                    }
+                }
+                return assembly.claim(removalChoice.slot(), "condition-removal-exclusive-choice-v1",
+                        new ConditionChoiceMechanic(ConditionOperation.REMOVE,
+                                removalChoice.conditions().stream().map(this::conditionName).toList(), 1),
+                        unknownContext(), associations, false, MechanicsCompleteness.PARTIAL);
+            });
+            if (choice != null) {
+                choiceGroup = choice.revision().reference(choice.id());
+            }
+        }
+        final MechanicRevisionReference removalChoiceReference = choiceGroup;
+        if (removalChoice != null && removalChoice.unmodeledReason() != null) {
+            assembly.abstain(removalChoice.unmodeledReason(), MechanicFamily.CONDITION,
+                    UnsupportedReason.FAMILY_NOT_IMPLEMENTED, removalChoice.selectionPointer());
+        }
+        for (LocatedText entry : entries) {
+            Matcher matcher = CONDITION_TAG.matcher(entry.text());
+            while (matcher.find()) {
+                String raw = matcher.group(1).toLowerCase(java.util.Locale.ROOT);
+                ConditionName condition = conditionName(raw);
+                if (!assessed.add(raw)) {
+                    continue;
+                }
+                if (condition == null) {
+                    assembly.abstain("condition-reference-" + raw, MechanicFamily.CONDITION,
+                            UnsupportedReason.UNSUPPORTED_SYNTAX, entry.pointer());
+                    continue;
+                }
+                LocatedPhrase removal = explicitConditionRemoval(entry.text(), raw);
+                if (removal == null) {
+                    assembly.abstain("condition-reference-" + raw, MechanicFamily.CONDITION,
+                            UnsupportedReason.AMBIGUOUS_INTERPRETATION, entry.pointer());
+                    continue;
+                }
+                String key = raw;
+                assembly.attempt("condition-remove-" + key, MechanicFamily.CONDITION, () -> {
+                    TextMechanicsEvidence evidence = source.textEvidence(entry.pointer(), removal.phrase());
+                    var associations = new ArrayList<MechanicEvidenceAssociation>();
+                    Matcher tagMatcher = CONDITION_TAG.matcher(entry.text());
+                    while (tagMatcher.find()) {
+                        if (tagMatcher.group(1).equalsIgnoreCase(key)) {
+                            TextMechanicsEvidence conditionEvidence = source.textEvidence(entry.pointer(),
+                                    tagMatcher.group());
+                            associations.add(MechanicEvidenceAssociation.of(conditionEvidence,
+                                    "/payload", EvidenceRole.EFFECT_ROLE));
+                            break;
+                        }
+                    }
+                    associations.add(MechanicEvidenceAssociation.of(evidence, "/payload/qualifiers",
+                            EvidenceRole.QUALIFIER));
+                    if (removalChoiceReference != null && removalChoice.conditions().contains(key)) {
+                        associations.add(MechanicEvidenceAssociation.of(
+                                source.textEvidence(removalChoice.alternativesPointer(),
+                                        removalChoice.alternativesText()),
+                                "/payload/choiceGroup", EvidenceRole.REFERENCE));
+                    }
+                    if (spellTarget != null) {
+                        associations.add(MechanicEvidenceAssociation.of(
+                                source.textEvidence(spellTarget.pointer(), spellTarget.phrase()), "/context/subject",
+                                EvidenceRole.QUALIFIER));
+                    }
+                    return assembly.claim("condition-remove-" + key, "condition-explicit-removal-v1",
+                            new ConditionChangeMechanic(ConditionOperation.REMOVE, condition,
+                            List.of(removal.phrase()), removalChoiceReference != null
+                                    && removalChoice.conditions().contains(key) ? removalChoiceReference : null),
+                            new MechanicContext(spellTarget == null
+                                    ? new UnknownSubject(UnknownValueReason.NOT_INTERPRETED)
+                                    : new SpellTargetSubject(TargetScope.SINGLE_TARGET_CREATURE), List.of()),
+                            associations, false,
+                            MechanicsCompleteness.PARTIAL);
+                });
+            }
+        }
+        return assembly.finish(List.of(source.source().jsonPointer() + "/entries"),
+                List.of(source.source().jsonPointer() + "/entriesHigherLevel"));
+    }
+
+    private ConditionRemovalChoice conditionRemovalChoice(List<LocatedText> entries) {
+        for (LocatedText entry : entries) {
+            String lower = entry.text().toLowerCase(java.util.Locale.ROOT);
+            if (lower.contains("end either one disease or one condition afflicting it")) {
+                Matcher tags = CONDITION_TAG.matcher(entry.text());
+                List<String> conditions = new ArrayList<>();
+                while (tags.find()) {
+                    String raw = tags.group(1).toLowerCase(java.util.Locale.ROOT);
+                    if (conditionName(raw) != null && !conditions.contains(raw)) {
+                        conditions.add(raw);
+                    }
+                }
+                if (conditions.size() >= 2) {
+                    return new ConditionRemovalChoice("condition-remove-choice-" + String.join("-", conditions),
+                            entry.pointer(), entry.text(), entry.pointer(), entry.text(), conditions,
+                            "condition-removal-unmodeled-disease-option");
+                }
+            }
+            Matcher effect = Pattern.compile("(?i)one effect that \\{@condition\\s+([^}|]+)(?:\\|[^}]*)?}"
+                    + "\\s+or\\s+\\{@condition\\s+([^}|]+)(?:\\|[^}]*)?}").matcher(entry.text());
+            LocatedText selection = entries.stream().filter(candidate -> candidate.text().toLowerCase(
+                    java.util.Locale.ROOT).contains("one of the following effects on the target")).findFirst()
+                    .orElse(null);
+            if (effect.find() && selection != null) {
+                String first = effect.group(1).toLowerCase(java.util.Locale.ROOT);
+                String second = effect.group(2).toLowerCase(java.util.Locale.ROOT);
+                if (conditionName(first) != null && conditionName(second) != null) {
+                    return new ConditionRemovalChoice("condition-remove-choice-" + first + "-" + second,
+                            selection.pointer(), selection.text(), entry.pointer(), entry.text(),
+                            List.of(first, second),
+                            "condition-removal-unmodeled-alternatives");
+                }
+            }
+        }
+        return null;
+    }
+
+    private LocatedPhrase explicitConditionRemoval(String text, String condition) {
+        Pattern tag = Pattern.compile("(?i)\\{@condition\\s+" + Pattern.quote(condition)
+                + "(?:\\|[^}]*)?}");
+        Matcher matcher = tag.matcher(text);
+        while (matcher.find()) {
+            String sentence = sentenceContaining(text, matcher.group());
+            String lower = sentence.toLowerCase(java.util.Locale.ROOT);
+            boolean ending = lower.matches("(?s).*(?:condition\\s+ends|ends?\\s+the\\s+condition).*")
+                    || lower.matches("(?s).*end(?:s|ed)?\\s+(?:either\\s+)?(?:one of the following effects on the target|one condition afflicting it).*")
+                    || lower.matches("(?s).*one effect that\\s+.*");
+            if (ending) {
+                return new LocatedPhrase("", sentence);
+            }
+        }
+        String lower = text.toLowerCase(java.util.Locale.ROOT);
+        if (lower.contains("end either one disease or one condition afflicting it")
+                && lower.contains("the condition can be") && tag.matcher(text).find()) {
+            return new LocatedPhrase("", text.trim());
+        }
+        return null;
+    }
+
+    private boolean containsConditionTag(List<EntryDte> entries) {
+        for (EntryDte entry : entries) {
+            if (entry instanceof TextEntryDte text && CONDITION_TAG.matcher(text.text()).find()) {
+                return true;
+            }
+            if (entry instanceof SectionEntryDte section && containsConditionTag(section.entries())) {
+                return true;
+            }
+            if (entry instanceof com.thedndpub.data.dte.common.entry.ListEntryDte list
+                    && containsConditionTag(list.items())) {
+                return true;
+            }
+            if (entry instanceof NamedEntryDte named && containsConditionTag(named.entries())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private LocatedPhrase genericConditionTarget(List<LocatedText> entries) {
+        for (LocatedText entry : entries) {
+            String lower = entry.text().toLowerCase(java.util.Locale.ROOT);
+            for (String phrase : List.of("a creature you touch", "the creature you touch", "you touch a creature",
+                    "the target", "a creature of your choice")) {
+                int index = lower.indexOf(phrase);
+                if (index >= 0) {
+                    return new LocatedPhrase(entry.pointer(), entry.text().substring(index, index + phrase.length()));
+                }
+            }
+        }
+        return null;
     }
 
     private void extractConditions(SpellDefinition spell, SpellMechanicsEvidenceSource source,
@@ -665,8 +918,7 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
 
     private MechanicRecord conditionSavingThrow(SpellDefinition spell, SpellMechanicsEvidenceSource source,
                                                 SpellMechanicsAssembly assembly, ConditionTarget target) {
-        if (!CONDITION_DEPENDENCY_OWNERS.contains(spell.id().value())
-                || spell.mechanics().savingThrows().isEmpty()) {
+        if (spell.mechanics().conditionsInflicted().isEmpty() || spell.mechanics().savingThrows().isEmpty()) {
             return null;
         }
         if (spell.mechanics().savingThrows().size() != 1) {
@@ -706,9 +958,6 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
     }
 
     private ConditionTarget conditionTarget(SpellDefinition spell, SpellMechanicsEvidenceSource source) {
-        if (!CONDITION_DEPENDENCY_OWNERS.contains(spell.id().value())) {
-            return ConditionTarget.unknown();
-        }
         List<LocatedText> entries = locatedEntries(spell.entries(), "/entries", source);
         for (LocatedText entry : entries) {
             String lower = entry.text().toLowerCase(java.util.Locale.ROOT);
@@ -730,8 +979,33 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
                 return targetFrom(entry, "Choose one creature that you can see", TargetScope.SINGLE_TARGET_CREATURE,
                         null, spell, source);
         }
+            if (lower.contains("each creature")) {
+                String phrase = sentencePrefix(entry.text(), "each creature");
+                return targetFrom(entry, phrase, TargetScope.AREA_AFFECTED_CREATURES, null, spell, source);
+            }
+            if (lower.contains("you touch a creature")) {
+                return targetFrom(entry, "You touch a creature", TargetScope.CASTER_OR_TOUCHED_CREATURE, null,
+                        spell, source);
+            }
+            if (lower.contains("choose a creature")) {
+                String phrase = sentencePrefix(entry.text(), "choose a creature");
+                return targetFrom(entry, phrase, TargetScope.SINGLE_TARGET_CREATURE, null, spell, source);
+            }
+            if (lower.contains("a creature of your choice")) {
+                String phrase = sentencePrefix(entry.text(), "a creature of your choice");
+                return targetFrom(entry, phrase, TargetScope.SINGLE_TARGET_CREATURE, null, spell, source);
+            }
         }
         return ConditionTarget.unknown();
+    }
+
+    private String sentencePrefix(String text, String phrase) {
+        int index = text.toLowerCase(java.util.Locale.ROOT).indexOf(phrase);
+        if (index < 0) {
+            return phrase;
+        }
+        int end = text.indexOf('.', index);
+        return text.substring(index, end < 0 ? text.length() : end + 1).trim();
     }
 
     private ConditionTarget targetFrom(LocatedText entry, String phrase, TargetScope scope,
@@ -894,6 +1168,10 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
             for (int index = 0; index < named.entries().size(); index++) {
                 collectLocatedEntry(named.entries().get(index), pointer + "/entries/" + index, source, result);
             }
+        } else if (entry instanceof com.thedndpub.data.dte.common.entry.ListEntryDte list) {
+            for (int index = 0; index < list.items().size(); index++) {
+                collectLocatedEntry(list.items().get(index), pointer + "/items/" + index, source, result);
+            }
         }
     }
 
@@ -940,6 +1218,14 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
     }
 
     private record ConditionChoiceCandidate(String pointer, String sentence, String first, String second) {
+    }
+
+    private record ConditionRemovalChoice(String slot, String selectionPointer, String selectionPhrase,
+                                          String alternativesPointer, String alternativesText,
+                                          List<String> conditions, String unmodeledReason) {
+        private ConditionRemovalChoice {
+            conditions = List.copyOf(conditions);
+        }
     }
 
     private void extractGeneralDamage(
@@ -1154,6 +1440,13 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
                         minimumCastingSlotLevel, 1), unknownContext(),
                 List.of(MechanicEvidenceAssociation.of(evidence, "/payload", EvidenceRole.EFFECT_ROLE)),
                 false, MechanicsCompleteness.PARTIAL);
+    }
+
+    MechanicRecord generalizedSlotScaling(
+            SpellDefinition spell,
+            SpellMechanicsEvidenceSource source,
+            SpellMechanicsAssembly assembly) {
+        return slotScaling(spell, source, assembly);
     }
 
     private String damageRole(String text, MarkupTag tag, String damageType) {
