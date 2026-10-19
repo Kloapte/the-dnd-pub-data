@@ -14,6 +14,7 @@ import com.thedndpub.data.mechanics.inspection.MechanicsInspectionAvailability;
 import com.thedndpub.data.mechanics.inspection.TextEvidenceLocatorDto;
 import com.thedndpub.data.mechanics.model.CatalogDomain;
 import com.thedndpub.data.mechanics.model.ConditionChangeMechanic;
+import com.thedndpub.data.mechanics.model.ConditionChoiceMechanic;
 import com.thedndpub.data.mechanics.model.CoverageStatus;
 import com.thedndpub.data.mechanics.model.MechanicsDocument;
 import com.thedndpub.data.mechanics.model.MechanicsHashes;
@@ -107,6 +108,27 @@ class SpellMechanicsInspectionApiTests {
             assertEquals(com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW,
                     claim.licensing().status());
         }
+    }
+
+    @Test
+    void blindnessDeafnessChoiceAppearsInPrivateSpellInspection() throws Exception {
+        String response = mvc.perform(get("/api/spells/spell:phb:blindness-deafness")
+                        .param("include", "interpretedMechanics"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        JsonNode envelope = mapper.readTree(response).get("interpretedMechanics");
+        JsonNode choice = null;
+        for (JsonNode claim : envelope.get("interpretations")) {
+            if (claim.at("/payload/kind").asText().equals("CONDITION_CHOICE")) {
+                choice = claim;
+                break;
+            }
+        }
+        assertNotNull(choice);
+        assertEquals(1, choice.at("/payload/choicesToSelect").intValue());
+        assertEquals(List.of("BLINDED", "DEAFENED"), mapper.convertValue(choice.at("/payload/alternatives"),
+                mapper.getTypeFactory().constructCollectionType(List.class, String.class)));
+        assertEquals("PENDING_REVIEW", choice.at("/review/recordedStatus").asText());
+        assertEquals("NEEDS_REVIEW", choice.at("/licensing/status").asText());
     }
 
     @Test

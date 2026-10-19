@@ -33,7 +33,9 @@ class MechanicsValuesTests {
                 new ConditionChangeMechanic(ConditionOperation.APPLY, ConditionName.CHARMED,
                         List.of("on a failed Wisdom saving throw")),
                 new ConditionChangeMechanic(ConditionOperation.REMOVE, ConditionName.POISONED, List.of()),
-                new ConditionChangeMechanic(ConditionOperation.GRANT_IMMUNITY, ConditionName.FRIGHTENED, List.of()));
+                new ConditionChangeMechanic(ConditionOperation.GRANT_IMMUNITY, ConditionName.FRIGHTENED, List.of()),
+                new ConditionChoiceMechanic(ConditionOperation.APPLY,
+                        List.of(ConditionName.BLINDED, ConditionName.DEAFENED), 1));
     }
 
     static SpellMentionReference unresolvedSpell() {

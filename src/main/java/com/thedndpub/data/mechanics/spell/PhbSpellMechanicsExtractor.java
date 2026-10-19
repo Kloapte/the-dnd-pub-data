@@ -9,6 +9,7 @@ import com.thedndpub.data.mechanics.model.AmountSymbol;
 import com.thedndpub.data.mechanics.model.AppliesOnSaveOutcome;
 import com.thedndpub.data.mechanics.model.DamageMechanic;
 import com.thedndpub.data.mechanics.model.ConditionChangeMechanic;
+import com.thedndpub.data.mechanics.model.ConditionChoiceMechanic;
 import com.thedndpub.data.mechanics.model.ConditionName;
 import com.thedndpub.data.mechanics.model.ConditionOperation;
 import com.thedndpub.data.mechanics.model.DamageOutcome;
@@ -22,6 +23,7 @@ import com.thedndpub.data.mechanics.model.MechanicContext;
 import com.thedndpub.data.mechanics.model.MechanicEvidenceAssociation;
 import com.thedndpub.data.mechanics.model.MechanicFamily;
 import com.thedndpub.data.mechanics.model.MechanicRecord;
+import com.thedndpub.data.mechanics.model.MechanicRevisionReference;
 import com.thedndpub.data.mechanics.model.MechanicsCompleteness;
 import com.thedndpub.data.mechanics.model.MechanicsDocument;
 import com.thedndpub.data.mechanics.model.ModelChecks;
@@ -42,6 +44,8 @@ import com.thedndpub.data.mechanics.syntax.MarkupSyntaxException;
 import com.thedndpub.data.mechanics.syntax.MarkupTag;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,6 +81,9 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
     private static final String BODY = "/entries/0";
     private static final String HIGHER = "/entriesHigherLevel/0/entries/0";
     private static final Pattern DICE = Pattern.compile("([1-9][0-9]*)d([1-9][0-9]*)");
+    private static final Pattern EXCLUSIVE_CONDITION_CHOICE = Pattern.compile(
+            "(?i)either\\s+\\{@condition\\s+([a-z]+)(?:\\|[^}]*)?}\\s+or\\s+"
+                    + "\\{@condition\\s+([a-z]+)(?:\\|[^}]*)?}\\s*\\(your choice\\)");
     private static final String SAVE = "must make a Dexterity saving throw";
     private static final String FAILURE = "on a failed save";
     private static final String SUCCESS = "half as much damage on a successful one";
@@ -158,24 +165,97 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
 
     private void extractConditions(SpellDefinition spell, SpellMechanicsEvidenceSource source,
                                    SpellMechanicsAssembly assembly) {
+        Map<ConditionName, MechanicRevisionReference> choiceGroups = conditionChoice(spell, source, assembly);
         for (String raw : spell.mechanics().conditionsInflicted()) {
-            conditionClaim(raw, ConditionOperation.APPLY, spell, source, assembly, "/conditionInflict");
+            ConditionName condition = conditionName(raw);
+            conditionClaim(raw, ConditionOperation.APPLY, spell, source, assembly, "/conditionInflict",
+                    choiceGroups.get(condition));
         }
         for (String raw : spell.mechanics().conditionImmunities()) {
-            conditionClaim(raw, ConditionOperation.GRANT_IMMUNITY, spell, source, assembly, "/conditionImmune");
+            conditionClaim(raw, ConditionOperation.GRANT_IMMUNITY, spell, source, assembly, "/conditionImmune", null);
+        }
+    }
+
+    private Map<ConditionName, MechanicRevisionReference> conditionChoice(
+            SpellDefinition spell, SpellMechanicsEvidenceSource source, SpellMechanicsAssembly assembly) {
+        var candidates = new ArrayList<ConditionChoiceCandidate>();
+        for (int index = 0; index < spell.entries().size(); index++) {
+            String pointer = "/entries/" + index;
+            try {
+                String text = source.text(pointer).text();
+                Matcher matcher = EXCLUSIVE_CONDITION_CHOICE.matcher(text);
+                while (matcher.find()) {
+                    String first = matcher.group(1).toLowerCase(java.util.Locale.ROOT);
+                    String second = matcher.group(2).toLowerCase(java.util.Locale.ROOT);
+                    if (!spell.mechanics().conditionsInflicted().contains(first)
+                            || !spell.mechanics().conditionsInflicted().contains(second)) {
+                        continue;
+                    }
+                    candidates.add(new ConditionChoiceCandidate(pointer,
+                            text, first, second));
+                }
+            } catch (SpellPatternMismatch ignored) {
+                // Nested entries need a dedicated source path before they can define a choice group.
+            }
+        }
+        if (candidates.size() != 1) {
+            return Map.of();
+        }
+        ConditionChoiceCandidate candidate = candidates.getFirst();
+        ConditionName first = conditionName(candidate.first());
+        ConditionName second = conditionName(candidate.second());
+        if (first == null || second == null || first == second) {
+            assembly.abstain("condition-choice-unsupported", MechanicFamily.CONDITION,
+                    UnsupportedReason.UNSUPPORTED_SYNTAX, candidate.pointer());
+            return Map.of();
+        }
+        MechanicRecord choice = assembly.attempt("condition-choice-" + candidate.first() + "-" + candidate.second(),
+                MechanicFamily.CONDITION, () -> {
+                    var firstField = source.fieldEvidence("/conditionInflict/"
+                            + spell.mechanics().conditionsInflicted().indexOf(candidate.first()));
+                    var secondField = source.fieldEvidence("/conditionInflict/"
+                            + spell.mechanics().conditionsInflicted().indexOf(candidate.second()));
+                    var choiceEvidence = source.textEvidence(candidate.pointer(), candidate.sentence());
+                    return assembly.claim("condition-choice-" + candidate.first() + "-" + candidate.second(),
+                            "condition-exclusive-choice-v1",
+                            new ConditionChoiceMechanic(ConditionOperation.APPLY, List.of(first, second), 1),
+                            unknownContext(), List.of(
+                                    MechanicEvidenceAssociation.of(choiceEvidence, "/payload/choicesToSelect",
+                                            EvidenceRole.QUALIFIER),
+                                    MechanicEvidenceAssociation.of(firstField, "/payload/alternatives/0",
+                                            EvidenceRole.VALUE),
+                                    MechanicEvidenceAssociation.of(secondField, "/payload/alternatives/1",
+                                            EvidenceRole.VALUE)), false, MechanicsCompleteness.PARTIAL);
+                });
+        if (choice == null) {
+            return Map.of();
+        }
+        MechanicRevisionReference reference = choice.revision().reference(choice.id());
+        return Map.of(first, reference, second, reference);
+    }
+
+    private ConditionName conditionName(String value) {
+        if (value == null) {
+            return null;
+        }
+        try {
+            return ConditionName.valueOf(value.toUpperCase(java.util.Locale.ROOT));
+        } catch (IllegalArgumentException exception) {
+            return null;
         }
     }
 
     private void conditionClaim(String raw, ConditionOperation operation, SpellDefinition spell,
-                                SpellMechanicsEvidenceSource source, SpellMechanicsAssembly assembly, String field) {
+                                SpellMechanicsEvidenceSource source, SpellMechanicsAssembly assembly, String field,
+                                MechanicRevisionReference choiceGroup) {
         String operationId = operation.name().toLowerCase(java.util.Locale.ROOT).replace('_', '-');
         assembly.attempt("condition-" + operationId + "-" + raw, MechanicFamily.CONDITION,
-                () -> conditionRecord(raw, operation, spell, source, assembly, field));
+                () -> conditionRecord(raw, operation, spell, source, assembly, field, choiceGroup));
     }
 
     private MechanicRecord conditionRecord(String raw, ConditionOperation operation, SpellDefinition spell,
                                            SpellMechanicsEvidenceSource source, SpellMechanicsAssembly assembly,
-                                           String field) {
+                                           String field, MechanicRevisionReference choiceGroup) {
         String operationId = operation.name().toLowerCase(java.util.Locale.ROOT).replace('_', '-');
         ConditionName condition;
         try {
@@ -188,6 +268,7 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
                         : spell.mechanics().conditionImmunities().indexOf(raw)));
         var qualifiers = new java.util.ArrayList<String>();
         var associations = new java.util.ArrayList<MechanicEvidenceAssociation>();
+        TextMechanicsEvidence choiceEvidence = null;
         associations.add(MechanicEvidenceAssociation.of(fieldEvidence, "/payload", EvidenceRole.EFFECT_ROLE));
         String conditionTag = "{@condition " + raw;
         for (int index = 0; index < spell.entries().size(); index++) {
@@ -208,6 +289,9 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
                 String phrase = authoredText.substring(start, end).trim();
                 if (!phrase.isEmpty() && !qualifiers.contains(phrase)) {
                     var qualifierEvidence = source.textEvidence(pointer, phrase);
+                    if (choiceGroup != null) {
+                        choiceEvidence = qualifierEvidence;
+                    }
                     qualifiers.add(phrase);
                     associations.add(MechanicEvidenceAssociation.of(qualifierEvidence, "/payload/qualifiers",
                             EvidenceRole.QUALIFIER));
@@ -216,10 +300,18 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
                 // Nested entries require a dedicated evidence path and are not flattened here.
             }
         }
+        if (choiceGroup != null && choiceEvidence != null) {
+            associations.add(MechanicEvidenceAssociation.of(choiceEvidence, "/payload/choiceGroup",
+                    EvidenceRole.REFERENCE));
+        }
         return assembly.claim("condition-" + operationId + "-" + raw,
-                "condition-explicit-metadata-v1", new ConditionChangeMechanic(operation, condition, qualifiers),
+                "condition-explicit-metadata-v1",
+                new ConditionChangeMechanic(operation, condition, qualifiers, choiceGroup),
                 unknownContext(), associations,
                 true, MechanicsCompleteness.PARTIAL);
+    }
+
+    private record ConditionChoiceCandidate(String pointer, String sentence, String first, String second) {
     }
 
     private void extractGeneralDamage(

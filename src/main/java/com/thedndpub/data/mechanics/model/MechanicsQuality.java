@@ -43,6 +43,8 @@ final class MechanicsQuality {
             case EffectDurationMechanic duration -> duration(duration.specification(), "/payload/specification", findings);
             case ConditionChangeMechanic ignored -> {
             }
+            case ConditionChoiceMechanic ignored -> {
+            }
             case ArmorClassModifierMechanic ignored -> {
                 // A symbolic modifier is an identified variable, not an unresolved numeric calculation.
             }

@@ -172,6 +172,17 @@ final class MechanicsDocumentValidator {
                 durationTarget(records, reference);
             }
         }
+        if (record.payload() instanceof ConditionChangeMechanic condition && condition.choiceGroup() != null) {
+            MechanicRecord target = current(records, condition.choiceGroup());
+            ModelChecks.require(target == null || target.payload() instanceof ConditionChoiceMechanic,
+                    "Condition choice reference must target a condition choice mechanic");
+            if (target != null) {
+                ConditionChoiceMechanic choice = (ConditionChoiceMechanic) target.payload();
+                ModelChecks.require(choice.operation() == condition.operation()
+                                && choice.alternatives().contains(condition.condition()),
+                        "Condition claim does not match its choice group");
+            }
+        }
         if (record.payload() instanceof EffectDurationMechanic duration
                 && duration.specification() instanceof ReferencedDuration reference) {
             durationTarget(records, reference);

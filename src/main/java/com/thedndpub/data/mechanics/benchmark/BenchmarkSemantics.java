@@ -49,6 +49,7 @@ final class BenchmarkSemantics {
             case SavingThrowRequirementMechanic ignored -> MechanicFamily.SAVING_THROW_REQUIREMENT;
             case SpellSlotScalingMechanic ignored -> MechanicFamily.SPELL_SLOT_SCALING;
             case com.thedndpub.data.mechanics.model.ConditionChangeMechanic ignored -> MechanicFamily.CONDITION;
+            case com.thedndpub.data.mechanics.model.ConditionChoiceMechanic ignored -> MechanicFamily.CONDITION;
         };
     }
 

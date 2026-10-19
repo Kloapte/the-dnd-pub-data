@@ -9,10 +9,15 @@ import java.util.List;
 public record ConditionChangeMechanic(
         ConditionOperation operation,
         ConditionName condition,
-        List<String> qualifiers) implements MechanicPayload {
+        List<String> qualifiers,
+        MechanicRevisionReference choiceGroup) implements MechanicPayload {
     public ConditionChangeMechanic {
         ModelChecks.required(operation, "operation");
         ModelChecks.required(condition, "condition");
         qualifiers = ModelChecks.list(qualifiers);
+    }
+
+    public ConditionChangeMechanic(ConditionOperation operation, ConditionName condition, List<String> qualifiers) {
+        this(operation, condition, qualifiers, null);
     }
 }

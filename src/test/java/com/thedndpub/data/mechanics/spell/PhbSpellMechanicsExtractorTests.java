@@ -5,6 +5,10 @@ import com.thedndpub.data.mechanics.model.Ability;
 import com.thedndpub.data.mechanics.model.AmountSymbol;
 import com.thedndpub.data.mechanics.model.AppliesOnSaveOutcome;
 import com.thedndpub.data.mechanics.model.CoverageStatus;
+import com.thedndpub.data.mechanics.model.ConditionChangeMechanic;
+import com.thedndpub.data.mechanics.model.ConditionChoiceMechanic;
+import com.thedndpub.data.mechanics.model.ConditionName;
+import com.thedndpub.data.mechanics.model.ConditionOperation;
 import com.thedndpub.data.mechanics.model.DamageMechanic;
 import com.thedndpub.data.mechanics.model.DamageOutcome;
 import com.thedndpub.data.mechanics.model.DiceAmount;
@@ -117,6 +121,76 @@ class PhbSpellMechanicsExtractorTests {
                 && value.role() == com.thedndpub.data.mechanics.model.EvidenceRole.QUALIFIER));
         assertInstanceOf(UnknownSubject.class, record.context().subject());
         assertEquals(MechanicsCompleteness.PARTIAL, record.assessment().completeness());
+    }
+
+    @Test
+    void blindnessDeafnessPreservesExclusiveChoiceAndFailedSaveQualifier() throws IOException {
+        var document = extract(input("blindness-deafness"));
+        var choice = document.interpretations().stream()
+                .filter(value -> value.payload() instanceof ConditionChoiceMechanic)
+                .findFirst().orElseThrow();
+        var payload = (ConditionChoiceMechanic) choice.payload();
+        assertEquals(ConditionOperation.APPLY, payload.operation());
+        assertEquals(java.util.List.of(ConditionName.BLINDED, ConditionName.DEAFENED), payload.alternatives());
+        assertEquals(1, payload.choicesToSelect());
+        var individual = document.interpretations().stream()
+                .filter(value -> value.payload() instanceof ConditionChangeMechanic)
+                .toList();
+        assertEquals(2, individual.size());
+        assertTrue(individual.stream().allMatch(value ->
+                ((ConditionChangeMechanic) value.payload()).choiceGroup().equals(choice.revision().reference(choice.id()))));
+        var qualifiers = individual.stream().flatMap(value ->
+                ((ConditionChangeMechanic) value.payload()).qualifiers().stream()).toList();
+        assertTrue(qualifiers.stream().anyMatch(value -> value.contains("fails")));
+        assertTrue(qualifiers.stream().anyMatch(value -> value.contains("for the duration")));
+        assertEquals(MechanicsCompleteness.PARTIAL, choice.assessment().completeness());
+        assertTrue(choice.evidenceAssociations().stream().anyMatch(value -> value.claimPath().equals("/payload/alternatives/0")));
+        assertTrue(choice.evidenceAssociations().stream().anyMatch(value ->
+                value.claimPath().equals("/payload/choicesToSelect")));
+        assertTrue(individual.stream().allMatch(value -> value.evidenceAssociations().stream().anyMatch(association ->
+                association.claimPath().equals("/payload/choiceGroup")
+                        && association.role() == com.thedndpub.data.mechanics.model.EvidenceRole.REFERENCE)));
+        assertEquals(document.interpretations().stream().map(value -> value.id().value()).toList(),
+                extract(input("blindness-deafness")).interpretations().stream()
+                        .map(value -> value.id().value()).toList());
+    }
+
+    @Test
+    void simultaneousHypnoticPatternConditionsRemainIndependent() throws IOException {
+        var document = extract(input("hypnotic-pattern"));
+        var conditions = document.interpretations().stream()
+                .filter(value -> value.payload() instanceof ConditionChangeMechanic)
+                .map(value -> (ConditionChangeMechanic) value.payload()).toList();
+        assertTrue(conditions.stream().anyMatch(value -> value.condition() == ConditionName.CHARMED));
+        assertTrue(conditions.stream().anyMatch(value -> value.condition() == ConditionName.INCAPACITATED));
+        assertTrue(conditions.stream().allMatch(value -> value.choiceGroup() == null));
+        assertFalse(document.interpretations().stream().anyMatch(value -> value.payload() instanceof ConditionChoiceMechanic));
+    }
+
+    @Test
+    void fireballEvidenceUsesGenericIdsAndRetainsValidLegacyAliases() throws IOException {
+        var document = extract(input("fireball"));
+        var damage = claim(document, "fireball-damage-v1");
+        var saveOutcomeIds = damage.context().bindings().stream()
+                .filter(AppliesOnSaveOutcome.class::isInstance).map(AppliesOnSaveOutcome.class::cast)
+                .flatMap(value -> value.evidenceIds().stream()).toList();
+        assertFalse(saveOutcomeIds.isEmpty());
+        assertTrue(damage.evidenceAssociations().stream().allMatch(value -> value.evidenceId().startsWith("spell-")));
+        assertTrue(saveOutcomeIds.stream().allMatch(id -> damage.evidenceAssociations().stream()
+                .anyMatch(value -> value.evidenceId().equals(id))));
+        var evidenceIds = document.evidence().stream().map(value -> value.id()).collect(Collectors.toSet());
+        assertTrue(document.interpretations().stream().flatMap(value -> value.evidenceAssociations().stream())
+                .allMatch(value -> value.evidenceId().startsWith("spell-") && evidenceIds.contains(value.evidenceId())));
+        assertTrue(document.evidence().stream().filter(TextMechanicsEvidence.class::isInstance)
+                .map(TextMechanicsEvidence.class::cast).allMatch(value ->
+                        value.syntax().location().jsonPointer().startsWith("/")
+                                && value.syntax().span().endExclusive() >= value.syntax().span().startInclusive()));
+        assertTrue(document.evidence().stream().anyMatch(value -> value.id().startsWith("shield-text:")));
+        assertTrue(document.evidence().stream().anyMatch(value -> value.id().startsWith("shield-field:")));
+        assertTrue(document.evidence().stream().filter(value -> value.id().startsWith("spell-")).allMatch(value ->
+                value instanceof TextMechanicsEvidence || value instanceof StructuredFieldMechanicsEvidence));
+        assertEquals(document.evidence().stream().map(value -> value.id()).toList(),
+                extract(input("fireball")).evidence().stream().map(value -> value.id()).toList());
     }
 
     @Test
@@ -416,7 +490,7 @@ class PhbSpellMechanicsExtractorTests {
         assertEquals(969, inspection.size());
         assertEquals(87, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.PROCESSED).count());
         assertEquals(882, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.NOT_ATTEMPTED).count());
-        assertEquals(155, inspection.documents().stream().mapToInt(value -> value.interpretations().size()).sum());
+        assertEquals(156, inspection.documents().stream().mapToInt(value -> value.interpretations().size()).sum());
         assertEquals(930, inspection.documents().stream().mapToInt(value -> value.observations().size()).sum());
         for (String slug : java.util.List.of("fireball", "healing-word")) {
             var id = spells.findById("spell:phb:" + slug).id();

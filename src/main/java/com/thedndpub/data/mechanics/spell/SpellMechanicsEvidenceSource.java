@@ -28,12 +28,15 @@ import java.util.Map;
 
 /** Per-extraction evidence builder over verified original bytes, never a source DTO or shared mutable catalog. */
 public final class SpellMechanicsEvidenceSource {
-    private static final java.util.Set<String> LEGACY_EVIDENCE_OWNERS = java.util.Set.of(
-            "spell:phb:fireball", "spell:phb:healing-word", "spell:phb:shield", "spell:xphb:shield");
+    private static final java.util.Set<String> SHIELD_EVIDENCE_OWNERS = java.util.Set.of(
+            "spell:phb:shield", "spell:xphb:shield");
+    private static final java.util.Set<String> LEGACY_SHIELD_ALIAS_OWNERS = java.util.Set.of(
+            "spell:phb:fireball", "spell:phb:healing-word");
     private final SpellMechanicsSourceOwner source;
     private final MechanicsOwnerReference owner;
     private final JsonNode tree;
     private final String evidenceIdNamespace;
+    private final String legacyEvidenceIdNamespace;
     private final Map<String, MechanicsEvidence> evidence = new LinkedHashMap<>();
 
     public SpellMechanicsEvidenceSource(
@@ -42,7 +45,8 @@ public final class SpellMechanicsEvidenceSource {
             byte[] originalBytes,
             ObjectMapper mapper) {
         this.source = ModelChecks.required(source, "source");
-        evidenceIdNamespace = LEGACY_EVIDENCE_OWNERS.contains(source.id().value()) ? "shield" : "spell";
+        evidenceIdNamespace = SHIELD_EVIDENCE_OWNERS.contains(source.id().value()) ? "shield" : "spell";
+        legacyEvidenceIdNamespace = LEGACY_SHIELD_ALIAS_OWNERS.contains(source.id().value()) ? "shield" : null;
         ModelChecks.require(definition.id().equals(source.id()) && definition.source().equals(source.source()),
                 "Normalized and authored Spell owners differ");
         ModelChecks.require(MechanicsHashes.sha256(originalBytes).equals(source.revision().resourceSha256()),
@@ -137,23 +141,34 @@ public final class SpellMechanicsEvidenceSource {
         if (end == start) {
             throw new SpellPatternMismatch(UnsupportedReason.NO_SUPPORTED_PATTERN, pointer);
         }
-        String id = evidenceIdNamespace + "-text:" + MechanicsHashes.sha256(source.revision().resourceSha256()
+        String identity = MechanicsHashes.sha256(source.revision().resourceSha256()
                 + source.jsonPointer() + pointer + ":" + start + ":" + end).substring(0, 24);
+        String id = evidenceIdNamespace + "-text:" + identity;
         var result = new TextMechanicsEvidence(id, owner.source(),
                 new SyntaxEvidence(location(pointer), new SyntaxSpan(start, end)), MechanicsHashes.sha256(text),
                 MechanicsOrigin.AUTHORED, owner);
         retain(result);
+        if (legacyEvidenceIdNamespace != null) {
+            retain(new TextMechanicsEvidence(legacyEvidenceIdNamespace + "-text:" + identity, owner.source(),
+                    result.syntax(), result.textSha256(), result.origin(), result.authoredOwner()));
+        }
         return result;
     }
 
     StructuredFieldMechanicsEvidence fieldEvidence(String pointer) {
         ModelChecks.require(!node(pointer).isMissingNode(), "Cannot fabricate evidence for a missing source field");
-        String id = evidenceIdNamespace + "-field:" + MechanicsHashes.sha256(source.revision().resourceSha256()
+        String identity = MechanicsHashes.sha256(source.revision().resourceSha256()
                 + source.jsonPointer() + pointer).substring(0, 24);
+        String id = evidenceIdNamespace + "-field:" + identity;
         var result = new StructuredFieldMechanicsEvidence(id, owner.source(), sourceOwner(),
                 source.jsonPointer() + pointer, hierarchy(pointer), MechanicsHashes.sha256(node(pointer).toString()),
                 MechanicsOrigin.AUTHORED, owner);
         retain(result);
+        if (legacyEvidenceIdNamespace != null) {
+            retain(new StructuredFieldMechanicsEvidence(legacyEvidenceIdNamespace + "-field:" + identity,
+                    result.source(), result.owner(), result.jsonPointer(), result.hierarchy(), result.valueSha256(),
+                    result.origin(), result.authoredOwner()));
+        }
         return result;
     }
 

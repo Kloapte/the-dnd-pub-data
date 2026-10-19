@@ -32,6 +32,9 @@ final class MechanicsBindings {
                 && duration.specification() instanceof ReferencedDuration reference) {
             references.add(reference.mechanic());
         }
+        if (record.payload() instanceof ConditionChangeMechanic condition && condition.choiceGroup() != null) {
+            references.add(condition.choiceGroup());
+        }
         return references;
     }
 }
