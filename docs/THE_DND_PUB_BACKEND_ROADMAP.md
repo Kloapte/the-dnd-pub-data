@@ -1,6 +1,6 @@
 # The DnD Pub Data Backend — Development Roadmap
 
-> **Status:** Authoritative working roadmap, 19 October 2026. Step 7.2 and Steps 7.3.1–7.3.3 are implemented. Step 7.4.3 is PARTIAL after batch 7.4.3A: 87 of 969 Spell owners are processed with 155 typed mechanics. All six benchmark fixtures await human review, so authoritative benchmark acceptance remains outstanding.
+> **Status:** Authoritative working roadmap, 19 October 2026. Step 7.2 and Steps 7.3.1–7.3.3 are implemented. Step 7.4.3 is PARTIAL after batch 7.4.3C: 95 of 969 Spell owners are processed with 171 typed mechanics. All six benchmark fixtures await human review, so authoritative benchmark acceptance remains outstanding.
 >
 > **Scope:** Java / Spring Boot data backend and its supporting evidence, tests, and APIs. Angular UI, Keycloak integration, persistence, and public internet deployment are future work unless explicitly authorized.
 
@@ -245,13 +245,35 @@ Do not begin 7.4.3B or 7.4.4 as part of this batch.
 
 Batch 7.4.3A adds the typed `ConditionChangeMechanic` and a bounded PHB mapping for explicit
 `conditionInflict` and `conditionImmune` source classifications. It processes 64 additional owners,
-bringing the catalog to 87 processed owners and 155 typed mechanics, including 91 condition claims.
+bringing the catalog to 87 processed owners and 156 typed mechanics, including 91 condition claims
+and the exclusive condition-choice claim added in the corrective addendum.
 Application, removal and immunity have distinct operations; this batch extracts application and
 immunity only. Claims remain partial, pending review and NEEDS_REVIEW for licensing. Exact source
 fields and available same-sentence qualifier text are retained; target context, typed save/trigger
 dependencies, recurring saves, concentration and complex endings remain unsupported. See the
 [7.4.3A implementation report](../analysis/mechanics/step-7/7.4.3A-spell-conditions-status-effects.md).
-Step 7.4.3 remains PARTIAL; do not begin 7.4.3B or 7.4.4 without authorization.
+This 7.4.3A batch left condition targets, typed save dependencies, recurring saves, concentration and
+complex endings unsupported or partial. Batch 7.4.3B addresses a bounded set of those gaps below.
+
+Batch 7.4.3B adds typed saving-throw condition dependencies, target scopes, declared duration and
+concentration relationships, and selected condition-ending relationships for five existing PHB
+owners. Four new saving-throw requirement claims bring the catalog to 160 mechanics; no owners were
+added. Complex conditional endings remain partial or abstained. All claims remain pending human
+review and NEEDS_REVIEW for licensing. See the
+[7.4.3B implementation report](../analysis/mechanics/step-7/7.4.3B-condition-dependencies-endings.md).
+Step 7.4.3 remained PARTIAL after B; its subsequent C batch is recorded below.
+
+Batch 7.4.3C adds reusable typed statistic modifiers, damage resistance/immunity operations,
+damage type selections, source-backed applicability, modifier save-outcome dependencies, and
+bounded target-count context. Eight additional PHB owners contribute eleven claims, bringing the
+catalog to 95 processed owners and 171 typed mechanics. Shield remains on its existing AC/prevention
+mechanics. Mage Armor's conditional endings remain partial; generic numeric damage reduction,
+damage immunity extraction and the wider modifier/resistance corpus remain unsupported or
+unattempted. Absorb Elements is absent from the pinned PHB source and was skipped. All new claims
+remain pending mechanics review and NEEDS_REVIEW for licensing. See the
+[7.4.3C implementation report](../analysis/mechanics/step-7/7.4.3C-spell-modifiers-resistances-protection.md).
+Step 7.4.3 remains PARTIAL because planned modifier and protective effect coverage is bounded; do not
+begin 7.4.4 without authorization.
 
 ### 7.5. Monster mechanics interpretation — PLANNED
 
@@ -340,8 +362,8 @@ For every numbered batch:
 
 ## Immediate next action
 
-**Step 7.4.3 is PARTIAL after batch 7.4.3A.** The six benchmark fixtures still require human review before
+**Step 7.4.3 is PARTIAL after batch 7.4.3C.** The six benchmark fixtures still require human review before
 authoritative benchmark acceptance; there is no approved gold set or independently validated
 extractor accuracy. Candidate diagnostics do not constitute mechanics verification or publication
-permission. Do not begin 7.4.3B or 7.4.4 as part of this batch or modify P1D,
+permission. Do not begin 7.4.4 as part of this batch or modify P1D,
 Keycloak, database or frontend work from this mechanics batch.

@@ -35,7 +35,15 @@ class MechanicsValuesTests {
                 new ConditionChangeMechanic(ConditionOperation.REMOVE, ConditionName.POISONED, List.of()),
                 new ConditionChangeMechanic(ConditionOperation.GRANT_IMMUNITY, ConditionName.FRIGHTENED, List.of()),
                 new ConditionChoiceMechanic(ConditionOperation.APPLY,
-                        List.of(ConditionName.BLINDED, ConditionName.DEAFENED), 1));
+                        List.of(ConditionName.BLINDED, ConditionName.DEAFENED), 1),
+                new StatisticModifierMechanic(List.of(ModifiedStatistic.ATTACK_ROLL,
+                        ModifiedStatistic.SAVING_THROW), ModifierOperation.SUBTRACT, new DiceAmount(1, 4, 0)),
+                new StatisticModifierMechanic(List.of(ModifiedStatistic.ABILITY_CHECK), ModifierOperation.MULTIPLY,
+                        new IntegerAmount(2)),
+                new DamageResistanceMechanic(DamageProtectionOperation.RESISTANCE,
+                        new DamageTypeChoice(List.of("acid", "cold"), 1), DamageApplicability.ANY_DAMAGE),
+                new DamageResistanceMechanic(DamageProtectionOperation.IMMUNITY,
+                        new FixedDamageType("poison"), DamageApplicability.ANY_DAMAGE));
     }
 
     static SpellMentionReference unresolvedSpell() {
@@ -170,6 +178,14 @@ class MechanicsValuesTests {
         for (var value : List.of(new CasterSubject(), new UnknownSubject(UnknownValueReason.NOT_INTERPRETED))) {
             assertEquals(value, mapper.readValue(mapper.writerFor(SubjectReference.class).writeValueAsBytes(value), SubjectReference.class));
         }
+        for (var value : List.of(new SpellTargetSubject(TargetScope.SINGLE_TARGET_CREATURE,
+                        CreatureTypeRestriction.HUMANOID),
+                new SpellTargetSubject(TargetScope.MULTIPLE_TARGET_CREATURES, null, 3),
+                new SpellTargetSubject(TargetScope.AREA_AFFECTED_CREATURES),
+                new SpellTargetSubject(TargetScope.CASTER_OR_TOUCHED_CREATURE))) {
+            assertEquals(value, mapper.readValue(mapper.writerFor(SubjectReference.class).writeValueAsBytes(value),
+                    SubjectReference.class));
+        }
         for (var value : List.of(new FixedSaveDifficulty(0), new UnknownSaveDifficulty(UnknownValueReason.NOT_AUTHORED))) {
             assertEquals(value, mapper.readValue(mapper.writerFor(SaveDifficulty.class).writeValueAsBytes(value), SaveDifficulty.class));
         }
@@ -178,6 +194,18 @@ class MechanicsValuesTests {
         for (var value : List.of(declared, referenced)) {
             byte[] json = mapper.writerFor(DurationSpecification.class).writeValueAsBytes(value);
             assertEquals(value, mapper.readValue(json, DurationSpecification.class));
+        }
+        var saveReference = ac().revision().reference(ac().id());
+        for (MechanicContextBinding binding : List.of(
+                new ConditionOnSaveOutcome(saveReference, SaveOutcome.FAILURE, List.of("text-1")),
+                new ConditionEndsOnSaveSuccess(saveReference, RepeatSaveTiming.END_OF_EACH_TARGET_TURN,
+                        List.of("text-2")),
+                new ConditionEndsWithSpell(List.of("text-3")),
+                new RequiresConcentration(List.of("field-1")),
+                new ModifierOnSaveOutcome(saveReference, SaveOutcome.FAILURE, List.of("text-4")),
+                new AppliesWhen(ApplicabilityCondition.TARGET_IS_WILLING, List.of("text-5")))) {
+            byte[] json = mapper.writerFor(MechanicContextBinding.class).writeValueAsBytes(binding);
+            assertEquals(binding, mapper.readValue(json, MechanicContextBinding.class));
         }
     }
 

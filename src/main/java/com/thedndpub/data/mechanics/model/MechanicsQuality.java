@@ -48,6 +48,9 @@ final class MechanicsQuality {
             case ArmorClassModifierMechanic ignored -> {
                 // A symbolic modifier is an identified variable, not an unresolved numeric calculation.
             }
+            case StatisticModifierMechanic modifier -> amount(modifier.amount(), "/payload/amount", findings);
+            case DamageResistanceMechanic ignored -> {
+            }
         }
         Map<MechanicRevisionReference, Map<SaveOutcome, DamageOutcome>> saveOutcomes = new HashMap<>();
         DurationSpecification previousDuration = null;

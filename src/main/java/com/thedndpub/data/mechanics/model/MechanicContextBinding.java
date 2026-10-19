@@ -8,12 +8,24 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = ActivatedBy.class, name = "ACTIVATED_BY"),
         @JsonSubTypes.Type(value = AppliesForDuration.class, name = "APPLIES_FOR_DURATION"),
         @JsonSubTypes.Type(value = AppliesOnSaveOutcome.class, name = "APPLIES_ON_SAVE_OUTCOME"),
-        @JsonSubTypes.Type(value = IncludesTriggeringAttack.class, name = "INCLUDES_TRIGGERING_ATTACK")
+        @JsonSubTypes.Type(value = ConditionOnSaveOutcome.class, name = "CONDITION_ON_SAVE_OUTCOME"),
+        @JsonSubTypes.Type(value = ConditionEndsOnSaveSuccess.class, name = "CONDITION_ENDS_ON_SAVE_SUCCESS"),
+        @JsonSubTypes.Type(value = ConditionEndsWithSpell.class, name = "CONDITION_ENDS_WITH_SPELL"),
+        @JsonSubTypes.Type(value = RequiresConcentration.class, name = "REQUIRES_CONCENTRATION"),
+        @JsonSubTypes.Type(value = IncludesTriggeringAttack.class, name = "INCLUDES_TRIGGERING_ATTACK"),
+        @JsonSubTypes.Type(value = ModifierOnSaveOutcome.class, name = "MODIFIER_ON_SAVE_OUTCOME"),
+        @JsonSubTypes.Type(value = AppliesWhen.class, name = "APPLIES_WHEN")
 })
 public sealed interface MechanicContextBinding permits
         ActivatedBy,
         AppliesForDuration,
         AppliesOnSaveOutcome,
-        IncludesTriggeringAttack {
+        ConditionOnSaveOutcome,
+        ConditionEndsOnSaveSuccess,
+        ConditionEndsWithSpell,
+        RequiresConcentration,
+        IncludesTriggeringAttack,
+        ModifierOnSaveOutcome,
+        AppliesWhen {
 
 }

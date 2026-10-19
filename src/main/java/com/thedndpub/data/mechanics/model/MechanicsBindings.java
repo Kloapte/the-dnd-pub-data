@@ -12,7 +12,13 @@ final class MechanicsBindings {
             case ActivatedBy activation -> activation.evidenceIds();
             case AppliesForDuration duration -> duration.evidenceIds();
             case AppliesOnSaveOutcome outcome -> outcome.evidenceIds();
+            case ConditionOnSaveOutcome outcome -> outcome.evidenceIds();
+            case ConditionEndsOnSaveSuccess ending -> ending.evidenceIds();
+            case ConditionEndsWithSpell ending -> ending.evidenceIds();
+            case RequiresConcentration concentration -> concentration.evidenceIds();
             case IncludesTriggeringAttack inclusion -> inclusion.evidenceIds();
+            case ModifierOnSaveOutcome outcome -> outcome.evidenceIds();
+            case AppliesWhen applies -> applies.evidenceIds();
         };
     }
 
@@ -22,6 +28,12 @@ final class MechanicsBindings {
             if (binding instanceof ActivatedBy activation) {
                 references.add(activation.activation());
             } else if (binding instanceof AppliesOnSaveOutcome outcome) {
+                references.add(outcome.savingThrow());
+            } else if (binding instanceof ConditionOnSaveOutcome outcome) {
+                references.add(outcome.savingThrow());
+            } else if (binding instanceof ConditionEndsOnSaveSuccess ending) {
+                references.add(ending.savingThrow());
+            } else if (binding instanceof ModifierOnSaveOutcome outcome) {
                 references.add(outcome.savingThrow());
             } else if (binding instanceof AppliesForDuration timing
                     && timing.duration() instanceof ReferencedDuration duration) {

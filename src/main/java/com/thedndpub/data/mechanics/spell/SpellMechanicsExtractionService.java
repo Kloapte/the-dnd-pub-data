@@ -82,7 +82,7 @@ public final class SpellMechanicsExtractionService {
         ModelChecks.require(seen.equals(owners.keySet()), "Missing extraction documents");
         ModelChecks.require(processedShieldOwners == ShieldMechanicsEdition.values().length,
                 "The pinned Shield pilot requires both authoritative source owners");
-        ModelChecks.require(processedPhbOwners == expectedPhbOwners && processedPhbOwners >= 21,
+        ModelChecks.require(processedPhbOwners == expectedPhbOwners && processedPhbOwners >= 29,
                 "The PHB pattern set requires every explicitly supported owner");
         result.sort(Comparator.comparing(document -> document.owner().id()));
         return List.copyOf(result);

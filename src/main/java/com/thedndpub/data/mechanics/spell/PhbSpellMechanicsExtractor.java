@@ -2,16 +2,28 @@ package com.thedndpub.data.mechanics.spell;
 
 import com.thedndpub.data.dte.common.entry.EntryDte;
 import com.thedndpub.data.dte.common.entry.SectionEntryDte;
+import com.thedndpub.data.dte.common.entry.NamedEntryDte;
 import com.thedndpub.data.dte.common.entry.TextEntryDte;
 import com.thedndpub.data.dto.spell.SpellDefinition;
 import com.thedndpub.data.mechanics.model.Ability;
 import com.thedndpub.data.mechanics.model.AmountSymbol;
 import com.thedndpub.data.mechanics.model.AppliesOnSaveOutcome;
+import com.thedndpub.data.mechanics.model.AppliesWhen;
+import com.thedndpub.data.mechanics.model.ApplicabilityCondition;
+import com.thedndpub.data.mechanics.model.ArmorClassModifierMechanic;
+import com.thedndpub.data.mechanics.model.DamageApplicability;
+import com.thedndpub.data.mechanics.model.DamageProtectionOperation;
+import com.thedndpub.data.mechanics.model.DamageResistanceMechanic;
+import com.thedndpub.data.mechanics.model.DamageTypeChoice;
 import com.thedndpub.data.mechanics.model.DamageMechanic;
 import com.thedndpub.data.mechanics.model.ConditionChangeMechanic;
 import com.thedndpub.data.mechanics.model.ConditionChoiceMechanic;
 import com.thedndpub.data.mechanics.model.ConditionName;
+import com.thedndpub.data.mechanics.model.ConditionOnSaveOutcome;
+import com.thedndpub.data.mechanics.model.ConditionEndsOnSaveSuccess;
+import com.thedndpub.data.mechanics.model.ConditionEndsWithSpell;
 import com.thedndpub.data.mechanics.model.ConditionOperation;
+import com.thedndpub.data.mechanics.model.CreatureTypeRestriction;
 import com.thedndpub.data.mechanics.model.DamageOutcome;
 import com.thedndpub.data.mechanics.model.DiceAmount;
 import com.thedndpub.data.mechanics.model.EvidenceRole;
@@ -21,14 +33,29 @@ import com.thedndpub.data.mechanics.model.HealingMechanic;
 import com.thedndpub.data.mechanics.model.HealingMode;
 import com.thedndpub.data.mechanics.model.MechanicContext;
 import com.thedndpub.data.mechanics.model.MechanicEvidenceAssociation;
+import com.thedndpub.data.mechanics.model.MechanicsEvidence;
 import com.thedndpub.data.mechanics.model.MechanicFamily;
 import com.thedndpub.data.mechanics.model.MechanicRecord;
 import com.thedndpub.data.mechanics.model.MechanicRevisionReference;
+import com.thedndpub.data.mechanics.model.MechanicContextBinding;
 import com.thedndpub.data.mechanics.model.MechanicsCompleteness;
 import com.thedndpub.data.mechanics.model.MechanicsDocument;
+import com.thedndpub.data.mechanics.model.ModifierOnSaveOutcome;
+import com.thedndpub.data.mechanics.model.ModifierOperation;
+import com.thedndpub.data.mechanics.model.ModifiedStatistic;
 import com.thedndpub.data.mechanics.model.ModelChecks;
 import com.thedndpub.data.mechanics.model.ProcessingState;
 import com.thedndpub.data.mechanics.model.SaveOutcome;
+import com.thedndpub.data.mechanics.model.AppliesForDuration;
+import com.thedndpub.data.mechanics.model.DeclaredSpellDurationReference;
+import com.thedndpub.data.mechanics.model.RepeatSaveTiming;
+import com.thedndpub.data.mechanics.model.RequiresConcentration;
+import com.thedndpub.data.mechanics.model.SpellTargetSubject;
+import com.thedndpub.data.mechanics.model.StatisticModifierMechanic;
+import com.thedndpub.data.mechanics.model.IntegerModifier;
+import com.thedndpub.data.mechanics.model.IntegerAmount;
+import com.thedndpub.data.mechanics.model.SubjectReference;
+import com.thedndpub.data.mechanics.model.TargetScope;
 import com.thedndpub.data.mechanics.model.ScalingEffect;
 import com.thedndpub.data.mechanics.model.SpellSlotScalingMechanic;
 import com.thedndpub.data.mechanics.model.SavingThrowRequirementMechanic;
@@ -75,6 +102,13 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
             "spell:phb:mass-cure-wounds",
             "spell:phb:mass-healing-word",
             "spell:phb:prayer-of-healing");
+    private static final Set<String> CONDITION_DEPENDENCY_OWNERS = Set.of(
+            "spell:phb:hold-person", "spell:phb:blindness-deafness", "spell:phb:fear",
+            "spell:phb:greater-invisibility", "spell:phb:hypnotic-pattern");
+    private static final Set<String> MODIFIER_AND_PROTECTION_OWNERS = Set.of(
+            "spell:phb:shield-of-faith", "spell:phb:mage-armor", "spell:phb:barkskin",
+            "spell:phb:longstrider", "spell:phb:bless", "spell:phb:bane",
+            "spell:phb:protection-from-energy", "spell:phb:stoneskin");
     private static final Set<String> PREVIOUSLY_PROCESSED_OWNERS = Set.of(
             "spell:phb:fireball", "spell:phb:healing-word");
     private static final Set<String> OWNERS;
@@ -97,6 +131,7 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
     static {
         var owners = new java.util.HashSet<>(DAMAGE_OWNERS);
         owners.addAll(HEALING_OWNERS);
+        owners.addAll(MODIFIER_AND_PROTECTION_OWNERS);
         OWNERS = Set.copyOf(owners);
     }
 
@@ -150,6 +185,9 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
         } else if (HEALING_OWNERS.contains(spell.id().value())) {
             extractGeneralHealing(spell, source, assembly);
         }
+        if (MODIFIER_AND_PROTECTION_OWNERS.contains(spell.id().value())) {
+            extractModifierAndProtection(spell, source, assembly);
+        }
         extractConditions(spell, source, assembly);
         if (!spell.entriesHigherLevel().isEmpty()
                 && !spell.id().value().equals("spell:phb:fireball")
@@ -165,19 +203,317 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
 
     private void extractConditions(SpellDefinition spell, SpellMechanicsEvidenceSource source,
                                    SpellMechanicsAssembly assembly) {
-        Map<ConditionName, MechanicRevisionReference> choiceGroups = conditionChoice(spell, source, assembly);
+        ConditionTarget target = conditionTarget(spell, source);
+        MechanicRecord savingThrow = conditionSavingThrow(spell, source, assembly, target);
+        MechanicRevisionReference savingThrowReference = savingThrow == null
+                ? null : savingThrow.revision().reference(savingThrow.id());
+        Map<ConditionName, MechanicRevisionReference> choiceGroups = conditionChoice(
+                spell, source, assembly, target, savingThrowReference);
         for (String raw : spell.mechanics().conditionsInflicted()) {
             ConditionName condition = conditionName(raw);
+            MechanicRevisionReference choiceGroup = choiceGroups.get(condition);
+            EffectContext effectContext = choiceGroup == null
+                    ? conditionEffectContext(spell, source, target, condition, savingThrowReference, false)
+                    : null;
             conditionClaim(raw, ConditionOperation.APPLY, spell, source, assembly, "/conditionInflict",
-                    choiceGroups.get(condition));
+                    choiceGroup, effectContext);
         }
         for (String raw : spell.mechanics().conditionImmunities()) {
-            conditionClaim(raw, ConditionOperation.GRANT_IMMUNITY, spell, source, assembly, "/conditionImmune", null);
+            conditionClaim(raw, ConditionOperation.GRANT_IMMUNITY, spell, source, assembly,
+                    "/conditionImmune", null, null);
+        }
+        preserveComplexConditionEndings(spell, source, assembly);
+    }
+
+    private void extractModifierAndProtection(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                               SpellMechanicsAssembly assembly) {
+        switch (spell.id().value()) {
+            case "spell:phb:shield-of-faith" -> assembly.attempt("shield-of-faith-ac-v1",
+                    MechanicFamily.ARMOR_CLASS_MODIFIER,
+                    () -> shieldOfFaith(spell, source, assembly));
+            case "spell:phb:mage-armor" -> assembly.attempt("mage-armor-base-ac-v1", MechanicFamily.MODIFIER,
+                    () -> mageArmor(spell, source, assembly));
+            case "spell:phb:barkskin" -> assembly.attempt("barkskin-ac-minimum-v1", MechanicFamily.MODIFIER,
+                    () -> barkskin(spell, source, assembly));
+            case "spell:phb:longstrider" -> assembly.attempt("longstrider-speed-v1", MechanicFamily.MODIFIER,
+                    () -> longstrider(spell, source, assembly));
+            case "spell:phb:bless" -> assembly.attempt("bless-roll-bonus-v1", MechanicFamily.MODIFIER,
+                    () -> bless(spell, source, assembly));
+            case "spell:phb:bane" -> bane(spell, source, assembly);
+            case "spell:phb:protection-from-energy" -> assembly.attempt("protection-from-energy-resistance-v1",
+                    MechanicFamily.DAMAGE_RESISTANCE,
+                    () -> protectionFromEnergy(spell, source, assembly));
+            case "spell:phb:stoneskin" -> stoneskin(spell, source, assembly);
+            default -> throw new IllegalStateException("Unsupported modifier owner " + spell.id().value());
+        }
+    }
+
+    private MechanicRecord shieldOfFaith(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                         SpellMechanicsAssembly assembly) {
+        String body = "A shimmering field appears and surrounds a creature of your choice within range, "
+                + "granting it a +2 bonus to AC for the duration.";
+        MechanicContext context = modifierContext(spell, source,
+                new SpellTargetSubject(TargetScope.SINGLE_TARGET_CREATURE),
+                List.of(), List.of(), null);
+        return modifierClaim(spell, source, assembly, "shield-of-faith-ac", "shield-of-faith-ac-bonus-v1",
+                new ArmorClassModifierMechanic(new IntegerModifier(2, "+2")), body, context,
+                List.of(),
+                MechanicsCompleteness.COMPLETE_WITHIN_CLAIM);
+    }
+
+    private MechanicRecord mageArmor(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                     SpellMechanicsAssembly assembly) {
+        String body = "You touch a willing creature who isn't wearing armor, and a protective magical force "
+                + "surrounds it until the spell ends. The target's base AC becomes 13 + its Dexterity modifier. "
+                + "The spell ends if the target dons armor or if you dismiss the spell as an action.";
+        var conditions = List.of(
+                new ApplicabilityEvidence(ApplicabilityCondition.TARGET_IS_WILLING, "willing creature"),
+                new ApplicabilityEvidence(ApplicabilityCondition.TARGET_NOT_WEARING_ARMOR, "isn't wearing armor"));
+        MechanicContext context = modifierContext(spell, source,
+                new SpellTargetSubject(TargetScope.SINGLE_TARGET_CREATURE),
+                conditions, List.of(), null);
+        var payload = new StatisticModifierMechanic(List.of(ModifiedStatistic.BASE_ARMOR_CLASS),
+                ModifierOperation.SET_BASE,
+                new SumAmount(List.of(new IntegerAmount(13), new SymbolicAmount(AmountSymbol.DEXTERITY_MODIFIER))));
+        TextMechanicsEvidence bodyEvidence = source.textEvidence(BODY, body);
+        MechanicRecord claim = modifierClaim(spell, source, assembly, "mage-armor-base-ac",
+                "mage-armor-base-ac-replacement-v1", payload, body, context, List.of(),
+                MechanicsCompleteness.PARTIAL);
+        assembly.unsupported("mage-armor-conditional-endings", MechanicFamily.MODIFIER,
+                List.of(bodyEvidence.id()));
+        return claim;
+    }
+
+    private MechanicRecord barkskin(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                    SpellMechanicsAssembly assembly) {
+        String body = "You touch a willing creature. Until the spell ends, the target's skin has a rough, "
+                + "bark-like appearance, and the target's AC can't be less than 16, regardless of what kind of "
+                + "armor it is wearing.";
+        var conditions = List.of(new ApplicabilityEvidence(ApplicabilityCondition.TARGET_IS_WILLING,
+                "willing creature"));
+        MechanicContext context = modifierContext(spell, source,
+                new SpellTargetSubject(TargetScope.SINGLE_TARGET_CREATURE),
+                conditions, List.of(), null);
+        return modifierClaim(spell, source, assembly, "barkskin-ac-minimum", "barkskin-ac-floor-v1",
+                new StatisticModifierMechanic(List.of(ModifiedStatistic.ARMOR_CLASS), ModifierOperation.MINIMUM,
+                        new IntegerAmount(16)), body, context, List.of(), MechanicsCompleteness.COMPLETE_WITHIN_CLAIM);
+    }
+
+    private MechanicRecord longstrider(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                       SpellMechanicsAssembly assembly) {
+        String body = "You touch a creature. The target's speed increases by 10 feet until the spell ends.";
+        MechanicContext context = modifierContext(spell, source,
+                new SpellTargetSubject(TargetScope.SINGLE_TARGET_CREATURE),
+                List.of(), List.of(), null);
+        return modifierClaim(spell, source, assembly, "longstrider-speed", "longstrider-speed-increase-v1",
+                new StatisticModifierMechanic(List.of(ModifiedStatistic.MOVEMENT_SPEED), ModifierOperation.ADD,
+                        new IntegerAmount(10)), body, context, List.of(), MechanicsCompleteness.COMPLETE_WITHIN_CLAIM);
+    }
+
+    private MechanicRecord bless(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                 SpellMechanicsAssembly assembly) {
+        String body = "You bless up to three creatures of your choice within range. Whenever a target makes an "
+                + "attack roll or a saving throw before the spell ends, the target can roll a {@dice d4} and add "
+                + "the number rolled to the attack roll or saving throw.";
+        var when = List.of(new ApplicabilityEvidence(ApplicabilityCondition.TARGET_MAKES_ROLL_BEFORE_SPELL_ENDS,
+                "Whenever a target makes an attack roll or a saving throw before the spell ends"));
+        MechanicContext context = modifierContext(spell, source,
+                new SpellTargetSubject(TargetScope.MULTIPLE_TARGET_CREATURES, null, 3),
+                when, List.of(), null);
+        return modifierClaim(spell, source, assembly, "bless-roll-bonus", "bless-roll-d4-bonus-v1",
+                new StatisticModifierMechanic(List.of(ModifiedStatistic.ATTACK_ROLL, ModifiedStatistic.SAVING_THROW),
+                        ModifierOperation.ADD, new DiceAmount(1, 4, 0)), body, context, List.of(),
+                MechanicsCompleteness.COMPLETE_WITHIN_CLAIM);
+    }
+
+    private void bane(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                      SpellMechanicsAssembly assembly) {
+        String body = "Up to three creatures of your choice that you can see within range must make Charisma "
+                + "saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving "
+                + "throw before the spell ends, the target must roll a {@dice d4} and subtract the number rolled "
+                + "from the attack roll or saving throw.";
+        MechanicRecord save = assembly.attempt("bane-charisma-save-v1", MechanicFamily.SAVING_THROW_REQUIREMENT,
+                () -> baneSavingThrow(spell, source, assembly, body));
+        MechanicRevisionReference saveReference = save == null ? null : save.revision().reference(save.id());
+        var when = List.of(new ApplicabilityEvidence(ApplicabilityCondition.TARGET_MAKES_ROLL_BEFORE_SPELL_ENDS,
+                "makes an attack roll or a saving throw before the spell ends"));
+        var subject = new SpellTargetSubject(TargetScope.MULTIPLE_TARGET_CREATURES, null, 3);
+        MechanicContext context = modifierContext(spell, source, subject,
+                when, saveReference == null ? List.of() : List.of("target that fails this saving throw"),
+                saveReference);
+        assembly.attempt("bane-roll-penalty-v1", MechanicFamily.MODIFIER, () ->
+                modifierClaim(spell, source, assembly, "bane-roll-penalty", "bane-roll-d4-penalty-v1",
+                        new StatisticModifierMechanic(List.of(ModifiedStatistic.ATTACK_ROLL,
+                                ModifiedStatistic.SAVING_THROW), ModifierOperation.SUBTRACT,
+                                new DiceAmount(1, 4, 0)), body, context, List.of(),
+                        MechanicsCompleteness.COMPLETE_WITHIN_CLAIM));
+    }
+
+    private MechanicRecord baneSavingThrow(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                           SpellMechanicsAssembly assembly, String expectedBody) {
+        exactBody(spell, source, expectedBody);
+        require(spell.mechanics().savingThrows().equals(List.of("charisma")), "/savingThrow");
+        TextMechanicsEvidence evidence = source.textEvidence(BODY, "must make Charisma saving throws");
+        var abilityEvidence = source.fieldEvidence("/savingThrow/0");
+        var targetEvidence = source.textEvidence(BODY, "Up to three creatures of your choice that you can see within range");
+        return assembly.claim("bane-charisma-save", "bane-saving-throw-requirement-v1",
+                new SavingThrowRequirementMechanic(new FixedAbility(Ability.CHARISMA),
+                        new UnknownSaveDifficulty(UnknownValueReason.NOT_AUTHORED)),
+                new MechanicContext(new SpellTargetSubject(TargetScope.MULTIPLE_TARGET_CREATURES, null, 3), List.of()),
+                List.of(association(evidence, "/payload", EvidenceRole.EFFECT_ROLE),
+                        association(abilityEvidence, "/payload/ability", EvidenceRole.VALUE),
+                        association(targetEvidence, "/context/subject", EvidenceRole.QUALIFIER)), false,
+                MechanicsCompleteness.PARTIAL);
+    }
+
+    private MechanicRecord protectionFromEnergy(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                                  SpellMechanicsAssembly assembly) {
+        String body = "For the duration, the willing creature you touch has resistance to one damage type of your "
+                + "choice: acid, cold, fire, lightning, or thunder.";
+        var conditions = List.of(new ApplicabilityEvidence(ApplicabilityCondition.TARGET_IS_WILLING,
+                "willing creature"));
+        MechanicContext context = modifierContext(spell, source,
+                new SpellTargetSubject(TargetScope.SINGLE_TARGET_CREATURE),
+                conditions, List.of(), null);
+        return modifierClaim(spell, source, assembly, "protection-from-energy-resistance",
+                "protection-from-energy-selected-resistance-v1",
+                new DamageResistanceMechanic(DamageProtectionOperation.RESISTANCE,
+                        new DamageTypeChoice(List.of("acid", "cold", "fire", "lightning", "thunder"), 1),
+                        DamageApplicability.ANY_DAMAGE), body, context, List.of(),
+                MechanicsCompleteness.COMPLETE_WITHIN_CLAIM);
+    }
+
+    private void stoneskin(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                           SpellMechanicsAssembly assembly) {
+        String body = "This spell turns the flesh of a willing creature you touch as hard as stone. Until the spell "
+                + "ends, the target has resistance to nonmagical bludgeoning, piercing, and slashing damage.";
+        var conditions = List.of(new ApplicabilityEvidence(ApplicabilityCondition.TARGET_IS_WILLING,
+                "willing creature"));
+        MechanicContext context = modifierContext(spell, source,
+                new SpellTargetSubject(TargetScope.SINGLE_TARGET_CREATURE),
+                conditions, List.of(), null);
+        String damageClause = "resistance to nonmagical bludgeoning, piercing, and slashing damage";
+        for (String type : List.of("bludgeoning", "piercing", "slashing")) {
+            assembly.attempt("stoneskin-resistance-" + type + "-v1", MechanicFamily.DAMAGE_RESISTANCE, () -> {
+                exactBody(spell, source, body);
+                TextMechanicsEvidence evidence = source.textEvidence(BODY, damageClause);
+                return modifierClaim(spell, source, assembly, "stoneskin-resistance-" + type,
+                        "stoneskin-nonmagical-resistance-v1",
+                        new DamageResistanceMechanic(DamageProtectionOperation.RESISTANCE,
+                                new FixedDamageType(type), DamageApplicability.NONMAGICAL_DAMAGE_ONLY), body, context,
+                        List.of(association(evidence, "/payload", EvidenceRole.EFFECT_ROLE)),
+                        MechanicsCompleteness.COMPLETE_WITHIN_CLAIM);
+            });
+        }
+    }
+
+    private MechanicContext modifierContext(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                            SubjectReference subject,
+                                            List<ApplicabilityEvidence> applicability,
+                                            List<String> savePhrase, MechanicRevisionReference save) {
+        var bindings = new ArrayList<MechanicContextBinding>();
+        if (spell.durations().size() == 1 && "timed".equals(spell.durations().getFirst().type())) {
+            var duration = new DeclaredSpellDurationReference(spell.id(), 0, source.source().revision());
+            var evidence = source.fieldEvidence("/duration/0");
+            bindings.add(new AppliesForDuration(duration, List.of(evidence.id())));
+        }
+        if (spell.durations().size() == 1 && Boolean.TRUE.equals(spell.durations().getFirst().concentration())) {
+            var evidence = source.fieldEvidence("/duration/0/concentration");
+            bindings.add(new RequiresConcentration(List.of(evidence.id())));
+        }
+        if (save != null) {
+            var evidence = source.textEvidence(BODY, savePhrase.getFirst());
+            bindings.add(new ModifierOnSaveOutcome(save, SaveOutcome.FAILURE, List.of(evidence.id())));
+        }
+        for (ApplicabilityEvidence condition : applicability) {
+            var evidence = source.textEvidence(BODY, condition.phrase());
+            bindings.add(new AppliesWhen(condition.condition(), List.of(evidence.id())));
+        }
+        // The target phrase is separately associated by modifierClaim, while bindings retain their own evidence.
+        return new MechanicContext(subject, bindings);
+    }
+
+    private MechanicRecord modifierClaim(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                         SpellMechanicsAssembly assembly, String slot, String pattern,
+                                         com.thedndpub.data.mechanics.model.MechanicPayload payload,
+                                         String body, MechanicContext context,
+                                         List<MechanicEvidenceAssociation> extraAssociations,
+                                         MechanicsCompleteness completeness) {
+        exactBody(spell, source, body);
+        TextMechanicsEvidence effectEvidence = source.textEvidence(BODY, body);
+        var associations = new ArrayList<MechanicEvidenceAssociation>();
+        associations.add(association(effectEvidence, "/payload", EvidenceRole.EFFECT_ROLE));
+        associations.addAll(extraAssociations);
+        for (int index = 0; index < context.bindings().size(); index++) {
+            for (String id : bindingEvidenceIds(context.bindings().get(index))) {
+                var evidence = source.evidence().stream().filter(item -> item.id().equals(id)).findFirst()
+                        .orElseThrow(() -> new IllegalStateException("Missing binding evidence " + id));
+                associations.add(association(evidence, "/context/bindings/" + index, EvidenceRole.QUALIFIER));
+            }
+        }
+        if (context.subject() instanceof SpellTargetSubject) {
+            TextMechanicsEvidence targetEvidence = source.textEvidence(BODY, subjectPhrase(spell.id().value()));
+            associations.add(association(targetEvidence, "/context/subject", EvidenceRole.QUALIFIER));
+        }
+        return assembly.claim(slot, pattern, payload, context, associations, false, completeness);
+    }
+
+    private String subjectPhrase(String id) {
+        return switch (id) {
+            case "spell:phb:shield-of-faith" -> "creature of your choice within range";
+            case "spell:phb:mage-armor" -> "touch a willing creature";
+            case "spell:phb:barkskin", "spell:phb:protection-from-energy", "spell:phb:stoneskin" ->
+                    "willing creature";
+            case "spell:phb:longstrider" -> "touch a creature";
+            case "spell:phb:bless" -> "up to three creatures of your choice within range";
+            case "spell:phb:bane" -> "Up to three creatures of your choice that you can see within range";
+            default -> throw new IllegalStateException("Unsupported target phrase owner " + id);
+        };
+    }
+
+    private List<String> bindingEvidenceIds(MechanicContextBinding binding) {
+        return switch (binding) {
+            case AppliesForDuration duration -> duration.evidenceIds();
+            case RequiresConcentration concentration -> concentration.evidenceIds();
+            case AppliesWhen applies -> applies.evidenceIds();
+            case ModifierOnSaveOutcome outcome -> outcome.evidenceIds();
+            default -> throw new IllegalArgumentException("Unexpected modifier context binding");
+        };
+    }
+
+    private String exactBody(SpellDefinition spell, SpellMechanicsEvidenceSource source, String expected) {
+        require(spell.entries().size() == 1 && spell.entries().getFirst() instanceof TextEntryDte, "/entries");
+        String text = ((TextEntryDte) spell.entries().getFirst()).text();
+        require(text.equals(expected), BODY);
+        source.verifyText(BODY, text);
+        return text;
+    }
+
+    private record ApplicabilityEvidence(ApplicabilityCondition condition, String phrase) {
+    }
+
+    private void preserveComplexConditionEndings(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                                SpellMechanicsAssembly assembly) {
+        String id = spell.id().value();
+        String pointer = switch (id) {
+            case "spell:phb:fear", "spell:phb:hypnotic-pattern" -> "/entries/1";
+            default -> null;
+        };
+        if (pointer == null) {
+            return;
+        }
+        try {
+            assembly.unsupported("condition-ending-rules", MechanicFamily.CONDITION,
+                    List.of(source.textEvidence(pointer, null).id()));
+        } catch (SpellPatternMismatch mismatch) {
+            assembly.abstain("condition-ending-rules", MechanicFamily.CONDITION,
+                    mismatch.reason(), mismatch.relativePointer());
         }
     }
 
     private Map<ConditionName, MechanicRevisionReference> conditionChoice(
-            SpellDefinition spell, SpellMechanicsEvidenceSource source, SpellMechanicsAssembly assembly) {
+            SpellDefinition spell, SpellMechanicsEvidenceSource source, SpellMechanicsAssembly assembly,
+            ConditionTarget target, MechanicRevisionReference savingThrow) {
         var candidates = new ArrayList<ConditionChoiceCandidate>();
         for (int index = 0; index < spell.entries().size(); index++) {
             String pointer = "/entries/" + index;
@@ -211,6 +547,8 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
         }
         MechanicRecord choice = assembly.attempt("condition-choice-" + candidate.first() + "-" + candidate.second(),
                 MechanicFamily.CONDITION, () -> {
+                    EffectContext effectContext = conditionEffectContext(spell, source, target, first,
+                            savingThrow, true);
                     var firstField = source.fieldEvidence("/conditionInflict/"
                             + spell.mechanics().conditionsInflicted().indexOf(candidate.first()));
                     var secondField = source.fieldEvidence("/conditionInflict/"
@@ -219,13 +557,14 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
                     return assembly.claim("condition-choice-" + candidate.first() + "-" + candidate.second(),
                             "condition-exclusive-choice-v1",
                             new ConditionChoiceMechanic(ConditionOperation.APPLY, List.of(first, second), 1),
-                            unknownContext(), List.of(
+                            effectContext.context(), combineAssociations(List.of(
                                     MechanicEvidenceAssociation.of(choiceEvidence, "/payload/choicesToSelect",
                                             EvidenceRole.QUALIFIER),
                                     MechanicEvidenceAssociation.of(firstField, "/payload/alternatives/0",
                                             EvidenceRole.VALUE),
                                     MechanicEvidenceAssociation.of(secondField, "/payload/alternatives/1",
-                                            EvidenceRole.VALUE)), false, MechanicsCompleteness.PARTIAL);
+                                            EvidenceRole.VALUE)), effectContext.associations()), false,
+                            MechanicsCompleteness.PARTIAL);
                 });
         if (choice == null) {
             return Map.of();
@@ -247,15 +586,16 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
 
     private void conditionClaim(String raw, ConditionOperation operation, SpellDefinition spell,
                                 SpellMechanicsEvidenceSource source, SpellMechanicsAssembly assembly, String field,
-                                MechanicRevisionReference choiceGroup) {
+                                MechanicRevisionReference choiceGroup, EffectContext effectContext) {
         String operationId = operation.name().toLowerCase(java.util.Locale.ROOT).replace('_', '-');
         assembly.attempt("condition-" + operationId + "-" + raw, MechanicFamily.CONDITION,
-                () -> conditionRecord(raw, operation, spell, source, assembly, field, choiceGroup));
+                () -> conditionRecord(raw, operation, spell, source, assembly, field, choiceGroup, effectContext));
     }
 
     private MechanicRecord conditionRecord(String raw, ConditionOperation operation, SpellDefinition spell,
                                            SpellMechanicsEvidenceSource source, SpellMechanicsAssembly assembly,
-                                           String field, MechanicRevisionReference choiceGroup) {
+                                           String field, MechanicRevisionReference choiceGroup,
+                                           EffectContext effectContext) {
         String operationId = operation.name().toLowerCase(java.util.Locale.ROOT).replace('_', '-');
         ConditionName condition;
         try {
@@ -304,11 +644,299 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
             associations.add(MechanicEvidenceAssociation.of(choiceEvidence, "/payload/choiceGroup",
                     EvidenceRole.REFERENCE));
         }
+        if (spell.id().value().equals("spell:phb:fear") && condition == ConditionName.FRIGHTENED) {
+            String endingText = source.text("/entries/1").text();
+            if (!qualifiers.contains(endingText)) {
+                var endingEvidence = source.textEvidence("/entries/1", endingText);
+                qualifiers.add(endingText);
+                associations.add(MechanicEvidenceAssociation.of(endingEvidence, "/payload/qualifiers",
+                        EvidenceRole.QUALIFIER));
+            }
+        }
+        if (effectContext != null) {
+            associations.addAll(effectContext.associations());
+        }
         return assembly.claim("condition-" + operationId + "-" + raw,
-                "condition-explicit-metadata-v1",
+                effectContext == null ? "condition-explicit-metadata-v1" : "condition-dependency-context-v1",
                 new ConditionChangeMechanic(operation, condition, qualifiers, choiceGroup),
-                unknownContext(), associations,
+                effectContext == null ? unknownContext() : effectContext.context(), associations,
                 true, MechanicsCompleteness.PARTIAL);
+    }
+
+    private MechanicRecord conditionSavingThrow(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                                SpellMechanicsAssembly assembly, ConditionTarget target) {
+        if (!CONDITION_DEPENDENCY_OWNERS.contains(spell.id().value())
+                || spell.mechanics().savingThrows().isEmpty()) {
+            return null;
+        }
+        if (spell.mechanics().savingThrows().size() != 1) {
+            assembly.abstain("condition-save-dependency", MechanicFamily.SAVING_THROW_REQUIREMENT,
+                    UnsupportedReason.AMBIGUOUS_INTERPRETATION, "/savingThrow");
+            return null;
+        }
+        Ability saveAbility = ability(spell.mechanics().savingThrows().getFirst());
+        List<LocatedText> entries = locatedEntries(spell.entries(), "/entries", source);
+        boolean hasFailedCondition = spell.mechanics().conditionsInflicted().stream()
+                .anyMatch(condition -> failedConditionEvidence(entries, condition) != null);
+        if (!hasFailedCondition) {
+            assembly.abstain("condition-save-dependency", MechanicFamily.SAVING_THROW_REQUIREMENT,
+                    UnsupportedReason.AMBIGUOUS_INTERPRETATION, "/entries/0");
+            return null;
+        }
+        LocatedText saveText = entries.stream()
+                .filter(value -> value.text().contains(saveAbility.name().charAt(0)
+                        + saveAbility.name().substring(1).toLowerCase(java.util.Locale.ROOT) + " saving throw"))
+                .findFirst().orElse(null);
+        if (saveText == null) {
+            assembly.abstain("condition-save-dependency", MechanicFamily.SAVING_THROW_REQUIREMENT,
+                    UnsupportedReason.PROVENANCE_UNAVAILABLE, "/entries/0");
+            return null;
+        }
+        return assembly.attempt("condition-saving-throw-v1", MechanicFamily.SAVING_THROW_REQUIREMENT, () ->
+                assembly.claim("condition-saving-throw", "condition-saving-throw-v1",
+                        new SavingThrowRequirementMechanic(new FixedAbility(saveAbility),
+                                new UnknownSaveDifficulty(UnknownValueReason.NOT_AUTHORED)),
+                        new MechanicContext(target == null ? new UnknownSubject(UnknownValueReason.NOT_INTERPRETED)
+                                : target.subject(), List.of()), combineAssociations(List.of(
+                                MechanicEvidenceAssociation.of(source.textEvidence(saveText.pointer(), saveText.text()),
+                                        "/payload", EvidenceRole.EFFECT_ROLE),
+                                MechanicEvidenceAssociation.of(source.fieldEvidence("/savingThrow/0"),
+                                        "/payload/ability", EvidenceRole.VALUE)),
+                                targetAssociations(source, target)), false, MechanicsCompleteness.PARTIAL));
+    }
+
+    private ConditionTarget conditionTarget(SpellDefinition spell, SpellMechanicsEvidenceSource source) {
+        if (!CONDITION_DEPENDENCY_OWNERS.contains(spell.id().value())) {
+            return ConditionTarget.unknown();
+        }
+        List<LocatedText> entries = locatedEntries(spell.entries(), "/entries", source);
+        for (LocatedText entry : entries) {
+            String lower = entry.text().toLowerCase(java.util.Locale.ROOT);
+            if (lower.contains("you or a creature you touch")) {
+                return targetFrom(entry, "You or a creature you touch", TargetScope.CASTER_OR_TOUCHED_CREATURE, null,
+                        spell, source);
+            }
+            if (lower.contains("each creature in a 30-foot cone")
+                    || lower.contains("each creature in the area who sees the pattern")) {
+                String phrase = lower.contains("each creature in a 30-foot cone")
+                        ? "Each creature in a 30-foot cone" : "Each creature in the area who sees the pattern";
+                return targetFrom(entry, phrase, TargetScope.AREA_AFFECTED_CREATURES, null, spell, source);
+            }
+            if (lower.contains("choose a humanoid that you can see")) {
+                return targetFrom(entry, "Choose a humanoid that you can see", TargetScope.SINGLE_TARGET_CREATURE,
+                        CreatureTypeRestriction.HUMANOID, spell, source);
+            }
+            if (lower.contains("choose one creature that you can see")) {
+                return targetFrom(entry, "Choose one creature that you can see", TargetScope.SINGLE_TARGET_CREATURE,
+                        null, spell, source);
+        }
+        }
+        return ConditionTarget.unknown();
+    }
+
+    private ConditionTarget targetFrom(LocatedText entry, String phrase, TargetScope scope,
+                                       CreatureTypeRestriction restriction, SpellDefinition spell,
+                                       SpellMechanicsEvidenceSource source) {
+        var evidence = new ArrayList<LocatedPhrase>();
+        evidence.add(new LocatedPhrase(entry.pointer(), sentenceContaining(entry.text(), phrase)));
+        TargetScope targetScope = scope;
+        for (LocatedText higherLevel : locatedEntries(spell.entriesHigherLevel(), "/entriesHigherLevel", source)) {
+            Matcher additionalTargets = Pattern.compile("(?i)target one additional (?:creature|humanoid)")
+                    .matcher(higherLevel.text());
+            if (additionalTargets.find()) {
+                targetScope = TargetScope.MULTIPLE_TARGET_CREATURES;
+                evidence.add(new LocatedPhrase(higherLevel.pointer(),
+                        sentenceContaining(higherLevel.text(), additionalTargets.group())));
+            }
+        }
+        return new ConditionTarget(new SpellTargetSubject(targetScope, restriction), List.copyOf(evidence));
+    }
+
+    private EffectContext conditionEffectContext(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                                 ConditionTarget target, ConditionName condition,
+                                                 MechanicRevisionReference savingThrow, boolean choiceGroup) {
+        SubjectReference subject = target == null ? new UnknownSubject(UnknownValueReason.NOT_INTERPRETED)
+                : target.subject();
+        var bindings = new ArrayList<MechanicContextBinding>();
+        var associations = new ArrayList<MechanicEvidenceAssociation>();
+        if (target != null) {
+            associations.addAll(targetAssociations(source, target));
+        }
+
+        LocatedPhrase failed = choiceGroup
+                ? failedConditionEvidence(locatedEntries(spell.entries(), "/entries", source),
+                        condition.name().toLowerCase(java.util.Locale.ROOT))
+                : directFailedConditionEvidence(spell, source, condition);
+        if (savingThrow != null && failed != null) {
+            TextMechanicsEvidence evidence = source.textEvidence(failed.pointer(), failed.phrase());
+            int index = bindings.size();
+            bindings.add(new ConditionOnSaveOutcome(savingThrow, SaveOutcome.FAILURE, List.of(evidence.id())));
+            associations.add(MechanicEvidenceAssociation.of(evidence, "/context/bindings/" + index,
+                    EvidenceRole.QUALIFIER));
+        }
+
+        if (spell.durations().size() == 1 && "timed".equals(spell.durations().getFirst().type())) {
+            var duration = new DeclaredSpellDurationReference(spell.id(), 0, source.source().revision());
+            int index = bindings.size();
+            var fieldEvidence = source.fieldEvidence("/duration/0");
+            bindings.add(new AppliesForDuration(duration, List.of(fieldEvidence.id())));
+            associations.add(MechanicEvidenceAssociation.of(fieldEvidence, "/context/bindings/" + index,
+                    EvidenceRole.QUALIFIER));
+        }
+        if (spell.durations().size() == 1 && Boolean.TRUE.equals(spell.durations().getFirst().concentration())) {
+            var concentrationEvidence = source.fieldEvidence("/duration/0/concentration");
+            int index = bindings.size();
+            bindings.add(new RequiresConcentration(List.of(concentrationEvidence.id())));
+            associations.add(MechanicEvidenceAssociation.of(concentrationEvidence, "/context/bindings/" + index,
+                    EvidenceRole.QUALIFIER));
+        }
+
+        if (savingThrow != null) {
+            LocatedPhrase ending = successfulRepeatSave(spell, source);
+            if (ending != null) {
+                TextMechanicsEvidence evidence = source.textEvidence(ending.pointer(), ending.phrase());
+                int index = bindings.size();
+                bindings.add(new ConditionEndsOnSaveSuccess(savingThrow,
+                        RepeatSaveTiming.END_OF_EACH_TARGET_TURN, List.of(evidence.id())));
+                associations.add(MechanicEvidenceAssociation.of(evidence, "/context/bindings/" + index,
+                        EvidenceRole.QUALIFIER));
+            }
+        }
+        if (spell.id().value().equals("spell:phb:greater-invisibility")) {
+            LocatedPhrase ending = firstPhrase(spell, source, Pattern.compile("(?i)until the spell ends"));
+            if (ending != null) {
+                TextMechanicsEvidence evidence = source.textEvidence(ending.pointer(), ending.phrase());
+                int index = bindings.size();
+                bindings.add(new ConditionEndsWithSpell(List.of(evidence.id())));
+                associations.add(MechanicEvidenceAssociation.of(evidence, "/context/bindings/" + index,
+                        EvidenceRole.QUALIFIER));
+            }
+        }
+        return new EffectContext(new MechanicContext(subject, bindings), List.copyOf(associations));
+    }
+
+    private LocatedPhrase directFailedConditionEvidence(SpellDefinition spell, SpellMechanicsEvidenceSource source,
+                                                        ConditionName condition) {
+        return failedConditionEvidence(locatedEntries(spell.entries(), "/entries", source),
+                condition.name().toLowerCase(java.util.Locale.ROOT));
+    }
+
+    private LocatedPhrase failedConditionEvidence(List<LocatedText> entries, String condition) {
+        Pattern conditionTag = Pattern.compile("(?i)\\{@condition\\s+" + Pattern.quote(condition)
+                + "(?:\\|[^}]*)?}");
+        Pattern failedSave = Pattern.compile("(?i)(?:on a failed save|if it fails|must succeed on a .*? saving throw or)");
+        for (LocatedText entry : entries) {
+            Matcher conditionMatcher = conditionTag.matcher(entry.text());
+            while (conditionMatcher.find()) {
+                String sentence = sentenceContaining(entry.text(), conditionMatcher.group());
+                if (failedSave.matcher(sentence).find()) {
+                    return new LocatedPhrase(entry.pointer(), sentence);
+                }
+            }
+        }
+        return null;
+    }
+
+    private LocatedPhrase successfulRepeatSave(SpellDefinition spell, SpellMechanicsEvidenceSource source) {
+        if (spell.mechanics().savingThrows().size() != 1) {
+            return null;
+        }
+        String ability = spell.mechanics().savingThrows().getFirst().toLowerCase(java.util.Locale.ROOT);
+        for (LocatedText entry : locatedEntries(spell.entries(), "/entries", source)) {
+            String lower = entry.text().toLowerCase(java.util.Locale.ROOT);
+            String startText = "at the end of each of its turns,";
+            int start = lower.indexOf(startText);
+            if (start < 0 || lower.indexOf(startText, start + startText.length()) >= 0) {
+                continue;
+            }
+            int saveStart = lower.indexOf(" can make ", start);
+            int saveEnd = lower.indexOf(" saving throw.", saveStart);
+            int successStart = lower.indexOf(" on a success,", saveEnd);
+            int ending = successStart < 0 ? -1 : lower.indexOf("spell ends", successStart);
+            int end = ending < 0 ? -1 : lower.indexOf('.', ending);
+            if (saveStart < 0 || saveEnd < 0 || successStart < 0 || end < 0
+                    || !lower.substring(saveStart, saveEnd).contains(ability)) {
+                continue;
+            }
+            return new LocatedPhrase(entry.pointer(), entry.text().substring(start, end + 1));
+        }
+        return null;
+    }
+
+    private LocatedPhrase firstPhrase(SpellDefinition spell, SpellMechanicsEvidenceSource source, Pattern pattern) {
+        for (LocatedText entry : locatedEntries(spell.entries(), "/entries", source)) {
+            Matcher matcher = pattern.matcher(entry.text());
+            if (matcher.find()) {
+                return new LocatedPhrase(entry.pointer(), matcher.group());
+            }
+        }
+        return null;
+    }
+
+    private List<LocatedText> locatedEntries(List<EntryDte> entries, String pointer,
+                                             SpellMechanicsEvidenceSource source) {
+        var result = new ArrayList<LocatedText>();
+        for (int index = 0; index < entries.size(); index++) {
+            collectLocatedEntry(entries.get(index), pointer + "/" + index, source, result);
+        }
+        return List.copyOf(result);
+    }
+
+    private void collectLocatedEntry(EntryDte entry, String pointer, SpellMechanicsEvidenceSource source,
+                                     List<LocatedText> result) {
+        if (entry instanceof TextEntryDte) {
+            result.add(new LocatedText(pointer, source.text(pointer).text()));
+        } else if (entry instanceof SectionEntryDte section) {
+            for (int index = 0; index < section.entries().size(); index++) {
+                collectLocatedEntry(section.entries().get(index), pointer + "/entries/" + index, source, result);
+            }
+        } else if (entry instanceof NamedEntryDte named) {
+            for (int index = 0; index < named.entries().size(); index++) {
+                collectLocatedEntry(named.entries().get(index), pointer + "/entries/" + index, source, result);
+            }
+        }
+    }
+
+    private String sentenceContaining(String text, String phrase) {
+        int index = text.indexOf(phrase);
+        require(index >= 0, BODY);
+        int start = Math.max(text.lastIndexOf('.', index), text.lastIndexOf(';', index)) + 1;
+        int end = text.indexOf('.', index + phrase.length());
+        return text.substring(start, end < 0 ? text.length() : end + 1).trim();
+    }
+
+    private List<MechanicEvidenceAssociation> targetAssociations(SpellMechanicsEvidenceSource source,
+                                                                 ConditionTarget target) {
+        var associations = new ArrayList<MechanicEvidenceAssociation>();
+        if (target != null) {
+            for (LocatedPhrase phrase : target.evidence()) {
+                associations.add(MechanicEvidenceAssociation.of(source.textEvidence(phrase.pointer(), phrase.phrase()),
+                        "/context/subject", EvidenceRole.QUALIFIER));
+            }
+        }
+        return List.copyOf(associations);
+    }
+
+    private List<MechanicEvidenceAssociation> combineAssociations(List<MechanicEvidenceAssociation> first,
+                                                                  List<MechanicEvidenceAssociation> second) {
+        var result = new ArrayList<>(first);
+        result.addAll(second);
+        return List.copyOf(result);
+    }
+
+    private record LocatedText(String pointer, String text) {
+    }
+
+    private record LocatedPhrase(String pointer, String phrase) {
+    }
+
+    private record ConditionTarget(SpellTargetSubject subject, List<LocatedPhrase> evidence) {
+        private static ConditionTarget unknown() {
+            return null;
+        }
+    }
+
+    private record EffectContext(MechanicContext context, List<MechanicEvidenceAssociation> associations) {
     }
 
     private record ConditionChoiceCandidate(String pointer, String sentence, String first, String second) {
@@ -686,6 +1314,11 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
         if (!matches) {
             throw new SpellPatternMismatch(UnsupportedReason.NO_SUPPORTED_PATTERN, pointer);
         }
+    }
+
+    private static MechanicEvidenceAssociation association(MechanicsEvidence evidence, String path,
+                                                           EvidenceRole role) {
+        return MechanicEvidenceAssociation.of(evidence, path, role);
     }
 
     private static void verifyEntries(List<EntryDte> entries, String pointer, SpellMechanicsEvidenceSource source) {

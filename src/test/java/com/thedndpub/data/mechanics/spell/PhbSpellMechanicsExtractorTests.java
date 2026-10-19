@@ -4,32 +4,56 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thedndpub.data.mechanics.model.Ability;
 import com.thedndpub.data.mechanics.model.AmountSymbol;
 import com.thedndpub.data.mechanics.model.AppliesOnSaveOutcome;
+import com.thedndpub.data.mechanics.model.AppliesWhen;
+import com.thedndpub.data.mechanics.model.ApplicabilityCondition;
+import com.thedndpub.data.mechanics.model.ArmorClassModifierMechanic;
 import com.thedndpub.data.mechanics.model.CoverageStatus;
 import com.thedndpub.data.mechanics.model.ConditionChangeMechanic;
 import com.thedndpub.data.mechanics.model.ConditionChoiceMechanic;
+import com.thedndpub.data.mechanics.model.ConditionEndsOnSaveSuccess;
+import com.thedndpub.data.mechanics.model.ConditionEndsWithSpell;
 import com.thedndpub.data.mechanics.model.ConditionName;
+import com.thedndpub.data.mechanics.model.ConditionOnSaveOutcome;
 import com.thedndpub.data.mechanics.model.ConditionOperation;
+import com.thedndpub.data.mechanics.model.CreatureTypeRestriction;
+import com.thedndpub.data.mechanics.model.DeclaredSpellDurationReference;
 import com.thedndpub.data.mechanics.model.DamageMechanic;
 import com.thedndpub.data.mechanics.model.DamageOutcome;
+import com.thedndpub.data.mechanics.model.DamageApplicability;
+import com.thedndpub.data.mechanics.model.DamageProtectionOperation;
+import com.thedndpub.data.mechanics.model.DamageResistanceMechanic;
+import com.thedndpub.data.mechanics.model.DamageTypeChoice;
 import com.thedndpub.data.mechanics.model.DiceAmount;
 import com.thedndpub.data.mechanics.model.FixedAbility;
 import com.thedndpub.data.mechanics.model.FixedDamageType;
+import com.thedndpub.data.mechanics.model.IntegerAmount;
+import com.thedndpub.data.mechanics.model.IntegerModifier;
 import com.thedndpub.data.mechanics.model.HealingMechanic;
 import com.thedndpub.data.mechanics.model.HealingMode;
 import com.thedndpub.data.mechanics.model.MechanicRecord;
 import com.thedndpub.data.mechanics.model.MechanicsCompleteness;
 import com.thedndpub.data.mechanics.model.MechanicsDocument;
 import com.thedndpub.data.mechanics.model.MechanicsHashes;
+import com.thedndpub.data.mechanics.model.MechanicContextBinding;
+import com.thedndpub.data.mechanics.model.ModifierOnSaveOutcome;
+import com.thedndpub.data.mechanics.model.ModifierOperation;
+import com.thedndpub.data.mechanics.model.ModifiedStatistic;
 import com.thedndpub.data.mechanics.model.MechanicsLicensingStatus;
+import com.thedndpub.data.mechanics.model.AppliesForDuration;
 import com.thedndpub.data.mechanics.model.ProcessingState;
 import com.thedndpub.data.mechanics.model.SaveOutcome;
+import com.thedndpub.data.mechanics.model.RepeatSaveTiming;
+import com.thedndpub.data.mechanics.model.RequiresConcentration;
 import com.thedndpub.data.mechanics.model.ScalingEffect;
 import com.thedndpub.data.mechanics.model.SavingThrowRequirementMechanic;
 import com.thedndpub.data.mechanics.model.SpellSlotScalingMechanic;
+import com.thedndpub.data.mechanics.model.StatisticModifierMechanic;
 import com.thedndpub.data.mechanics.model.StructuredFieldMechanicsEvidence;
 import com.thedndpub.data.mechanics.model.SumAmount;
 import com.thedndpub.data.mechanics.model.SymbolicAmount;
 import com.thedndpub.data.mechanics.model.TextMechanicsEvidence;
+import com.thedndpub.data.mechanics.model.SpellTargetSubject;
+import com.thedndpub.data.mechanics.model.TargetScope;
 import com.thedndpub.data.mechanics.model.UnknownSaveDifficulty;
 import com.thedndpub.data.mechanics.model.UnknownSubject;
 import com.thedndpub.data.mechanics.model.UnknownValueReason;
@@ -48,6 +72,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -87,7 +112,9 @@ class PhbSpellMechanicsExtractorTests {
 
     private MechanicRecord claim(MechanicsDocument document, String pattern) {
         return document.interpretations().stream()
-                .filter(value -> value.derivation().patternId().equals(pattern)).findFirst().orElseThrow();
+                .filter(value -> value.derivation().patternId().equals(pattern)).findFirst()
+                .orElseThrow(() -> new AssertionError("Missing pattern " + pattern + ": "
+                        + document.unsupported().stream().map(value -> value.id() + "=" + value.reason()).toList()));
     }
 
     private String evidenceId(EvidenceLocatorDto evidence) {
@@ -191,6 +218,138 @@ class PhbSpellMechanicsExtractorTests {
                 value instanceof TextMechanicsEvidence || value instanceof StructuredFieldMechanicsEvidence));
         assertEquals(document.evidence().stream().map(value -> value.id()).toList(),
                 extract(input("fireball")).evidence().stream().map(value -> value.id()).toList());
+    }
+
+    @Test
+    void conditionDependenciesTargetsDurationsAndEndingsAreSourceBacked() throws IOException {
+        var hold = extract(input("hold-person"));
+        var holdCondition = condition(hold, ConditionName.PARALYZED);
+        var holdSave = claim(hold, "condition-saving-throw-v1");
+        assertEquals(new FixedAbility(Ability.WISDOM),
+                assertInstanceOf(SavingThrowRequirementMechanic.class, holdSave.payload()).ability());
+        assertConditionSave(holdCondition, holdSave, SaveOutcome.FAILURE);
+        assertTarget(holdCondition, TargetScope.MULTIPLE_TARGET_CREATURES, CreatureTypeRestriction.HUMANOID);
+        assertDurationAndConcentration(holdCondition, true);
+        assertEquals(RepeatSaveTiming.END_OF_EACH_TARGET_TURN,
+                binding(holdCondition, ConditionEndsOnSaveSuccess.class).timing());
+
+        var blindness = extract(input("blindness-deafness"));
+        var choice = blindness.interpretations().stream()
+                .filter(value -> value.payload() instanceof ConditionChoiceMechanic).findFirst().orElseThrow();
+        var blindnessSave = claim(blindness, "condition-saving-throw-v1");
+        assertEquals(new FixedAbility(Ability.CONSTITUTION),
+                assertInstanceOf(SavingThrowRequirementMechanic.class, blindnessSave.payload()).ability());
+        assertConditionSave(choice, blindnessSave, SaveOutcome.FAILURE);
+        assertDurationAndConcentration(choice, false);
+        assertEquals(RepeatSaveTiming.END_OF_EACH_TARGET_TURN,
+                binding(choice, ConditionEndsOnSaveSuccess.class).timing());
+        var blindClaims = blindness.interpretations().stream()
+                .filter(value -> value.payload() instanceof ConditionChangeMechanic).toList();
+        assertEquals(2, blindClaims.size());
+        assertTrue(blindClaims.stream().allMatch(value -> value.context().bindings().stream()
+                .noneMatch(ConditionOnSaveOutcome.class::isInstance)));
+        assertTrue(blindClaims.stream().allMatch(value -> ((ConditionChangeMechanic) value.payload()).choiceGroup()
+                .equals(choice.revision().reference(choice.id()))));
+
+        var fear = extract(input("fear"));
+        var fearCondition = condition(fear, ConditionName.FRIGHTENED);
+        var fearSave = claim(fear, "condition-saving-throw-v1");
+        assertConditionSave(fearCondition, fearSave, SaveOutcome.FAILURE);
+        assertTarget(fearCondition, TargetScope.AREA_AFFECTED_CREATURES, null);
+        assertDurationAndConcentration(fearCondition, true);
+        assertFalse(fearCondition.context().bindings().stream().anyMatch(ConditionEndsOnSaveSuccess.class::isInstance));
+        assertTrue(((ConditionChangeMechanic) fearCondition.payload()).qualifiers().stream()
+                .anyMatch(value -> value.contains("line of sight") && value.contains("Dash")));
+        assertTrue(fear.unsupported().stream().anyMatch(value -> value.id().equals("condition-ending-rules")));
+
+        var invisibility = extract(input("greater-invisibility"));
+        var invisibleCondition = condition(invisibility, ConditionName.INVISIBLE);
+        assertTrue(invisibility.interpretations().stream()
+                .noneMatch(value -> value.payload() instanceof SavingThrowRequirementMechanic));
+        assertTarget(invisibleCondition, TargetScope.CASTER_OR_TOUCHED_CREATURE, null);
+        assertDurationAndConcentration(invisibleCondition, true);
+        assertNotNull(binding(invisibleCondition, ConditionEndsWithSpell.class));
+
+        var hypnotic = extract(input("hypnotic-pattern"));
+        var charmed = condition(hypnotic, ConditionName.CHARMED);
+        var incapacitated = condition(hypnotic, ConditionName.INCAPACITATED);
+        var hypnoticSave = claim(hypnotic, "condition-saving-throw-v1");
+        assertConditionSave(charmed, hypnoticSave, SaveOutcome.FAILURE);
+        assertTrue(incapacitated.context().bindings().stream().noneMatch(ConditionOnSaveOutcome.class::isInstance));
+        assertTarget(charmed, TargetScope.AREA_AFFECTED_CREATURES, null);
+        assertTarget(incapacitated, TargetScope.AREA_AFFECTED_CREATURES, null);
+        assertDurationAndConcentration(charmed, true);
+        assertDurationAndConcentration(incapacitated, true);
+        assertFalse(hypnotic.interpretations().stream().anyMatch(value -> value.payload() instanceof ConditionChoiceMechanic));
+        assertTrue(hypnotic.unsupported().stream().anyMatch(value -> value.id().equals("condition-ending-rules")));
+
+        for (var pair : List.of(Map.entry("hold-person", hold), Map.entry("blindness-deafness", blindness),
+                Map.entry("fear", fear), Map.entry("greater-invisibility", invisibility),
+                Map.entry("hypnotic-pattern", hypnotic))) {
+            var repeated = extract(input(pair.getKey()));
+            assertEquals(pair.getValue().interpretations().stream().map(value -> value.revision().contentSha256()).toList(),
+                    repeated.interpretations().stream().map(value -> value.revision().contentSha256()).toList());
+        }
+    }
+
+    @Test
+    void ambiguousConditionSaveLanguageDoesNotCreateAnOutcomeDependency() throws IOException {
+        var input = input("hold-person").changed(mapper, root -> root.withArray("entries").set(0,
+                mapper.getNodeFactory().textNode(root.at("/entries/0").textValue()
+                        .replace("must succeed on a Wisdom saving throw or be {@condition paralyzed}",
+                                "makes a Wisdom saving throw and is {@condition paralyzed}"))));
+        var document = extract(input);
+        assertTrue(document.interpretations().stream().noneMatch(value ->
+                value.derivation().patternId().equals("condition-saving-throw-v1")));
+        assertTrue(document.interpretations().stream()
+                .filter(value -> value.payload() instanceof ConditionChangeMechanic)
+                .noneMatch(value -> value.context().bindings().stream().anyMatch(ConditionOnSaveOutcome.class::isInstance)));
+        assertTrue(document.unsupported().stream().anyMatch(value ->
+                value.reason() == UnsupportedReason.AMBIGUOUS_INTERPRETATION));
+    }
+
+    private MechanicRecord condition(MechanicsDocument document, ConditionName condition) {
+        return document.interpretations().stream().filter(value -> value.payload() instanceof ConditionChangeMechanic change
+                        && change.condition() == condition)
+                .findFirst().orElseThrow();
+    }
+
+    private <T extends com.thedndpub.data.mechanics.model.MechanicContextBinding> T binding(
+            MechanicRecord record, Class<T> type) {
+        return record.context().bindings().stream().filter(type::isInstance).map(type::cast).findFirst().orElseThrow();
+    }
+
+    private void assertConditionSave(MechanicRecord effect, MechanicRecord save, SaveOutcome outcome) {
+        var dependency = binding(effect, ConditionOnSaveOutcome.class);
+        assertEquals(save.revision().reference(save.id()), dependency.savingThrow());
+        assertEquals(outcome, dependency.outcome());
+        assertTrue(effect.evidenceAssociations().stream().anyMatch(value ->
+                value.claimPath().startsWith("/context/bindings/")
+                        && dependency.evidenceIds().contains(value.evidenceId())));
+        assertEquals(com.thedndpub.data.mechanics.review.MechanicsReviewStatus.PENDING_REVIEW,
+                effect.review().recordedStatus());
+        assertEquals(MechanicsLicensingStatus.NEEDS_REVIEW, effect.licensing().status());
+        assertEquals(com.thedndpub.data.mechanics.review.MechanicsReviewStatus.PENDING_REVIEW,
+                save.review().recordedStatus());
+        assertEquals(MechanicsLicensingStatus.NEEDS_REVIEW, save.licensing().status());
+    }
+
+    private void assertTarget(MechanicRecord effect, TargetScope scope, CreatureTypeRestriction restriction) {
+        var target = assertInstanceOf(SpellTargetSubject.class, effect.context().subject());
+        assertEquals(scope, target.scope());
+        assertEquals(restriction, target.creatureTypeRestriction());
+        assertTrue(effect.evidenceAssociations().stream().anyMatch(value ->
+                value.claimPath().equals("/context/subject")
+                        && value.role() == com.thedndpub.data.mechanics.model.EvidenceRole.QUALIFIER));
+    }
+
+    private void assertDurationAndConcentration(MechanicRecord effect, boolean concentration) {
+        var duration = binding(effect, AppliesForDuration.class);
+        assertInstanceOf(DeclaredSpellDurationReference.class, duration.duration());
+        assertTrue(effect.evidenceAssociations().stream().anyMatch(value ->
+                duration.evidenceIds().contains(value.evidenceId())
+                        && value.claimPath().startsWith("/context/bindings/")));
+        assertEquals(concentration, effect.context().bindings().stream().anyMatch(RequiresConcentration.class::isInstance));
     }
 
     @Test
@@ -486,11 +645,118 @@ class PhbSpellMechanicsExtractorTests {
     }
 
     @Test
+    void modifierAndProtectionPatternsPreserveOperationsDependenciesAndSourceBackedContext() throws IOException {
+        var shieldFaith = extract(input("shield-of-faith"));
+        var shieldAc = claim(shieldFaith, "shield-of-faith-ac-bonus-v1");
+        assertEquals(new IntegerModifier(2, "+2"),
+                assertInstanceOf(ArmorClassModifierMechanic.class, shieldAc.payload()).amount());
+        assertTrue(shieldAc.context().bindings().stream().anyMatch(AppliesForDuration.class::isInstance));
+        assertTrue(shieldAc.context().bindings().stream().anyMatch(RequiresConcentration.class::isInstance));
+        assertEquals(TargetScope.SINGLE_TARGET_CREATURE,
+                assertInstanceOf(SpellTargetSubject.class, shieldAc.context().subject()).scope());
+
+        var mageArmor = extract(input("mage-armor"));
+        var mageAc = claim(mageArmor, "mage-armor-base-ac-replacement-v1");
+        var magePayload = assertInstanceOf(StatisticModifierMechanic.class, mageAc.payload());
+        assertEquals(ModifierOperation.SET_BASE, magePayload.operation());
+        assertEquals(List.of(ModifiedStatistic.BASE_ARMOR_CLASS), magePayload.statistics());
+        assertEquals(new SumAmount(List.of(new IntegerAmount(13),
+                        new SymbolicAmount(AmountSymbol.DEXTERITY_MODIFIER))), magePayload.amount());
+        assertTrue(mageAc.assessment().completeness() == MechanicsCompleteness.PARTIAL);
+        assertEquals(1, mageArmor.unsupported().size());
+        assertTrue(mageAc.context().bindings().stream().anyMatch(binding -> binding instanceof AppliesWhen applies
+                && applies.condition() == ApplicabilityCondition.TARGET_NOT_WEARING_ARMOR));
+
+        var barkskin = extract(input("barkskin"));
+        var barkAc = assertInstanceOf(StatisticModifierMechanic.class,
+                claim(barkskin, "barkskin-ac-floor-v1").payload());
+        assertEquals(ModifierOperation.MINIMUM, barkAc.operation());
+        assertEquals(new IntegerAmount(16), barkAc.amount());
+
+        var longstrider = extract(input("longstrider"));
+        var speed = assertInstanceOf(StatisticModifierMechanic.class,
+                claim(longstrider, "longstrider-speed-increase-v1").payload());
+        assertEquals(List.of(ModifiedStatistic.MOVEMENT_SPEED), speed.statistics());
+        assertEquals(ModifierOperation.ADD, speed.operation());
+        assertEquals(new IntegerAmount(10), speed.amount());
+
+        var bless = extract(input("bless"));
+        var blessBonus = assertInstanceOf(StatisticModifierMechanic.class,
+                claim(bless, "bless-roll-d4-bonus-v1").payload());
+        assertEquals(ModifierOperation.ADD, blessBonus.operation());
+        assertEquals(new DiceAmount(1, 4, 0), blessBonus.amount());
+        assertEquals(List.of(ModifiedStatistic.ATTACK_ROLL, ModifiedStatistic.SAVING_THROW), blessBonus.statistics());
+        assertEquals(3, assertInstanceOf(SpellTargetSubject.class,
+                claim(bless, "bless-roll-d4-bonus-v1").context().subject()).maximumTargets());
+
+        var bane = extract(input("bane"));
+        var baneSave = claim(bane, "bane-saving-throw-requirement-v1");
+        var banePenaltyClaim = claim(bane, "bane-roll-d4-penalty-v1");
+        var banePenalty = assertInstanceOf(StatisticModifierMechanic.class, banePenaltyClaim.payload());
+        assertEquals(ModifierOperation.SUBTRACT, banePenalty.operation());
+        assertEquals(new DiceAmount(1, 4, 0), banePenalty.amount());
+        var saveDependency = banePenaltyClaim.context().bindings().stream()
+                .filter(ModifierOnSaveOutcome.class::isInstance).map(ModifierOnSaveOutcome.class::cast)
+                .findFirst().orElseThrow();
+        assertEquals(SaveOutcome.FAILURE, saveDependency.outcome());
+        assertEquals(baneSave.revision().reference(baneSave.id()), saveDependency.savingThrow());
+        assertEquals(MechanicsCompleteness.PARTIAL, baneSave.assessment().completeness());
+        assertTrue(banePenaltyClaim.context().bindings().stream().anyMatch(binding -> binding instanceof AppliesWhen applies
+                && applies.condition() == ApplicabilityCondition.TARGET_MAKES_ROLL_BEFORE_SPELL_ENDS));
+
+        var protection = extract(input("protection-from-energy"));
+        var energyClaim = claim(protection, "protection-from-energy-selected-resistance-v1");
+        var energy = assertInstanceOf(DamageResistanceMechanic.class, energyClaim.payload());
+        assertEquals(DamageProtectionOperation.RESISTANCE, energy.operation());
+        assertEquals(new DamageTypeChoice(List.of("acid", "cold", "fire", "lightning", "thunder"), 1),
+                energy.damageTypes());
+        assertTrue(energyClaim.context().bindings().stream().anyMatch(RequiresConcentration.class::isInstance));
+
+        var stoneskin = extract(input("stoneskin"));
+        var stoneResistances = stoneskin.interpretations().stream()
+                .filter(record -> record.payload() instanceof DamageResistanceMechanic).toList();
+        assertEquals(3, stoneResistances.size());
+        assertEquals(List.of("bludgeoning", "piercing", "slashing"), stoneResistances.stream()
+                .map(record -> ((DamageResistanceMechanic) record.payload()).damageTypes())
+                .map(type -> ((FixedDamageType) type).authoredCode()).toList());
+        assertTrue(stoneResistances.stream().allMatch(record ->
+                ((DamageResistanceMechanic) record.payload()).operation() == DamageProtectionOperation.RESISTANCE
+                        && ((DamageResistanceMechanic) record.payload()).applicability()
+                        == DamageApplicability.NONMAGICAL_DAMAGE_ONLY
+                        && record.context().bindings().stream().anyMatch(RequiresConcentration.class::isInstance)));
+
+        for (var document : List.of(shieldFaith, mageArmor, barkskin, longstrider, bless, bane, protection, stoneskin)) {
+            assertEquals(document, extract(input(document.owner().id().substring("spell:phb:".length()))));
+            assertTrue(document.interpretations().stream().allMatch(record ->
+                    record.review().recordedStatus() == MechanicsReviewStatus.PENDING_REVIEW
+                            && record.licensing().status() == MechanicsLicensingStatus.NEEDS_REVIEW));
+            for (var record : document.interpretations()) {
+                assertTrue(document.evidence().stream().map(value -> value.id())
+                        .collect(Collectors.toSet()).containsAll(record.evidenceAssociations().stream()
+                                .map(value -> value.evidenceId()).toList()));
+            }
+        }
+    }
+
+    @Test
+    void ambiguousModifierWordingAbstainsInsteadOfGuessingAnOperation() throws IOException {
+        var changed = input("barkskin").changed(mapper, root -> root.withArray("entries").set(0,
+                mapper.getNodeFactory().textNode("The creature's AC changes to 16 in some circumstances.")));
+        var document = extract(changed);
+        assertFalse(document.interpretations().stream()
+                .anyMatch(record -> record.payload() instanceof StatisticModifierMechanic));
+        assertTrue(document.unsupported().stream().anyMatch(value ->
+                value.candidateFamily() == com.thedndpub.data.mechanics.model.MechanicFamily.MODIFIER
+                        && (value.reason() == UnsupportedReason.NO_SUPPORTED_PATTERN
+                        || value.reason() == UnsupportedReason.AMBIGUOUS_INTERPRETATION)));
+    }
+
+    @Test
     void registeredPatternsProcessConditionOwnersAndPreserveAllFormulaObservations() {
         assertEquals(969, inspection.size());
-        assertEquals(87, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.PROCESSED).count());
-        assertEquals(882, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.NOT_ATTEMPTED).count());
-        assertEquals(156, inspection.documents().stream().mapToInt(value -> value.interpretations().size()).sum());
+        assertEquals(95, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.PROCESSED).count());
+        assertEquals(874, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.NOT_ATTEMPTED).count());
+        assertEquals(171, inspection.documents().stream().mapToInt(value -> value.interpretations().size()).sum());
         assertEquals(930, inspection.documents().stream().mapToInt(value -> value.observations().size()).sum());
         for (String slug : java.util.List.of("fireball", "healing-word")) {
             var id = spells.findById("spell:phb:" + slug).id();

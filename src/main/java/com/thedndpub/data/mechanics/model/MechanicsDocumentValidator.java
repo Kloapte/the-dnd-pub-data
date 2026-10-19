@@ -167,6 +167,31 @@ final class MechanicsDocumentValidator {
                 MechanicRecord target = current(records, outcome.savingThrow());
                 ModelChecks.require(target == null || target.payload() instanceof SavingThrowRequirementMechanic,
                         "Save outcome binding must reference a save requirement");
+            } else if (binding instanceof ConditionOnSaveOutcome outcome) {
+                conditionPayload(record);
+                validateSavingThrowTarget(records, outcome.savingThrow());
+            } else if (binding instanceof ConditionEndsOnSaveSuccess ending) {
+                conditionPayload(record);
+                validateSavingThrowTarget(records, ending.savingThrow());
+            } else if (binding instanceof ModifierOnSaveOutcome outcome) {
+                ModelChecks.require(record.payload() instanceof StatisticModifierMechanic,
+                        "Modifier save dependency must be attached to a statistic modifier");
+                validateSavingThrowTarget(records, outcome.savingThrow());
+            } else if (binding instanceof AppliesWhen) {
+                ModelChecks.require(record.payload() instanceof StatisticModifierMechanic
+                                || record.payload() instanceof ArmorClassModifierMechanic
+                                || record.payload() instanceof DamageResistanceMechanic,
+                        "Applicability conditions must be attached to an effect claim");
+            } else if (binding instanceof ConditionEndsWithSpell) {
+                conditionPayload(record);
+            } else if (binding instanceof RequiresConcentration) {
+                ModelChecks.require(record.payload() instanceof ConditionChangeMechanic
+                                || record.payload() instanceof ConditionChoiceMechanic
+                                || record.payload() instanceof ArmorClassModifierMechanic
+                                || record.payload() instanceof StatisticModifierMechanic
+                                || record.payload() instanceof DamageResistanceMechanic
+                                || record.payload() instanceof SpellDamagePreventionMechanic,
+                        "Concentration must be attached to an effect claim");
             } else if (binding instanceof AppliesForDuration duration
                     && duration.duration() instanceof ReferencedDuration reference) {
                 durationTarget(records, reference);
@@ -187,6 +212,24 @@ final class MechanicsDocumentValidator {
                 && duration.specification() instanceof ReferencedDuration reference) {
             durationTarget(records, reference);
         }
+    }
+
+    private static void conditionPayload(MechanicRecord record) {
+        if (record.payload() instanceof ConditionChangeMechanic condition) {
+            ModelChecks.require(condition.operation() == ConditionOperation.APPLY,
+                    "Condition relationships require an application claim");
+            return;
+        }
+        ModelChecks.require(record.payload() instanceof ConditionChoiceMechanic choice
+                        && choice.operation() == ConditionOperation.APPLY,
+                "Condition relationship must target an application claim or choice group");
+    }
+
+    private static void validateSavingThrowTarget(
+            Map<MechanicId, MechanicRecord> records, MechanicRevisionReference reference) {
+        MechanicRecord target = current(records, reference);
+        ModelChecks.require(target == null || target.payload() instanceof SavingThrowRequirementMechanic,
+                "Condition save relationship must reference a save requirement");
     }
 
     private static void durationTarget(Map<MechanicId, MechanicRecord> records, ReferencedDuration reference) {

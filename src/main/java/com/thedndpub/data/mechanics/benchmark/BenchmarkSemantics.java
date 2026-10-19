@@ -5,6 +5,10 @@ import com.thedndpub.data.mechanics.model.AllTriggers;
 import com.thedndpub.data.mechanics.model.AnyTrigger;
 import com.thedndpub.data.mechanics.model.AppliesForDuration;
 import com.thedndpub.data.mechanics.model.AppliesOnSaveOutcome;
+import com.thedndpub.data.mechanics.model.ConditionOnSaveOutcome;
+import com.thedndpub.data.mechanics.model.ConditionEndsOnSaveSuccess;
+import com.thedndpub.data.mechanics.model.ConditionEndsWithSpell;
+import com.thedndpub.data.mechanics.model.RequiresConcentration;
 import com.thedndpub.data.mechanics.model.ArmorClassModifierMechanic;
 import com.thedndpub.data.mechanics.model.DamageMechanic;
 import com.thedndpub.data.mechanics.model.EffectDurationMechanic;
@@ -14,6 +18,10 @@ import com.thedndpub.data.mechanics.model.IncludesTriggeringAttack;
 import com.thedndpub.data.mechanics.model.MechanicContext;
 import com.thedndpub.data.mechanics.model.MechanicContextBinding;
 import com.thedndpub.data.mechanics.model.MechanicFamily;
+import com.thedndpub.data.mechanics.model.StatisticModifierMechanic;
+import com.thedndpub.data.mechanics.model.DamageResistanceMechanic;
+import com.thedndpub.data.mechanics.model.ModifierOnSaveOutcome;
+import com.thedndpub.data.mechanics.model.AppliesWhen;
 import com.thedndpub.data.mechanics.model.MechanicPayload;
 import com.thedndpub.data.mechanics.model.MechanicRecord;
 import com.thedndpub.data.mechanics.model.MechanicRevisionReference;
@@ -50,6 +58,8 @@ final class BenchmarkSemantics {
             case SpellSlotScalingMechanic ignored -> MechanicFamily.SPELL_SLOT_SCALING;
             case com.thedndpub.data.mechanics.model.ConditionChangeMechanic ignored -> MechanicFamily.CONDITION;
             case com.thedndpub.data.mechanics.model.ConditionChoiceMechanic ignored -> MechanicFamily.CONDITION;
+            case StatisticModifierMechanic ignored -> MechanicFamily.MODIFIER;
+            case DamageResistanceMechanic ignored -> MechanicFamily.DAMAGE_RESISTANCE;
         };
     }
 
@@ -116,7 +126,20 @@ final class BenchmarkSemantics {
                         && outcome.outcome() == other.outcome()
                         && outcome.damageOutcome() == other.damageOutcome()
                         && outcome.savingThrow().equals(other.savingThrow());
+                case ConditionOnSaveOutcome outcome -> second instanceof ConditionOnSaveOutcome other
+                        && outcome.outcome() == other.outcome()
+                        && outcome.savingThrow().equals(other.savingThrow());
+                case ConditionEndsOnSaveSuccess ending -> second instanceof ConditionEndsOnSaveSuccess other
+                        && ending.timing() == other.timing()
+                        && ending.savingThrow().equals(other.savingThrow());
+                case ConditionEndsWithSpell ignored -> second instanceof ConditionEndsWithSpell;
+                case RequiresConcentration ignored -> second instanceof RequiresConcentration;
                 case IncludesTriggeringAttack ignored -> second instanceof IncludesTriggeringAttack;
+                case ModifierOnSaveOutcome outcome -> second instanceof ModifierOnSaveOutcome other
+                        && outcome.outcome() == other.outcome()
+                        && outcome.savingThrow().equals(other.savingThrow());
+                case AppliesWhen applies -> second instanceof AppliesWhen other
+                        && applies.condition() == other.condition();
             };
             if (!same) {
                 return false;
@@ -151,7 +174,13 @@ final class BenchmarkSemantics {
             case ActivatedBy activation -> activation.evidenceIds();
             case AppliesForDuration duration -> duration.evidenceIds();
             case AppliesOnSaveOutcome outcome -> outcome.evidenceIds();
+            case ConditionOnSaveOutcome outcome -> outcome.evidenceIds();
+            case ConditionEndsOnSaveSuccess ending -> ending.evidenceIds();
+            case ConditionEndsWithSpell ending -> ending.evidenceIds();
+            case RequiresConcentration concentration -> concentration.evidenceIds();
             case IncludesTriggeringAttack attack -> attack.evidenceIds();
+            case ModifierOnSaveOutcome outcome -> outcome.evidenceIds();
+            case AppliesWhen applies -> applies.evidenceIds();
         };
     }
 }

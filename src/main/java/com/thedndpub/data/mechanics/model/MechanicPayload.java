@@ -14,7 +14,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = SavingThrowRequirementMechanic.class, name = "SAVING_THROW_REQUIREMENT"),
         @JsonSubTypes.Type(value = SpellSlotScalingMechanic.class, name = "SPELL_SLOT_SCALING"),
         @JsonSubTypes.Type(value = ConditionChangeMechanic.class, name = "CONDITION_CHANGE"),
-        @JsonSubTypes.Type(value = ConditionChoiceMechanic.class, name = "CONDITION_CHOICE")
+        @JsonSubTypes.Type(value = ConditionChoiceMechanic.class, name = "CONDITION_CHOICE"),
+        @JsonSubTypes.Type(value = StatisticModifierMechanic.class, name = "STATISTIC_MODIFIER"),
+        @JsonSubTypes.Type(value = DamageResistanceMechanic.class, name = "DAMAGE_RESISTANCE")
 })
 public sealed interface MechanicPayload permits
         ArmorClassModifierMechanic,
@@ -26,6 +28,8 @@ public sealed interface MechanicPayload permits
         SavingThrowRequirementMechanic,
         SpellSlotScalingMechanic,
         ConditionChangeMechanic,
-        ConditionChoiceMechanic {
+        ConditionChoiceMechanic,
+        StatisticModifierMechanic,
+        DamageResistanceMechanic {
 
 }

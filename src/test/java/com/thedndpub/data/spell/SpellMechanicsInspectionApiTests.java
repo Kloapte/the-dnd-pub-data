@@ -132,6 +132,22 @@ class SpellMechanicsInspectionApiTests {
     }
 
     @Test
+    void conditionDependenciesAppearOnlyInPrivateInspectionProjection() throws Exception {
+        String privateResponse = mvc.perform(get("/api/spells/spell:phb:hold-person")
+                        .param("include", "interpretedMechanics"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        JsonNode envelope = mapper.readTree(privateResponse).get("interpretedMechanics");
+        assertTrue(envelope.get("interpretations").toString().contains("CONDITION_ON_SAVE_OUTCOME"));
+        assertTrue(envelope.get("interpretations").toString().contains("CONDITION_ENDS_ON_SAVE_SUCCESS"));
+        assertTrue(envelope.get("interpretations").toString().contains("REQUIRES_CONCENTRATION"));
+        assertTrue(envelope.get("interpretations").toString().contains("MULTIPLE_TARGET_CREATURES"));
+
+        JsonNode defaultResponse = mapper.readTree(mvc.perform(get("/api/spells/spell:phb:hold-person"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString());
+        assertFalse(defaultResponse.has("interpretedMechanics"));
+    }
+
+    @Test
     void registeredOwnersAreProcessedAndOtherOwnersRemainUnattemptedWithAllObservations() throws Exception {
         assertEquals(969, inspection.size());
         assertEquals(969, inspection.documents().size());
@@ -168,13 +184,16 @@ class SpellMechanicsInspectionApiTests {
                     "spell:phb:insect-plague", "spell:phb:moonbeam", "spell:phb:flaming-sphere",
                     "spell:phb:wind-wall",
                     "spell:phb:cure-wounds", "spell:phb:mass-cure-wounds", "spell:phb:mass-healing-word",
-                    "spell:phb:prayer-of-healing").contains(definition.id().value())) {
+                    "spell:phb:prayer-of-healing",
+                    "spell:phb:shield-of-faith", "spell:phb:mage-armor", "spell:phb:barkskin",
+                    "spell:phb:longstrider", "spell:phb:bless", "spell:phb:bane",
+                    "spell:phb:protection-from-energy", "spell:phb:stoneskin").contains(definition.id().value())) {
                 processedOwners++;
                 assertEquals(ProcessingState.PROCESSED, result.processing().state());
                 assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
                 assertTrue(!result.interpretations().isEmpty()
                         || result.coverage().status() == CoverageStatus.NONE_SUPPORTED);
-                assertEquals(result.interpretations().size(), result.reviewSummary().needsMechanicsReview());
+                assertEquals(result.interpretations().size(), result.reviewSummary().total());
                 assertEquals(0, result.reviewSummary().verified());
                 assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
                         == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
@@ -187,7 +206,7 @@ class SpellMechanicsInspectionApiTests {
                         || result.coverage().status() == CoverageStatus.NONE_SUPPORTED);
                 assertTrue(!result.interpretations().isEmpty()
                         || result.coverage().status() == CoverageStatus.NONE_SUPPORTED);
-                assertEquals(result.interpretations().size(), result.reviewSummary().needsMechanicsReview());
+                assertEquals(result.interpretations().size(), result.reviewSummary().total());
                 assertEquals(0, result.reviewSummary().verified());
                 assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
                         == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
@@ -220,8 +239,8 @@ class SpellMechanicsInspectionApiTests {
             }
         }
         assertEquals(930, observations);
-        assertEquals(87, processedOwners);
-        assertEquals(882, inspection.size() - processedOwners);
+        assertEquals(95, processedOwners);
+        assertEquals(874, inspection.size() - processedOwners);
         assertEquals(422, ownersWithObservations);
         assertEquals(547, inspection.size() - ownersWithObservations);
         assertTrue(publication.index().authorizedObservations().isEmpty());
@@ -251,6 +270,33 @@ class SpellMechanicsInspectionApiTests {
                         .value(8))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.amount.terms[1].symbol")
                         .value("CASTER_SPELLCASTING_ABILITY_MODIFIER"));
+    }
+
+    @Test
+    void newModifierAndResistanceClaimsRemainPrivateAndInspectable() throws Exception {
+        mvc.perform(get("/api/spells/spell:phb:mage-armor").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.kind")
+                        .value("STATISTIC_MODIFIER"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.operation")
+                        .value("SET_BASE"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.amount.terms[0].value")
+                        .value(13))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].context.subject.maximumTargets")
+                        .doesNotExist());
+        mvc.perform(get("/api/spells/spell:phb:protection-from-energy").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.kind")
+                        .value("DAMAGE_RESISTANCE"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.damageTypes.count").value(1))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].context.bindings[1].kind")
+                        .value("REQUIRES_CONCENTRATION"));
+        mvc.perform(get("/api/spells/spell:phb:bane").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[2].kind")
+                        .value("MODIFIER_ON_SAVE_OUTCOME"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[2].outcome")
+                        .value("FAILURE"));
     }
 
     @Test
