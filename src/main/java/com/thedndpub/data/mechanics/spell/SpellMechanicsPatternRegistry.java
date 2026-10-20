@@ -1,10 +1,10 @@
 package com.thedndpub.data.mechanics.spell;
 
 import com.thedndpub.data.dto.spell.SpellDefinition;
-import com.thedndpub.data.mechanics.model.MechanicsDocument;
 import com.thedndpub.data.mechanics.model.ModelChecks;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 /** Ordered, immutable composition of the currently supported Spell extraction patterns. */
 final class SpellMechanicsPatternRegistry {
@@ -17,28 +17,22 @@ final class SpellMechanicsPatternRegistry {
                 == this.patterns.size(), "Spell pattern IDs must be unique");
     }
 
+    static SpellMechanicsPatternRegistry standard() {
+        return new SpellMechanicsPatternRegistry(List.of(
+                new ShieldMechanicsExtractor(), new PhbSpellMechanicsExtractor(),
+                new XgeSteelWindStrikeRules()));
+    }
+
     SpellMechanicsPattern find(SpellDefinition spell) {
-        return find(spell, false);
+        return find(spell, pattern -> pattern.supports(spell));
     }
 
-    SpellMechanicsPattern findForInventory(SpellDefinition spell) {
-        return find(spell, true);
-    }
-
-    private SpellMechanicsPattern find(SpellDefinition spell, boolean inventory) {
+    SpellMechanicsPattern find(SpellDefinition spell, Predicate<SpellMechanicsPattern> applicable) {
         List<SpellMechanicsPattern> matches = patterns.stream()
-                .filter(pattern -> inventory ? pattern.supportsForInventory(spell) : pattern.supports(spell))
+                .filter(applicable)
                 .toList();
         ModelChecks.require(matches.size() <= 1, "Spell patterns overlap for " + spell.id().value());
         return matches.isEmpty() ? null : matches.getFirst();
     }
 
-    MechanicsDocument extract(
-            SpellDefinition spell,
-            SpellMechanicsEvidenceSource source,
-            MechanicsDocument original) {
-        SpellMechanicsPattern pattern = find(spell);
-        ModelChecks.require(pattern != null, "No Spell pattern supports " + spell.id().value());
-        return pattern.extract(spell, source, original);
-    }
 }

@@ -30,6 +30,30 @@ The packaged script accepts `-JavaExecutable` and `-JarPath` overrides. Its hist
 machine-specific; supply the installed Java path on other machines. It starts a temporary localhost
 process and stops that process in `finally`. Output belongs in ignored `target/`.
 
+Offline inventory and benchmark implementations, plus `SchemaDiscovery`, live in the Maven test
+source set and are excluded from the application JAR. The inventory assertions and candidate
+benchmark tests run with the normal test suite. To run schema discovery after compiling test sources,
+write its output under `target/`:
+
+```powershell
+mvn test-compile exec:java "-Dexec.classpathScope=test" `
+    -Dexec.args="src/main/resources/data target/schema-discovery"
+```
+
+The moved inventory implementation comprises `SpellCapabilityInventoryRunner`,
+`SpellCapabilityRecord`, `SpellCapabilityInventory`, `SpellCapabilityClassification`,
+`SpellCapabilityInventoryComparison`, and the three inventory/comparison report writers. The
+`mechanics.benchmark` package moved as a unit: fixture loading and validation, typed expectations,
+review authority, comparison logic, and result types. These retain their Java package names in
+`src/test/java` so existing test and report-generation callers remain compatible.
+
+`SpellMechanicsPattern` no longer includes inventory-only methods, and runtime and inventory use the
+same standard pattern composition. Wider PHB candidate assessment still calls the package-private
+`supportsForInventory` and `extractForInventory` hooks on `PhbSpellMechanicsExtractor`; those hooks
+reuse its extraction implementation and do not alter runtime eligibility. Removing that remaining
+coupling cleanly requires separating PHB rule execution from production owner eligibility. Defer that
+broader refactor rather than duplicate extraction logic or expose candidate matching at runtime.
+
 ## Documentation checks
 
 ```powershell
@@ -53,6 +77,22 @@ directory when supported; several historical scripts write committed evidence at
 Do not regenerate old reports merely to make a past baseline agree with today's implementation.
 Whole-workspace batch verifiers can intentionally reject later code changes; their original scope
 is not a permanent requirement to freeze the repository.
+
+The 7.4.4A Spell capability inventory and 7.4.4C comparison have an explicit opt-in regeneration
+test. Ordinary test runs only write report serialization checks to JUnit temporary directories. To
+intentionally replace the three current report artifacts using the preserved 7.4.4B baseline, run
+from the repository root:
+
+```powershell
+mvn -Dtest=SpellCapabilityInventoryTests#regenerateAuthoritativeReports `
+    -Dmechanics.inventory.regenerate=true test
+```
+
+Review the resulting analysis diff before keeping it. The regeneration test writes report content to
+`@TempDir` first and copies those outputs to the tracked paths only when this explicit property and
+test selector are both supplied. To preview regeneration without replacing tracked reports, add
+`-Dmechanics.inventory.reportDirectory=target/mechanics-inventory-preview`. It does not rewrite the
+historical baseline.
 
 The [consolidation report](DOCUMENTATION-CONSOLIDATION.md) and machine-readable inventories record
 the exact retained paths and two original Markdown snapshots. Restore those snapshots only in a

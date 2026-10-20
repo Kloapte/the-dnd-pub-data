@@ -26,6 +26,11 @@ class MechanicsValuesTests {
                 new EffectDurationMechanic(new UntilTurnBoundary(TurnActor.CASTER, TurnBoundary.START_OF_NEXT_TURN)),
                 new SpellDamagePreventionMechanic(unresolvedSpell()),
                 new DamageMechanic(new DiceAmount(8, 6, 0), new FixedDamageType("fire")),
+                new DamageMechanic(new DiceAmount(1, 8, 0), new FixedDamageType("cold"),
+                        new CharacterLevelDamageScaling(List.of(
+                                new CharacterLevelDamageTier(5, new DiceAmount(2, 8, 0)),
+                                new CharacterLevelDamageTier(11, new DiceAmount(3, 8, 0)),
+                                new CharacterLevelDamageTier(17, new DiceAmount(4, 8, 0))))),
                 new HealingMechanic(new SumAmount(List.of(new DiceAmount(1, 4, 0),
                         new SymbolicAmount(AmountSymbol.CASTER_SPELLCASTING_ABILITY_MODIFIER))), HealingMode.RESTORE_HIT_POINTS),
                 new SavingThrowRequirementMechanic(new FixedAbility(Ability.DEXTERITY),
@@ -43,7 +48,38 @@ class MechanicsValuesTests {
                 new DamageResistanceMechanic(DamageProtectionOperation.RESISTANCE,
                         new DamageTypeChoice(List.of("acid", "cold"), 1), DamageApplicability.ANY_DAMAGE),
                 new DamageResistanceMechanic(DamageProtectionOperation.IMMUNITY,
-                        new FixedDamageType("poison"), DamageApplicability.ANY_DAMAGE));
+                        new FixedDamageType("poison"), DamageApplicability.ANY_DAMAGE),
+                new HitPointRecoveryPreventionMechanic(),
+                new ReactionPreventionMechanic(),
+                new AttackRollModifierMechanic(AttackRollModifier.DISADVANTAGE,
+                        new FutureAttackRollSelector(AttackRollParticipant.AFFECTED_SUBJECT,
+                                AttackRollParticipant.CASTER)));
+    }
+
+    @Test
+    void referencedAttackRollModifierSelectorSerializesAsTypedReference() throws Exception {
+        var attackReference = new MechanicRevisionReference(
+                MechanicId.of(PHB, "source-attack-roll"), 1, "a".repeat(64));
+        MechanicPayload payload = new AttackRollModifierMechanic(AttackRollModifier.ADVANTAGE,
+                new ReferencedAttackRollSelector(attackReference));
+
+        String json = mapper.writeValueAsString(payload);
+
+        assertEquals(payload, mapper.readValue(json, MechanicPayload.class));
+        assertTrue(json.contains("\"kind\":\"REFERENCED_ATTACK_ROLL\""));
+        assertTrue(json.contains("\"contentSha256\":\"" + "a".repeat(64) + "\""));
+    }
+
+    @Test
+    void attackRollModifierRequiresAValueAndTypedRollSelection() {
+        assertThrows(NullPointerException.class, () ->
+                new AttackRollModifierMechanic(null,
+                        new FutureAttackRollSelector(AttackRollParticipant.AFFECTED_SUBJECT,
+                                AttackRollParticipant.CASTER)));
+        assertThrows(NullPointerException.class, () ->
+                new AttackRollModifierMechanic(AttackRollModifier.ADVANTAGE, null));
+        assertThrows(NullPointerException.class, () ->
+                new FutureAttackRollSelector(null, AttackRollParticipant.CASTER));
     }
 
     static SpellMentionReference unresolvedSpell() {
@@ -87,6 +123,20 @@ class MechanicsValuesTests {
             assertThrows(IllegalArgumentException.class, () -> new IntegerModifier(1, invalid));
         }
         assertThrows(IllegalArgumentException.class, () -> new IntegerModifier(5, "+6"));
+    }
+
+    @Test
+    void characterLevelDamageScalingRejectsMalformedTierSequences() {
+        assertThrows(IllegalArgumentException.class, () -> new CharacterLevelDamageTier(1,
+                new DiceAmount(2, 8, 0)));
+        assertThrows(IllegalArgumentException.class, () -> new CharacterLevelDamageScaling(List.of()));
+        assertThrows(IllegalArgumentException.class, () -> new CharacterLevelDamageScaling(List.of(
+                new CharacterLevelDamageTier(11, new DiceAmount(3, 8, 0)),
+                new CharacterLevelDamageTier(5, new DiceAmount(2, 8, 0)))));
+        assertThrows(IllegalArgumentException.class, () -> new DamageMechanic(new DiceAmount(1, 8, 0),
+                new FixedDamageType("cold"), new CharacterLevelDamageScaling(List.of(
+                new CharacterLevelDamageTier(5, new DiceAmount(2, 8, 0)),
+                new CharacterLevelDamageTier(11, new DiceAmount(3, 10, 0))))));
     }
 
     @Test
@@ -182,7 +232,9 @@ class MechanicsValuesTests {
                         CreatureTypeRestriction.HUMANOID),
                 new SpellTargetSubject(TargetScope.MULTIPLE_TARGET_CREATURES, null, 3),
                 new SpellTargetSubject(TargetScope.AREA_AFFECTED_CREATURES),
-                new SpellTargetSubject(TargetScope.CASTER_OR_TOUCHED_CREATURE))) {
+                new SpellTargetSubject(TargetScope.CASTER_OR_TOUCHED_CREATURE),
+                new SpellTargetSubject(TargetScope.SINGLE_TARGET,
+                        List.of(TargetCategory.CREATURE, TargetCategory.OBJECT)))) {
             assertEquals(value, mapper.readValue(mapper.writerFor(SubjectReference.class).writeValueAsBytes(value),
                     SubjectReference.class));
         }
@@ -207,6 +259,38 @@ class MechanicsValuesTests {
             byte[] json = mapper.writerFor(MechanicContextBinding.class).writeValueAsBytes(binding);
             assertEquals(binding, mapper.readValue(json, MechanicContextBinding.class));
         }
+    }
+
+    @Test
+    void singleTargetCreatureOrObjectEligibilityIsExactlyOneAndValidated() throws Exception {
+        var alternatives = List.of(TargetCategory.CREATURE, TargetCategory.OBJECT);
+        var subject = new SpellTargetSubject(TargetScope.SINGLE_TARGET, alternatives);
+        assertEquals(TargetScope.SINGLE_TARGET, subject.scope());
+        assertEquals(alternatives, subject.eligibleTargetCategories());
+
+        String encoded = mapper.writeValueAsString(subject);
+        assertTrue(encoded.contains("\"eligibleTargetCategories\":[\"CREATURE\",\"OBJECT\"]"));
+        assertFalse(mapper.writeValueAsString(new SpellTargetSubject(TargetScope.SINGLE_TARGET_CREATURE))
+                .contains("eligibleTargetCategories"));
+
+        assertThrows(IllegalArgumentException.class, () -> new SpellTargetSubject(TargetScope.SINGLE_TARGET,
+                List.of()));
+        assertThrows(IllegalArgumentException.class, () -> new SpellTargetSubject(TargetScope.SINGLE_TARGET,
+                List.of(TargetCategory.CREATURE, TargetCategory.CREATURE)));
+        assertThrows(IllegalArgumentException.class, () -> new SpellTargetSubject(TargetScope.SINGLE_TARGET,
+                java.util.Arrays.asList(TargetCategory.CREATURE, null)));
+        assertThrows(IllegalArgumentException.class, () -> new SpellTargetSubject(TargetScope.SINGLE_TARGET,
+                List.of(TargetCategory.OBJECT)));
+        assertThrows(IllegalArgumentException.class, () -> new SpellTargetSubject(
+                TargetScope.MULTIPLE_TARGET_CREATURES,
+                null,
+                2,
+                alternatives));
+        assertThrows(IllegalArgumentException.class, () -> new SpellTargetSubject(
+                TargetScope.SINGLE_TARGET,
+                CreatureTypeRestriction.HUMANOID,
+                null,
+                alternatives));
     }
 
     static Stream<Class<?>> polymorphicRoots() {

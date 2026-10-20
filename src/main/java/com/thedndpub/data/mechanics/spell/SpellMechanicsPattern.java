@@ -9,21 +9,8 @@ interface SpellMechanicsPattern {
 
     boolean supports(SpellDefinition spell);
 
-    /** Wider offline inventory applicability; production catalogs continue using {@link #supports}. */
-    default boolean supportsForInventory(SpellDefinition spell) {
-        return supports(spell);
-    }
-
     MechanicsDocument extract(
             SpellDefinition spell,
             SpellMechanicsEvidenceSource source,
             MechanicsDocument original);
-
-    /** Executes wider assess-only candidates without changing production matcher eligibility. */
-    default MechanicsDocument extractForInventory(
-            SpellDefinition spell,
-            SpellMechanicsEvidenceSource source,
-            MechanicsDocument original) {
-        return extract(spell, source, original);
-    }
 }

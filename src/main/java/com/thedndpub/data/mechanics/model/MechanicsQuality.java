@@ -28,6 +28,8 @@ final class MechanicsQuality {
                         && damage.damageType() instanceof UnknownDamageType),
                         "Wholly unknown damage belongs in unsupported constructs");
             }
+            case DamageInstanceSeriesMechanic series ->
+                    amount(series.amountPerInstance(), "/payload/amountPerInstance", findings);
             case HealingMechanic healing -> amount(healing.amount(), "/payload/amount", findings);
             case SpellSlotScalingMechanic scaling -> amount(scaling.increment(), "/payload/increment", findings);
             case SavingThrowRequirementMechanic save -> {
@@ -50,6 +52,14 @@ final class MechanicsQuality {
             }
             case StatisticModifierMechanic modifier -> amount(modifier.amount(), "/payload/amount", findings);
             case DamageResistanceMechanic ignored -> {
+            }
+            case AttackRollMechanic ignored -> {
+            }
+            case HitPointRecoveryPreventionMechanic ignored -> {
+            }
+            case ReactionPreventionMechanic ignored -> {
+            }
+            case AttackRollModifierMechanic ignored -> {
             }
         }
         Map<MechanicRevisionReference, Map<SaveOutcome, DamageOutcome>> saveOutcomes = new HashMap<>();

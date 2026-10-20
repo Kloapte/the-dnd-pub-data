@@ -9,6 +9,7 @@ import com.thedndpub.data.mechanics.model.MechanicFamily;
 import com.thedndpub.data.mechanics.model.MechanicId;
 import com.thedndpub.data.mechanics.model.MechanicPayload;
 import com.thedndpub.data.mechanics.model.MechanicRecord;
+import com.thedndpub.data.mechanics.model.MechanicRevisionReference;
 import com.thedndpub.data.mechanics.model.MechanicsAssessment;
 import com.thedndpub.data.mechanics.model.MechanicsCompleteness;
 import com.thedndpub.data.mechanics.model.MechanicsCoverage;
@@ -82,12 +83,34 @@ final class SpellMechanicsAssembly {
                          List<MechanicEvidenceAssociation> associations, boolean directStructured,
                          MechanicsCompleteness completeness) {
         return MechanicRecord.propose(MechanicId.of(source.owner(), slot), payload, context, associations,
-                new MechanicDerivation(directStructured ? DerivationMethod.DIRECT_STRUCTURED_MAPPING
-                        : DerivationMethod.BOUNDED_CONTEXT_INTERPRETATION, pattern, "1", adapter + "-1",
-                        List.of(), List.of(source.source().revision())),
-                new MechanicsAssessment(completeness,
-                        directStructured ? MechanicsSupport.DIRECT_STRUCTURED : MechanicsSupport.BOUNDED_CONTEXT,
-                        List.of(), List.of()));
+                derivation(pattern, directStructured), assessment(completeness, directStructured));
+    }
+
+    MechanicRecord claimSuperseding(
+            String slot,
+            String pattern,
+            MechanicPayload payload,
+            MechanicContext context,
+            List<MechanicEvidenceAssociation> associations,
+            MechanicRevisionReference predecessor,
+            boolean directStructured) {
+        MechanicId id = MechanicId.of(source.owner(), slot);
+        MechanicRecord revised = MechanicRecord.proposeSupersedingPending(id, predecessor,
+                payload, context, associations, derivation(pattern, directStructured),
+                assessment(MechanicsCompleteness.COMPLETE_WITHIN_CLAIM, directStructured));
+        return revised;
+    }
+
+    private MechanicDerivation derivation(String pattern, boolean directStructured) {
+        return new MechanicDerivation(directStructured ? DerivationMethod.DIRECT_STRUCTURED_MAPPING
+                : DerivationMethod.BOUNDED_CONTEXT_INTERPRETATION, pattern, "1", adapter + "-1",
+                List.of(), List.of(source.source().revision()));
+    }
+
+    private MechanicsAssessment assessment(MechanicsCompleteness completeness, boolean directStructured) {
+        return new MechanicsAssessment(completeness,
+                directStructured ? MechanicsSupport.DIRECT_STRUCTURED : MechanicsSupport.BOUNDED_CONTEXT,
+                List.of(), List.of());
     }
 
     MechanicsDocument finish() {
@@ -97,8 +120,11 @@ final class SpellMechanicsAssembly {
     }
 
     void unsupported(String id, MechanicFamily family, List<String> evidenceIds) {
-        unsupported.add(new UnsupportedMechanicsConstruct(id, family,
-                UnsupportedReason.FAMILY_NOT_IMPLEMENTED, evidenceIds, List.of()));
+        unsupported(id, family, UnsupportedReason.FAMILY_NOT_IMPLEMENTED, evidenceIds);
+    }
+
+    void unsupported(String id, MechanicFamily family, UnsupportedReason reason, List<String> evidenceIds) {
+        unsupported.add(new UnsupportedMechanicsConstruct(id, family, reason, evidenceIds, List.of()));
     }
 
     void abstain(String id, MechanicFamily family, UnsupportedReason reason, String pointer) {

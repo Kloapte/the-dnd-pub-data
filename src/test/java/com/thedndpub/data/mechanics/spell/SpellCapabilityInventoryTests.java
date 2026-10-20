@@ -9,6 +9,7 @@ import com.thedndpub.data.services.SpellMechanicsInspectionCatalog;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import org.junit.jupiter.api.io.TempDir;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -59,15 +60,32 @@ class SpellCapabilityInventoryTests {
         assertEquals(definitions.stream().map(definition -> definition.id().value()).collect(Collectors.toSet()),
                 inventory.spells().stream().map(SpellCapabilityRecord::spellId).collect(Collectors.toSet()));
         assertEquals(969, inventory.classificationCounts().values().stream().mapToInt(Integer::intValue).sum());
-        assertEquals(106, inventory.currentlyProcessedCount());
-        assertEquals(310, inventory.potentialTypedClaimCount());
-        assertEquals(228, currentDocuments.stream().mapToInt(document -> document.interpretations().size()).sum());
+        assertEquals(Map.of("NOT_ASSESSED", 366, "PARTIALLY_SUPPORTED", 170, "SUPPORTED", 0,
+                "UNSUPPORTED", 433), inventory.classificationCounts());
+        assertEquals(124, inventory.currentlyProcessedCount());
+        assertEquals(334, inventory.potentialTypedClaimCount());
+        assertEquals(261, currentDocuments.stream().mapToInt(document -> document.interpretations().size()).sum());
 
         var byId = inventory.spells().stream().collect(Collectors.toMap(SpellCapabilityRecord::spellId,
                 Function.identity()));
         assertEquals("PHB", byId.get("spell:phb:shield").source());
         assertEquals("XPHB", byId.get("spell:xphb:shield").source());
         assertNotEquals(byId.get("spell:phb:shield"), byId.get("spell:xphb:shield"));
+        assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED,
+                byId.get("spell:phb:magic-missile").classification());
+        assertEquals(List.of("DAMAGE_INSTANCE_SERIES"),
+                byId.get("spell:phb:magic-missile").candidateMechanicFamilies());
+        SpellCapabilityRecord steelWindStrike = byId.get("spell:xge:steel-wind-strike");
+        assertEquals("PROCESSED", steelWindStrike.processingState());
+        assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED, steelWindStrike.classification());
+        assertEquals(2, steelWindStrike.potentialMechanicCount());
+        assertEquals(List.of("ATTACK_ROLL", "DAMAGE"), steelWindStrike.candidateMechanicFamilies());
+        assertTrue(steelWindStrike.unsupportedReasons().contains("UNDETERMINED:FAMILY_NOT_IMPLEMENTED"));
+        SpellCapabilityRecord acidArrow = byId.get("spell:phb:melf-s-acid-arrow");
+        assertEquals("PROCESSED", acidArrow.processingState());
+        assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED, acidArrow.classification());
+        assertEquals(4, acidArrow.potentialMechanicCount());
+        assertEquals(List.of("ATTACK_ROLL", "DAMAGE"), acidArrow.candidateMechanicFamilies());
         assertEquals(inventory.catalogTotal(), inventory.sourceCounts().values().stream().mapToInt(Integer::intValue).sum());
         assertEquals(currentDocuments, mechanics.documents(), "Inventory assessment must not mutate inspection documents");
     }
@@ -90,6 +108,38 @@ class SpellCapabilityInventoryTests {
         assertEquals(5, byId.get("spell:phb:lesser-restoration").potentialMechanicCount());
         assertEquals(3, byId.get("spell:phb:greater-restoration").potentialMechanicCount());
         assertEquals(4, byId.get("spell:phb:power-word-heal").potentialMechanicCount());
+        SpellCapabilityRecord fireBolt = byId.get("spell:phb:fire-bolt");
+        assertEquals("PROCESSED", fireBolt.processingState());
+        assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED, fireBolt.classification());
+        assertEquals(2, fireBolt.potentialMechanicCount());
+        assertEquals(List.of("ATTACK_ROLL", "DAMAGE"), fireBolt.candidateMechanicFamilies());
+        assertTrue(fireBolt.unsupportedReasons().contains("UNDETERMINED:FAMILY_NOT_IMPLEMENTED"));
+        SpellCapabilityRecord eldritchBlast = byId.get("spell:phb:eldritch-blast");
+        assertEquals("PROCESSED", eldritchBlast.processingState());
+        assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED, eldritchBlast.classification());
+        assertEquals(2, eldritchBlast.potentialMechanicCount());
+        assertEquals(List.of("ATTACK_ROLL", "DAMAGE"), eldritchBlast.candidateMechanicFamilies());
+        assertFalse(eldritchBlast.unsupportedReasons().contains("ATTACK_ROLL:FAMILY_NOT_IMPLEMENTED"));
+        SpellCapabilityRecord scorchingRay = byId.get("spell:phb:scorching-ray");
+        assertEquals("PROCESSED", scorchingRay.processingState());
+        assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED, scorchingRay.classification());
+        assertEquals(2, scorchingRay.potentialMechanicCount());
+        assertEquals(List.of("ATTACK_ROLL", "DAMAGE"), scorchingRay.candidateMechanicFamilies());
+        assertTrue(scorchingRay.unsupportedReasons().contains("ATTACK_ROLL:SOURCE_UNSPECIFIED"));
+        SpellCapabilityRecord chillTouch = byId.get("spell:phb:chill-touch");
+        assertEquals("PROCESSED", chillTouch.processingState());
+        assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED, chillTouch.classification());
+        assertEquals(4, chillTouch.potentialMechanicCount());
+        assertEquals(List.of("ATTACK_ROLL", "ATTACK_ROLL_MODIFIER", "DAMAGE", "HEALING_PREVENTION"),
+                chillTouch.candidateMechanicFamilies());
+        assertFalse(chillTouch.unsupportedReasons().contains("ATTACK_ROLL:FAMILY_NOT_IMPLEMENTED"));
+        SpellCapabilityRecord shockingGrasp = byId.get("spell:phb:shocking-grasp");
+        assertEquals("PROCESSED", shockingGrasp.processingState());
+        assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED, shockingGrasp.classification());
+        assertEquals(4, shockingGrasp.potentialMechanicCount());
+        assertEquals(List.of("ATTACK_ROLL", "ATTACK_ROLL_MODIFIER", "DAMAGE", "REACTION_RESTRICTION"),
+                shockingGrasp.candidateMechanicFamilies());
+        assertFalse(shockingGrasp.unsupportedReasons().contains("ATTACK_ROLL:FAMILY_NOT_IMPLEMENTED"));
         SpellCapabilityRecord negatedCondition = byId.get("spell:phb:animal-shapes");
         assertEquals(0, negatedCondition.potentialMechanicCount());
         assertEquals(SpellCapabilityClassification.UNSUPPORTED, negatedCondition.classification());
@@ -99,6 +149,26 @@ class SpellCapabilityInventoryTests {
         assertFalse(byId.get("spell:phb:enthrall").candidateMechanicFamilies().contains("CONDITION"),
                 "A condition used as a prerequisite must not become an application claim");
         assertEquals(0, byId.get("spell:phb:protection-from-evil-and-good").potentialMechanicCount());
+
+        Map<String, Integer> immunityClaimCounts = Map.of(
+                "spell:au:iron-body", 3,
+                "spell:xphb:feign-death", 1,
+                "spell:xphb:gaseous-form", 1,
+                "spell:xphb:heroism", 1,
+                "spell:xphb:mind-blank", 1);
+        immunityClaimCounts.forEach((id, count) -> {
+            assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED, byId.get(id).classification(), id);
+            assertEquals(count, byId.get(id).potentialMechanicCount(), id);
+        });
+        for (String id : List.of("spell:xphb:freedom-of-movement", "spell:xphb:heroes-feast")) {
+            assertEquals(SpellCapabilityClassification.UNSUPPORTED, byId.get(id).classification(), id);
+            assertTrue(byId.get(id).unsupportedReasons().stream()
+                    .anyMatch(reason -> reason.equals("CONDITION:AMBIGUOUS_INTERPRETATION")), id);
+        }
+        SpellCapabilityRecord planarChoice = byId.get("spell:tce:tasha-s-otherworldly-guise");
+        assertTrue(planarChoice.patternMatched());
+        assertEquals(0, planarChoice.potentialMechanicCount());
+        assertTrue(planarChoice.unsupportedReasons().contains("CONDITION:AMBIGUOUS_INTERPRETATION"));
     }
 
     @Test
@@ -140,13 +210,29 @@ class SpellCapabilityInventoryTests {
         assertEquals(mapper.writeValueAsString(inventory), mapper.writeValueAsString(repeated));
         assertEquals(SpellCapabilityInventoryReports.markdown(inventory),
                 SpellCapabilityInventoryReports.markdown(repeated));
+    }
 
-        Path reportRoot = Path.of("analysis/mechanics/step-7");
-        SpellCapabilityInventoryReports.write(inventory, mapper,
-                reportRoot.resolve("7.4.4A-spell-capability-inventory.json"),
-                reportRoot.resolve("7.4.4A-spell-capability-inventory.md"));
-        SpellConditionInventoryComparisonReports.write(
-                reportRoot.resolve("7.4.4C-condition-extraction-comparison.md"), comparison);
+    @Test
+    @EnabledIfSystemProperty(named = "mechanics.inventory.regenerate", matches = "true")
+    void regenerateAuthoritativeReports(@TempDir Path temp) throws Exception {
+        Path inventoryJson = temp.resolve("7.4.4A-spell-capability-inventory.json");
+        Path inventoryMarkdown = temp.resolve("7.4.4A-spell-capability-inventory.md");
+        SpellCapabilityInventoryReports.write(inventory, mapper, inventoryJson, inventoryMarkdown);
+
+        String comparison = SpellConditionInventoryComparisonReports.markdown(baseline, inventory, 190,
+                currentDocuments.stream().mapToInt(document -> document.interpretations().size()).sum());
+        Path comparisonMarkdown = temp.resolve("7.4.4C-condition-extraction-comparison.md");
+        Files.writeString(comparisonMarkdown, comparison);
+
+        Path reportRoot = Path.of(System.getProperty("mechanics.inventory.reportDirectory",
+                "analysis/mechanics/step-7"));
+        Files.createDirectories(reportRoot);
+        Files.copy(inventoryJson, reportRoot.resolve(inventoryJson.getFileName()),
+                java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(inventoryMarkdown, reportRoot.resolve(inventoryMarkdown.getFileName()),
+                java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(comparisonMarkdown, reportRoot.resolve(comparisonMarkdown.getFileName()),
+                java.nio.file.StandardCopyOption.REPLACE_EXISTING);
     }
 
     @Test

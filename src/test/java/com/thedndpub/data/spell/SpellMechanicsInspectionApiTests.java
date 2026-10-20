@@ -167,6 +167,29 @@ class SpellMechanicsInspectionApiTests {
                 assertEquals(5, result.reviewSummary().total());
                 assertEquals(2, result.reviewSummary().pendingReview());
                 assertEquals(3, result.reviewSummary().needsMechanicsReview());
+            } else if (definition.id().value().equals("spell:phb:fire-bolt")) {
+                processedOwners++;
+                assertEquals(ProcessingState.PROCESSED, result.processing().state());
+                assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
+                assertEquals(2, result.interpretations().size());
+                assertEquals(1, result.unsupported().size());
+                assertEquals("fire-bolt-object-ignition", result.unsupported().getFirst().id());
+                assertEquals(1, result.unsupported().getFirst().evidenceIds().size());
+                assertEquals(2, result.reviewSummary().pendingReview());
+                assertEquals(0, result.reviewSummary().verified());
+                assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
+                        == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
+            } else if (java.util.Set.of("spell:phb:chill-touch", "spell:phb:shocking-grasp")
+                    .contains(definition.id().value())) {
+                processedOwners++;
+                assertEquals(ProcessingState.PROCESSED, result.processing().state());
+                assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
+                assertEquals(4, result.interpretations().size());
+                assertEquals(0, result.unsupported().size());
+                assertEquals(4, result.reviewSummary().pendingReview());
+                assertEquals(0, result.reviewSummary().verified());
+                assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
+                        == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
             } else if (definition.id().value().equals("spell:phb:fireball")
                     || definition.id().value().equals("spell:phb:healing-word")) {
                 processedOwners++;
@@ -192,7 +215,8 @@ class SpellMechanicsInspectionApiTests {
                     "spell:phb:calm-emotions", "spell:phb:disintegrate", "spell:phb:dissonant-whispers",
                     "spell:phb:ice-storm", "spell:phb:thunderwave",
                     "spell:phb:greater-restoration", "spell:phb:lesser-restoration",
-                    "spell:phb:power-word-heal").contains(definition.id().value())) {
+                    "spell:phb:power-word-heal", "spell:phb:eldritch-blast",
+                    "spell:phb:scorching-ray").contains(definition.id().value())) {
                 processedOwners++;
                 assertEquals(ProcessingState.PROCESSED, result.processing().state());
                 assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
@@ -211,6 +235,60 @@ class SpellMechanicsInspectionApiTests {
                         || result.coverage().status() == CoverageStatus.NONE_SUPPORTED);
                 assertTrue(!result.interpretations().isEmpty()
                         || result.coverage().status() == CoverageStatus.NONE_SUPPORTED);
+                assertEquals(result.interpretations().size(), result.reviewSummary().total());
+                assertEquals(0, result.reviewSummary().verified());
+                assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
+                        == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
+            } else if (definition.id().value().equals("spell:phb:inflict-wounds")) {
+                processedOwners++;
+                assertEquals(ProcessingState.PROCESSED, result.processing().state());
+                assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
+                assertEquals(2, result.interpretations().size());
+                assertEquals(0, result.reviewSummary().verified());
+                assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
+                        == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
+            } else if (definition.id().value().equals("spell:phb:magic-missile")) {
+                processedOwners++;
+                assertEquals(ProcessingState.PROCESSED, result.processing().state());
+                assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
+                assertEquals(1, result.interpretations().size());
+                assertEquals(0, result.reviewSummary().verified());
+                assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
+                        == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
+            } else if (definition.id().value().equals("spell:phb:melf-s-acid-arrow")) {
+                processedOwners++;
+                assertEquals(ProcessingState.PROCESSED, result.processing().state());
+                assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
+                assertEquals(4, result.interpretations().size());
+                assertEquals(0, result.reviewSummary().verified());
+                assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
+                        == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
+            } else if (definition.id().value().equals("spell:phb:ray-of-frost")) {
+                processedOwners++;
+                assertEquals(ProcessingState.PROCESSED, result.processing().state());
+                assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
+                assertEquals(3, result.interpretations().size());
+                assertTrue(result.unsupported().isEmpty());
+                assertEquals(0, result.reviewSummary().verified());
+                assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
+                        == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
+            } else if (definition.id().value().equals("spell:xge:steel-wind-strike")) {
+                processedOwners++;
+                assertEquals(ProcessingState.PROCESSED, result.processing().state());
+                assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
+                assertEquals(2, result.interpretations().size());
+                assertEquals(1, result.unsupported().size());
+                assertEquals(0, result.reviewSummary().verified());
+                assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
+                        == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
+            } else if (java.util.Set.of("spell:au:iron-body", "spell:xphb:freedom-of-movement",
+                    "spell:xphb:gaseous-form", "spell:xphb:heroes-feast", "spell:xphb:heroism",
+                    "spell:xphb:feign-death", "spell:xphb:mind-blank",
+                    "spell:tce:tasha-s-otherworldly-guise").contains(definition.id().value())) {
+                processedOwners++;
+                assertEquals(ProcessingState.PROCESSED, result.processing().state());
+                assertEquals(result.interpretations().isEmpty() ? CoverageStatus.NONE_SUPPORTED
+                        : CoverageStatus.PARTIAL, result.coverage().status());
                 assertEquals(result.interpretations().size(), result.reviewSummary().total());
                 assertEquals(0, result.reviewSummary().verified());
                 assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
@@ -244,8 +322,8 @@ class SpellMechanicsInspectionApiTests {
             }
         }
         assertEquals(930, observations);
-        assertEquals(106, processedOwners);
-        assertEquals(863, inspection.size() - processedOwners);
+        assertEquals(124, processedOwners);
+        assertEquals(845, inspection.size() - processedOwners);
         assertEquals(422, ownersWithObservations);
         assertEquals(547, inspection.size() - ownersWithObservations);
         assertTrue(publication.index().authorizedObservations().isEmpty());
@@ -275,6 +353,130 @@ class SpellMechanicsInspectionApiTests {
                         .value(8))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.amount.terms[1].symbol")
                         .value("CASTER_SPELLCASTING_ABILITY_MODIFIER"));
+    }
+
+    @Test
+    void inflictWoundsAttackRollIsAvailableOnlyInPrivateInspection() throws Exception {
+        String ordinary = mvc.perform(get("/api/spells/spell:phb:inflict-wounds"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertFalse(mapper.readTree(ordinary).has("interpretedMechanics"));
+
+        mvc.perform(get("/api/spells/spell:phb:inflict-wounds").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations.length()").value(2))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.kind").value("ATTACK_ROLL"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.attackKind")
+                        .value("MELEE_SPELL"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.actorRole").value("CASTER"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[0].kind")
+                        .value("APPLIES_ON_ATTACK_ROLL_OUTCOME"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[0].outcome")
+                        .value("HIT"))
+                .andExpect(jsonPath("$.interpretedMechanics.reviewSummary.verified").value(0));
+    }
+
+    @Test
+    void rayOfFrostAttackAndSpeedEffectAreAvailableOnlyThroughPrivateInspection() throws Exception {
+        String ordinary = mvc.perform(get("/api/spells/spell:phb:ray-of-frost"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertFalse(mapper.readTree(ordinary).has("interpretedMechanics"));
+
+        mvc.perform(get("/api/spells/spell:phb:ray-of-frost").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations.length()").value(3))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.kind").value("ATTACK_ROLL"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.attackKind")
+                        .value("RANGED_SPELL"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[0].kind")
+                        .value("APPLIES_ON_ATTACK_ROLL_OUTCOME"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].revision").value(2))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].payload.characterLevelScaling.tiers[0].minimumCharacterLevel")
+                        .value(5))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].payload.characterLevelScaling.tiers[2].amount.count")
+                        .value(4))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[2].payload.statistics[0]")
+                        .value("MOVEMENT_SPEED"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[2].context.bindings[0].outcome")
+                        .value("HIT"))
+                .andExpect(jsonPath("$.interpretedMechanics.unsupported").doesNotExist())
+                .andExpect(jsonPath("$.interpretedMechanics.reviewSummary.verified").value(0));
+    }
+
+    @Test
+    void fireBoltTargetAlternativesAndIgnitionDiagnosticArePrivateOnly() throws Exception {
+        String ordinary = mvc.perform(get("/api/spells/spell:phb:fire-bolt"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertFalse(mapper.readTree(ordinary).has("interpretedMechanics"));
+
+        mvc.perform(get("/api/spells/spell:phb:fire-bolt").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations.length()").value(2))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.kind")
+                        .value("ATTACK_ROLL"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].context.subject.scope")
+                        .value("SINGLE_TARGET"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].context.subject.eligibleTargetCategories[0]")
+                        .value("CREATURE"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].context.subject.eligibleTargetCategories[1]")
+                        .value("OBJECT"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.subject.scope")
+                        .value("SINGLE_TARGET"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[0].outcome")
+                        .value("HIT"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].payload.characterLevelScaling.tiers[2].amount.count")
+                        .value(4))
+                .andExpect(jsonPath("$.interpretedMechanics.unsupported[0].id")
+                        .value("fire-bolt-object-ignition"))
+                .andExpect(jsonPath("$.interpretedMechanics.reviewSummary.verified").value(0));
+    }
+
+    @Test
+    void conditionalAttackEffectsAreAvailableOnlyThroughPrivateInspection() throws Exception {
+        for (String id : java.util.List.of("spell:phb:chill-touch", "spell:phb:shocking-grasp")) {
+            String ordinary = mvc.perform(get("/api/spells/" + id))
+                    .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+            assertFalse(mapper.readTree(ordinary).has("interpretedMechanics"), id);
+        }
+
+        mvc.perform(get("/api/spells/spell:phb:chill-touch").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations.length()").value(4))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.attackKind")
+                        .value("RANGED_SPELL"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[0].outcome")
+                        .value("HIT"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[2].payload.kind")
+                        .value("HIT_POINT_RECOVERY_PREVENTION"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[2].context.bindings[1].duration.actor")
+                        .value("CASTER"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[3].payload.kind")
+                        .value("ATTACK_ROLL_MODIFIER"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[3].payload.modifier")
+                        .value("DISADVANTAGE"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[3].payload.affectedRolls.actor")
+                        .value("AFFECTED_SUBJECT"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[3].payload.affectedRolls.target")
+                        .value("CASTER"))
+                .andExpect(jsonPath("$.interpretedMechanics.unsupported").doesNotExist());
+
+        mvc.perform(get("/api/spells/spell:phb:shocking-grasp").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations.length()").value(4))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[0].payload.attackKind")
+                        .value("MELEE_SPELL"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].context.bindings[0].outcome")
+                        .value("HIT"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[2].payload.kind")
+                        .value("REACTION_PREVENTION"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[2].context.bindings[1].duration.actor")
+                        .value("AFFECTED_SUBJECT"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[3].payload.kind")
+                        .value("ATTACK_ROLL_MODIFIER"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[3].payload.modifier")
+                        .value("ADVANTAGE"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[3].context.bindings[0].condition")
+                        .value("ATTACK_ROLL_TARGET_WEARING_ARMOR_MADE_OF_METAL"))
+                .andExpect(jsonPath("$.interpretedMechanics.unsupported").doesNotExist());
     }
 
     @Test

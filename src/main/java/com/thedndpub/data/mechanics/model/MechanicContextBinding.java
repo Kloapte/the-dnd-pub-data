@@ -14,7 +14,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = RequiresConcentration.class, name = "REQUIRES_CONCENTRATION"),
         @JsonSubTypes.Type(value = IncludesTriggeringAttack.class, name = "INCLUDES_TRIGGERING_ATTACK"),
         @JsonSubTypes.Type(value = ModifierOnSaveOutcome.class, name = "MODIFIER_ON_SAVE_OUTCOME"),
-        @JsonSubTypes.Type(value = AppliesWhen.class, name = "APPLIES_WHEN")
+        @JsonSubTypes.Type(value = AppliesWhen.class, name = "APPLIES_WHEN"),
+        @JsonSubTypes.Type(value = AppliesOnAttackRollOutcome.class, name = "APPLIES_ON_ATTACK_ROLL_OUTCOME"),
+        @JsonSubTypes.Type(value = AppliesOnEachAttackRollOutcome.class, name = "APPLIES_ON_EACH_ATTACK_ROLL_OUTCOME")
 })
 public sealed interface MechanicContextBinding permits
         ActivatedBy,
@@ -26,6 +28,8 @@ public sealed interface MechanicContextBinding permits
         RequiresConcentration,
         IncludesTriggeringAttack,
         ModifierOnSaveOutcome,
-        AppliesWhen {
+        AppliesWhen,
+        AppliesOnAttackRollOutcome,
+        AppliesOnEachAttackRollOutcome {
 
 }

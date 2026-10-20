@@ -69,8 +69,28 @@ public record MechanicRecord(
                 payload, context, associations, derivation, assessment, null, null);
     }
 
+    /** Creates a pending revision linked to a caller-verified historical pending claim. */
+    public static MechanicRecord proposeSupersedingPending(
+            MechanicId id,
+            MechanicRevisionReference predecessor,
+            MechanicPayload payload,
+            MechanicContext context,
+            List<MechanicEvidenceAssociation> associations,
+            MechanicDerivation derivation,
+            MechanicsAssessment assessment) {
+        ModelChecks.require(predecessor != null && predecessor.id().equals(id),
+                "A superseding claim requires its own prior revision reference");
+        MechanicRevisionContent content = new MechanicRevisionContent(
+                id, payload, context, associations, derivation, assessment);
+        MechanicRevision revision = new MechanicRevision(predecessor.number() + 1,
+                MechanicsHashes.claimHash(content), predecessor);
+        return new MechanicRecord(id, revision, payload, context, associations, derivation,
+                assessment, null, null);
+    }
+
     public MechanicRecord withReviewFindings(List<MechanicsFinding> findings) {
         return new MechanicRecord(id, revision, payload, context, evidenceAssociations, derivation,
                 assessment, review.withFindings(findings), licensing);
     }
+
 }

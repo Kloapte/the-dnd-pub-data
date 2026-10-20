@@ -324,13 +324,13 @@ class ShieldMechanicsExtractorTests {
     }
 
     @Test
-    void startupServiceLeavesOther874DocumentsAndAll930ObservationsUntouched() {
+    void startupServiceLeavesOther848DocumentsAndAll930ObservationsUntouched() {
         var manifest = List.copyOf(owners.values());
         var initial = new SpellMechanicsDocumentFactory(mapper).unattempted(spells.findAll(), formulas.index(), manifest);
         var extracted = new SpellMechanicsExtractionService(mapper).extract(initial, spells.findAll(), manifest);
         assertEquals(969, extracted.size());
-        assertEquals(106, extracted.stream().filter(value -> value.processing().state() == ProcessingState.PROCESSED).count());
-        assertEquals(863, extracted.stream().filter(value -> value.processing().state() == ProcessingState.NOT_ATTEMPTED).count());
+        assertEquals(124, extracted.stream().filter(value -> value.processing().state() == ProcessingState.PROCESSED).count());
+        assertEquals(845, extracted.stream().filter(value -> value.processing().state() == ProcessingState.NOT_ATTEMPTED).count());
         Map<String, MechanicsDocument> before = initial.stream()
                 .collect(Collectors.toMap(value -> value.owner().id(), Function.identity()));
         for (var document : extracted) {

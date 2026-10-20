@@ -22,14 +22,19 @@ public final class SpellCapabilityInventoryRunner {
     }
 
     public SpellCapabilityInventoryRunner(ObjectMapper mapper, ResourceLoader resources) {
-        this(mapper, resources, List.of(new ShieldMechanicsExtractor(), new PhbSpellMechanicsExtractor()));
+        this(mapper, resources, SpellMechanicsPatternRegistry.standard());
     }
 
     SpellCapabilityInventoryRunner(
             ObjectMapper mapper, ResourceLoader resources, List<SpellMechanicsPattern> patternList) {
+        this(mapper, resources, new SpellMechanicsPatternRegistry(patternList));
+    }
+
+    private SpellCapabilityInventoryRunner(
+            ObjectMapper mapper, ResourceLoader resources, SpellMechanicsPatternRegistry patterns) {
         this.mapper = Objects.requireNonNull(mapper);
         this.resources = Objects.requireNonNull(resources);
-        this.patterns = new SpellMechanicsPatternRegistry(patternList);
+        this.patterns = Objects.requireNonNull(patterns);
     }
 
     public SpellCapabilityInventory assess(
@@ -78,11 +83,12 @@ public final class SpellCapabilityInventoryRunner {
             MechanicsDocument candidate = null;
             List<String> diagnostics = new ArrayList<>();
             try {
-                pattern = patterns.findForInventory(definition);
+                pattern = patterns.find(definition, matchingPattern ->
+                        supportsForInventory(matchingPattern, definition));
                 if (pattern != null) {
                     byte[] sourceBytes = bytesByResource.computeIfAbsent(
                             source.revision().resourcePath(), this::readPinnedResource);
-                    candidate = pattern.extractForInventory(definition,
+                    candidate = extractForInventory(pattern, definition,
                             new SpellMechanicsEvidenceSource(definition, source, sourceBytes, mapper), original);
                 }
             } catch (RuntimeException exception) {
@@ -140,6 +146,22 @@ public final class SpellCapabilityInventoryRunner {
         }
         return new SpellCapabilityInventory("5eTools v2.37.0", records.size(), sources, classifications,
                 processed, newlyConvertible, potentialClaims, families, unsupportedReasons, unassessedReasons, records);
+    }
+
+    private static boolean supportsForInventory(SpellMechanicsPattern pattern, SpellDefinition spell) {
+        return pattern instanceof PhbSpellMechanicsExtractor phb
+                ? phb.supportsForInventory(spell)
+                : pattern.supports(spell);
+    }
+
+    private static MechanicsDocument extractForInventory(
+            SpellMechanicsPattern pattern,
+            SpellDefinition spell,
+            SpellMechanicsEvidenceSource source,
+            MechanicsDocument original) {
+        return pattern instanceof PhbSpellMechanicsExtractor phb
+                ? phb.extractForInventory(spell, source, original)
+                : pattern.extract(spell, source, original);
     }
 
     private static SpellCapabilityClassification classify(
@@ -209,6 +231,13 @@ public final class SpellCapabilityInventoryRunner {
         if (payload instanceof ConditionChangeMechanic || payload instanceof ConditionChoiceMechanic) return "CONDITION";
         if (payload instanceof StatisticModifierMechanic) return "MODIFIER";
         if (payload instanceof DamageResistanceMechanic) return "DAMAGE_RESISTANCE";
+        if (payload instanceof AttackRollMechanic) return "ATTACK_ROLL";
+        if (payload instanceof HitPointRecoveryPreventionMechanic) return "HEALING_PREVENTION";
+        if (payload instanceof ReactionPreventionMechanic) return "REACTION_RESTRICTION";
+        if (payload instanceof AttackRollModifierMechanic) return "ATTACK_ROLL_MODIFIER";
+        if (payload instanceof com.thedndpub.data.mechanics.model.DamageInstanceSeriesMechanic) {
+            return "DAMAGE_INSTANCE_SERIES";
+        }
         return "UNKNOWN";
     }
 

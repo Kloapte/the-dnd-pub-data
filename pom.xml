@@ -69,6 +69,7 @@
                 <version>3.5.0</version>
                 <configuration>
                     <mainClass>com.thedndpub.data.analysis.SchemaDiscovery</mainClass>
+                    <classpathScope>test</classpathScope>
                 </configuration>
             </plugin>
             <plugin>

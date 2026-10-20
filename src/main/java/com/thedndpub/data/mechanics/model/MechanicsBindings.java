@@ -19,6 +19,8 @@ final class MechanicsBindings {
             case IncludesTriggeringAttack inclusion -> inclusion.evidenceIds();
             case ModifierOnSaveOutcome outcome -> outcome.evidenceIds();
             case AppliesWhen applies -> applies.evidenceIds();
+            case AppliesOnAttackRollOutcome outcome -> outcome.evidenceIds();
+            case AppliesOnEachAttackRollOutcome outcome -> outcome.evidenceIds();
         };
     }
 
@@ -35,6 +37,10 @@ final class MechanicsBindings {
                 references.add(ending.savingThrow());
             } else if (binding instanceof ModifierOnSaveOutcome outcome) {
                 references.add(outcome.savingThrow());
+            } else if (binding instanceof AppliesOnAttackRollOutcome outcome) {
+                references.add(outcome.attackRoll());
+            } else if (binding instanceof AppliesOnEachAttackRollOutcome outcome) {
+                references.add(outcome.attackRoll());
             } else if (binding instanceof AppliesForDuration timing
                     && timing.duration() instanceof ReferencedDuration duration) {
                 references.add(duration.mechanic());
@@ -44,8 +50,16 @@ final class MechanicsBindings {
                 && duration.specification() instanceof ReferencedDuration reference) {
             references.add(reference.mechanic());
         }
+        if (record.payload() instanceof AttackRollModifierMechanic modifier
+                && modifier.affectedRolls() instanceof ReferencedAttackRollSelector reference) {
+            references.add(reference.attackRoll());
+        }
         if (record.payload() instanceof ConditionChangeMechanic condition && condition.choiceGroup() != null) {
             references.add(condition.choiceGroup());
+        }
+        if (record.payload() instanceof DamageMechanic damage
+                && damage.amount() instanceof FractionOfAmount fraction) {
+            references.add(fraction.baseAmount());
         }
         return references;
     }

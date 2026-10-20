@@ -5,6 +5,9 @@ import com.thedndpub.data.mechanics.model.AllTriggers;
 import com.thedndpub.data.mechanics.model.AnyTrigger;
 import com.thedndpub.data.mechanics.model.AppliesForDuration;
 import com.thedndpub.data.mechanics.model.AppliesOnSaveOutcome;
+import com.thedndpub.data.mechanics.model.AppliesOnAttackRollOutcome;
+import com.thedndpub.data.mechanics.model.AppliesOnEachAttackRollOutcome;
+import com.thedndpub.data.mechanics.model.AttackRollMechanic;
 import com.thedndpub.data.mechanics.model.ConditionOnSaveOutcome;
 import com.thedndpub.data.mechanics.model.ConditionEndsOnSaveSuccess;
 import com.thedndpub.data.mechanics.model.ConditionEndsWithSpell;
@@ -53,6 +56,8 @@ final class BenchmarkSemantics {
             case EffectDurationMechanic ignored -> MechanicFamily.DURATION;
             case SpellDamagePreventionMechanic ignored -> MechanicFamily.SPELL_DAMAGE_PREVENTION;
             case DamageMechanic ignored -> MechanicFamily.DAMAGE;
+            case com.thedndpub.data.mechanics.model.DamageInstanceSeriesMechanic ignored ->
+                    MechanicFamily.DAMAGE_INSTANCE_SERIES;
             case HealingMechanic ignored -> MechanicFamily.HEALING;
             case SavingThrowRequirementMechanic ignored -> MechanicFamily.SAVING_THROW_REQUIREMENT;
             case SpellSlotScalingMechanic ignored -> MechanicFamily.SPELL_SLOT_SCALING;
@@ -60,6 +65,13 @@ final class BenchmarkSemantics {
             case com.thedndpub.data.mechanics.model.ConditionChoiceMechanic ignored -> MechanicFamily.CONDITION;
             case StatisticModifierMechanic ignored -> MechanicFamily.MODIFIER;
             case DamageResistanceMechanic ignored -> MechanicFamily.DAMAGE_RESISTANCE;
+            case AttackRollMechanic ignored -> MechanicFamily.ATTACK_ROLL;
+            case com.thedndpub.data.mechanics.model.HitPointRecoveryPreventionMechanic ignored ->
+                    MechanicFamily.HEALING_PREVENTION;
+            case com.thedndpub.data.mechanics.model.ReactionPreventionMechanic ignored ->
+                    MechanicFamily.REACTION_RESTRICTION;
+            case com.thedndpub.data.mechanics.model.AttackRollModifierMechanic ignored ->
+                    MechanicFamily.ATTACK_ROLL_MODIFIER;
         };
     }
 
@@ -140,6 +152,13 @@ final class BenchmarkSemantics {
                         && outcome.savingThrow().equals(other.savingThrow());
                 case AppliesWhen applies -> second instanceof AppliesWhen other
                         && applies.condition() == other.condition();
+                case AppliesOnAttackRollOutcome outcome -> second instanceof AppliesOnAttackRollOutcome other
+                        && outcome.outcome() == other.outcome()
+                        && outcome.attackRoll().equals(other.attackRoll());
+                case AppliesOnEachAttackRollOutcome outcome -> second instanceof AppliesOnEachAttackRollOutcome other
+                        && outcome.outcome() == other.outcome()
+                        && outcome.instanceScope() == other.instanceScope()
+                        && outcome.attackRoll().equals(other.attackRoll());
             };
             if (!same) {
                 return false;
@@ -181,6 +200,8 @@ final class BenchmarkSemantics {
             case IncludesTriggeringAttack attack -> attack.evidenceIds();
             case ModifierOnSaveOutcome outcome -> outcome.evidenceIds();
             case AppliesWhen applies -> applies.evidenceIds();
+            case AppliesOnAttackRollOutcome outcome -> outcome.evidenceIds();
+            case AppliesOnEachAttackRollOutcome outcome -> outcome.evidenceIds();
         };
     }
 }

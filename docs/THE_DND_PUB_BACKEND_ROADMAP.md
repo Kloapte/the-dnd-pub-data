@@ -1,6 +1,6 @@
 # The DnD Pub Data Backend — Development Roadmap
 
-> **Status:** Authoritative working roadmap, 19 October 2026. Step 7.2 and Steps 7.3.1–7.3.3 are implemented. Step 7.4.3 remains PARTIAL after batch 7.4.3C. Step 7.4.4 is IN PROGRESS with 7.4.4A, 7.4.4B, and 7.4.4C complete: 106 of 969 Spell owners are processed with 228 typed mechanics; all six benchmark fixtures await human review, so authoritative benchmark acceptance remains outstanding.
+> **Status:** Authoritative working roadmap, 21 October 2026. Step 7.2 and Steps 7.3.1–7.3.3 are implemented. Step 7.4.3 remains PARTIAL after batch 7.4.3C. Step 7.4.4 is IN PROGRESS with 7.4.4A through 7.4.4S complete: 124 of 969 Spell owners are processed with 261 typed mechanics; all six benchmark fixtures await human review, so authoritative benchmark acceptance remains outstanding.
 >
 > **Scope:** Java / Spring Boot data backend and its supporting evidence, tests, and APIs. Angular UI, Keycloak integration, persistence, and public internet deployment are future work unless explicitly authorized.
 
@@ -360,6 +360,292 @@ no candidate reaches SUPPORTED; coverage tracking was not redesigned. Step 7.4.3
 parent Step 7.4.4 remains IN PROGRESS. Verification: focused extractor/inventory/private REST tests,
 790 passing Maven tests, deterministic repeated report output, and `git diff --check`.
 
+##### 7.4.4D. Spell mechanic-family discovery — COMPLETE (analysis only)
+
+The read-only discovery report verifies the current 969-owner inventory baseline (163 PARTIALLY_SUPPORTED,
+440 UNSUPPORTED, 366 NOT_ASSESSED, 0 SUPPORTED; 106 production owners, 228 typed claims, and 310
+potential typed claims). It scans pinned source fields and authored `entries`/`entriesHigherLevel` text,
+counts each source-aware owner once per family, and records overlapping family counts, classifications,
+representative source pointers, candidate model fit, false-positive limits, and priorities. Structured
+condition-immunity evidence is the clearest bounded follow-up candidate; no extraction or coverage change
+is authorized by this analysis.
+
+See the [7.4.4D discovery report](../analysis/mechanics/step-7/7.4.4D-mechanic-family-discovery.md)
+and its [deterministic machine summary](../analysis/mechanics/step-7/7.4.4D-mechanic-family-discovery.json).
+Step 7.4.3 remains PARTIAL, and parent Step 7.4.4 remains IN PROGRESS. Verification: inventory baseline
+reconciled; repeated machine-summary output is byte-identical; no source, fixture, inventory, or historical
+report was changed; `git diff --check` passes.
+
+##### 7.4.4E. Structured Spell condition immunity extraction — COMPLETE
+
+The bounded production rule assesses eight verified AU/TCE/XPHB owners with structured `conditionImmune`
+fields. Five owners yield seven `GRANT_IMMUNITY` claims with source-bound subject, duration and evidence;
+Tasha's Otherworldly Guise, XPHB Freedom of Movement, and XPHB Heroes' Feast are processed with explicit
+ambiguity diagnostics and no immunity claims. Existing PHB condition documents remain unchanged. Iron
+Body's separate removal of already-present conditions remains explicitly diagnosed rather than being
+conflated with immunity.
+Production processing rises from 106 to 114 owners and 228 to 235 claims. Inventory classifications move
+from 163 to 168 PARTIALLY_SUPPORTED and from 440 to 435 UNSUPPORTED; NOT_ASSESSED remains 366 and
+SUPPORTED remains 0 because the existing coverage-accounting limitation is unchanged. Review and licensing
+defaults remain pending/`NEEDS_REVIEW`, and no mechanics are publication-authorized.
+
+See the [7.4.4E implementation report](../analysis/mechanics/step-7/7.4.4E-structured-condition-immunity.md)
+for all 12 candidate decisions, evidence pointers, claims, abstentions, and verification. The preview
+inventory/comparison was written under `target/`; historical reports and pinned sources were preserved.
+Step 7.4.3 remains PARTIAL and parent Step 7.4.4 remains IN PROGRESS.
+
+##### 7.4.4F. Spell attack-roll modeling and feasibility — COMPLETE (analysis only)
+
+The analysis verifies the post-E inventory baseline: 969 Spell identities, 168 PARTIALLY_SUPPORTED,
+435 UNSUPPORTED, 366 NOT_ASSESSED, 0 SUPPORTED, 114 processed owners, and 235 production claims.
+The 7.4.4D discovery's 75 attack-roll cue owners remain a search signal, not an eligibility list.
+Its machine summary preserves only five representative owners, so the full post-E owner-by-owner
+classification rejoin is not asserted. A direct pinned-corpus scan confirms 65 non-empty structured
+`spellAttack` owners and documents why the field alone cannot prove an actual spell attack.
+
+The analysis finds that existing damage, hit-trigger, target, statistic modifier, timing, evidence,
+revision, review and licensing types cover useful parts of the family but do not represent the attack
+roll itself or general hit/miss/critical dependencies. It proposes a bounded `AttackRollMechanic`
+and revision-bound outcome binding, with a one-owner Inflict Wounds pilot recommendation for a
+future separately authorized batch. No model or extraction behavior is changed by F.
+
+See the [7.4.4F report](../analysis/mechanics/step-7/7.4.4F-attack-roll-modeling.md) and
+[deterministic machine summary](../analysis/mechanics/step-7/7.4.4F-attack-roll-modeling.json).
+Step 7.4.3 remains PARTIAL; parent Step 7.4.4 remains IN PROGRESS. Verification: baseline checked
+against the E preview; source-field owner count reconciled with D evidence-mode counts; deterministic
+JSON SHA-256 repeated identically; no source, fixture, production, test or historical report changes;
+`git diff --check` passes.
+
+##### 7.4.4G. Attack-roll canonical model and Inflict Wounds pilot — COMPLETE
+
+This bounded pilot adds a typed `AttackRollMechanic` and revision-bound `AppliesOnAttackRollOutcome`
+relationship for exactly `spell:phb:inflict-wounds`. Its new attack-roll and hit-damage claims retain
+pending review and licensing states. Inflict Wounds moves from unattempted with no claims to partial
+coverage with two claims; its inventory classification remains PARTIALLY_SUPPORTED. Corpus totals
+are 969 identities, 168 PARTIALLY_SUPPORTED, 435 UNSUPPORTED, 366 NOT_ASSESSED, 0 SUPPORTED, 115
+processed owners, and 237 production typed claims. No other attack owner is activated. Higher-level
+damage scaling and the wider candidate family remain deferred.
+
+The [7.4.4G implementation report](../analysis/mechanics/step-7/7.4.4G-attack-roll-canonical-model-and-inflict-wounds-pilot.md)
+records exact IDs, revision hashes, evidence pointers/spans, baseline comparisons and verification.
+The pre/post owner-level comparison changes only Inflict Wounds in canonical mechanics and private
+inspection; default REST output is unchanged for all 969 owners. Inventory and comparison previews
+were generated under `target/`; pinned source data, benchmark fixtures and historical reports remain
+unchanged. Focused tests and the 800-test Maven suite pass. Step 7.4.3 remains PARTIAL and parent
+Step 7.4.4 remains IN PROGRESS.
+
+##### 7.4.4H. Simple Spell attack generalization — COMPLETE
+
+The bounded PHB attack rule now covers the Inflict Wounds pilot and the individually reviewed
+`spell:phb:ray-of-frost` owner. Ray of Frost contributes an attack-roll claim, HIT-bound cold damage,
+and a HIT-bound movement-speed reduction ending at the caster's next turn start. Cantrip scaling is
+an evidence-backed unsupported diagnostic. Fire Bolt, Chill Touch, and Shocking Grasp remain
+unactivated because their target/effect/attack-modifier semantics cannot be represented without
+omitting material mechanics.
+
+The [7.4.4H report](../analysis/mechanics/step-7/7.4.4H-simple-spell-attack-generalization.md)
+records owner eligibility, claim revisions, evidence spans, before/after hashes, and verification.
+Inventory totals are 969 identities, 116 processed owners, and 240 typed claims; classifications
+remain 168 PARTIALLY_SUPPORTED, 435 UNSUPPORTED, 366 NOT_ASSESSED, and 0 SUPPORTED. Inflict Wounds
+and all unrelated owners remain byte-identical in canonical output; default REST is unchanged for
+all 969 owners. Focused extractor, inventory, inspection, benchmark, and Shield tests pass; the
+802-test Maven suite passes. Step 7.4.3 remains PARTIAL and parent Step 7.4.4 remains IN PROGRESS.
+
+##### 7.4.4I. Cantrip damage scaling — COMPLETE
+
+Added the typed `CharacterLevelDamageScaling` and `CharacterLevelDamageTier` extension to
+`DamageMechanic`, keeping character-level progression distinct from spell-slot scaling. The
+already-eligible `spell:phb:ray-of-frost` damage claim now records the source-backed 1d8/2d8/3d8/4d8
+progression at levels 1/5/11/17. Its existing damage mechanic ID is unchanged and advances from
+revision 1 to revision 2, superseding the captured revision 1 hash; its attack and movement-speed
+claims are unchanged. The now-fully-represented cantrip-scaling diagnostic is removed. Acid Splash
+remains unchanged because its one-or-two-creature targeting choice is not fully represented.
+
+The [7.4.4I report](../analysis/mechanics/step-7/7.4.4I-cantrip-damage-scaling.md) records the
+preimplementation model decision, source pointers, bounded owner review, claim revisions, inventory
+counts, and comparisons. Inventory remains at 969 identities, 116 processed owners, 240 typed claims,
+168 PARTIALLY_SUPPORTED, 435 UNSUPPORTED, 366 NOT_ASSESSED, and 0 SUPPORTED. Focused extraction,
+inventory/benchmark previews, and the 814-test Maven suite pass. Character-level scaling remains a
+pending private interpretation; review/licensing are not approved and publication authorization
+remains zero. Step 7.4.3 remains PARTIAL and parent Step 7.4.4 remains IN PROGRESS.
+
+##### 7.4.4J. Creature/object target eligibility — COMPLETE
+
+The typed `SpellTargetSubject` supports exactly one selected target eligible from mutually exclusive
+`CREATURE` or `OBJECT` categories. The PHB-only Fire Bolt pilot adds attack-roll and HIT-bound damage
+claims with its explicit character-level damage progression. Its separately qualified object-ignition
+rule remains an evidence-backed unsupported diagnostic because the model cannot yet represent the
+flammability and not-worn-or-carried requirements. No other attack owner or source edition was activated.
+
+The [7.4.4J report](../analysis/mechanics/step-7/7.4.4J-creature-object-target-eligibility.md)
+records source review, exact claim revisions, target validation, ignition abstention, previews and
+compatibility hashes. Inventory remains at 969 identities, 117 processed owners, and 242 typed claims;
+classifications remain 168 PARTIALLY_SUPPORTED, 435 UNSUPPORTED, 366 NOT_ASSESSED, and 0 SUPPORTED.
+Canonical documents and private inspection change only for Fire Bolt; default REST is byte-identical
+for all 969 owners. The 818-test Maven suite passes, with one existing skipped test. Review/licensing
+remain pending and publication authorization remains zero. Step 7.4.3 remains PARTIAL and parent
+Step 7.4.4 remains IN PROGRESS.
+
+##### 7.4.4K. Conditional on-hit effects — COMPLETE
+
+The shared PHB one-roll spell attack rule now extracts source-backed hit point recovery prevention for
+Chill Touch and reaction prevention for Shocking Grasp, each bound one-way to the attack claim's HIT
+outcome and source-specified turn boundary. The two effects use dedicated typed payloads. Chill Touch's
+undead-target attack disadvantage and Shocking Grasp's pre-hit metal-armor advantage remain explicit,
+source-evidenced unsupported diagnostics because target predicates and advantage semantics are not in
+the current model. No other owner or source edition was activated.
+
+The [7.4.4K report](../analysis/mechanics/step-7/7.4.4K-conditional-on-hit-effects.md) records both
+candidate reviews, claim IDs and content hashes, evidence spans, abstentions, inventory metrics and
+compatibility comparisons. Inventory remains at 969 identities, 168 PARTIALLY_SUPPORTED, 435
+UNSUPPORTED, 366 NOT_ASSESSED, and 0 SUPPORTED; processed owners increase to 119 and production claims
+to 248. Canonical documents and private inspection change only for Chill Touch and Shocking Grasp;
+default REST remains byte-identical for all owners. The 827-test Maven suite passes with one skipped
+test. Review/licensing remain pending and publication authorization remains zero. Step 7.4.3 remains
+PARTIAL and parent Step 7.4.4 remains IN PROGRESS.
+
+##### 7.4.4L. Conditional attack-roll advantage and disadvantage — COMPLETE
+
+Added the typed `AttackRollModifierMechanic` with explicit advantage/disadvantage and selectors for
+an existing revision-bound attack roll or future rolls identified by actor and target roles.
+`AppliesWhen`, `AppliesOnAttackRollOutcome`, and `AppliesForDuration` separately represent the
+qualifier, activation event, and duration. Shocking Grasp's modifier applies to its own attack roll
+before the outcome when its target wears metal armor. Chill Touch's modifier applies after a HIT to
+future attacks by the affected undead creature against the original caster, until the end of that
+caster's next turn. The two K diagnostics are resolved; no other owner or edition was activated.
+
+The [7.4.4L report](../analysis/mechanics/step-7/7.4.4L-conditional-attack-roll-modifiers.md)
+records exact claims, revision hashes, source evidence spans, model validation, owner-level comparisons,
+and deterministic previews. Inventory remains at 969 identities, 119 processed owners, and 250
+production claims; classifications remain 168 PARTIALLY_SUPPORTED, 435 UNSUPPORTED, 366 NOT_ASSESSED,
+and 0 SUPPORTED. Only Chill Touch and Shocking Grasp changed in canonical documents and private
+inspection; default REST is byte-identical for all 969 owners. The forked-compiler Maven suite passes
+831 tests with one skipped test. Review and licensing remain pending; publication authorization remains
+zero. Step 7.4.3 remains PARTIAL and parent Step 7.4.4 remains IN PROGRESS.
+
+##### 7.4.4M. Multi-instance Spell mechanics feasibility and design — COMPLETE
+
+Completed a source-based feasibility review of PHB Scorching Ray, Eldritch Blast and Magic Missile.
+The report distinguishes independent attack instances, automatic-hit damage instances, one damage
+event across multiple targets, and one attack affecting multiple targets. It proposes typed count
+progression, per-instance target allocation and corresponding-attack HIT binding for attack spells,
+plus a separate automatic-hit damage-series payload for Magic Missile. No owners, claims, production
+types, fixtures or canonical outputs changed. The existing Magic Missile benchmark remains pending
+human review with its three deferred expectations intact.
+
+The [7.4.4M report](../analysis/mechanics/step-7/7.4.4M-multi-instance-spell-feasibility.md)
+records exact authored evidence pointers and spans, structured-field limits, model gaps, proposed
+canonical JSON, migration risks and a staged implementation sequence. The inventory remains at 969
+identities, 119 processed owners, 250 production claims and 326 potential claims. Focused inventory,
+inspection and benchmark tests pass (84 tests, 0 failures, 0 errors, 1 skipped); `git diff --check`
+passes. Review/licensing remain pending and publication authorization remains zero. Step 7.4.3 remains
+PARTIAL and parent Step 7.4.4 remains IN PROGRESS.
+
+##### 7.4.4N. Eldritch Blast multi-attack pilot — COMPLETE
+
+Activated only PHB Eldritch Blast. Added typed character-level instance-count progression and
+per-instance target allocation to `AttackRollMechanic`, plus a one-way corresponding-instance HIT
+binding from its 1d10 force damage claim to the exact attack revision. Each beam independently targets
+one creature within range; targets may be repeated or differ. Levels 5, 11 and 17 increase total beam
+counts to 2, 3 and 4. No spell-slot count scaling, damage progression, visibility, object targeting,
+or runtime combat behavior was added.
+
+The [7.4.4N report](../analysis/mechanics/step-7/7.4.4N-eldritch-blast-multi-attack-pilot.md)
+records exact source pointers and spans, claim revisions and hashes, validation rules, inventory
+deltas, deterministic previews and compatibility comparisons. Inventory is now 969 identities,
+120 processed owners, 252 production claims and 327 potential claims. Classification totals are
+unchanged. All unrelated canonical and private inspection documents are byte-identical; default Spell
+detail responses are byte-identical for all 969 owners. Focused tests pass (154 tests, 0 failures,
+0 errors, 1 skipped); the full Maven suite passes (840 tests, 0 failures, 0 errors, 1 skipped). Review
+and licensing remain pending and publication authorization remains zero. Step 7.4.3 remains PARTIAL
+and parent Step 7.4.4 remains IN PROGRESS.
+
+##### 7.4.4O. Scorching Ray slot-scaled multi-attack — COMPLETE
+
+Activated only PHB Scorching Ray. Added `SpellSlotInstanceCount` for total ray counts, with three
+base rays at spell level 2 and one additional ray per higher slot level. Each ray has an independent
+ranged spell attack, one target assignment within range, and a corresponding-instance HIT binding to
+one 2d6 fire damage event. The source allows one or several targets, so repeated and distinct target
+assignments are supported. It does not specify eligible target categories; the allocation preserves
+that state as `UNSPECIFIED_IN_SOURCE`, and an evidence-backed diagnostic keeps the owner partial. No
+creature-only or object eligibility is inferred.
+
+The [7.4.4O report](../analysis/mechanics/step-7/7.4.4O-scorching-ray-slot-scaled-multi-attack.md)
+records the pinned source evidence, claim revisions and hashes, target-category decision, inventory
+deltas, deterministic previews and compatibility comparisons. Inventory is now 969 identities, 121
+processed owners, 254 production claims and 328 potential claims. Classification totals remain 168
+PARTIALLY_SUPPORTED, 435 UNSUPPORTED, 366 NOT_ASSESSED and 0 SUPPORTED. Only Scorching Ray's
+canonical and private-inspection output changed; default Spell detail responses are byte-identical for
+all 969 owners. The full Maven suite passes 848 tests with one skipped test. Review remains pending,
+licensing remains `NEEDS_REVIEW`, and publication authorization remains zero. Step 7.4.3 remains
+PARTIAL and parent Step 7.4.4 remains IN PROGRESS.
+
+##### 7.4.4P. Magic Missile automatic-hit damage instances — COMPLETE
+
+Activated only PHB Magic Missile. Added a typed damage-instance-series claim with three initial
+`1d4 + 1` force darts, one creature assignment per dart, caster visibility and range constraints,
+automatic-hit resolution, simultaneous impact, and one extra dart per higher slot level. Damage roll
+grouping remains `UNSPECIFIED`; no attack-roll claim or combat execution semantics were added. The
+owner remains PARTIAL, and the existing Magic Missile benchmark fixture remains byte-identical and
+pending human review.
+
+The [7.4.4P report](../analysis/mechanics/step-7/7.4.4P-magic-missile-automatic-hit-instances.md)
+records pinned evidence, claim identity and hash, benchmark deferrals, deterministic inventory
+previews, and byte-level compatibility. Inventory is now 969 identities, 122 processed owners, 255
+production claims and 328 potential claims. Classification totals remain 168 PARTIALLY_SUPPORTED,
+435 UNSUPPORTED, 366 NOT_ASSESSED and 0 SUPPORTED. Canonical and private inspection outputs changed
+only for Magic Missile; default Spell responses remain byte-identical for all 969 owners. The full
+Maven suite passes 851 tests with one skipped test. Review remains pending, licensing remains
+`NEEDS_REVIEW`, publication authorization remains zero, Step 7.4.3 remains PARTIAL, and parent Step
+7.4.4 remains IN PROGRESS.
+
+##### 7.4.4Q. Multi-instance consolidation and coverage discovery — COMPLETE (ANALYSIS ONLY)
+
+Verified the post-P baseline at 969 Spell owners, 122 processed owners, 255 production claims, and
+328 potential typed claims; classifications remain 168 PARTIALLY_SUPPORTED, 435 UNSUPPORTED,
+366 NOT_ASSESSED, and 0 SUPPORTED. Reviewed the N–P model implementations, evidence, dependency
+validation, pilot semantics, Magic Missile benchmark boundary, and all 168 partial inventory rows.
+Scanned authored entries and structured fields across all 18 pinned Spell resources, then
+source-reviewed representative candidates across PHB, XGE, TCE, AI, and XPHB. The report records
+screening counts, false positives, candidate classifications, model gaps, and a bounded R–X
+implementation sequence. No extraction, claims, source files, fixtures, or classifications changed.
+Repeated target-only inventory generation was deterministic. Review and licensing remain independent;
+publication authorization remains zero. Step 7.4.3 remains PARTIAL and parent Step 7.4.4 remains IN
+PROGRESS. See the [7.4.4Q discovery report](../analysis/mechanics/step-7/7.4.4Q-multi-instance-consolidation-discovery.md).
+
+##### 7.4.4R. Steel Wind Strike selected-target-count independent attacks — COMPLETE
+
+Added a source-bounded XGE pattern for `spell:xge:steel-wind-strike` using the pinned 5eTools
+v2.37.0 resource. The typed `SelectedTargetCount` represents up to five distinct visible creatures,
+one independent melee spell attack per selected creature, with no fixed or minimum attack count.
+One revision-1 damage claim binds 6d10 force damage to the HIT of its corresponding attack instance.
+The separate post-attack teleport choice remains an evidence-backed unsupported diagnostic because
+the current model cannot express its target-relative destination and hit-or-miss eligibility.
+Coverage remains PARTIAL; both claims remain PENDING_REVIEW / NEEDS_REVIEW for licensing, and
+publication authorization remains zero. Inventory is 123 processed owners / 257 claims / 330
+potential claims, with PARTIALLY_SUPPORTED 169, UNSUPPORTED 434, NOT_ASSESSED 366 and SUPPORTED 0.
+All 968 other canonical/private inspection documents and all 969 default Spell REST responses are
+byte-identical to the pre-R baseline. See the [7.4.4R report](../analysis/mechanics/step-7/7.4.4R-steel-wind-strike-selected-target-attacks.md).
+
+##### 7.4.4S. Melf's Acid Arrow HIT/MISS branches and delayed damage — COMPLETE
+
+Added four revision-1 claims for `spell:phb:melf-s-acid-arrow`: one ranged spell attack, immediate
+`4d4` acid damage on HIT, `2d4` acid damage at the end of the target's next turn on HIT, and half of
+the initial damage on MISS. Typed spell-slot damage scaling adds `1d4` to both HIT amounts per slot
+level above 2; the MISS fraction references the scaled initial damage claim. MISS evidence explicitly
+records no damage at the end of the target's next turn. The target remains a single target with its
+creature/object category unspecified by source. Overall coverage stays PARTIAL. Review remains
+PENDING_REVIEW, licensing NEEDS_REVIEW, and publication authorization zero.
+
+The verified inventory is 124 processed owners / 261 claims / 334 potential claims, with
+PARTIALLY_SUPPORTED 170, UNSUPPORTED 433, NOT_ASSESSED 366 and SUPPORTED 0. Only Melf's Acid Arrow
+changes canonical and private inspection; all 969 default Spell REST responses remain byte-identical.
+The pinned PHB hash, benchmark fixtures, existing 257 claims and historical reports remain unchanged.
+The full Surefire suite passes 862 tests with one existing skip; the normal Maven `test` lifecycle
+encountered the Windows javac archive-close access denial, so tests were compiled against the Maven
+test classpath before running the complete Surefire suite. See the
+[7.4.4S implementation report](../analysis/mechanics/step-7/7.4.4S-melfs-acid-arrow-hit-miss-delayed-damage.md).
+
 ### 7.5. Monster mechanics interpretation — PLANNED
 
 Reuse the common mechanics model for actions, attacks, saves, traits, legendary actions and spellcasting. Preserve action economy, authored alternatives, recharge and nested effect context. Reuse Batch 7/8 evidence and identify missing effective text-origin mappings rather than manufacturing them.
@@ -450,5 +736,6 @@ For every numbered batch:
 **Step 7.4.3 remains PARTIAL after batch 7.4.3C.** The six benchmark fixtures still require human review
 before authoritative benchmark acceptance; there is no approved gold set or independently validated
 extractor accuracy. Candidate diagnostics do not constitute mechanics verification or publication
-permission. Step 7.4.4 is IN PROGRESS with 7.4.4C complete. Stop at 7.4.4C; do not begin later
-mechanic families, corpus-wide production activation, Step 7.5, database, or frontend work.
+permission. Step 7.4.4 remains IN PROGRESS through completed implementation batch 7.4.4S. Stop at
+7.4.4S; no later multi-instance implementation, benchmark adjudication, Step 7.5, database, or
+frontend work is authorized by this batch.

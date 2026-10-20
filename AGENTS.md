@@ -16,6 +16,8 @@
 - Prefer Java records for immutable transfer and domain data, sealed interfaces for bounded polymorphism, and defensive copies for mutable collections.
 - Model known shapes with explicit types; avoid `Object`, `JsonNode`, and generic maps in application-facing models. Use custom Jackson deserializers only when needed.
 - Use meaningful comments for non-obvious constraints; do not restate the code. Keep changes focused and the final diff reviewable. Never compress code to save tokens.
+- Prefer extending an existing cohesive class over introducing another service, factory, registry or wrapper unless the new abstraction has a demonstrably separate responsibility.
+- The normal test suite must not depend on generated analysis artifacts. Tests should use self-contained fixtures or actual pinned source data where appropriate.
 
 ## Source ingestion and normalization
 

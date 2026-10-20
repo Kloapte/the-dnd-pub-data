@@ -1,0 +1,1150 @@
+﻿{
+    "datasetVersion":  "5eTools v2.37.0",
+    "inventorySource":  "analysis/mechanics/step-7/7.4.4A-spell-capability-inventory.json",
+    "verifiedBaseline":  {
+                             "identities":  969,
+                             "classifications":  {
+                                                     "SUPPORTED":  0,
+                                                     "PARTIALLY_SUPPORTED":  163,
+                                                     "UNSUPPORTED":  440,
+                                                     "NOT_ASSESSED":  366
+                                                 },
+                             "productionOwners":  106,
+                             "typedClaims":  228,
+                             "potentialTypedClaims":  310
+                         },
+    "sourceOwnersMatched":  969,
+    "familyCounts":  [
+                         {
+                             "family":  "attack_roll_hit_dependent",
+                             "evidenceOwnerCount":  75,
+                             "classifications":  {
+                                                     "SUPPORTED":  0,
+                                                     "PARTIALLY_SUPPORTED":  19,
+                                                     "UNSUPPORTED":  56,
+                                                     "NOT_ASSESSED":  0
+                                                 },
+                             "evidenceModeOwnerCounts":  {
+                                                             "structuredOnly":  6,
+                                                             "proseOnly":  10,
+                                                             "mixed":  59
+                                                         },
+                             "examples":  [
+                                              {
+                                                  "spellId":  "spell:ai:jim-s-magic-missile",
+                                                  "name":  "Jim\u0027s Magic Missile",
+                                                  "source":  "AI",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "structured",
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/5/spellAttack",
+                                                                        "excerpt":  "R"
+                                                                    },
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/5/entries/2",
+                                                                        "excerpt":  "You create three twisting, whistling, hypoallergenic, gluten-free darts of magical force. Each dart targets a creature of your choice that you can see within range. Make a ranged spell attack for each missile. On a hit, a missile deals {@damage 2d4} force damage to its target."
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:frhof:blade-of-disaster",
+                                                  "name":  "Blade of Disaster",
+                                                  "source":  "FRHoF",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "structured",
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/2/spellAttack",
+                                                                        "excerpt":  "M"
+                                                                    },
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/2/entries/0",
+                                                                        "excerpt":  "You create a 3-foot-long blade-shaped planar rift that lasts for the duration. The rift appears within range in a space of your choice, and you can immediately make up to two melee spell attacks, each one against a creature or object within 5 feet of the rift. On a hit, the targe"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:frhof:elminster-s-effulgent-spheres",
+                                                  "name":  "Elminster\u0027s Effulgent Spheres",
+                                                  "source":  "FRHoF",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "structured"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/9/spellAttack",
+                                                                        "excerpt":  "R"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:frhof:holy-star-of-mystra",
+                                                  "name":  "Holy Star of Mystra",
+                                                  "source":  "FRHoF",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "structured",
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/11/spellAttack",
+                                                                        "excerpt":  "R"
+                                                                    },
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/11/entries/1",
+                                                                        "excerpt":  "When you cast this spell and as a {@variantrule Bonus Action|XPHB} on later turns, you can unleash a shining bolt from the mote, targeting one creature within 120 feet of yourself. Make a ranged spell attack. On a hit, the target takes Force or Radiant damage (your choice) equal "
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:frhof:spellfire-flare",
+                                                  "name":  "Spellfire Flare",
+                                                  "source":  "FRHoF",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "structured",
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/15/spellAttack",
+                                                                        "excerpt":  "R"
+                                                                    },
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/15/entries/0",
+                                                                        "excerpt":  "You unleash a blast of brilliant fire. Make a ranged spell attack against a target within range; a target gains no benefit from {@variantrule Cover|XPHB|Half Cover} or {@variantrule Cover|XPHB|Three-Quarters Cover} for this attack roll. On a hit, the target takes {@damage 2d10} R"
+                                                                    }
+                                                                ]
+                                              }
+                                          ],
+                             "matchingRule":  "Structured spellAttack/spellAttacks plus explicit spell attack and on-hit prose.",
+                             "interpretationLimit":  "Attack rolls, hit-dependent damage, attack count, target selection, and cover are distinct semantics; attack-marked tags alone do not establish the full resolution rule.",
+                             "existingModelsAndGaps":  "HitByAttackTrigger, AttackEventKind, DamageMechanic, TargetScope; no dedicated spell attack-resolution payload."
+                         },
+                         {
+                             "family":  "movement_speed",
+                             "evidenceOwnerCount":  27,
+                             "classifications":  {
+                                                     "SUPPORTED":  0,
+                                                     "PARTIALLY_SUPPORTED":  6,
+                                                     "UNSUPPORTED":  17,
+                                                     "NOT_ASSESSED":  4
+                                                 },
+                             "evidenceModeOwnerCounts":  {
+                                                             "structuredOnly":  0,
+                                                             "proseOnly":  27,
+                                                             "mixed":  0
+                                                         },
+                             "examples":  [
+                                              {
+                                                  "spellId":  "spell:ai:incite-greed",
+                                                  "name":  "Incite Greed",
+                                                  "source":  "AI",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/3/entries/0",
+                                                                        "excerpt":  "When you cast this spell, you present the gem used as the material component and choose any number of creatures within range that can see you. Each target must succeed on a Wisdom saving throw or be {@condition charmed} by you until the spell ends, or until you or your companions"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:egw:magnify-gravity",
+                                                  "name":  "Magnify Gravity",
+                                                  "source":  "EGW",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/6/entries/0",
+                                                                        "excerpt":  "The gravity in a 10-foot-radius sphere centered on a point you can see within range increases for a moment. Each creature in the sphere on the turn when you cast the spell must make a Constitution saving throw. On a failed save, a creature takes {@damage 2d8} force damage, and it"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:egw:time-ravage",
+                                                  "name":  "Time Ravage",
+                                                  "source":  "EGW",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/13/entries/0",
+                                                                        "excerpt":  "You target a creature you can see within range, putting its physical form through the devastation of rapid aging. The target must make a Constitution saving throw, taking {@damage 10d12} necrotic damage on a failed save, or half as much damage on a successful one. If the save fai"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:ftd:ashardalon-s-stride",
+                                                  "name":  "Ashardalon\u0027s Stride",
+                                                  "source":  "FTD",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/0/entries/0",
+                                                                        "excerpt":  "The billowing flames of a dragon blast from your feet, granting you explosive speed. For the duration, your speed increases by 20 feet and moving doesn\u0027t provoke opportunity attacks."
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:animate-objects",
+                                                  "name":  "Animate Objects",
+                                                  "source":  "PHB",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/8/entries/3",
+                                                                        "excerpt":  "An animated object is a construct with AC, hit points, attacks, Strength, and Dexterity determined by its size. Its Constitution is 10 and its Intelligence and Wisdom are 3, and its Charisma is 1. Its speed is 30 feet; if the object lacks legs or other appendages it can use for l"
+                                                                    }
+                                                                ]
+                                              }
+                                          ],
+                             "matchingRule":  "Explicit speed increase/decrease, inability to move, half speed, or stated movement distance in prose.",
+                             "interpretationLimit":  "Creature stat blocks and incidental motion can match; identify whose speed changes, mode, duration, and movement-cost rules.",
+                             "existingModelsAndGaps":  "StatisticModifierMechanic may fit a bounded numeric speed change; no general movement, forced displacement, or movement-mode payload."
+                         },
+                         {
+                             "family":  "teleport_forced_movement",
+                             "evidenceOwnerCount":  32,
+                             "classifications":  {
+                                                     "SUPPORTED":  0,
+                                                     "PARTIALLY_SUPPORTED":  3,
+                                                     "UNSUPPORTED":  18,
+                                                     "NOT_ASSESSED":  11
+                                                 },
+                             "evidenceModeOwnerCounts":  {
+                                                             "structuredOnly":  0,
+                                                             "proseOnly":  32,
+                                                             "mixed":  0
+                                                         },
+                             "examples":  [
+                                              {
+                                                  "spellId":  "spell:au:dueling-ground",
+                                                  "name":  "Dueling Ground",
+                                                  "source":  "AU",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/6/entries/2",
+                                                                        "excerpt":  "If a target drops to 0 {@variantrule Hit Points|XPHB} while in the dueling ground, the target is {@variantrule Stable|XPHB} and teleports to the nearest unoccupied space outside the dueling ground. If a target is subjected to an effect that would kill it instantly without dealing"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:arcane-gate",
+                                                  "name":  "Arcane Gate",
+                                                  "source":  "PHB",
+                                                  "classification":  "NOT_ASSESSED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/13/entries/0",
+                                                                        "excerpt":  "You create linked teleportation portals that remain open for the duration. Choose two points on the ground that you can see, one point within 10 feet of you and one point within 500 feet of you. A circular portal, 10 feet in diameter, opens over each point. If the portal would op"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:astral-projection",
+                                                  "name":  "Astral Projection",
+                                                  "source":  "PHB",
+                                                  "classification":  "PARTIALLY_SUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/17/entries/4",
+                                                                        "excerpt":  "The spell might also end early for you or one of your companions. A successful {@spell dispel magic} spell used against an astral or physical body ends the spell for that creature. If a creature\u0027s original body or its astral form drops to 0 hit points, the spell ends for that cre"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:dimension-door",
+                                                  "name":  "Dimension Door",
+                                                  "source":  "PHB",
+                                                  "classification":  "PARTIALLY_SUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/97/entries/0",
+                                                                        "excerpt":  "You teleport yourself from your current location to any other spot within range. You arrive at exactly the spot desired. It can be a place you can see, one you can visualize, or one you can describe by stating distance and direction, such as \"200 feet straight downward\" or \"upwar"
+                                                                    },
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/97/entries/2",
+                                                                        "excerpt":  "If you would arrive in a place already occupied by an object or a creature, you and any creature traveling with you each take {@damage 4d6} force damage, and the spell fails to teleport you."
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:forbiddance",
+                                                  "name":  "Forbiddance",
+                                                  "source":  "PHB",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/146/entries/0",
+                                                                        "excerpt":  "You create a ward against magical travel that protects up to 40,000 square feet of floor space to a height of 30 feet above the floor. For the duration, creatures can\u0027t teleport into the area or use portals, such as those created by the {@spell gate} spell, to enter the area. The"
+                                                                    }
+                                                                ]
+                                              }
+                                          ],
+                             "matchingRule":  "Teleport/teleportation and explicit push, pull, or forced relocation prose.",
+                             "interpretationLimit":  "Includes movement permissions, prevention, portals, and mishap clauses as well as actual movement; direction, destination, willing status, and collision outcomes differ.",
+                             "existingModelsAndGaps":  "TargetScope and trigger/condition types can contextualize; no teleport or forced-movement payload."
+                         },
+                         {
+                             "family":  "summoning_creation",
+                             "evidenceOwnerCount":  14,
+                             "classifications":  {
+                                                     "SUPPORTED":  0,
+                                                     "PARTIALLY_SUPPORTED":  0,
+                                                     "UNSUPPORTED":  5,
+                                                     "NOT_ASSESSED":  9
+                                                 },
+                             "evidenceModeOwnerCounts":  {
+                                                             "structuredOnly":  0,
+                                                             "proseOnly":  14,
+                                                             "mixed":  0
+                                                         },
+                             "examples":  [
+                                              {
+                                                  "spellId":  "spell:efa:homunculus-servant",
+                                                  "name":  "Homunculus Servant",
+                                                  "source":  "EFA",
+                                                  "classification":  "NOT_ASSESSED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/0/entries/0",
+                                                                        "excerpt":  "You summon a special homunculus in an unoccupied space within range. This creature uses the {@creature Homunculus Servant|EFA} stat block. If you already have a homunculus from this spell, the homunculus is replaced by the new one. You determine the homunculus\u0027s appearance, such "
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:llk:flock-of-familiars",
+                                                  "name":  "Flock of Familiars",
+                                                  "source":  "LLK",
+                                                  "classification":  "NOT_ASSESSED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/0/entries/0",
+                                                                        "excerpt":  "You temporarily summon three familiars—spirits that take animal forms of your choice. Each familiar uses the same rules and options for a familiar conjured by the {@spell find familiar} spell. All the familiars conjured by this spell must be the same type of creature (celestials,"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:llk:galder-s-speedy-courier",
+                                                  "name":  "Galder\u0027s Speedy Courier",
+                                                  "source":  "LLK",
+                                                  "classification":  "NOT_ASSESSED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/1/entries/0",
+                                                                        "excerpt":  "You summon a Small air elemental to a spot within range. The air elemental is formless, nearly transparent, immune to all damage, and cannot interact with other creatures or objects. It carries an open, empty chest whose interior dimensions are 3 feet on each side. While the spel"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:animate-objects",
+                                                  "name":  "Animate Objects",
+                                                  "source":  "PHB",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/8/entries/0",
+                                                                        "excerpt":  "Objects come to life at your command. Choose up to ten nonmagical objects within range that are not being worn or carried. Medium targets count as two objects, Large targets count as four objects, Huge targets count as eight objects. You can\u0027t animate any object larger than Huge."
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:conjure-animals",
+                                                  "name":  "Conjure Animals",
+                                                  "source":  "PHB",
+                                                  "classification":  "NOT_ASSESSED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/62/entries/0",
+                                                                        "excerpt":  "You summon fey spirits that take the form of beasts and appear in unoccupied spaces that you can see within range. Choose one of the following options for what appears:"
+                                                                    }
+                                                                ]
+                                              }
+                                          ],
+                             "matchingRule":  "Summon/conjure creature language, animate objects, objects coming to life, and explicit creation of named creature-like entities.",
+                             "interpretationLimit":  "Counts include different creation modes and replacement/choice rules; summoned stat blocks are references, not resolved mechanics and may reflect edition-specific policies.",
+                             "existingModelsAndGaps":  "No creature creation or summoning payload; target and condition types cannot encode creature statistics or lifecycle."
+                         },
+                         {
+                             "family":  "visibility_invisibility_senses",
+                             "evidenceOwnerCount":  42,
+                             "classifications":  {
+                                                     "SUPPORTED":  0,
+                                                     "PARTIALLY_SUPPORTED":  7,
+                                                     "UNSUPPORTED":  13,
+                                                     "NOT_ASSESSED":  22
+                                                 },
+                             "evidenceModeOwnerCounts":  {
+                                                             "structuredOnly":  0,
+                                                             "proseOnly":  42,
+                                                             "mixed":  0
+                                                         },
+                             "examples":  [
+                                              {
+                                                  "spellId":  "spell:egw:dark-star",
+                                                  "name":  "Dark Star",
+                                                  "source":  "EGW",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/0/entries/1",
+                                                                        "excerpt":  "For the duration, the spell\u0027s area is {@quickref difficult terrain||3}. A creature with {@sense darkvision} can\u0027t see through the magical darkness, and nonmagical light can\u0027t illuminate it. No sound can be created within or pass through the area. Any creature or object entirely i"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:animate-objects",
+                                                  "name":  "Animate Objects",
+                                                  "source":  "PHB",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/8/entries/3",
+                                                                        "excerpt":  "An animated object is a construct with AC, hit points, attacks, Strength, and Dexterity determined by its size. Its Constitution is 10 and its Intelligence and Wisdom are 3, and its Charisma is 1. Its speed is 30 feet; if the object lacks legs or other appendages it can use for l"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:arcane-eye",
+                                                  "name":  "Arcane Eye",
+                                                  "source":  "PHB",
+                                                  "classification":  "NOT_ASSESSED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/12/entries/1",
+                                                                        "excerpt":  "You mentally receive visual information from the eye, which has normal vision and {@sense darkvision} out to 30 feet. The eye can look in every direction."
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:astral-projection",
+                                                  "name":  "Astral Projection",
+                                                  "source":  "PHB",
+                                                  "classification":  "PARTIALLY_SUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/17/entries/1",
+                                                                        "excerpt":  "Your astral body resembles your mortal form in almost every way, replicating your game statistics and possessions. The principal difference is the addition of a silvery cord that extends from between your shoulder blades and trails behind you, fading to invisibility after 1 foot."
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:blur",
+                                                  "name":  "Blur",
+                                                  "source":  "PHB",
+                                                  "classification":  "NOT_ASSESSED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/38/entries/0",
+                                                                        "excerpt":  "Your body becomes blurred, shifting and wavering to all who can see you. For the duration, any creature has disadvantage on attack rolls against you. An attacker is immune to this effect if it doesn\u0027t rely on sight, as with blindsight, or can see through illusions, as with {@sens"
+                                                                    }
+                                                                ]
+                                              }
+                                          ],
+                             "matchingRule":  "Explicit invisibility, darkvision, blindsight, truesight, tremorsense, obscuration, or seeing through darkness/fog.",
+                             "interpretationLimit":  "Vision mentioned as a target prerequisite is excluded by the cue; sensory exceptions and visibility of objects/creatures need precise scope.",
+                             "existingModelsAndGaps":  "ConditionChangeMechanic can model Invisible condition only; no senses, obscurement, vision, or detection payload."
+                         },
+                         {
+                             "family":  "terrain_environment",
+                             "evidenceOwnerCount":  34,
+                             "classifications":  {
+                                                     "SUPPORTED":  0,
+                                                     "PARTIALLY_SUPPORTED":  9,
+                                                     "UNSUPPORTED":  18,
+                                                     "NOT_ASSESSED":  7
+                                                 },
+                             "evidenceModeOwnerCounts":  {
+                                                             "structuredOnly":  0,
+                                                             "proseOnly":  34,
+                                                             "mixed":  0
+                                                         },
+                             "examples":  [
+                                              {
+                                                  "spellId":  "spell:au:dueling-ground",
+                                                  "name":  "Dueling Ground",
+                                                  "source":  "AU",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/6/entries/0",
+                                                                        "excerpt":  "You create a magical dueling ground bounded by a glowing, rune-scribed circle in a 15-foot-radius {@variantrule Sphere [Area of Effect]|XPHB|Sphere} centered on a point on the ground you touch."
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:blade-barrier",
+                                                  "name":  "Blade Barrier",
+                                                  "source":  "PHB",
+                                                  "classification":  "PARTIALLY_SUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/31/entries/0",
+                                                                        "excerpt":  "You create a vertical wall of whirling, razor-sharp blades made of magical energy. The wall appears within range and lasts for the duration. You can make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high,"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:cloudkill",
+                                                  "name":  "Cloudkill",
+                                                  "source":  "PHB",
+                                                  "classification":  "PARTIALLY_SUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/52/entries/0",
+                                                                        "excerpt":  "You create a 20-foot-radius sphere of poisonous, yellow-green fog centered on a point you choose within range. The fog spreads around corners. It lasts for the duration or until strong wind disperses the fog, ending the spell. Its area is {@quickref Vision and Light|PHB|2||heavil"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:create-food-and-water",
+                                                  "name":  "Create Food and Water",
+                                                  "source":  "PHB",
+                                                  "classification":  "NOT_ASSESSED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/78/entries/0",
+                                                                        "excerpt":  "You create 45 pounds of food and 30 gallons of water on the ground or in containers within range, enough to sustain up to fifteen humanoids or five steeds for 24 hours. The food is bland but nourishing, and spoils if uneaten after 24 hours. The water is clean and doesn\u0027t go bad."
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:earthquake",
+                                                  "name":  "Earthquake",
+                                                  "source":  "PHB",
+                                                  "classification":  "PARTIALLY_SUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/112/entries/0",
+                                                                        "excerpt":  "You create a seismic disturbance at a point on the ground that you can see within range. For the duration, an intense tremor rips through the ground in a 100-foot-radius circle centered on that point and shakes creatures and structures in contact with the ground in that area."
+                                                                    },
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/112/entries/1",
+                                                                        "excerpt":  "The ground in the area becomes {@quickref difficult terrain||3}. Each creature on the ground that is {@status concentration||concentrating} must make a Constitution saving throw. On a failed save, the creature\u0027s {@status concentration} is broken."
+                                                                    }
+                                                                ]
+                                              }
+                                          ],
+                             "matchingRule":  "Environment/terrain nouns paired with explicit change, coverage, difficult-terrain, or weather cues.",
+                             "interpretationLimit":  "Generated walls/fog/food/water and narrative scene setting can match; terrain change, area effect, damage zone, and object creation must be distinguished.",
+                             "existingModelsAndGaps":  "TargetScope and Duration types offer context; no terrain, area-state, or environmental payload."
+                         },
+                         {
+                             "family":  "transformation_shapechange",
+                             "evidenceOwnerCount":  14,
+                             "classifications":  {
+                                                     "SUPPORTED":  0,
+                                                     "PARTIALLY_SUPPORTED":  1,
+                                                     "UNSUPPORTED":  6,
+                                                     "NOT_ASSESSED":  7
+                                                 },
+                             "evidenceModeOwnerCounts":  {
+                                                             "structuredOnly":  0,
+                                                             "proseOnly":  14,
+                                                             "mixed":  0
+                                                         },
+                             "examples":  [
+                                              {
+                                                  "spellId":  "spell:aag:create-spelljamming-helm",
+                                                  "name":  "Create Spelljamming Helm",
+                                                  "source":  "AAG",
+                                                  "classification":  "NOT_ASSESSED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/1/entries/0",
+                                                                        "excerpt":  "Holding the rod used in the casting of the spell, you touch a Large or smaller chair that is unoccupied. The rod disappears, and the chair is transformed into a {@item spelljamming helm|AAG}."
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:au:iron-body",
+                                                  "name":  "Iron Body",
+                                                  "source":  "AU",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/16/entries/0",
+                                                                        "excerpt":  "One willing creature you touch transforms into living metal. Until the spell ends, the target\u0027s {@condition Exhaustion|XPHB} level can\u0027t increase; the target has {@variantrule Resistance|XPHB} to Bludgeoning, Fire, Piercing, and Slashing damage; and it has {@variantrule Immunity|"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:animate-objects",
+                                                  "name":  "Animate Objects",
+                                                  "source":  "PHB",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/8/entries/0",
+                                                                        "excerpt":  "Objects come to life at your command. Choose up to ten nonmagical objects within range that are not being worn or carried. Medium targets count as two objects, Large targets count as four objects, Huge targets count as eight objects. You can\u0027t animate any object larger than Huge."
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:conjure-animals",
+                                                  "name":  "Conjure Animals",
+                                                  "source":  "PHB",
+                                                  "classification":  "NOT_ASSESSED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/62/entries/0",
+                                                                        "excerpt":  "You summon fey spirits that take the form of beasts and appear in unoccupied spaces that you can see within range. Choose one of the following options for what appears:"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:conjure-fey",
+                                                  "name":  "Conjure Fey",
+                                                  "source":  "PHB",
+                                                  "classification":  "NOT_ASSESSED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/66/entries/0",
+                                                                        "excerpt":  "You summon a {@filter fey creature of challenge rating 6 or lower|bestiary|challenge rating=[\u00260;\u00266]|type=fey|miscellaneous=!swarm}, or a fey spirit that takes the form of a {@filter beast of challenge rating 6 or lower|bestiary|challenge rating=[\u00260;\u00266]|type=beast|miscellaneous=!s"
+                                                                    }
+                                                                ]
+                                              }
+                                          ],
+                             "matchingRule":  "Explicit polymorph/shapechange/transform into or assume/take a form language.",
+                             "interpretationLimit":  "May be a creature transformation, object conversion, summoned form, or appearance-only effect; stat replacement and reversibility are substantial distinctions.",
+                             "existingModelsAndGaps":  "No transformation or creature-stat replacement payload."
+                         },
+                         {
+                             "family":  "condition_immunity_prevention",
+                             "evidenceOwnerCount":  12,
+                             "classifications":  {
+                                                     "SUPPORTED":  0,
+                                                     "PARTIALLY_SUPPORTED":  4,
+                                                     "UNSUPPORTED":  8,
+                                                     "NOT_ASSESSED":  0
+                                                 },
+                             "evidenceModeOwnerCounts":  {
+                                                             "structuredOnly":  12,
+                                                             "proseOnly":  0,
+                                                             "mixed":  0
+                                                         },
+                             "examples":  [
+                                              {
+                                                  "spellId":  "spell:au:iron-body",
+                                                  "name":  "Iron Body",
+                                                  "source":  "AU",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "structured"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/16/conditionImmune",
+                                                                        "excerpt":  "paralyzed,petrified,poisoned"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:freedom-of-movement",
+                                                  "name":  "Freedom of Movement",
+                                                  "source":  "PHB",
+                                                  "classification":  "PARTIALLY_SUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "structured"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/149/conditionImmune",
+                                                                        "excerpt":  "paralyzed,restrained"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:heroes-feast",
+                                                  "name":  "Heroes\u0027 Feast",
+                                                  "source":  "PHB",
+                                                  "classification":  "PARTIALLY_SUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "structured"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/178/conditionImmune",
+                                                                        "excerpt":  "frightened"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:heroism",
+                                                  "name":  "Heroism",
+                                                  "source":  "PHB",
+                                                  "classification":  "PARTIALLY_SUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "structured"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/179/conditionImmune",
+                                                                        "excerpt":  "frightened"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:mind-blank",
+                                                  "name":  "Mind Blank",
+                                                  "source":  "PHB",
+                                                  "classification":  "PARTIALLY_SUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "structured"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/227/conditionImmune",
+                                                                        "excerpt":  "charmed"
+                                                                    }
+                                                                ]
+                                              }
+                                          ],
+                             "matchingRule":  "Structured conditionImmune plus explicit prose condition-immunity/prevention language.",
+                             "interpretationLimit":  "Structured tags are clearer than prose; scope, duration, and whether immunity is unconditional or conditional still need validation.",
+                             "existingModelsAndGaps":  "ConditionChangeMechanic with ConditionOperation.GRANT_IMMUNITY; existing canonical condition and duration bindings."
+                         },
+                         {
+                             "family":  "damage_mitigation_protection",
+                             "evidenceOwnerCount":  52,
+                             "classifications":  {
+                                                     "SUPPORTED":  0,
+                                                     "PARTIALLY_SUPPORTED":  11,
+                                                     "UNSUPPORTED":  38,
+                                                     "NOT_ASSESSED":  3
+                                                 },
+                             "evidenceModeOwnerCounts":  {
+                                                             "structuredOnly":  35,
+                                                             "proseOnly":  9,
+                                                             "mixed":  8
+                                                         },
+                             "examples":  [
+                                              {
+                                                  "spellId":  "spell:au:aura-of-evasion",
+                                                  "name":  "Aura of Evasion",
+                                                  "source":  "AU",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/0/entries/0",
+                                                                        "excerpt":  "An aura of alacrity radiates from you in a 30-foot {@variantrule Emanation [Area of Effect]|XPHB|Emanation} for the duration. While in the aura, you and your allies have {@variantrule Advantage|XPHB} on Dexterity saving throws. When an affected creature is subjected to an effect "
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:au:illusory-dragon",
+                                                  "name":  "Illusory Dragon",
+                                                  "source":  "AU",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "structured"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/13/damageImmune",
+                                                                        "excerpt":  "acid,bludgeoning,cold,fire,force,lightning,necrotic,piercing,poison,psychic,radiant,slashing,thunder"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:au:invulnerability",
+                                                  "name":  "Invulnerability",
+                                                  "source":  "AU",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "structured"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/15/damageImmune",
+                                                                        "excerpt":  "acid,bludgeoning,cold,fire,force,lightning,necrotic,piercing,poison,psychic,radiant,slashing,thunder"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:au:iron-body",
+                                                  "name":  "Iron Body",
+                                                  "source":  "AU",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "structured"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/16/damageResist",
+                                                                        "excerpt":  "bludgeoning,fire,piercing,slashing"
+                                                                    },
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/16/damageImmune",
+                                                                        "excerpt":  "poison"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:frhof:alustriel-s-mooncloak",
+                                                  "name":  "Alustriel\u0027s Mooncloak",
+                                                  "source":  "FRHoF",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "structured"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "structured",
+                                                                        "path":  "/spell/0/damageResist",
+                                                                        "excerpt":  "cold,lightning,radiant"
+                                                                    }
+                                                                ]
+                                              }
+                                          ],
+                             "matchingRule":  "Structured damageResist/damageImmune/damageVulnerable and explicit damage-resistance/reduction prose.",
+                             "interpretationLimit":  "Resistance, immunity, vulnerability, temporary hit points, reduction, advantage on saves, and spell-only prevention are not interchangeable.",
+                             "existingModelsAndGaps":  "DamageResistanceMechanic and SpellDamagePreventionMechanic; no generic damage-reduction or mitigation payload."
+                         },
+                         {
+                             "family":  "ending_triggers",
+                             "evidenceOwnerCount":  21,
+                             "classifications":  {
+                                                     "SUPPORTED":  0,
+                                                     "PARTIALLY_SUPPORTED":  2,
+                                                     "UNSUPPORTED":  11,
+                                                     "NOT_ASSESSED":  8
+                                                 },
+                             "evidenceModeOwnerCounts":  {
+                                                             "structuredOnly":  0,
+                                                             "proseOnly":  21,
+                                                             "mixed":  0
+                                                         },
+                             "examples":  [
+                                              {
+                                                  "spellId":  "spell:au:dueling-ground",
+                                                  "name":  "Dueling Ground",
+                                                  "source":  "AU",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/6/entries/1",
+                                                                        "excerpt":  "As part of creating the dueling ground, you designate two willing creatures within the {@variantrule Sphere [Area of Effect]|XPHB|Sphere} as the targets. The spell ends early if a creature other than one of the targets enters the {@variantrule Sphere [Area of Effect]|XPHB|Sphere}"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:au:entrancing-mirrors",
+                                                  "name":  "Entrancing Mirrors",
+                                                  "source":  "AU",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/8/entries/2",
+                                                                        "excerpt":  "A {@condition Stunned|XPHB} target repeats the Intelligence saving throw at the end of each of its turns, ending the spell on itself on a success."
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:au:vision-of-elapsing-eons",
+                                                  "name":  "Vision of Elapsing Eons",
+                                                  "source":  "AU",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/28/entries/1",
+                                                                        "excerpt":  "While {@condition Paralyzed|XPHB}, the target repeats the save at the end of each of its turns. On a failed save, it gains 1 {@condition Exhaustion|XPHB} level. On a successful save, the spell ends. The spell ends early if someone within 5 feet of the target takes an action to sh"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:frhof:elminster-s-effulgent-spheres",
+                                                  "name":  "Elminster\u0027s Effulgent Spheres",
+                                                  "source":  "FRHoF",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/9/entries/3",
+                                                                        "excerpt":  "The spell ends early if you have no more spheres remaining."
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:frhof:sylune-s-viper",
+                                                  "name":  "SylunÃ©\u0027s Viper",
+                                                  "source":  "FRHoF",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/17/entries/0",
+                                                                        "excerpt":  "A shimmering, spectral snake encircles your body for the duration. You gain 15 {@variantrule Temporary Hit Points|XPHB}; the spell ends early if you have no {@variantrule Temporary Hit Points|XPHB} left."
+                                                                    }
+                                                                ]
+                                              }
+                                          ],
+                             "matchingRule":  "Explicit early-ending condition or repeated-save clause that ends the effect/spell.",
+                             "interpretationLimit":  "Ordinary duration endings are excluded; many clauses are nested in condition/application mechanics and must retain target-specific ending semantics.",
+                             "existingModelsAndGaps":  "EffectDurationMechanic, ConditionEndsOnSaveSuccess, ConditionEndsWithSpell, TriggerExpression; no general conditional-ending payload for arbitrary effect types."
+                         },
+                         {
+                             "family":  "resource_restrictions_special_targeting",
+                             "evidenceOwnerCount":  4,
+                             "classifications":  {
+                                                     "SUPPORTED":  0,
+                                                     "PARTIALLY_SUPPORTED":  1,
+                                                     "UNSUPPORTED":  2,
+                                                     "NOT_ASSESSED":  1
+                                                 },
+                             "evidenceModeOwnerCounts":  {
+                                                             "structuredOnly":  0,
+                                                             "proseOnly":  4,
+                                                             "mixed":  0
+                                                         },
+                             "examples":  [
+                                              {
+                                                  "spellId":  "spell:au:transfix",
+                                                  "name":  "Transfix",
+                                                  "source":  "AU",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/26/entries/3",
+                                                                        "excerpt":  "Until the spell ends, you can take a {@action Magic|XPHB} action on subsequent turns to target another creature, but you can\u0027t target a creature again if it has succeeded on a save against this casting of the spell."
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:phb:eyebite",
+                                                  "name":  "Eyebite",
+                                                  "source":  "PHB",
+                                                  "classification":  "PARTIALLY_SUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/123/entries/0",
+                                                                        "excerpt":  "For the spell\u0027s duration, your eyes become an inky void imbued with dread power. One creature of your choice within 60 feet of you that you can see must succeed on a Wisdom saving throw or be affected by one of the following effects of your choice for the duration. On each of you"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:xphb:eyebite",
+                                                  "name":  "Eyebite",
+                                                  "source":  "XPHB",
+                                                  "classification":  "UNSUPPORTED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/128/entries/1",
+                                                                        "excerpt":  "On each of your turns until the spell ends, you can take a {@action Magic|XPHB} action to target another creature but can\u0027t target a creature again if it has succeeded on a save against this casting of the spell."
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "spellId":  "spell:xphb:tasha-s-bubbling-cauldron",
+                                                  "name":  "Tasha\u0027s Bubbling Cauldron",
+                                                  "source":  "XPHB",
+                                                  "classification":  "NOT_ASSESSED",
+                                                  "evidenceModes":  [
+                                                                        "prose"
+                                                                    ],
+                                                  "locations":  [
+                                                                    {
+                                                                        "mode":  "prose",
+                                                                        "path":  "/spell/346/entries/2",
+                                                                        "excerpt":  "Potions obtained from the cauldron that aren\u0027t consumed disappear when you cast this spell again."
+                                                                    }
+                                                                ]
+                                              }
+                                          ],
+                             "matchingRule":  "Explicit consumed/spent resource, repeated-target restriction, or cast-again restriction.",
+                             "interpretationLimit":  "Small cue count underestimates heterogeneous component, cost, target eligibility, repeat-target and resource expenditure semantics; material components are not necessarily costs.",
+                             "existingModelsAndGaps":  "SpellTargetSubject and TargetScope encode target shapes; no general resource-cost/restriction payload."
+                         }
+                     ],
+    "methodology":  {
+                        "corpus":  "Pinned 5eTools v2.37.0 Spell JSON under src/main/resources/data/spells, joined to the current 7.4.4A inventory by exact source and name.",
+                        "ownerCounting":  "Each spellId is counted at most once per family, even if multiple entry strings or fields match. Family counts overlap and must not be summed.",
+                        "evidenceLocations":  "JSON pointers are rooted at the source spells array, for example /spell/97/entries/0; structured pointers use the source array index and field name.",
+                        "evidenceMatching":  "Structured source fields are matched exactly where listed. Prose is scanned in entries and entriesHigherLevel with family-specific lexical cues and reviewed examples; counts are discovery candidates, not asserted extraction eligibility.",
+                        "classification":  "Classification is joined from the existing inventory record and does not change inventory output.",
+                        "baseline":  "The inventory JSON is authoritative for identities, classifications, processed owners and potential typed claims. Current typed claim count (228) is cross-checked against the roadmap and current inventory report narrative."
+                    }
+}

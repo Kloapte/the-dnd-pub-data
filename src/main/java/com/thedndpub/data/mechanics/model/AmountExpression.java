@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = DiceAmount.class, name = "DICE"),
         @JsonSubTypes.Type(value = SymbolicAmount.class, name = "SYMBOLIC"),
         @JsonSubTypes.Type(value = SumAmount.class, name = "SUM"),
+        @JsonSubTypes.Type(value = FractionOfAmount.class, name = "FRACTION_OF_AMOUNT"),
         @JsonSubTypes.Type(value = UnknownAmount.class, name = "UNKNOWN")
 })
 public sealed interface AmountExpression permits
@@ -16,6 +17,7 @@ public sealed interface AmountExpression permits
         DiceAmount,
         SymbolicAmount,
         SumAmount,
+        FractionOfAmount,
         UnknownAmount {
 
 }

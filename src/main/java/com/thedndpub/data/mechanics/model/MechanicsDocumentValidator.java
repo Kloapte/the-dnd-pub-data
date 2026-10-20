@@ -156,6 +156,19 @@ final class MechanicsDocumentValidator {
     }
 
     private static void validateBindingTypes(MechanicRecord record, Map<MechanicId, MechanicRecord> records) {
+        if (record.payload() instanceof DamageMechanic damage
+                && damage.amount() instanceof FractionOfAmount fraction) {
+            MechanicRecord base = records.get(fraction.baseAmount().id());
+            ModelChecks.require(base != null && base.payload() instanceof DamageMechanic,
+                    "Fractional damage must reference an existing damage claim");
+            ModelChecks.require(base.revision().reference(base.id()).equals(fraction.baseAmount()),
+                    "Fractional damage references a stale base damage revision");
+            DamageMechanic baseDamage = (DamageMechanic) base.payload();
+            ModelChecks.require(!(baseDamage.amount() instanceof FractionOfAmount),
+                    "Fractional damage cannot reference another fraction");
+            ModelChecks.require(damage.damageType().equals(baseDamage.damageType()),
+                    "Fractional damage must preserve its base damage type");
+        }
         for (MechanicContextBinding binding : record.context().bindings()) {
             if (binding instanceof ActivatedBy activation) {
                 MechanicRecord target = current(records, activation.activation());
@@ -167,6 +180,33 @@ final class MechanicsDocumentValidator {
                 MechanicRecord target = current(records, outcome.savingThrow());
                 ModelChecks.require(target == null || target.payload() instanceof SavingThrowRequirementMechanic,
                         "Save outcome binding must reference a save requirement");
+            } else if (binding instanceof AppliesOnAttackRollOutcome outcome) {
+                ModelChecks.require(record.payload() instanceof DamageMechanic
+                                || record.payload() instanceof StatisticModifierMechanic
+                                || record.payload() instanceof HitPointRecoveryPreventionMechanic
+                                || record.payload() instanceof ReactionPreventionMechanic
+                                || record.payload() instanceof AttackRollModifierMechanic,
+                        "Attack-roll outcome must be attached to a supported effect mechanic");
+                MechanicRecord target = records.get(outcome.attackRoll().id());
+                ModelChecks.require(target == null || target.payload() instanceof AttackRollMechanic,
+                        "Attack-roll outcome must reference an attack-roll mechanic");
+                if (target != null) {
+                    ModelChecks.require(target.revision().reference(target.id()).equals(outcome.attackRoll()),
+                            "Attack-roll outcome references a stale attack-roll revision");
+                }
+            } else if (binding instanceof AppliesOnEachAttackRollOutcome outcome) {
+                ModelChecks.require(record.payload() instanceof DamageMechanic,
+                        "Per-instance attack-roll outcome must be attached to damage");
+                MechanicRecord target = records.get(outcome.attackRoll().id());
+                ModelChecks.require(target != null && target.payload() instanceof AttackRollMechanic,
+                        "Per-instance outcome must reference an existing attack-roll mechanic");
+                ModelChecks.require(target.revision().reference(target.id()).equals(outcome.attackRoll()),
+                        "Per-instance outcome references a stale attack-roll revision");
+                AttackRollMechanic attack = (AttackRollMechanic) target.payload();
+                ModelChecks.require(attack.attacksIndependent(),
+                        "Per-instance outcome must reference independent attack rolls");
+                ModelChecks.require(record.context().subject().equals(target.context().subject()),
+                        "Per-instance damage must share the attack target subject");
             } else if (binding instanceof ConditionOnSaveOutcome outcome) {
                 conditionPayload(record);
                 validateSavingThrowTarget(records, outcome.savingThrow());
@@ -180,7 +220,8 @@ final class MechanicsDocumentValidator {
             } else if (binding instanceof AppliesWhen) {
                 ModelChecks.require(record.payload() instanceof StatisticModifierMechanic
                                 || record.payload() instanceof ArmorClassModifierMechanic
-                                || record.payload() instanceof DamageResistanceMechanic,
+                                || record.payload() instanceof DamageResistanceMechanic
+                                || record.payload() instanceof AttackRollModifierMechanic,
                         "Applicability conditions must be attached to an effect claim");
             } else if (binding instanceof ConditionEndsWithSpell) {
                 conditionPayload(record);
@@ -197,6 +238,7 @@ final class MechanicsDocumentValidator {
                 durationTarget(records, reference);
             }
         }
+        validateInstanceTargetAllocation(record);
         if (record.payload() instanceof ConditionChangeMechanic condition && condition.choiceGroup() != null) {
             MechanicRecord target = current(records, condition.choiceGroup());
             ModelChecks.require(target == null || target.payload() instanceof ConditionChoiceMechanic,
@@ -208,10 +250,87 @@ final class MechanicsDocumentValidator {
                         "Condition claim does not match its choice group");
             }
         }
+        validateAttackRollModifier(record, records);
         if (record.payload() instanceof EffectDurationMechanic duration
                 && duration.specification() instanceof ReferencedDuration reference) {
             durationTarget(records, reference);
         }
+    }
+
+    private static void validateInstanceTargetAllocation(MechanicRecord record) {
+        if (record.payload() instanceof DamageInstanceSeriesMechanic series) {
+            InstanceTargetAllocation allocation = series.targetAllocation();
+            ModelChecks.require(record.context().subject() instanceof SpellTargetSubject,
+                    "Damage instance series requires a typed Spell target subject");
+            validateTargetCategories((SpellTargetSubject) record.context().subject(),
+                    allocation.eligibleTargetCategories());
+            ModelChecks.require(record.context().bindings().isEmpty(),
+                    "Automatic-hit damage series cannot depend on an attack-roll outcome");
+            return;
+        }
+        if (!(record.payload() instanceof AttackRollMechanic attack) || attack.targetAllocation() == null) {
+            return;
+        }
+        InstanceTargetAllocation allocation = attack.targetAllocation();
+        if (allocation.targetCategoryEligibilityStatus() == TargetCategoryEligibilityStatus.UNSPECIFIED_IN_SOURCE) {
+            ModelChecks.require(record.context().subject() instanceof UnknownSubject unknown
+                            && unknown.reason() == UnknownValueReason.NOT_AUTHORED,
+                    "Source-unspecified target categories require a not-authored subject value");
+            return;
+        }
+        if (allocation.targetCategoryEligibilityStatus() == TargetCategoryEligibilityStatus.NOT_ASSESSED) {
+            ModelChecks.require(record.context().subject() instanceof UnknownSubject unknown
+                            && unknown.reason() == UnknownValueReason.NOT_INTERPRETED,
+                    "Unassessed target categories require a not-interpreted subject value");
+            return;
+        }
+        ModelChecks.require(record.context().subject() instanceof SpellTargetSubject,
+                "Per-instance target allocation requires a typed Spell target subject");
+        SpellTargetSubject subject = (SpellTargetSubject) record.context().subject();
+        validateTargetCategories(subject, allocation.eligibleTargetCategories());
+        if (attack.selectedTargetCount() != null) {
+            ModelChecks.require(subject.scope() == TargetScope.MULTIPLE_TARGET_CREATURES
+                            && subject.maximumTargets() != null
+                            && subject.maximumTargets() == attack.selectedTargetCount().maximumSelectedTargets(),
+                    "Selected-target attack count must match the target subject maximum");
+        }
+    }
+
+    private static void validateTargetCategories(
+            SpellTargetSubject subject,
+            List<TargetCategory> allocationCategories) {
+        List<TargetCategory> subjectCategories = switch (subject.scope()) {
+            case SINGLE_TARGET_CREATURE -> List.of(TargetCategory.CREATURE);
+            case MULTIPLE_TARGET_CREATURES -> List.of(TargetCategory.CREATURE);
+            case SINGLE_TARGET -> subject.eligibleTargetCategories();
+            default -> null;
+        };
+        ModelChecks.require(subjectCategories != null
+                        && subjectCategories.equals(allocationCategories),
+                "Per-instance target allocation must match the Spell target subject categories");
+    }
+
+    private static void validateAttackRollModifier(
+            MechanicRecord record, Map<MechanicId, MechanicRecord> records) {
+        if (!(record.payload() instanceof AttackRollModifierMechanic modifier)) {
+            return;
+        }
+        if (modifier.affectedRolls() instanceof ReferencedAttackRollSelector referenced) {
+            MechanicRecord target = records.get(referenced.attackRoll().id());
+            ModelChecks.require(target != null && target.payload() instanceof AttackRollMechanic,
+                    "A referenced attack-roll modifier must identify an existing attack-roll claim");
+            ModelChecks.require(target.revision().reference(target.id()).equals(referenced.attackRoll()),
+                    "An attack-roll modifier references a stale attack-roll revision");
+        }
+        List<ApplicabilityCondition> conditions = record.context().bindings().stream()
+                .filter(AppliesWhen.class::isInstance)
+                .map(AppliesWhen.class::cast)
+                .map(AppliesWhen::condition)
+                .toList();
+        ModelChecks.require(!(modifier.affectedRolls() instanceof ReferencedAttackRollSelector
+                        && conditions.contains(ApplicabilityCondition.TARGET_NOT_WEARING_ARMOR)
+                        && conditions.contains(ApplicabilityCondition.ATTACK_ROLL_TARGET_WEARING_ARMOR_MADE_OF_METAL)),
+                "A target cannot both wear metal armor and not wear armor");
     }
 
     private static void conditionPayload(MechanicRecord record) {
@@ -260,6 +379,16 @@ final class MechanicsDocumentValidator {
                         && declared.source().equals(sources.get(declared.source().resourcePath())),
                         "Declared duration source/owner mismatch");
             }
+        }
+        if (record.payload() instanceof DamageMechanic damage
+                && damage.timing() == DamageTiming.END_OF_TARGET_NEXT_TURN) {
+            ModelChecks.require(record.context().bindings().stream().anyMatch(binding ->
+                            binding instanceof AppliesOnAttackRollOutcome outcome
+                                    && outcome.outcome() == AttackRollOutcome.HIT),
+                    "End-of-target-next-turn damage requires a HIT outcome trigger");
+            ModelChecks.require(record.context().bindings().stream().noneMatch(binding ->
+                            binding instanceof AppliesOnEachAttackRollOutcome),
+                    "End-of-target-next-turn damage currently requires a single attack outcome");
         }
     }
 

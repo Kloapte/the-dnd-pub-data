@@ -16,7 +16,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = ConditionChangeMechanic.class, name = "CONDITION_CHANGE"),
         @JsonSubTypes.Type(value = ConditionChoiceMechanic.class, name = "CONDITION_CHOICE"),
         @JsonSubTypes.Type(value = StatisticModifierMechanic.class, name = "STATISTIC_MODIFIER"),
-        @JsonSubTypes.Type(value = DamageResistanceMechanic.class, name = "DAMAGE_RESISTANCE")
+        @JsonSubTypes.Type(value = DamageResistanceMechanic.class, name = "DAMAGE_RESISTANCE"),
+        @JsonSubTypes.Type(value = AttackRollMechanic.class, name = "ATTACK_ROLL"),
+        @JsonSubTypes.Type(value = HitPointRecoveryPreventionMechanic.class, name = "HIT_POINT_RECOVERY_PREVENTION"),
+        @JsonSubTypes.Type(value = ReactionPreventionMechanic.class, name = "REACTION_PREVENTION"),
+        @JsonSubTypes.Type(value = AttackRollModifierMechanic.class, name = "ATTACK_ROLL_MODIFIER"),
+        @JsonSubTypes.Type(value = DamageInstanceSeriesMechanic.class, name = "DAMAGE_INSTANCE_SERIES")
 })
 public sealed interface MechanicPayload permits
         ArmorClassModifierMechanic,
@@ -30,6 +35,11 @@ public sealed interface MechanicPayload permits
         ConditionChangeMechanic,
         ConditionChoiceMechanic,
         StatisticModifierMechanic,
-        DamageResistanceMechanic {
+        DamageResistanceMechanic,
+        AttackRollMechanic,
+        HitPointRecoveryPreventionMechanic,
+        ReactionPreventionMechanic,
+        AttackRollModifierMechanic,
+        DamageInstanceSeriesMechanic {
 
 }

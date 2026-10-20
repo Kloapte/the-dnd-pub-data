@@ -1,13 +1,25 @@
 package com.thedndpub.data.mechanics.spell;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thedndpub.data.dte.common.entry.TextEntryDte;
 import com.thedndpub.data.mechanics.model.Ability;
+import com.thedndpub.data.mechanics.model.AttackActivationTiming;
+import com.thedndpub.data.mechanics.model.AttackActorRole;
+import com.thedndpub.data.mechanics.model.AttackKind;
+import com.thedndpub.data.mechanics.model.AttackRollMechanic;
+import com.thedndpub.data.mechanics.model.AttackRollModifier;
+import com.thedndpub.data.mechanics.model.AttackRollModifierMechanic;
+import com.thedndpub.data.mechanics.model.AttackRollOutcome;
+import com.thedndpub.data.mechanics.model.AttackRollParticipant;
+import com.thedndpub.data.mechanics.model.AppliesOnAttackRollOutcome;
 import com.thedndpub.data.mechanics.model.AmountSymbol;
 import com.thedndpub.data.mechanics.model.AppliesOnSaveOutcome;
 import com.thedndpub.data.mechanics.model.AppliesWhen;
 import com.thedndpub.data.mechanics.model.ApplicabilityCondition;
 import com.thedndpub.data.mechanics.model.ArmorClassModifierMechanic;
 import com.thedndpub.data.mechanics.model.CoverageStatus;
+import com.thedndpub.data.mechanics.model.CharacterLevelDamageScaling;
+import com.thedndpub.data.mechanics.model.CharacterLevelDamageTier;
 import com.thedndpub.data.mechanics.model.ConditionChangeMechanic;
 import com.thedndpub.data.mechanics.model.ConditionChoiceMechanic;
 import com.thedndpub.data.mechanics.model.ConditionEndsOnSaveSuccess;
@@ -31,6 +43,9 @@ import com.thedndpub.data.mechanics.model.IntegerModifier;
 import com.thedndpub.data.mechanics.model.HealingMechanic;
 import com.thedndpub.data.mechanics.model.HealingMode;
 import com.thedndpub.data.mechanics.model.MechanicRecord;
+import com.thedndpub.data.mechanics.model.MechanicFamily;
+import com.thedndpub.data.mechanics.model.MechanicEvidenceAssociation;
+import com.thedndpub.data.mechanics.model.MechanicRevisionReference;
 import com.thedndpub.data.mechanics.model.MechanicsCompleteness;
 import com.thedndpub.data.mechanics.model.MechanicsDocument;
 import com.thedndpub.data.mechanics.model.MechanicsHashes;
@@ -40,6 +55,13 @@ import com.thedndpub.data.mechanics.model.ModifierOperation;
 import com.thedndpub.data.mechanics.model.ModifiedStatistic;
 import com.thedndpub.data.mechanics.model.MechanicsLicensingStatus;
 import com.thedndpub.data.mechanics.model.AppliesForDuration;
+import com.thedndpub.data.mechanics.model.HitPointRecoveryPreventionMechanic;
+import com.thedndpub.data.mechanics.model.FutureAttackRollSelector;
+import com.thedndpub.data.mechanics.model.ReferencedAttackRollSelector;
+import com.thedndpub.data.mechanics.model.ReactionPreventionMechanic;
+import com.thedndpub.data.mechanics.model.MechanicContext;
+import com.thedndpub.data.mechanics.model.MechanicRevisionReference;
+import com.thedndpub.data.mechanics.model.EvidenceRole;
 import com.thedndpub.data.mechanics.model.ProcessingState;
 import com.thedndpub.data.mechanics.model.SaveOutcome;
 import com.thedndpub.data.mechanics.model.RepeatSaveTiming;
@@ -52,8 +74,12 @@ import com.thedndpub.data.mechanics.model.StructuredFieldMechanicsEvidence;
 import com.thedndpub.data.mechanics.model.SumAmount;
 import com.thedndpub.data.mechanics.model.SymbolicAmount;
 import com.thedndpub.data.mechanics.model.TextMechanicsEvidence;
+import com.thedndpub.data.mechanics.model.TurnActor;
+import com.thedndpub.data.mechanics.model.TurnBoundary;
+import com.thedndpub.data.mechanics.model.UntilTurnBoundary;
 import com.thedndpub.data.mechanics.model.SpellTargetSubject;
 import com.thedndpub.data.mechanics.model.TargetScope;
+import com.thedndpub.data.mechanics.model.TargetCategory;
 import com.thedndpub.data.mechanics.model.UnknownSaveDifficulty;
 import com.thedndpub.data.mechanics.model.UnknownSubject;
 import com.thedndpub.data.mechanics.model.UnknownValueReason;
@@ -149,6 +175,732 @@ class PhbSpellMechanicsExtractorTests {
                 && value.role() == com.thedndpub.data.mechanics.model.EvidenceRole.QUALIFIER));
         assertInstanceOf(UnknownSubject.class, record.context().subject());
         assertEquals(MechanicsCompleteness.PARTIAL, record.assessment().completeness());
+    }
+
+    @Test
+    void inflictWoundsProducesOneSourceBoundMeleeSpellAttackAndLinkedHitDamage() throws Exception {
+        var extractionInput = input("inflict-wounds");
+        var sourceText = ((TextEntryDte) extractionInput.spell().entries().getFirst()).text();
+        var document = extract(extractionInput);
+
+        assertEquals(2, document.interpretations().size());
+        var attack = document.interpretations().stream()
+                .filter(record -> record.id().value().endsWith(":attack-roll"))
+                .findFirst().orElseThrow();
+        var attackPayload = assertInstanceOf(AttackRollMechanic.class, attack.payload());
+        assertEquals("mechanic:spell:phb:inflict-wounds:attack-roll", attack.id().value());
+        assertEquals(1, attack.revision().number());
+        assertEquals(AttackKind.MELEE_SPELL, attackPayload.attackKind());
+        assertEquals(AttackActorRole.CASTER, attackPayload.actorRole());
+        assertEquals(1, attackPayload.attackCount());
+        assertTrue(attackPayload.attacksIndependent());
+        assertEquals(AttackActivationTiming.CAST_TIME, attackPayload.activationTiming());
+        var attackTarget = assertInstanceOf(SpellTargetSubject.class, attack.context().subject());
+        assertEquals(TargetScope.SINGLE_TARGET_CREATURE, attackTarget.scope());
+        assertEquals("c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a",
+                document.sources().getFirst().resourceSha256());
+
+        var damage = document.interpretations().stream()
+                .filter(record -> record.id().value().endsWith(":damage"))
+                .findFirst().orElseThrow();
+        assertEquals("mechanic:spell:phb:inflict-wounds:damage", damage.id().value());
+        assertEquals(1, damage.revision().number());
+        var damagePayload = assertInstanceOf(DamageMechanic.class, damage.payload());
+        assertEquals(new DiceAmount(3, 10, 0), damagePayload.amount());
+        assertEquals(new FixedDamageType("necrotic"), damagePayload.damageType());
+        var outcome = assertInstanceOf(AppliesOnAttackRollOutcome.class,
+                damage.context().bindings().getFirst());
+        assertEquals(attack.revision().reference(attack.id()), outcome.attackRoll());
+        assertEquals(AttackRollOutcome.HIT, outcome.outcome());
+        assertEquals(TargetScope.SINGLE_TARGET_CREATURE,
+                assertInstanceOf(SpellTargetSubject.class, damage.context().subject()).scope());
+
+        assertTrue(attack.evidenceAssociations().stream().anyMatch(value ->
+                value.claimPath().equals("/payload")
+                        && value.role() == com.thedndpub.data.mechanics.model.EvidenceRole.EFFECT_ROLE));
+        assertTrue(damage.evidenceAssociations().stream().anyMatch(value ->
+                value.claimPath().equals("/context/bindings/0")
+                        && value.role() == com.thedndpub.data.mechanics.model.EvidenceRole.TRIGGER));
+        var attackText = assertInstanceOf(TextMechanicsEvidence.class, document.evidence().stream()
+                .filter(value -> attack.evidenceAssociations().stream()
+                        .anyMatch(association -> association.evidenceId().equals(value.id())))
+                .filter(TextMechanicsEvidence.class::isInstance).findFirst().orElseThrow());
+        assertEquals("/spell/192/entries/0", attackText.syntax().location().jsonPointer());
+        String attackPhrase = "Make a melee spell attack against a creature you can reach";
+        int attackStart = sourceText.indexOf(attackPhrase);
+        assertTrue(attackStart >= 0);
+        assertEquals(attackStart, attackText.syntax().span().startInclusive());
+        assertEquals(attackStart + attackPhrase.length(), attackText.syntax().span().endExclusive());
+        var outcomeEvidence = assertInstanceOf(TextMechanicsEvidence.class, document.evidence().stream()
+                .filter(value -> value.id().equals(outcome.evidenceIds().getFirst())).findFirst().orElseThrow());
+        int hitStart = sourceText.indexOf("On a hit");
+        assertEquals("/spell/192/entries/0", outcomeEvidence.syntax().location().jsonPointer());
+        assertEquals(hitStart, outcomeEvidence.syntax().span().startInclusive());
+        assertEquals(hitStart + "On a hit".length(), outcomeEvidence.syntax().span().endExclusive());
+        var attackKindEvidence = assertInstanceOf(StructuredFieldMechanicsEvidence.class, document.evidence().stream()
+                .filter(value -> attack.evidenceAssociations().stream()
+                        .anyMatch(association -> association.evidenceId().equals(value.id())))
+                .filter(StructuredFieldMechanicsEvidence.class::isInstance).findFirst().orElseThrow());
+        assertEquals("/spell/192/spellAttack/0", attackKindEvidence.jsonPointer());
+        var damageFormulaEvidence = document.evidence().stream()
+                .filter(value -> damage.evidenceAssociations().stream()
+                        .anyMatch(association -> association.evidenceId().equals(value.id())))
+                .filter(TextMechanicsEvidence.class::isInstance)
+                .map(TextMechanicsEvidence.class::cast)
+                .filter(value -> sourceText.startsWith("{@damage 3d10}", value.syntax().span().startInclusive()))
+                .findFirst().orElseThrow();
+        assertEquals("/spell/192/entries/0", damageFormulaEvidence.syntax().location().jsonPointer());
+        int damageFormulaStart = sourceText.indexOf("{@damage 3d10}");
+        assertEquals(damageFormulaStart, damageFormulaEvidence.syntax().span().startInclusive());
+        assertEquals(damageFormulaStart + "{@damage 3d10}".length(),
+                damageFormulaEvidence.syntax().span().endExclusive());
+        assertTrue(document.interpretations().stream().allMatch(record ->
+                record.review().recordedStatus() == com.thedndpub.data.mechanics.review.MechanicsReviewStatus.PENDING_REVIEW
+                        && record.licensing().status() == MechanicsLicensingStatus.NEEDS_REVIEW));
+        assertEquals(com.thedndpub.data.mechanics.review.MechanicsReviewStatus.PENDING_REVIEW,
+                attack.review().recordedStatus());
+        assertEquals(MechanicsLicensingStatus.NEEDS_REVIEW, attack.licensing().status());
+        assertEquals(0, document.reviewSummary().verified());
+
+        byte[] serialized = com.thedndpub.data.mechanics.model.MechanicsJson.mapper().writeValueAsBytes(document);
+        assertArrayEquals(serialized,
+                com.thedndpub.data.mechanics.model.MechanicsJson.mapper().writeValueAsBytes(document));
+        assertEquals(document, com.thedndpub.data.mechanics.model.MechanicsJson.mapper()
+                .readValue(serialized, MechanicsDocument.class));
+    }
+
+    @Test
+    void inflictWoundsRejectsAStaleAttackRollRevisionReference() throws Exception {
+        var document = extract(input("inflict-wounds"));
+        var attack = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof AttackRollMechanic).findFirst().orElseThrow();
+        var damage = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof DamageMechanic).findFirst().orElseThrow();
+        var outcome = assertInstanceOf(AppliesOnAttackRollOutcome.class, damage.context().bindings().getFirst());
+        var staleReference = new MechanicRevisionReference(attack.id(), 1, "0".repeat(64));
+        var staleBinding = new AppliesOnAttackRollOutcome(staleReference, AttackRollOutcome.HIT,
+                outcome.evidenceIds());
+        var staleDamage = MechanicRecord.propose(damage.id(), damage.payload(),
+                new com.thedndpub.data.mechanics.model.MechanicContext(
+                        damage.context().subject(), List.of(staleBinding)),
+                damage.evidenceAssociations(), damage.derivation(), damage.assessment());
+        var records = List.of(attack, staleDamage);
+
+        assertThrows(IllegalArgumentException.class, () -> MechanicsDocument.create(
+                document.owner(), 1, document.sources(), document.processing(), records, document.observations(),
+                document.unsupported(), document.evidence(), document.coverage()));
+    }
+
+    @Test
+    void rayOfFrostProducesRangedAttackDamageAndHitBoundSpeedReduction() throws Exception {
+        var extractionInput = input("ray-of-frost");
+        var body = ((TextEntryDte) extractionInput.spell().entries().getFirst()).text();
+        var scaling = ((TextEntryDte) extractionInput.spell().entries().get(1)).text();
+        var document = extract(extractionInput);
+
+        assertEquals(3, document.interpretations().size());
+        var attack = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof AttackRollMechanic).findFirst().orElseThrow();
+        assertEquals("mechanic:spell:phb:ray-of-frost:attack-roll", attack.id().value());
+        assertEquals(1, attack.revision().number());
+        var attackPayload = assertInstanceOf(AttackRollMechanic.class, attack.payload());
+        assertEquals(AttackKind.RANGED_SPELL, attackPayload.attackKind());
+        assertEquals(AttackActorRole.CASTER, attackPayload.actorRole());
+        assertEquals(1, attackPayload.attackCount());
+        assertTrue(attackPayload.attacksIndependent());
+        assertEquals(AttackActivationTiming.CAST_TIME, attackPayload.activationTiming());
+        assertEquals(TargetScope.SINGLE_TARGET_CREATURE,
+                assertInstanceOf(SpellTargetSubject.class, attack.context().subject()).scope());
+        assertTextEvidence(document, attack, "/context/subject", EvidenceRole.SUBJECT,
+                "/spell/273/entries/0", "a creature within range", body);
+
+        var damage = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof DamageMechanic).findFirst().orElseThrow();
+        assertEquals("mechanic:spell:phb:ray-of-frost:damage", damage.id().value());
+        assertEquals(2, damage.revision().number());
+        assertEquals(new MechanicRevisionReference(damage.id(), 1,
+                        "126f7880b1895357a0a51913971f334e071754f18931be4266f0c1427d952d2a"),
+                damage.revision().supersedes());
+        var damagePayload = assertInstanceOf(DamageMechanic.class, damage.payload());
+        assertEquals(new DiceAmount(1, 8, 0), damagePayload.amount());
+        assertEquals(new FixedDamageType("cold"), damagePayload.damageType());
+        var progression = damagePayload.characterLevelScaling();
+        assertNotNull(progression);
+        assertEquals(List.of(
+                        new CharacterLevelDamageTier(5, new DiceAmount(2, 8, 0)),
+                        new CharacterLevelDamageTier(11, new DiceAmount(3, 8, 0)),
+                        new CharacterLevelDamageTier(17, new DiceAmount(4, 8, 0))),
+                progression.tiers());
+        for (int level : List.of(1, 4, 5, 10, 11, 16, 17)) {
+            assertEquals(rayOfFrostDamageAtLevel(progression, level),
+                    new DiceAmount(level < 5 ? 1 : level < 11 ? 2 : level < 17 ? 3 : 4, 8, 0),
+                    "character level " + level);
+        }
+        var damageOutcome = assertInstanceOf(AppliesOnAttackRollOutcome.class,
+                damage.context().bindings().getFirst());
+        assertEquals(attack.revision().reference(attack.id()), damageOutcome.attackRoll());
+        assertEquals(AttackRollOutcome.HIT, damageOutcome.outcome());
+
+        var speed = document.interpretations().stream()
+                .filter(record -> record.id().value().endsWith(":movement-speed")).findFirst().orElseThrow();
+        assertEquals(1, speed.revision().number());
+        assertEquals("83be98777af7cb729d39de075007fbc59ecf8c8a8d9ea1ff70bd2070334a8b7c",
+                speed.revision().contentSha256());
+        var speedPayload = assertInstanceOf(StatisticModifierMechanic.class, speed.payload());
+        assertEquals(List.of(ModifiedStatistic.MOVEMENT_SPEED), speedPayload.statistics());
+        assertEquals(ModifierOperation.SUBTRACT, speedPayload.operation());
+        assertEquals(new IntegerAmount(10), speedPayload.amount());
+        assertEquals(TargetScope.SINGLE_TARGET_CREATURE,
+                assertInstanceOf(SpellTargetSubject.class, speed.context().subject()).scope());
+        var speedOutcome = assertInstanceOf(AppliesOnAttackRollOutcome.class,
+                speed.context().bindings().getFirst());
+        assertEquals(attack.revision().reference(attack.id()), speedOutcome.attackRoll());
+        assertEquals(AttackRollOutcome.HIT, speedOutcome.outcome());
+        var duration = assertInstanceOf(AppliesForDuration.class, speed.context().bindings().get(1));
+        assertEquals(new UntilTurnBoundary(TurnActor.CASTER, TurnBoundary.START_OF_NEXT_TURN), duration.duration());
+
+        assertTrue(document.unsupported().stream()
+                .noneMatch(value -> value.id().equals("ray-of-frost-cantrip-scaling")));
+        assertEquals(0, document.coverage().unsupportedCount());
+        assertEquals(0, document.unsupported().size());
+        assertTrue(damage.evidenceAssociations().stream().anyMatch(association ->
+                association.claimPath().equals("/payload/characterLevelScaling")
+                        && association.role() == com.thedndpub.data.mechanics.model.EvidenceRole.SCALING));
+        for (int level : List.of(5, 11, 17)) {
+            var structured = assertInstanceOf(StructuredFieldMechanicsEvidence.class, document.evidence().stream()
+                    .filter(value -> damage.evidenceAssociations().stream()
+                            .anyMatch(association -> association.evidenceId().equals(value.id())))
+                    .filter(StructuredFieldMechanicsEvidence.class::isInstance)
+                    .map(StructuredFieldMechanicsEvidence.class::cast)
+                    .filter(value -> value.jsonPointer().endsWith("/scaling/" + level)).findFirst().orElseThrow());
+            assertEquals("/spell/273/scalingLevelDice/scaling/" + level, structured.jsonPointer());
+            String tierPhrase = level + "th level ({@damage " + (level == 5 ? "2d8" : level == 11 ? "3d8" : "4d8") + "})";
+            var tierEvidence = assertInstanceOf(TextMechanicsEvidence.class, document.evidence().stream()
+                    .filter(value -> value instanceof TextMechanicsEvidence text
+                            && text.syntax().location().jsonPointer().equals("/spell/273/entries/1")
+                            && sourceContainsSpan(scaling, text, tierPhrase))
+                    .findFirst().orElseThrow());
+            int tierStart = scaling.indexOf(tierPhrase);
+            assertEquals(tierStart, tierEvidence.syntax().span().startInclusive());
+            assertEquals(tierStart + tierPhrase.length(), tierEvidence.syntax().span().endExclusive());
+        }
+        String scalingJson = com.thedndpub.data.mechanics.model.MechanicsJson.mapper()
+                .writeValueAsString(damagePayload);
+        assertTrue(scalingJson.contains("characterLevelScaling"));
+        assertFalse(scalingJson.contains("spellSlotScaling"));
+
+        assertEquals("c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a",
+                document.sources().getFirst().resourceSha256());
+        assertTrue(document.interpretations().stream().allMatch(record ->
+                record.review().recordedStatus() == com.thedndpub.data.mechanics.review.MechanicsReviewStatus.PENDING_REVIEW
+                        && record.licensing().status() == MechanicsLicensingStatus.NEEDS_REVIEW));
+        assertEquals(0, document.reviewSummary().verified());
+        assertTrue(document.unsupported().stream().allMatch(value ->
+                value.evidenceIds().stream().allMatch(id -> document.evidence().stream()
+                        .anyMatch(evidence -> evidence.id().equals(id)))));
+        assertTrue(body.contains("its speed is reduced by 10 feet until the start of your next turn"));
+
+        byte[] first = com.thedndpub.data.mechanics.model.MechanicsJson.mapper().writeValueAsBytes(document);
+        byte[] second = com.thedndpub.data.mechanics.model.MechanicsJson.mapper().writeValueAsBytes(document);
+        assertArrayEquals(first, second);
+        assertEquals(document, com.thedndpub.data.mechanics.model.MechanicsJson.mapper()
+                .readValue(first, MechanicsDocument.class));
+    }
+
+    private DiceAmount rayOfFrostDamageAtLevel(CharacterLevelDamageScaling scaling, int characterLevel) {
+        DiceAmount amount = new DiceAmount(1, 8, 0);
+        for (CharacterLevelDamageTier tier : scaling.tiers()) {
+            if (characterLevel >= tier.minimumCharacterLevel()) {
+                amount = tier.amount();
+            }
+        }
+        return amount;
+    }
+
+    private boolean sourceContainsSpan(String text, TextMechanicsEvidence evidence, String phrase) {
+        int start = text.indexOf(phrase);
+        return start >= 0 && evidence.syntax().span().startInclusive() == start
+                && evidence.syntax().span().endExclusive() == start + phrase.length();
+    }
+
+    private void assertHitReference(MechanicRecord attack, MechanicRecord dependent) {
+        var binding = dependent.context().bindings().stream()
+                .filter(AppliesOnAttackRollOutcome.class::isInstance)
+                .map(AppliesOnAttackRollOutcome.class::cast).findFirst().orElseThrow();
+        assertEquals(attack.revision().reference(attack.id()), binding.attackRoll());
+        assertEquals(AttackRollOutcome.HIT, binding.outcome());
+    }
+
+    private void assertTextEvidence(
+            MechanicsDocument document,
+            MechanicRecord claim,
+            String path,
+            EvidenceRole role,
+            String pointer,
+            String phrase,
+            String sourceText) {
+        var association = claim.evidenceAssociations().stream()
+                .filter(value -> value.claimPath().equals(path) && value.role() == role)
+                .findFirst().orElseThrow();
+        var evidence = assertInstanceOf(TextMechanicsEvidence.class, document.evidence().stream()
+                .filter(value -> value.id().equals(association.evidenceId())).findFirst().orElseThrow());
+        assertEquals(pointer, evidence.syntax().location().jsonPointer());
+        assertTrue(sourceContainsSpan(sourceText, evidence, phrase), phrase);
+    }
+
+    private TextMechanicsEvidence unsupportedText(
+            MechanicsDocument document,
+            com.thedndpub.data.mechanics.model.UnsupportedMechanicsConstruct unsupported,
+            String pointer) {
+        var evidence = assertInstanceOf(TextMechanicsEvidence.class, document.evidence().stream()
+                .filter(value -> unsupported.evidenceIds().contains(value.id())).findFirst().orElseThrow());
+        assertEquals(pointer, evidence.syntax().location().jsonPointer());
+        return evidence;
+    }
+
+    private com.thedndpub.data.mechanics.model.UnsupportedMechanicsConstruct unsupported(
+            MechanicsDocument document,
+            String id) {
+        return document.unsupported().stream().filter(value -> value.id().equals(id))
+                .findFirst().orElseThrow();
+    }
+
+    private void assertReviewPending(MechanicsDocument document) {
+        assertTrue(document.interpretations().stream().allMatch(record ->
+                record.review().recordedStatus() == MechanicsReviewStatus.PENDING_REVIEW
+                        && record.licensing().status() == MechanicsLicensingStatus.NEEDS_REVIEW));
+        assertEquals(0, document.reviewSummary().verified());
+        assertEquals(0, document.reviewSummary().rejected());
+    }
+
+    private void assertStaleAttackReferenceRejected(MechanicsDocument document) {
+        var attack = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof AttackRollMechanic).findFirst().orElseThrow();
+        var dependent = document.interpretations().stream().filter(record -> record != attack
+                && record.context().bindings().stream().anyMatch(AppliesOnAttackRollOutcome.class::isInstance))
+                .findFirst().orElseThrow();
+        var bindings = new java.util.ArrayList<>(dependent.context().bindings());
+        int index = java.util.stream.IntStream.range(0, bindings.size())
+                .filter(value -> bindings.get(value) instanceof AppliesOnAttackRollOutcome).findFirst().orElseThrow();
+        var existing = (AppliesOnAttackRollOutcome) bindings.get(index);
+        bindings.set(index, new AppliesOnAttackRollOutcome(
+                new MechanicRevisionReference(attack.id(), attack.revision().number(), "0".repeat(64)),
+                existing.outcome(), existing.evidenceIds()));
+        var stale = MechanicRecord.propose(dependent.id(), dependent.payload(),
+                new MechanicContext(dependent.context().subject(), bindings), dependent.evidenceAssociations(),
+                dependent.derivation(), dependent.assessment());
+        var records = document.interpretations().stream()
+                .map(record -> record == dependent ? stale : record).toList();
+        assertThrows(IllegalArgumentException.class, () -> MechanicsDocument.create(
+                document.owner(), document.revision().number(), document.sources(), document.processing(), records,
+                document.observations(), document.unsupported(), document.evidence(), document.coverage()));
+    }
+
+    private void assertStaleModifierSelectorRejected(MechanicsDocument document) {
+        var attack = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof AttackRollMechanic).findFirst().orElseThrow();
+        var modifier = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof AttackRollModifierMechanic).findFirst().orElseThrow();
+        var payload = assertInstanceOf(AttackRollModifierMechanic.class, modifier.payload());
+        var staleReference = new MechanicRevisionReference(attack.id(), attack.revision().number(), "0".repeat(64));
+        var stalePayload = new AttackRollModifierMechanic(payload.modifier(),
+                new ReferencedAttackRollSelector(staleReference));
+        var staleModifier = MechanicRecord.propose(modifier.id(), stalePayload, modifier.context(),
+                modifier.evidenceAssociations(), modifier.derivation(), modifier.assessment());
+        var records = document.interpretations().stream()
+                .map(record -> record == modifier ? staleModifier : record).toList();
+        assertThrows(IllegalArgumentException.class, () -> MechanicsDocument.create(
+                document.owner(), document.revision().number(), document.sources(), document.processing(), records,
+                document.observations(), document.unsupported(), document.evidence(), document.coverage()));
+    }
+
+    private void assertContradictoryArmorQualifierRejected(MechanicsDocument document) {
+        var modifier = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof AttackRollModifierMechanic).findFirst().orElseThrow();
+        var metalArmor = modifier.context().bindings().stream().filter(AppliesWhen.class::isInstance)
+                .map(AppliesWhen.class::cast).findFirst().orElseThrow();
+        var qualifierEvidence = document.evidence().stream()
+                .filter(evidence -> metalArmor.evidenceIds().contains(evidence.id())).findFirst().orElseThrow();
+        var context = new MechanicContext(modifier.context().subject(), List.of(metalArmor,
+                new AppliesWhen(ApplicabilityCondition.TARGET_NOT_WEARING_ARMOR, metalArmor.evidenceIds())));
+        var associations = new java.util.ArrayList<>(modifier.evidenceAssociations());
+        associations.add(MechanicEvidenceAssociation.of(qualifierEvidence,
+                "/context/bindings/1", EvidenceRole.QUALIFIER));
+        var contradictory = MechanicRecord.propose(modifier.id(), modifier.payload(), context, associations,
+                modifier.derivation(), modifier.assessment());
+        var records = document.interpretations().stream()
+                .map(record -> record == modifier ? contradictory : record).toList();
+        assertThrows(IllegalArgumentException.class, () -> MechanicsDocument.create(
+                document.owner(), document.revision().number(), document.sources(), document.processing(), records,
+                document.observations(), document.unsupported(), document.evidence(), document.coverage()));
+    }
+
+    private void assertDeterministic(MechanicsDocument document) throws Exception {
+        byte[] first = com.thedndpub.data.mechanics.model.MechanicsJson.mapper().writeValueAsBytes(document);
+        byte[] second = com.thedndpub.data.mechanics.model.MechanicsJson.mapper().writeValueAsBytes(document);
+        assertArrayEquals(first, second);
+        assertEquals(document, com.thedndpub.data.mechanics.model.MechanicsJson.mapper()
+                .readValue(first, MechanicsDocument.class));
+    }
+
+    @Test
+    void xphbSpellAttackOwnersRemainUnactivated() {
+        var xphbFireBolt = inspection.findById(spells.findById("spell:xphb:fire-bolt").id());
+        assertEquals(ProcessingState.NOT_ATTEMPTED, xphbFireBolt.processing().state());
+        assertTrue(xphbFireBolt.interpretations().isEmpty());
+    }
+
+    @Test
+    void fireBoltTargetsExactlyOneCreatureOrObjectAndKeepsIgnitionUnsupported() throws Exception {
+        var extractionInput = input("fire-bolt");
+        var body = ((TextEntryDte) extractionInput.spell().entries().getFirst()).text();
+        var scalingText = ((TextEntryDte) extractionInput.spell().entries().get(1)).text();
+        var document = extract(extractionInput);
+
+        assertEquals("spell:phb:fire-bolt", document.owner().id());
+        assertEquals("c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a",
+                document.sources().getFirst().resourceSha256());
+        assertEquals(ProcessingState.PROCESSED, document.processing().state());
+        assertEquals(2, document.interpretations().size());
+
+        var attack = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof AttackRollMechanic).findFirst().orElseThrow();
+        assertEquals("mechanic:spell:phb:fire-bolt:attack-roll", attack.id().value());
+        assertEquals(1, attack.revision().number());
+        var attackPayload = assertInstanceOf(AttackRollMechanic.class, attack.payload());
+        assertEquals(AttackKind.RANGED_SPELL, attackPayload.attackKind());
+        assertEquals(AttackActorRole.CASTER, attackPayload.actorRole());
+        assertEquals(1, attackPayload.attackCount());
+        assertTrue(attackPayload.attacksIndependent());
+        assertEquals(AttackActivationTiming.CAST_TIME, attackPayload.activationTiming());
+
+        var attackSubject = assertInstanceOf(SpellTargetSubject.class, attack.context().subject());
+        assertEquals(TargetScope.SINGLE_TARGET, attackSubject.scope(), "one target is selected for this attack");
+        assertEquals(List.of(TargetCategory.CREATURE, TargetCategory.OBJECT),
+                attackSubject.eligibleTargetCategories(), "categories are alternatives for the one target");
+        assertNull(attackSubject.maximumTargets());
+        assertNull(attackSubject.creatureTypeRestriction());
+        for (int index = 0; index < attackSubject.eligibleTargetCategories().size(); index++) {
+            int categoryIndex = index;
+            var association = attack.evidenceAssociations().stream()
+                    .filter(value -> value.claimPath().equals(
+                            "/context/subject/eligibleTargetCategories/" + categoryIndex))
+                    .findFirst().orElseThrow();
+            var targetEvidence = assertInstanceOf(TextMechanicsEvidence.class, document.evidence().stream()
+                    .filter(value -> value.id().equals(association.evidenceId())).findFirst().orElseThrow());
+            assertEquals("/spell/136/entries/0", targetEvidence.syntax().location().jsonPointer());
+            assertTrue(body.substring(targetEvidence.syntax().span().startInclusive(),
+                    targetEvidence.syntax().span().endExclusive()).contains("creature or object within range"));
+        }
+
+        var damage = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof DamageMechanic).findFirst().orElseThrow();
+        assertEquals("mechanic:spell:phb:fire-bolt:damage", damage.id().value());
+        assertEquals(1, damage.revision().number());
+        var damagePayload = assertInstanceOf(DamageMechanic.class, damage.payload());
+        assertEquals(new DiceAmount(1, 10, 0), damagePayload.amount());
+        assertEquals(new FixedDamageType("fire"), damagePayload.damageType());
+        assertEquals(List.of(
+                        new CharacterLevelDamageTier(5, new DiceAmount(2, 10, 0)),
+                        new CharacterLevelDamageTier(11, new DiceAmount(3, 10, 0)),
+                        new CharacterLevelDamageTier(17, new DiceAmount(4, 10, 0))),
+                damagePayload.characterLevelScaling().tiers());
+        assertEquals(attackSubject, damage.context().subject());
+        var hitBinding = assertInstanceOf(AppliesOnAttackRollOutcome.class,
+                damage.context().bindings().getFirst());
+        assertEquals(attack.revision().reference(attack.id()), hitBinding.attackRoll());
+        assertEquals(AttackRollOutcome.HIT, hitBinding.outcome());
+        assertEquals("phb-fire-bolt-attack-roll-v1", attack.derivation().patternId());
+        assertEquals("phb-fire-bolt-hit-damage-v1", damage.derivation().patternId());
+
+        var ignition = document.unsupported().stream()
+                .filter(value -> value.id().equals("fire-bolt-object-ignition")).findFirst().orElseThrow();
+        assertEquals(1, document.unsupported().size());
+        assertEquals(MechanicFamily.UNDETERMINED, ignition.candidateFamily());
+        assertEquals(UnsupportedReason.FAMILY_NOT_IMPLEMENTED, ignition.reason());
+        var ignitionEvidence = assertInstanceOf(TextMechanicsEvidence.class, document.evidence().stream()
+                .filter(value -> ignition.evidenceIds().contains(value.id())).findFirst().orElseThrow());
+        assertEquals("/spell/136/entries/0", ignitionEvidence.syntax().location().jsonPointer());
+        String ignitionText = body.substring(ignitionEvidence.syntax().span().startInclusive(),
+                ignitionEvidence.syntax().span().endExclusive());
+        assertEquals("A flammable object hit by this spell ignites if it isn't being worn or carried.",
+                ignitionText);
+        assertFalse(document.interpretations().stream().anyMatch(record ->
+                record.derivation().patternId().contains("ignition")));
+
+        for (int level : List.of(5, 11, 17)) {
+            var evidence = document.evidence().stream().filter(StructuredFieldMechanicsEvidence.class::isInstance)
+                    .map(StructuredFieldMechanicsEvidence.class::cast)
+                    .filter(value -> value.jsonPointer().endsWith("/scaling/" + level)).findFirst().orElseThrow();
+            assertEquals("/spell/136/scalingLevelDice/scaling/" + level, evidence.jsonPointer());
+            String phrase = level + "th level ({@damage " + (level == 5 ? "2d10" : level == 11 ? "3d10" : "4d10") + "})";
+            assertTrue(scalingText.contains(phrase));
+            assertTrue(damage.evidenceAssociations().stream().anyMatch(association ->
+                    association.evidenceId().equals(evidence.id())
+                            && association.claimPath().startsWith("/payload/characterLevelScaling/tiers/")));
+        }
+
+        assertTrue(document.interpretations().stream().allMatch(record ->
+                record.review().recordedStatus() == MechanicsReviewStatus.PENDING_REVIEW
+                        && record.licensing().status() == MechanicsLicensingStatus.NEEDS_REVIEW));
+        assertEquals(0, document.reviewSummary().verified());
+        byte[] first = com.thedndpub.data.mechanics.model.MechanicsJson.mapper().writeValueAsBytes(document);
+        byte[] second = com.thedndpub.data.mechanics.model.MechanicsJson.mapper().writeValueAsBytes(document);
+        assertArrayEquals(first, second);
+        assertEquals(document, com.thedndpub.data.mechanics.model.MechanicsJson.mapper()
+                .readValue(first, MechanicsDocument.class));
+    }
+
+    @Test
+    void chillTouchBindsHitPointRecoveryAndUndeadAttackDisadvantage() throws Exception {
+        var extractionInput = input("chill-touch");
+        String body = ((TextEntryDte) extractionInput.spell().entries().getFirst()).text();
+        String scalingText = ((TextEntryDte) extractionInput.spell().entries().get(2)).text();
+        var document = extract(extractionInput);
+
+        assertEquals("spell:phb:chill-touch", document.owner().id());
+        assertEquals("PHB", document.owner().source().identity().code());
+        assertEquals("c9e54cce55e7ce0fc988feb1b604bf505faa5c042635542fa6b6ed36724e297a",
+                document.sources().getFirst().resourceSha256());
+        assertEquals(ProcessingState.PROCESSED, document.processing().state());
+        assertEquals(4, document.interpretations().size());
+
+        var attack = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof AttackRollMechanic).findFirst().orElseThrow();
+        assertEquals("mechanic:spell:phb:chill-touch:attack-roll", attack.id().value());
+        assertEquals(1, attack.revision().number());
+        var attackPayload = assertInstanceOf(AttackRollMechanic.class, attack.payload());
+        assertEquals(AttackKind.RANGED_SPELL, attackPayload.attackKind());
+        assertEquals(AttackActorRole.CASTER, attackPayload.actorRole());
+        assertEquals(1, attackPayload.attackCount());
+        assertTrue(attackPayload.attacksIndependent());
+        assertEquals(AttackActivationTiming.CAST_TIME, attackPayload.activationTiming());
+        assertTrue(attack.context().bindings().isEmpty(), "effect dependencies point to the attack, not vice versa");
+        assertEquals(TargetScope.SINGLE_TARGET_CREATURE,
+                assertInstanceOf(SpellTargetSubject.class, attack.context().subject()).scope());
+        assertTextEvidence(document, attack, "/context/subject", EvidenceRole.SUBJECT,
+                "/spell/45/entries/0", "a creature within range", body);
+
+        var damage = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof DamageMechanic).findFirst().orElseThrow();
+        assertEquals("mechanic:spell:phb:chill-touch:damage", damage.id().value());
+        assertEquals(1, damage.revision().number());
+        var damagePayload = assertInstanceOf(DamageMechanic.class, damage.payload());
+        assertEquals(new DiceAmount(1, 8, 0), damagePayload.amount());
+        assertEquals(new FixedDamageType("necrotic"), damagePayload.damageType());
+        assertEquals(List.of(
+                        new CharacterLevelDamageTier(5, new DiceAmount(2, 8, 0)),
+                        new CharacterLevelDamageTier(11, new DiceAmount(3, 8, 0)),
+                        new CharacterLevelDamageTier(17, new DiceAmount(4, 8, 0))),
+                damagePayload.characterLevelScaling().tiers());
+        assertHitReference(attack, damage);
+        assertTextEvidence(document, damage, "/payload/amount", EvidenceRole.VALUE,
+                "/spell/45/entries/0", "{@damage 1d8}", body);
+        for (int level : List.of(5, 11, 17)) {
+            var evidence = document.evidence().stream().filter(StructuredFieldMechanicsEvidence.class::isInstance)
+                    .map(StructuredFieldMechanicsEvidence.class::cast)
+                    .filter(value -> value.jsonPointer().endsWith("/scaling/" + level)).findFirst().orElseThrow();
+            assertEquals("/spell/45/scalingLevelDice/scaling/" + level, evidence.jsonPointer());
+            assertTrue(damage.evidenceAssociations().stream().anyMatch(association ->
+                    association.evidenceId().equals(evidence.id())
+                            && association.claimPath().startsWith("/payload/characterLevelScaling/tiers/")));
+        }
+        assertTrue(scalingText.contains("when you reach 5th level ({@damage 2d8})"));
+
+        var prevention = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof HitPointRecoveryPreventionMechanic)
+                .findFirst().orElseThrow();
+        assertEquals("mechanic:spell:phb:chill-touch:hit-point-recovery-prevention", prevention.id().value());
+        assertEquals(1, prevention.revision().number());
+        assertHitReference(attack, prevention);
+        var duration = prevention.context().bindings().stream().filter(AppliesForDuration.class::isInstance)
+                .map(AppliesForDuration.class::cast).findFirst().orElseThrow();
+        assertEquals(new UntilTurnBoundary(TurnActor.CASTER, TurnBoundary.START_OF_NEXT_TURN), duration.duration());
+        assertTextEvidence(document, prevention, "/payload", EvidenceRole.EFFECT_ROLE,
+                "/spell/45/entries/0", "it can't regain hit points", body);
+        assertTextEvidence(document, prevention, "/context/bindings/0", EvidenceRole.TRIGGER,
+                "/spell/45/entries/0", "On a hit", body);
+        assertTextEvidence(document, prevention, "/context/bindings/1", EvidenceRole.QUALIFIER,
+                "/spell/45/entries/0", "until the start of your next turn", body);
+
+        var disadvantage = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof AttackRollModifierMechanic).findFirst().orElseThrow();
+        assertEquals("mechanic:spell:phb:chill-touch:undead-attack-roll-disadvantage", disadvantage.id().value());
+        assertEquals(1, disadvantage.revision().number());
+        var modifier = assertInstanceOf(AttackRollModifierMechanic.class, disadvantage.payload());
+        assertEquals(AttackRollModifier.DISADVANTAGE, modifier.modifier());
+        assertEquals(new FutureAttackRollSelector(AttackRollParticipant.AFFECTED_SUBJECT,
+                        AttackRollParticipant.CASTER), modifier.affectedRolls());
+        assertEquals(3, disadvantage.context().bindings().size());
+        assertHitReference(attack, disadvantage);
+        assertEquals(ApplicabilityCondition.AFFECTED_SUBJECT_IS_UNDEAD,
+                disadvantage.context().bindings().stream().filter(AppliesWhen.class::isInstance)
+                        .map(AppliesWhen.class::cast).map(AppliesWhen::condition).findFirst().orElseThrow());
+        var disadvantageDuration = disadvantage.context().bindings().stream()
+                .filter(AppliesForDuration.class::isInstance).map(AppliesForDuration.class::cast)
+                .findFirst().orElseThrow();
+        assertEquals(new UntilTurnBoundary(TurnActor.CASTER, TurnBoundary.END_OF_NEXT_TURN),
+                disadvantageDuration.duration());
+        String undeadText = ((TextEntryDte) extractionInput.spell().entries().get(1)).text();
+        assertTextEvidence(document, disadvantage, "/payload", EvidenceRole.EFFECT_ROLE,
+                "/spell/45/entries/1", "has disadvantage on attack rolls against you", undeadText);
+        assertTextEvidence(document, disadvantage, "/payload/affectedRolls/actor", EvidenceRole.SUBJECT,
+                "/spell/45/entries/1", "attack rolls against you", undeadText);
+        assertTextEvidence(document, disadvantage, "/payload/affectedRolls/target", EvidenceRole.REFERENCE,
+                "/spell/45/entries/1", "attack rolls against you", undeadText);
+        assertTextEvidence(document, disadvantage, "/context/subject", EvidenceRole.SUBJECT,
+                "/spell/45/entries/1", "an undead target", undeadText);
+        assertTextEvidence(document, disadvantage, "/context/bindings/0", EvidenceRole.TRIGGER,
+                "/spell/45/entries/1", "If you hit", undeadText);
+        assertTextEvidence(document, disadvantage, "/context/bindings/1", EvidenceRole.QUALIFIER,
+                "/spell/45/entries/1", "an undead target", undeadText);
+        assertTextEvidence(document, disadvantage, "/context/bindings/2", EvidenceRole.DURATION,
+                "/spell/45/entries/1", "until the end of your next turn", undeadText);
+        assertTrue(document.unsupported().isEmpty());
+        assertFalse(document.interpretations().stream()
+                .anyMatch(record -> record.payload() instanceof StatisticModifierMechanic));
+        assertReviewPending(document);
+        assertStaleAttackReferenceRejected(document);
+        assertDeterministic(document);
+    }
+
+    @Test
+    void shockingGraspBindsReactionPreventionAndMetalArmorAdvantage() throws Exception {
+        var extractionInput = input("shocking-grasp");
+        String body = ((TextEntryDte) extractionInput.spell().entries().getFirst()).text();
+        String scalingText = ((TextEntryDte) extractionInput.spell().entries().get(1)).text();
+        var document = extract(extractionInput);
+
+        assertEquals("spell:phb:shocking-grasp", document.owner().id());
+        assertEquals("PHB", document.owner().source().identity().code());
+        assertEquals(ProcessingState.PROCESSED, document.processing().state());
+        assertEquals(4, document.interpretations().size());
+
+        var attack = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof AttackRollMechanic).findFirst().orElseThrow();
+        assertEquals("mechanic:spell:phb:shocking-grasp:attack-roll", attack.id().value());
+        assertEquals(1, attack.revision().number());
+        var attackPayload = assertInstanceOf(AttackRollMechanic.class, attack.payload());
+        assertEquals(AttackKind.MELEE_SPELL, attackPayload.attackKind());
+        assertEquals(AttackActorRole.CASTER, attackPayload.actorRole());
+        assertEquals(1, attackPayload.attackCount());
+        assertTrue(attackPayload.attacksIndependent());
+        assertEquals(AttackActivationTiming.CAST_TIME, attackPayload.activationTiming());
+        assertTrue(attack.context().bindings().isEmpty(), "effect dependencies point to the attack, not vice versa");
+        assertEquals(TargetScope.SINGLE_TARGET_CREATURE,
+                assertInstanceOf(SpellTargetSubject.class, attack.context().subject()).scope());
+        assertTextEvidence(document, attack, "/context/subject", EvidenceRole.SUBJECT,
+                "/spell/297/entries/0", "a creature you try to touch", body);
+
+        var damage = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof DamageMechanic).findFirst().orElseThrow();
+        assertEquals("mechanic:spell:phb:shocking-grasp:damage", damage.id().value());
+        assertEquals(new DiceAmount(1, 8, 0), assertInstanceOf(DamageMechanic.class, damage.payload()).amount());
+        var damagePayload = assertInstanceOf(DamageMechanic.class, damage.payload());
+        assertEquals(new FixedDamageType("lightning"), damagePayload.damageType());
+        assertEquals(List.of(
+                        new CharacterLevelDamageTier(5, new DiceAmount(2, 8, 0)),
+                        new CharacterLevelDamageTier(11, new DiceAmount(3, 8, 0)),
+                        new CharacterLevelDamageTier(17, new DiceAmount(4, 8, 0))),
+                damagePayload.characterLevelScaling().tiers());
+        assertHitReference(attack, damage);
+        assertTextEvidence(document, damage, "/payload/amount", EvidenceRole.VALUE,
+                "/spell/297/entries/0", "{@damage 1d8}", body);
+        assertTrue(scalingText.contains("and 17th level ({@damage 4d8})"));
+
+        var prevention = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof ReactionPreventionMechanic).findFirst().orElseThrow();
+        assertEquals("mechanic:spell:phb:shocking-grasp:reaction-prevention", prevention.id().value());
+        assertEquals(1, prevention.revision().number());
+        assertHitReference(attack, prevention);
+        var duration = prevention.context().bindings().stream().filter(AppliesForDuration.class::isInstance)
+                .map(AppliesForDuration.class::cast).findFirst().orElseThrow();
+        assertEquals(new UntilTurnBoundary(TurnActor.AFFECTED_SUBJECT, TurnBoundary.START_OF_NEXT_TURN), duration.duration());
+        assertTextEvidence(document, prevention, "/payload", EvidenceRole.EFFECT_ROLE,
+                "/spell/297/entries/0", "it can't take reactions", body);
+        assertTextEvidence(document, prevention, "/context/bindings/0", EvidenceRole.TRIGGER,
+                "/spell/297/entries/0", "On a hit", body);
+        assertTextEvidence(document, prevention, "/context/bindings/1", EvidenceRole.QUALIFIER,
+                "/spell/297/entries/0", "until the start of its next turn", body);
+
+        var advantage = document.interpretations().stream()
+                .filter(record -> record.payload() instanceof AttackRollModifierMechanic).findFirst().orElseThrow();
+        assertEquals("mechanic:spell:phb:shocking-grasp:metal-armor-attack-roll-advantage", advantage.id().value());
+        assertEquals(1, advantage.revision().number());
+        var modifier = assertInstanceOf(AttackRollModifierMechanic.class, advantage.payload());
+        assertEquals(AttackRollModifier.ADVANTAGE, modifier.modifier());
+        var referenced = assertInstanceOf(ReferencedAttackRollSelector.class, modifier.affectedRolls());
+        assertEquals(attack.revision().reference(attack.id()), referenced.attackRoll());
+        assertEquals(1, advantage.context().bindings().size());
+        assertEquals(ApplicabilityCondition.ATTACK_ROLL_TARGET_WEARING_ARMOR_MADE_OF_METAL,
+                advantage.context().bindings().stream().filter(AppliesWhen.class::isInstance)
+                        .map(AppliesWhen.class::cast).map(AppliesWhen::condition).findFirst().orElseThrow());
+        assertFalse(advantage.context().bindings().stream().anyMatch(AppliesOnAttackRollOutcome.class::isInstance),
+                "This modifier applies before an attack outcome and does not depend on HIT");
+        assertFalse(advantage.context().bindings().stream().anyMatch(AppliesForDuration.class::isInstance));
+        assertTextEvidence(document, advantage, "/payload", EvidenceRole.EFFECT_ROLE,
+                "/spell/297/entries/0", "You have advantage on the attack roll", body);
+        assertTextEvidence(document, advantage, "/payload/affectedRolls/attackRoll", EvidenceRole.REFERENCE,
+                "/spell/297/entries/0", "Make a melee spell attack against the target", body);
+        assertTextEvidence(document, advantage, "/context/subject", EvidenceRole.SUBJECT,
+                "/spell/297/entries/0", "a creature you try to touch", body);
+        assertTextEvidence(document, advantage, "/context/bindings/0", EvidenceRole.QUALIFIER,
+                "/spell/297/entries/0", "the target is wearing armor made of metal", body);
+        assertTrue(document.unsupported().isEmpty());
+        assertFalse(document.interpretations().stream().anyMatch(record ->
+                record.payload() instanceof StatisticModifierMechanic statisticModifier
+                        && statisticModifier.statistics().contains(ModifiedStatistic.ATTACK_ROLL)));
+        assertReviewPending(document);
+        assertStaleAttackReferenceRejected(document);
+        assertStaleModifierSelectorRejected(document);
+        assertContradictoryArmorQualifierRejected(document);
+        assertDeterministic(document);
+    }
+
+    @Test
+    void conditionalAttackRulesAbstainOnMissingConflictingAndMalformedSourceEvidence() throws IOException {
+        var missingAttackText = input("chill-touch").changed(mapper, root -> root.withArray("entries").set(0,
+                mapper.getNodeFactory().textNode(root.at("/entries/0").textValue()
+                        .replace("Make a ranged spell attack", "Make a ranged weapon attack"))));
+        var missingAttackDocument = extract(missingAttackText);
+        assertFalse(missingAttackDocument.interpretations().stream()
+                .anyMatch(record -> record.payload() instanceof AttackRollMechanic));
+        assertFalse(missingAttackDocument.interpretations().stream()
+                .anyMatch(record -> record.payload() instanceof DamageMechanic));
+
+        var conflictingScalingText = input("chill-touch").changed(mapper, root -> root.withArray("entries").set(2,
+                mapper.getNodeFactory().textNode(root.at("/entries/2").textValue()
+                        .replace("17th level", "16th level"))));
+        var conflictingScalingDocument = extract(conflictingScalingText);
+        var damage = conflictingScalingDocument.interpretations().stream()
+                .filter(record -> record.payload() instanceof DamageMechanic).findFirst().orElseThrow();
+        assertNull(((DamageMechanic) damage.payload()).characterLevelScaling());
+        assertTrue(conflictingScalingDocument.unsupported().stream()
+                .anyMatch(value -> value.id().equals("chill-touch-cantrip-scaling")));
+
+        var missingScalingField = input("shocking-grasp").changed(mapper, root ->
+                ((com.fasterxml.jackson.databind.node.ObjectNode) root.at("/scalingLevelDice/scaling")).remove("17"));
+        var missingScalingDocument = extract(missingScalingField);
+        var shockingDamage = missingScalingDocument.interpretations().stream()
+                .filter(record -> record.payload() instanceof DamageMechanic).findFirst().orElseThrow();
+        assertNull(((DamageMechanic) shockingDamage.payload()).characterLevelScaling());
+        assertTrue(missingScalingDocument.unsupported().stream()
+                .anyMatch(value -> value.id().equals("shocking-grasp-cantrip-scaling")));
+
+        var carriedMetalText = input("shocking-grasp").changed(mapper, root -> root.withArray("entries").set(0,
+                mapper.getNodeFactory().textNode(root.at("/entries/0").textValue().replace(
+                        "if the target is wearing armor made of metal",
+                        "if the target is carrying metal"))));
+        var carriedMetalDocument = extract(carriedMetalText);
+        assertFalse(carriedMetalDocument.interpretations().stream()
+                .anyMatch(record -> record.payload() instanceof AttackRollModifierMechanic),
+                "Carrying metal does not satisfy the source's worn-armor requirement");
+        assertTrue(carriedMetalDocument.unsupported().stream().anyMatch(value ->
+                value.candidateFamily() == MechanicFamily.ATTACK_ROLL_MODIFIER));
+
+        var conflictingAttackField = input("shocking-grasp").changed(mapper, root ->
+                root.withArray("spellAttack").set(0, mapper.getNodeFactory().textNode("R")));
+        assertThrows(IllegalArgumentException.class, () -> extract(conflictingAttackField));
     }
 
     @Test
@@ -949,9 +1701,9 @@ class PhbSpellMechanicsExtractorTests {
     @Test
     void registeredPatternsProcessConditionOwnersAndPreserveAllFormulaObservations() {
         assertEquals(969, inspection.size());
-        assertEquals(106, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.PROCESSED).count());
-        assertEquals(863, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.NOT_ATTEMPTED).count());
-        assertEquals(228, inspection.documents().stream().mapToInt(value -> value.interpretations().size()).sum());
+        assertEquals(124, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.PROCESSED).count());
+        assertEquals(845, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.NOT_ATTEMPTED).count());
+        assertEquals(261, inspection.documents().stream().mapToInt(value -> value.interpretations().size()).sum());
         assertEquals(930, inspection.documents().stream().mapToInt(value -> value.observations().size()).sum());
         for (String slug : java.util.List.of("fireball", "healing-word")) {
             var id = spells.findById("spell:phb:" + slug).id();
@@ -1026,9 +1778,9 @@ class PhbSpellMechanicsExtractorTests {
     }
 
     @Test
-    void newAdapterRejectsNonPilotOwners() throws IOException {
-        var input = ShieldExtractionTestInput.actual(spells.findById("spell:phb:magic-missile"),
-                owners.get("spell:phb:magic-missile"));
+    void phbAdapterRejectsOtherEditionOwners() throws IOException {
+        var input = ShieldExtractionTestInput.actual(spells.findById("spell:xphb:fire-bolt"),
+                owners.get("spell:xphb:fire-bolt"));
         assertThrows(IllegalArgumentException.class, () -> extract(input));
     }
 }
