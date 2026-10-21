@@ -60,11 +60,11 @@ class SpellCapabilityInventoryTests {
         assertEquals(definitions.stream().map(definition -> definition.id().value()).collect(Collectors.toSet()),
                 inventory.spells().stream().map(SpellCapabilityRecord::spellId).collect(Collectors.toSet()));
         assertEquals(969, inventory.classificationCounts().values().stream().mapToInt(Integer::intValue).sum());
-        assertEquals(Map.of("NOT_ASSESSED", 366, "PARTIALLY_SUPPORTED", 170, "SUPPORTED", 0,
-                "UNSUPPORTED", 433), inventory.classificationCounts());
-        assertEquals(124, inventory.currentlyProcessedCount());
-        assertEquals(334, inventory.potentialTypedClaimCount());
-        assertEquals(261, currentDocuments.stream().mapToInt(document -> document.interpretations().size()).sum());
+        assertEquals(Map.of("NOT_ASSESSED", 366, "PARTIALLY_SUPPORTED", 174, "SUPPORTED", 0,
+                "UNSUPPORTED", 429), inventory.classificationCounts());
+        assertEquals(129, inventory.currentlyProcessedCount());
+        assertEquals(351, inventory.potentialTypedClaimCount());
+        assertEquals(279, currentDocuments.stream().mapToInt(document -> document.interpretations().size()).sum());
 
         var byId = inventory.spells().stream().collect(Collectors.toMap(SpellCapabilityRecord::spellId,
                 Function.identity()));
@@ -86,6 +86,30 @@ class SpellCapabilityInventoryTests {
         assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED, acidArrow.classification());
         assertEquals(4, acidArrow.potentialMechanicCount());
         assertEquals(List.of("ATTACK_ROLL", "DAMAGE"), acidArrow.candidateMechanicFamilies());
+        SpellCapabilityRecord spiritualWeapon = byId.get("spell:phb:spiritual-weapon");
+        assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED, spiritualWeapon.classification());
+        assertEquals(3, spiritualWeapon.potentialMechanicCount());
+        assertEquals(List.of("ATTACK_ROLL", "DAMAGE", "DURATION"),
+                spiritualWeapon.candidateMechanicFamilies());
+        assertEquals(Map.of("COMPLETE_WITHIN_CLAIM", 2, "PARTIAL", 1),
+                spiritualWeapon.claimCompletenessCounts());
+        SpellCapabilityRecord iceKnife = byId.get("spell:xge:ice-knife");
+        assertEquals("PROCESSED", iceKnife.processingState());
+        assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED, iceKnife.classification());
+        assertEquals(5, iceKnife.potentialMechanicCount());
+        assertEquals(List.of("AREA_EFFECT", "ATTACK_ROLL", "DAMAGE", "SAVING_THROW_REQUIREMENT"),
+                iceKnife.candidateMechanicFamilies());
+        SpellCapabilityRecord magicStone = byId.get("spell:xge:magic-stone");
+        assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED, magicStone.classification());
+        assertEquals(3, magicStone.potentialMechanicCount());
+        assertEquals(List.of("ATTACK_ROLL", "DAMAGE", "DURATION"), magicStone.candidateMechanicFamilies());
+        assertTrue(magicStone.unsupportedReasons().contains("ATTACK_ROLL:SOURCE_UNSPECIFIED"));
+        SpellCapabilityRecord witchBolt = byId.get("spell:phb:witch-bolt");
+        assertEquals("PROCESSED", witchBolt.processingState());
+        assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED, witchBolt.classification());
+        assertEquals(4, witchBolt.potentialMechanicCount());
+        assertEquals(List.of("ATTACK_ROLL", "DAMAGE", "DURATION"), witchBolt.candidateMechanicFamilies());
+        assertTrue(witchBolt.unsupportedReasons().contains("ATTACK_ROLL:FAMILY_NOT_IMPLEMENTED"));
         assertEquals(inventory.catalogTotal(), inventory.sourceCounts().values().stream().mapToInt(Integer::intValue).sum());
         assertEquals(currentDocuments, mechanics.documents(), "Inventory assessment must not mutate inspection documents");
     }
@@ -132,14 +156,14 @@ class SpellCapabilityInventoryTests {
         assertEquals(4, chillTouch.potentialMechanicCount());
         assertEquals(List.of("ATTACK_ROLL", "ATTACK_ROLL_MODIFIER", "DAMAGE", "HEALING_PREVENTION"),
                 chillTouch.candidateMechanicFamilies());
-        assertFalse(chillTouch.unsupportedReasons().contains("ATTACK_ROLL:FAMILY_NOT_IMPLEMENTED"));
+        assertTrue(chillTouch.unsupportedReasons().contains("ATTACK_ROLL:FAMILY_NOT_IMPLEMENTED"));
         SpellCapabilityRecord shockingGrasp = byId.get("spell:phb:shocking-grasp");
         assertEquals("PROCESSED", shockingGrasp.processingState());
         assertEquals(SpellCapabilityClassification.PARTIALLY_SUPPORTED, shockingGrasp.classification());
         assertEquals(4, shockingGrasp.potentialMechanicCount());
         assertEquals(List.of("ATTACK_ROLL", "ATTACK_ROLL_MODIFIER", "DAMAGE", "REACTION_RESTRICTION"),
                 shockingGrasp.candidateMechanicFamilies());
-        assertFalse(shockingGrasp.unsupportedReasons().contains("ATTACK_ROLL:FAMILY_NOT_IMPLEMENTED"));
+        assertTrue(shockingGrasp.unsupportedReasons().contains("ATTACK_ROLL:FAMILY_NOT_IMPLEMENTED"));
         SpellCapabilityRecord negatedCondition = byId.get("spell:phb:animal-shapes");
         assertEquals(0, negatedCondition.potentialMechanicCount());
         assertEquals(SpellCapabilityClassification.UNSUPPORTED, negatedCondition.classification());

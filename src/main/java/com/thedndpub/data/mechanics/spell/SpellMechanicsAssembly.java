@@ -1,6 +1,7 @@
 package com.thedndpub.data.mechanics.spell;
 
 import com.thedndpub.data.mechanics.model.CoverageStatus;
+import com.thedndpub.data.mechanics.model.CoverageScopeExtent;
 import com.thedndpub.data.mechanics.model.DerivationMethod;
 import com.thedndpub.data.mechanics.model.MechanicContext;
 import com.thedndpub.data.mechanics.model.MechanicDerivation;
@@ -54,6 +55,10 @@ final class SpellMechanicsAssembly {
                     mismatch.reason(), List.of(anchor.id()), List.of()));
             return null;
         }
+    }
+
+    String ownerId() {
+        return source.owner().id();
     }
 
     List<MechanicRecord> attemptMany(
@@ -133,10 +138,20 @@ final class SpellMechanicsAssembly {
     }
 
     MechanicsDocument finish(List<String> considered, List<String> unassessed) {
+        return finish(considered, unassessed, CoverageStatus.PARTIAL, CoverageScopeExtent.DECLARED_SUBSET);
+    }
+
+    MechanicsDocument finishCompleteScope(List<String> considered) {
+        return finish(considered, List.of(), CoverageStatus.COMPLETE_WITHIN_SCOPE, CoverageScopeExtent.FULL_SPELL);
+    }
+
+    private MechanicsDocument finish(List<String> considered, List<String> unassessed,
+                                     CoverageStatus coverageStatus, CoverageScopeExtent extent) {
         return MechanicsDocument.create(source.owner(), 1, List.of(source.source().revision()),
                 new MechanicsProcessing(ProcessingState.PROCESSED, adapter, "1"),
                 records, original.observations(), unsupported, source.evidence(),
-                new MechanicsCoverage(records.isEmpty() ? CoverageStatus.NONE_SUPPORTED : CoverageStatus.PARTIAL,
-                        adapter, "1", considered, unassessed, unsupported.size()));
+                new MechanicsCoverage(records.isEmpty() ? CoverageStatus.NONE_SUPPORTED : coverageStatus,
+                        adapter, "1", considered, unassessed, unsupported.size(),
+                        records.isEmpty() ? CoverageScopeExtent.DECLARED_SUBSET : extent));
     }
 }

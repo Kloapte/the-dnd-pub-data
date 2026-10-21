@@ -44,16 +44,18 @@ public final class SpellMechanicsInspectionMapper {
                 document.sources().stream().map(source -> new MechanicsSourceRevisionDto(
                         source.resourcePath(), source.datasetVersion(), source.resourcePath(), source.resourceSha256()))
                         .toList(),
-                document.interpretations().stream().map(this::mechanic).toList(),
+                document.interpretations().stream().map(this::projectClaim).toList(),
                 document.observations().stream().map(observation -> observation(observation, document.owner())).toList(),
                 document.unsupported(),
                 document.evidence().stream().map(this::evidence).toList(),
                 document.coverage(),
                 document.reviewSummary(),
-                failed ? List.of(MechanicsInspectionDiagnostic.INTERPRETATION_PROCESSING_FAILED) : List.of());
+                failed ? List.of(MechanicsInspectionDiagnostic.INTERPRETATION_PROCESSING_FAILED) : List.of(),
+                !failed && document.coverage().status()
+                        == com.thedndpub.data.mechanics.model.CoverageStatus.COMPLETE_WITHIN_SCOPE ? Boolean.TRUE : null);
     }
 
-    private MechanicInspectionDto mechanic(MechanicRecord record) {
+    public MechanicInspectionDto projectClaim(MechanicRecord record) {
         MechanicDerivation derivation = record.derivation();
         return new MechanicInspectionDto(
                 record.id(), record.revision().number(), record.payload(), record.context(),

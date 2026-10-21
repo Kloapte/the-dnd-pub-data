@@ -223,6 +223,8 @@ public final class SpellCapabilityInventoryRunner {
         if (payload instanceof ArmorClassModifierMechanic) return "ARMOR_CLASS_MODIFIER";
         if (payload instanceof ReactionActivationMechanic) return "REACTION_ACTIVATION";
         if (payload instanceof EffectDurationMechanic) return "DURATION";
+        if (payload instanceof PersistentSpellEffectMechanic) return "DURATION";
+        if (payload instanceof com.thedndpub.data.mechanics.model.EnchantedObjectCollectionMechanic) return "DURATION";
         if (payload instanceof SpellDamagePreventionMechanic) return "SPELL_DAMAGE_PREVENTION";
         if (payload instanceof DamageMechanic) return "DAMAGE";
         if (payload instanceof HealingMechanic) return "HEALING";
@@ -237,6 +239,10 @@ public final class SpellCapabilityInventoryRunner {
         if (payload instanceof AttackRollModifierMechanic) return "ATTACK_ROLL_MODIFIER";
         if (payload instanceof com.thedndpub.data.mechanics.model.DamageInstanceSeriesMechanic) {
             return "DAMAGE_INSTANCE_SERIES";
+        }
+        if (payload instanceof AttackTriggeredAreaEffectMechanic) return "AREA_EFFECT";
+        if (payload instanceof com.thedndpub.data.mechanics.model.ConditionalAttackChainMechanic) {
+            return "CONDITIONAL_ATTACK_CHAIN";
         }
         return "UNKNOWN";
     }

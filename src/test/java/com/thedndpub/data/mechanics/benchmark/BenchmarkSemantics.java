@@ -54,6 +54,12 @@ final class BenchmarkSemantics {
             case ArmorClassModifierMechanic ignored -> MechanicFamily.ARMOR_CLASS_MODIFIER;
             case ReactionActivationMechanic ignored -> MechanicFamily.REACTION_ACTIVATION;
             case EffectDurationMechanic ignored -> MechanicFamily.DURATION;
+            case com.thedndpub.data.mechanics.model.PersistentSpellEffectMechanic ignored -> MechanicFamily.DURATION;
+            case com.thedndpub.data.mechanics.model.EnchantedObjectCollectionMechanic ignored -> MechanicFamily.DURATION;
+            case com.thedndpub.data.mechanics.model.AttackTriggeredAreaEffectMechanic ignored ->
+                    MechanicFamily.AREA_EFFECT;
+            case com.thedndpub.data.mechanics.model.ConditionalAttackChainMechanic ignored ->
+                    MechanicFamily.CONDITIONAL_ATTACK_CHAIN;
             case SpellDamagePreventionMechanic ignored -> MechanicFamily.SPELL_DAMAGE_PREVENTION;
             case DamageMechanic ignored -> MechanicFamily.DAMAGE;
             case com.thedndpub.data.mechanics.model.DamageInstanceSeriesMechanic ignored ->
@@ -61,8 +67,13 @@ final class BenchmarkSemantics {
             case HealingMechanic ignored -> MechanicFamily.HEALING;
             case SavingThrowRequirementMechanic ignored -> MechanicFamily.SAVING_THROW_REQUIREMENT;
             case SpellSlotScalingMechanic ignored -> MechanicFamily.SPELL_SLOT_SCALING;
+            case com.thedndpub.data.mechanics.model.GenericScalingMechanic scaling ->
+                    scaling.axis() == com.thedndpub.data.mechanics.model.ScalingAxis.SPELL_SLOT_LEVEL
+                            ? MechanicFamily.SPELL_SLOT_SCALING : MechanicFamily.UNDETERMINED;
             case com.thedndpub.data.mechanics.model.ConditionChangeMechanic ignored -> MechanicFamily.CONDITION;
             case com.thedndpub.data.mechanics.model.ConditionChoiceMechanic ignored -> MechanicFamily.CONDITION;
+            case com.thedndpub.data.mechanics.model.ConditionTerminationEventMechanic ignored ->
+                    MechanicFamily.CONDITION;
             case StatisticModifierMechanic ignored -> MechanicFamily.MODIFIER;
             case DamageResistanceMechanic ignored -> MechanicFamily.DAMAGE_RESISTANCE;
             case AttackRollMechanic ignored -> MechanicFamily.ATTACK_ROLL;
@@ -159,6 +170,9 @@ final class BenchmarkSemantics {
                         && outcome.outcome() == other.outcome()
                         && outcome.instanceScope() == other.instanceScope()
                         && outcome.attackRoll().equals(other.attackRoll());
+                case com.thedndpub.data.mechanics.model.AppliesToAreaEffect area ->
+                        second instanceof com.thedndpub.data.mechanics.model.AppliesToAreaEffect other
+                                && area.areaEffect().equals(other.areaEffect());
             };
             if (!same) {
                 return false;
@@ -202,6 +216,7 @@ final class BenchmarkSemantics {
             case AppliesWhen applies -> applies.evidenceIds();
             case AppliesOnAttackRollOutcome outcome -> outcome.evidenceIds();
             case AppliesOnEachAttackRollOutcome outcome -> outcome.evidenceIds();
+            case com.thedndpub.data.mechanics.model.AppliesToAreaEffect area -> area.evidenceIds();
         };
     }
 }

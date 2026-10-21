@@ -12,7 +12,16 @@ public record MechanicsCoverage(
         String scopeVersion,
         List<String> consideredSourcePaths,
         List<String> unassessedSourcePaths,
-        @JsonProperty(required = true) int unsupportedCount) {
+        @JsonProperty(required = true) int unsupportedCount,
+        CoverageScopeExtent scopeExtent) {
+    /** Legacy payloads preserve their original serialization and leave scope extent undeclared. */
+    public MechanicsCoverage(CoverageStatus status, String scopeId, String scopeVersion,
+                             List<String> consideredSourcePaths, List<String> unassessedSourcePaths,
+                             int unsupportedCount) {
+        this(status, scopeId, scopeVersion, consideredSourcePaths, unassessedSourcePaths, unsupportedCount,
+                null);
+    }
+
     public MechanicsCoverage {
         ModelChecks.required(status, "status");
         consideredSourcePaths = ModelChecks.list(consideredSourcePaths);
@@ -25,8 +34,12 @@ public record MechanicsCoverage(
             ModelChecks.text(scopeVersion, "scopeVersion");
         }
         if (status == CoverageStatus.COMPLETE_WITHIN_SCOPE) {
-            ModelChecks.require(unsupportedCount == 0 && unassessedSourcePaths.isEmpty(),
-                    "A complete scope cannot omit sections or unsupported constructs");
+            ModelChecks.required(scopeExtent, "A complete scope must declare its extent");
+            ModelChecks.require(!consideredSourcePaths.isEmpty() && unassessedSourcePaths.isEmpty(),
+                    "A complete scope must declare considered paths and cannot retain unassessed paths");
+        }
+        if (status == CoverageStatus.NOT_ASSESSED) {
+            ModelChecks.require(scopeExtent == null, "An unassessed scope cannot declare an extent");
         }
     }
 }

@@ -6,6 +6,7 @@ import com.thedndpub.data.dto.spell.SpellFormulaAnnotationIndex;
 import com.thedndpub.data.dto.spell.SpellId;
 import com.thedndpub.data.mechanics.inspection.SpellMechanicsInspectionDto;
 import com.thedndpub.data.mechanics.inspection.SpellMechanicsInspectionMapper;
+import com.thedndpub.data.mechanics.inspection.ExperimentalSpellMechanicsDto;
 import com.thedndpub.data.mechanics.model.FormulaObservationReference;
 import com.thedndpub.data.mechanics.model.MechanicsCatalogValidation;
 import com.thedndpub.data.mechanics.model.MechanicsDocument;
@@ -13,6 +14,9 @@ import com.thedndpub.data.mechanics.model.ModelChecks;
 import com.thedndpub.data.mechanics.model.SourceArtifactRevision;
 import com.thedndpub.data.mechanics.spell.SpellMechanicsDocumentFactory;
 import com.thedndpub.data.mechanics.spell.SpellMechanicsExtractionService;
+import com.thedndpub.data.mechanics.spell.ExperimentalSpellMechanicsDryRunService;
+import com.thedndpub.data.mechanics.experimental.ExperimentalMechanicsV2Dto;
+import com.thedndpub.data.mechanics.experimental.GenericMechanicsRecognitionPipeline;
 import com.thedndpub.data.mechanics.spell.SpellMechanicsSourceOwner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,16 +41,7 @@ public final class SpellMechanicsInspectionCatalog {
             SpellFormulaAnnotationCatalog formulas,
             SourceRegistry sources) {
         this(new SpellMechanicsDocumentFactory(mapper), new SpellMechanicsExtractionService(mapper),
-                spells.findAll(), formulas.index(), sources);
-    }
-
-    private SpellMechanicsInspectionCatalog(
-            SpellMechanicsDocumentFactory factory,
-            SpellMechanicsExtractionService extraction,
-            List<SpellDefinition> definitions,
-            SpellFormulaAnnotationIndex formulaIndex,
-            SourceRegistry sources) {
-        this(factory, extraction, definitions, formulaIndex, sources, factory.loadOwners());
+                spells.findAll(), formulas.index(), sources, mapper);
     }
 
     private SpellMechanicsInspectionCatalog(
@@ -55,9 +50,30 @@ public final class SpellMechanicsInspectionCatalog {
             List<SpellDefinition> definitions,
             SpellFormulaAnnotationIndex formulaIndex,
             SourceRegistry sources,
-            List<SpellMechanicsSourceOwner> manifest) {
-        this(extraction.extract(factory.unattempted(definitions, formulaIndex, manifest), definitions, manifest),
+            ObjectMapper mapper) {
+        this(factory, extraction, definitions, formulaIndex, sources, factory.loadOwners(), mapper);
+    }
+
+    private SpellMechanicsInspectionCatalog(
+            SpellMechanicsDocumentFactory factory,
+            SpellMechanicsExtractionService extraction,
+            List<SpellDefinition> definitions,
+            SpellFormulaAnnotationIndex formulaIndex,
+            SourceRegistry sources,
+            List<SpellMechanicsSourceOwner> manifest,
+            ObjectMapper mapper) {
+        this(buildCatalog(factory, extraction, definitions, formulaIndex, manifest, mapper),
                 definitions, formulaIndex, sources, manifest);
+    }
+
+    private SpellMechanicsInspectionCatalog(
+            CatalogBuild build,
+            List<SpellDefinition> definitions,
+            SpellFormulaAnnotationIndex formulaIndex,
+            SourceRegistry sources,
+            List<SpellMechanicsSourceOwner> manifest) {
+        this(build.canonicalDocuments(), definitions, formulaIndex, sources, manifest,
+                build.experimental(), build.experimentalV2());
     }
 
     /** Adapter boundary for future canonical documents; no extraction or publication policy lives here. */
@@ -67,6 +83,17 @@ public final class SpellMechanicsInspectionCatalog {
             SpellFormulaAnnotationIndex formulaIndex,
             SourceRegistry sources,
             List<SpellMechanicsSourceOwner> manifest) {
+        this(documents, definitions, formulaIndex, sources, manifest, Map.of(), Map.of());
+    }
+
+    private SpellMechanicsInspectionCatalog(
+            List<MechanicsDocument> documents,
+            List<SpellDefinition> definitions,
+            SpellFormulaAnnotationIndex formulaIndex,
+            SourceRegistry sources,
+            List<SpellMechanicsSourceOwner> manifest,
+            Map<SpellId, ExperimentalSpellMechanicsDto> experimental,
+            Map<SpellId, ExperimentalMechanicsV2Dto> experimentalV2) {
         Map<SpellId, SpellDefinition> owners = new TreeMap<>(Comparator.comparing(SpellId::value));
         for (SpellDefinition definition : definitions) {
             ModelChecks.require(owners.putIfAbsent(definition.id(), definition) == null, "Duplicate Spell definition owner");
@@ -101,7 +128,14 @@ public final class SpellMechanicsInspectionCatalog {
             List<Integer> expected = formulaIndex.bySpellId().get(id).stream()
                     .map(annotation -> annotation.occurrenceIndex()).toList();
             ModelChecks.require(expected.equals(occurrenceIndices), "Incomplete or reordered formula references");
-            ModelChecks.require(projections.putIfAbsent(id, projectionMapper.project(document)) == null,
+            SpellMechanicsInspectionDto projection = projectionMapper.project(document);
+            ExperimentalSpellMechanicsDto experimentalDto = experimental.get(id);
+            if (experimentalDto != null) {
+                projection = withExperimental(projection, experimentalDto, experimentalV2.get(id));
+            } else if (experimentalV2.containsKey(id)) {
+                projection = withExperimental(projection, null, experimentalV2.get(id));
+            }
+            ModelChecks.require(projections.putIfAbsent(id, projection) == null,
                     "Duplicate inspection owner");
         }
         ModelChecks.require(projections.keySet().equals(owners.keySet()), "Missing inspection owners");
@@ -109,6 +143,39 @@ public final class SpellMechanicsInspectionCatalog {
         var ordered = new ArrayList<>(documents);
         ordered.sort(Comparator.comparing(document -> document.owner().id()));
         this.documents = List.copyOf(ordered);
+    }
+
+    private static CatalogBuild buildCatalog(
+            SpellMechanicsDocumentFactory factory,
+            SpellMechanicsExtractionService extraction,
+            List<SpellDefinition> definitions,
+            SpellFormulaAnnotationIndex formulaIndex,
+            List<SpellMechanicsSourceOwner> manifest,
+            ObjectMapper mapper) {
+        List<MechanicsDocument> unattempted = factory.unattempted(definitions, formulaIndex, manifest);
+        List<MechanicsDocument> canonical = extraction.extract(unattempted, definitions, manifest);
+        Map<SpellId, ExperimentalSpellMechanicsDto> experimental =
+                new ExperimentalSpellMechanicsDryRunService(mapper)
+                        .evaluate(definitions, unattempted, canonical, manifest);
+        Map<SpellId, ExperimentalMechanicsV2Dto> experimentalV2 =
+                new GenericMechanicsRecognitionPipeline(mapper).evaluate(definitions, canonical, manifest);
+        return new CatalogBuild(canonical, experimental, experimentalV2);
+    }
+
+    private static SpellMechanicsInspectionDto withExperimental(
+            SpellMechanicsInspectionDto canonical, ExperimentalSpellMechanicsDto experimental,
+            ExperimentalMechanicsV2Dto experimentalV2) {
+        return new SpellMechanicsInspectionDto(canonical.schemaVersion(), canonical.projection(),
+                canonical.availability(), canonical.processing(), canonical.sourceRevisions(),
+                canonical.interpretations(), canonical.observations(), canonical.unsupported(), canonical.evidence(),
+                canonical.coverage(), canonical.reviewSummary(), canonical.diagnostics(),
+                canonical.readyForHumanReviewWithinScope(), experimental, canonical.origin(), experimentalV2);
+    }
+
+    private record CatalogBuild(
+            List<MechanicsDocument> canonicalDocuments,
+            Map<SpellId, ExperimentalSpellMechanicsDto> experimental,
+            Map<SpellId, ExperimentalMechanicsV2Dto> experimentalV2) {
     }
 
     public SpellMechanicsInspectionDto findById(SpellId id) {

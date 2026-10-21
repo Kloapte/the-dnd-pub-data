@@ -507,7 +507,9 @@ final class PhbConditionMechanicsRules {
     }
 
     private ConditionName conditionName(String value) {
-        if (value == null) {
+        if (value == null || value.equalsIgnoreCase("exhaustion")) {
+            // Exhaustion support belongs to the experimental generic interpreter until the
+            // canonical PHB rules are deliberately migrated and reviewed.
             return null;
         }
         try {
@@ -532,6 +534,9 @@ final class PhbConditionMechanicsRules {
         String operationId = operation.name().toLowerCase(java.util.Locale.ROOT).replace('_', '-');
         ConditionName condition;
         try {
+            if (raw.equalsIgnoreCase("exhaustion")) {
+                throw new IllegalArgumentException("Exhaustion is not supported by the legacy canonical extractor");
+            }
             condition = ConditionName.valueOf(raw.toUpperCase(java.util.Locale.ROOT));
         } catch (IllegalArgumentException exception) {
             throw new SpellPatternMismatch(UnsupportedReason.UNSUPPORTED_SYNTAX, field);

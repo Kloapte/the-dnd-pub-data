@@ -4,6 +4,7 @@ public enum ConditionName {
     BLINDED,
     CHARMED,
     DEAFENED,
+    EXHAUSTION,
     FRIGHTENED,
     GRAPPLED,
     INCAPACITATED,

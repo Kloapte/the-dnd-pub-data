@@ -143,7 +143,9 @@ public final class PhbSpellMechanicsExtractor implements SpellMechanicsPattern {
     }
 
     boolean supportsForInventory(SpellDefinition spell) {
-        return supports(spell) || spell.source().identity().code().equalsIgnoreCase("PHB")
+        return supports(spell) || !PhbSpiritualWeaponRules.OWNER_ID.equals(spell.id().value())
+                && !PhbWitchBoltRules.OWNER_ID.equals(spell.id().value())
+                && spell.source().identity().code().equalsIgnoreCase("PHB")
                 && (!spell.mechanics().savingThrows().isEmpty() || !spell.mechanics().damageInflicted().isEmpty()
                 || PhbConditionMechanicsRules.containsConditionTag(spell.entries())
                 || PhbConditionMechanicsRules.containsConditionTag(spell.entriesHigherLevel()));

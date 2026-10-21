@@ -21,6 +21,7 @@ final class MechanicsBindings {
             case AppliesWhen applies -> applies.evidenceIds();
             case AppliesOnAttackRollOutcome outcome -> outcome.evidenceIds();
             case AppliesOnEachAttackRollOutcome outcome -> outcome.evidenceIds();
+            case AppliesToAreaEffect area -> area.evidenceIds();
         };
     }
 
@@ -41,6 +42,8 @@ final class MechanicsBindings {
                 references.add(outcome.attackRoll());
             } else if (binding instanceof AppliesOnEachAttackRollOutcome outcome) {
                 references.add(outcome.attackRoll());
+            } else if (binding instanceof AppliesToAreaEffect area) {
+                references.add(area.areaEffect());
             } else if (binding instanceof AppliesForDuration timing
                     && timing.duration() instanceof ReferencedDuration duration) {
                 references.add(duration.mechanic());
@@ -54,12 +57,31 @@ final class MechanicsBindings {
                 && modifier.affectedRolls() instanceof ReferencedAttackRollSelector reference) {
             references.add(reference.attackRoll());
         }
+        if (record.payload() instanceof AttackRollMechanic attack && attack.activationPattern() != null) {
+            references.add(attack.activationPattern().persistentEffect());
+        }
+        if (record.payload() instanceof PersistentSpellEffectMechanic effect && effect.establishment() != null) {
+            references.add(effect.establishment().attackRoll());
+        }
+        if (record.payload() instanceof AttackRollMechanic attack && attack.enchantedObjectUse() != null) {
+            references.add(attack.enchantedObjectUse().enchantedObjectCollection());
+        }
+        if (record.payload() instanceof AttackTriggeredAreaEffectMechanic area) {
+            references.add(area.attackRoll());
+        }
+        if (record.payload() instanceof ConditionalAttackChainMechanic chain) {
+            references.add(chain.initialAttack());
+            references.add(chain.reusableDamage());
+        }
         if (record.payload() instanceof ConditionChangeMechanic condition && condition.choiceGroup() != null) {
             references.add(condition.choiceGroup());
         }
         if (record.payload() instanceof DamageMechanic damage
                 && damage.amount() instanceof FractionOfAmount fraction) {
             references.add(fraction.baseAmount());
+        }
+        if (record.payload() instanceof DamageMechanic damage && damage.actionActivation() != null) {
+            references.add(damage.actionActivation().persistentEffect());
         }
         return references;
     }

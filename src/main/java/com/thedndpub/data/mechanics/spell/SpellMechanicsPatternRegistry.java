@@ -19,8 +19,10 @@ final class SpellMechanicsPatternRegistry {
 
     static SpellMechanicsPatternRegistry standard() {
         return new SpellMechanicsPatternRegistry(List.of(
-                new ShieldMechanicsExtractor(), new PhbSpellMechanicsExtractor(),
-                new XgeSteelWindStrikeRules()));
+                new ShieldMechanicsExtractor(), new PhbSpiritualWeaponRules(), new PhbWitchBoltRules(),
+                new PhbSpellMechanicsExtractor(),
+                new XgeSteelWindStrikeRules(), new XgeMagicStoneRules(), new XgeIceKnifeRules(),
+                new XphbChromaticOrbRules()));
     }
 
     SpellMechanicsPattern find(SpellDefinition spell) {
@@ -28,11 +30,20 @@ final class SpellMechanicsPatternRegistry {
     }
 
     SpellMechanicsPattern find(SpellDefinition spell, Predicate<SpellMechanicsPattern> applicable) {
-        List<SpellMechanicsPattern> matches = patterns.stream()
-                .filter(applicable)
-                .toList();
+        List<SpellMechanicsPattern> matches = matching(spell, applicable);
         ModelChecks.require(matches.size() <= 1, "Spell patterns overlap for " + spell.id().value());
         return matches.isEmpty() ? null : matches.getFirst();
+    }
+
+    List<SpellMechanicsPattern> matching(
+            SpellDefinition spell, Predicate<SpellMechanicsPattern> applicable) {
+        return patterns.stream()
+                .filter(applicable)
+                .toList();
+    }
+
+    List<SpellMechanicsPattern> patterns() {
+        return patterns;
     }
 
 }

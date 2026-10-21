@@ -239,8 +239,10 @@ class MechanicsDocumentTests {
                 List.of(new SourceArtifactRevision("5eTools v2.37.0", artifact("PHB").resourcePath(), "0".repeat(64))),
                 new MechanicsProcessing(ProcessingState.PROCESSED, "test", "v1"), List.of(ac()), List.of(), List.of(),
                 List.of(shieldBody()), new MechanicsCoverage(CoverageStatus.PARTIAL, "test", "v1", List.of(), List.of(), 0)));
-        assertThrows(IllegalArgumentException.class, () -> new MechanicsCoverage(CoverageStatus.COMPLETE_WITHIN_SCOPE,
+        assertThrows(NullPointerException.class, () -> new MechanicsCoverage(CoverageStatus.COMPLETE_WITHIN_SCOPE,
                 "test", "v1", List.of(), List.of("/entries"), 0));
+        assertThrows(IllegalArgumentException.class, () -> new MechanicsCoverage(CoverageStatus.COMPLETE_WITHIN_SCOPE,
+                "test", "v1", List.of(), List.of(), 0, CoverageScopeExtent.FULL_SPELL));
     }
 
     @Test
@@ -330,21 +332,81 @@ class MechanicsDocumentTests {
                         HealingMode.RESTORE_HIT_POINTS),
                 ac().context(), complete(), shieldBody());
         var coverage = new MechanicsCoverage(CoverageStatus.COMPLETE_WITHIN_SCOPE,
-                "test-only-scope", "v1", List.of("/spell/294/entries"), List.of(), 0);
+                "test-only-scope", "v1", List.of("/spell/294/entries"), List.of(), 1,
+                CoverageScopeExtent.FULL_SPELL);
+        var unsupported = new UnsupportedMechanicsConstruct("unknown-amount", MechanicFamily.DAMAGE,
+                UnsupportedReason.SOURCE_UNSPECIFIED, List.of("body"), List.of());
 
-        assertThrows(IllegalArgumentException.class, () -> MechanicsDocument.create(
+        var accountedWithGap = MechanicsDocument.create(
                 PHB, 1, List.of(artifact("PHB")),
                 new MechanicsProcessing(ProcessingState.PROCESSED, "model-construction-only", "v1"),
-                List.of(unknown), List.of(), List.of(), List.of(shieldBody()), coverage));
+                List.of(unknown), List.of(), List.of(unsupported), List.of(shieldBody()), coverage);
+        assertEquals(CoverageStatus.COMPLETE_WITHIN_SCOPE, accountedWithGap.coverage().status());
+        assertEquals(1, accountedWithGap.coverage().unsupportedCount());
         assertThrows(IllegalArgumentException.class, () -> MechanicEvidenceAssociation.of(
                 shieldBody(), "/payload/amount", EvidenceRole.EFFECT_ROLE));
 
+        var cleanCoverage = new MechanicsCoverage(CoverageStatus.COMPLETE_WITHIN_SCOPE,
+                "test-only-scope", "v1", List.of("/spell/294/entries"), List.of(), 0,
+                CoverageScopeExtent.FULL_SPELL);
         var completeDocument = MechanicsDocument.create(
                 PHB, 1, List.of(artifact("PHB")),
                 new MechanicsProcessing(ProcessingState.PROCESSED, "model-construction-only", "v1"),
-                List.of(ac()), List.of(), List.of(), List.of(shieldBody()), coverage);
+                List.of(ac()), List.of(), List.of(), List.of(shieldBody()), cleanCoverage);
         assertEquals(CoverageStatus.COMPLETE_WITHIN_SCOPE, completeDocument.coverage().status());
         assertEquals(MechanicsReviewStatus.PENDING_REVIEW, completeDocument.reviewSummary().aggregateStatus());
+    }
+
+    @Test
+    void documentHashIsPermutationIndependentAndClaimHashesRemainClaimLocal() {
+        var first = ac();
+        var second = proposal(PHB, "duration", new EffectDurationMechanic(new FixedDuration(DurationUnit.ROUND, 1, null)),
+                ac().context(), complete(), shieldBody());
+        var source = List.of(artifact("PHB"));
+        var processing = new MechanicsProcessing(ProcessingState.PROCESSED, "fixture", "v1");
+        var coverage = new MechanicsCoverage(CoverageStatus.PARTIAL, "fixture", "v1", List.of(), List.of(), 0);
+        var summary = com.thedndpub.data.mechanics.review.MechanicsReviewSummary.from(
+                List.of(first.review(), second.review()));
+        var ordered = new MechanicsDocumentContent(PHB, source, processing, List.of(first, second), List.of(), List.of(),
+                List.of(shieldBody()), coverage, summary);
+        var permuted = new MechanicsDocumentContent(PHB, source, processing, List.of(second, first), List.of(), List.of(),
+                List.of(shieldBody()), coverage, summary);
+        assertEquals(MechanicsHashes.documentHash(ordered), MechanicsHashes.documentHash(permuted));
+        assertNotEquals(MechanicsHashes.documentHash(ordered, MechanicsHashes.LEGACY_DOCUMENT_HASH_PROTOCOL),
+                MechanicsHashes.documentHash(permuted, MechanicsHashes.LEGACY_DOCUMENT_HASH_PROTOCOL));
+        assertEquals(first.revision().contentSha256(), ordered.interpretations().getFirst().revision().contentSha256());
+        assertEquals(MechanicsHashes.DOCUMENT_HASH_PROTOCOL, new MechanicsDocumentRevision(1,
+                MechanicsHashes.documentHash(ordered), MechanicsHashes.DOCUMENT_HASH_PROTOCOL)
+                .effectiveHashProtocolVersion());
+        assertEquals(MechanicsHashes.LEGACY_DOCUMENT_HASH_PROTOCOL,
+                new MechanicsDocumentRevision(1, MechanicsHashes.documentHash(ordered, 1))
+                        .effectiveHashProtocolVersion());
+        MechanicsDocument current = document(List.of(first, second));
+        MechanicsDocumentContent currentContent = new MechanicsDocumentContent(current.owner(), current.sources(),
+                current.processing(), current.interpretations(), current.observations(), current.unsupported(),
+                current.evidence(), current.coverage(), current.reviewSummary());
+        MechanicsDocument legacy = new MechanicsDocument(current.owner(), new MechanicsDocumentRevision(1,
+                MechanicsHashes.documentHash(currentContent, MechanicsHashes.LEGACY_DOCUMENT_HASH_PROTOCOL)),
+                current.sources(), current.processing(), current.interpretations(), current.observations(),
+                current.unsupported(), current.evidence(), current.coverage(), current.reviewSummary());
+        try {
+            String json = MechanicsJson.mapper().writeValueAsString(legacy);
+            assertFalse(MechanicsJson.mapper().readTree(json).path("revision").has("hashProtocolVersion"));
+            assertEquals(legacy, MechanicsJson.mapper().readValue(json, MechanicsDocument.class));
+        } catch (java.io.IOException exception) {
+            throw new AssertionError(exception);
+        }
+    }
+
+    @Test
+    void genericDependencyGraphRejectsCyclesAndSelfReferences() {
+        MechanicId a = MechanicId.of(PHB, "a");
+        MechanicId b = MechanicId.of(PHB, "b");
+        MechanicsDocumentValidator.validateDependencyGraph(java.util.Map.of(a, List.of(b), b, List.of()));
+        assertThrows(IllegalArgumentException.class, () -> MechanicsDocumentValidator.validateDependencyGraph(
+                java.util.Map.of(a, List.of(b), b, List.of(a))));
+        assertThrows(IllegalArgumentException.class, () -> MechanicsDocumentValidator.validateDependencyGraph(
+                java.util.Map.of(a, List.of(a))));
     }
 
     @Test

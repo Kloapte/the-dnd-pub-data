@@ -82,6 +82,23 @@ publication authorization. A failed canonical processing result projects
 UNAVAILABLE / FAILED and a controlled diagnostic; it is not a successful empty result. Catalog
 integrity failures stop startup rather than silently returning missing inspection.
 
+The include also adds `experimentalInterpretationV2` as a versioned sibling to the existing
+`experimentalInterpretation` v1 property. v1 remains unchanged for existing clients. v2 separates
+`mechanics` (typed payloads and explicit relations), `evidence`, `diagnostics`, and interpretation-level
+`metadata`. It is generated from source fragments at startup and cached in the inspection catalog;
+requests do not execute the catalogue pipeline. v2 results are experimental, source-fingerprinted,
+limited to recognized fragments, pending human review, rights-unreviewed, and never publication-
+authorized. An empty v2 mechanics list with `NO_PATTERN_MATCH` means no current strategy recognized a
+mechanic, not that the spell has no mechanics. `EXTRACTION_ERROR` and unresolved/unsupported source
+signals are explicit. The top-level `relationships` collection currently represents explicit
+saving-throw-to-damage outcomes and attack-HIT/MISS-to-damage outcomes. Save relationships retain
+their `outcomes` field; attack relationships add `attackOutcomes`. Both refer to stable local mechanic
+IDs and source evidence. These are declarative source relationships, not runtime resolution or event
+execution. See the [attack-to-damage implementation report](../../analysis/mechanics/step-7/7.5-attack-damage-relationship-strategy-implementation.md),
+the [save-to-damage implementation report](../../analysis/mechanics/step-7/7.5-saving-throw-damage-relationship-strategy-implementation.md),
+and the [v2 implementation report](../../analysis/mechanics/step-7/7.4.4-generic-mechanics-pipeline-v2-implementation.md)
+and its [full-catalogue results](../../analysis/mechanics/step-7/7.4.4-generic-first-full-catalogue-dry-run-v2.md).
+
 Public DTOs omit private reviewer identities, audit journals and complete source entries. The
 [inspection mapper](../../src/main/java/com/thedndpub/data/mechanics/inspection/SpellMechanicsInspectionMapper.java)
 is the explicit boundary from canonical documents, and the

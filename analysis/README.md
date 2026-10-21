@@ -11,7 +11,14 @@ and historical investigations, not additional authorization to implement their p
 | --- | --- |
 | Current architecture and conventions | [Documentation index](../docs/README.md) |
 | Mechanics model and active implementation references | [Active mechanics index](active/mechanics/README.md) |
-| Current corpus-wide Spell capability assessment | [7.4.4A–C inventory and comparisons](mechanics/step-7/7.4.4C-condition-extraction-comparison.md) |
+| Current Spell capability inventory | [7.4.4A–C inventory and comparisons](mechanics/step-7/7.4.4C-condition-extraction-comparison.md) |
+| Latest bounded Spell mechanics implementation | [7.4.4X Chromatic Orb](mechanics/step-7/7.4.4X-chromatic-orb-damage-dice-conditional-chaining.md) |
+| Generic-first interpretation architecture | [7.4.4 pattern audit](mechanics/step-7/7.4.4-generic-first-pattern-audit.md) |
+| Generic-first catalogue dry run | [All-spell experimental results](mechanics/step-7/7.4.4-generic-first-full-catalogue-dry-run.md) and [per-owner artifact](mechanics/step-7/generic-first-dry-run-results.json) |
+| Step 7.5 generic pipeline v2 baseline | [Implementation report](mechanics/step-7/7.4.4-generic-mechanics-pipeline-v2-implementation.md), [v2 catalogue summary](mechanics/step-7/7.4.4-generic-first-full-catalogue-dry-run-v2.md), and [per-owner results](mechanics/step-7/generic-first-dry-run-v2-results.json) |
+| Step 7.5 condition extraction | [Condition strategy implementation and verification](mechanics/step-7/7.5-generic-condition-extraction-and-relationship-strategy-implementation.md), [v5 catalogue summary](mechanics/step-7/7.5-generic-condition-dry-run-v5.md), and [per-owner v5 results](mechanics/step-7/generic-condition-dry-run-v5-results.json) |
+| Step 7.4.4 closure remediation | [F-02/F-03/F-04/F-06 results](mechanics/step-7/7.4.4-closure-remediation.md) |
+| Step 7.4.4 closure remediation | [F-02/F-03/F-04/F-06 results](mechanics/step-7/7.4.4-closure-remediation.md) |
 | Cross-catalog discoveries | [Domain discoveries](domain/DOMAIN-DISCOVERIES.md) |
 | Completed source-family coverage | [Source coverage matrix](remaining-json/SOURCE-COVERAGE-MATRIX.md) |
 | Source registry conventions | [Source registry design](sources/SOURCE-REGISTRY-DESIGN.md) |

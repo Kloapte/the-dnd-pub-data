@@ -33,6 +33,7 @@ import com.thedndpub.data.mechanics.model.MechanicFamily;
 import com.thedndpub.data.mechanics.model.MechanicRecord;
 import com.thedndpub.data.mechanics.model.CharacterLevelInstanceCount;
 import com.thedndpub.data.mechanics.model.CharacterLevelInstanceCountTier;
+import com.thedndpub.data.mechanics.model.MechanicsCompleteness;
 import com.thedndpub.data.mechanics.model.InstanceCountProgression;
 import com.thedndpub.data.mechanics.model.InstanceTargetAllocation;
 import com.thedndpub.data.mechanics.model.MechanicRevisionReference;
@@ -234,7 +235,21 @@ final class PhbSpellAttackRules {
                     () -> shockingGraspMetalArmorAdvantage(source, assembly, attackRoll));
         }
 
+        if (isCoverageCantrip(spell.id().value())) {
+            StructuredFieldMechanicsEvidence range = source.fieldEvidence("/range");
+            assembly.unsupported(spell.id().value() + ":unsupported:attack-range",
+                    MechanicFamily.ATTACK_ROLL, UnsupportedReason.FAMILY_NOT_IMPLEMENTED, List.of(range.id()));
+        }
+
         String root = source.source().jsonPointer();
+        if (isCoverageCantrip(spell.id().value())) {
+            return assembly.finishCompleteScope(List.of(
+                    root + "/name", root + "/source", root + "/page", root + "/level", root + "/school",
+                    root + "/time", root + "/range", root + "/duration", root + "/components",
+                    root + "/areaTags", root + "/miscTags", root + "/spellAttack", root + "/damageInflict",
+                    root + "/conditionInflict", root + "/conditionImmune", root + "/savingThrow",
+                    root + "/scalingLevelDice", root + "/entries", root + "/entriesHigherLevel"));
+        }
         List<String> considered = spell.id().value().equals(INFLECT_WOUNDS)
                 ? List.of(root + "/spellAttack", root + "/damageInflict", root + "/entries",
                         root + "/entriesHigherLevel")
@@ -632,6 +647,10 @@ final class PhbSpellAttackRules {
         };
     }
 
+    private static boolean isCoverageCantrip(String ownerId) {
+        return ownerId.equals(CHILL_TOUCH) || ownerId.equals(RAY_OF_FROST) || ownerId.equals(SHOCKING_GRASP);
+    }
+
     private static MechanicRecord attackRoll(
             Rule rule,
             SpellMechanicsEvidenceSource source,
@@ -649,7 +668,9 @@ final class PhbSpellAttackRules {
                         AttackActivationTiming.CAST_TIME),
                 new MechanicContext(rule.targetSubject(), List.of()),
                 associations,
-                false);
+                false,
+                isCoverageCantrip(assembly.ownerId())
+                        ? MechanicsCompleteness.PARTIAL : MechanicsCompleteness.COMPLETE_WITHIN_CLAIM);
     }
 
     private static MechanicRecord hitDamage(

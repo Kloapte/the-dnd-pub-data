@@ -1,6 +1,6 @@
 # The DnD Pub Data Backend — Development Roadmap
 
-> **Status:** Authoritative working roadmap, 21 October 2026. Step 7.2 and Steps 7.3.1–7.3.3 are implemented. Step 7.4.3 remains PARTIAL after batch 7.4.3C. Step 7.4.4 is IN PROGRESS with 7.4.4A through 7.4.4S complete: 124 of 969 Spell owners are processed with 261 typed mechanics; all six benchmark fixtures await human review, so authoritative benchmark acceptance remains outstanding.
+> **Status:** Authoritative working roadmap, 21 October 2026. Step 7.2 and Steps 7.3.1–7.3.3 are implemented. Step 7.4.3 remains PARTIAL after batch 7.4.3C. Step 7.4.4 is COMPLETE after implementation batches 7.4.4A through 7.4.4X and the consolidation/readiness review and approved closure remediation. The review's accepted and deferred findings, including deferred F-05, remain recorded in the linked reports; all six benchmark fixtures still await human review, so authoritative benchmark acceptance remains outstanding. Step 7.5 is IN PROGRESS for generic experimental spell extraction; v1/v2 dry-run baselines are recorded, while semantic review, canonical promotion, and licensing approval remain outstanding.
 >
 > **Scope:** Java / Spring Boot data backend and its supporting evidence, tests, and APIs. Angular UI, Keycloak integration, persistence, and public internet deployment are future work unless explicitly authorized.
 
@@ -26,6 +26,7 @@ Build a reliable, inspectable, source-aware D&D 5e data API that converts pinned
 10. Preserve existing REST compatibility unless an API change is explicitly authorized and tested.
 11. Require meaningful tests, golden fixtures, full-corpus regression checks, and explicit completion reports for implementation batches.
 12. Do not start another numbered step or batch without user approval.
+13. Interpret spell mechanics generic-first: prefer reusable source-aware rules, preserve edition boundaries and evidence, and report ambiguity or unsupported content explicitly. See the [mechanics model principle](architecture/MECHANICS-MODEL.md#generic-first-spell-interpretation) and [7.4.4 pattern audit](../analysis/mechanics/step-7/7.4.4-generic-first-pattern-audit.md).
 
 ## 1. Core catalogs — COMPLETE
 
@@ -210,11 +211,17 @@ portion of the 7.3 exit criterion remains outstanding.
 
 **Exit criterion for 7.3:** Shield and the approved pilot fixtures have inspectable typed outputs, explicit gaps, independent expectations and passing targeted regression tests.
 
-### 7.4. Expand Spell interpretation — IN PROGRESS
+### 7.4. Mechanics foundations and bounded canonical interpretation: IN PROGRESS
 
-Iteratively add supported families: damage, healing, modifiers, saving throws, attack rolls, targeting/area, duration/concentration, conditions, resource use, triggers, scaling and choice-dependent effects. Preserve distinctions among authored structured fields, formula syntax, conditional rules and natural-language effects. Measure full-corpus coverage and errors; avoid claiming all 969 Spells are fully interpreted when some are partial.
+Maintain the mechanics model, source provenance and evidence guarantees, bounded canonical spell
+interpretation, and independent human-review and licensing safeguards. Bounded canonical extraction
+may add source-backed claims within an authorized scope. Generic corpus-wide recognition and
+experimental extraction are tracked separately in Step 7.5. Processed status does not imply complete,
+verified, licensed, or publishable mechanics.
 
-**Exit criterion:** documented per-family support and per-Spell interpretation completeness, stable evidence links and meaningful benchmark coverage.
+**Exit criterion:** preserve validated typed mechanics and source evidence, distinguish bounded
+canonical interpretation from experimental candidates, and maintain independent completeness, review,
+licensing and publication decisions. Step 7.4 remains IN PROGRESS while 7.4.3 is PARTIAL.
 
 #### 7.4.1. Generalize existing Spell mechanics extraction — COMPLETE
 
@@ -317,9 +324,9 @@ The current 7.4.4A reports are regenerated; their original baseline is preserved
 includes claim and classification transitions. Review and licensing defaults remain unchanged, and
 no REST contracts, benchmark fixtures, pinned JSON or publication decisions changed.
 
-At the completion of 7.4.4B, condition generalization, full-corpus production activation, Step 7.5,
-and frontend work remained out of scope for that batch. Condition work is recorded in the separately
-authorized 7.4.4C section below.
+At the completion of 7.4.4B, condition generalization, full-corpus production activation, the then-
+planned monster-mechanics Step 7.5, and frontend work remained out of scope for that batch. Condition
+work is recorded in the separately authorized 7.4.4C section below.
 
 ##### 7.4.4C. Generalize Spell condition extraction — COMPLETE
 
@@ -646,25 +653,163 @@ encountered the Windows javac archive-close access denial, so tests were compile
 test classpath before running the complete Surefire suite. See the
 [7.4.4S implementation report](../analysis/mechanics/step-7/7.4.4S-melfs-acid-arrow-hit-miss-delayed-damage.md).
 
-### 7.5. Monster mechanics interpretation — PLANNED
+##### 7.4.4T. PHB Spiritual Weapon persistent effect and repeated attacks — COMPLETE
 
+Activated only `spell:phb:spiritual-weapon`. Added a spell-created persistent effect with the PHB
+duration, an initial cast-time melee spell attack, and later one-attack bonus-action opportunities
+while the effect persists. HIT damage is `1d8` force plus the caster's symbolic spellcasting ability
+modifier, with `1d8` increases at slot levels 3, 5, 7, and 9. The attack claim remains partial and
+records unsupported weapon-relative reach, creation location, movement limit, and the source's
+movement-plus-repeat relationship. Review is PENDING_REVIEW, licensing NEEDS_REVIEW, and publication
+authorization remains zero.
+
+The verified inventory is 125 processed owners / 264 production claims / 337 potential claims, with
+PARTIALLY_SUPPORTED 171, UNSUPPORTED 432, NOT_ASSESSED 366, and SUPPORTED 0. Only Spiritual Weapon
+changes canonical and private inspection; all 969 default Spell REST outputs remain byte-identical.
+The full Surefire suite passes 865 tests with 0 failures, 0 errors, and 2 skips. See the
+[7.4.4T implementation report](../analysis/mechanics/step-7/7.4.4T-spiritual-weapon-persistent-repeated-attacks.md).
+
+##### 7.4.4U. XGE Magic Stone finite transferable objects and per-use consumption — COMPLETE
+
+Activated only `spell:xge:magic-stone`. Added a finite enchanted-pebble collection and one ranged
+spell attack per explicit use by the caster or another creature. Attack and HIT-damage modifiers
+retain original-caster attribution; individual enchantments end on either attack outcome, on the
+source-defined one-minute duration, or on recasting as specified. Throw and sling delivery are
+preserved. The attack claim remains partial because the source does not specify sling range. Review
+is PENDING_REVIEW, licensing NEEDS_REVIEW, and publication authorization remains zero.
+
+The verified inventory is 126 processed owners / 267 production claims / 340 potential claims, with
+PARTIALLY_SUPPORTED 172, UNSUPPORTED 431, NOT_ASSESSED 366, and SUPPORTED 0. Only Magic Stone
+changes canonical and private inspection; all 969 default Spell REST responses remain byte-identical.
+The full Maven test suite passes 868 tests with 0 failures, 0 errors, and 3 skips. See the
+[7.4.4U implementation report](../analysis/mechanics/step-7/7.4.4U-magic-stone-transferable-consumable-objects.md).
+
+##### 7.4.4V. PHB Witch Bolt HIT-gated persistent link and action damage — COMPLETE
+
+Activated only `spell:phb:witch-bolt`. Added a one-attack cast-time ranged spell attack; a
+concentration-based link established only on HIT; initial HIT-only `1d12` lightning damage with
+source-defined spell-slot scaling; and a separate optional later caster-action activation that
+automatically deals unscaled `1d12` lightning damage to the linked target. The link records duration,
+concentration, range, total-cover, and action-use termination conditions. The initial attack claim
+remains partial because the mechanics model cannot yet express its range qualifier. Review is
+PENDING_REVIEW, licensing NEEDS_REVIEW, and publication authorization remains zero.
+
+The verified inventory is 127 processed owners / 271 production claims / 343 potential claims, with
+PARTIALLY_SUPPORTED 172, UNSUPPORTED 431, NOT_ASSESSED 366, and SUPPORTED 0. Only Witch Bolt changes
+canonical and private inspection; all 969 default Spell REST responses remain byte-identical. The
+full Maven suite passes 872 tests with 0 failures, 0 errors, and 4 skips. See the
+[7.4.4V implementation report](../analysis/mechanics/step-7/7.4.4V-witch-bolt-hit-gated-recurring-damage.md).
+
+##### 7.4.4W. XGE Ice Knife outcome-independent explosion — COMPLETE
+
+Activated only `spell:xge:ice-knife`. Added a cast-time ranged spell attack, separate HIT-only
+`1d10` piercing damage, one target-centered 5-foot explosion that follows either HIT or MISS, a
+Dexterity save for affected creatures, and separate failed-save `2d6` cold damage. Higher-level
+slots scale only the cold damage by `1d6` per level above 1st. The attack-range qualifier and save-DC
+attribution remain explicit unsupported diagnostics; coverage is PARTIAL. Recorded review is
+PENDING_REVIEW, effective review is derived, licensing is NEEDS_REVIEW, and publication authorization
+remains zero.
+
+The verified inventory is 128 processed owners / 276 production claims / 348 potential claims, with
+PARTIALLY_SUPPORTED 173, UNSUPPORTED 430, NOT_ASSESSED 366, and SUPPORTED 0. Only Ice Knife changes
+canonical and private inspection; the other 968 owner outputs match. All 969 default Spell REST
+responses remain byte-identical. The full Maven suite passes 876 tests with 0 failures, 0 errors,
+and 5 skips. See the [7.4.4W implementation report](../analysis/mechanics/step-7/7.4.4W-ice-knife-outcome-independent-explosion.md).
+
+##### 7.4.4X. XPHB Chromatic Orb damage-dice conditional chaining — COMPLETE
+
+Activated only `spell:xphb:chromatic-orb`; the 2014 PHB owner remains unprocessed. Added one
+cast-time ranged spell attack, HIT-only `3d8` damage with a cast-time choice among six source-defined
+types, and a declarative chain rule triggered when at least two d8s in one spell damage roll show
+the same face. A qualifying result allows a new attack and damage roll against a different creature
+within 30 feet of the previous target. Damage adds `1d8` per slot level above 1st, and the maximum
+leaps equal the slot level (including one possible leap at slot 1). The attack claim is PARTIAL because its
+90-foot range is not represented. Source does not specify treatment of external/critical damage
+dice, later-attack misses, or the category of later targets; these remain explicit unsupported
+diagnostics. Recorded review is PENDING_REVIEW, licensing NEEDS_REVIEW, and publication
+authorization remains zero.
+
+The verified inventory is 129 processed owners / 279 production claims / 351 potential claims, with
+PARTIALLY_SUPPORTED 174, UNSUPPORTED 429, NOT_ASSESSED 366, and SUPPORTED 0. Only Chromatic Orb
+changes canonical and private inspection; all 969 default Spell REST responses remain byte-identical.
+The full Maven suite passes 874 tests with 0 failures, 0 errors, and 5 skips. See the
+[7.4.4X implementation report](../analysis/mechanics/step-7/7.4.4X-chromatic-orb-damage-dice-conditional-chaining.md).
+
+### 7.5. Full Spell Corpus Mechanical Extraction: IN PROGRESS
+
+Scale the generic, source-aware experimental recognition and extraction pipeline across the pinned
+spell catalogue. Candidate extraction is a discovery and review-preparation activity; it does not
+establish semantic correctness, complete source accounting, human review, canonical promotion,
+licensing approval or publication authorization. PHB 2014 and XPHB 2024 remain separate interpretation
+domains. Further implementation batches require their own authorization.
+
+#### 7.5.1. Generic Recognition Pipeline: INITIAL EXPERIMENTAL IMPLEMENTATION COMPLETE
+
+The v1 generic-first dry run is retained as a historical prototype and comparison baseline. The v2
+implementation adds source normalization, multi-candidate mechanic classification, a strategy
+registry, composition and validation, and an additive experimental API projection under the existing
+`include=interpretedMechanics` contract. The v2 recognizers are generic across owner and source IDs;
+the pipeline supports multiple strategies per mechanic family and reports unsupported, ambiguous,
+unaccounted and conflicting results. Its current strategy families and limitations are documented in
+the [v2 implementation report](../analysis/mechanics/step-7/7.4.4-generic-mechanics-pipeline-v2-implementation.md).
+This records an initial experimental capability, not complete recognition or production extraction.
+
+#### 7.5.2. Catalogue-Wide Experimental Extraction: BASELINES RECORDED; IN PROGRESS
+
+Historical catalogue dry runs:
+
+- **v1:** the earlier generic-first run recorded 174 owners with 351 candidate claims, 58 additional
+  owners with recognizer matches but no claims, and 737 owners without matching patterns. See the
+  [v1 full-catalogue report](../analysis/mechanics/step-7/7.4.4-generic-first-full-catalogue-dry-run.md)
+  and [per-owner results](../analysis/mechanics/step-7/generic-first-dry-run-results.json).
+- **v2 baseline:** 969 source-qualified owners across 18 pinned resources; 548 owners with candidate
+  mechanics; 421 without candidate mechanics; 749 `CANDIDATE_PARTIAL` outcomes; 220
+  `NO_PATTERN_MATCH` outcomes; and 1,026 experimental candidate mechanics. The v2 payload-only
+  comparison did not reproduce 257 canonical payloads. Canonical interpretations and human-review,
+  licensing and publication decisions remained unchanged. See the [v2 catalogue report](../analysis/mechanics/step-7/7.4.4-generic-first-full-catalogue-dry-run-v2.md)
+  and [per-owner results](../analysis/mechanics/step-7/generic-first-dry-run-v2-results.json).
+
+These are experimental baseline measurements, not acceptance or correctness results. Continue
+catalogue-wide assessment only through separately authorized batches; report candidate coverage,
+unsupported findings and canonical differences without promoting results implicitly.
+
+#### 7.5.3. Mechanical Relationship Resolution: PLANNED
+
+Resolve supported relationships among attacks, damage, saves, conditions, scaling, durations,
+targets and triggered effects using source-backed dependencies. Preserve ambiguous or unsupported
+relationships explicitly, maintain acyclic static claim dependencies, and distinguish them from
+runtime event sequences. Do not add combat execution or infer relationships from proximity alone.
+
+#### 7.5.4. Unsupported Mechanic Family Expansion: PLANNED
+
+Use observed unsupported families and source evidence to prioritize reusable model or strategy
+extensions. Add only mechanic families with recurring source-backed need; preserve abstention when a
+source relationship cannot be represented. Keep family implementation separate from spell-specific
+exceptions and do not optimize for candidate counts.
+
+#### 7.5.5. Corpus Coverage & Stabilization: PLANNED
+
+Establish reliable source accounting and deterministic corpus reports; distinguish processed owners,
+recognized candidates, represented and unsupported mechanics, human-review readiness, reviewed
+claims, licensing status and publication eligibility. Validate PHB/XPHB separation, evidence integrity,
+compatibility and canonical-promotion gates. Do not mark owners complete based only on recognized
+fragments or successful extraction.
+
+### 7.6. Monster mechanics interpretation: PLANNED
 Reuse the common mechanics model for actions, attacks, saves, traits, legendary actions and spellcasting. Preserve action economy, authored alternatives, recharge and nested effect context. Reuse Batch 7/8 evidence and identify missing effective text-origin mappings rather than manufacturing them.
 
-### 7.6. Item, Feat, Class and feature interpretation — PLANNED
-
+### 7.7. Item, Feat, Class and feature interpretation: PLANNED
 Reuse Item/Feat/Class enrichment, recharge and prerequisites evidence. Preserve choice semantics, attunement, limited uses, recharge, conditional effects and class-level progression. Distinguish source facts from inferred grants. Extend the benchmark suite by mechanic family.
 
-### 7.7. Cross-catalog mechanics and quality consolidation — PLANNED
-
+### 7.8. Cross-catalog mechanics and quality consolidation: PLANNED
 Resolve mechanic references to typed catalog identities where supported; preserve ambiguity/deferred outcomes. Build repeatable corpus-level validation, coverage reports, compatibility checks and reviewer workflows. Treat human overrides as future persistence concerns, not source-file edits.
 
-### 7.8. External publication readiness — DEFERRED
-
+### 7.9. External publication readiness: DEFERRED
 When an internet-facing API is actually planned: apply P1D and subsequent approved publication policies to release projections, deliver required attribution, verify rights status and source provenance, implement backend role-based filtering/authentication (Keycloak if selected), and audit what a client can actually retrieve. No frontend-only protection. This is distinct from extraction completeness.
 
 ## 8. Remaining cross-catalog integration — PLANNED
 
-Integrate any catalog and mechanics links not covered by 7.7. Reconcile scope before implementation to avoid duplicate work. Keep original unresolved and ambiguous identities visible.
+Integrate any catalog and mechanics links not covered by 7.8. Reconcile scope before implementation to avoid duplicate work. Keep original unresolved and ambiguous identities visible.
 
 ## 9. Comprehensive automated validation — PLANNED
 
@@ -736,6 +881,14 @@ For every numbered batch:
 **Step 7.4.3 remains PARTIAL after batch 7.4.3C.** The six benchmark fixtures still require human review
 before authoritative benchmark acceptance; there is no approved gold set or independently validated
 extractor accuracy. Candidate diagnostics do not constitute mechanics verification or publication
-permission. Step 7.4.4 remains IN PROGRESS through completed implementation batch 7.4.4S. Stop at
-7.4.4S; no later multi-instance implementation, benchmark adjudication, Step 7.5, database, or
-frontend work is authorized by this batch.
+permission. Step 7.4.4 is COMPLETE following implementation through 7.4.4X, the consolidation and
+readiness review, and approved closure remediation of F-02, F-03, F-04 and F-06. F-01 was accepted
+without work; F-05 remains deferred. See the
+[consolidation review](../analysis/mechanics/step-7/7.4.4-consolidation-readiness-review.md) and
+[closure remediation report](../analysis/mechanics/step-7/7.4.4-closure-remediation.md) for findings,
+deferred work, compatibility results and closure evidence. The generic-first interpretation principle
+and its current reuse limits are documented in the [mechanics model guide](architecture/MECHANICS-MODEL.md#generic-first-spell-interpretation)
+and [pattern audit](../analysis/mechanics/step-7/7.4.4-generic-first-pattern-audit.md). Step 7.4.3
+remains PARTIAL. Step 7.5 now records the ongoing generic experimental spell-extraction phase and its
+v1/v2 baselines; each implementation batch still requires explicit authorization. Database and frontend
+work remain separate and unauthorized.

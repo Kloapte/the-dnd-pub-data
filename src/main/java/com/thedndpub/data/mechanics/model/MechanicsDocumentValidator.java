@@ -69,6 +69,7 @@ final class MechanicsDocumentValidator {
             ModelChecks.require(record.id().ownerId().equals(owner.id()), "Mechanic belongs to another catalog owner");
             ModelChecks.require(recordIndex.putIfAbsent(record.id(), record) == null, "Duplicate current mechanic ID");
         }
+        validateResolvedDependencyGraph(recordIndex);
         List<MechanicRecord> prepared = new ArrayList<>();
         for (MechanicRecord record : records) {
             List<MechanicsFinding> findings = new ArrayList<>();
@@ -146,16 +147,202 @@ final class MechanicsDocumentValidator {
             ModelChecks.require(records.isEmpty(), "NONE_SUPPORTED cannot contain interpretations");
         }
         if (coverage.status() == CoverageStatus.COMPLETE_WITHIN_SCOPE) {
-            ModelChecks.require(prepared.stream().allMatch(record ->
-                    record.assessment().completeness() == MechanicsCompleteness.COMPLETE_WITHIN_CLAIM
-                            && record.review().findings().stream()
-                                .noneMatch(finding -> finding.severity() == FindingSeverity.REQUIRES_REVIEW)),
-                    "Complete scope contains partial claims");
+            ModelChecks.require(coverage.scopeExtent() != null,
+                    "Complete coverage must identify its assessed scope");
         }
         return List.copyOf(prepared);
     }
 
+    static void validateDependencyGraph(Map<MechanicId, List<MechanicId>> dependencies) {
+        Set<MechanicId> visiting = new HashSet<>();
+        Set<MechanicId> visited = new HashSet<>();
+        for (MechanicId id : dependencies.keySet()) {
+            requireAcyclic(id, dependencies, visiting, visited);
+        }
+    }
+
+    private static void validateResolvedDependencyGraph(Map<MechanicId, MechanicRecord> records) {
+        Map<MechanicId, List<MechanicId>> dependencies = new LinkedHashMap<>();
+        for (MechanicRecord record : records.values()) {
+            List<MechanicId> resolved = MechanicsBindings.references(record).stream()
+                    .map(MechanicRevisionReference::id)
+                    .filter(records::containsKey)
+                    .toList();
+            dependencies.put(record.id(), resolved);
+        }
+        validateDependencyGraph(dependencies);
+    }
+
+    private static void requireAcyclic(
+            MechanicId id,
+            Map<MechanicId, List<MechanicId>> dependencies,
+            Set<MechanicId> visiting,
+            Set<MechanicId> visited) {
+        if (visited.contains(id)) {
+            return;
+        }
+        ModelChecks.require(visiting.add(id), "Mechanic claim dependencies must be acyclic");
+        for (MechanicId dependency : dependencies.getOrDefault(id, List.of())) {
+            if (dependencies.containsKey(dependency)) {
+                requireAcyclic(dependency, dependencies, visiting, visited);
+            }
+        }
+        visiting.remove(id);
+        visited.add(id);
+    }
+
     private static void validateBindingTypes(MechanicRecord record, Map<MechanicId, MechanicRecord> records) {
+        if (record.payload() instanceof ConditionalAttackChainMechanic chain) {
+            MechanicRecord attackRecord = current(records, chain.initialAttack());
+            MechanicRecord damageRecord = current(records, chain.reusableDamage());
+            ModelChecks.require(attackRecord != null && attackRecord.payload() instanceof AttackRollMechanic,
+                    "Conditional attack chains must reference an attack-roll claim");
+            ModelChecks.require(damageRecord != null && damageRecord.payload() instanceof DamageMechanic,
+                    "Conditional attack chains must reference a damage claim");
+            ModelChecks.require(attackRecord.revision().reference(attackRecord.id()).equals(chain.initialAttack())
+                            && damageRecord.revision().reference(damageRecord.id()).equals(chain.reusableDamage()),
+                    "Conditional attack chains must reference current claim revisions");
+            AttackRollMechanic attack = (AttackRollMechanic) attackRecord.payload();
+            ModelChecks.require(attack.attackCount() == 1 && attack.countProgression() == null
+                            && attack.selectedTargetCount() == null,
+                    "A conditional chain must bind to one initial attack opportunity");
+            ModelChecks.require(record.context().subject().equals(attackRecord.context().subject()),
+                    "A conditional attack chain must retain its initial attack target context");
+            DamageMechanic damage = (DamageMechanic) damageRecord.payload();
+            boolean damageBoundToInitialHit = damageRecord.context().bindings().stream()
+                    .filter(AppliesOnAttackRollOutcome.class::isInstance)
+                    .map(AppliesOnAttackRollOutcome.class::cast)
+                    .anyMatch(outcome -> outcome.attackRoll().equals(chain.initialAttack())
+                            && outcome.outcome() == AttackRollOutcome.HIT)
+                    || damageRecord.context().bindings().stream()
+                            .filter(AppliesOnEachAttackRollOutcome.class::isInstance)
+                            .map(AppliesOnEachAttackRollOutcome.class::cast)
+                            .anyMatch(outcome -> outcome.attackRoll().equals(chain.initialAttack())
+                                    && outcome.outcome() == AttackRollOutcome.HIT);
+            ModelChecks.require(damageBoundToInitialHit,
+                    "Conditional attack-chain damage must be bound to a HIT on its referenced attack");
+            ModelChecks.require(chain.continuationTrigger().damage().equals(chain.reusableDamage())
+                            && chain.continuationTrigger().dieSides() >= 2
+                            && chain.continuationTrigger().minimumMatchingDice() >= 2,
+                    "Conditional chain triggers must use the referenced reusable damage claim");
+            int eligibleDice = matchingDamageDice(damage.amount(), chain.continuationTrigger().dieSides());
+            ModelChecks.require(eligibleDice >= chain.continuationTrigger().minimumMatchingDice(),
+                    "The reusable damage formula must contain enough eligible dice for its match trigger");
+            validateLeapLimit(chain.leapLimit());
+        }
+        if (record.payload() instanceof AttackTriggeredAreaEffectMechanic area) {
+            MechanicRecord attackRecord = current(records, area.attackRoll());
+            ModelChecks.require(attackRecord != null && attackRecord.payload() instanceof AttackRollMechanic,
+                    "Attack-triggered area effects must reference an attack-roll claim");
+            AttackRollMechanic attack = (AttackRollMechanic) attackRecord.payload();
+            ModelChecks.require(attack.attackKind() == AttackKind.RANGED_SPELL
+                            && attack.actorRole() == AttackActorRole.CASTER
+                            && attack.attackCount() == 1
+                            && attack.activationTiming() == AttackActivationTiming.CAST_TIME
+                            && attack.countProgression() == null
+                            && attack.activationPattern() == null
+                            && attack.selectedTargetCount() == null,
+                    "Outcome-independent area effects require one initial cast-time ranged spell attack");
+            ModelChecks.require(attackRecord.revision().reference(attackRecord.id()).equals(area.attackRoll()),
+                    "Attack-triggered area effect references a stale attack revision");
+            ModelChecks.require(attackRecord.context().subject() instanceof SpellTargetSubject target
+                            && target.scope() == TargetScope.SINGLE_TARGET_CREATURE,
+                    "The area effect's triggering attack must target one creature");
+            ModelChecks.require(record.context().subject() instanceof SpellTargetSubject areaSubject
+                            && areaSubject.scope() == TargetScope.AREA_AFFECTED_CREATURES,
+                    "Attack-triggered areas must use an affected-creatures subject");
+        }
+        List<AppliesToAreaEffect> areaBindings = record.context().bindings().stream()
+                .filter(AppliesToAreaEffect.class::isInstance)
+                .map(AppliesToAreaEffect.class::cast).toList();
+        if (!areaBindings.isEmpty()) {
+            ModelChecks.require(record.payload() instanceof SavingThrowRequirementMechanic
+                            || record.payload() instanceof DamageMechanic,
+                    "Area-effect bindings may only apply to a save or damage claim");
+            ModelChecks.require(areaBindings.size() == 1,
+                    "A save or damage claim must reference exactly one area effect");
+            MechanicRevisionReference areaReference = areaBindings.getFirst().areaEffect();
+            MechanicRecord areaRecord = current(records, areaReference);
+            ModelChecks.require(areaRecord != null
+                            && areaRecord.payload() instanceof AttackTriggeredAreaEffectMechanic,
+                    "Area-effect bindings must reference an attack-triggered area claim");
+            ModelChecks.require(areaRecord.revision().reference(areaRecord.id()).equals(areaReference),
+                    "Area-effect binding references a stale area claim revision");
+            ModelChecks.require(record.context().subject().equals(areaRecord.context().subject()),
+                    "Area saves and damage must retain the affected-creatures subject");
+            if (record.payload() instanceof DamageMechanic) {
+                List<AppliesOnSaveOutcome> saveBindings = record.context().bindings().stream()
+                        .filter(AppliesOnSaveOutcome.class::isInstance)
+                        .map(AppliesOnSaveOutcome.class::cast).toList();
+                ModelChecks.require(saveBindings.size() == 2
+                                && saveBindings.stream().anyMatch(binding -> binding.outcome() == SaveOutcome.FAILURE
+                                    && binding.damageOutcome() == DamageOutcome.FULL_DAMAGE)
+                                && saveBindings.stream().anyMatch(binding -> binding.outcome() == SaveOutcome.SUCCESS
+                                    && binding.damageOutcome() == DamageOutcome.NO_DAMAGE),
+                        "Area damage must bind full damage on save failure and no damage on success");
+                MechanicRecord saveRecord = current(records, saveBindings.getFirst().savingThrow());
+                ModelChecks.require(saveRecord != null
+                                && saveRecord.payload() instanceof SavingThrowRequirementMechanic
+                                && saveRecord.context().bindings().stream().anyMatch(binding ->
+                                        binding instanceof AppliesToAreaEffect applies
+                                                && applies.areaEffect().equals(areaReference)),
+                        "Area damage must depend on a saving throw for the same area effect");
+            }
+        }
+        if (record.payload() instanceof PersistentSpellEffectMechanic effect
+                && effect.establishment() != null) {
+            MechanicRevisionReference reference = effect.establishment().attackRoll();
+            MechanicRecord attackRecord = current(records, reference);
+            ModelChecks.require(attackRecord != null && attackRecord.payload() instanceof AttackRollMechanic,
+                    "HIT-gated persistent effects must reference an attack-roll claim");
+            AttackRollMechanic attack = (AttackRollMechanic) attackRecord.payload();
+            ModelChecks.require(attack.attackKind() == AttackKind.RANGED_SPELL
+                            && attack.actorRole() == AttackActorRole.CASTER
+                            && attack.attackCount() == 1
+                            && attack.activationTiming() == AttackActivationTiming.CAST_TIME
+                            && attack.countProgression() == null
+                            && attack.activationPattern() == null,
+                    "HIT-gated Witch Bolt effects require one initial caster attack during casting");
+            ModelChecks.require(attackRecord.revision().reference(attackRecord.id()).equals(reference),
+                    "HIT-gated effect references a stale initial attack revision");
+            ModelChecks.require(record.context().subject().equals(attackRecord.context().subject()),
+                    "A persistent spell effect must retain its establishing attack target");
+        }
+        if (record.payload() instanceof DamageMechanic damage && damage.actionActivation() != null) {
+            ModelChecks.require(damage.spellSlotScaling() == null && damage.characterLevelScaling() == null
+                            && damage.timing() == null,
+                    "Action-activated damage cannot inherit scaling or turn-based automatic timing");
+            MechanicRevisionReference reference = damage.actionActivation().persistentEffect();
+            MechanicRecord effect = current(records, reference);
+            ModelChecks.require(effect != null && effect.payload() instanceof PersistentSpellEffectMechanic,
+                    "Action-activated damage must require a persistent spell effect");
+            PersistentSpellEffectMechanic persistent = (PersistentSpellEffectMechanic) effect.payload();
+            ModelChecks.require(persistent.establishment() != null,
+                    "Action-activated damage must require an established persistent effect");
+            ModelChecks.require(effect.revision().reference(effect.id()).equals(reference),
+                    "Action-activated damage references a stale persistent effect revision");
+            ModelChecks.require(record.context().subject().equals(effect.context().subject()),
+                    "Action-activated damage must retain the persistent effect target");
+        }
+        if (record.payload() instanceof AttackRollMechanic attack && attack.activationPattern() != null) {
+            AttackActivationPattern pattern = attack.activationPattern();
+            ModelChecks.require(attack.actorRole() == AttackActorRole.SPELL_CREATED_EFFECT
+                            && attack.attackCount() == 1
+                            && attack.activationTiming() == pattern.initialActivation()
+                            && attack.countProgression() == null
+                            && attack.selectedTargetCount() == null,
+                    "Persistent-effect attack opportunities require one attack per explicit activation");
+            MechanicRecord effect = current(records, pattern.persistentEffect());
+            ModelChecks.require(effect != null && effect.payload() instanceof PersistentSpellEffectMechanic,
+                    "Attack activation pattern must reference a persistent spell effect");
+        }
+        if (record.payload() instanceof AttackRollMechanic attack && attack.enchantedObjectUse() != null) {
+            MechanicRevisionReference reference = attack.enchantedObjectUse().enchantedObjectCollection();
+            MechanicRecord collection = current(records, reference);
+            ModelChecks.require(collection != null
+                            && collection.payload() instanceof EnchantedObjectCollectionMechanic,
+                    "Enchanted-object attacks must reference a current enchanted-object collection claim");
+        }
         if (record.payload() instanceof DamageMechanic damage
                 && damage.amount() instanceof FractionOfAmount fraction) {
             MechanicRecord base = records.get(fraction.baseAmount().id());
@@ -207,6 +394,10 @@ final class MechanicsDocumentValidator {
                         "Per-instance outcome must reference independent attack rolls");
                 ModelChecks.require(record.context().subject().equals(target.context().subject()),
                         "Per-instance damage must share the attack target subject");
+            } else if (binding instanceof AppliesToAreaEffect) {
+                ModelChecks.require(record.payload() instanceof SavingThrowRequirementMechanic
+                                || record.payload() instanceof DamageMechanic,
+                        "Area-effect references are limited to saves and damage");
             } else if (binding instanceof ConditionOnSaveOutcome outcome) {
                 conditionPayload(record);
                 validateSavingThrowTarget(records, outcome.savingThrow());
@@ -255,6 +446,28 @@ final class MechanicsDocumentValidator {
                 && duration.specification() instanceof ReferencedDuration reference) {
             durationTarget(records, reference);
         }
+    }
+
+    private static int matchingDamageDice(AmountExpression amount, int dieSides) {
+        if (amount instanceof DiceAmount dice) {
+            return dice.sides() == dieSides ? dice.count() : 0;
+        }
+        if (amount instanceof SumAmount sum) {
+            return sum.terms().stream().mapToInt(term -> matchingDamageDice(term, dieSides)).sum();
+        }
+        return 0;
+    }
+
+    private static void validateLeapLimit(SpellSlotLeapLimit limit) {
+        int previous = -1;
+        boolean permitsLeap = false;
+        for (int slotLevel = limit.minimumSlotLevel(); slotLevel <= 9; slotLevel++) {
+            int maximum = limit.maximumLeapsAtSlotLevel(slotLevel);
+            ModelChecks.require(maximum >= previous, "Conditional-chain leap limits cannot decrease by slot level");
+            permitsLeap |= maximum > 0;
+            previous = maximum;
+        }
+        ModelChecks.require(permitsLeap, "A conditional attack chain must permit at least one leap");
     }
 
     private static void validateInstanceTargetAllocation(MechanicRecord record) {
@@ -367,6 +580,10 @@ final class MechanicsDocumentValidator {
         List<DurationSpecification> durations = new ArrayList<>();
         if (record.payload() instanceof EffectDurationMechanic duration) {
             durations.add(duration.specification());
+        } else if (record.payload() instanceof PersistentSpellEffectMechanic effect) {
+            durations.add(effect.duration());
+        } else if (record.payload() instanceof EnchantedObjectCollectionMechanic objects) {
+            durations.add(objects.enchantmentDuration());
         }
         for (MechanicContextBinding binding : record.context().bindings()) {
             if (binding instanceof AppliesForDuration duration) {

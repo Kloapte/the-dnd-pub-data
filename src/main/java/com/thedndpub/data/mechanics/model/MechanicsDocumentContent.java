@@ -5,7 +5,7 @@ import com.thedndpub.data.mechanics.review.MechanicsReviewSummary;
 
 import java.util.List;
 
-/** Hash protocol v1 document payload; excludes its own revision to avoid self-reference. */
+/** Canonical document payload; excludes its own revision to avoid self-reference. */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public record MechanicsDocumentContent(
         MechanicsOwnerReference owner,

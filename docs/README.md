@@ -8,6 +8,7 @@ This index describes where guidance lives; it does not add implementation author
 | Repository and agent conventions | [AGENTS.md](../AGENTS.md) |
 | Architecture, normalization, identity and provenance | [Data pipeline](architecture/DATA-PIPELINE.md) |
 | Canonical mechanics, review and rights semantics | [Mechanics model](architecture/MECHANICS-MODEL.md) |
+| Generic full-spell-corpus extraction phase and historical v1/v2 baselines | [Backend roadmap, Step 7.5](THE_DND_PUB_BACKEND_ROADMAP.md#75-full-spell-corpus-mechanical-extraction-in-progress) |
 | Opt-in Spell inspection REST contract | [Spell inspection](api/SPELL-INSPECTION.md) |
 | Build, verification and evidence handling | [Development workflow](development/WORKFLOW.md) |
 | Detailed investigations and preserved reports | [Analysis index](../analysis/README.md) |

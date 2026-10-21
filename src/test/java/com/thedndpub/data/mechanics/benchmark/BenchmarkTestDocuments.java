@@ -117,7 +117,10 @@ final class BenchmarkTestDocuments {
         return MechanicsDocument.create(fixture.owner(), 1, List.of(fixture.source()),
                 new MechanicsProcessing(ProcessingState.PROCESSED, "synthetic-comparator-test-only", "1"),
                 records, observations, unsupported, evidence,
-                new MechanicsCoverage(coverage, "synthetic-comparator-test-only", "1", List.of(), List.of(), unsupported.size()));
+                new MechanicsCoverage(coverage, "synthetic-comparator-test-only", "1",
+                        coverage == CoverageStatus.COMPLETE_WITHIN_SCOPE ? List.of("/spell/benchmark") : List.of(),
+                        List.of(), unsupported.size(), coverage == CoverageStatus.COMPLETE_WITHIN_SCOPE
+                                ? com.thedndpub.data.mechanics.model.CoverageScopeExtent.FULL_SPELL : null));
     }
 
     static MechanicsDocument empty(SpellBenchmarkFixture fixture) {

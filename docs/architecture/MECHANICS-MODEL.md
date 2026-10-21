@@ -69,3 +69,48 @@ does not depend on its authorized set and does not filter pending/rejected/right
 
 See the [Spell inspection API](../api/SPELL-INSPECTION.md) for the current projection. No extraction,
 rules engine, database review workflow or external publication policy is introduced by these guides.
+
+# Generic-first spell interpretation
+
+Interpret spell mechanics through reusable, deterministic, source-aware rules wherever possible.
+Adding a spell should not require new Java code unless its source structure or mechanics fall outside
+the supported generic rules. A spell-specific adapter is an exception and must be justified by a
+concrete limitation of the generic interpreter.
+
+Each interpretation must retain exact source evidence, its mechanic completeness assessment, its
+source-accounting scope and human-review state. Unrecognized, ambiguous or unsupported source content
+must remain visible as an explicit diagnostic or unassessed path; inspecting every path does not by
+itself mean that the mechanics have been represented. `FULL_SPELL` accounting and `DECLARED_SUBSET`
+accounting must remain distinguishable.
+
+Source editions are separate interpretation domains. In particular, PHB 2014 and XPHB 2024 owners,
+evidence, matching rules and mechanics must not be combined by name or borrowed across editions.
+Human review is required before an interpretation can be approved for publication; licensing
+authorization is a separate requirement. Neither mechanics extraction, complete source accounting,
+nor human review alone authorizes publication.
+
+The [generic-first pattern audit](../../analysis/mechanics/step-7/7.4.4-generic-first-pattern-audit.md)
+documents the current implementation's reuse limits and the evidence required before expanding rule
+applicability.
+
+## Experimental generic recognition pipeline
+
+The experimental v2 path normalizes pinned spell JSON into source-qualified fragments, classifies
+structured and authored signals into mechanic candidates, invokes reusable type strategies, then
+composes stable candidate mechanics with deduplicated evidence and explicit diagnostics. The v2
+projection is additive to the existing private inspection include; it does not replace the legacy
+experimental projection or canonical interpretation. Its recognition strategies do not select by
+spell ID or source allowlist. A source cue can remain unsupported or unaccounted, and every v2 result
+is limited to `RECOGNIZED_FRAGMENTS_ONLY`; source-fragment recognition does not establish full-spell
+accounting or completeness. Review stays pending, licensing stays unassessed, and publication
+authorization remains false. The implementation and full-catalogue dry run are documented in the
+[v2 pipeline report](../../analysis/mechanics/step-7/7.4.4-generic-mechanics-pipeline-v2-implementation.md).
+
+## Roadmap relationship
+
+Step 7.4 records mechanics foundations and bounded canonical interpretations, including its completed
+7.4.4 pilots and consolidation. Generic full-catalogue experimental extraction is tracked separately
+under Step 7.5. The v1 and v2 dry runs are historical experimental baselines; v2 currently recognizes
+source fragments and emits candidate mechanics, but does not establish full-spell accounting,
+semantic verification, human review, canonical promotion, licensing or publication approval. The
+[roadmap](../THE_DND_PUB_BACKEND_ROADMAP.md) defines the staged work and its authorization boundary.

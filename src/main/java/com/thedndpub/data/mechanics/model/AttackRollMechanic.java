@@ -12,11 +12,22 @@ public record AttackRollMechanic(
         AttackActivationTiming activationTiming,
         InstanceCountProgression countProgression,
         InstanceTargetAllocation targetAllocation,
-        SelectedTargetCount selectedTargetCount) implements MechanicPayload {
+        SelectedTargetCount selectedTargetCount,
+        AttackActivationPattern activationPattern,
+        EnchantedObjectAttackUse enchantedObjectUse) implements MechanicPayload {
     public AttackRollMechanic {
         ModelChecks.required(attackKind, "attackKind");
         ModelChecks.required(actorRole, "actorRole");
         ModelChecks.required(activationTiming, "activationTiming");
+        if (enchantedObjectUse != null) {
+            ModelChecks.require(actorRole == AttackActorRole.ENCHANTED_OBJECT_USER
+                            && attackKind == AttackKind.RANGED_SPELL
+                            && attackCount == 1 && !attacksIndependent
+                            && activationTiming == AttackActivationTiming.OBJECT_USE
+                            && countProgression == null && targetAllocation == null
+                            && selectedTargetCount == null && activationPattern == null,
+                    "Enchanted-object attacks are one ranged spell attack per object use");
+        }
         if (selectedTargetCount != null) {
             ModelChecks.require(attackCount == null,
                     "Selected-target attack counts cannot also have a fixed attack count");
@@ -70,10 +81,24 @@ public record AttackRollMechanic(
     public AttackRollMechanic(
             AttackKind attackKind,
             AttackActorRole actorRole,
+            Integer attackCount,
+            boolean attacksIndependent,
+            AttackActivationTiming activationTiming,
+            InstanceCountProgression countProgression,
+            InstanceTargetAllocation targetAllocation,
+            SelectedTargetCount selectedTargetCount) {
+        this(attackKind, actorRole, attackCount, attacksIndependent, activationTiming,
+                countProgression, targetAllocation, selectedTargetCount, null, null);
+    }
+
+    public AttackRollMechanic(
+            AttackKind attackKind,
+            AttackActorRole actorRole,
             int attackCount,
             boolean attacksIndependent,
             AttackActivationTiming activationTiming) {
-        this(attackKind, actorRole, attackCount, attacksIndependent, activationTiming, null, null, null);
+        this(attackKind, actorRole, attackCount, attacksIndependent, activationTiming,
+                null, null, null, null, null);
     }
 
     public AttackRollMechanic(
@@ -85,6 +110,31 @@ public record AttackRollMechanic(
             InstanceCountProgression countProgression,
             InstanceTargetAllocation targetAllocation) {
         this(attackKind, actorRole, Integer.valueOf(attackCount), attacksIndependent, activationTiming,
-                countProgression, targetAllocation, null);
+                countProgression, targetAllocation, null, null, null);
+    }
+
+    public AttackRollMechanic(
+            AttackKind attackKind,
+            AttackActorRole actorRole,
+            int attackCount,
+            boolean attacksIndependent,
+            AttackActivationTiming activationTiming,
+            EnchantedObjectAttackUse enchantedObjectUse) {
+        this(attackKind, actorRole, Integer.valueOf(attackCount), attacksIndependent, activationTiming,
+                null, null, null, null, enchantedObjectUse);
+    }
+
+    public AttackRollMechanic(
+            AttackKind attackKind,
+            AttackActorRole actorRole,
+            Integer attackCount,
+            boolean attacksIndependent,
+            AttackActivationTiming activationTiming,
+            InstanceCountProgression countProgression,
+            InstanceTargetAllocation targetAllocation,
+            SelectedTargetCount selectedTargetCount,
+            AttackActivationPattern activationPattern) {
+        this(attackKind, actorRole, attackCount, attacksIndependent, activationTiming,
+                countProgression, targetAllocation, selectedTargetCount, activationPattern, null);
     }
 }

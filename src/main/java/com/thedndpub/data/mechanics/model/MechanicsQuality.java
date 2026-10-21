@@ -32,6 +32,11 @@ final class MechanicsQuality {
                     amount(series.amountPerInstance(), "/payload/amountPerInstance", findings);
             case HealingMechanic healing -> amount(healing.amount(), "/payload/amount", findings);
             case SpellSlotScalingMechanic scaling -> amount(scaling.increment(), "/payload/increment", findings);
+            case GenericScalingMechanic scaling -> {
+                for (int index = 0; index < scaling.steps().size(); index++) {
+                    amount(scaling.steps().get(index).value(), "/payload/steps/" + index + "/value", findings);
+                }
+            }
             case SavingThrowRequirementMechanic save -> {
                 if (save.ability() instanceof UnknownAbility) {
                     add(findings, MechanicsFindingCode.UNKNOWN_ABILITY, "/payload/ability");
@@ -43,9 +48,18 @@ final class MechanicsQuality {
             case ReactionActivationMechanic reaction -> trigger(reaction.trigger(), "/payload/trigger", findings);
             case SpellDamagePreventionMechanic protection -> spell(protection.spell(), "/payload/spell", findings);
             case EffectDurationMechanic duration -> duration(duration.specification(), "/payload/specification", findings);
+            case PersistentSpellEffectMechanic effect -> duration(effect.duration(), "/payload/duration", findings);
+            case EnchantedObjectCollectionMechanic objects ->
+                    duration(objects.enchantmentDuration(), "/payload/enchantmentDuration", findings);
+            case AttackTriggeredAreaEffectMechanic ignored -> {
+            }
+            case ConditionalAttackChainMechanic ignored -> {
+            }
             case ConditionChangeMechanic ignored -> {
             }
             case ConditionChoiceMechanic ignored -> {
+            }
+            case ConditionTerminationEventMechanic ignored -> {
             }
             case ArmorClassModifierMechanic ignored -> {
                 // A symbolic modifier is an identified variable, not an unresolved numeric calculation.

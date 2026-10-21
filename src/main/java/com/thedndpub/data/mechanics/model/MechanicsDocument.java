@@ -37,7 +37,8 @@ public record MechanicsDocument(
         MechanicsDocumentContent content = new MechanicsDocumentContent(owner, sources, processing,
                 interpretations, observations, unsupported, evidence, coverage, reviewSummary);
         ModelChecks.required(revision, "revision");
-        ModelChecks.require(revision.contentSha256().equals(MechanicsHashes.documentHash(content)),
+        ModelChecks.require(revision.contentSha256().equals(
+                        MechanicsHashes.documentHash(content, revision.effectiveHashProtocolVersion())),
                 "Document revision fingerprint mismatch");
     }
 
@@ -66,7 +67,7 @@ public record MechanicsDocument(
         MechanicsDocumentContent content = new MechanicsDocumentContent(owner, sources, processing,
                 interpretations, observations, unsupported, evidence, coverage, summary);
         MechanicsDocumentRevision revision = new MechanicsDocumentRevision(
-                revisionNumber, MechanicsHashes.documentHash(content));
+                revisionNumber, MechanicsHashes.documentHash(content), MechanicsHashes.DOCUMENT_HASH_PROTOCOL);
         return new MechanicsDocument(owner, revision,
                 sources, processing, interpretations, observations, unsupported, evidence, coverage, summary);
     }

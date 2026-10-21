@@ -4,6 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thedndpub.data.dto.spell.SpellDefinition;
 import com.thedndpub.data.dto.spell.SpellId;
 import com.thedndpub.data.mechanics.model.MechanicsDocument;
+import com.thedndpub.data.mechanics.model.MechanicsSourceContent;
+import com.thedndpub.data.mechanics.model.MechanicsSourceEvidenceVerifier;
+import com.thedndpub.data.mechanics.model.MechanicsSourceOwnerPointer;
+import com.thedndpub.data.mechanics.model.MechanicsOwnerReference;
+import com.thedndpub.data.mechanics.model.CatalogDomain;
 import com.thedndpub.data.mechanics.model.ModelChecks;
 import com.thedndpub.data.mechanics.model.ProcessingState;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -83,6 +88,18 @@ public final class SpellMechanicsExtractionService {
             });
             var evidence = new SpellMechanicsEvidenceSource(definition, source, bytes, mapper);
             MechanicsDocument extracted = pattern.extract(definition, evidence, document);
+            List<MechanicsSourceContent> sourceContent = extracted.sources().stream()
+                    .map(revision -> new MechanicsSourceContent(revision, sourceBytesByResource.computeIfAbsent(
+                            revision.resourcePath(), resourcePath -> {
+                                try {
+                                    return resources.getResource("classpath:" + resourcePath).getContentAsByteArray();
+                                } catch (IOException exception) {
+                                    throw new IllegalStateException("Cannot load pinned evidence resource", exception);
+                                }
+                            })))
+                    .toList();
+            MechanicsSourceEvidenceVerifier.verify(extracted, sourceContent,
+                    trustedRevisions(extracted, manifest), trustedOwnerPointers(extracted, manifest), mapper);
             ModelChecks.require(extracted.owner().equals(document.owner())
                             && extracted.processing().state() == ProcessingState.PROCESSED,
                     "Supported Spell pattern did not produce a processed owner document");
@@ -108,5 +125,31 @@ public final class SpellMechanicsExtractionService {
         ModelChecks.require(sourceEdition != null,
                 "Spell extraction pattern selected for an unsupported source edition");
         sourceEdition.validateSourceRevision(owner);
+    }
+
+    private static List<com.thedndpub.data.mechanics.model.SourceArtifactRevision> trustedRevisions(
+            MechanicsDocument document, List<SpellMechanicsSourceOwner> manifest) {
+        var required = new HashSet<>(document.sources());
+        var trusted = new HashSet<com.thedndpub.data.mechanics.model.SourceArtifactRevision>();
+        for (SpellMechanicsSourceOwner sourceOwner : manifest) {
+            if (required.contains(sourceOwner.revision())) {
+                validateSourceRevision(sourceOwner);
+                trusted.add(sourceOwner.revision());
+            }
+        }
+        ModelChecks.require(trusted.equals(required),
+                "Every evidence source revision must be present and validated in the pinned manifest");
+        return trusted.stream().sorted(Comparator.comparing(
+                com.thedndpub.data.mechanics.model.SourceArtifactRevision::resourcePath)).toList();
+    }
+
+    private static List<MechanicsSourceOwnerPointer> trustedOwnerPointers(
+            MechanicsDocument document, List<SpellMechanicsSourceOwner> manifest) {
+        return manifest.stream()
+                .filter(sourceOwner -> document.sources().contains(sourceOwner.revision()))
+                .map(sourceOwner -> new MechanicsSourceOwnerPointer(
+                        new MechanicsOwnerReference(CatalogDomain.SPELL, sourceOwner.id().value(), sourceOwner.source()),
+                        sourceOwner.revision(), sourceOwner.jsonPointer()))
+                .toList();
     }
 }

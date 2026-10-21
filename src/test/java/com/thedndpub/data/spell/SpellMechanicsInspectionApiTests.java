@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.StreamSupport;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -183,9 +184,9 @@ class SpellMechanicsInspectionApiTests {
                     .contains(definition.id().value())) {
                 processedOwners++;
                 assertEquals(ProcessingState.PROCESSED, result.processing().state());
-                assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
+                assertEquals(CoverageStatus.COMPLETE_WITHIN_SCOPE, result.coverage().status());
                 assertEquals(4, result.interpretations().size());
-                assertEquals(0, result.unsupported().size());
+                assertEquals(1, result.unsupported().size());
                 assertEquals(4, result.reviewSummary().pendingReview());
                 assertEquals(0, result.reviewSummary().verified());
                 assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
@@ -266,9 +267,9 @@ class SpellMechanicsInspectionApiTests {
             } else if (definition.id().value().equals("spell:phb:ray-of-frost")) {
                 processedOwners++;
                 assertEquals(ProcessingState.PROCESSED, result.processing().state());
-                assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
+                assertEquals(CoverageStatus.COMPLETE_WITHIN_SCOPE, result.coverage().status());
                 assertEquals(3, result.interpretations().size());
-                assertTrue(result.unsupported().isEmpty());
+                assertEquals(1, result.unsupported().size());
                 assertEquals(0, result.reviewSummary().verified());
                 assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
                         == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
@@ -278,6 +279,51 @@ class SpellMechanicsInspectionApiTests {
                 assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
                 assertEquals(2, result.interpretations().size());
                 assertEquals(1, result.unsupported().size());
+                assertEquals(0, result.reviewSummary().verified());
+                assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
+                        == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
+            } else if (definition.id().value().equals("spell:phb:spiritual-weapon")) {
+                processedOwners++;
+                assertEquals(ProcessingState.PROCESSED, result.processing().state());
+                assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
+                assertEquals(3, result.interpretations().size());
+                assertEquals(2, result.unsupported().size());
+                assertEquals(0, result.reviewSummary().verified());
+                assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
+                        == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
+            } else if (definition.id().value().equals("spell:xge:magic-stone")) {
+                processedOwners++;
+                assertEquals(ProcessingState.PROCESSED, result.processing().state());
+                assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
+                assertEquals(3, result.interpretations().size());
+                assertEquals(1, result.unsupported().size());
+                assertEquals(0, result.reviewSummary().verified());
+                assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
+                        == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
+            } else if (definition.id().value().equals("spell:phb:witch-bolt")) {
+                processedOwners++;
+                assertEquals(ProcessingState.PROCESSED, result.processing().state());
+                assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
+                assertEquals(4, result.interpretations().size());
+                assertEquals(1, result.unsupported().size());
+                assertEquals(0, result.reviewSummary().verified());
+                assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
+                        == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
+            } else if (definition.id().value().equals("spell:xge:ice-knife")) {
+                processedOwners++;
+                assertEquals(ProcessingState.PROCESSED, result.processing().state());
+                assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
+                assertEquals(5, result.interpretations().size());
+                assertEquals(2, result.unsupported().size());
+                assertEquals(0, result.reviewSummary().verified());
+                assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
+                        == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
+            } else if (definition.id().value().equals("spell:xphb:chromatic-orb")) {
+                processedOwners++;
+                assertEquals(ProcessingState.PROCESSED, result.processing().state());
+                assertEquals(CoverageStatus.PARTIAL, result.coverage().status());
+                assertEquals(3, result.interpretations().size());
+                assertEquals(4, result.unsupported().size());
                 assertEquals(0, result.reviewSummary().verified());
                 assertTrue(result.interpretations().stream().allMatch(value -> value.licensing().status()
                         == com.thedndpub.data.mechanics.model.MechanicsLicensingStatus.NEEDS_REVIEW));
@@ -322,12 +368,52 @@ class SpellMechanicsInspectionApiTests {
             }
         }
         assertEquals(930, observations);
-        assertEquals(124, processedOwners);
-        assertEquals(845, inspection.size() - processedOwners);
+        assertEquals(129, processedOwners);
+        assertEquals(840, inspection.size() - processedOwners);
         assertEquals(422, ownersWithObservations);
         assertEquals(547, inspection.size() - ownersWithObservations);
         assertTrue(publication.index().authorizedObservations().isEmpty());
         assertEquals(250, publication.index().candidates().size());
+    }
+
+    @Test
+    void experimentalInterpretationIsSeparateForCanonicalAndPreviouslyUnprocessedOwners() throws Exception {
+        JsonNode canonicalResponse = mapper.readTree(mvc.perform(
+                        get("/api/spells/spell:phb:fireball").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString());
+        JsonNode canonicalEnvelope = canonicalResponse.get("interpretedMechanics");
+        assertEquals("CANONICAL", canonicalEnvelope.path("origin").asText());
+        assertEquals("PROCESSED", canonicalEnvelope.at("/processing/state").asText());
+        assertTrue(canonicalEnvelope.path("interpretations").size() > 0);
+        assertEquals("EXPERIMENTAL", canonicalEnvelope.at("/experimentalInterpretation/origin").asText());
+        assertFalse(canonicalEnvelope.at("/experimentalInterpretation/reviewed").asBoolean());
+        assertFalse(canonicalEnvelope.at("/experimentalInterpretation/publicationAuthorized").asBoolean());
+        assertTrue(canonicalEnvelope.at("/experimentalInterpretation/canonicalComparison/reproducedClaimIds")
+                .size() > 0);
+
+        JsonNode candidateResponse = mapper.readTree(mvc.perform(
+                        get("/api/spells/spell:phb:poison-spray").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString());
+        JsonNode candidateEnvelope = candidateResponse.get("interpretedMechanics");
+        assertEquals("NOT_ATTEMPTED", candidateEnvelope.at("/processing/state").asText());
+        assertTrue(candidateEnvelope.path("interpretations").isEmpty());
+        assertEquals("CANDIDATE_PARTIAL", candidateEnvelope.at("/experimentalInterpretation/outcome").asText());
+        assertTrue(candidateEnvelope.at("/experimentalInterpretation/candidateClaims").size() > 0);
+        assertTrue(candidateEnvelope.at("/experimentalInterpretation/evidence").size() > 0);
+        assertEquals("PENDING_REVIEW", candidateEnvelope
+                .at("/experimentalInterpretation/candidateClaims/0/review/recordedStatus").asText());
+    }
+
+    @Test
+    void noPatternMatchIsExplicitlyReturnedWithoutClaimingTheSpellHasNoMechanics() throws Exception {
+        JsonNode response = mapper.readTree(mvc.perform(
+                        get("/api/spells/spell:aag:air-bubble").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString());
+        JsonNode experimental = response.at("/interpretedMechanics/experimentalInterpretation");
+        assertEquals("NO_PATTERN_MATCH", experimental.path("outcome").asText());
+        assertTrue(experimental.path("candidateClaims").isEmpty());
+        assertTrue(experimental.path("unaccountedSourcePaths").size() > 0);
+        assertTrue(experimental.path("diagnostics").toString().contains("SOURCE_MECHANICS_UNASSESSED"));
     }
 
     @Test
@@ -376,6 +462,50 @@ class SpellMechanicsInspectionApiTests {
     }
 
     @Test
+    void witchBoltPersistentAndActionActivatedMechanicsStayInPrivateInspection() throws Exception {
+        String ordinary = mvc.perform(get("/api/spells/spell:phb:witch-bolt"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertFalse(mapper.readTree(ordinary).has("interpretedMechanics"));
+
+        mvc.perform(get("/api/spells/spell:phb:witch-bolt").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations.length()").value(4))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].payload.kind")
+                        .value("PERSISTENT_SPELL_EFFECT"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[1].payload.establishment.outcome")
+                        .value("HIT"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[3].payload.actionActivation.optional")
+                        .value(true))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[3].payload.actionActivation.timing")
+                        .value("ACTION_ON_SUBSEQUENT_TURN"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[3].payload.actionActivation.resolution")
+                        .value("AUTOMATIC_WITHOUT_ATTACK_OR_SAVE"))
+                .andExpect(jsonPath("$.interpretedMechanics.reviewSummary.verified").value(0));
+    }
+
+    @Test
+    void iceKnifeOutcomeIndependentExplosionStaysInPrivateInspection() throws Exception {
+        String ordinary = mvc.perform(get("/api/spells/spell:xge:ice-knife"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertFalse(mapper.readTree(ordinary).has("interpretedMechanics"));
+
+        mvc.perform(get("/api/spells/spell:xge:ice-knife").param("include", "interpretedMechanics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations.length()").value(5))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[2].payload.kind")
+                        .value("ATTACK_TRIGGERED_AREA_EFFECT"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[2].payload.trigger")
+                        .value("AFTER_ATTACK_REGARDLESS_OF_OUTCOME"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[3].context.bindings[0].kind")
+                        .value("APPLIES_TO_AREA_EFFECT"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[4].context.bindings[1].damageOutcome")
+                        .value("FULL_DAMAGE"))
+                .andExpect(jsonPath("$.interpretedMechanics.interpretations[4].context.bindings[2].damageOutcome")
+                        .value("NO_DAMAGE"))
+                .andExpect(jsonPath("$.interpretedMechanics.reviewSummary.verified").value(0));
+    }
+
+    @Test
     void rayOfFrostAttackAndSpeedEffectAreAvailableOnlyThroughPrivateInspection() throws Exception {
         String ordinary = mvc.perform(get("/api/spells/spell:phb:ray-of-frost"))
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
@@ -398,7 +528,8 @@ class SpellMechanicsInspectionApiTests {
                         .value("MOVEMENT_SPEED"))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[2].context.bindings[0].outcome")
                         .value("HIT"))
-                .andExpect(jsonPath("$.interpretedMechanics.unsupported").doesNotExist())
+                .andExpect(jsonPath("$.interpretedMechanics.unsupported[0].id")
+                        .value("spell:phb:ray-of-frost:unsupported:attack-range"))
                 .andExpect(jsonPath("$.interpretedMechanics.reviewSummary.verified").value(0));
     }
 
@@ -427,6 +558,8 @@ class SpellMechanicsInspectionApiTests {
                         .value(4))
                 .andExpect(jsonPath("$.interpretedMechanics.unsupported[0].id")
                         .value("fire-bolt-object-ignition"))
+                .andExpect(jsonPath("$.interpretedMechanics.coverage.scopeExtent").value("DECLARED_SUBSET"))
+                .andExpect(jsonPath("$.interpretedMechanics.readyForHumanReviewWithinScope").doesNotExist())
                 .andExpect(jsonPath("$.interpretedMechanics.reviewSummary.verified").value(0));
     }
 
@@ -457,7 +590,10 @@ class SpellMechanicsInspectionApiTests {
                         .value("AFFECTED_SUBJECT"))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[3].payload.affectedRolls.target")
                         .value("CASTER"))
-                .andExpect(jsonPath("$.interpretedMechanics.unsupported").doesNotExist());
+                .andExpect(jsonPath("$.interpretedMechanics.coverage.status").value("COMPLETE_WITHIN_SCOPE"))
+                .andExpect(jsonPath("$.interpretedMechanics.readyForHumanReviewWithinScope").value(true))
+                .andExpect(jsonPath("$.interpretedMechanics.unsupported[0].id")
+                        .value("spell:phb:chill-touch:unsupported:attack-range"));
 
         mvc.perform(get("/api/spells/spell:phb:shocking-grasp").param("include", "interpretedMechanics"))
                 .andExpect(status().isOk())
@@ -476,7 +612,9 @@ class SpellMechanicsInspectionApiTests {
                         .value("ADVANTAGE"))
                 .andExpect(jsonPath("$.interpretedMechanics.interpretations[3].context.bindings[0].condition")
                         .value("ATTACK_ROLL_TARGET_WEARING_ARMOR_MADE_OF_METAL"))
-                .andExpect(jsonPath("$.interpretedMechanics.unsupported").doesNotExist());
+                .andExpect(jsonPath("$.interpretedMechanics.coverage.status").value("COMPLETE_WITHIN_SCOPE"))
+                .andExpect(jsonPath("$.interpretedMechanics.unsupported[0].id")
+                        .value("spell:phb:shocking-grasp:unsupported:attack-range"));
     }
 
     @Test
@@ -808,6 +946,157 @@ class SpellMechanicsInspectionApiTests {
                 inspection.documents().stream().map(document -> document.owner().id()).toList());
         assertEquals(mapper.writeValueAsString(service.findById(id.value(), "interpretedMechanics")),
                 mapper.writeValueAsString(service.findById(id.value(), "interpretedMechanics")));
+    }
+
+    @Test
+    void genericExperimentalV2SeparatesMechanicsEvidenceDiagnosticsAndMetadata() throws Exception {
+        String ordinary = mvc.perform(get("/api/spells/spell:phb:fireball"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertFalse(mapper.readTree(ordinary).has("interpretedMechanics"));
+
+        JsonNode response = mapper.readTree(mvc.perform(get("/api/spells/spell:phb:fireball")
+                .param("include", "interpretedMechanics")).andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString());
+        JsonNode canonical = response.path("interpretedMechanics");
+        JsonNode experimental = canonical.path("experimentalInterpretationV2");
+        assertEquals("EXPERIMENTAL", experimental.path("origin").asText());
+        assertEquals(2, experimental.path("apiVersion").asInt());
+        assertTrue(experimental.path("mechanics").isArray());
+        assertEquals(2, experimental.path("relationships").size());
+        assertTrue(experimental.path("evidence").isArray());
+        assertTrue(experimental.path("diagnostics").isArray());
+        assertEquals("PENDING_REVIEW", experimental.path("metadata").path("reviewStatus").asText());
+        assertFalse(experimental.path("metadata").path("publicationAuthorized").asBoolean());
+        assertTrue(canonical.path("interpretations").isArray());
+        assertFalse(experimental.path("mechanics").toString().contains("evidenceAssociations"));
+        assertFalse(experimental.path("mechanics").toString().contains("licensing"));
+        JsonNode relationship = StreamSupport.stream(experimental.path("relationships").spliterator(), false)
+                .filter(item -> item.path("type").asText().equals("SAVING_THROW_DAMAGE_OUTCOME"))
+                .findFirst().orElseThrow();
+        assertEquals("SAVING_THROW_DAMAGE_OUTCOME", relationship.path("type").asText());
+        assertEquals("FAILURE", relationship.path("outcomes").get(0).path("outcome").asText());
+        assertEquals("FULL_DAMAGE", relationship.path("outcomes").get(0).path("application").asText());
+        assertEquals("SUCCESS", relationship.path("outcomes").get(1).path("outcome").asText());
+        assertEquals("HALF_DAMAGE", relationship.path("outcomes").get(1).path("application").asText());
+        assertTrue(experimental.path("mechanics").toString().contains(relationship.path("sourceMechanicId").asText()));
+        assertTrue(experimental.path("mechanics").toString().contains(relationship.path("targetMechanicId").asText()));
+        assertTrue(experimental.path("evidence").toString().contains(relationship.path("id").asText()));
+        assertTrue(StreamSupport.stream(experimental.path("relationships").spliterator(), false)
+                .anyMatch(item -> item.path("type").asText().equals("SCALING_APPLIES_TO")
+                        && item.path("scalingRule").path("affectedQuantity").asText().equals("DAMAGE_AMOUNT")));
+
+        JsonNode xphb = mapper.readTree(mvc.perform(get("/api/spells/spell:xphb:fireball")
+                .param("include", "interpretedMechanics")).andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString());
+        assertEquals("data/spells/spells-phb.json",
+                canonical.path("experimentalInterpretationV2").path("metadata").path("sourceResource").asText());
+        assertEquals("data/spells/spells-xphb.json", xphb.path("interpretedMechanics")
+                .path("experimentalInterpretationV2").path("metadata").path("sourceResource").asText());
+        assertNotEquals(canonical.path("experimentalInterpretationV2").path("metadata").path("sourceSha256").asText(),
+                xphb.path("interpretedMechanics").path("experimentalInterpretationV2")
+                        .path("metadata").path("sourceSha256").asText());
+    }
+
+    @Test
+    void genericScalingIsProjectedAsIndependentMechanicsAndTypedRelationships() throws Exception {
+        assertScaling("spell:phb:fireball", "SPELL_SLOT_LEVEL", "DAMAGE_AMOUNT", "DAMAGE");
+        assertScaling("spell:phb:healing-word", "SPELL_SLOT_LEVEL", "HEALING_AMOUNT", "HEALING");
+        assertScaling("spell:phb:scorching-ray", "SPELL_SLOT_LEVEL", "PROJECTILE_COUNT", "DAMAGE");
+        assertScaling("spell:phb:eldritch-blast", "CHARACTER_LEVEL", "ATTACK_COUNT", "ATTACK");
+        assertScaling("spell:phb:ray-of-frost", "CHARACTER_LEVEL", "DAMAGE_AMOUNT", "DAMAGE");
+        assertScaling("spell:phb:magic-missile", "SPELL_SLOT_LEVEL", "PROJECTILE_COUNT", "DAMAGE");
+        assertScaling("spell:xge:ice-knife", "SPELL_SLOT_LEVEL", "DAMAGE_AMOUNT", "DAMAGE");
+    }
+
+    @Test
+    void genericConditionOperationsAndLifecycleRelationshipsAreProjectedSeparately() throws Exception {
+        JsonNode hold = experimentalSpell("spell:phb:hold-person");
+        JsonNode holdMechanics = hold.path("mechanics");
+        JsonNode paralysis = StreamSupport.stream(holdMechanics.spliterator(), false)
+                .filter(item -> item.path("properties").path("kind").asText().equals("CONDITION_CHANGE")
+                        && item.path("properties").path("condition").asText().equals("PARALYZED"))
+                .findFirst().orElseThrow(() -> new AssertionError(hold.toPrettyString()));
+        assertEquals("APPLY", paralysis.path("properties").path("operation").asText());
+        assertTrue(StreamSupport.stream(hold.path("relationships").spliterator(), false)
+                .anyMatch(item -> item.path("type").asText().equals("SAVE_CONDITION_OUTCOME")
+                        && item.path("conditionOutcomes").toString().contains("FAILURE")
+                        && item.path("conditionOutcomes").toString().contains("APPLY")));
+        assertTrue(StreamSupport.stream(hold.path("relationships").spliterator(), false)
+                .anyMatch(item -> item.path("type").asText().equals("CONDITION_TERMINATION")
+                        && item.path("terminationRule").path("trigger").asText().equals("REPEATED_SAVE_SUCCESS")));
+        assertTrue(StreamSupport.stream(hold.path("relationships").spliterator(), false)
+                .anyMatch(item -> item.path("type").asText().equals("CONDITION_DURATION")));
+
+        JsonNode lesser = experimentalSpell("spell:phb:lesser-restoration");
+        assertTrue(StreamSupport.stream(lesser.path("mechanics").spliterator(), false)
+                .anyMatch(item -> item.path("properties").path("kind").asText().equals("CONDITION_CHOICE")
+                        && item.path("properties").path("operation").asText().equals("REMOVE")
+                        && item.path("properties").path("alternatives").size() == 4));
+
+        JsonNode protection = experimentalSpell("spell:phb:protection-from-evil-and-good");
+        assertTrue(StreamSupport.stream(protection.path("mechanics").spliterator(), false)
+                .filter(item -> item.path("properties").path("kind").asText().equals("CONDITION_CHANGE"))
+                .anyMatch(item -> item.path("properties").path("operation").asText().equals("PREVENT")));
+
+        JsonNode ray = experimentalSpell("spell:phb:ray-of-sickness");
+        JsonNode poisoned = StreamSupport.stream(ray.path("mechanics").spliterator(), false)
+                .filter(item -> item.path("properties").path("kind").asText().equals("CONDITION_CHANGE")
+                        && item.path("properties").path("condition").asText().equals("POISONED"))
+                .findFirst().orElseThrow(() -> new AssertionError(ray.toPrettyString()));
+        assertTrue(StreamSupport.stream(ray.path("relationships").spliterator(), false)
+                .anyMatch(item -> item.path("type").asText().equals("SAVE_CONDITION_OUTCOME")
+                        && item.path("targetMechanicId").asText().equals(poisoned.path("id").asText())
+                        && item.path("conditionOutcomes").toString().contains("FAILURE")
+                        && item.path("conditionOutcomes").toString().contains("APPLY")), ray.toPrettyString());
+
+        JsonNode web = experimentalSpell("spell:phb:web");
+        assertTrue(StreamSupport.stream(web.path("relationships").spliterator(), false)
+                .anyMatch(item -> item.path("type").asText().equals("CONDITION_TERMINATION")
+                        && item.path("terminationRule").path("trigger").asText()
+                                .equals("ACTION_SUCCESSFUL_CHECK")), web.toPrettyString());
+
+        JsonNode chill = experimentalSpell("spell:phb:chill-touch");
+        assertFalse(StreamSupport.stream(chill.path("mechanics").spliterator(), false)
+                .anyMatch(item -> item.path("properties").path("kind").asText().startsWith("CONDITION_")));
+
+        JsonNode xphbHold = experimentalSpell("spell:xphb:hold-person");
+        assertTrue(StreamSupport.stream(xphbHold.path("mechanics").spliterator(), false)
+                .anyMatch(item -> item.path("properties").path("kind").asText().equals("CONDITION_CHANGE")
+                        && item.path("properties").path("condition").asText().equals("PARALYZED")));
+
+        JsonNode xphbHallow = experimentalSpell("spell:xphb:hallow");
+        assertFalse(StreamSupport.stream(xphbHallow.path("mechanics").spliterator(), false)
+                .anyMatch(item -> item.path("properties").path("kind").asText().equals("CONDITION_CHANGE")
+                        && item.path("properties").path("condition").asText().equals("CHARMED")
+                        && item.path("properties").path("operation").asText().equals("APPLY")));
+        assertTrue(StreamSupport.stream(xphbHallow.path("mechanics").spliterator(), false)
+                .anyMatch(item -> item.path("properties").path("kind").asText().equals("CONDITION_CHANGE")
+                        && item.path("properties").path("condition").asText().equals("FRIGHTENED")
+                        && item.path("properties").path("operation").asText().equals("PREVENT")));
+    }
+
+    private JsonNode experimentalSpell(String ownerId) throws Exception {
+        JsonNode response = mapper.readTree(mvc.perform(get("/api/spells/" + ownerId)
+                .param("include", "interpretedMechanics")).andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString());
+        return response.path("interpretedMechanics").path("experimentalInterpretationV2");
+    }
+
+    private void assertScaling(String ownerId, String axis, String quantity, String targetFamily) throws Exception {
+        JsonNode response = mapper.readTree(mvc.perform(get("/api/spells/" + ownerId)
+                .param("include", "interpretedMechanics")).andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString());
+        JsonNode experimental = response.path("interpretedMechanics").path("experimentalInterpretationV2");
+        assertTrue(StreamSupport.stream(experimental.path("mechanics").spliterator(), false)
+                .anyMatch(item -> item.path("type").asText().equals("SCALING")
+                        && item.path("properties").path("axis").asText().equals(axis)), ownerId);
+        assertTrue(StreamSupport.stream(experimental.path("relationships").spliterator(), false)
+                .anyMatch(item -> item.path("type").asText().equals("SCALING_APPLIES_TO")
+                        && item.path("scalingRule").path("affectedQuantity").asText().equals(quantity)
+                        && StreamSupport.stream(experimental.path("mechanics").spliterator(), false)
+                                .anyMatch(mechanic -> mechanic.path("id").asText()
+                                        .equals(item.path("targetMechanicId").asText())
+                                        && mechanic.path("type").asText().equals(targetFamily))), ownerId);
     }
 
     @Test

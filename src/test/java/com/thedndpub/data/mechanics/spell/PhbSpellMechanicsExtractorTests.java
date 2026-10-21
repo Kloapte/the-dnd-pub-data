@@ -344,7 +344,7 @@ class PhbSpellMechanicsExtractorTests {
         var speed = document.interpretations().stream()
                 .filter(record -> record.id().value().endsWith(":movement-speed")).findFirst().orElseThrow();
         assertEquals(1, speed.revision().number());
-        assertEquals("83be98777af7cb729d39de075007fbc59ecf8c8a8d9ea1ff70bd2070334a8b7c",
+        assertEquals("587d0e43440e033c93976fbd7d7a7e8b6547ddc0450acfff711957c130398bc2",
                 speed.revision().contentSha256());
         var speedPayload = assertInstanceOf(StatisticModifierMechanic.class, speed.payload());
         assertEquals(List.of(ModifiedStatistic.MOVEMENT_SPEED), speedPayload.statistics());
@@ -361,8 +361,8 @@ class PhbSpellMechanicsExtractorTests {
 
         assertTrue(document.unsupported().stream()
                 .noneMatch(value -> value.id().equals("ray-of-frost-cantrip-scaling")));
-        assertEquals(0, document.coverage().unsupportedCount());
-        assertEquals(0, document.unsupported().size());
+        assertEquals(1, document.coverage().unsupportedCount());
+        assertEquals("spell:phb:ray-of-frost:unsupported:attack-range", document.unsupported().getFirst().id());
         assertTrue(damage.evidenceAssociations().stream().anyMatch(association ->
                 association.claimPath().equals("/payload/characterLevelScaling")
                         && association.role() == com.thedndpub.data.mechanics.model.EvidenceRole.SCALING));
@@ -756,7 +756,7 @@ class PhbSpellMechanicsExtractorTests {
                 "/spell/45/entries/1", "an undead target", undeadText);
         assertTextEvidence(document, disadvantage, "/context/bindings/2", EvidenceRole.DURATION,
                 "/spell/45/entries/1", "until the end of your next turn", undeadText);
-        assertTrue(document.unsupported().isEmpty());
+        assertEquals("spell:phb:chill-touch:unsupported:attack-range", document.unsupported().getFirst().id());
         assertFalse(document.interpretations().stream()
                 .anyMatch(record -> record.payload() instanceof StatisticModifierMechanic));
         assertReviewPending(document);
@@ -846,7 +846,7 @@ class PhbSpellMechanicsExtractorTests {
                 "/spell/297/entries/0", "a creature you try to touch", body);
         assertTextEvidence(document, advantage, "/context/bindings/0", EvidenceRole.QUALIFIER,
                 "/spell/297/entries/0", "the target is wearing armor made of metal", body);
-        assertTrue(document.unsupported().isEmpty());
+        assertEquals("spell:phb:shocking-grasp:unsupported:attack-range", document.unsupported().getFirst().id());
         assertFalse(document.interpretations().stream().anyMatch(record ->
                 record.payload() instanceof StatisticModifierMechanic statisticModifier
                         && statisticModifier.statistics().contains(ModifiedStatistic.ATTACK_ROLL)));
@@ -855,6 +855,38 @@ class PhbSpellMechanicsExtractorTests {
         assertStaleModifierSelectorRejected(document);
         assertContradictoryArmorQualifierRejected(document);
         assertDeterministic(document);
+    }
+
+    @Test
+    void cantripCoverageAccountsForEachWholeSpellWhilePreservingUnmodeledAttackRange() throws Exception {
+        for (String id : List.of("chill-touch", "ray-of-frost", "shocking-grasp")) {
+            MechanicsDocument document = extract(input(id));
+            assertEquals(CoverageStatus.COMPLETE_WITHIN_SCOPE, document.coverage().status(), id);
+            assertEquals(com.thedndpub.data.mechanics.model.CoverageScopeExtent.FULL_SPELL,
+                    document.coverage().scopeExtent(), id);
+            assertTrue(document.coverage().unassessedSourcePaths().isEmpty(), id);
+            assertTrue(document.coverage().consideredSourcePaths().containsAll(List.of(
+                    "/spell/" + spellIndex(id) + "/time", "/spell/" + spellIndex(id) + "/range",
+                    "/spell/" + spellIndex(id) + "/level", "/spell/" + spellIndex(id) + "/school",
+                    "/spell/" + spellIndex(id) + "/duration", "/spell/" + spellIndex(id) + "/components",
+                    "/spell/" + spellIndex(id) + "/entries", "/spell/" + spellIndex(id) + "/spellAttack",
+                    "/spell/" + spellIndex(id) + "/damageInflict",
+                    "/spell/" + spellIndex(id) + "/scalingLevelDice")), id);
+            assertEquals(1, document.unsupported().size(), id);
+            assertTrue(document.unsupported().getFirst().id().endsWith(":unsupported:attack-range"), id);
+            assertEquals(MechanicsCompleteness.PARTIAL, document.interpretations().getFirst()
+                    .assessment().completeness(), id);
+            assertEquals(0, document.reviewSummary().verified(), id);
+        }
+    }
+
+    private static int spellIndex(String id) {
+        return switch (id) {
+            case "chill-touch" -> 45;
+            case "ray-of-frost" -> 273;
+            case "shocking-grasp" -> 297;
+            default -> throw new IllegalArgumentException("Unknown test owner");
+        };
     }
 
     @Test
@@ -1701,9 +1733,9 @@ class PhbSpellMechanicsExtractorTests {
     @Test
     void registeredPatternsProcessConditionOwnersAndPreserveAllFormulaObservations() {
         assertEquals(969, inspection.size());
-        assertEquals(124, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.PROCESSED).count());
-        assertEquals(845, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.NOT_ATTEMPTED).count());
-        assertEquals(261, inspection.documents().stream().mapToInt(value -> value.interpretations().size()).sum());
+        assertEquals(129, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.PROCESSED).count());
+        assertEquals(840, inspection.documents().stream().filter(value -> value.processing().state() == ProcessingState.NOT_ATTEMPTED).count());
+        assertEquals(279, inspection.documents().stream().mapToInt(value -> value.interpretations().size()).sum());
         assertEquals(930, inspection.documents().stream().mapToInt(value -> value.observations().size()).sum());
         for (String slug : java.util.List.of("fireball", "healing-word")) {
             var id = spells.findById("spell:phb:" + slug).id();

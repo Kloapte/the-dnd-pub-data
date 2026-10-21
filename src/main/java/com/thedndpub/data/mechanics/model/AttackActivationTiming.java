@@ -1,5 +1,8 @@
 package com.thedndpub.data.mechanics.model;
 
 public enum AttackActivationTiming {
-    CAST_TIME
+    UNSPECIFIED,
+    CAST_TIME,
+    BONUS_ACTION,
+    OBJECT_USE
 }
