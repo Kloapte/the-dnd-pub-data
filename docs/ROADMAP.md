@@ -39,17 +39,64 @@ Semantic enrichment is the preferred approach from Step 1 onward. When semantic 
 
 ## Roadmap execution
 
-The roadmap consists of an initial dependency analysis followed by domain-specific normalization steps.
+Step 0 is complete. The sequence below incorporates the approved dependency analysis and planning decisions.
 
-**Step 0 determines whether the proposed roadmap order is viable.**
+Evidence:
 
-The current ordering reflects the existing understanding of the source structures and must remain unchanged until Step 0 has been completed and its recommendations reviewed.
+- [Step 0 discovery report](../discover/STEP_0_DEPENDENCY_ANALYSIS.md).
+- [Dependency tables and source inventory](../discover/step-0/dependency-tables.md).
 
-Step 0 may recommend reordering, splitting, or combining steps, but must not apply these changes without approval.
+The discovery artifacts retain the original step numbering as historical evidence. The step numbers in this roadmap govern future work. Do not repeat Step 0 to execute this revision.
+
+| Step | Domain |
+| --- | --- |
+| 1 | Source Registry |
+| 2 | Core Rules Foundation |
+| 3 | Equipment Foundation |
+| 4 | Spells |
+| 5 | Creatures / Monsters |
+| 6 | Spells Completion |
+| 7 | Classes and Optional Features |
+| 8 | Character Building |
+| 9 | World Building |
+| Z | Bonus / Deferred Data |
 
 Each normalization domain in Steps 1–Z follows the six-phase normalization workflow described below.
 
 Every phase is a separate milestone requiring approval before proceeding.
+
+Coordinating domains within a step preserves separate cohesive domain contracts and all phase approval checkpoints. Step 6 applies the same six phases to incremental enrichment of existing spells, with contract changes reviewed before conversion.
+
+This revision authorizes planning only. Step 1 and every subsequent phase or step require explicit authorization before work begins. Further changes to the sequence also require approval.
+
+## Identity, references, and interpretation coverage
+
+- Start source identity work from `sources/registry.json`, subject to validation against the supplied metadata and source usage.
+- Preserve code-only sources without inventing publication names, dates, versions, relationships, or other unavailable metadata.
+- Include adventure metadata only where useful for source identification. Publication content and stories are outside this roadmap's scope; preserve relevant citations and rule excerpts already present in domain datasets.
+- Review source-format defaults, edition differences, aliases, and reprints before resolving canonical identities. Shared names, omitted source components, and reprint links do not establish mechanical equivalence.
+- Use predictable identifiers following `<type>:<source>:<name>`. Allow contextual qualification of the name component when needed to distinguish classes, subclasses, feature levels, pantheons, parent species, or other source-supported identity context.
+- Preserve stable identities wherever possible. Review compatibility and migration implications before changing an existing identifier; do not create a new identity solely because an interpretation is enriched later.
+- Preserve source references to later domains without requiring immediate mechanics execution. Resolve canonical targets only when evidence establishes their identities; retain unresolved source references explicitly until then.
+- Treat 5eTools page navigation, including `{@5etools ...}` links, as noncanonical navigation metadata, not resolved entity references. Preserve useful source navigation separately from canonical relationships.
+- Preserve filter criteria and choice requirements without assuming that a page, selector, or display label supplies a canonical entity or complete eligible set.
+- Preserve existing SRD and SRD52 flags without inventing, inferring, or reassigning status.
+- Keep provenance and the original source location for every normalized entity and later enrichment. Do not silently overwrite approved interpretations or duplicate previously normalized external models.
+
+Track interpretation coverage at the affected rule or mechanic, since one entity may have several outcomes:
+
+| Interpretation status | Meaning and required accounting |
+| --- | --- |
+| Complete | The interpretation is supported by source evidence and validated within the approved scope; applicable execution behavior is verified during integration. |
+| Deferred | A known dependency or later milestone prevents completion. Record the affected behavior, preserved references, reason, and intended revisit step or explicit future approval checkpoint. |
+| Unsupported | Required content is unavailable or behavior cannot be represented or executed under the approved contract. Preserve evidence and state the limitation explicitly. |
+| Ambiguous | Source evidence permits conflicting interpretations or is insufficient to choose one reliably. Preserve the uncertainty and the decision requiring review. |
+
+Do not present deferred, unsupported, or ambiguous mechanics as complete. A step may finish with an explicitly reviewed partial dataset and documented execution limits; report each outstanding dependency and its disposition.
+
+Document missing publication content and catalogs as explicitly unsupported where they prevent interpretation. Step 0 identified gaps involving quick-reference content, standalone tables, decks/cards, psionics, general class spell membership, and referenced publication prose. Related inline material must be reviewed before claiming a particular target's content is unavailable. Neither reordering nor a valid reference supplies missing mechanics.
+
+Account for all source domains and ancillary arrays. Unlisted sources are not automatically out of scope: assign them during the relevant analysis, or record an explicit deferral or approved exclusion. Maintain the distinction between content outside the approved scope and missing content required by an in-scope mechanic.
 
 ---
 
@@ -412,6 +459,10 @@ Integrate the approved canonical datasets into the backend using strongly typed 
 
 ## Step 0 — Dependency analysis and roadmap validation
 
+### Status and evidence
+
+Completed and reviewed. The [discovery report](../discover/STEP_0_DEPENDENCY_ANALYSIS.md) and [dependency tables](../discover/step-0/dependency-tables.md) are the evidence for this revision. Retain the original Step 0 scope and deliverables below for traceability; no repeat analysis is authorized by this update.
+
 ### Objective
 
 Determine whether the proposed roadmap order is viable based on actual dependencies within the 5eTools source data.
@@ -452,31 +503,73 @@ Produce a report under `/discover` containing:
 
 Do not normalize datasets, create canonical schemas, or modify the roadmap during this step.
 
-**Approval checkpoint:** Present the findings and proposed changes. Do not modify the roadmap order without approval.
+**Approval checkpoint:** Step 0 findings and the planning decisions reflected below have been approved. This roadmap revision is presented for review; do not begin Step 1 without explicit authorization.
 
 ---
 
-## Step 1 — Interpreting the game
+## Step 1 — Source Registry
 
 ### Objective
 
-Establish the foundational source metadata, game actions, and rules that other domains may reference.
+Establish validated source identity and metadata relationships that all other domains can reference.
 
 Semantic enrichment is intended from this step onward.
 
 ### Source files
 
-- `books.json`
-- `actions.json`
-- `variantrules.json`
+- `sources/registry.json` — starting point for source identity, subject to validation.
+- `books.json` — publication metadata useful for identifying sources.
+- `adventures.json` — metadata only where useful for source identification.
+
+Source paths in Steps 1–Z are relative to `src/main/resources/data`.
 
 ### Focus
 
-**Books**
+**Registry and publication metadata**
 
 - Establish source identity and relationships.
+- Validate existing registry codes and aliases against relevant book/adventure metadata and source usage.
 - Preserve source metadata and existing identifiers.
 - Provide consistent source references for other normalized entities.
+- Preserve code-only sources where richer metadata is unavailable.
+- Preserve explicit distinctions between publication IDs, source codes, aliases, and parent relationships.
+- Record unresolved or ambiguous metadata without inferring missing values.
+
+### Scope boundary
+
+Publication content and stories are out of scope. Adventure metadata is included only for source identification. Metadata lookup does not supply referenced chapter prose or establish rule equivalence between editions.
+
+### Submodel analysis
+
+Evaluate source identity, publication metadata, aliases, and parent relationships as cohesive responsibilities. Avoid requiring complete publication metadata for every valid source code.
+
+### Completion criteria
+
+- The registry and relevant metadata have approved canonical contracts and validated source relationships.
+- Foundational source references and code-only sources are accounted for.
+- Unresolved, ambiguous, and unavailable metadata are documented.
+- Approved datasets are integrated and verified.
+
+---
+
+## Step 2 — Core Rules Foundation
+
+### Objective
+
+Coordinate the original Steps 1 and 2 game-rule domains as a shared foundation while maintaining separate cohesive domain contracts.
+
+Semantic enrichment includes actions, rules, skills, conditions, diseases, statuses, senses, and languages. Shared references and reusable mechanics must support their circular relationships without recursively embedding complete external models.
+
+### Source files
+
+- `actions.json`
+- `variantrules.json`
+- `skills.json`
+- `conditionsdiseases.json` — conditions, diseases, and statuses.
+- `senses.json`
+- `languages.json` — languages and language scripts.
+
+### Focus
 
 **Actions**
 
@@ -485,47 +578,15 @@ Semantic enrichment is intended from this step onward.
 - Identify reusable action mechanics and references.
 - Evaluate whether distinct action categories require submodels.
 
-**Variant rules**
+**Core and variant rules**
 
-- Analyze optional and alternative game rules.
+- Distinguish core definitions, optional rules, and alternative rules using source evidence; `variantrules.json` is not exclusively optional content.
+- Analyze optional and alternative game rules without automatically excluding them from semantic enrichment.
 - Identify mechanics that modify or extend standard behavior.
 - Identify dependencies on actions, conditions, abilities, and other game concepts.
-- Determine how rule applicability, activation, and exceptions should be represented.
-- Evaluate whether variant rules require specialized submodels or reusable mechanics components.
+- Determine rule applicability, activation, exceptions, and edition-specific behavior.
+- Evaluate specialized submodels and reusable mechanics components.
 - Preserve distinctions between standard rules and optional variants.
-
-### Special consideration
-
-Variant rules may be semantically complex.
-
-If full semantic enrichment proves unreliable or counterproductive, Codex must identify the affected structures, explain the limitations, and propose a reduced or alternative normalization approach.
-
-Do not automatically exclude variant rules from semantic enrichment.
-
-### Completion criteria
-
-- Foundational source references are established.
-- Actions and variant rules have approved canonical contracts.
-- Semantic enrichment coverage is documented.
-- Unsupported or ambiguous rules are explicitly identified.
-- Approved datasets are integrated and verified.
-
----
-
-## Step 2 — Interpreting the basic building blocks
-
-### Objective
-
-Normalize foundational game concepts that are reused by other domains.
-
-### Source domains
-
-- Skills
-- `conditionsdiseases`
-- Senses
-- Languages
-
-### Focus
 
 **Skills**
 
@@ -533,12 +594,13 @@ Normalize foundational game concepts that are reused by other domains.
 - Interpret skill-related mechanics and checks.
 - Establish stable references for other models.
 
-**Conditions and diseases**
+**Conditions, diseases, and statuses**
 
-- Identify conditions, diseases, and their mechanical effects.
+- Identify conditions, diseases, statuses, and their mechanical effects.
 - Interpret restrictions, penalties, advantages, disadvantages, and exceptions.
-- Evaluate whether conditions and diseases should be independent models.
+- Evaluate whether conditions, diseases, and statuses should be independent models.
 - Identify reusable condition effects and references.
+- Preserve disease dependencies on spells, world effects, or missing rules as explicit interpretation outcomes.
 
 **Senses**
 
@@ -550,19 +612,66 @@ Normalize foundational game concepts that are reused by other domains.
 
 - Establish language identity and relationships.
 - Identify language categories and relevant metadata.
+- Preserve language scripts and their relationships.
 - Preserve references used by creatures and characters.
+
+### Coordination and submodel analysis
+
+Analyze shared checks, saves, attacks, proficiency, advantage/disadvantage, action timing, movement, targeting, duration, concentration, and effects where supported by the source. Coordinate dependent rule definitions, conditions, and senses while keeping their domain identities and contracts cohesive.
+
+Determine manageable analysis and conversion batches during Phase 1. Coordination does not bypass phase approvals or require complete execution of later-domain references.
+
+Variant rules may be semantically complex. If full semantic enrichment proves unreliable or counterproductive, identify the affected structures, explain the limitations, and propose a reduced or alternative approach for approval. Do not automatically exclude those rules.
 
 ### Completion criteria
 
 - Foundational models have approved schemas.
 - Relevant mechanics are normalized.
 - Shared references are established.
-- Semantic coverage and limitations are documented.
+- Complete, deferred, unsupported, and ambiguous interpretations and execution limits are documented.
 - Approved datasets are integrated and verified.
 
 ---
 
-## Step 3 — Interpreting spells
+## Step 3 — Equipment Foundation
+
+### Objective
+
+Normalize foundational equipment identities and mechanics used by spells, creatures, classes, and character building.
+
+### Source files
+
+- `items-base.json` — foundational base items, item types, properties, masteries, type supplements, and required entry templates.
+- `items.json` — foundational equipment and identity relationships required by the approved analysis scope.
+- References into `magicvariants.json` and other equipment content must remain traceable; advanced equipment and magical variants are deferred to Step 9.
+
+### Focus
+
+- Foundational equipment identities and source-qualified references.
+- Weapon categories, damage, range, ammunition, and relevant attack rules.
+- Armor, shields, armor class, requirements, and relevant restrictions.
+- Item types, item properties, and weapon masteries.
+- Base-item relationships and foundational equipment choices, packs, and contents where applicable.
+- Required item-entry templates, substitutions, inherited descriptions, and source-specific expansion performed offline.
+- Dependencies on core rules, conditions, and later mechanics.
+
+### Scope and submodel analysis
+
+Evaluate base items, weapons, armor, types, properties, masteries, and entry templates as cohesive models or reusable components. Define the boundary between foundational and advanced equipment during Phase 1, accounting for every affected entry or structure. Record content assigned to Step 9 explicitly.
+
+Do not expand advanced equipment or magical variants in this step. Reuse foundation identities in later equipment enrichment; do not create duplicate models solely to complete deferred mechanics.
+
+### Completion criteria
+
+- Foundational equipment contracts and required templates are approved.
+- Representative weapons, armor, properties, masteries, and template-dependent structures are validated.
+- Foundational identities and references are established, with deferred equipment content assigned to Step 9.
+- Semantic coverage, interpretation statuses, and execution limits are documented.
+- Approved datasets are integrated and verified.
+
+---
+
+## Step 4 — Spells
 
 ### Objective
 
@@ -601,17 +710,26 @@ Consider spells with multiple simultaneous effects.
 
 Avoid forcing mutually compatible spell behaviors into exclusive subtypes.
 
+### Deferred dependencies
+
+Normalize spells before creatures. Preserve stable references for summoning, transformations, creature statistics, and species-dependent effects without requiring immediate mechanics execution.
+
+Record each deferred interpretation, affected normalized spell identity, source evidence, dependency, and execution limitation. Assign creature-dependent work to Step 6 after Step 5. Species and other dependencies that remain unavailable at Step 6 must retain an explicit later revisit checkpoint; Step 6 does not authorize beginning Character Building or another domain.
+
+Missing publication content or catalogs must be documented as unsupported where applicable. Ambiguous source mechanics remain identifiable for review.
+
 ### Completion criteria
 
 - Spell model and effect contracts are approved.
 - Representative spell categories and outliers are validated.
 - All source entries are accounted for.
-- Semantic coverage and unsupported mechanics are documented.
+- Semantic coverage and complete, deferred, unsupported, and ambiguous interpretations are documented.
+- Creature/species-dependent mechanics have stable source references and explicit revisit checkpoints.
 - Approved datasets are integrated and verified.
 
 ---
 
-## Step 4 — Interpreting monsters
+## Step 5 — Creatures / Monsters
 
 ### Objective
 
@@ -620,6 +738,7 @@ Normalize creatures and their combat, movement, perception, and special mechanic
 ### Source files
 
 - `/monsters/**.json`
+- Include bestiary files, `monsters/template.json`, and `monsters/legendarygroups.json`, including their ancillary template arrays.
 
 ### Focus
 
@@ -636,6 +755,9 @@ Normalize creatures and their combat, movement, perception, and special mechanic
 - Conditions, transformations, and special effects.
 - Challenge rating and relevant progression data.
 - Source variants, inherited data, and overrides.
+- Monster templates, legendary-group templates, generated versions, and their identity relationships.
+- Ordered copy, inheritance, preservation, template, and override operations interpreted offline.
+- Summoned creatures and scaling that requires spell or class context.
 
 ### Submodel analysis
 
@@ -648,20 +770,62 @@ Avoid excessive creature-specific implementations.
 - Creature and associated mechanic contracts are approved.
 - Representative creature structures are validated.
 - All source entries are accounted for.
-- Semantic coverage and unsupported mechanics are documented.
+- Inheritance targets, templates, versions, legendary-group references, and source traceability are verified.
+- Semantic coverage and all interpretation statuses are documented, including spell/class-dependent execution limits.
+- Creature dependencies available for Step 6 are identified without duplicating referenced spell entities.
 - Approved datasets are integrated and verified.
 
 ---
 
-## Step 5 — Interpreting classes
+## Step 6 — Spells Completion
 
 ### Objective
 
-Normalize classes, subclasses, progression, and character capabilities.
+Revisit deferred spell mechanics after creature normalization, enriching existing normalized spell entities while preserving their stable identities and approved interpretations.
+
+### Source files and existing artifacts
+
+- `/spells/**.json` — original source evidence for the affected spells.
+- `/monsters/**.json` — approved creature, template, legendary-group, version, and inheritance evidence relevant to those spells.
+- Existing approved spell contracts, normalized spell entities, provenance, and deferred-interpretation records from Step 4.
+- Approved creature contracts and normalized entities from Step 5.
+
+### Focus
+
+- Reconcile the Step 4 deferred interpretations with the creature models now available.
+- Enrich summoning, transformations, form selection, creature-dependent scaling, and related effects where supported.
+- Resolve eligible references with source and edition context; reuse creature identities without embedding full external models.
+- Preserve each spell's identity and traceability. Do not generate duplicate spell entities or regenerate unaffected approved interpretations.
+- Review contract suitability and submodel boundaries for newly supported behavior; require approval before contract changes or conversion.
+- Validate newly supported mechanics and compatibility with existing spell and creature behavior.
+- Preserve species, class, advanced-equipment, supplementary, or missing-content dependencies that remain unavailable.
+
+### Workflow and remaining dependencies
+
+Apply all six normalization phases to the affected spell interpretations. Phase 1 identifies the affected set and needed modeling refinements; Phase 2 reviews contract compatibility and obtains approval before representative enrichment. Representative conversion, validation, expansion to the remaining affected entries, and integration retain their separate approval checkpoints.
+
+Every Step 4 deferral must be accounted for as complete, still deferred, unsupported, or ambiguous. If species mechanics still depend on Step 8, record that dependency and a future approval checkpoint for enrichment once available. Apply the same rule to other later dependencies. A deferred reference is not a claim of executable mechanics, and this step does not authorize work in a later domain.
+
+### Completion criteria
+
+- Deferred spells have been reviewed against approved creature models and original source evidence.
+- Supported creature-dependent mechanics are enriched in existing spell entities and validated.
+- Stable spell identities and prior approved interpretations are preserved, with no duplicate entities.
+- All original deferrals have a reviewed disposition; remaining dependencies and revisit checkpoints are documented.
+- Approved enrichment is integrated and verified, with its execution coverage and limitations reported.
+
+---
+
+## Step 7 — Classes and Optional Features
+
+### Objective
+
+Normalize classes, subclasses, features, progression, and optional-feature pools together while preserving their distinct domain identities.
 
 ### Source files
 
 - `/classes/**.json`
+- `optionalfeatures.json`
 
 ### Focus
 
@@ -673,6 +837,8 @@ Normalize classes, subclasses, progression, and character capabilities.
 - Spellcasting progression.
 - Resource pools and recovery.
 - Feature choices and optional capabilities.
+- Optional-feature pools, feature types, eligibility, prerequisites, and selection progression.
+- Optional-feature relationships to classes, subclasses, feats, and other features.
 - Scaling mechanics.
 - Dependencies between features.
 - Conditional and replacement features.
@@ -680,21 +846,23 @@ Normalize classes, subclasses, progression, and character capabilities.
 
 ### Submodel analysis
 
-Evaluate class progression, feature types, resource mechanics, and subclass relationships.
+Evaluate class progression, feature types, optional-feature pools, resource mechanics, and subclass relationships. Review contextual identity qualification for repeated feature names, levels, and class/subclass source combinations.
 
 Prefer reusable feature and progression components over large class-specific structures.
 
+Preserve references to feats and character-building domains normalized in Step 8. Treat spell selectors as selection requirements; do not infer complete class spell membership from page/filter labels. Document missing psionic talent/discipline catalogs, general class spell membership, or other required content as unsupported where applicable.
+
 ### Completion criteria
 
-- Class, subclass, and progression contracts are approved.
-- Representative progression structures are validated.
+- Class, subclass, feature, progression, and optional-feature contracts are approved.
+- Representative progression, eligibility, and optional-feature selection structures are validated.
 - All source entries are accounted for.
 - Semantic coverage and unsupported mechanics are documented.
 - Approved datasets are integrated and verified.
 
 ---
 
-## Step 6 — Character building
+## Step 8 — Character Building
 
 ### Objective
 
@@ -705,12 +873,12 @@ Normalize character creation and customization data.
 - `races.json`
 - `feats.json`
 - `backgrounds.json`
-- `optionalfeatures.json`
 - `names.json`
+- Reuse approved optional features from Step 7 through references.
 
 ### Focus
 
-- Species and racial traits.
+- Species, subraces, parent relationships, inherited traits, and source variants.
 - Character backgrounds.
 - Feats and prerequisites.
 - Optional and selectable features.
@@ -723,7 +891,9 @@ Normalize character creation and customization data.
 
 ### Submodel analysis
 
-Evaluate whether traits, feats, backgrounds, and optional features can share reusable mechanics without losing their distinct domain identities.
+Evaluate whether traits, feats, and backgrounds can share reusable mechanics with the approved optional features from Step 7 without losing their distinct domain identities. Preserve contextual subrace identity and parent traceability; do not duplicate normalized optional-feature pools.
+
+Identify any spell interpretations still deferred for species mechanics. Record which approved species entities enable later enrichment; completing those spell changes requires a separately authorized milestone following the six-phase workflow.
 
 ### Completion criteria
 
@@ -735,11 +905,11 @@ Evaluate whether traits, feats, backgrounds, and optional features can share reu
 
 ---
 
-## Step 7 — World building
+## Step 9 — World Building
 
 ### Objective
 
-Normalize equipment, rewards, encounters, objects, vehicles, hazards, and other world-related game entities.
+Normalize all remaining original world-building content, including advanced equipment, magical variants, rewards, encounters, objects, vehicles, and hazards. Reuse and enrich equipment foundation identities established in Step 3.
 
 ### Source files
 
@@ -755,6 +925,14 @@ Normalize equipment, rewards, encounters, objects, vehicles, hazards, and other 
 - `objects.json`
 - `vehicles.json`
 - `trapshazards.json`
+
+Preserve all these original source assignments. For `items.json` and `items-base.json`, account for the content already normalized in Step 3 and all remaining content. Do not duplicate foundation entities or omit ancillary arrays when splitting the work.
+
+### Internal order
+
+Determine internal domain and batch order during the relevant Phase 1 analysis, using approved dependency evidence and the actual scope of each world domain. Bring the proposed order and boundaries for review before conversion; this roadmap does not prescribe a fixed order among the remaining world sources.
+
+Evaluate dependencies such as advanced items and variants on base equipment, loot results on items, encounters on creatures/vehicles, and rewards on facilities. Preserve later references to Step Z facilities without automatically moving bastions into this step or requiring immediate execution of their mechanics.
 
 ### Focus
 
@@ -781,16 +959,23 @@ Prefer reusable mechanics and references where appropriate.
 - Relevant world-building contracts are approved.
 - Representative structures and outliers are validated.
 - All source entries are accounted for.
+- Foundational and advanced equipment coverage is reconciled across Steps 3 and 9 without duplicate identities or unassigned content.
 - Semantic coverage and unsupported mechanics are documented.
 - Approved datasets are integrated and verified.
 
 ---
 
-## Step Z — Bonus data
+## Step Z — Bonus / Deferred Data
 
 ### Objective
 
-Normalize optional, auxiliary, or supplementary data that does not justify inclusion in the main normalization sequence.
+Normalize bastions, homecrafts, supplementary data, and explicitly deferred source domains within approved scopes, preserving their relationships with the main sequence.
+
+### Source files
+
+- `bastions.json` — facilities and their mechanics.
+- `homecrafts.json` — crochet patterns and relevant source relationships.
+- Supplementary or explicitly deferred source domains identified and accounted for during earlier analyses.
 
 ### Scope
 
@@ -798,12 +983,19 @@ Determine the final scope based on Step 0 findings and discoveries made during e
 
 Avoid duplicating domains already normalized elsewhere.
 
+Account for each unlisted source explicitly; do not automatically exclude it or assign it to Z without review. Preserve facility/reward, item, creature, spell, and rule references. Evaluate supplementary submodels through the same Phase 1 alternatives and six-phase approval workflow.
+
+Do not assume missing publication content or absent catalogs are available for normalization. Record affected interpretations as unsupported where applicable. Any proposal to obtain additional content or change an approved domain's coverage requires separate approval; publication content and stories remain out of scope.
+
+When a later domain makes an earlier deferred mechanic supportable, identify the existing normalized entities and the incremental enrichment needed. Schedule that work through an explicit approval checkpoint, preserving identities and prior approved interpretations.
+
 ### Completion criteria
 
 - Auxiliary datasets are accounted for.
 - Approved contracts are implemented where appropriate.
 - Normalized data is validated and integrated.
 - Remaining exclusions and limitations are documented.
+- Earlier deferred dependencies affected by this step have reviewed dispositions and explicit enrichment checkpoints where required.
 
 ---
 
@@ -839,7 +1031,8 @@ The roadmap is complete when:
 - Canonical JSON Schema contracts are established.
 - Source entries are accounted for through normalized entities or explicit exclusions.
 - Semantic mechanics coverage is documented.
-- Unsupported and ambiguous constructs are visible and traceable.
+- Complete, deferred, unsupported, and ambiguous interpretations are visible and traceable.
+- Deferred interpretations have reviewed dispositions and explicit revisit checkpoints; remaining execution limitations are documented.
 - Normalized datasets pass applicable schema and integrity validation.
 - Approved data is integrated into the backend.
 - Runtime services no longer require unnecessary source-specific interpretation.

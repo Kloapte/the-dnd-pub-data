@@ -161,6 +161,19 @@ The objective is to interpret descriptive game rules and convert them into struc
 - Report changed interpretations, unresolved differences, and compatibility concerns.
 - Treat source removal separately from deletion of normalized entities. Report the impact before removing previously approved data.
 
+### Incomplete normalization and reference tracking
+
+- Keep canonical normalized JSON free of implementation, normalization, and review status metadata.
+- Do not introduce fields such as `implementationStatus`, `normalizationStatus`, `reviewStatus`, `isComplete`, `needsReview`, or similar workflow indicators into canonical domain models.
+- Preserve valid source-derived references even when their targets have not yet been normalized or integrated.
+- Document incomplete interpretations, unresolved or missing references, deferred dependencies, unsupported mechanics, and missing source content under `/doc`.
+- Maintain a discoverable overview of incomplete artifacts, including their canonical identifiers, affected properties or mechanics, reasons for incompleteness, dependencies, and required follow-up work.
+- Distinguish deferred, unsupported, and ambiguous cases in documentation rather than encoding those workflow states in normalized structures.
+- Update the documentation when an incomplete artifact is resolved, including removing obsolete limitations.
+- Use validation reports under `/reports` for generated findings and verification results. Keep persistent, actionable limitations documented under `/doc`.
+- Do not invent placeholder mechanics or reference targets merely to make normalized artifacts appear complete.
+- Provenance and schema versioning may be maintained in separate manifests, but implementation and review progress must remain outside canonical domain JSON.
+
 ## Normalization workflow
 
 Each roadmap domain follows six phases. Every phase is a separate milestone requiring approval before proceeding to the next.
