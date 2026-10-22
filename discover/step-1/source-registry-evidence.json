@@ -1,0 +1,4632 @@
+{
+    "methodVersion": 1,
+    "observedAt": "2026-10-22",
+    "gitRevision": "86023e93dfb7422e1531c0a5dc1ecff526420df2",
+    "sourceCorpusSha256": "df60cc4ad8599701aff178bed2826fb80d2d2cb1e862d67938d1873ec793b8c1",
+    "inspectedFiles": 174,
+    "analysisFiles": [
+        {
+            "file": "sources/registry.json",
+            "bytes": 31089,
+            "sha256": "f54414851b9470158ebabaf1c5c847cce988d41aaeb3f573dec9f32b85594955",
+            "records": 181
+        },
+        {
+            "file": "books.json",
+            "bytes": 307918,
+            "sha256": "8d216dd1aa9e948546d3cd6bc1d92a32438049c8e3c0d250619c7f7e1937129c",
+            "records": 66
+        },
+        {
+            "file": "adventures.json",
+            "bytes": 795310,
+            "sha256": "cba46dc96d2b74fdc5d30cbea5f16f1867cbc89f64a8245c1e200794603fa6b1",
+            "records": 101
+        }
+    ],
+    "metadataFields": {
+        "registry": {
+            "frequencies": {
+                "aliases": 181,
+                "code": 181
+            },
+            "topLevelTypes": {
+                "aliases": {
+                    "array": 181
+                },
+                "code": {
+                    "string": 181
+                }
+            }
+        },
+        "books": {
+            "frequencies": {
+                "alias": 4,
+                "author": 66,
+                "coverCredit": 3,
+                "group": 66,
+                "id": 66,
+                "name": 66,
+                "parentSource": 4,
+                "published": 66,
+                "revised": 2,
+                "source": 66
+            },
+            "topLevelTypes": {
+                "alias": {
+                    "array": 4
+                },
+                "author": {
+                    "string": 66
+                },
+                "coverCredit": {
+                    "string": 3
+                },
+                "group": {
+                    "string": 66
+                },
+                "id": {
+                    "string": 66
+                },
+                "name": {
+                    "string": 66
+                },
+                "parentSource": {
+                    "string": 4
+                },
+                "published": {
+                    "string": 66
+                },
+                "revised": {
+                    "string": 2
+                },
+                "source": {
+                    "string": 66
+                }
+            }
+        },
+        "adventures": {
+            "frequencies": {
+                "alias": 2,
+                "author": 100,
+                "group": 101,
+                "id": 101,
+                "name": 101,
+                "parentSource": 50,
+                "published": 101,
+                "publishedOrder": 26,
+                "source": 101
+            },
+            "topLevelTypes": {
+                "alias": {
+                    "array": 2
+                },
+                "author": {
+                    "string": 100
+                },
+                "group": {
+                    "string": 101
+                },
+                "id": {
+                    "string": 101
+                },
+                "name": {
+                    "string": 101
+                },
+                "parentSource": {
+                    "string": 50
+                },
+                "published": {
+                    "string": 101
+                },
+                "publishedOrder": {
+                    "number": 26
+                },
+                "source": {
+                    "string": 101
+                }
+            }
+        }
+    },
+    "registry": {
+        "codeCount": 181,
+        "uniqueCodesCaseInsensitive": 181,
+        "duplicateCodes": {},
+        "aliasesTotal": 6,
+        "aliasesPerEntry": {
+            "0": 175,
+            "1": 6
+        },
+        "uniqueAliasesCaseInsensitive": 6,
+        "duplicateAliases": {},
+        "aliasCodeConflicts": [],
+        "aliasShapeIssues": [],
+        "emptyAliasEntries": 175,
+        "caseVariants": {}
+    },
+    "books": {
+        "count": 66,
+        "duplicateIds": {},
+        "duplicateSources": {},
+        "duplicateDisplayNames": {},
+        "idsDifferentFromSources": [
+            {
+                "kind": "book",
+                "index": 5,
+                "id": "PS-Z",
+                "source": "PSZ"
+            },
+            {
+                "kind": "book",
+                "index": 6,
+                "id": "PS-I",
+                "source": "PSI"
+            },
+            {
+                "kind": "book",
+                "index": 9,
+                "id": "PS-K",
+                "source": "PSK"
+            },
+            {
+                "kind": "book",
+                "index": 10,
+                "id": "PS-A",
+                "source": "PSA"
+            },
+            {
+                "kind": "book",
+                "index": 13,
+                "id": "PS-X",
+                "source": "PSX"
+            },
+            {
+                "kind": "book",
+                "index": 15,
+                "id": "PS-D",
+                "source": "PSD"
+            }
+        ],
+        "aliasOccurrences": [
+            {
+                "kind": "book",
+                "index": 38,
+                "id": "AAG",
+                "source": "AAG",
+                "alias": "Spelljammer: Astral Adventurer's Guide",
+                "registryCodeMatches": [],
+                "registryAliasMatches": []
+            },
+            {
+                "kind": "book",
+                "index": 39,
+                "id": "BAM",
+                "source": "BAM",
+                "alias": "Spelljammer: Boo's Astral Menagerie",
+                "registryCodeMatches": [],
+                "registryAliasMatches": []
+            },
+            {
+                "kind": "book",
+                "index": 43,
+                "id": "MPP",
+                "source": "MPP",
+                "alias": "Planescape: Adventures in the Multiverse",
+                "registryCodeMatches": [],
+                "registryAliasMatches": []
+            },
+            {
+                "kind": "book",
+                "index": 44,
+                "id": "SatO",
+                "source": "SatO",
+                "alias": "Planescape: Adventures in the Multiverse",
+                "registryCodeMatches": [],
+                "registryAliasMatches": []
+            }
+        ],
+        "parentEdges": [
+            {
+                "kind": "book",
+                "index": 38,
+                "id": "AAG",
+                "source": "AAG",
+                "parentSource": "SAiS",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "book",
+                "index": 39,
+                "id": "BAM",
+                "source": "BAM",
+                "parentSource": "SAiS",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "book",
+                "index": 43,
+                "id": "MPP",
+                "source": "MPP",
+                "parentSource": "PAitM",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "book",
+                "index": 44,
+                "id": "SatO",
+                "source": "SatO",
+                "parentSource": "PAitM",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            }
+        ],
+        "publishedDateFormats": {
+            "YYYY-MM-DD": 66
+        },
+        "groupCounts": {
+            "core": 6,
+            "screen": 6,
+            "setting": 15,
+            "setting-alt": 8,
+            "organized-play": 1,
+            "supplement": 11,
+            "supplement-alt": 12,
+            "other": 2,
+            "recipe": 4,
+            "homecraft": 1
+        },
+        "authorMissing": []
+    },
+    "adventures": {
+        "count": 101,
+        "duplicateIds": {},
+        "duplicateSources": {},
+        "duplicateDisplayNames": {},
+        "idsDifferentFromSources": [
+            {
+                "kind": "adventure",
+                "index": 39,
+                "id": "MOT-NSS",
+                "source": "MOT"
+            },
+            {
+                "kind": "adventure",
+                "index": 96,
+                "id": "FRAiF-TLLoL",
+                "source": "FRAiF"
+            }
+        ],
+        "aliasOccurrences": [
+            {
+                "kind": "adventure",
+                "index": 65,
+                "id": "LoX",
+                "source": "LoX",
+                "alias": "Spelljammer: Light of Xaryxis",
+                "registryCodeMatches": [],
+                "registryAliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 71,
+                "id": "ToFW",
+                "source": "ToFW",
+                "alias": "Planescape: Adventures in the Multiverse",
+                "registryCodeMatches": [],
+                "registryAliasMatches": []
+            }
+        ],
+        "parentEdges": [
+            {
+                "kind": "adventure",
+                "index": 7,
+                "id": "TftYP-TSC",
+                "source": "TftYP-TSC",
+                "parentSource": "TftYP",
+                "codeMatches": [
+                    "TftYP"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 8,
+                "id": "TftYP-TFoF",
+                "source": "TftYP-TFoF",
+                "parentSource": "TftYP",
+                "codeMatches": [
+                    "TftYP"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 9,
+                "id": "TftYP-THSoT",
+                "source": "TftYP-THSoT",
+                "parentSource": "TftYP",
+                "codeMatches": [
+                    "TftYP"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 10,
+                "id": "TftYP-WPM",
+                "source": "TftYP-WPM",
+                "parentSource": "TftYP",
+                "codeMatches": [
+                    "TftYP"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 11,
+                "id": "TftYP-DiT",
+                "source": "TftYP-DiT",
+                "parentSource": "TftYP",
+                "codeMatches": [
+                    "TftYP"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 12,
+                "id": "TftYP-AtG",
+                "source": "TftYP-AtG",
+                "parentSource": "TftYP",
+                "codeMatches": [
+                    "TftYP"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 13,
+                "id": "TftYP-ToH",
+                "source": "TftYP-ToH",
+                "parentSource": "TftYP",
+                "codeMatches": [
+                    "TftYP"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 21,
+                "id": "KKW",
+                "source": "KKW",
+                "parentSource": "GGR",
+                "codeMatches": [
+                    "GGR"
+                ],
+                "bookMatches": [
+                    "book:GGR"
+                ],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 25,
+                "id": "OoW",
+                "source": "OoW",
+                "parentSource": "AI",
+                "codeMatches": [
+                    "AI"
+                ],
+                "bookMatches": [
+                    "book:AI"
+                ],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 26,
+                "id": "DIP",
+                "source": "DIP",
+                "parentSource": "ESK",
+                "codeMatches": [
+                    "ESK"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 27,
+                "id": "SLW",
+                "source": "SLW",
+                "parentSource": "ESK",
+                "codeMatches": [
+                    "ESK"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 28,
+                "id": "SDW",
+                "source": "SDW",
+                "parentSource": "ESK",
+                "codeMatches": [
+                    "ESK"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 29,
+                "id": "DC",
+                "source": "DC",
+                "parentSource": "ESK",
+                "codeMatches": [
+                    "ESK"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 33,
+                "id": "EFR",
+                "source": "EFR",
+                "parentSource": "ERLW",
+                "codeMatches": [
+                    "ERLW"
+                ],
+                "bookMatches": [
+                    "book:ERLW"
+                ],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 34,
+                "id": "RMBRE",
+                "source": "RMBRE",
+                "parentSource": "RMR",
+                "codeMatches": [
+                    "RMR"
+                ],
+                "bookMatches": [
+                    "book:RMR"
+                ],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 35,
+                "id": "ToR",
+                "source": "ToR",
+                "parentSource": "EGW",
+                "codeMatches": [
+                    "EGW"
+                ],
+                "bookMatches": [
+                    "book:EGW"
+                ],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 36,
+                "id": "DD",
+                "source": "DD",
+                "parentSource": "EGW",
+                "codeMatches": [
+                    "EGW"
+                ],
+                "bookMatches": [
+                    "book:EGW"
+                ],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 37,
+                "id": "FS",
+                "source": "FS",
+                "parentSource": "EGW",
+                "codeMatches": [
+                    "EGW"
+                ],
+                "bookMatches": [
+                    "book:EGW"
+                ],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 38,
+                "id": "US",
+                "source": "US",
+                "parentSource": "EGW",
+                "codeMatches": [
+                    "EGW"
+                ],
+                "bookMatches": [
+                    "book:EGW"
+                ],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 39,
+                "id": "MOT-NSS",
+                "source": "MOT",
+                "parentSource": "MOT",
+                "codeMatches": [
+                    "MOT"
+                ],
+                "bookMatches": [
+                    "book:MOT"
+                ],
+                "adventureMatches": [
+                    "adventure:MOT-NSS"
+                ],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 42,
+                "id": "HoL",
+                "source": "HoL",
+                "parentSource": "VRGR",
+                "codeMatches": [
+                    "VRGR"
+                ],
+                "bookMatches": [
+                    "book:VRGR"
+                ],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 44,
+                "id": "AitFR-ISF",
+                "source": "AitFR-ISF",
+                "parentSource": "AitFR",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 45,
+                "id": "AitFR-THP",
+                "source": "AitFR-THP",
+                "parentSource": "AitFR",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 46,
+                "id": "AitFR-AVT",
+                "source": "AitFR-AVT",
+                "parentSource": "AitFR",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 47,
+                "id": "AitFR-DN",
+                "source": "AitFR-DN",
+                "parentSource": "AitFR",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 48,
+                "id": "AitFR-FCD",
+                "source": "AitFR-FCD",
+                "parentSource": "AitFR",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 49,
+                "id": "NRH-TCMC",
+                "source": "NRH-TCMC",
+                "parentSource": "NRH",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 50,
+                "id": "NRH-AVitW",
+                "source": "NRH-AVitW",
+                "parentSource": "NRH",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 51,
+                "id": "NRH-ASS",
+                "source": "NRH-ASS",
+                "parentSource": "NRH",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 52,
+                "id": "NRH-CoI",
+                "source": "NRH-CoI",
+                "parentSource": "NRH",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 53,
+                "id": "NRH-TLT",
+                "source": "NRH-TLT",
+                "parentSource": "NRH",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 54,
+                "id": "NRH-AWoL",
+                "source": "NRH-AWoL",
+                "parentSource": "NRH",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 55,
+                "id": "NRH-AT",
+                "source": "NRH-AT",
+                "parentSource": "NRH",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 57,
+                "id": "SCC-CK",
+                "source": "SCC-CK",
+                "parentSource": "SCC",
+                "codeMatches": [
+                    "SCC"
+                ],
+                "bookMatches": [
+                    "book:SCC"
+                ],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 58,
+                "id": "SCC-HfMT",
+                "source": "SCC-HfMT",
+                "parentSource": "SCC",
+                "codeMatches": [
+                    "SCC"
+                ],
+                "bookMatches": [
+                    "book:SCC"
+                ],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 59,
+                "id": "SCC-TMM",
+                "source": "SCC-TMM",
+                "parentSource": "SCC",
+                "codeMatches": [
+                    "SCC"
+                ],
+                "bookMatches": [
+                    "book:SCC"
+                ],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 60,
+                "id": "SCC-ARiR",
+                "source": "SCC-ARiR",
+                "parentSource": "SCC",
+                "codeMatches": [
+                    "SCC"
+                ],
+                "bookMatches": [
+                    "book:SCC"
+                ],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 65,
+                "id": "LoX",
+                "source": "LoX",
+                "parentSource": "SAiS",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 71,
+                "id": "ToFW",
+                "source": "ToFW",
+                "parentSource": "PAitM",
+                "codeMatches": [],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 84,
+                "id": "DrDe-DaS",
+                "source": "DrDe-DaS",
+                "parentSource": "DrDe",
+                "codeMatches": [
+                    "DrDe"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 85,
+                "id": "DrDe-BD",
+                "source": "DrDe-BD",
+                "parentSource": "DrDe",
+                "codeMatches": [
+                    "DrDe"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 86,
+                "id": "DrDe-TWoO",
+                "source": "DrDe-TWoO",
+                "parentSource": "DrDe",
+                "codeMatches": [
+                    "DrDe"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 87,
+                "id": "DrDe-FWtVC",
+                "source": "DrDe-FWtVC",
+                "parentSource": "DrDe",
+                "codeMatches": [
+                    "DrDe"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 88,
+                "id": "DrDe-TDoN",
+                "source": "DrDe-TDoN",
+                "parentSource": "DrDe",
+                "codeMatches": [
+                    "DrDe"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 89,
+                "id": "DrDe-TFV",
+                "source": "DrDe-TFV",
+                "parentSource": "DrDe",
+                "codeMatches": [
+                    "DrDe"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 90,
+                "id": "DrDe-BtS",
+                "source": "DrDe-BtS",
+                "parentSource": "DrDe",
+                "codeMatches": [
+                    "DrDe"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 91,
+                "id": "DrDe-SD",
+                "source": "DrDe-SD",
+                "parentSource": "DrDe",
+                "codeMatches": [
+                    "DrDe"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 92,
+                "id": "DrDe-ACfaS",
+                "source": "DrDe-ACfaS",
+                "parentSource": "DrDe",
+                "codeMatches": [
+                    "DrDe"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 93,
+                "id": "DrDe-DotSC",
+                "source": "DrDe-DotSC",
+                "parentSource": "DrDe",
+                "codeMatches": [
+                    "DrDe"
+                ],
+                "bookMatches": [],
+                "adventureMatches": [],
+                "aliasMatches": []
+            },
+            {
+                "kind": "adventure",
+                "index": 96,
+                "id": "FRAiF-TLLoL",
+                "source": "FRAiF",
+                "parentSource": "FRAiF",
+                "codeMatches": [
+                    "FRAiF"
+                ],
+                "bookMatches": [
+                    "book:FRAiF"
+                ],
+                "adventureMatches": [
+                    "adventure:FRAiF-TLLoL"
+                ],
+                "aliasMatches": []
+            }
+        ],
+        "parentRelationSummary": {
+            "total": 54,
+            "registryCodeTarget": 36,
+            "unregisteredParentValue": 18,
+            "oneMetadataTarget": 13,
+            "noMetadataTarget": 39,
+            "multipleMetadataTargets": 2
+        },
+        "parentSourceValues": [
+            {
+                "parentSource": "SAiS",
+                "records": [
+                    "book:AAG",
+                    "book:BAM",
+                    "adventure:LoX"
+                ],
+                "registryCodeMatches": []
+            },
+            {
+                "parentSource": "PAitM",
+                "records": [
+                    "book:MPP",
+                    "book:SatO",
+                    "adventure:ToFW"
+                ],
+                "registryCodeMatches": []
+            },
+            {
+                "parentSource": "TftYP",
+                "records": [
+                    "adventure:TftYP-TSC",
+                    "adventure:TftYP-TFoF",
+                    "adventure:TftYP-THSoT",
+                    "adventure:TftYP-WPM",
+                    "adventure:TftYP-DiT",
+                    "adventure:TftYP-AtG",
+                    "adventure:TftYP-ToH"
+                ],
+                "registryCodeMatches": [
+                    "TftYP"
+                ]
+            },
+            {
+                "parentSource": "GGR",
+                "records": [
+                    "adventure:KKW"
+                ],
+                "registryCodeMatches": [
+                    "GGR"
+                ]
+            },
+            {
+                "parentSource": "AI",
+                "records": [
+                    "adventure:OoW"
+                ],
+                "registryCodeMatches": [
+                    "AI"
+                ]
+            },
+            {
+                "parentSource": "ESK",
+                "records": [
+                    "adventure:DIP",
+                    "adventure:SLW",
+                    "adventure:SDW",
+                    "adventure:DC"
+                ],
+                "registryCodeMatches": [
+                    "ESK"
+                ]
+            },
+            {
+                "parentSource": "ERLW",
+                "records": [
+                    "adventure:EFR"
+                ],
+                "registryCodeMatches": [
+                    "ERLW"
+                ]
+            },
+            {
+                "parentSource": "RMR",
+                "records": [
+                    "adventure:RMBRE"
+                ],
+                "registryCodeMatches": [
+                    "RMR"
+                ]
+            },
+            {
+                "parentSource": "EGW",
+                "records": [
+                    "adventure:ToR",
+                    "adventure:DD",
+                    "adventure:FS",
+                    "adventure:US"
+                ],
+                "registryCodeMatches": [
+                    "EGW"
+                ]
+            },
+            {
+                "parentSource": "MOT",
+                "records": [
+                    "adventure:MOT-NSS"
+                ],
+                "registryCodeMatches": [
+                    "MOT"
+                ]
+            },
+            {
+                "parentSource": "VRGR",
+                "records": [
+                    "adventure:HoL"
+                ],
+                "registryCodeMatches": [
+                    "VRGR"
+                ]
+            },
+            {
+                "parentSource": "AitFR",
+                "records": [
+                    "adventure:AitFR-ISF",
+                    "adventure:AitFR-THP",
+                    "adventure:AitFR-AVT",
+                    "adventure:AitFR-DN",
+                    "adventure:AitFR-FCD"
+                ],
+                "registryCodeMatches": []
+            },
+            {
+                "parentSource": "NRH",
+                "records": [
+                    "adventure:NRH-TCMC",
+                    "adventure:NRH-AVitW",
+                    "adventure:NRH-ASS",
+                    "adventure:NRH-CoI",
+                    "adventure:NRH-TLT",
+                    "adventure:NRH-AWoL",
+                    "adventure:NRH-AT"
+                ],
+                "registryCodeMatches": []
+            },
+            {
+                "parentSource": "SCC",
+                "records": [
+                    "adventure:SCC-CK",
+                    "adventure:SCC-HfMT",
+                    "adventure:SCC-TMM",
+                    "adventure:SCC-ARiR"
+                ],
+                "registryCodeMatches": [
+                    "SCC"
+                ]
+            },
+            {
+                "parentSource": "DrDe",
+                "records": [
+                    "adventure:DrDe-DaS",
+                    "adventure:DrDe-BD",
+                    "adventure:DrDe-TWoO",
+                    "adventure:DrDe-FWtVC",
+                    "adventure:DrDe-TDoN",
+                    "adventure:DrDe-TFV",
+                    "adventure:DrDe-BtS",
+                    "adventure:DrDe-SD",
+                    "adventure:DrDe-ACfaS",
+                    "adventure:DrDe-DotSC"
+                ],
+                "registryCodeMatches": [
+                    "DrDe"
+                ]
+            },
+            {
+                "parentSource": "FRAiF",
+                "records": [
+                    "adventure:FRAiF-TLLoL"
+                ],
+                "registryCodeMatches": [
+                    "FRAiF"
+                ]
+            }
+        ],
+        "publishedDateFormats": {
+            "YYYY-MM-DD": 101
+        },
+        "publishedOrderCounts": {
+            "present": 26,
+            "absent": 75,
+            "duplicateWithinParent": {}
+        },
+        "levelShapes": {
+            "end,start": 101
+        },
+        "groupCounts": {
+            "supplement": 59,
+            "supplement-alt": 42
+        },
+        "authorMissing": [
+            {
+                "index": 77,
+                "id": "VNotEE",
+                "source": "VNotEE"
+            }
+        ]
+    },
+    "sourceCoverage": {
+        "registryCodes": 181,
+        "withBookMetadata": 66,
+        "withAdventureMetadata": 101,
+        "withBookOrAdventureMetadata": 165,
+        "matchingBookOrAdventureId": 159,
+        "withSourceOrPublicationId": 165,
+        "withoutEitherSourceOrPublicationId": 16,
+        "distinctRegistryCodesUsedElsewhere": 141,
+        "unregisteredSourceFields": [
+            {
+                "field": "source",
+                "value": "WGE",
+                "location": "monsters/bestiary-erlw.json#/monster/3/altArt/0/source"
+            }
+        ],
+        "sourceCaseDifferences": {},
+        "sourceFieldFrequency": {
+            "source": 18354
+        },
+        "usageByRegistryCode": [
+            {
+                "code": "AAG",
+                "registryIndex": 0,
+                "books": [
+                    "AAG"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "AAG"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 51,
+                "corpusDomains": {
+                    "backgrounds.json": 2,
+                    "items-base.json": 1,
+                    "items.json": 20,
+                    "races.json": 6,
+                    "spells": 2,
+                    "variantrules.json": 4,
+                    "vehicles.json": 16
+                },
+                "aliases": []
+            },
+            {
+                "code": "AATM",
+                "registryIndex": 1,
+                "books": [
+                    "AATM"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "AATM"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 4,
+                "corpusDomains": {
+                    "encounters.json": 1,
+                    "monsters": 3
+                },
+                "aliases": []
+            },
+            {
+                "code": "ABH",
+                "registryIndex": 2,
+                "books": [
+                    "ABH"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "ABH"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 27,
+                "corpusDomains": {
+                    "backgrounds.json": 3,
+                    "feats.json": 16,
+                    "monsters": 7,
+                    "races.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "AI",
+                "registryIndex": 3,
+                "books": [
+                    "AI"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "AI"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 75,
+                "corpusDomains": {
+                    "backgrounds.json": 5,
+                    "items.json": 23,
+                    "languages.json": 1,
+                    "magicvariants.json": 2,
+                    "monsters": 24,
+                    "races.json": 1,
+                    "spells": 7,
+                    "variantrules.json": 10,
+                    "vehicles.json": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "AitFR-AVT",
+                "registryIndex": 4,
+                "books": [],
+                "adventures": [
+                    "AitFR-AVT"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "AitFR-AVT"
+                ],
+                "corpusReferences": 5,
+                "corpusDomains": {
+                    "items.json": 3,
+                    "spells": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "AitFR-DN",
+                "registryIndex": 5,
+                "books": [],
+                "adventures": [
+                    "AitFR-DN"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "AitFR-DN"
+                ],
+                "corpusReferences": 9,
+                "corpusDomains": {
+                    "items.json": 3,
+                    "monsters": 6
+                },
+                "aliases": []
+            },
+            {
+                "code": "AitFR-FCD",
+                "registryIndex": 6,
+                "books": [],
+                "adventures": [
+                    "AitFR-FCD"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "AitFR-FCD"
+                ],
+                "corpusReferences": 6,
+                "corpusDomains": {
+                    "items.json": 2,
+                    "monsters": 2,
+                    "spells": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "AitFR-ISF",
+                "registryIndex": 7,
+                "books": [],
+                "adventures": [
+                    "AitFR-ISF"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "AitFR-ISF"
+                ],
+                "corpusReferences": 2,
+                "corpusDomains": {
+                    "monsters": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "AitFR-THP",
+                "registryIndex": 8,
+                "books": [],
+                "adventures": [
+                    "AitFR-THP"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "AitFR-THP"
+                ],
+                "corpusReferences": 4,
+                "corpusDomains": {
+                    "items.json": 1,
+                    "monsters": 3
+                },
+                "aliases": []
+            },
+            {
+                "code": "AL",
+                "registryIndex": 9,
+                "books": [
+                    "AL"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "AL"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "AU",
+                "registryIndex": 10,
+                "books": [
+                    "AU"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "AU"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 306,
+                "corpusDomains": {
+                    "backgrounds.json": 10,
+                    "bastions.json": 9,
+                    "classes": 69,
+                    "feats.json": 29,
+                    "items-base.json": 1,
+                    "items.json": 97,
+                    "magicvariants.json": 14,
+                    "monsters": 35,
+                    "optionalfeatures.json": 8,
+                    "rewards.json": 1,
+                    "spells": 33
+                },
+                "aliases": []
+            },
+            {
+                "code": "AUD",
+                "registryIndex": 11,
+                "books": [],
+                "adventures": [
+                    "AUD"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "AUD"
+                ],
+                "corpusReferences": 22,
+                "corpusDomains": {
+                    "items.json": 9,
+                    "magicvariants.json": 5,
+                    "monsters": 8
+                },
+                "aliases": []
+            },
+            {
+                "code": "AWM",
+                "registryIndex": 12,
+                "books": [
+                    "AWM"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "AWM"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 12,
+                "corpusDomains": {
+                    "monsters": 11,
+                    "races.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "AZfyT",
+                "registryIndex": 13,
+                "books": [],
+                "adventures": [
+                    "AZfyT"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "AZfyT"
+                ],
+                "corpusReferences": 2,
+                "corpusDomains": {
+                    "items.json": 1,
+                    "trapshazards.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "BAM",
+                "registryIndex": 14,
+                "books": [
+                    "BAM"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "BAM"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 95,
+                "corpusDomains": {
+                    "encounters.json": 3,
+                    "items.json": 1,
+                    "monsters": 89,
+                    "rewards.json": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "BGDIA",
+                "registryIndex": 15,
+                "books": [],
+                "adventures": [
+                    "BGDIA"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "BGDIA"
+                ],
+                "corpusReferences": 106,
+                "corpusDomains": {
+                    "backgrounds.json": 14,
+                    "items.json": 14,
+                    "magicvariants.json": 1,
+                    "monsters": 56,
+                    "rewards.json": 7,
+                    "trapshazards.json": 1,
+                    "vehicles.json": 13
+                },
+                "aliases": []
+            },
+            {
+                "code": "BGG",
+                "registryIndex": 16,
+                "books": [
+                    "BGG"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "BGG"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 169,
+                "corpusDomains": {
+                    "backgrounds.json": 2,
+                    "classes": 10,
+                    "encounters.json": 18,
+                    "feats.json": 14,
+                    "items.json": 32,
+                    "magicvariants.json": 3,
+                    "monsters": 90
+                },
+                "aliases": []
+            },
+            {
+                "code": "BMT",
+                "registryIndex": 17,
+                "books": [
+                    "BMT"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "BMT"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 185,
+                "corpusDomains": {
+                    "backgrounds.json": 2,
+                    "feats.json": 1,
+                    "items.json": 75,
+                    "magicvariants.json": 18,
+                    "monsters": 56,
+                    "objects.json": 1,
+                    "rewards.json": 26,
+                    "spells": 3,
+                    "trapshazards.json": 3
+                },
+                "aliases": []
+            },
+            {
+                "code": "BQDD",
+                "registryIndex": 18,
+                "books": [],
+                "adventures": [
+                    "BQDD"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "BQDD"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "BQGT",
+                "registryIndex": 19,
+                "books": [],
+                "adventures": [
+                    "BQGT"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "BQGT"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "CaBoMP",
+                "registryIndex": 20,
+                "books": [
+                    "CaBoMP"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "CaBoMP"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 20,
+                "corpusDomains": {
+                    "homecrafts.json": 20
+                },
+                "aliases": []
+            },
+            {
+                "code": "CM",
+                "registryIndex": 21,
+                "books": [],
+                "adventures": [
+                    "CM"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "CM"
+                ],
+                "corpusReferences": 67,
+                "corpusDomains": {
+                    "conditionsdiseases.json": 1,
+                    "items.json": 12,
+                    "monsters": 51,
+                    "rewards.json": 3
+                },
+                "aliases": []
+            },
+            {
+                "code": "CoA",
+                "registryIndex": 22,
+                "books": [],
+                "adventures": [
+                    "CoA"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "CoA"
+                ],
+                "corpusReferences": 128,
+                "corpusDomains": {
+                    "items.json": 26,
+                    "magicvariants.json": 4,
+                    "monsters": 98
+                },
+                "aliases": []
+            },
+            {
+                "code": "CoS",
+                "registryIndex": 23,
+                "books": [],
+                "adventures": [
+                    "CoS"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "CoS"
+                ],
+                "corpusReferences": 157,
+                "corpusDomains": {
+                    "backgrounds.json": 1,
+                    "items.json": 15,
+                    "monsters": 121,
+                    "rewards.json": 17,
+                    "variantrules.json": 3
+                },
+                "aliases": []
+            },
+            {
+                "code": "CRCotN",
+                "registryIndex": 24,
+                "books": [],
+                "adventures": [
+                    "CRCotN"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "CRCotN"
+                ],
+                "corpusReferences": 118,
+                "corpusDomains": {
+                    "items.json": 18,
+                    "magicvariants.json": 2,
+                    "monsters": 89,
+                    "rewards.json": 9
+                },
+                "aliases": []
+            },
+            {
+                "code": "DC",
+                "registryIndex": 25,
+                "books": [],
+                "adventures": [
+                    "DC"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DC"
+                ],
+                "corpusReferences": 7,
+                "corpusDomains": {
+                    "items.json": 2,
+                    "monsters": 5
+                },
+                "aliases": []
+            },
+            {
+                "code": "DD",
+                "registryIndex": 26,
+                "books": [],
+                "adventures": [
+                    "DD"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DD"
+                ],
+                "corpusReferences": 1,
+                "corpusDomains": {
+                    "vehicles.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "DIP",
+                "registryIndex": 27,
+                "books": [],
+                "adventures": [
+                    "DIP"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DIP"
+                ],
+                "corpusReferences": 11,
+                "corpusDomains": {
+                    "monsters": 10,
+                    "rewards.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "DitLCoT",
+                "registryIndex": 28,
+                "books": [],
+                "adventures": [
+                    "DitLCoT"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DitLCoT"
+                ],
+                "corpusReferences": 6,
+                "corpusDomains": {
+                    "items.json": 3,
+                    "magicvariants.json": 1,
+                    "monsters": 1,
+                    "vehicles.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "DMG",
+                "registryIndex": 29,
+                "books": [
+                    "DMG"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "DMG"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 876,
+                "corpusDomains": {
+                    "actions.json": 8,
+                    "classes": 27,
+                    "conditionsdiseases.json": 3,
+                    "deities.json": 20,
+                    "encounters.json": 4,
+                    "items-base.json": 35,
+                    "items.json": 531,
+                    "loot.json": 28,
+                    "magicvariants.json": 46,
+                    "monsters": 37,
+                    "objects.json": 8,
+                    "races.json": 18,
+                    "rewards.json": 40,
+                    "trapshazards.json": 24,
+                    "variantrules.json": 46,
+                    "vehicles.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "DMTCRG",
+                "registryIndex": 30,
+                "books": [
+                    "DMTCRG"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "DMTCRG"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "DoD",
+                "registryIndex": 31,
+                "books": [
+                    "DoD"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "DoD"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 1,
+                "corpusDomains": {
+                    "monsters": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "DoSI",
+                "registryIndex": 32,
+                "books": [],
+                "adventures": [
+                    "DoSI"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DoSI"
+                ],
+                "corpusReferences": 13,
+                "corpusDomains": {
+                    "monsters": 13
+                },
+                "aliases": []
+            },
+            {
+                "code": "DrDe",
+                "registryIndex": 33,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 2,
+                "corpusDomains": {
+                    "rewards.json": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "DrDe-ACfaS",
+                "registryIndex": 34,
+                "books": [],
+                "adventures": [
+                    "DrDe-ACfaS"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DrDe-ACfaS"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "DrDe-BD",
+                "registryIndex": 35,
+                "books": [],
+                "adventures": [
+                    "DrDe-BD"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DrDe-BD"
+                ],
+                "corpusReferences": 1,
+                "corpusDomains": {
+                    "monsters": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "DrDe-BtS",
+                "registryIndex": 36,
+                "books": [],
+                "adventures": [
+                    "DrDe-BtS"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DrDe-BtS"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "DrDe-DaS",
+                "registryIndex": 37,
+                "books": [],
+                "adventures": [
+                    "DrDe-DaS"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DrDe-DaS"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "DrDe-DotSC",
+                "registryIndex": 38,
+                "books": [],
+                "adventures": [
+                    "DrDe-DotSC"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DrDe-DotSC"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "DrDe-FWtVC",
+                "registryIndex": 39,
+                "books": [],
+                "adventures": [
+                    "DrDe-FWtVC"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DrDe-FWtVC"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "DrDe-SD",
+                "registryIndex": 40,
+                "books": [],
+                "adventures": [
+                    "DrDe-SD"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DrDe-SD"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "DrDe-TDoN",
+                "registryIndex": 41,
+                "books": [],
+                "adventures": [
+                    "DrDe-TDoN"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DrDe-TDoN"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "DrDe-TFV",
+                "registryIndex": 42,
+                "books": [],
+                "adventures": [
+                    "DrDe-TFV"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DrDe-TFV"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "DrDe-TWoO",
+                "registryIndex": 43,
+                "books": [],
+                "adventures": [
+                    "DrDe-TWoO"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DrDe-TWoO"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "DSotDQ",
+                "registryIndex": 44,
+                "books": [],
+                "adventures": [
+                    "DSotDQ"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "DSotDQ"
+                ],
+                "corpusReferences": 200,
+                "corpusDomains": {
+                    "backgrounds.json": 2,
+                    "classes": 13,
+                    "deities.json": 21,
+                    "feats.json": 9,
+                    "items-base.json": 1,
+                    "items.json": 5,
+                    "languages.json": 19,
+                    "magicvariants.json": 1,
+                    "monsters": 123,
+                    "objects.json": 2,
+                    "races.json": 1,
+                    "rewards.json": 3
+                },
+                "aliases": []
+            },
+            {
+                "code": "EEPC",
+                "registryIndex": 45,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 55,
+                "corpusDomains": {
+                    "feats.json": 1,
+                    "languages.json": 1,
+                    "monsters": 2,
+                    "races.json": 8,
+                    "spells": 43
+                },
+                "aliases": []
+            },
+            {
+                "code": "EFA",
+                "registryIndex": 46,
+                "books": [
+                    "EFA"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "EFA"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 192,
+                "corpusDomains": {
+                    "backgrounds.json": 17,
+                    "bastions.json": 10,
+                    "classes": 66,
+                    "encounters.json": 1,
+                    "feats.json": 28,
+                    "items.json": 6,
+                    "magicvariants.json": 3,
+                    "monsters": 27,
+                    "objects.json": 1,
+                    "optionalfeatures.json": 4,
+                    "races.json": 9,
+                    "rewards.json": 16,
+                    "spells": 1,
+                    "vehicles.json": 3
+                },
+                "aliases": []
+            },
+            {
+                "code": "EET",
+                "registryIndex": 47,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 1,
+                "corpusDomains": {
+                    "items.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "EFR",
+                "registryIndex": 48,
+                "books": [],
+                "adventures": [
+                    "EFR"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "EFR"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "EGW",
+                "registryIndex": 49,
+                "books": [
+                    "EGW"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "EGW"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 307,
+                "corpusDomains": {
+                    "backgrounds.json": 7,
+                    "classes": 34,
+                    "conditionsdiseases.json": 1,
+                    "deities.json": 32,
+                    "items-base.json": 1,
+                    "items.json": 132,
+                    "languages.json": 3,
+                    "magicvariants.json": 4,
+                    "monsters": 57,
+                    "races.json": 20,
+                    "spells": 16
+                },
+                "aliases": []
+            },
+            {
+                "code": "ERLW",
+                "registryIndex": 50,
+                "books": [
+                    "ERLW"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "ERLW"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 226,
+                "corpusDomains": {
+                    "backgrounds.json": 1,
+                    "classes": 48,
+                    "deities.json": 21,
+                    "feats.json": 2,
+                    "items-base.json": 1,
+                    "items.json": 34,
+                    "languages.json": 16,
+                    "magicvariants.json": 18,
+                    "monsters": 47,
+                    "optionalfeatures.json": 11,
+                    "races.json": 26,
+                    "spells": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "ESK",
+                "registryIndex": 51,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 6,
+                "corpusDomains": {
+                    "monsters": 5,
+                    "variantrules.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "FFotR",
+                "registryIndex": 52,
+                "books": [],
+                "adventures": [
+                    "FFotR"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "FFotR"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "FRAiF",
+                "registryIndex": 53,
+                "books": [
+                    "FRAiF"
+                ],
+                "adventures": [
+                    "FRAiF-TLLoL"
+                ],
+                "bookIds": [
+                    "FRAiF"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 86,
+                "corpusDomains": {
+                    "conditionsdiseases.json": 4,
+                    "encounters.json": 1,
+                    "items.json": 19,
+                    "monsters": 52,
+                    "trapshazards.json": 10
+                },
+                "aliases": []
+            },
+            {
+                "code": "FRHoF",
+                "registryIndex": 54,
+                "books": [
+                    "FRHoF"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "FRHoF"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 233,
+                "corpusDomains": {
+                    "backgrounds.json": 18,
+                    "bastions.json": 8,
+                    "classes": 64,
+                    "deities.json": 42,
+                    "feats.json": 34,
+                    "items-base.json": 3,
+                    "items.json": 27,
+                    "languages.json": 17,
+                    "monsters": 1,
+                    "spells": 19
+                },
+                "aliases": []
+            },
+            {
+                "code": "FS",
+                "registryIndex": 55,
+                "books": [],
+                "adventures": [
+                    "FS"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "FS"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "FTD",
+                "registryIndex": 56,
+                "books": [
+                    "FTD"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "FTD"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 358,
+                "corpusDomains": {
+                    "classes": 20,
+                    "feats.json": 3,
+                    "items.json": 37,
+                    "loot.json": 4,
+                    "magicvariants.json": 7,
+                    "monsters": 264,
+                    "races.json": 6,
+                    "rewards.json": 8,
+                    "spells": 9
+                },
+                "aliases": []
+            },
+            {
+                "code": "GGR",
+                "registryIndex": 57,
+                "books": [
+                    "GGR"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "GGR"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 189,
+                "corpusDomains": {
+                    "backgrounds.json": 10,
+                    "classes": 16,
+                    "items.json": 43,
+                    "languages.json": 18,
+                    "magicvariants.json": 1,
+                    "monsters": 81,
+                    "races.json": 8,
+                    "rewards.json": 10,
+                    "spells": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "GoS",
+                "registryIndex": 58,
+                "books": [],
+                "adventures": [
+                    "GoS"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "GoS"
+                ],
+                "corpusReferences": 111,
+                "corpusDomains": {
+                    "backgrounds.json": 4,
+                    "conditionsdiseases.json": 2,
+                    "deities.json": 1,
+                    "encounters.json": 1,
+                    "items.json": 6,
+                    "monsters": 59,
+                    "names.json": 1,
+                    "variantrules.json": 9,
+                    "vehicles.json": 28
+                },
+                "aliases": []
+            },
+            {
+                "code": "GotSF",
+                "registryIndex": 59,
+                "books": [],
+                "adventures": [
+                    "GotSF"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "GotSF"
+                ],
+                "corpusReferences": 1,
+                "corpusDomains": {
+                    "monsters": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "HAT-LMI",
+                "registryIndex": 60,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 5,
+                "corpusDomains": {
+                    "items.json": 5
+                },
+                "aliases": []
+            },
+            {
+                "code": "HAT-TG",
+                "registryIndex": 61,
+                "books": [
+                    "HAT-TG"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "HAT-TG"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 7,
+                "corpusDomains": {
+                    "monsters": 7
+                },
+                "aliases": []
+            },
+            {
+                "code": "HBTD",
+                "registryIndex": 62,
+                "books": [],
+                "adventures": [
+                    "HBTD"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "HBTD"
+                ],
+                "corpusReferences": 19,
+                "corpusDomains": {
+                    "items.json": 6,
+                    "magicvariants.json": 1,
+                    "objects.json": 12
+                },
+                "aliases": []
+            },
+            {
+                "code": "HF",
+                "registryIndex": 63,
+                "books": [
+                    "HF"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "HF"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 79,
+                "corpusDomains": {
+                    "recipes.json": 79
+                },
+                "aliases": []
+            },
+            {
+                "code": "HFDoMM",
+                "registryIndex": 64,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 57,
+                "corpusDomains": {
+                    "recipes.json": 57
+                },
+                "aliases": []
+            },
+            {
+                "code": "HFFotM",
+                "registryIndex": 65,
+                "books": [
+                    "HFFotM"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "HFFotM"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 76,
+                "corpusDomains": {
+                    "recipes.json": 76
+                },
+                "aliases": []
+            },
+            {
+                "code": "HFLotT",
+                "registryIndex": 66,
+                "books": [
+                    "HFLotT"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "HFLotT"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 80,
+                "corpusDomains": {
+                    "recipes.json": 80
+                },
+                "aliases": []
+            },
+            {
+                "code": "HFStCM",
+                "registryIndex": 67,
+                "books": [],
+                "adventures": [
+                    "HFStCM"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "HFStCM"
+                ],
+                "corpusReferences": 2,
+                "corpusDomains": {
+                    "recipes.json": 1,
+                    "rewards.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "HftT",
+                "registryIndex": 68,
+                "books": [],
+                "adventures": [
+                    "HftT"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "HftT"
+                ],
+                "corpusReferences": 19,
+                "corpusDomains": {
+                    "conditionsdiseases.json": 14,
+                    "items.json": 1,
+                    "monsters": 4
+                },
+                "aliases": []
+            },
+            {
+                "code": "HoL",
+                "registryIndex": 69,
+                "books": [],
+                "adventures": [
+                    "HoL"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "HoL"
+                ],
+                "corpusReferences": 4,
+                "corpusDomains": {
+                    "monsters": 4
+                },
+                "aliases": []
+            },
+            {
+                "code": "HotB",
+                "registryIndex": 70,
+                "books": [],
+                "adventures": [
+                    "HotB"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "HotB"
+                ],
+                "corpusReferences": 13,
+                "corpusDomains": {
+                    "items.json": 2,
+                    "monsters": 11
+                },
+                "aliases": []
+            },
+            {
+                "code": "HotDQ",
+                "registryIndex": 71,
+                "books": [],
+                "adventures": [
+                    "HotDQ"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "HotDQ"
+                ],
+                "corpusReferences": 31,
+                "corpusDomains": {
+                    "items.json": 6,
+                    "languages.json": 1,
+                    "monsters": 24
+                },
+                "aliases": []
+            },
+            {
+                "code": "IDRotF",
+                "registryIndex": 72,
+                "books": [],
+                "adventures": [
+                    "IDRotF"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "IDRotF"
+                ],
+                "corpusReferences": 148,
+                "corpusDomains": {
+                    "conditionsdiseases.json": 1,
+                    "items.json": 32,
+                    "languages.json": 1,
+                    "monsters": 89,
+                    "objects.json": 1,
+                    "races.json": 1,
+                    "rewards.json": 18,
+                    "spells": 3,
+                    "trapshazards.json": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "IMR",
+                "registryIndex": 73,
+                "books": [],
+                "adventures": [
+                    "IMR"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "IMR"
+                ],
+                "corpusReferences": 56,
+                "corpusDomains": {
+                    "items.json": 26,
+                    "monsters": 30
+                },
+                "aliases": []
+            },
+            {
+                "code": "JttRC",
+                "registryIndex": 74,
+                "books": [],
+                "adventures": [
+                    "JttRC"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "JttRC"
+                ],
+                "corpusReferences": 83,
+                "corpusDomains": {
+                    "items.json": 5,
+                    "monsters": 77,
+                    "objects.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "KftGV",
+                "registryIndex": 75,
+                "books": [],
+                "adventures": [
+                    "KftGV"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "KftGV"
+                ],
+                "corpusReferences": 66,
+                "corpusDomains": {
+                    "items.json": 9,
+                    "monsters": 57
+                },
+                "aliases": []
+            },
+            {
+                "code": "KKW",
+                "registryIndex": 76,
+                "books": [],
+                "adventures": [
+                    "KKW"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "KKW"
+                ],
+                "corpusReferences": 3,
+                "corpusDomains": {
+                    "monsters": 3
+                },
+                "aliases": []
+            },
+            {
+                "code": "LFL",
+                "registryIndex": 77,
+                "books": [
+                    "LFL"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "LFL"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 27,
+                "corpusDomains": {
+                    "backgrounds.json": 2,
+                    "feats.json": 2,
+                    "items.json": 2,
+                    "monsters": 8,
+                    "races.json": 13
+                },
+                "aliases": []
+            },
+            {
+                "code": "LK",
+                "registryIndex": 78,
+                "books": [],
+                "adventures": [
+                    "LK"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "LK"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "LLK",
+                "registryIndex": 79,
+                "books": [],
+                "adventures": [
+                    "LLK"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "LLK"
+                ],
+                "corpusReferences": 34,
+                "corpusDomains": {
+                    "items.json": 14,
+                    "magicvariants.json": 3,
+                    "monsters": 14,
+                    "spells": 3
+                },
+                "aliases": []
+            },
+            {
+                "code": "LMoP",
+                "registryIndex": 80,
+                "books": [],
+                "adventures": [
+                    "LMoP"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "LMoP"
+                ],
+                "corpusReferences": 14,
+                "corpusDomains": {
+                    "items.json": 5,
+                    "monsters": 9
+                },
+                "aliases": []
+            },
+            {
+                "code": "LoX",
+                "registryIndex": 81,
+                "books": [],
+                "adventures": [
+                    "LoX"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "LoX"
+                ],
+                "corpusReferences": 16,
+                "corpusDomains": {
+                    "items.json": 1,
+                    "monsters": 15
+                },
+                "aliases": []
+            },
+            {
+                "code": "LR",
+                "registryIndex": 82,
+                "books": [],
+                "adventures": [
+                    "LR"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "LR"
+                ],
+                "corpusReferences": 9,
+                "corpusDomains": {
+                    "monsters": 8,
+                    "races.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "LRDT",
+                "registryIndex": 83,
+                "books": [],
+                "adventures": [
+                    "LRDT"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "LRDT"
+                ],
+                "corpusReferences": 2,
+                "corpusDomains": {
+                    "monsters": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "MaBJoV",
+                "registryIndex": 84,
+                "books": [
+                    "MaBJoV"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "MaBJoV"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 61,
+                "corpusDomains": {
+                    "monsters": 61
+                },
+                "aliases": []
+            },
+            {
+                "code": "MCV1SC",
+                "registryIndex": 85,
+                "books": [
+                    "MCV1SC"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "MCV1SC"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 10,
+                "corpusDomains": {
+                    "monsters": 10
+                },
+                "aliases": []
+            },
+            {
+                "code": "MCV2DC",
+                "registryIndex": 86,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 12,
+                "corpusDomains": {
+                    "items.json": 1,
+                    "monsters": 11
+                },
+                "aliases": []
+            },
+            {
+                "code": "MCV3MC",
+                "registryIndex": 87,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 5,
+                "corpusDomains": {
+                    "monsters": 5
+                },
+                "aliases": []
+            },
+            {
+                "code": "MCV4EC",
+                "registryIndex": 88,
+                "books": [
+                    "MCV4EC"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "MCV4EC"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 25,
+                "corpusDomains": {
+                    "monsters": 25
+                },
+                "aliases": []
+            },
+            {
+                "code": "MFF",
+                "registryIndex": 89,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 18,
+                "corpusDomains": {
+                    "monsters": 18
+                },
+                "aliases": []
+            },
+            {
+                "code": "MGELFT",
+                "registryIndex": 90,
+                "books": [
+                    "MGELFT"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "MGELFT"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 6,
+                "corpusDomains": {
+                    "monsters": 6
+                },
+                "aliases": []
+            },
+            {
+                "code": "MisMV1",
+                "registryIndex": 91,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 6,
+                "corpusDomains": {
+                    "monsters": 6
+                },
+                "aliases": []
+            },
+            {
+                "code": "MM",
+                "registryIndex": 92,
+                "books": [
+                    "MM"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "MM"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 1615,
+                "corpusDomains": {
+                    "items.json": 4,
+                    "languages.json": 21,
+                    "magicvariants.json": 6,
+                    "monsters": 1580,
+                    "senses.json": 1,
+                    "variantrules.json": 3
+                },
+                "aliases": []
+            },
+            {
+                "code": "MOT",
+                "registryIndex": 93,
+                "books": [
+                    "MOT"
+                ],
+                "adventures": [
+                    "MOT-NSS"
+                ],
+                "bookIds": [
+                    "MOT"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 176,
+                "corpusDomains": {
+                    "backgrounds.json": 1,
+                    "classes": 11,
+                    "deities.json": 15,
+                    "items.json": 14,
+                    "languages.json": 9,
+                    "magicvariants.json": 1,
+                    "monsters": 59,
+                    "races.json": 5,
+                    "rewards.json": 60,
+                    "spells": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "MPMM",
+                "registryIndex": 94,
+                "books": [
+                    "MPMM"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "MPMM"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 389,
+                "corpusDomains": {
+                    "cultsboons.json": 14,
+                    "items.json": 1,
+                    "monsters": 325,
+                    "races.json": 47,
+                    "trapshazards.json": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "MPP",
+                "registryIndex": 95,
+                "books": [
+                    "MPP"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "MPP"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 69,
+                "corpusDomains": {
+                    "encounters.json": 1,
+                    "monsters": 68
+                },
+                "aliases": []
+            },
+            {
+                "code": "MTF",
+                "registryIndex": 96,
+                "books": [
+                    "MTF"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "MTF"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 465,
+                "corpusDomains": {
+                    "cultsboons.json": 27,
+                    "deities.json": 80,
+                    "feats.json": 1,
+                    "items.json": 4,
+                    "languages.json": 2,
+                    "monsters": 329,
+                    "names.json": 1,
+                    "races.json": 17,
+                    "rewards.json": 1,
+                    "vehicles.json": 3
+                },
+                "aliases": []
+            },
+            {
+                "code": "NF",
+                "registryIndex": 97,
+                "books": [
+                    "NF"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "NF"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 19,
+                "corpusDomains": {
+                    "items.json": 8,
+                    "monsters": 6,
+                    "trapshazards.json": 5
+                },
+                "aliases": []
+            },
+            {
+                "code": "NRH-ASS",
+                "registryIndex": 98,
+                "books": [],
+                "adventures": [
+                    "NRH-ASS"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "NRH-ASS"
+                ],
+                "corpusReferences": 2,
+                "corpusDomains": {
+                    "monsters": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "NRH-AT",
+                "registryIndex": 99,
+                "books": [],
+                "adventures": [
+                    "NRH-AT"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "NRH-AT"
+                ],
+                "corpusReferences": 7,
+                "corpusDomains": {
+                    "items.json": 2,
+                    "monsters": 5
+                },
+                "aliases": []
+            },
+            {
+                "code": "NRH-AVitW",
+                "registryIndex": 100,
+                "books": [],
+                "adventures": [
+                    "NRH-AVitW"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "NRH-AVitW"
+                ],
+                "corpusReferences": 3,
+                "corpusDomains": {
+                    "monsters": 3
+                },
+                "aliases": []
+            },
+            {
+                "code": "NRH-AWoL",
+                "registryIndex": 101,
+                "books": [],
+                "adventures": [
+                    "NRH-AWoL"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "NRH-AWoL"
+                ],
+                "corpusReferences": 2,
+                "corpusDomains": {
+                    "monsters": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "NRH-CoI",
+                "registryIndex": 102,
+                "books": [],
+                "adventures": [
+                    "NRH-CoI"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "NRH-CoI"
+                ],
+                "corpusReferences": 4,
+                "corpusDomains": {
+                    "monsters": 4
+                },
+                "aliases": []
+            },
+            {
+                "code": "NRH-TCMC",
+                "registryIndex": 103,
+                "books": [],
+                "adventures": [
+                    "NRH-TCMC"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "NRH-TCMC"
+                ],
+                "corpusReferences": 2,
+                "corpusDomains": {
+                    "monsters": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "NRH-TLT",
+                "registryIndex": 104,
+                "books": [],
+                "adventures": [
+                    "NRH-TLT"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "NRH-TLT"
+                ],
+                "corpusReferences": 2,
+                "corpusDomains": {
+                    "items.json": 1,
+                    "monsters": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "OGA",
+                "registryIndex": 105,
+                "books": [
+                    "OGA"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "OGA"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 2,
+                "corpusDomains": {
+                    "items.json": 1,
+                    "races.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "OotA",
+                "registryIndex": 106,
+                "books": [],
+                "adventures": [
+                    "OotA"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "OotA"
+                ],
+                "corpusReferences": 142,
+                "corpusDomains": {
+                    "conditionsdiseases.json": 1,
+                    "items-base.json": 2,
+                    "items.json": 17,
+                    "languages.json": 1,
+                    "monsters": 121
+                },
+                "aliases": []
+            },
+            {
+                "code": "OoW",
+                "registryIndex": 107,
+                "books": [],
+                "adventures": [
+                    "OoW"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "OoW"
+                ],
+                "corpusReferences": 18,
+                "corpusDomains": {
+                    "conditionsdiseases.json": 1,
+                    "monsters": 17
+                },
+                "aliases": []
+            },
+            {
+                "code": "PaBTSO",
+                "registryIndex": 108,
+                "books": [],
+                "adventures": [
+                    "PaBTSO"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "PaBTSO"
+                ],
+                "corpusReferences": 95,
+                "corpusDomains": {
+                    "items.json": 24,
+                    "monsters": 69,
+                    "rewards.json": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "PaF",
+                "registryIndex": 109,
+                "books": [
+                    "PaF"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "PaF"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 76,
+                "corpusDomains": {
+                    "recipes.json": 76
+                },
+                "aliases": []
+            },
+            {
+                "code": "PHB",
+                "registryIndex": 110,
+                "books": [
+                    "PHB"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "PHB"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 2042,
+                "corpusDomains": {
+                    "actions.json": 20,
+                    "backgrounds.json": 57,
+                    "classes": 723,
+                    "conditionsdiseases.json": 23,
+                    "deities.json": 195,
+                    "feats.json": 42,
+                    "items-base.json": 122,
+                    "items.json": 177,
+                    "languages.json": 28,
+                    "magicvariants.json": 6,
+                    "monsters": 135,
+                    "optionalfeatures.json": 90,
+                    "races.json": 29,
+                    "senses.json": 3,
+                    "skills.json": 18,
+                    "spells": 361,
+                    "variantrules.json": 13
+                },
+                "aliases": []
+            },
+            {
+                "code": "PiP",
+                "registryIndex": 111,
+                "books": [],
+                "adventures": [
+                    "PiP"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "PiP"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "PotA",
+                "registryIndex": 112,
+                "books": [],
+                "adventures": [
+                    "PotA"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "PotA"
+                ],
+                "corpusReferences": 107,
+                "corpusDomains": {
+                    "cultsboons.json": 4,
+                    "items.json": 21,
+                    "monsters": 82
+                },
+                "aliases": []
+            },
+            {
+                "code": "PSA",
+                "registryIndex": 113,
+                "books": [
+                    "PS-A"
+                ],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 105,
+                "corpusDomains": {
+                    "backgrounds.json": 6,
+                    "classes": 66,
+                    "languages.json": 2,
+                    "monsters": 24,
+                    "races.json": 7
+                },
+                "aliases": [
+                    "PS-A"
+                ]
+            },
+            {
+                "code": "PSD",
+                "registryIndex": 114,
+                "books": [
+                    "PS-D"
+                ],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 13,
+                "corpusDomains": {
+                    "cultsboons.json": 1,
+                    "languages.json": 3,
+                    "monsters": 7,
+                    "races.json": 2
+                },
+                "aliases": [
+                    "PS-D"
+                ]
+            },
+            {
+                "code": "PSI",
+                "registryIndex": 115,
+                "books": [
+                    "PS-I"
+                ],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 49,
+                "corpusDomains": {
+                    "backgrounds.json": 1,
+                    "languages.json": 4,
+                    "monsters": 38,
+                    "races.json": 5,
+                    "variantrules.json": 1
+                },
+                "aliases": [
+                    "PS-I"
+                ]
+            },
+            {
+                "code": "PSK",
+                "registryIndex": 116,
+                "books": [
+                    "PS-K"
+                ],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 48,
+                "corpusDomains": {
+                    "classes": 10,
+                    "feats.json": 2,
+                    "languages.json": 1,
+                    "monsters": 27,
+                    "races.json": 8
+                },
+                "aliases": [
+                    "PS-K"
+                ]
+            },
+            {
+                "code": "PSX",
+                "registryIndex": 117,
+                "books": [
+                    "PS-X"
+                ],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 120,
+                "corpusDomains": {
+                    "feats.json": 1,
+                    "items.json": 50,
+                    "languages.json": 6,
+                    "monsters": 53,
+                    "races.json": 10
+                },
+                "aliases": [
+                    "PS-X"
+                ]
+            },
+            {
+                "code": "PSZ",
+                "registryIndex": 118,
+                "books": [
+                    "PS-Z"
+                ],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 65,
+                "corpusDomains": {
+                    "monsters": 49,
+                    "races.json": 16
+                },
+                "aliases": [
+                    "PS-Z"
+                ]
+            },
+            {
+                "code": "QftIS",
+                "registryIndex": 119,
+                "books": [],
+                "adventures": [
+                    "QftIS"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "QftIS"
+                ],
+                "corpusReferences": 82,
+                "corpusDomains": {
+                    "items.json": 11,
+                    "monsters": 71
+                },
+                "aliases": []
+            },
+            {
+                "code": "RHW",
+                "registryIndex": 120,
+                "books": [
+                    "RHW"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "RHW"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 189,
+                "corpusDomains": {
+                    "backgrounds.json": 4,
+                    "bastions.json": 8,
+                    "classes": 51,
+                    "feats.json": 11,
+                    "items.json": 2,
+                    "monsters": 104,
+                    "races.json": 4,
+                    "rewards.json": 5
+                },
+                "aliases": []
+            },
+            {
+                "code": "RMBRE",
+                "registryIndex": 121,
+                "books": [],
+                "adventures": [
+                    "RMBRE"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "RMBRE"
+                ],
+                "corpusReferences": 20,
+                "corpusDomains": {
+                    "items.json": 1,
+                    "monsters": 17,
+                    "objects.json": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "RMR",
+                "registryIndex": 122,
+                "books": [
+                    "RMR"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "RMR"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 69,
+                "corpusDomains": {
+                    "conditionsdiseases.json": 15,
+                    "spells": 54
+                },
+                "aliases": []
+            },
+            {
+                "code": "RoT",
+                "registryIndex": 123,
+                "books": [],
+                "adventures": [
+                    "RoT"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "RoT"
+                ],
+                "corpusReferences": 36,
+                "corpusDomains": {
+                    "items.json": 3,
+                    "languages.json": 1,
+                    "monsters": 32
+                },
+                "aliases": []
+            },
+            {
+                "code": "RoTOS",
+                "registryIndex": 124,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 4,
+                "corpusDomains": {
+                    "items.json": 4
+                },
+                "aliases": []
+            },
+            {
+                "code": "RtG",
+                "registryIndex": 125,
+                "books": [],
+                "adventures": [
+                    "RtG"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "RtG"
+                ],
+                "corpusReferences": 9,
+                "corpusDomains": {
+                    "monsters": 8,
+                    "trapshazards.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "RWG",
+                "registryIndex": 126,
+                "books": [],
+                "adventures": [
+                    "RWG"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "RWG"
+                ],
+                "corpusReferences": 1,
+                "corpusDomains": {
+                    "monsters": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "SAC",
+                "registryIndex": 127,
+                "books": [
+                    "SAC"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "SAC"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "SADS",
+                "registryIndex": 128,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 4,
+                "corpusDomains": {
+                    "monsters": 4
+                },
+                "aliases": []
+            },
+            {
+                "code": "SatO",
+                "registryIndex": 129,
+                "books": [
+                    "SatO"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "SatO"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 17,
+                "corpusDomains": {
+                    "backgrounds.json": 2,
+                    "encounters.json": 1,
+                    "feats.json": 7,
+                    "items.json": 5,
+                    "spells": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "SCAG",
+                "registryIndex": 130,
+                "books": [
+                    "SCAG"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "SCAG"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 280,
+                "corpusDomains": {
+                    "backgrounds.json": 13,
+                    "classes": 82,
+                    "deities.json": 123,
+                    "feats.json": 1,
+                    "items-base.json": 13,
+                    "items.json": 1,
+                    "languages.json": 20,
+                    "races.json": 22,
+                    "spells": 4,
+                    "variantrules.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "SCC",
+                "registryIndex": 131,
+                "books": [
+                    "SCC"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "SCC"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 80,
+                "corpusDomains": {
+                    "backgrounds.json": 5,
+                    "feats.json": 2,
+                    "items.json": 18,
+                    "monsters": 49,
+                    "races.json": 1,
+                    "spells": 5
+                },
+                "aliases": []
+            },
+            {
+                "code": "SCC-ARiR",
+                "registryIndex": 132,
+                "books": [],
+                "adventures": [
+                    "SCC-ARiR"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "SCC-ARiR"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "SCC-CK",
+                "registryIndex": 133,
+                "books": [],
+                "adventures": [
+                    "SCC-CK"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "SCC-CK"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "SCC-HfMT",
+                "registryIndex": 134,
+                "books": [],
+                "adventures": [
+                    "SCC-HfMT"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "SCC-HfMT"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "SCC-TMM",
+                "registryIndex": 135,
+                "books": [],
+                "adventures": [
+                    "SCC-TMM"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "SCC-TMM"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "ScoEE",
+                "registryIndex": 136,
+                "books": [],
+                "adventures": [
+                    "ScoEE"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "ScoEE"
+                ],
+                "corpusReferences": 3,
+                "corpusDomains": {
+                    "items.json": 3
+                },
+                "aliases": []
+            },
+            {
+                "code": "Screen",
+                "registryIndex": 137,
+                "books": [
+                    "Screen"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "Screen"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "ScreenDungeonKit",
+                "registryIndex": 138,
+                "books": [
+                    "ScreenDungeonKit"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "ScreenDungeonKit"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "ScreenSpelljammer",
+                "registryIndex": 139,
+                "books": [
+                    "ScreenSpelljammer"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "ScreenSpelljammer"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "ScreenWildernessKit",
+                "registryIndex": 140,
+                "books": [
+                    "ScreenWildernessKit"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "ScreenWildernessKit"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "SDW",
+                "registryIndex": 141,
+                "books": [],
+                "adventures": [
+                    "SDW"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "SDW"
+                ],
+                "corpusReferences": 7,
+                "corpusDomains": {
+                    "items.json": 1,
+                    "monsters": 6
+                },
+                "aliases": []
+            },
+            {
+                "code": "SjA",
+                "registryIndex": 142,
+                "books": [],
+                "adventures": [
+                    "SjA"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "SjA"
+                ],
+                "corpusReferences": 4,
+                "corpusDomains": {
+                    "items.json": 2,
+                    "vehicles.json": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "SKT",
+                "registryIndex": 143,
+                "books": [],
+                "adventures": [
+                    "SKT"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "SKT"
+                ],
+                "corpusReferences": 146,
+                "corpusDomains": {
+                    "items.json": 20,
+                    "languages.json": 2,
+                    "monsters": 124
+                },
+                "aliases": []
+            },
+            {
+                "code": "SLW",
+                "registryIndex": 144,
+                "books": [],
+                "adventures": [
+                    "SLW"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "SLW"
+                ],
+                "corpusReferences": 8,
+                "corpusDomains": {
+                    "monsters": 8
+                },
+                "aliases": []
+            },
+            {
+                "code": "TCE",
+                "registryIndex": 145,
+                "books": [
+                    "TCE"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "TCE"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 769,
+                "corpusDomains": {
+                    "classes": 493,
+                    "deities.json": 30,
+                    "feats.json": 15,
+                    "items-base.json": 1,
+                    "items.json": 86,
+                    "monsters": 47,
+                    "objects.json": 6,
+                    "optionalfeatures.json": 56,
+                    "races.json": 3,
+                    "spells": 22,
+                    "trapshazards.json": 7,
+                    "variantrules.json": 3
+                },
+                "aliases": []
+            },
+            {
+                "code": "TD",
+                "registryIndex": 146,
+                "books": [
+                    "TD"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "TD"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "TftYP",
+                "registryIndex": 147,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 194,
+                "corpusDomains": {
+                    "conditionsdiseases.json": 1,
+                    "items.json": 24,
+                    "languages.json": 1,
+                    "monsters": 167,
+                    "objects.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "TftYP-AtG",
+                "registryIndex": 148,
+                "books": [],
+                "adventures": [
+                    "TftYP-AtG"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "TftYP-AtG"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "TftYP-DiT",
+                "registryIndex": 149,
+                "books": [],
+                "adventures": [
+                    "TftYP-DiT"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "TftYP-DiT"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "TftYP-TFoF",
+                "registryIndex": 150,
+                "books": [],
+                "adventures": [
+                    "TftYP-TFoF"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "TftYP-TFoF"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "TftYP-THSoT",
+                "registryIndex": 151,
+                "books": [],
+                "adventures": [
+                    "TftYP-THSoT"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "TftYP-THSoT"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "TftYP-ToH",
+                "registryIndex": 152,
+                "books": [],
+                "adventures": [
+                    "TftYP-ToH"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "TftYP-ToH"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "TftYP-TSC",
+                "registryIndex": 153,
+                "books": [],
+                "adventures": [
+                    "TftYP-TSC"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "TftYP-TSC"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "TftYP-WPM",
+                "registryIndex": 154,
+                "books": [],
+                "adventures": [
+                    "TftYP-WPM"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "TftYP-WPM"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "TLK",
+                "registryIndex": 155,
+                "books": [],
+                "adventures": [
+                    "TLK"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "TLK"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "ToA",
+                "registryIndex": 156,
+                "books": [],
+                "adventures": [
+                    "ToA"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "ToA"
+                ],
+                "corpusReferences": 148,
+                "corpusDomains": {
+                    "backgrounds.json": 2,
+                    "conditionsdiseases.json": 3,
+                    "items-base.json": 1,
+                    "items.json": 26,
+                    "monsters": 94,
+                    "rewards.json": 22
+                },
+                "aliases": []
+            },
+            {
+                "code": "ToD",
+                "registryIndex": 157,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 63,
+                "corpusDomains": {
+                    "items.json": 13,
+                    "languages.json": 2,
+                    "monsters": 48
+                },
+                "aliases": []
+            },
+            {
+                "code": "ToFW",
+                "registryIndex": 158,
+                "books": [],
+                "adventures": [
+                    "ToFW"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "ToFW"
+                ],
+                "corpusReferences": 21,
+                "corpusDomains": {
+                    "monsters": 19,
+                    "rewards.json": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "ToR",
+                "registryIndex": 159,
+                "books": [],
+                "adventures": [
+                    "ToR"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "ToR"
+                ],
+                "corpusReferences": 1,
+                "corpusDomains": {
+                    "rewards.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "TTP",
+                "registryIndex": 160,
+                "books": [],
+                "adventures": [
+                    "TTP"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "TTP"
+                ],
+                "corpusReferences": 9,
+                "corpusDomains": {
+                    "items.json": 1,
+                    "monsters": 7,
+                    "races.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "UATheMysticClass",
+                "registryIndex": 161,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 66,
+                "corpusDomains": {
+                    "classes": 66
+                },
+                "aliases": []
+            },
+            {
+                "code": "US",
+                "registryIndex": 162,
+                "books": [],
+                "adventures": [
+                    "US"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "US"
+                ],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "UtHftLH",
+                "registryIndex": 163,
+                "books": [],
+                "adventures": [
+                    "UtHftLH"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "UtHftLH"
+                ],
+                "corpusReferences": 7,
+                "corpusDomains": {
+                    "items.json": 6,
+                    "magicvariants.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "VD",
+                "registryIndex": 164,
+                "books": [],
+                "adventures": [],
+                "bookIds": [],
+                "adventureIds": [],
+                "corpusReferences": 2,
+                "corpusDomains": {
+                    "monsters": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "VEoR",
+                "registryIndex": 165,
+                "books": [],
+                "adventures": [
+                    "VEoR"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "VEoR"
+                ],
+                "corpusReferences": 80,
+                "corpusDomains": {
+                    "items.json": 5,
+                    "monsters": 74,
+                    "vehicles.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "VGM",
+                "registryIndex": 166,
+                "books": [
+                    "VGM"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "VGM"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 401,
+                "corpusDomains": {
+                    "deities.json": 9,
+                    "items.json": 8,
+                    "languages.json": 4,
+                    "magicvariants.json": 2,
+                    "monsters": 353,
+                    "races.json": 21,
+                    "spells": 1,
+                    "trapshazards.json": 2,
+                    "variantrules.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "VNotEE",
+                "registryIndex": 167,
+                "books": [],
+                "adventures": [
+                    "VNotEE"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "VNotEE"
+                ],
+                "corpusReferences": 2,
+                "corpusDomains": {
+                    "rewards.json": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "VRGR",
+                "registryIndex": 168,
+                "books": [
+                    "VRGR"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "VRGR"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 95,
+                "corpusDomains": {
+                    "backgrounds.json": 2,
+                    "classes": 21,
+                    "conditionsdiseases.json": 1,
+                    "deities.json": 1,
+                    "items.json": 5,
+                    "monsters": 47,
+                    "races.json": 3,
+                    "rewards.json": 4,
+                    "trapshazards.json": 4,
+                    "variantrules.json": 7
+                },
+                "aliases": []
+            },
+            {
+                "code": "WBtW",
+                "registryIndex": 169,
+                "books": [],
+                "adventures": [
+                    "WBtW"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "WBtW"
+                ],
+                "corpusReferences": 78,
+                "corpusDomains": {
+                    "backgrounds.json": 2,
+                    "items-base.json": 1,
+                    "items.json": 20,
+                    "monsters": 53,
+                    "races.json": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "WDH",
+                "registryIndex": 170,
+                "books": [],
+                "adventures": [
+                    "WDH"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "WDH"
+                ],
+                "corpusReferences": 125,
+                "corpusDomains": {
+                    "items.json": 28,
+                    "monsters": 97
+                },
+                "aliases": []
+            },
+            {
+                "code": "WDMM",
+                "registryIndex": 171,
+                "books": [],
+                "adventures": [
+                    "WDMM"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "WDMM"
+                ],
+                "corpusReferences": 156,
+                "corpusDomains": {
+                    "conditionsdiseases.json": 1,
+                    "items.json": 27,
+                    "monsters": 125,
+                    "objects.json": 1,
+                    "variantrules.json": 2
+                },
+                "aliases": []
+            },
+            {
+                "code": "WttHC",
+                "registryIndex": 172,
+                "books": [],
+                "adventures": [
+                    "WttHC"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "WttHC"
+                ],
+                "corpusReferences": 39,
+                "corpusDomains": {
+                    "items.json": 8,
+                    "monsters": 31
+                },
+                "aliases": []
+            },
+            {
+                "code": "XDMG",
+                "registryIndex": 173,
+                "books": [
+                    "XDMG"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "XDMG"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 903,
+                "corpusDomains": {
+                    "bastions.json": 35,
+                    "conditionsdiseases.json": 3,
+                    "deities.json": 27,
+                    "items-base.json": 29,
+                    "items.json": 617,
+                    "loot.json": 43,
+                    "magicvariants.json": 84,
+                    "monsters": 2,
+                    "objects.json": 10,
+                    "rewards.json": 19,
+                    "trapshazards.json": 33,
+                    "vehicles.json": 1
+                },
+                "aliases": []
+            },
+            {
+                "code": "XGE",
+                "registryIndex": 174,
+                "books": [
+                    "XGE"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "XGE"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 629,
+                "corpusDomains": {
+                    "actions.json": 2,
+                    "classes": 345,
+                    "deities.json": 17,
+                    "encounters.json": 11,
+                    "feats.json": 15,
+                    "items-base.json": 19,
+                    "items.json": 50,
+                    "magicvariants.json": 7,
+                    "monsters": 2,
+                    "names.json": 8,
+                    "optionalfeatures.json": 24,
+                    "spells": 95,
+                    "trapshazards.json": 12,
+                    "variantrules.json": 22
+                },
+                "aliases": []
+            },
+            {
+                "code": "XMM",
+                "registryIndex": 175,
+                "books": [
+                    "XMM"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "XMM"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 601,
+                "corpusDomains": {
+                    "items.json": 1,
+                    "languages.json": 15,
+                    "monsters": 585
+                },
+                "aliases": []
+            },
+            {
+                "code": "XMtS",
+                "registryIndex": 176,
+                "books": [],
+                "adventures": [
+                    "XMtS"
+                ],
+                "bookIds": [],
+                "adventureIds": [
+                    "XMtS"
+                ],
+                "corpusReferences": 6,
+                "corpusDomains": {
+                    "items.json": 6
+                },
+                "aliases": []
+            },
+            {
+                "code": "XPHB",
+                "registryIndex": 177,
+                "books": [
+                    "XPHB"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "XPHB"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 1916,
+                "corpusDomains": {
+                    "actions.json": 18,
+                    "backgrounds.json": 16,
+                    "classes": 659,
+                    "conditionsdiseases.json": 18,
+                    "feats.json": 80,
+                    "items-base.json": 135,
+                    "items.json": 132,
+                    "languages.json": 20,
+                    "magicvariants.json": 97,
+                    "monsters": 100,
+                    "optionalfeatures.json": 81,
+                    "races.json": 27,
+                    "senses.json": 4,
+                    "skills.json": 18,
+                    "spells": 391,
+                    "trapshazards.json": 5,
+                    "variantrules.json": 115
+                },
+                "aliases": []
+            },
+            {
+                "code": "XSAC",
+                "registryIndex": 178,
+                "books": [
+                    "XSAC"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "XSAC"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "XScreen",
+                "registryIndex": 179,
+                "books": [
+                    "XScreen"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "XScreen"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            },
+            {
+                "code": "XScreenRHW",
+                "registryIndex": 180,
+                "books": [
+                    "XScreenRHW"
+                ],
+                "adventures": [],
+                "bookIds": [
+                    "XScreenRHW"
+                ],
+                "adventureIds": [],
+                "corpusReferences": 0,
+                "corpusDomains": {},
+                "aliases": []
+            }
+        ],
+        "unregisteredBookSources": [],
+        "unregisteredAdventureSources": [],
+        "sourceFieldOccurrences": 18354
+    },
+    "tagReferences": {
+        "bookOccurrences": 696,
+        "adventureOccurrences": 72,
+        "sourceCountsFromResolvedTags": {
+            "AAG": 10,
+            "AATM": 8,
+            "AI": 4,
+            "AU": 2,
+            "BAM": 10,
+            "BGDIA": 8,
+            "BGG": 10,
+            "BMT": 2,
+            "CoA": 14,
+            "CoS": 4,
+            "DMG": 216,
+            "DSotDQ": 4,
+            "EFA": 32,
+            "EGW": 10,
+            "ERLW": 32,
+            "FRAiF": 26,
+            "FRHoF": 78,
+            "FTD": 2,
+            "GoS": 52,
+            "HotDQ": 4,
+            "IDRotF": 6,
+            "JttRC": 2,
+            "MM": 28,
+            "MOT": 4,
+            "MPMM": 6,
+            "MPP": 56,
+            "NF": 2,
+            "OGA": 2,
+            "OotA": 20,
+            "PHB": 260,
+            "PSA": 1,
+            "PSK": 1,
+            "QftIS": 2,
+            "RHW": 4,
+            "RoT": 10,
+            "SatO": 26,
+            "ToA": 10,
+            "TTP": 2,
+            "VGM": 4,
+            "VRGR": 12,
+            "WBtW": 2,
+            "WDMM": 4,
+            "XDMG": 406,
+            "XGE": 10,
+            "XMM": 32,
+            "XPHB": 94
+        },
+        "unmatchedTargets": []
+    }
+}

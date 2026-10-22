@@ -1,0 +1,19 @@
+{
+  "code": "MOT",
+  "publications": [
+    {
+      "kind": "book",
+      "name": "Mythic Odysseys of Theros",
+      "published": "2020-06-02",
+      "group": "setting"
+    },
+    {
+      "kind": "adventure",
+      "publicationId": "MOT-NSS",
+      "name": "Theros: No Silent Secret",
+      "published": "2020-06-02",
+      "group": "supplement",
+      "parentSource": "MOT"
+    }
+  ]
+}

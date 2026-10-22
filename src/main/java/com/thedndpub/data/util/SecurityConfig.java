@@ -20,7 +20,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/**").permitAll());
+                        .requestMatchers("/api/**", "/swagger-ui/**",  "/v3/api-docs/**").permitAll());
         return http.build();
     }
 

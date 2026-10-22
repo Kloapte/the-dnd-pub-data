@@ -1,0 +1,142 @@
+{
+  "manifestVersion": 1,
+  "sourceCorpusSha256": "df60cc4ad8599701aff178bed2826fb80d2d2cb1e862d67938d1873ec793b8c1",
+  "schemaId": "urn:thedndpub:schemas:source:v1",
+  "entries": [
+    {
+      "sourceCode": "PHB",
+      "registryEntry": {
+        "sourceFile": "src/main/resources/data/sources/registry.json",
+        "jsonPointer": "/sources/110",
+        "sourceFileSha256": "f54414851b9470158ebabaf1c5c847cce988d41aaeb3f573dec9f32b85594955"
+      },
+      "publicationRecords": [
+        {
+          "kind": "book",
+          "sourceId": "PHB",
+          "sourceFile": "src/main/resources/data/books.json",
+          "jsonPointer": "/book/0",
+          "sourceFileSha256": "8d216dd1aa9e948546d3cd6bc1d92a32438049c8e3c0d250619c7f7e1937129c"
+        }
+      ]
+    },
+    {
+      "sourceCode": "EEPC",
+      "registryEntry": {
+        "sourceFile": "src/main/resources/data/sources/registry.json",
+        "jsonPointer": "/sources/45",
+        "sourceFileSha256": "f54414851b9470158ebabaf1c5c847cce988d41aaeb3f573dec9f32b85594955"
+      },
+      "publicationRecords": []
+    },
+    {
+      "sourceCode": "MOT",
+      "registryEntry": {
+        "sourceFile": "src/main/resources/data/sources/registry.json",
+        "jsonPointer": "/sources/93",
+        "sourceFileSha256": "f54414851b9470158ebabaf1c5c847cce988d41aaeb3f573dec9f32b85594955"
+      },
+      "publicationRecords": [
+        {
+          "kind": "book",
+          "sourceId": "MOT",
+          "sourceFile": "src/main/resources/data/books.json",
+          "jsonPointer": "/book/23",
+          "sourceFileSha256": "8d216dd1aa9e948546d3cd6bc1d92a32438049c8e3c0d250619c7f7e1937129c"
+        },
+        {
+          "kind": "adventure",
+          "sourceId": "MOT-NSS",
+          "sourceFile": "src/main/resources/data/adventures.json",
+          "jsonPointer": "/adventure/39",
+          "sourceFileSha256": "cba46dc96d2b74fdc5d30cbea5f16f1867cbc89f64a8245c1e200794603fa6b1"
+        }
+      ]
+    },
+    {
+      "sourceCode": "PSZ",
+      "registryEntry": {
+        "sourceFile": "src/main/resources/data/sources/registry.json",
+        "jsonPointer": "/sources/118",
+        "sourceFileSha256": "f54414851b9470158ebabaf1c5c847cce988d41aaeb3f573dec9f32b85594955"
+      },
+      "publicationRecords": [
+        {
+          "kind": "book",
+          "sourceId": "PS-Z",
+          "sourceFile": "src/main/resources/data/books.json",
+          "jsonPointer": "/book/5",
+          "sourceFileSha256": "8d216dd1aa9e948546d3cd6bc1d92a32438049c8e3c0d250619c7f7e1937129c"
+        }
+      ]
+    },
+    {
+      "sourceCode": "AAG",
+      "registryEntry": {
+        "sourceFile": "src/main/resources/data/sources/registry.json",
+        "jsonPointer": "/sources/0",
+        "sourceFileSha256": "f54414851b9470158ebabaf1c5c847cce988d41aaeb3f573dec9f32b85594955"
+      },
+      "publicationRecords": [
+        {
+          "kind": "book",
+          "sourceId": "AAG",
+          "sourceFile": "src/main/resources/data/books.json",
+          "jsonPointer": "/book/38",
+          "sourceFileSha256": "8d216dd1aa9e948546d3cd6bc1d92a32438049c8e3c0d250619c7f7e1937129c"
+        }
+      ]
+    },
+    {
+      "sourceCode": "EFR",
+      "registryEntry": {
+        "sourceFile": "src/main/resources/data/sources/registry.json",
+        "jsonPointer": "/sources/48",
+        "sourceFileSha256": "f54414851b9470158ebabaf1c5c847cce988d41aaeb3f573dec9f32b85594955"
+      },
+      "publicationRecords": [
+        {
+          "kind": "adventure",
+          "sourceId": "EFR",
+          "sourceFile": "src/main/resources/data/adventures.json",
+          "jsonPointer": "/adventure/33",
+          "sourceFileSha256": "cba46dc96d2b74fdc5d30cbea5f16f1867cbc89f64a8245c1e200794603fa6b1"
+        }
+      ]
+    },
+    {
+      "sourceCode": "ERLW",
+      "registryEntry": {
+        "sourceFile": "src/main/resources/data/sources/registry.json",
+        "jsonPointer": "/sources/50",
+        "sourceFileSha256": "f54414851b9470158ebabaf1c5c847cce988d41aaeb3f573dec9f32b85594955"
+      },
+      "publicationRecords": [
+        {
+          "kind": "book",
+          "sourceId": "ERLW",
+          "sourceFile": "src/main/resources/data/books.json",
+          "jsonPointer": "/book/21",
+          "sourceFileSha256": "8d216dd1aa9e948546d3cd6bc1d92a32438049c8e3c0d250619c7f7e1937129c"
+        }
+      ]
+    },
+    {
+      "sourceCode": "SAC",
+      "registryEntry": {
+        "sourceFile": "src/main/resources/data/sources/registry.json",
+        "jsonPointer": "/sources/127",
+        "sourceFileSha256": "f54414851b9470158ebabaf1c5c847cce988d41aaeb3f573dec9f32b85594955"
+      },
+      "publicationRecords": [
+        {
+          "kind": "book",
+          "sourceId": "SAC",
+          "sourceFile": "src/main/resources/data/books.json",
+          "jsonPointer": "/book/17",
+          "sourceFileSha256": "8d216dd1aa9e948546d3cd6bc1d92a32438049c8e3c0d250619c7f7e1937129c"
+        }
+      ]
+    }
+  ]
+}

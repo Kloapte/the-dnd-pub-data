@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:thedndpub:schemas:source:v1",
+  "title": "Source",
+  "description": "A stable source-code identity with optional source-derived publication references.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "code"
+  ],
+  "properties": {
+    "code": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "description": "The exact, case-preserved source code used as the primary Source identifier."
+    },
+    "codeAliases": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^\\S+$"
+      },
+      "description": "Source-code aliases from the source registry; distinct from publication-title aliases."
+    },
+    "publications": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/publicationReference"
+      },
+      "description": "Optional source-derived publication metadata. Multiple records may share this Source code. Omit for code-only sources."
+    }
+  },
+  "$defs": {
+    "publicationReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "book",
+            "adventure"
+          ],
+          "description": "The source metadata collection that supplied this publication reference."
+        },
+        "publicationId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "description": "The source publication ID, included when it differs from the Source code or is needed to distinguish records."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The supplied publication or adventure name."
+        },
+        "published": {
+          "type": "string",
+          "format": "date",
+          "description": "The supplied publication date."
+        },
+        "revised": {
+          "type": "string",
+          "format": "date",
+          "description": "A supplied revision date, when present in the source metadata."
+        },
+        "group": {
+          "type": "string",
+          "enum": [
+            "core",
+            "screen",
+            "setting",
+            "setting-alt",
+            "organized-play",
+            "supplement",
+            "supplement-alt",
+            "other",
+            "recipe",
+            "homecraft"
+          ],
+          "description": "The supplied source grouping label. It does not imply edition or rules equivalence."
+        },
+        "titleAliases": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Supplied human-readable aliases for this publication, distinct from Source code aliases."
+        },
+        "parentSource": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "description": "The raw parentSource token from metadata. This value is not by itself proof that a canonical parent target has been resolved."
+        }
+      }
+    }
+  }
+}

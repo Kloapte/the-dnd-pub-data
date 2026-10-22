@@ -1,0 +1,719 @@
+{
+  "sourceCorpusSha256": "df60cc4ad8599701aff178bed2826fb80d2d2cb1e862d67938d1873ec793b8c1",
+  "references": [
+    {
+      "owner": {
+        "sourceCode": "AAG",
+        "kind": "book",
+        "publicationId": "AAG"
+      },
+      "property": "parentSource",
+      "rawValue": "SAiS",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "AitFR-AVT",
+        "kind": "adventure",
+        "publicationId": "AitFR-AVT"
+      },
+      "property": "parentSource",
+      "rawValue": "AitFR",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "AitFR-DN",
+        "kind": "adventure",
+        "publicationId": "AitFR-DN"
+      },
+      "property": "parentSource",
+      "rawValue": "AitFR",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "AitFR-FCD",
+        "kind": "adventure",
+        "publicationId": "AitFR-FCD"
+      },
+      "property": "parentSource",
+      "rawValue": "AitFR",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "AitFR-ISF",
+        "kind": "adventure",
+        "publicationId": "AitFR-ISF"
+      },
+      "property": "parentSource",
+      "rawValue": "AitFR",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "AitFR-THP",
+        "kind": "adventure",
+        "publicationId": "AitFR-THP"
+      },
+      "property": "parentSource",
+      "rawValue": "AitFR",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "BAM",
+        "kind": "book",
+        "publicationId": "BAM"
+      },
+      "property": "parentSource",
+      "rawValue": "SAiS",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "DC",
+        "kind": "adventure",
+        "publicationId": "DC"
+      },
+      "property": "parentSource",
+      "rawValue": "ESK",
+      "disposition": "resolved",
+      "sourceCodeTarget": "ESK",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "DD",
+        "kind": "adventure",
+        "publicationId": "DD"
+      },
+      "property": "parentSource",
+      "rawValue": "EGW",
+      "disposition": "resolved",
+      "sourceCodeTarget": "EGW",
+      "candidatePublicationIds": [
+        "EGW"
+      ],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "DIP",
+        "kind": "adventure",
+        "publicationId": "DIP"
+      },
+      "property": "parentSource",
+      "rawValue": "ESK",
+      "disposition": "resolved",
+      "sourceCodeTarget": "ESK",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "DrDe-ACfaS",
+        "kind": "adventure",
+        "publicationId": "DrDe-ACfaS"
+      },
+      "property": "parentSource",
+      "rawValue": "DrDe",
+      "disposition": "resolved",
+      "sourceCodeTarget": "DrDe",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "DrDe-BD",
+        "kind": "adventure",
+        "publicationId": "DrDe-BD"
+      },
+      "property": "parentSource",
+      "rawValue": "DrDe",
+      "disposition": "resolved",
+      "sourceCodeTarget": "DrDe",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "DrDe-BtS",
+        "kind": "adventure",
+        "publicationId": "DrDe-BtS"
+      },
+      "property": "parentSource",
+      "rawValue": "DrDe",
+      "disposition": "resolved",
+      "sourceCodeTarget": "DrDe",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "DrDe-DaS",
+        "kind": "adventure",
+        "publicationId": "DrDe-DaS"
+      },
+      "property": "parentSource",
+      "rawValue": "DrDe",
+      "disposition": "resolved",
+      "sourceCodeTarget": "DrDe",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "DrDe-DotSC",
+        "kind": "adventure",
+        "publicationId": "DrDe-DotSC"
+      },
+      "property": "parentSource",
+      "rawValue": "DrDe",
+      "disposition": "resolved",
+      "sourceCodeTarget": "DrDe",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "DrDe-FWtVC",
+        "kind": "adventure",
+        "publicationId": "DrDe-FWtVC"
+      },
+      "property": "parentSource",
+      "rawValue": "DrDe",
+      "disposition": "resolved",
+      "sourceCodeTarget": "DrDe",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "DrDe-SD",
+        "kind": "adventure",
+        "publicationId": "DrDe-SD"
+      },
+      "property": "parentSource",
+      "rawValue": "DrDe",
+      "disposition": "resolved",
+      "sourceCodeTarget": "DrDe",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "DrDe-TDoN",
+        "kind": "adventure",
+        "publicationId": "DrDe-TDoN"
+      },
+      "property": "parentSource",
+      "rawValue": "DrDe",
+      "disposition": "resolved",
+      "sourceCodeTarget": "DrDe",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "DrDe-TFV",
+        "kind": "adventure",
+        "publicationId": "DrDe-TFV"
+      },
+      "property": "parentSource",
+      "rawValue": "DrDe",
+      "disposition": "resolved",
+      "sourceCodeTarget": "DrDe",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "DrDe-TWoO",
+        "kind": "adventure",
+        "publicationId": "DrDe-TWoO"
+      },
+      "property": "parentSource",
+      "rawValue": "DrDe",
+      "disposition": "resolved",
+      "sourceCodeTarget": "DrDe",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "EFR",
+        "kind": "adventure",
+        "publicationId": "EFR"
+      },
+      "property": "parentSource",
+      "rawValue": "ERLW",
+      "disposition": "resolved",
+      "sourceCodeTarget": "ERLW",
+      "candidatePublicationIds": [
+        "ERLW"
+      ],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "FRAiF",
+        "kind": "adventure",
+        "publicationId": "FRAiF-TLLoL"
+      },
+      "property": "parentSource",
+      "rawValue": "FRAiF",
+      "disposition": "ambiguous",
+      "sourceCodeTarget": "FRAiF",
+      "candidatePublicationIds": [
+        "FRAiF"
+      ],
+      "reason": "The token matches a Source with multiple publication records; the raw field does not establish target granularity."
+    },
+    {
+      "owner": {
+        "sourceCode": "FS",
+        "kind": "adventure",
+        "publicationId": "FS"
+      },
+      "property": "parentSource",
+      "rawValue": "EGW",
+      "disposition": "resolved",
+      "sourceCodeTarget": "EGW",
+      "candidatePublicationIds": [
+        "EGW"
+      ],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "HoL",
+        "kind": "adventure",
+        "publicationId": "HoL"
+      },
+      "property": "parentSource",
+      "rawValue": "VRGR",
+      "disposition": "resolved",
+      "sourceCodeTarget": "VRGR",
+      "candidatePublicationIds": [
+        "VRGR"
+      ],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "KKW",
+        "kind": "adventure",
+        "publicationId": "KKW"
+      },
+      "property": "parentSource",
+      "rawValue": "GGR",
+      "disposition": "resolved",
+      "sourceCodeTarget": "GGR",
+      "candidatePublicationIds": [
+        "GGR"
+      ],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "LoX",
+        "kind": "adventure",
+        "publicationId": "LoX"
+      },
+      "property": "parentSource",
+      "rawValue": "SAiS",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "MOT",
+        "kind": "adventure",
+        "publicationId": "MOT-NSS"
+      },
+      "property": "parentSource",
+      "rawValue": "MOT",
+      "disposition": "ambiguous",
+      "sourceCodeTarget": "MOT",
+      "candidatePublicationIds": [
+        "MOT"
+      ],
+      "reason": "The token matches a Source with multiple publication records; the raw field does not establish target granularity."
+    },
+    {
+      "owner": {
+        "sourceCode": "MPP",
+        "kind": "book",
+        "publicationId": "MPP"
+      },
+      "property": "parentSource",
+      "rawValue": "PAitM",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "NRH-ASS",
+        "kind": "adventure",
+        "publicationId": "NRH-ASS"
+      },
+      "property": "parentSource",
+      "rawValue": "NRH",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "NRH-AT",
+        "kind": "adventure",
+        "publicationId": "NRH-AT"
+      },
+      "property": "parentSource",
+      "rawValue": "NRH",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "NRH-AVitW",
+        "kind": "adventure",
+        "publicationId": "NRH-AVitW"
+      },
+      "property": "parentSource",
+      "rawValue": "NRH",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "NRH-AWoL",
+        "kind": "adventure",
+        "publicationId": "NRH-AWoL"
+      },
+      "property": "parentSource",
+      "rawValue": "NRH",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "NRH-CoI",
+        "kind": "adventure",
+        "publicationId": "NRH-CoI"
+      },
+      "property": "parentSource",
+      "rawValue": "NRH",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "NRH-TCMC",
+        "kind": "adventure",
+        "publicationId": "NRH-TCMC"
+      },
+      "property": "parentSource",
+      "rawValue": "NRH",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "NRH-TLT",
+        "kind": "adventure",
+        "publicationId": "NRH-TLT"
+      },
+      "property": "parentSource",
+      "rawValue": "NRH",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "OoW",
+        "kind": "adventure",
+        "publicationId": "OoW"
+      },
+      "property": "parentSource",
+      "rawValue": "AI",
+      "disposition": "resolved",
+      "sourceCodeTarget": "AI",
+      "candidatePublicationIds": [
+        "AI"
+      ],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "RMBRE",
+        "kind": "adventure",
+        "publicationId": "RMBRE"
+      },
+      "property": "parentSource",
+      "rawValue": "RMR",
+      "disposition": "resolved",
+      "sourceCodeTarget": "RMR",
+      "candidatePublicationIds": [
+        "RMR"
+      ],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "SatO",
+        "kind": "book",
+        "publicationId": "SatO"
+      },
+      "property": "parentSource",
+      "rawValue": "PAitM",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "SCC-ARiR",
+        "kind": "adventure",
+        "publicationId": "SCC-ARiR"
+      },
+      "property": "parentSource",
+      "rawValue": "SCC",
+      "disposition": "resolved",
+      "sourceCodeTarget": "SCC",
+      "candidatePublicationIds": [
+        "SCC"
+      ],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "SCC-CK",
+        "kind": "adventure",
+        "publicationId": "SCC-CK"
+      },
+      "property": "parentSource",
+      "rawValue": "SCC",
+      "disposition": "resolved",
+      "sourceCodeTarget": "SCC",
+      "candidatePublicationIds": [
+        "SCC"
+      ],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "SCC-HfMT",
+        "kind": "adventure",
+        "publicationId": "SCC-HfMT"
+      },
+      "property": "parentSource",
+      "rawValue": "SCC",
+      "disposition": "resolved",
+      "sourceCodeTarget": "SCC",
+      "candidatePublicationIds": [
+        "SCC"
+      ],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "SCC-TMM",
+        "kind": "adventure",
+        "publicationId": "SCC-TMM"
+      },
+      "property": "parentSource",
+      "rawValue": "SCC",
+      "disposition": "resolved",
+      "sourceCodeTarget": "SCC",
+      "candidatePublicationIds": [
+        "SCC"
+      ],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "SDW",
+        "kind": "adventure",
+        "publicationId": "SDW"
+      },
+      "property": "parentSource",
+      "rawValue": "ESK",
+      "disposition": "resolved",
+      "sourceCodeTarget": "ESK",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "SLW",
+        "kind": "adventure",
+        "publicationId": "SLW"
+      },
+      "property": "parentSource",
+      "rawValue": "ESK",
+      "disposition": "resolved",
+      "sourceCodeTarget": "ESK",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "TftYP-AtG",
+        "kind": "adventure",
+        "publicationId": "TftYP-AtG"
+      },
+      "property": "parentSource",
+      "rawValue": "TftYP",
+      "disposition": "resolved",
+      "sourceCodeTarget": "TftYP",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "TftYP-DiT",
+        "kind": "adventure",
+        "publicationId": "TftYP-DiT"
+      },
+      "property": "parentSource",
+      "rawValue": "TftYP",
+      "disposition": "resolved",
+      "sourceCodeTarget": "TftYP",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "TftYP-TFoF",
+        "kind": "adventure",
+        "publicationId": "TftYP-TFoF"
+      },
+      "property": "parentSource",
+      "rawValue": "TftYP",
+      "disposition": "resolved",
+      "sourceCodeTarget": "TftYP",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "TftYP-THSoT",
+        "kind": "adventure",
+        "publicationId": "TftYP-THSoT"
+      },
+      "property": "parentSource",
+      "rawValue": "TftYP",
+      "disposition": "resolved",
+      "sourceCodeTarget": "TftYP",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "TftYP-ToH",
+        "kind": "adventure",
+        "publicationId": "TftYP-ToH"
+      },
+      "property": "parentSource",
+      "rawValue": "TftYP",
+      "disposition": "resolved",
+      "sourceCodeTarget": "TftYP",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "TftYP-TSC",
+        "kind": "adventure",
+        "publicationId": "TftYP-TSC"
+      },
+      "property": "parentSource",
+      "rawValue": "TftYP",
+      "disposition": "resolved",
+      "sourceCodeTarget": "TftYP",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "TftYP-WPM",
+        "kind": "adventure",
+        "publicationId": "TftYP-WPM"
+      },
+      "property": "parentSource",
+      "rawValue": "TftYP",
+      "disposition": "resolved",
+      "sourceCodeTarget": "TftYP",
+      "candidatePublicationIds": [],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "ToFW",
+        "kind": "adventure",
+        "publicationId": "ToFW"
+      },
+      "property": "parentSource",
+      "rawValue": "PAitM",
+      "disposition": "unresolved",
+      "candidatePublicationIds": [],
+      "reason": "The token matches no registry Source code or supplied publication ID."
+    },
+    {
+      "owner": {
+        "sourceCode": "ToR",
+        "kind": "adventure",
+        "publicationId": "ToR"
+      },
+      "property": "parentSource",
+      "rawValue": "EGW",
+      "disposition": "resolved",
+      "sourceCodeTarget": "EGW",
+      "candidatePublicationIds": [
+        "EGW"
+      ],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    },
+    {
+      "owner": {
+        "sourceCode": "US",
+        "kind": "adventure",
+        "publicationId": "US"
+      },
+      "property": "parentSource",
+      "rawValue": "EGW",
+      "disposition": "resolved",
+      "sourceCodeTarget": "EGW",
+      "candidatePublicationIds": [
+        "EGW"
+      ],
+      "reason": "The token identifies one registered Source; its raw value is preserved in canonical JSON."
+    }
+  ]
+}

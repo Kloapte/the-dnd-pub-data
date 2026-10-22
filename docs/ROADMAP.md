@@ -1,5 +1,7 @@
 # The DnD Pub — Compendium Backend — Roadmap
 
+**Status: Finalized and approved.** The approved sequence and scope are established below. Phase and step approval checkpoints remain in force.
+
 ## Goal
 
 The goal of this project is to transform D&D 5eTools source data into a normalized, strongly typed, semantically enriched compendium for The DnD Pub.
@@ -39,7 +41,7 @@ Semantic enrichment is the preferred approach from Step 1 onward. When semantic 
 
 ## Roadmap execution
 
-Step 0 is complete. The sequence below incorporates the approved dependency analysis and planning decisions.
+Step 0 is completed and approved. The sequence below incorporates the approved dependency analysis and planning decisions.
 
 Evidence:
 
@@ -384,6 +386,8 @@ Continue the feedback loop until the representative conversion is accepted.
 
 ## Phase 5 — Dataset expansion
 
+**Status:** Completed and approved. The canonical Source dataset is stored at `src/main/resources/normalized/sources/sources.json`; provenance, conversion tooling, and reports remain outside runtime resources.
+
 ### Objective
 
 Normalize the remaining source entries using the approved contracts and interpretation conventions.
@@ -416,11 +420,13 @@ Do not claim full completion when entries remain unaccounted for.
 - Provenance and versioning metadata.
 - Identified integration limitations.
 
-**Approval checkpoint:** Stop and request approval before proceeding to Phase 6.
+**Approval checkpoint:** Phase 5 is approved. Stop here; Phase 6 requires separate authorization.
 
 ---
 
 ## Phase 6 — Backend integration
+
+**Status:** Implementation completed; awaiting review. Phase 6 is not yet approved.
 
 ### Objective
 
@@ -461,7 +467,7 @@ Integrate the approved canonical datasets into the backend using strongly typed 
 
 ### Status and evidence
 
-Completed and reviewed. The [discovery report](../discover/STEP_0_DEPENDENCY_ANALYSIS.md) and [dependency tables](../discover/step-0/dependency-tables.md) are the evidence for this revision. Retain the original Step 0 scope and deliverables below for traceability; no repeat analysis is authorized by this update.
+Completed and approved. The [discovery report](../discover/STEP_0_DEPENDENCY_ANALYSIS.md) and [dependency tables](../discover/step-0/dependency-tables.md) are the evidence for the approved sequence. Retain the original Step 0 scope and deliverables below for traceability; no repeat analysis is authorized by this update.
 
 ### Objective
 
