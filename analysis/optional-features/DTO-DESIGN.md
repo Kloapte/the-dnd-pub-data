@@ -1,7 +1,0 @@
-# Optional Features DTO design
-
-Each definition is identified by a stable source-aware ID (`optional-feature:<normalized-source>:<slug>`), with shared `SourceIdentity` and page-bearing `SourceReference` values. Feature types are a list of original source codes because one feature may have multiple types and the corpus provides no authoritative labels.
-
-Public detail includes identity, source/page, feature type codes, prerequisite groups, resource consumption, spell grant declarations, proficiency/sense grants, progression declarations, and source reprint/secondary-source references. Summary DTOs carry identity, name, source/page, and feature types. Entry prose, raw markup, import metadata, and availability flags are excluded. Prerequisites preserve grouped level plus class/subclass identity, item, pact, spell, other summary, and optional-feature requirements. No evaluator is included.
-
-Spell grants and progression are source declaration structures, not character selections or resolved spell/class catalog links. Explicit class/subclass identities are kept as lightweight source references; none are inferred from feature type. Resource amount/min/max values are preserved as supplied; no recharge or use formula exists in the observed source. IDs are never merged across sources. For the observed prerequisites, each record has one requirement group; the collection shape remains a list so the model does not preclude alternatives in other source revisions.

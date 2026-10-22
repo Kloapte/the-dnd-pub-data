@@ -1,3 +1,0 @@
-# Optional Features inheritance analysis
-
-The complete raw corpus was rechecked for `_copy`, `_versions`, `_mod`, and template/inheritance declarations. None occur. Strict typed deserialization rejects unknown properties, and the raw-resource regression test confirms these inheritance keys are absent. The result is 221 root definitions and zero expanded definitions; expansion was not deferred. All roots have unique source-provided `(name, source)` identities. `reprintedAs` is a reference, not a copy instruction, and never creates a definition. `isClassFeatureVariant` occurs on 25 records; it is source metadata, not a concrete expansion declaration.

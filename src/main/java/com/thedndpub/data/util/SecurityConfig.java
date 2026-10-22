@@ -20,7 +20,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/monsters/**", "/api/languages/**", "/api/books/**", "/api/skills/**", "/api/senses/**", "/api/conditions/**", "/api/actions/**", "/api/**").permitAll());
+                        .requestMatchers("/api/**").permitAll());
         return http.build();
     }
 

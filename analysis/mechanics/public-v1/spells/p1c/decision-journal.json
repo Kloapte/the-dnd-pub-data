@@ -1,7 +1,0 @@
-{
-  "artifactKind": "REVIEW_DECISION_JOURNAL_NOT_RUNTIME_ALLOWLIST",
-  "schemaVersion": "1.0.0",
-  "candidateManifestSha256": "a52c938bae6c2b86f5c2941b3c4784dd05d31f809a5694b1c0213ddcc698f950",
-  "headEventSha256": null,
-  "events": []
-}
