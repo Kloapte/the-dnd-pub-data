@@ -1,0 +1,23 @@
+{
+  "id": "rule:XPHB:Ability Check",
+  "source": "XPHB",
+  "name": "Ability Check",
+  "page": 360,
+  "sourceFlags": {
+    "srd52": true,
+    "basicRules2024": true
+  },
+  "ruleType": "C",
+  "entries": [
+    "An ability check is a {@variantrule D20 Test|XPHB} that represents using one of the six abilities—or a specific skill associated with an ability—to overcome a challenge."
+  ],
+  "references": [
+    {
+      "targetType": "variantrule",
+      "source": "XPHB",
+      "name": "D20 Test",
+      "id": "rule:XPHB:D20 Test",
+      "rawToken": "{@variantrule D20 Test|XPHB}"
+    }
+  ]
+}

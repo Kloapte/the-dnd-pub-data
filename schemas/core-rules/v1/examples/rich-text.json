@@ -1,0 +1,31 @@
+[
+  "Plain source prose with an inline {@skill Acrobatics|PHB} tag.",
+  {
+    "type": "entries",
+    "name": "Named Group",
+    "entries": ["A nested entry."],
+    "source": "PHB",
+    "page": 10
+  },
+  {
+    "type": "list",
+    "style": "list-hang-notitle",
+    "columns": 2,
+    "items": [{"type": "item", "name": "First", "entry": "Entry text."}]
+  },
+  {
+    "type": "table",
+    "caption": "Illustrative table",
+    "colLabels": ["Name", "Value"],
+    "colStyles": ["col-6", "col-6"],
+    "rows": [["Text", 1]],
+    "footnotes": ["Footnote text."],
+    "data": {"genTables": {"tableInclude": true}}
+  },
+  {"type": "inset", "name": "Inset", "entries": ["Inset text."]},
+  {"type": "section", "name": "Section", "entries": ["Section text."]},
+  {"type": "item", "name": "Nested Item", "entries": ["Nested item text."]},
+  {"type": "inline", "entries": ["Inline ", {"type": "link", "href": {"type": "internal", "path": "rules.html", "hash": "anchor"}, "entry": "navigation link"}]},
+  {"type": "image", "href": {"type": "internal", "path": "book/PHB/example.webp"}, "width": 640, "height": 480, "title": "Example image", "credit": "Source credit"},
+  {"type": "quote", "entries": ["Quoted source text."], "by": "{@creature Example|PHB}"}
+]

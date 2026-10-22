@@ -1,0 +1,21 @@
+{
+  "id": "language:PHB:Common",
+  "source": "PHB",
+  "name": "Common",
+  "page": 123,
+  "sourceFlags": {
+    "srd": true,
+    "basicRules": true
+  },
+  "reprintedAs": [
+    "Common|XPHB"
+  ],
+  "typicalSpeakers": [
+    "{@filter humans|bestiary|type=humanoid|tag=any race;human}"
+  ],
+  "type": "standard",
+  "script": "Common",
+  "fonts": [
+    "fonts/languages/PHB/Human/Harpers.ttf"
+  ]
+}

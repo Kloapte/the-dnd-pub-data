@@ -1,0 +1,14 @@
+{
+  "id": "action:PHB:End Concentration",
+  "source": "PHB",
+  "name": "End Concentration",
+  "page": 203,
+  "timing": [
+    {
+      "kind": "free"
+    }
+  ],
+  "entries": [
+    "If a spell must be maintained with {@status concentration}, that fact appears in its Duration entry. You can end concentration at any time (no action required)."
+  ]
+}

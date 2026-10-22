@@ -1,0 +1,28 @@
+{
+  "id": "action:PHB:Attack",
+  "source": "PHB",
+  "name": "Attack",
+  "page": 192,
+  "sourceFlags": {
+    "srd": true,
+    "basicRules": true
+  },
+  "timing": [
+    {
+      "kind": "fixed",
+      "number": 1,
+      "unit": "action"
+    }
+  ],
+  "entries": [
+    "The most common action to take in combat is the Attack action, whether you are swinging a sword, firing an arrow from a bow, or brawling with your fists.",
+    "With this action, you make one melee or ranged attack. See the \"{@book Making an Attack|phb|9|making an attack}\" section for the rules that govern attacks."
+  ],
+  "reprintedAs": [
+    "Attack|XPHB"
+  ],
+  "seeAlsoAction": [
+    "grapple",
+    "shove"
+  ]
+}

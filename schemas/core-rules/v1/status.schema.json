@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:thedndpub:schemas:core-rules:status:v1",
+  "title": "Status",
+  "description": "A source-qualified game status, distinct from conditions and diseases.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "source", "name", "page", "entries"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^status:[^:]+:.+$"},
+    "source": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/nonEmptyString"},
+    "name": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"},
+    "page": {"type": "integer", "minimum": 1},
+    "sourceFlags": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceFlags"},
+    "entries": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/richTextArray"},
+    "reprintedAs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reprintReference"}
+    },
+    "references": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/modelReference"}}
+  }
+}

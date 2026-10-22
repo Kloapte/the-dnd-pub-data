@@ -1,0 +1,9 @@
+{
+  "id": "action:DMG:Mark",
+  "source": "DMG",
+  "name": "Mark",
+  "page": 271,
+  "entries": [
+    "This option makes it easier for melee combatants to harry each other with opportunity attacks."
+  ]
+}

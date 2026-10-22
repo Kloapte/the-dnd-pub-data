@@ -1,0 +1,521 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:thedndpub:schemas:core-rules:common:v1",
+  "title": "Core Rules Shared Definitions",
+  "description": "Reusable structural definitions for Step 2 core rules entities.",
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^\\S+$"
+    },
+    "displayText": {
+      "type": "string",
+      "minLength": 1
+    },
+    "identity": {
+      "type": "object",
+      "required": [
+        "id",
+        "source",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/displayText",
+          "description": "Stable source-qualified identifier: <type>:<source>:<exact source name>."
+        },
+        "source": {
+          "$ref": "#/$defs/nonEmptyString",
+          "description": "Exact source code; references the approved Source Registry."
+        },
+        "name": {
+          "$ref": "#/$defs/displayText",
+          "description": "Exact source entity name."
+        }
+      }
+    },
+    "sourceFlags": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "srd": {
+          "type": "boolean"
+        },
+        "srd52": {
+          "type": "boolean"
+        },
+        "basicRules": {
+          "type": "boolean"
+        },
+        "basicRules2024": {
+          "type": "boolean"
+        }
+      },
+      "description": "Only source-supplied publication membership flags; no inferred values."
+    },
+    "sourceCitation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "page"
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "description": "A source-supplied additional-source citation, not a resolved entity reference."
+    },
+    "modelReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetType",
+        "name"
+      ],
+      "properties": {
+        "targetType": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "source": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "name": {
+          "$ref": "#/$defs/displayText"
+        },
+        "id": {
+          "$ref": "#/$defs/displayText",
+          "pattern": "^[A-Za-z0-9-]+:[^:]+:.+$",
+          "description": "Include only when a source-qualified stable target identity is established from source evidence."
+        },
+        "rawToken": {
+          "$ref": "#/$defs/displayText",
+          "description": "Optional exact source reference token retained for traceability."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": ["id"]
+          },
+          "then": {
+            "required": ["source"]
+          }
+        }
+      ],
+      "description": "An explicit reference. Missing source or id remains missing; no target is inferred."
+    },
+    "reprintReference": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/displayText"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "uid",
+            "tag"
+          ],
+          "properties": {
+            "uid": {
+              "$ref": "#/$defs/displayText"
+            },
+            "tag": {
+              "$ref": "#/$defs/nonEmptyString"
+            }
+          }
+        }
+      ],
+      "description": "Preserves supplied reprint link values, including the observed typed uid/tag form."
+    },
+    "internalLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "path"
+      ],
+      "properties": {
+        "type": {
+          "const": "internal"
+        },
+        "path": {
+          "$ref": "#/$defs/displayText"
+        },
+        "hash": {
+          "$ref": "#/$defs/displayText"
+        }
+      },
+      "description": "Noncanonical page navigation metadata. It is not a domain entity reference."
+    },
+    "richTextArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/richText"
+      }
+    },
+    "richText": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/$defs/entriesNode"
+        },
+        {
+          "$ref": "#/$defs/listNode"
+        },
+        {
+          "$ref": "#/$defs/tableNode"
+        },
+        {
+          "$ref": "#/$defs/insetNode"
+        },
+        {
+          "$ref": "#/$defs/sectionNode"
+        },
+        {
+          "$ref": "#/$defs/itemNode"
+        },
+        {
+          "$ref": "#/$defs/inlineNode"
+        },
+        {
+          "$ref": "#/$defs/linkNode"
+        },
+        {
+          "$ref": "#/$defs/imageNode"
+        },
+        {
+          "$ref": "#/$defs/quoteNode"
+        }
+      ],
+      "description": "Source-authored prose and presentation structure. Inline tags remain literal text."
+    },
+    "entriesNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "entries"
+      ],
+      "properties": {
+        "type": {
+          "const": "entries"
+        },
+        "name": {
+          "$ref": "#/$defs/displayText"
+        },
+        "entries": {
+          "$ref": "#/$defs/richTextArray"
+        },
+        "source": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "listNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "items"
+      ],
+      "properties": {
+        "type": {
+          "const": "list"
+        },
+        "name": {
+          "$ref": "#/$defs/displayText"
+        },
+        "style": {
+          "$ref": "#/$defs/displayText"
+        },
+        "columns": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "items": {
+          "$ref": "#/$defs/richTextArray"
+        }
+      }
+    },
+    "tableCell": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "$ref": "#/$defs/richText"
+        }
+      ]
+    },
+    "tableData": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "genTables": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "tableInclude"
+          ],
+          "properties": {
+            "tableInclude": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "minProperties": 1
+    },
+    "tableNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "colLabels",
+        "colStyles",
+        "rows"
+      ],
+      "properties": {
+        "type": {
+          "const": "table"
+        },
+        "caption": {
+          "$ref": "#/$defs/displayText"
+        },
+        "colLabels": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "colStyles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/tableCell"
+            }
+          }
+        },
+        "footnotes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "isNameGenerator": {
+          "type": "boolean"
+        },
+        "data": {
+          "$ref": "#/$defs/tableData"
+        }
+      }
+    },
+    "insetNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "name",
+        "entries"
+      ],
+      "properties": {
+        "type": {
+          "const": "inset"
+        },
+        "name": {
+          "$ref": "#/$defs/displayText"
+        },
+        "entries": {
+          "$ref": "#/$defs/richTextArray"
+        },
+        "source": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "sectionNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "name",
+        "entries"
+      ],
+      "properties": {
+        "type": {
+          "const": "section"
+        },
+        "name": {
+          "$ref": "#/$defs/displayText"
+        },
+        "entries": {
+          "$ref": "#/$defs/richTextArray"
+        }
+      }
+    },
+    "itemNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "name"
+      ],
+      "properties": {
+        "type": {
+          "const": "item"
+        },
+        "name": {
+          "$ref": "#/$defs/displayText"
+        },
+        "entry": {
+          "type": "string"
+        },
+        "entries": {
+          "$ref": "#/$defs/richTextArray"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "entry"
+          ],
+          "not": {
+            "required": [
+              "entries"
+            ]
+          }
+        },
+        {
+          "required": [
+            "entries"
+          ],
+          "not": {
+            "required": [
+              "entry"
+            ]
+          }
+        }
+      ]
+    },
+    "inlineNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "entries"
+      ],
+      "properties": {
+        "type": {
+          "const": "inline"
+        },
+        "entries": {
+          "$ref": "#/$defs/richTextArray"
+        }
+      }
+    },
+    "linkNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "href",
+        "entry"
+      ],
+      "properties": {
+        "type": {
+          "const": "link"
+        },
+        "href": {
+          "$ref": "#/$defs/internalLink"
+        },
+        "entry": {
+          "type": "string"
+        }
+      }
+    },
+    "imageNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "href"
+      ],
+      "properties": {
+        "type": {
+          "const": "image"
+        },
+        "href": {
+          "$ref": "#/$defs/internalLink"
+        },
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "height": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "title": {
+          "$ref": "#/$defs/displayText"
+        },
+        "credit": {
+          "$ref": "#/$defs/displayText"
+        }
+      }
+    },
+    "quoteNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "entries",
+        "by"
+      ],
+      "properties": {
+        "type": {
+          "const": "quote"
+        },
+        "entries": {
+          "$ref": "#/$defs/richTextArray"
+        },
+        "by": {
+          "$ref": "#/$defs/displayText"
+        }
+      }
+    }
+  }
+}

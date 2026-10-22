@@ -1,0 +1,9 @@
+{
+  "id": "language-script:PHB:Draconic",
+  "source": "PHB",
+  "name": "Draconic",
+  "fonts": [
+    "fonts/languages/PHB/Draconic/Iokharic.otf",
+    "fonts/languages/PHB/Draconic/Iokharic Bold.otf"
+  ]
+}

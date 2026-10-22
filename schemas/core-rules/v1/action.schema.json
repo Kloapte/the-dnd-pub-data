@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:thedndpub:schemas:core-rules:action:v1",
+  "title": "Action",
+  "description": "A source-qualified game action with source-authored entries and optional typed timing.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "source", "name", "page", "entries"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^action:[^:]+:.+$"},
+    "source": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/nonEmptyString"},
+    "name": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"},
+    "page": {"type": "integer", "minimum": 1},
+    "sourceFlags": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceFlags"},
+    "timing": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "number", "unit"],
+            "properties": {
+              "kind": {"const": "fixed"},
+              "number": {"type": "number", "exclusiveMinimum": 0},
+              "unit": {"enum": ["action", "reaction", "bonus"]}
+            }
+          },
+          {"type": "object", "additionalProperties": false, "required": ["kind"], "properties": {"kind": {"const": "free"}}},
+          {"type": "object", "additionalProperties": false, "required": ["kind"], "properties": {"kind": {"const": "varies"}}}
+        ]
+      },
+      "description": "Typed interpretation of source time. Omit when the source has no time value."
+    },
+    "entries": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/richTextArray"},
+    "reprintedAs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reprintReference"}
+    },
+    "seeAlsoAction": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"}},
+    "fromVariant": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"},
+    "references": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/modelReference"}}
+  }
+}

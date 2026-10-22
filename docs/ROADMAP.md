@@ -69,7 +69,7 @@ Every phase is a separate milestone requiring approval before proceeding.
 
 Coordinating domains within a step preserves separate cohesive domain contracts and all phase approval checkpoints. Step 6 applies the same six phases to incremental enrichment of existing spells, with contract changes reviewed before conversion.
 
-This revision authorizes planning only. Step 1 and every subsequent phase or step require explicit authorization before work begins. Further changes to the sequence also require approval.
+The approved roadmap sequence and scope remain unchanged. Step 0 is complete and approved. Step 1 is complete and approved through all six phases. Step 2, Phase 1 is complete and awaiting review; Phase 2 and all later work remain subject to their approval checkpoints.
 
 ## Identity, references, and interpretation coverage
 
@@ -509,11 +509,13 @@ Produce a report under `/discover` containing:
 
 Do not normalize datasets, create canonical schemas, or modify the roadmap during this step.
 
-**Approval checkpoint:** Step 0 findings and the planning decisions reflected below have been approved. This roadmap revision is presented for review; do not begin Step 1 without explicit authorization.
+**Approval checkpoint:** Step 0 findings and the planning decisions reflected below are completed and approved.
 
 ---
 
 ## Step 1 — Source Registry
+
+**Status:** Step 1 is completed and approved. Phases 1–6 are each completed and approved.
 
 ### Objective
 
@@ -559,6 +561,10 @@ Evaluate source identity, publication metadata, aliases, and parent relationship
 ---
 
 ## Step 2 — Core Rules Foundation
+
+**Phase 1 status:** Source and domain analysis is completed and approved.
+
+**Phase 2 status:** Canonical model and JSON Schema design is completed and awaiting review. Phase 3 has not begun.
 
 ### Objective
 

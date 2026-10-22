@@ -1,0 +1,14 @@
+{
+  "id": "action:PHB:Cast a Spell",
+  "source": "PHB",
+  "name": "Cast a Spell",
+  "page": 192,
+  "timing": [
+    {
+      "kind": "varies"
+    }
+  ],
+  "entries": [
+    "Each spell has a casting time, which specifies whether the caster must use an action, a reaction, minutes, or even hours to cast it."
+  ]
+}

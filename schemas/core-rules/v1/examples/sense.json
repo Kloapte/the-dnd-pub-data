@@ -1,0 +1,16 @@
+{
+  "id": "sense:PHB:Blindsight",
+  "source": "PHB",
+  "name": "Blindsight",
+  "page": 183,
+  "sourceFlags": {
+    "srd": true,
+    "basicRules": true
+  },
+  "entries": [
+    "A creature with blindsight can perceive its surroundings without relying on sight, within a specific radius."
+  ],
+  "reprintedAs": [
+    "Blindsight|XPHB"
+  ]
+}

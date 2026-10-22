@@ -1,0 +1,13 @@
+{
+  "id": "disease:XDMG:Cackle Fever",
+  "source": "XDMG",
+  "name": "Cackle Fever",
+  "page": 61,
+  "sourceFlags": {
+    "srd52": true
+  },
+  "type": "Magical Contagion",
+  "entries": [
+    "A creature suffers the following effects {@dice 1d4} days after infection:"
+  ]
+}

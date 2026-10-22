@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:thedndpub:schemas:core-rules:language-script:v1",
+  "title": "LanguageScript",
+  "description": "Source-qualified language-script font metadata, separate from language identity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "source", "name", "fonts"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^language-script:[^:]+:.+$"},
+    "source": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/nonEmptyString"},
+    "name": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"},
+    "fonts": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"}},
+    "references": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/modelReference"}}
+  }
+}

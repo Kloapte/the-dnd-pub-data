@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:thedndpub:schemas:core-rules:condition:v1",
+  "title": "Condition",
+  "description": "A source-qualified condition definition. Mechanics remain separate from descriptive entries until supported interpretations are approved.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "source", "name", "page", "entries"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^condition:[^:]+:.+$"},
+    "source": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/nonEmptyString"},
+    "name": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"},
+    "page": {"type": "integer", "minimum": 1},
+    "sourceFlags": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceFlags"},
+    "entries": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/richTextArray"},
+    "otherSources": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceCitation"}},
+    "reprintedAs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reprintReference"}
+    },
+    "hasFluffImages": {"type": "boolean"},
+    "references": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/modelReference"}}
+  }
+}
