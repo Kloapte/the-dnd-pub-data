@@ -16,6 +16,7 @@
   - Data mappings
   - Test coverage
 - Keep documentation synchronized with implemented functionality and approved contracts.
+- Keep JSON schemas and its examples under `/schemas`, categorized by its model name
 
 ## Technology and code conventions
 
@@ -45,140 +46,22 @@
 - Avoid serializing empty nested objects.
 - Annotate controller methods with appropriate Swagger/OpenAPI annotations.
 
-## Architecture principles
+## Architecture and canonical-data boundaries
 
-- The backend consumes normalized, strongly typed compendium data.
-- Original source data and normalized application data must remain separate.
-- Source-specific interpretation and normalization occur offline, not during application runtime.
-- Codex may interpret source data and generate normalized JSON artifacts.
-- Java is responsible for deterministic application behavior, validation, domain logic, and mechanics execution.
-- Do not introduce source-specific parsing or interpretation logic into runtime services when the information can be normalized beforehand.
-- Avoid unnecessary abstraction layers, generic interpretation frameworks, dynamic registries, and source-specific adapters.
-- Prefer stable, explicit data contracts over flexible but weakly typed structures.
-- Keep normalization concerns separate from runtime mechanics execution.
-- Preserve the original source data for auditing, comparison, and future normalization updates.
-- Do not modify original source files as part of normalization.
-
-## JSON Schema contracts
-
-- Use JSON Schema Draft 2020-12 for normalized JSON contracts.
-- JSON Schema is the authoritative structural contract for normalized datasets.
-- Define and review a schema before generating its normalized dataset.
-- Keep schemas versioned and under source control.
-- Prefer explicit property names, predictable types, and consistent representations.
-- Avoid unnecessary polymorphism, dynamic property names, and source-specific JSON structures.
-- Use `$ref` and `$defs` to reuse shared schema definitions when appropriate.
-- Prefer cohesive schemas over excessive fragmentation into many small files.
-- Define enumerations explicitly when their allowed values are known.
-- Use consistent conventions for identifiers, references, optional properties, arrays, and enumerations.
-- Distinguish required fields from optional fields.
-- Do not use `null`, empty strings, or empty collections interchangeably to represent missing information.
-- Do not introduce additional properties into normalized JSON unless permitted by the schema.
-- Validate generated JSON against its corresponding schema.
-- Schema validation alone is insufficient for cross-document references and game-rule correctness. Perform additional integrity checks where applicable.
-- Treat schema changes as contract changes. Do not silently modify an approved schema to accommodate unexpected source data.
-- Evaluate compatibility and migration implications before changing approved contracts.
-
-## Normalization principles
-
-### General
-
-- Codex performs source interpretation and normalization offline.
-- Normalized JSON is a versioned, reviewable project artifact.
-- Follow the currently authorized normalization stage and roadmap milestone.
-- Do not combine structural and semantic normalization unless explicitly authorized.
-- Preserve source meaning and traceability throughout normalization.
-- Never invent mechanical values, source relationships, resolved references, or provenance.
-- Preserve ambiguity and unsupported constructs explicitly.
-- Abstain and report when source evidence is insufficient.
-- Do not silently omit source information because it is difficult to represent.
-- Prefer reusable, domain-oriented structures over source-specific representations.
-- Do not create Java interpretation frameworks to compensate for incomplete normalized data.
-- Prefer improving the normalized contract or reporting unsupported structures.
-
-### Stage A — Structural normalization
-
-The objective is to convert source JSON into clean, consistent, strongly typed JSON structures without changing the meaning of the source.
-
-- Normalize inconsistent field names and representations.
-- Replace unnecessary nesting and source-specific polymorphism with predictable structures.
-- Replace dynamic property names with explicit fields or collections where practical.
-- Preserve meaningful descriptions, mechanics text, references, and metadata.
-- Do not infer executable mechanics from descriptive text unless explicitly authorized.
-- Do not discard information solely to simplify a schema.
-- Represent genuinely unsupported source structures explicitly and report them.
-- Avoid introducing speculative domain properties that are not supported by the source.
-- Design canonical structures that can support later semantic enrichment without unnecessary redesign.
-
-### Stage B — Semantic normalization
-
-The objective is to interpret descriptive game rules and convert them into structured, executable mechanics.
-
-- Perform semantic normalization only when explicitly authorized.
-- Interpret mechanics using source evidence and established game rules.
-- Prefer reusable mechanic structures over spell-specific, monster-specific, or feature-specific implementations.
-- Separate mechanical effects, activation requirements, conditions, targeting, duration, and other relevant concepts where appropriate.
-- Do not invent missing values or assume unspecified behavior.
-- Preserve conditional behavior and relevant rule restrictions.
-- Preserve ambiguous or unsupported mechanics explicitly rather than guessing.
-- Keep human adjudication requirements identifiable.
-- Report interpretations that cannot be represented by the current mechanics contract.
-- Do not modify the mechanics execution engine merely to accommodate a single source entry without explicit approval.
-- Keep generated mechanics compatible with deterministic backend execution.
-
-## Model identity and references
-
-- Use predictable model identifiers following the convention `<type>:<source>:<name>`.
-- Define and consistently apply normalization rules for identifier components.
-- Preserve stable identifiers across normalization runs whenever the underlying entity identity has not changed.
-- Preserve existing SRD and SRD52 flags.
-- Never invent, infer, or reassign SRD or SRD52 status.
-- Reference other normalized entities by their predictable identifiers.
-- Do not duplicate complete external models inside another DTO or JSON entry.
-- Preserve unresolved references explicitly and report them.
-- Do not invent references based solely on similar names.
-- Source entries may be split into multiple normalized entities when there is a clear domain reason.
-- Maintain traceability between original source entries and all normalized entities derived from them.
-- Do not merge distinct source entities unless their equivalence is established.
-
-## Provenance and versioning
-
-- Every normalized entity must be traceable to its original source entry.
-- Track provenance using a manifest or equivalent structured metadata.
-- Include applicable information such as:
-  - Original source identifier and location.
-  - Source version or revision.
-  - Source content hash.
-  - Normalized entity identifier.
-  - JSON Schema version.
-  - Normalization or review status.
-- Never fabricate unavailable provenance metadata.
-- Keep provenance metadata separate from application DTOs unless the application contract explicitly requires it.
-- Preserve approved normalized data when processing updated source versions.
-- Use deterministic source comparisons to identify added, modified, and removed entries.
-- Reinterpret changed entries and any affected dependencies rather than regenerating the entire dataset unnecessarily.
-- Do not silently overwrite previously approved normalized interpretations.
-- Report changed interpretations, unresolved differences, and compatibility concerns.
-- Treat source removal separately from deletion of normalized entities. Report the impact before removing previously approved data.
-
-### Incomplete normalization and reference tracking
-
-- Keep canonical normalized JSON free of implementation, normalization, and review status metadata.
-- Do not introduce fields such as `implementationStatus`, `normalizationStatus`, `reviewStatus`, `isComplete`, `needsReview`, or similar workflow indicators into canonical domain models.
-- Preserve valid source-derived references even when their targets have not yet been normalized or integrated.
-- Document incomplete interpretations, unresolved or missing references, deferred dependencies, unsupported mechanics, and missing source content under `/doc`.
-- Maintain a discoverable overview of incomplete artifacts, including their canonical identifiers, affected properties or mechanics, reasons for incompleteness, dependencies, and required follow-up work.
-- Distinguish deferred, unsupported, and ambiguous cases in documentation rather than encoding those workflow states in normalized structures.
-- Update the documentation when an incomplete artifact is resolved, including removing obsolete limitations.
-- Use validation reports under `/reports` for generated findings and verification results. Keep persistent, actionable limitations documented under `/doc`.
-- Do not invent placeholder mechanics or reference targets merely to make normalized artifacts appear complete.
-- Provenance and schema versioning may be maintained in separate manifests, but implementation and review progress must remain outside canonical domain JSON.
+- The backend consumes normalized, strongly typed compendium data; source interpretation happens offline, never in runtime services.
+- Java implements deterministic application behavior, validation, domain logic, and approved mechanics execution.
+- Original source datasets are immutable and remain separate from normalized application data.
+- **Read and follow [`BOUNDARIES.md`](BOUNDARIES.md) before any domain analysis, schema design, conversion, validation, or integration.** It is the authoritative policy for semantic interpretation, allowed canonical content, identity, references, omissions, duplication, licensing considerations, and provenance.
+- Prefer explicit domain-specific mechanics models, with small shared identity/source/reference components where justified. Do not introduce a universal mechanics model or source-specific runtime adapters by default.
+- JSON Schema Draft 2020-12 is authoritative for normalized structural contracts. Define and approve schemas before conversion; version them and validate generated data. Structural validation does not establish mechanical correctness.
+- Do not change an approved schema or normalized interpretation without review and approval. Do not modify original source data.
+- Treat the Source Registry as an approved, metadata-only domain. New semantic-normalization policies do not retroactively change approved Step 1 artifacts without separate authorization.
 
 ## Normalization workflow
 
 Each roadmap domain follows six phases. Every phase is a separate milestone requiring approval before proceeding to the next.
 
-Semantic enrichment is the intended normalization strategy from Step 1 onward. If source analysis indicates that semantic normalization is unreliable, unnecessarily complex, or counterproductive for a particular domain, Codex must explain the findings and propose an alternative for approval.
+Semantic interpretation into domain-specific canonical mechanics is the intended strategy for mechanics-bearing domains. Metadata-only domains, such as the approved Source Registry, are exempt from mechanic extraction. If semantic interpretation is unreliable or inappropriate for a domain, document the evidence and seek approval for an alternative. Follow BOUNDARIES.md.
 
 ### Phase 1 — Source and domain analysis
 
@@ -279,8 +162,9 @@ Using the approved analysis:
 - Create JSON Schema Draft 2020-12 contracts.
 - Use explicit and predictable structures.
 - Define required fields, optional fields, enumerations, and constraints.
-- Preserve source meaning and necessary provenance.
-- Define how unsupported or ambiguous mechanics are represented.
+- Model supported mechanics explicitly and domain-specifically; never retain source `entries` or rich-text as a default fallback.
+- Keep provenance and omitted/duplicate source content outside canonical JSON as specified in `BOUNDARIES.md`.
+- Define how unsupported or ambiguous mechanics are accounted for outside canonical JSON.
 - Provide representative JSON examples.
 - Document source-to-canonical mappings.
 - Validate the schemas and examples.
@@ -294,15 +178,15 @@ Do not begin source conversion before the contracts are approved.
 - Cover common structures, identified submodels, edge cases, and outliers.
 - Convert the selected entries into canonical JSON.
 - Perform semantic enrichment according to the approved contracts.
-- Preserve source references and traceability.
-- Record ambiguous interpretations and unsupported mechanics.
+- Preserve typed source references and external traceability.
+- Account for every original entry, documenting omitted and duplicate entries under `/doc/<model>/` as specified in `BOUNDARIES.md`.
 - Do not silently modify approved schemas.
 - Produce a conversion report showing coverage and identified issues.
 
 ### Phase 4 — Validation and feedback
 
 - Validate generated JSON against the approved JSON Schemas.
-- Verify source coverage and preservation of meaningful information.
+- Verify source-entry accounting, mechanically correct interpretation, and documentation of omitted/duplicate content.
 - Verify identifiers, references, and provenance.
 - Review semantic interpretations against original source evidence.
 - Evaluate whether the chosen domain model remains appropriate.
@@ -319,7 +203,7 @@ Do not begin source conversion before the contracts are approved.
 - Process data in manageable, reviewable batches.
 - Apply established interpretation conventions consistently.
 - Validate each batch against the approved schemas.
-- Track processed, successful, unresolved, and unsupported entries.
+- Track processed, successful, omitted, duplicate, unresolved, and unsupported entries; no silent loss.
 - Detect missing entities, duplicate identifiers, and broken references.
 - Preserve provenance and previously approved interpretations.
 - Report unexpected source variations before introducing significant contract changes.
@@ -346,7 +230,7 @@ Stop after the authorized milestone. Do not automatically proceed to the next ro
 - Use automated JSON Schema validation for normalized datasets.
 - Verify cross-document references separately from schema validation.
 - Verify uniqueness and stability of normalized identifiers.
-- Verify preservation of meaningful source information.
+- Verify every source entry has been accounted for under the canonical mechanics and external omission/duplication policy.
 - Track normalization coverage, unsupported constructs, and unresolved references.
 - Use representative fixtures for known structural variations and edge cases.
 - For semantic mechanics, test meaningful gameplay behavior rather than only JSON structure.
@@ -358,7 +242,7 @@ Stop after the authorized milestone. Do not automatically proceed to the next ro
 
 ## Codex execution workflow
 
-- Read this `AGENTS.md` and the relevant `ROADMAP.md` section before starting work.
+- Read this `AGENTS.md`, `BOUNDARIES.md`, and the relevant `ROADMAP.md` section before starting work.
 - Inspect only the code, schemas, source data, and documentation necessary for the authorized task.
 - Prefer targeted searches and focused inspection.
 - Consult historical discovery or analysis artifacts only when answering a concrete question.
@@ -391,7 +275,7 @@ Stop after the authorized milestone. Do not automatically proceed to the next ro
 - Favor simple domain models over generalized interpretation frameworks.
 - Avoid overengineering for hypothetical future source formats.
 - Do not hide uncertainty behind default values or guessed interpretations.
-- Do not sacrifice meaningful source information for simpler DTOs.
+- Do not silently lose meaningful source mechanics; document source content excluded from canonical JSON according to `BOUNDARIES.md`.
 - Keep generated data understandable and reviewable by humans.
 - Treat Codex-generated interpretations as proposals until validated and approved.
 - Preserve the distinction between structurally valid data and mechanically correct data.

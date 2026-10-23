@@ -12,7 +12,7 @@ These are recommendations only. The roadmap, source datasets, application, and c
 
 ## Scope, evidence, and reproducibility
 
-The instructions are [AGENTS.md](../AGENTS.md) and Step 0 of [docs/ROADMAP.md](../docs/ROADMAP.md). The roadmap resides under the existing `docs` directory; this analysis follows the requested `/discover` location without relocating existing files.
+The instructions are [AGENTS.md](../AGENTS.md) and Step 0 of [docs/ROADMAP.md](../ROADMAP.md). The roadmap resides under the existing `docs` directory; this analysis follows the requested `/discover` location without relocating existing files.
 
 All 174 JSON files under `src/main/resources/data` were parsed and recursively scanned: 27,828,944 bytes and 15,083 top-level array members. This is a complete census of those files, not a sample. Array members include metadata, templates, name-table containers, and loot-table containers; this number is not a count of canonical game entities. Nested versions and generated variants are not expanded or added to that total. Representative mechanics and dependency paths were then inspected directly; no exhaustive semantic interpretation of every entry is claimed.
 

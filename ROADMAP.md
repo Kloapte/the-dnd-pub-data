@@ -45,8 +45,8 @@ Step 0 is completed and approved. The sequence below incorporates the approved d
 
 Evidence:
 
-- [Step 0 discovery report](../discover/STEP_0_DEPENDENCY_ANALYSIS.md).
-- [Dependency tables and source inventory](../discover/step-0/dependency-tables.md).
+- [Step 0 discovery report](discover/STEP_0_DEPENDENCY_ANALYSIS.md).
+- [Dependency tables and source inventory](discover/step-0/dependency-tables.md).
 
 The discovery artifacts retain the original step numbering as historical evidence. The step numbers in this roadmap govern future work. Do not repeat Step 0 to execute this revision.
 
@@ -467,7 +467,7 @@ Integrate the approved canonical datasets into the backend using strongly typed 
 
 ### Status and evidence
 
-Completed and approved. The [discovery report](../discover/STEP_0_DEPENDENCY_ANALYSIS.md) and [dependency tables](../discover/step-0/dependency-tables.md) are the evidence for the approved sequence. Retain the original Step 0 scope and deliverables below for traceability; no repeat analysis is authorized by this update.
+Completed and approved. The [discovery report](discover/STEP_0_DEPENDENCY_ANALYSIS.md) and [dependency tables](discover/step-0/dependency-tables.md) are the evidence for the approved sequence. Retain the original Step 0 scope and deliverables below for traceability; no repeat analysis is authorized by this update.
 
 ### Objective
 
