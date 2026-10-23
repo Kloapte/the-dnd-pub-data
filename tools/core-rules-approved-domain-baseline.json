@@ -1,0 +1,88 @@
+{
+  "models": [
+    "condition",
+    "disease",
+    "language",
+    "sense",
+    "skill",
+    "status"
+  ],
+  "entries": [
+    {
+      "file": "condition.schema.json",
+      "sha256": "ce9f878d7a708ceea85b7dc0120bc7ca2b0dc64eaf676fb9ed836dc4488a8937"
+    },
+    {
+      "file": "examples/condition-blinded-xphb.json",
+      "sha256": "c7e93cf176b7df10b338a6cdbfb50d37b3affdc3013a371922d212c14759b571"
+    },
+    {
+      "file": "examples/condition-exhaustion-phb.json",
+      "sha256": "ef7838f317e086c39ef00f011a6f9087b936594056305436309628384df9858f"
+    },
+    {
+      "file": "examples/condition-exhaustion-xphb.json",
+      "sha256": "d434555dbd6cf80fffa2c46721ed92e91e1eef12cb38a8cc4ee0a338ea7f3f7a"
+    },
+    {
+      "file": "examples/condition.json",
+      "sha256": "2f18b100fcd101e4980276eb75f3fed55844cd5d57deaa44eca85363f7556c6a"
+    },
+    {
+      "file": "disease.schema.json",
+      "sha256": "5c65513a3cf84569dda728b2e1886df3f6e85e453664b5464dce63c5bba5e490"
+    },
+    {
+      "file": "examples/disease.json",
+      "sha256": "d98efebd317d36dd47e429c36216ac26802c5e8467d8d3123ee1e6c309e1e6c5"
+    },
+    {
+      "file": "language.schema.json",
+      "sha256": "6b3ec6e956e260ad19df23f999c05809bf5a59e08916f3c5df0831349c537987"
+    },
+    {
+      "file": "examples/language.json",
+      "sha256": "e11b88165f3fbcf92b7fc3ff40a876a3a1f3a3b2cdf8f65344aaa9eeaac613a5"
+    },
+    {
+      "file": "sense.schema.json",
+      "sha256": "1d16a9dce3627d0bb7a3c8001d17e959a12e51aa0bd5ac3c0a43dfc919b966ee"
+    },
+    {
+      "file": "examples/sense.json",
+      "sha256": "6c1bdac8c9d711c84b3aee911870eac15bfa0a3568f1bda62e0b6f2767bf4440"
+    },
+    {
+      "file": "skill.schema.json",
+      "sha256": "a62c2052800e448317410d65cb7d316a4d893ae53939ba649535631562796772"
+    },
+    {
+      "file": "examples/skill.json",
+      "sha256": "8b561e57fbc18827a2bb650505f2b3ff3a67c6912f2fca61802511a08aa2df51"
+    },
+    {
+      "file": "status.schema.json",
+      "sha256": "a69b2da44fdc27a4f9bae5a940288b980e109bd52c22db6c4c26fc751c3b3a32"
+    },
+    {
+      "file": "examples/status-bloodied.json",
+      "sha256": "66e06106aea1b7b24580bf3fc433ba1d4da0384dc79a081d8879375f13489949"
+    },
+    {
+      "file": "examples/status-concentration-phb.json",
+      "sha256": "bea5b235f7ac3157be6d47ef362832b12ba29d99e79d6c22dcebc052bbf106f3"
+    },
+    {
+      "file": "examples/status-concentration-xphb.json",
+      "sha256": "872e0337297d7cd6ba2b7385a916c760214e4b04815eb1ab8519937ad89e4827"
+    },
+    {
+      "file": "examples/status-surprised-phb.json",
+      "sha256": "226f3b0fb0bfda0544ab4254a114178dcd3d17482f4d09be4e79bc0a80168c78"
+    },
+    {
+      "file": "examples/status-surprised-xphb.json",
+      "sha256": "1e410f40eda737736bea1d3f1f5a122dccf06a8c486457ba22c7faffed39ac49"
+    }
+  ]
+}

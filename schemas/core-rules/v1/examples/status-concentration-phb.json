@@ -1,0 +1,63 @@
+{
+  "id": "status:phb:concentration",
+  "name": "Concentration",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 203,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "status",
+        "id": "status:xphb:concentration"
+      }
+    ]
+  },
+  "mechanics": [
+    {
+      "kind": "MAINTENANCE_SAVE",
+      "ability": "constitution",
+      "trigger": "damage",
+      "separateEachTrigger": true,
+      "dc": {
+        "formula": "higher-of-base-or-damage-fraction",
+        "base": 10,
+        "damageFraction": 0.5
+      },
+      "failure": "status-ends"
+    },
+    {
+      "kind": "MAINTENANCE_SAVE",
+      "ability": "constitution",
+      "trigger": "environmental-phenomenon",
+      "dc": {
+        "formula": "fixed",
+        "base": 10
+      },
+      "failure": "status-ends"
+    },
+    {
+      "kind": "ENDING_CONDITION",
+      "when": "another-concentration-spell-starts",
+      "automatic": true
+    },
+    {
+      "kind": "ENDING_CONDITION",
+      "when": "incapacitated",
+      "automatic": true
+    },
+    {
+      "kind": "ENDING_CONDITION",
+      "when": "dies",
+      "automatic": true
+    },
+    {
+      "kind": "ENDING_CONDITION",
+      "when": "voluntarily",
+      "automatic": false,
+      "actionRequired": false
+    }
+  ]
+}

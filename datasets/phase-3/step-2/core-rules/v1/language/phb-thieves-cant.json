@@ -1,0 +1,19 @@
+{
+  "id": "language:phb:thieves-cant",
+  "name": "Thieves' Cant",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 94,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:thieves-cant"
+      }
+    ]
+  },
+  "category": "secret"
+}

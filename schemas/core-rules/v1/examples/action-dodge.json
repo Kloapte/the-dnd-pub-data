@@ -1,0 +1,88 @@
+{
+  "id": "action:phb:dodge",
+  "name": "Dodge",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 192
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "DODGE"
+  ],
+  "operations": [
+    {
+      "kind": "ROLL_MODIFIER",
+      "modifier": {
+        "kind": "D20_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage"
+      },
+      "appliesWhen": {
+        "kind": "ATTACK_AGAINST_AFFECTED",
+        "actor": "attacker",
+        "target": "affected-creature"
+      },
+      "duration": {
+        "endsAt": "start-of-next-turn",
+        "endsIf": [
+          {
+            "kind": "HAS_CONDITION",
+            "actor": "affected-creature",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:phb:incapacitated"
+            }
+          },
+          {
+            "kind": "SPEED_IS_ZERO",
+            "actor": "affected-creature"
+          }
+        ]
+      },
+      "actor": "attacker",
+      "target": "affected-creature",
+      "operationId": "dodge-modifier-1",
+      "when": {
+        "kind": "CAN_SEE",
+        "actor": "attacker",
+        "target": "affected-creature"
+      }
+    },
+    {
+      "kind": "ROLL_MODIFIER",
+      "modifier": {
+        "kind": "D20_ROLL_MODIFIER",
+        "roll": "saving-throw",
+        "direction": "advantage",
+        "ability": "dexterity"
+      },
+      "appliesWhen": {
+        "kind": "SAVING_THROW_BY_AFFECTED",
+        "actor": "affected-creature",
+        "target": "affected-creature"
+      },
+      "duration": {
+        "endsAt": "start-of-next-turn",
+        "endsIf": [
+          {
+            "kind": "HAS_CONDITION",
+            "actor": "affected-creature",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:phb:incapacitated"
+            }
+          },
+          {
+            "kind": "SPEED_IS_ZERO",
+            "actor": "affected-creature"
+          }
+        ]
+      },
+      "actor": "affected-creature",
+      "target": "affected-creature",
+      "operationId": "dodge-modifier-2"
+    }
+  ]
+}

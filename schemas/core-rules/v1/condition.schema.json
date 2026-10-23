@@ -2,24 +2,415 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:thedndpub:schemas:core-rules:condition:v1",
   "title": "Condition",
-  "description": "A source-qualified condition definition. Mechanics remain separate from descriptive entries until supported interpretations are approved.",
+  "allOf": [
+    {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/identity"
+    }
+  ],
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "source", "name", "page", "entries"],
+  "required": [
+    "id",
+    "name",
+    "sourceMetadata",
+    "effects"
+  ],
   "properties": {
-    "id": {"type": "string", "pattern": "^condition:[^:]+:.+$"},
-    "source": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/nonEmptyString"},
-    "name": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"},
-    "page": {"type": "integer", "minimum": 1},
-    "sourceFlags": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceFlags"},
-    "entries": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/richTextArray"},
-    "otherSources": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceCitation"}},
-    "reprintedAs": {
+    "id": {
+      "type": "string",
+      "pattern": "^condition:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceMetadata": {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceMetadata"
+    },
+    "levelMechanics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maximumLevel",
+        "cumulative",
+        "application",
+        "endsAtLevel"
+      ],
+      "properties": {
+        "maximumLevel": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "cumulative": {
+          "type": "boolean"
+        },
+        "application": {
+          "enum": [
+            "add-specified-levels",
+            "add-one-level"
+          ]
+        },
+        "endsAtLevel": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "recovery": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "method",
+              "levelsRemoved"
+            ],
+            "properties": {
+              "method": {
+                "enum": [
+                  "long-rest",
+                  "raised-from-dead"
+                ]
+              },
+              "levelsRemoved": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "requirements": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "food",
+                    "drink"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "effects": {
       "type": "array",
       "minItems": 1,
-      "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reprintReference"}
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "sense",
+              "actor"
+            ],
+            "properties": {
+              "kind": {
+                "const": "REMOVE_SENSE"
+              },
+              "sense": {
+                "enum": [
+                  "sight",
+                  "hearing",
+                  "smell",
+                  "taste",
+                  "touch",
+                  "special"
+                ]
+              },
+              "actor": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actor"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "roll",
+              "requirement",
+              "actor"
+            ],
+            "properties": {
+              "kind": {
+                "const": "AUTOMATIC_CHECK_FAILURE"
+              },
+              "roll": {
+                "const": "ability-check"
+              },
+              "requirement": {
+                "enum": [
+                  "requires-sight",
+                  "requires-hearing",
+                  "requires-smell",
+                  "requires-touch"
+                ]
+              },
+              "actor": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actor"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "roll",
+              "direction",
+              "actor",
+              "target",
+              "appliesWhen"
+            ],
+            "properties": {
+              "kind": {
+                "const": "ATTACK_ROLL_MODIFIER"
+              },
+              "roll": {
+                "const": "attack"
+              },
+              "direction": {
+                "enum": [
+                  "advantage",
+                  "disadvantage"
+                ]
+              },
+              "actor": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actor"
+              },
+              "target": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actor"
+              },
+              "appliesWhen": {
+                "enum": [
+                  "attack-targets-affected",
+                  "affected-creature-attacks"
+                ]
+              },
+              "minimumLevel": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "duration": {
+                "const": "while-level-threshold-is-met"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "roll",
+              "direction",
+              "actor",
+              "duration"
+            ],
+            "properties": {
+              "kind": {
+                "const": "CHECK_ROLL_MODIFIER"
+              },
+              "roll": {
+                "enum": [
+                  "ability-check",
+                  "saving-throw",
+                  "attack",
+                  "d20-test"
+                ]
+              },
+              "direction": {
+                "enum": [
+                  "advantage",
+                  "disadvantage",
+                  "bonus",
+                  "penalty"
+                ]
+              },
+              "actor": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actor"
+              },
+              "ability": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+              },
+              "amountPerLevel": {
+                "type": "number"
+              },
+              "duration": {
+                "const": "while-level-threshold-is-met"
+              },
+              "minimumLevel": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "movement",
+              "actor",
+              "duration"
+            ],
+            "properties": {
+              "kind": {
+                "const": "MOVEMENT_MODIFIER"
+              },
+              "movement": {
+                "enum": [
+                  "speed-fraction",
+                  "speed-flat"
+                ]
+              },
+              "actor": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actor"
+              },
+              "amount": {
+                "type": "number"
+              },
+              "amountPerLevel": {
+                "type": "number"
+              },
+              "duration": {
+                "const": "while-level-threshold-is-met"
+              },
+              "minimumLevel": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "fraction",
+              "minimumLevel",
+              "actor",
+              "appliesWhen",
+              "duration"
+            ],
+            "properties": {
+              "kind": {
+                "const": "HIT_POINT_MAX_MODIFIER"
+              },
+              "fraction": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 1
+              },
+              "minimumLevel": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "actor": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actor"
+              },
+              "appliesWhen": {
+                "const": "at-or-above-level"
+              },
+              "duration": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "level"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "while-condition-level-at-or-above"
+                  },
+                  "level": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "atLevel"
+            ],
+            "properties": {
+              "kind": {
+                "const": "FATAL_EXHAUSTION_THRESHOLD"
+              },
+              "atLevel": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "restriction",
+              "actor",
+              "appliesWhen",
+              "duration"
+            ],
+            "properties": {
+              "kind": {
+                "const": "RESTRICTION"
+              },
+              "restriction": {
+                "enum": [
+                  "cannot-move",
+                  "cannot-take-actions",
+                  "cannot-take-reactions",
+                  "cannot-speak",
+                  "cannot-see",
+                  "cannot-target",
+                  "movement-limited"
+                ]
+              },
+              "actor": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actor"
+              },
+              "appliesWhen": {
+                "enum": [
+                  "on-own-turn",
+                  "first-turn-of-combat",
+                  "until-first-turn-ends",
+                  "at-or-above-level",
+                  "while-grappled"
+                ]
+              },
+              "minimumLevel": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "duration": {
+                "const": "while-level-threshold-is-met"
+              },
+              "amount": {
+                "type": "number",
+                "minimum": 0
+              },
+              "unit": {
+                "enum": [
+                  "feet",
+                  "speed-fraction"
+                ]
+              }
+            }
+          }
+        ]
+      }
     },
-    "hasFluffImages": {"type": "boolean"},
-    "references": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/modelReference"}}
+    "references": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+      }
+    }
   }
 }

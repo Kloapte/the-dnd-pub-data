@@ -1,0 +1,23 @@
+{
+  "id": "rule:dmg:downtime-activity-crafting-a-magic-item",
+  "name": "Downtime Activity: Crafting a Magic Item",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 128,
+    "citations": [
+      {
+        "source": "DMG",
+        "page": 141
+      }
+    ]
+  },
+  "mechanics": [
+    {
+      "componentId": "craft-magic-item",
+      "kind": "DOWNTIME_PROCEDURE",
+      "subtype": "ACTIVITY",
+      "procedure": "craft",
+      "outcome": "item-created"
+    }
+  ]
+}

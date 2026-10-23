@@ -1,0 +1,22 @@
+{
+  "id": "rule:xphb:spell-attack",
+  "name": "Spell Attack",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 374
+  },
+  "mechanics": [
+    {
+      "componentId": "spell-attack",
+      "kind": "SPELL_MAGIC",
+      "subtype": "SPELL_ATTACK",
+      "attackRoll": {
+        "kind": "ATTACK_ROLL",
+        "forms": [
+          "spell"
+        ],
+        "target": "armor-class"
+      }
+    }
+  ]
+}

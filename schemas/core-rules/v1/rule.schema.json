@@ -2,25 +2,1373 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:thedndpub:schemas:core-rules:rule:v1",
   "title": "Rule",
-  "description": "A source-qualified core, optional, variant, or other rule entry without inferred type-code meanings.",
+  "allOf": [
+    {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/identity"
+    }
+  ],
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "source", "name", "page", "entries"],
+  "required": [
+    "id",
+    "name",
+    "sourceMetadata",
+    "mechanics"
+  ],
   "properties": {
-    "id": {"type": "string", "pattern": "^rule:[^:]+:.+$"},
-    "source": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/nonEmptyString"},
-    "name": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"},
-    "page": {"type": "integer", "minimum": 1},
-    "sourceFlags": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceFlags"},
-    "ruleType": {"enum": ["C", "O", "V", "VO"]},
-    "type": {"enum": ["section", "entries"], "description": "The separate source field; do not derive it from ruleType."},
-    "entries": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/richTextArray"},
-    "reprintedAs": {
+    "id": {
+      "type": "string",
+      "pattern": "^rule:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceMetadata": {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceMetadata"
+    },
+    "mechanics": {
       "type": "array",
       "minItems": 1,
-      "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reprintReference"}
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/d20Test"
+          },
+          {
+            "$ref": "#/$defs/abilityCheck"
+          },
+          {
+            "$ref": "#/$defs/attackRoll"
+          },
+          {
+            "$ref": "#/$defs/savingThrow"
+          },
+          {
+            "$ref": "#/$defs/deathSavingThrow"
+          },
+          {
+            "$ref": "#/$defs/testModifier"
+          },
+          {
+            "$ref": "#/$defs/movement"
+          },
+          {
+            "$ref": "#/$defs/unarmedStrike"
+          },
+          {
+            "$ref": "#/$defs/areaGeometry"
+          },
+          {
+            "$ref": "#/$defs/cover"
+          },
+          {
+            "$ref": "#/$defs/obscuration"
+          },
+          {
+            "$ref": "#/$defs/damage"
+          },
+          {
+            "$ref": "#/$defs/hitPoints"
+          },
+          {
+            "$ref": "#/$defs/healing"
+          },
+          {
+            "$ref": "#/$defs/deathRule"
+          },
+          {
+            "$ref": "#/$defs/magic"
+          },
+          {
+            "$ref": "#/$defs/downtime"
+          },
+          {
+            "$ref": "#/$defs/social"
+          },
+          {
+            "$ref": "#/$defs/rest"
+          },
+          {
+            "$ref": "#/$defs/vehicle"
+          },
+          {
+            "$ref": "#/$defs/unarmedOption"
+          }
+        ]
+      }
     },
-    "additionalSources": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceCitation"}},
-    "references": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/modelReference"}}
+    "references": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+      }
+    },
+    "composition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "members"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "AND",
+            "OR"
+          ]
+        },
+        "members": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/$defs/compositionMember"
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  },
+  "$defs": {
+    "d20Test": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "includes",
+        "dmDeterminesWhenWarranted"
+      ],
+      "properties": {
+        "kind": {
+          "const": "D20_TEST"
+        },
+        "subtype": {
+          "const": "TEST"
+        },
+        "includes": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "ABILITY_CHECK",
+              "ATTACK_ROLL",
+              "SAVING_THROW"
+            ]
+          }
+        },
+        "dmDeterminesWhenWarranted": {
+          "type": "boolean"
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "abilityCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "abilities"
+      ],
+      "properties": {
+        "kind": {
+          "const": "D20_TEST"
+        },
+        "subtype": {
+          "const": "ABILITY_CHECK"
+        },
+        "abilities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+          }
+        },
+        "skill": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        },
+        "tool": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        },
+        "dc": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "passiveScore": {
+          "type": "boolean"
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "attackRoll": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "roll"
+      ],
+      "properties": {
+        "kind": {
+          "const": "D20_TEST"
+        },
+        "subtype": {
+          "const": "ATTACK_ROLL"
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        },
+        "roll": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/attackRoll"
+        }
+      }
+    },
+    "savingThrow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "savingThrow"
+      ],
+      "properties": {
+        "kind": {
+          "const": "D20_TEST"
+        },
+        "subtype": {
+          "const": "SAVING_THROW"
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "savingThrow": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/savingThrow"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "deathSavingThrow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "trigger"
+      ],
+      "properties": {
+        "kind": {
+          "const": "D20_TEST"
+        },
+        "subtype": {
+          "const": "DEATH_SAVING_THROW"
+        },
+        "trigger": {
+          "const": "start-of-turn-at-zero-hit-points"
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "testModifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "modifier"
+      ],
+      "properties": {
+        "kind": {
+          "const": "D20_TEST"
+        },
+        "subtype": {
+          "const": "TEST_MODIFIER"
+        },
+        "modifier": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/d20RollModifier"
+        },
+        "test": {
+          "enum": [
+            "ability-check",
+            "attack-roll",
+            "saving-throw",
+            "initiative",
+            "d20-test"
+          ]
+        },
+        "direction": {
+          "enum": [
+            "bonus",
+            "penalty"
+          ]
+        },
+        "amount": {
+          "type": "number"
+        },
+        "diceCount": {
+          "const": 2
+        },
+        "select": {
+          "enum": [
+            "higher",
+            "lower"
+          ]
+        },
+        "cancelsOpposite": {
+          "type": "boolean"
+        },
+        "multipleInstancesStack": {
+          "type": "boolean"
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "modifier": {
+                "const": "advantage"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "diceCount",
+              "select"
+            ],
+            "properties": {
+              "select": {
+                "const": "higher"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "modifier": {
+                "const": "disadvantage"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "diceCount",
+              "select"
+            ],
+            "properties": {
+              "select": {
+                "const": "lower"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "unarmedStrike": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "COMBAT_PROCEDURE"
+        },
+        "subtype": {
+          "const": "UNARMED_STRIKE"
+        }
+      }
+    },
+    "unarmedSave": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "abilities",
+        "abilitySelection",
+        "dc"
+      ],
+      "properties": {
+        "kind": {
+          "const": "SAVING_THROW"
+        },
+        "abilities": {
+          "const": [
+            "strength",
+            "dexterity"
+          ]
+        },
+        "abilitySelection": {
+          "const": "target-chooses"
+        },
+        "dc": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "base",
+            "ability",
+            "proficiencyBonus"
+          ],
+          "properties": {
+            "base": {
+              "const": 8
+            },
+            "ability": {
+              "const": "strength"
+            },
+            "proficiencyBonus": {
+              "type": "boolean"
+            }
+          }
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "movement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "procedure"
+      ],
+      "properties": {
+        "kind": {
+          "const": "MOVEMENT_SPATIAL"
+        },
+        "subtype": {
+          "enum": [
+            "CLIMBING",
+            "CRAWLING",
+            "DIFFICULT_TERRAIN",
+            "FALLING",
+            "FLYING",
+            "JUMPING",
+            "SWIMMING",
+            "TELEPORTATION"
+          ]
+        },
+        "procedure": {
+          "enum": [
+            "movement-cost",
+            "distance-limit",
+            "fall-damage",
+            "speed-required",
+            "destination"
+          ]
+        },
+        "speedType": {
+          "enum": [
+            "walking",
+            "climb",
+            "fly",
+            "swim",
+            "burrow"
+          ]
+        },
+        "distance": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "enum": [
+            "feet",
+            "speed-multiplier"
+          ]
+        },
+        "extraFeetPerFoot": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cumulative": {
+          "type": "boolean"
+        },
+        "ability": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+        },
+        "check": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "areaGeometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "shape"
+      ],
+      "properties": {
+        "kind": {
+          "const": "MOVEMENT_SPATIAL"
+        },
+        "subtype": {
+          "const": "AREA_OF_EFFECT"
+        },
+        "shape": {
+          "enum": [
+            "cone",
+            "cube",
+            "cylinder",
+            "emanation",
+            "line",
+            "sphere"
+          ]
+        },
+        "origin": {
+          "enum": [
+            "source",
+            "point-in-space",
+            "creature"
+          ]
+        },
+        "dimensions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
+        },
+        "unit": {
+          "const": "feet"
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "cover": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "level"
+      ],
+      "properties": {
+        "kind": {
+          "const": "MOVEMENT_SPATIAL"
+        },
+        "subtype": {
+          "const": "COVER"
+        },
+        "level": {
+          "enum": [
+            "half",
+            "three-quarters",
+            "total"
+          ]
+        },
+        "armorClassBonus": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "savingThrowBonus": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "blocksTargeting": {
+          "type": "boolean"
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "obscuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "level"
+      ],
+      "properties": {
+        "kind": {
+          "const": "MOVEMENT_SPATIAL"
+        },
+        "subtype": {
+          "const": "OBSCURATION"
+        },
+        "level": {
+          "enum": [
+            "lightly-obscured",
+            "heavily-obscured"
+          ]
+        },
+        "sightEffect": {
+          "enum": [
+            "disadvantage-on-sight-dependent-perception",
+            "blocks-vision"
+          ]
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "damage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "damageTypes"
+          ]
+        },
+        {
+          "required": [
+            "damageRoll"
+          ]
+        },
+        {
+          "required": [
+            "damageModifier"
+          ]
+        },
+        {
+          "required": [
+            "damageThreshold"
+          ]
+        },
+        {
+          "required": [
+            "objectDamage"
+          ]
+        }
+      ],
+      "properties": {
+        "kind": {
+          "const": "DAMAGE_HEALTH_STATE"
+        },
+        "subtype": {
+          "const": "DAMAGE"
+        },
+        "damageTypes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "acid",
+              "bludgeoning",
+              "cold",
+              "fire",
+              "force",
+              "lightning",
+              "necrotic",
+              "piercing",
+              "poison",
+              "psychic",
+              "radiant",
+              "slashing",
+              "thunder"
+            ]
+          }
+        },
+        "damageThreshold": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "objectDamage": {
+          "type": "boolean"
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "damageRoll": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+        },
+        "damageModifier": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "diceMultiplier",
+            "modifierApplications"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CRITICAL_HIT_DAMAGE_MODIFIER"
+            },
+            "diceMultiplier": {
+              "type": "integer",
+              "minimum": 2
+            },
+            "modifierApplications": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "appliesWhen": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+            }
+          }
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "hitPoints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "rule"
+      ],
+      "properties": {
+        "kind": {
+          "const": "DAMAGE_HEALTH_STATE"
+        },
+        "subtype": {
+          "const": "HIT_POINTS"
+        },
+        "rule": {
+          "enum": [
+            "temporary-hit-points",
+            "maximum",
+            "current",
+            "zero-hit-points"
+          ]
+        },
+        "replacementOrder": {
+          "enum": [
+            "choose-source",
+            "newest-first"
+          ]
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "healing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "method"
+      ],
+      "properties": {
+        "kind": {
+          "const": "DAMAGE_HEALTH_STATE"
+        },
+        "subtype": {
+          "const": "HEALING"
+        },
+        "method": {
+          "enum": [
+            "hit-dice",
+            "rest",
+            "healing-effect",
+            "stabilization"
+          ]
+        },
+        "amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "enum": [
+            "hit-points",
+            "hit-dice"
+          ]
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "deathRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "procedure"
+      ],
+      "properties": {
+        "kind": {
+          "const": "DAMAGE_HEALTH_STATE"
+        },
+        "subtype": {
+          "const": "DEATH"
+        },
+        "procedure": {
+          "enum": [
+            "instant-death",
+            "massive-damage",
+            "dying",
+            "stabilized"
+          ]
+        },
+        "threshold": {
+          "type": "number",
+          "minimum": 0
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "magic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype"
+      ],
+      "properties": {
+        "kind": {
+          "const": "SPELL_MAGIC"
+        },
+        "subtype": {
+          "enum": [
+            "CASTING",
+            "SPELL_ATTACK",
+            "RESOURCE",
+            "ATTUNEMENT",
+            "MAGICAL_EFFECT",
+            "POSSESSION",
+            "TRANSFORMATION"
+          ]
+        },
+        "castingTime": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/turnTiming"
+        },
+        "resource": {
+          "enum": [
+            "spell-slot",
+            "spell-point",
+            "charge"
+          ]
+        },
+        "requiresConcentration": {
+          "type": "boolean"
+        },
+        "reference": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "attackRoll": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/attackRoll"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "downtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "procedure"
+      ],
+      "properties": {
+        "kind": {
+          "const": "DOWNTIME_PROCEDURE"
+        },
+        "subtype": {
+          "const": "ACTIVITY"
+        },
+        "procedure": {
+          "enum": [
+            "craft",
+            "buy",
+            "sell",
+            "research",
+            "train",
+            "work",
+            "gamble",
+            "carouse",
+            "franchise"
+          ]
+        },
+        "duration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "properties": {
+            "amount": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "unit": {
+              "enum": [
+                "day",
+                "week",
+                "month"
+              ]
+            }
+          }
+        },
+        "check": {
+          "$ref": "#/$defs/abilityCheck"
+        },
+        "outcome": {
+          "enum": [
+            "item-created",
+            "information-gained",
+            "resource-gained",
+            "complication"
+          ]
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "social": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype"
+      ],
+      "properties": {
+        "kind": {
+          "const": "SOCIAL_PROCEDURE"
+        },
+        "subtype": {
+          "enum": [
+            "ATTITUDE",
+            "INFLUENCE",
+            "LOYALTY",
+            "MORALE"
+          ]
+        },
+        "attitude": {
+          "enum": [
+            "friendly",
+            "indifferent",
+            "hostile"
+          ]
+        },
+        "check": {
+          "$ref": "#/$defs/abilityCheck"
+        },
+        "scoreThreshold": {
+          "type": "number"
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "rest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "duration"
+      ],
+      "properties": {
+        "kind": {
+          "const": "REST_PROCEDURE"
+        },
+        "subtype": {
+          "enum": [
+            "SHORT_REST",
+            "LONG_REST"
+          ]
+        },
+        "duration": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "unit": {
+          "enum": [
+            "hour",
+            "hours"
+          ]
+        },
+        "interruption": {
+          "enum": [
+            "combat",
+            "strenuous-activity",
+            "none"
+          ]
+        },
+        "recovery": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "hit-points",
+              "hit-dice",
+              "class-feature",
+              "spell-slots"
+            ]
+          }
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "vehicle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "procedure"
+      ],
+      "properties": {
+        "kind": {
+          "const": "VEHICLE_PROCEDURE"
+        },
+        "subtype": {
+          "enum": [
+            "SHIP_MOVEMENT",
+            "SHIP_COMBAT",
+            "CREW",
+            "REPAIR",
+            "CRASHING"
+          ]
+        },
+        "procedure": {
+          "enum": [
+            "initiative",
+            "movement",
+            "attack",
+            "damage",
+            "repair",
+            "crew-role"
+          ]
+        },
+        "check": {
+          "$ref": "#/$defs/abilityCheck"
+        },
+        "distance": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "enum": [
+            "feet",
+            "miles",
+            "nautical-miles"
+          ]
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "compositionMember": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "componentId"
+          ],
+          "properties": {
+            "kind": {
+              "const": "COMPONENT"
+            },
+            "componentId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
+          }
+        },
+        {
+          "$ref": "#/properties/composition"
+        }
+      ]
+    },
+    "unarmedOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "option",
+        "onFailedSave",
+        "targetLimit",
+        "appliesWhen"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "COMBAT_PROCEDURE"
+        },
+        "subtype": {
+          "const": "UNARMED_STRIKE_OPTION"
+        },
+        "option": {
+          "enum": [
+            "GRAPPLE",
+            "SHOVE"
+          ]
+        },
+        "onFailedSave": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "condition"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "APPLY_CONDITION"
+                },
+                "condition": {
+                  "$ref": "#/$defs/conditionReference"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "outcomes"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "CHOOSE_ONE"
+                },
+                "outcomes": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "kind",
+                          "movement",
+                          "distance",
+                          "unit"
+                        ],
+                        "properties": {
+                          "kind": {
+                            "const": "FORCED_MOVEMENT"
+                          },
+                          "movement": {
+                            "const": "push"
+                          },
+                          "distance": {
+                            "const": 5
+                          },
+                          "unit": {
+                            "const": "feet"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "kind",
+                          "condition"
+                        ],
+                        "properties": {
+                          "kind": {
+                            "const": "APPLY_CONDITION"
+                          },
+                          "condition": {
+                            "$ref": "#/$defs/conditionReference"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "targetLimit": {
+          "const": "no-more-than-one-size-larger"
+        },
+        "requiresFreeHand": {
+          "type": "boolean"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "conditionReference": {
+      "allOf": [
+        {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        },
+        {
+          "type": "object",
+          "required": [
+            "targetType"
+          ],
+          "properties": {
+            "targetType": {
+              "const": "condition"
+            }
+          }
+        }
+      ]
+    }
   }
 }

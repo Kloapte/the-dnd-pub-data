@@ -2,45 +2,1091 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:thedndpub:schemas:core-rules:action:v1",
   "title": "Action",
-  "description": "A source-qualified game action with source-authored entries and optional typed timing.",
+  "allOf": [
+    {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/identity"
+    }
+  ],
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "source", "name", "page", "entries"],
+  "required": [
+    "id",
+    "name",
+    "sourceMetadata",
+    "capabilities"
+  ],
   "properties": {
-    "id": {"type": "string", "pattern": "^action:[^:]+:.+$"},
-    "source": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/nonEmptyString"},
-    "name": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"},
-    "page": {"type": "integer", "minimum": 1},
-    "sourceFlags": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceFlags"},
+    "id": {
+      "type": "string",
+      "pattern": "^action:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceMetadata": {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceMetadata"
+    },
     "timing": {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/turnTiming"
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "ATTACK_MELEE",
+          "ATTACK_RANGED",
+          "ATTACK_BAREHANDS",
+          "MARK_TARGET",
+          "DASH",
+          "DISENGAGE",
+          "DODGE",
+          "HELP",
+          "HIDE",
+          "READY",
+          "SEARCH",
+          "STUDY",
+          "INFLUENCE",
+          "UTILIZE",
+          "CAST_SPELL",
+          "END_CONCENTRATION",
+          "ESCAPE_GRAPPLE",
+          "USE_OBJECT",
+          "GRAPPLE",
+          "SHOVE",
+          "STABILIZE",
+          "MAGIC_ACTION",
+          "DON_SHIELD",
+          "DOFF_SHIELD",
+          "ACTIVATE_MAGIC_ITEM",
+          "IDENTIFY_SPELL",
+          "IMPROVISE"
+        ]
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "target",
+              "weapon",
+              "free-hand",
+              "movement",
+              "check",
+              "save",
+              "condition",
+              "item"
+            ]
+          },
+          "reference": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+          },
+          "ability": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+          }
+        }
+      }
+    },
+    "operations": {
       "type": "array",
       "minItems": 1,
       "items": {
         "oneOf": [
           {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["kind", "number", "unit"],
-            "properties": {
-              "kind": {"const": "fixed"},
-              "number": {"type": "number", "exclusiveMinimum": 0},
-              "unit": {"enum": ["action", "reaction", "bonus"]}
-            }
+            "$ref": "#/$defs/attackResolution"
           },
-          {"type": "object", "additionalProperties": false, "required": ["kind"], "properties": {"kind": {"const": "free"}}},
-          {"type": "object", "additionalProperties": false, "required": ["kind"], "properties": {"kind": {"const": "varies"}}}
+          {
+            "$ref": "#/$defs/rollModifier"
+          },
+          {
+            "$ref": "#/$defs/check"
+          },
+          {
+            "$ref": "#/$defs/savingThrow"
+          },
+          {
+            "$ref": "#/$defs/movement"
+          },
+          {
+            "$ref": "#/$defs/objectOperation"
+          },
+          {
+            "$ref": "#/$defs/spellOperation"
+          },
+          {
+            "$ref": "#/$defs/recoveryOperation"
+          },
+          {
+            "$ref": "#/$defs/conditionOperation"
+          },
+          {
+            "$ref": "#/$defs/statusOperation"
+          }
         ]
-      },
-      "description": "Typed interpretation of source time. Omit when the source has no time value."
+      }
     },
-    "entries": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/richTextArray"},
-    "reprintedAs": {
+    "references": {
       "type": "array",
       "minItems": 1,
-      "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reprintReference"}
+      "items": {
+        "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+      }
     },
-    "seeAlsoAction": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"}},
-    "fromVariant": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"},
-    "references": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/modelReference"}}
+    "choiceGroups": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/choiceGroup"
+      }
+    }
+  },
+  "$defs": {
+    "attackResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "attack"
+      ],
+      "properties": {
+        "kind": {
+          "const": "ATTACK_RESOLUTION"
+        },
+        "attack": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/attackRoll"
+        },
+        "target": {
+          "enum": [
+            "creature",
+            "object"
+          ]
+        },
+        "replacesOneAttack": {
+          "type": "boolean"
+        },
+        "operationId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        }
+      }
+    },
+    "rollModifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "modifier",
+        "actor",
+        "target",
+        "appliesWhen"
+      ],
+      "properties": {
+        "kind": {
+          "const": "ROLL_MODIFIER"
+        },
+        "modifier": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/d20RollModifier"
+        },
+        "actor": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actor"
+        },
+        "target": {
+          "enum": [
+            "affected-creature",
+            "attacker",
+            "marked-target",
+            "opposing-creature"
+          ]
+        },
+        "establishedBy": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actionTrigger"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actionTrigger"
+        },
+        "duration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "endsAt"
+          ],
+          "properties": {
+            "endsAt": {
+              "enum": [
+                "start-of-next-turn",
+                "end-of-next-turn",
+                "end-of-current-turn"
+              ]
+            },
+            "endsIf": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/conditionPredicate"
+              }
+            }
+          }
+        },
+        "usageLimit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "maximum",
+            "period"
+          ],
+          "properties": {
+            "maximum": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "period": {
+              "enum": [
+                "per-turn",
+                "per-round"
+              ]
+            }
+          }
+        },
+        "reaction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "availabilityRequired",
+            "consumed"
+          ],
+          "properties": {
+            "availabilityRequired": {
+              "type": "boolean"
+            },
+            "consumed": {
+              "type": "boolean"
+            }
+          }
+        },
+        "when": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/conditionPredicate"
+        },
+        "operationId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        }
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "operationId",
+        "resolution",
+        "actor",
+        "abilities"
+      ],
+      "properties": {
+        "kind": {
+          "const": "CHECK_OR_CONTEST"
+        },
+        "resolution": {
+          "enum": [
+            "against-dc",
+            "contested-check"
+          ]
+        },
+        "actor": {
+          "enum": [
+            "acting-creature",
+            "target",
+            "both"
+          ]
+        },
+        "abilities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+          }
+        },
+        "abilitySelection": {
+          "enum": [
+            "acting-creature-chooses",
+            "target-chooses"
+          ]
+        },
+        "skill": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        },
+        "opposingSkills": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+          }
+        },
+        "dc": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "dcSource": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        },
+        "opposingAbilities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+          }
+        },
+        "opposingAbilitySelection": {
+          "enum": [
+            "target-chooses",
+            "acting-creature-chooses"
+          ]
+        },
+        "failure": {
+          "enum": [
+            "no-effect",
+            "target-remains-unstable"
+          ]
+        },
+        "targetLimit": {
+          "enum": [
+            "no-more-than-one-size-larger"
+          ]
+        },
+        "targetWithinReach": {
+          "type": "boolean"
+        },
+        "automaticSuccessWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/conditionPredicate"
+        },
+        "operationId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "replacesOneAttack": {
+          "type": "boolean"
+        },
+        "target": {
+          "enum": [
+            "target",
+            "affected-creature"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "resolution": {
+                "const": "against-dc"
+              }
+            }
+          },
+          "then": {
+            "anyOf": [
+              {
+                "required": [
+                  "dc"
+                ],
+                "properties": {
+                  "dc": {}
+                }
+              },
+              {
+                "required": [
+                  "dcSource"
+                ],
+                "properties": {
+                  "dcSource": {}
+                }
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "resolution": {
+                "const": "contested-check"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "opposingAbilities"
+            ],
+            "properties": {
+              "opposingAbilities": {}
+            }
+          }
+        }
+      ]
+    },
+    "savingThrow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "operationId",
+        "actor",
+        "abilities",
+        "dc",
+        "successOutcome",
+        "failureOutcome"
+      ],
+      "properties": {
+        "kind": {
+          "const": "SAVING_THROW"
+        },
+        "actor": {
+          "enum": [
+            "acting-creature",
+            "target"
+          ]
+        },
+        "abilities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+          }
+        },
+        "dc": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/difficultyClass"
+        },
+        "abilitySelection": {
+          "enum": [
+            "target-chooses",
+            "rule-specified"
+          ]
+        },
+        "successOutcome": {
+          "enum": [
+            "no-effect",
+            "check-succeeds"
+          ]
+        },
+        "failureOutcome": {
+          "enum": [
+            "condition-applied",
+            "target-moved",
+            "effect-applied"
+          ]
+        },
+        "movementOutcome": {
+          "enum": [
+            "push-five-feet",
+            "prone"
+          ]
+        },
+        "operationId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        }
+      }
+    },
+    "movement": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "movement",
+            "amount",
+            "unit",
+            "appliesWhen"
+          ],
+          "properties": {
+            "kind": {
+              "const": "MOVEMENT_INCREASE"
+            },
+            "movement": {
+              "const": "current-turn-movement"
+            },
+            "amount": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "unit": {
+              "const": "current-speed"
+            },
+            "appliesWhen": {
+              "$ref": "#/$defs/movementApplicability"
+            },
+            "operationId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "movement",
+            "target",
+            "distance",
+            "unit",
+            "appliesWhen"
+          ],
+          "properties": {
+            "kind": {
+              "const": "FORCED_MOVEMENT"
+            },
+            "movement": {
+              "enum": [
+                "push",
+                "pull",
+                "drag"
+              ]
+            },
+            "target": {
+              "const": "other-creature"
+            },
+            "distance": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "unit": {
+              "enum": [
+                "feet",
+                "spaces"
+              ]
+            },
+            "appliesWhen": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/operationApplicability"
+            },
+            "alternativeOutcome": {
+              "enum": [
+                "prone"
+              ]
+            },
+            "operationId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "permission"
+          ],
+          "properties": {
+            "kind": {
+              "const": "MOVEMENT_PERMISSION"
+            },
+            "permission": {
+              "enum": [
+                "no-opportunity-attack"
+              ]
+            },
+            "duration": {
+              "enum": [
+                "current-turn",
+                "until-start-of-next-turn"
+              ]
+            },
+            "operationId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "trigger",
+            "response"
+          ],
+          "properties": {
+            "kind": {
+              "const": "TRIGGERED_MOVEMENT"
+            },
+            "trigger": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actionTrigger"
+            },
+            "response": {
+              "enum": [
+                "move-up-to-speed"
+              ]
+            },
+            "operationId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
+          }
+        }
+      ]
+    },
+    "objectOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "operation"
+      ],
+      "properties": {
+        "kind": {
+          "const": "OBJECT_OPERATION"
+        },
+        "operation": {
+          "enum": [
+            "ordinary-interaction",
+            "don-shield",
+            "doff-shield",
+            "activate-magic-item"
+          ]
+        },
+        "activation": {
+          "enum": [
+            "command-word",
+            "read-scroll",
+            "drink-potion",
+            "item-defined"
+          ]
+        },
+        "timing": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/turnTiming"
+        },
+        "operationId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        }
+      }
+    },
+    "spellOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "operation"
+      ],
+      "properties": {
+        "kind": {
+          "const": "SPELL_OPERATION"
+        },
+        "operation": {
+          "enum": [
+            "cast-spell",
+            "magic-action"
+          ]
+        },
+        "alternatives": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "cast-spell",
+              "activate-feature",
+              "activate-magic-item"
+            ]
+          }
+        },
+        "longCasting": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "when",
+            "magicActionEachTurn",
+            "concentrationRequired",
+            "failureOnConcentrationLoss",
+            "spellSlotExpendedOnFailure"
+          ],
+          "properties": {
+            "when": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "amount",
+                "unit"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "CASTING_TIME_AT_LEAST"
+                },
+                "amount": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "unit": {
+                  "const": "minute"
+                }
+              }
+            },
+            "magicActionEachTurn": {
+              "type": "boolean"
+            },
+            "concentrationRequired": {
+              "type": "boolean"
+            },
+            "failureOnConcentrationLoss": {
+              "type": "boolean"
+            },
+            "spellSlotExpendedOnFailure": {
+              "type": "boolean"
+            }
+          }
+        },
+        "operationId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        }
+      }
+    },
+    "recoveryOperation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "operation",
+            "amount",
+            "unit"
+          ],
+          "properties": {
+            "kind": {
+              "const": "RECOVERY_OPERATION"
+            },
+            "operation": {
+              "const": "restore-hit-points"
+            },
+            "amount": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "unit": {
+              "enum": [
+                "hit-dice",
+                "fixed"
+              ]
+            },
+            "operationId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "operation",
+            "appliesWhen",
+            "targetState"
+          ],
+          "properties": {
+            "kind": {
+              "const": "RECOVERY_OPERATION"
+            },
+            "operation": {
+              "const": "stabilize-creature"
+            },
+            "targetState": {
+              "const": "stable"
+            },
+            "appliesWhen": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/operationApplicability"
+            },
+            "operationId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
+          }
+        }
+      ]
+    },
+    "conditionOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "target",
+        "appliesWhen",
+        "recipient"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "APPLY_CONDITION",
+            "END_CONDITION"
+          ]
+        },
+        "target": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/operationApplicability"
+        },
+        "recipient": {
+          "enum": [
+            "acting-creature",
+            "target",
+            "affected-creature",
+            "grappled-creature"
+          ]
+        },
+        "actor": {
+          "enum": [
+            "acting-creature",
+            "affected-creature",
+            "grappler"
+          ]
+        },
+        "operationId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        }
+      },
+      "allOf": [
+        {
+          "properties": {
+            "target": {
+              "type": "object",
+              "properties": {
+                "targetType": {
+                  "const": "condition"
+                }
+              },
+              "required": [
+                "targetType"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "statusOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "target",
+        "appliesWhen",
+        "recipient",
+        "actor"
+      ],
+      "properties": {
+        "kind": {
+          "const": "END_STATUS"
+        },
+        "target": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        },
+        "appliesWhen": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/operationApplicability"
+        },
+        "recipient": {
+          "enum": [
+            "acting-creature",
+            "target",
+            "affected-creature",
+            "grappled-creature"
+          ]
+        },
+        "actor": {
+          "enum": [
+            "acting-creature",
+            "affected-creature",
+            "grappler"
+          ]
+        },
+        "operationId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        }
+      },
+      "allOf": [
+        {
+          "properties": {
+            "target": {
+              "type": "object",
+              "properties": {
+                "targetType": {
+                  "const": "status"
+                }
+              },
+              "required": [
+                "targetType"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "choiceGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "cardinality",
+        "trigger",
+        "members"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "cardinality": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minimumSelected",
+            "maximumSelected"
+          ],
+          "properties": {
+            "minimumSelected": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "maximumSelected": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "trigger": {
+          "$ref": "#/$defs/choiceTrigger"
+        },
+        "members": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "operationId"
+            ],
+            "properties": {
+              "operationId": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "choiceTrigger": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "operationId"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CHECK_SUCCEEDED"
+            },
+            "operationId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "operationId"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SAVE_FAILED"
+            },
+            "operationId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "event"
+          ],
+          "properties": {
+            "kind": {
+              "const": "TRIGGER_OCCURRED"
+            },
+            "event": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actionTrigger"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ACTION_TAKEN"
+            }
+          }
+        }
+      ]
+    },
+    "movementApplicability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "AFTER_SPEED_MODIFIERS"
+        }
+      }
+    }
   }
 }

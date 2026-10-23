@@ -2,22 +2,168 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:thedndpub:schemas:core-rules:sense:v1",
   "title": "Sense",
-  "description": "A source-qualified sense definition; creature-specific ranges are modeled with creature data.",
+  "allOf": [
+    {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/identity"
+    }
+  ],
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "source", "name", "page", "entries"],
+  "required": [
+    "id",
+    "name",
+    "sourceMetadata",
+    "capabilities"
+  ],
   "properties": {
-    "id": {"type": "string", "pattern": "^sense:[^:]+:.+$"},
-    "source": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/nonEmptyString"},
-    "name": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"},
-    "page": {"type": "integer", "minimum": 1},
-    "sourceFlags": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceFlags"},
-    "entries": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/richTextArray"},
-    "reprintedAs": {
+    "id": {
+      "type": "string",
+      "pattern": "^sense:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceMetadata": {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceMetadata"
+    },
+    "capabilities": {
       "type": "array",
       "minItems": 1,
-      "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reprintReference"}
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "perceives"
+            ],
+            "properties": {
+              "kind": {
+                "const": "SIGHT"
+              },
+              "perceives": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "visible-creatures",
+                    "invisible-creatures",
+                    "objects",
+                    "colors",
+                    "visual-detail",
+                    "illusions",
+                    "true-forms",
+                    "ethereal-plane"
+                  ]
+                }
+              },
+              "conditions": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "darkness",
+                    "heavily-obscured",
+                    "lightly-obscured"
+                  ]
+                }
+              },
+              "darknessAs": {
+                "enum": [
+                  "dim-light",
+                  "bright-light",
+                  "no-benefit"
+                ]
+              },
+              "colorPerception": {
+                "enum": [
+                  "normal",
+                  "grayscale"
+                ]
+              }
+            },
+            "description": "Qualitative sense capabilities only; creature-specific numeric ranges belong to creature records."
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "medium"
+            ],
+            "properties": {
+              "kind": {
+                "const": "NONVISUAL_PERCEPTION"
+              },
+              "medium": {
+                "enum": [
+                  "touch",
+                  "vibration",
+                  "sound",
+                  "smell",
+                  "other"
+                ]
+              },
+              "detects": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "enum": [
+                    "creatures",
+                    "movement",
+                    "objects"
+                  ]
+                }
+              },
+              "restrictions": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "cannot-detect-flying",
+                    "cannot-detect-incorporeal",
+                    "requires-contact",
+                    "requires-surface"
+                  ]
+                }
+              }
+            },
+            "description": "Qualitative nonvisual perception capability; no range is defined here."
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "interaction",
+              "effect"
+            ],
+            "properties": {
+              "kind": {
+                "const": "CONDITION_INTERACTION"
+              },
+              "interaction": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+              },
+              "effect": {
+                "enum": [
+                  "bypasses-sight-restriction",
+                  "does-not-bypass-sight-restriction",
+                  "unaffected-by-blindness"
+                ]
+              }
+            }
+          }
+        ]
+      }
     },
-    "references": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/modelReference"}}
+    "references": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+      }
+    }
   }
 }

@@ -1,0 +1,11 @@
+﻿{
+  "name": "dnd-pub-core-rules-contracts",
+  "private": true,
+  "scripts": {
+    "sync:core-rules:phase3-registers": "node tools/sync-phase-3-source-registers.cjs",
+    "validate:core-rules": "node tools/validate-core-rules.cjs"
+  },
+  "devDependencies": {
+    "ajv": "8.17.1"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "action:dmg:mark",
+  "name": "Mark",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 271
+  },
+  "capabilities": [
+    "MARK_TARGET"
+  ],
+  "operations": [
+    {
+      "kind": "ROLL_MODIFIER",
+      "modifier": {
+        "kind": "D20_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage"
+      },
+      "actor": "attacker",
+      "target": "marked-target",
+      "establishedBy": {
+        "kind": "MELEE_ATTACK_MADE",
+        "actor": "attacker",
+        "target": "creature"
+      },
+      "appliesWhen": {
+        "kind": "OPPORTUNITY_ATTACK",
+        "actor": "attacker",
+        "target": "marked-target"
+      },
+      "duration": {
+        "endsAt": "end-of-next-turn"
+      },
+      "usageLimit": {
+        "maximum": 1,
+        "period": "per-turn"
+      },
+      "reaction": {
+        "availabilityRequired": true,
+        "consumed": false
+      },
+      "operationId": "marked-opportunity-attack"
+    }
+  ]
+}

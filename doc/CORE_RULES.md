@@ -1,104 +1,48 @@
-# Core Rules Foundation contracts
+# Core Rules Foundation
 
-**Scope:** Step 2 canonical model and schema proposal for Action, Rule, Skill, Condition, Disease, Status, Sense, Language, and LanguageScript.
+The Core Rules Foundation provides canonical identities and interpreted mechanics for actions, rules, skills, conditions, diseases, statuses, senses, and languages. Contracts use JSON Schema Draft 2020-12 and are stored under [`schemas/core-rules/v1`](../schemas/core-rules/v1/).
 
-**Phase 1:** Completed and approved.
+## Canonical entity shape
 
-**Phase 2:** Model and Draft 2020-12 schemas are complete and awaiting review. No source records have been converted. Phase 3 requires approval.
+Each entity has a stable `id` and display `name`. Source attribution is grouped in `sourceMetadata`, which records the exact source code, supplied page, publication flags, citations, and explicit reprint references. A supplied `false` flag remains meaningful. Source-specific interpretations and different editions retain distinct identities; reprints do not imply equivalence or automatic merging.
 
-## Model structure
+IDs follow `<type>:<source>:<slug>`, for example `action:phb:attack`. The type is the lowercase canonical model token. Create both the source component and name slug deterministically: apply Unicode NFKD normalization, remove combining marks, lowercase with locale-independent rules, retain ASCII letters and digits, encode remaining non-ASCII letters as `u` followed by their lowercase hexadecimal code point, convert punctuation and whitespace runs to one hyphen, and trim leading and trailing hyphens. If the result is empty, use `u` followed by the lowercase hexadecimal UTF-8 bytes of the original value. Keep the original display name and exact source code unchanged in the entity. Validate uniqueness after normalization; report collisions for explicit adjudication rather than silently renaming or merging entities.
 
-Each record is a source-qualified entity with a stable identifier in the form `<type>:<source>:<exact source name>`, for example `skill:PHB:Acrobatics`. The identifier preserves the source code, name spelling, capitalization, and edition-specific record. Records with the same name from different sources remain separate. `reprintedAs` records a supplied relationship; it does not select a preferred edition or authorize merging.
+Shared references contain a `targetType` and canonical target `id`. A `relationship` describes the relationship between entities; an `operation` describes a mechanical operation. Neither changes the referenced target type. References are created only from explicit source evidence. Targets in later domains can be referenced by stable identity without embedding their complete models.
 
-The nine models remain independent, cohesive domain types. The source file `conditionsdiseases.json` contains three arrays but does not make conditions, diseases, and statuses one entity. Likewise, languages and language-script font metadata remain distinct. The design uses composition for shared source flags, citations, rich-text nodes, and explicit model references rather than an inheritance hierarchy.
+Canonical records contain interpreted domain facts and mechanics, not source `entries`, rich-text, font data, or presentation flags such as `hasFluff` and `hasFluffImages`. Do not store review or interpretation status in canonical JSON. Record complete omitted or duplicate source content and its source-object identity in the corresponding model's `omitted.md` or `duplicate.md` register when conversion identifies it. Partial interpretations retain supported mechanics while recording the complete source entry and affected portions in the omission register.
 
-| Model | Required data | Optional observed data |
+## Domain contracts and use cases
+
+| Model | Contract responsibility | Example use case |
 | --- | --- | --- |
-| Action | `id`, `source`, `name`, `page`, `entries` | source flags, typed `timing`, reprint links, `seeAlsoAction`, `fromVariant`, explicit references |
-| Rule | `id`, `source`, `name`, `page`, `entries` | source flags, raw `ruleType` code, separate `type`, reprint links, additional-source citations, explicit references |
-| Skill | `id`, `source`, `name`, `page`, `ability`, `entries` | source flags, reprint links, explicit references |
-| Condition | `id`, `source`, `name`, `page`, `entries` | source flags, other-source citations, reprint links, `hasFluffImages`, explicit references |
-| Disease | `id`, `source`, `name`, `page`, `entries` | source flags, supplied disease `type`, reprint links, explicit references |
-| Status | `id`, `source`, `name`, `page`, `entries` | source flags, reprint links, explicit references |
-| Sense | `id`, `source`, `name`, `page`, `entries` | source flags, reprint links, explicit references |
-| Language | `id`, `source`, `name`, `page` | source flags, reprint links, speaker descriptions, language category, script name, origin, entries, image flag, font paths, source citations, dialect names, explicit references |
-| LanguageScript | `id`, `source`, `name`, `fonts` | explicit references |
+| Action | Explicit capabilities, optional typed timing, requirements, typed references, and domain-specific operations for supported attacks, checks, modifiers, state changes, movement, interactions, spell activation, and recovery. | Represent Mark's opportunity-attack advantage with its actor, target, trigger, duration, usage limit, and reaction behavior; represent Grapple's contested check separately from applying Grappled. |
+| Rule | One Rule identity may contain multiple domain-specific mechanical components. Each component has a stable local `componentId`; `kind` identifies its family and `subtype` identifies its procedure. Optional `composition` groups component references with `AND` or `OR`; it does not imply execution order or conditional applicability. | Represent Critical Hit with an attack-roll component and a damage modifier that applies on that component's critical result. Represent Unarmed Strike as a choice among the damage, grapple, and shove procedures. |
+| Skill | Stable skill identity and its explicit ability association. | Associate Acrobatics with Dexterity without copying its descriptive examples. |
+| Condition | Typed sense removal, automatic check failure, roll modifiers, and restrictions with actor, target, and typed applicability. | Apply Blinded's loss of sight, sight-dependent check failure, and attack-roll effects. Keep edition-specific condition records separate. |
+| Disease | Disease-specific infection, incubation, symptoms, progression, saving throws, and recovery fields where source evidence supports them. | Represent a disease symptom as a typed condition reference and its supported ability-roll modifiers. |
+| Status | State thresholds, turn restrictions, maintenance saves, and ending conditions. | Detect Bloodied at half hit points; evaluate Concentration and Surprised according to their source edition. |
+| Sense | Qualitative perception capabilities, restrictions, and condition interactions. Numeric ranges belong to the creature that provides the sense. | Apply Darkvision's darkness and color perception, or Tremorsense's vibration-based detection, using the creature's range separately. |
+| Language | Language category, script name, origin, dialect relationships, and resolved typical-speaker references. | Filter by an explicitly identified typical speaker without retaining raw tag syntax. |
 
-`sourceFlags` is a composed object containing only supplied `srd`, `srd52`, `basicRules`, and `basicRules2024` booleans. It may contain any subset and must be omitted when there are no flags. False is meaningful and must be preserved.
+Action timing is optional. Action, bonus action, reaction, free, and fixed in-game durations use typed timing objects. `alternatives` holds explicit source-supported alternatives; `varied_gametime` preserves open-ended in-game time without a guessed duration or closed option list. Missing timing stays absent. Reaction triggers use typed trigger objects with source-supported kinds, not free-text descriptions.
 
-## Rich-text entries and references
+Action operations use typed event triggers and typed outcomes. Event triggers are distinct from persistent predicates: for example, `GRAPPLER_RELEASES` is an event, while `HAS_CONDITION` and `SPEED_IS_ZERO` describe state. Predicates identify actor and target roles and use a typed Condition reference when one applies. Roll modifiers reuse the shared `D20_ROLL_MODIFIER` value while retaining Action-specific actor, target, applicable roll and ability, conditions, duration, and usage constraints. Condition application and removal are separate operations from Status termination, and identify the recipient creature separately from the referenced Condition or Status. Check and save results are linked to follow-on operations by local `operationId`; a check result is not copied into an outcome string.
 
-`entries` is a recursive typed array. It accepts strings and observed object nodes: `entries`, `list`, `table`, `inset`, `section`, `item`, `inline`, `link`, `image`, and `quote`. Tables preserve string, number, or rich-text cells, optional footnotes, and the observed generated-table inclusion metadata. `item` requires exactly one of a singular `entry` string or nested `entries` array. Internal link/image paths are retained as navigation metadata, not resolved domain references.
+Action `choiceGroups` define their own cardinality, trigger, and member operation IDs. Each member applies only when its group is selected, after that group’s trigger occurs. The validator checks group and operation identity, membership, cardinality, trigger compatibility, and applicability consistency. This lets a choice represent an exactly-one outcome, as in Shove, without making all Action choices share that cardinality.
 
-Inline 5eTools tags remain unchanged inside source-authored text. A separate optional `references` array can carry explicitly identified entity references as `targetType`, exact `name`, optional source code, optional stable `id`, and optional raw tag token. An `id` requires a source code. No target is inferred from a similar name; absence of source or ID does not assert resolution. Non-entity tags such as dice, DC, filter, and 5eTools page navigation remain text/navigation, not entity references.
+Rule composition references local `componentId` values rather than copying component definitions. A nested `AND` means all referenced components participate; `OR` identifies source-supported alternatives. Components carry separate typed `appliesWhen` relationships such as `ON_HIT`, `ON_FAILED_SAVE`, or `ON_CRITICAL_HIT`. Composition does not establish order, trigger, or conditional applicability. For example, Unarmed Strike presents Damage, Grapple, and Shove as alternatives; the Grapple and Shove outcomes share one saving-throw component and apply on its failed result. Reusable attack-roll, saving-throw, DC, damage-roll, and D20-modifier value objects capture only the mechanics that share the same behavior; specialized procedures such as Death Saving Throws retain their separate structure. The repeatable Core Rules validator checks local component references, compatible applicability targets, contradictory OR branches, and cyclic dependencies in addition to schema validation.
 
-`reprintedAs` preserves the source's supplied representation: string UIDs such as `Attack|XPHB`, and the observed object form with `uid` and `tag` (used for reprint targets typed as hazards). This avoids guessing that every reprint target has the same domain type. Later conversion may add typed `references` when the target type and identity are established, while preserving the reprint association.
+Rule classification source codes `C`, `O`, `V`, and `VO` do not have verified meanings in the repository evidence, so the canonical model does not assign them full-word interpretations. Language scripts remain useful string values on Language records. The source's LanguageScript records contain font paths and no other relevant canonical information, so no LanguageScript model is defined.
 
-`additionalSources` and `otherSources` remain arrays of `{source, page}` citations. They reference Source Registry codes and publication locations; they are not entity relationships.
+## Interpretation boundaries
 
-## Typed action timing
+Mechanics are domain-specific. These contracts do not define a universal effect engine or a prose fallback. A contract's enumerated mechanics encode only supported structures; an unrepresented mechanic is kept out of canonical JSON and accounted for in the external omission register, with complete source identity and original entry content. If part of an entry is supported, retain the typed portion and document the complete entry and unsupported portion in that register. Duplicate source content is recorded separately with its complete content and identity.
 
-The source `time` array maps to optional `timing`. Each value is one of:
-
-- `{ "kind": "fixed", "number": 1, "unit": "action" }` for an explicit numeric action, reaction, or bonus unit.
-- `{ "kind": "free" }` for source text `Free`.
-- `{ "kind": "varies" }` for source text `Varies`.
-
-When source timing is absent, omit `timing`; do not substitute a default. This preserves the three observed forms and the missing `Mark` timing. This model does not encode all prose about when an action can be used.
-
-## Rule classification and edition identity
-
-`ruleType` is restricted to the source codes `C`, `O`, `V`, and `VO`, retained without expanding their meanings. It is optional because 40 of 231 source rules omit it. The independent source `type` field accepts `section` or `entries`; it is never inferred from `ruleType`.
-
-The `Rule` type is not synonymous with optional or variant rules. The four source codes do not establish activation, a universal rules toggle, or complete semantics. Source flags and edition codes remain source facts. No latest-edition selection is encoded.
-
-## Descriptive content and deterministic mechanics
-
-The contracts keep descriptive `entries` separate from typed facts already available in source data, such as action timing and a skill's ability association. They do not introduce a universal mechanics engine or encode extracted condition effects yet. The analysis found recurring effects but not enough approved, representative interpretations to define a shared executable effect contract without premature assumptions. Future semantic conversion must use approved typed mechanic structures where supported and retain explanatory entries and exceptions. Ambiguous, deferred, and unsupported interpretations belong in project tracking, not in canonical entity fields.
-
-## Source mappings
-
-| Source JSON | Canonical property or treatment |
-| --- | --- |
-| `name`, `source`, `page` | Preserve name and exact Source code. Build `id` deterministically as `<type>:<source>:<exact name>`; preserve page as an integer. `LanguageScript` has no source page. |
-| `srd`, `srd52`, `basicRules`, `basicRules2024` | Group present booleans under `sourceFlags` without changing values; omit the object if none are present. |
-| `entries` | Preserve text and recursively map supported typed nodes under the same property. Inline tags remain literal. |
-| `action.time` | Map each source value to a typed `timing` alternative; absent `time` means absent `timing`. |
-| `skill.ability` | Preserve the supplied lowercase ability code (`str`, `dex`, `con`, `int`, `wis`, `cha`). |
-| `variantrule.ruleType` and `variantrule.type` | Preserve separately as `ruleType` and `type`; keep their source values. |
-| `reprintedAs` | Preserve string UID values or the observed `{uid, tag}` object; do not merge or choose a target edition. |
-| `seeAlsoAction`, `fromVariant` | Preserve supplied values in their own fields; do not invent missing source qualifiers. |
-| `additionalSources`, `otherSources` | Preserve each field as its own array of typed Source-code/page citations. |
-| `condition.hasFluffImages`, `language.hasFluffImages` | Preserve the supplied boolean. |
-| `language.type`, `script`, `origin`, `typicalSpeakers`, `dialects`, `fonts` | Preserve as typed categories or strings/arrays. Keep script a string; do not bind it to the incomplete font catalog. |
-| `languageScript.fonts` | Preserve supplied asset paths on the separate LanguageScript entity. |
-| Explicit entity tags in content | Preserve literal tag in `entries`; optionally add a `references` value when its entity type/name/source are parsed from explicit evidence. A later-domain target need not exist yet. |
-| Provenance and interpretation/review tracking | Keep in an external manifest, discovery document, or report. Never put workflow state in canonical JSON. |
-
-All other source properties observed in the six datasets are represented by these mappings. The schemas reject additional properties so an upstream field change prompts analysis rather than silent loss.
+The Action, Condition, Disease, Rule, Sense, and Status schemas are intentionally explicit and do not cover every source mechanic. Complex disease transformations, optional Rule subsystems, ship and campaign procedures, exceptional Condition interactions, and novel sensory mechanics can require further reviewed contract design. Creature-specific sense ranges and many cross-domain references are resolved only when their target domains are available. Structural schema validation does not prove the mechanical interpretation is correct.
 
 ## Schemas and examples
 
-All contracts use JSON Schema Draft 2020-12 and version `v1`:
+Each model schema and its representative examples are categorized under `schemas/core-rules/v1/`. The shared schema defines identity, source metadata, references, ability names, actor roles, typed Action triggers and conditions, timing, and reusable mechanical values. The examples demonstrate Action modifiers, linked check results, state predicates, typed outcomes, triggered events, and choice groups; Rule component composition and reusable roll procedures; edition-qualified Condition and Status mechanics; a Disease with typed symptoms; and Skill, Sense, and Language facts. Run `npm run validate:core-rules` to compile the Draft 2020-12 schemas, validate examples, check cross-component integrity, and execute positive and negative validation cases. There is no source-prose example schema or LanguageScript example.
 
-- [Shared definitions](../schemas/core-rules/v1/common.schema.json)
-- [Action](../schemas/core-rules/v1/action.schema.json)
-- [Rule](../schemas/core-rules/v1/rule.schema.json)
-- [Skill](../schemas/core-rules/v1/skill.schema.json)
-- [Condition](../schemas/core-rules/v1/condition.schema.json)
-- [Disease](../schemas/core-rules/v1/disease.schema.json)
-- [Status](../schemas/core-rules/v1/status.schema.json)
-- [Sense](../schemas/core-rules/v1/sense.schema.json)
-- [Language](../schemas/core-rules/v1/language.schema.json)
-- [LanguageScript](../schemas/core-rules/v1/language-script.schema.json)
-- [Rich-text helper schema](../schemas/core-rules/v1/rich-text.schema.json)
-
-The example JSON files demonstrate each model, all action timing alternatives (including absent timing), and the observed rich-text node types. They are contract examples, not a normalized batch or a generated dataset. Validation findings are in the [Phase 2 schema validation report](../reports/step-2/CORE_RULES_FOUNDATION_PHASE_2_SCHEMA_VALIDATION.md).
-
-## Provenance, limitations, and open review points
-
-Use the approved Source Registry through the exact `source` code. Keep source file path, source revision/hash, raw entry locator, schema version, and interpretation review history in an external provenance manifest. A structural schema pass does not establish mechanics correctness or cross-document target validity.
-
-The current contract preserves 594 source records' observed field and rich-text variations, but no canonical records have been generated. The schema does not force all explicit inline tags into `references`; reference extraction and target integrity require later conversion checks. `Language.script` values are not links to LanguageScript because the catalog is incomplete and source contexts differ. Sense ranges remain dependent on creature records. Disease progression and complex variant rules remain prose unless and until their mechanics can be interpreted reliably. Existing incomplete-reference tracking under `/doc` remains applicable.
-
-Review these decisions before Phase 3: confirm the `id` component encoding (especially punctuation in future names/source codes); whether raw string/object `reprintedAs` remains the canonical representation or becomes a typed relation plus provenance; the policy for populating optional `references` from inline tags; and whether representative semantic cases justify any narrow reusable effect model or schema refinement. No full data expansion or backend integration is authorized by these proposals.
+The Phase 2 design feedback and validation history are maintained in the [Core Rules Phase 2 report](../reports/step-2/CORE_RULES_FOUNDATION_PHASE_2_SCHEMA_VALIDATION.md); execution findings belong in reports rather than this system contract document.

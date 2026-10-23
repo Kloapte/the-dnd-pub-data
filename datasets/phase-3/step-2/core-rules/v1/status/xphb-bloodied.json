@@ -1,0 +1,23 @@
+{
+  "id": "status:xphb:bloodied",
+  "name": "Bloodied",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 362,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "mechanics": [
+    {
+      "kind": "HIT_POINT_THRESHOLD",
+      "fraction": 0.5,
+      "comparison": "at-or-below",
+      "reference": {
+        "targetType": "rule",
+        "id": "rule:xphb:hit-points"
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "action:xge:identify-a-spell",
+  "name": "Identify a Spell",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 85
+  },
+  "timing": {
+    "kind": "alternatives",
+    "options": [
+      {
+        "kind": "action"
+      },
+      {
+        "kind": "reaction",
+        "trigger": {
+          "kind": "SPELL_CASTING_OBSERVED",
+          "actor": "observer",
+          "target": "spell-caster"
+        }
+      }
+    ]
+  },
+  "capabilities": [
+    "IDENTIFY_SPELL"
+  ]
+}

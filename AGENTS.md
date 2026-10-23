@@ -174,14 +174,15 @@ Do not begin source conversion before the contracts are approved.
 
 ### Phase 3 — Representative conversion
 
-- Select a small but representative set of source entries.
-- Cover common structures, identified submodels, edge cases, and outliers.
-- Convert the selected entries into canonical JSON.
-- Perform semantic enrichment according to the approved contracts.
-- Preserve typed source references and external traceability.
-- Account for every original entry, documenting omitted and duplicate entries under `/doc/<model>/` as specified in `BOUNDARIES.md`.
-- Do not silently modify approved schemas.
-- Produce a conversion report showing coverage and identified issues.
+- Select a small but representative set of source records, covering common structures, identified submodels, edge cases, and outliers.
+- **Codex must directly inspect and semantically interpret each selected source record**, including its nested entries, using the full approved Phase 1 analysis, Phase 2 research, contracts, examples, and reusable interpretation patterns. Phase 2 examples demonstrate schema capabilities; verify their mechanics against the actual source before reuse.
+- Codex must author the canonical JSON from its source-backed interpretation. **Do not replace this reasoning with a hardcoded source-to-canonical converter, keyword matching, regex extraction, switch-based mechanic recognition, or a scripted subset of known records.** Deterministic scripts may inventory source data, extract exact source objects, format output, check references, validate schemas/integrity, and audit accounting; they must not decide the meaning of source mechanics.
+- The representative selection limits **how many records** are interpreted, never **how completely each selected record** is interpreted. Examine every meaningful mechanic, prerequisite, exception, reference, and interaction even if related records are outside the sample.
+- Reuse all applicable approved domain-specific structures and patterns, not merely those implemented in a previous example or script. Before declaring a mechanic unsupported, inspect the complete relevant schema and approved examples and demonstrate why existing typed structures cannot express it accurately.
+- Preserve typed source references and external traceability; do not invent missing target identities or guess mechanics when evidence is insufficient.
+- Account for every original entry and meaningful portion, documenting genuinely omitted and duplicate content under `/doc/<model>/` as specified in `BOUNDARIES.md`. Distinguish schema limitations from interpretation gaps, unresolved references, and intentionally excluded nonmechanical material in the external accounting report.
+- Do not silently modify approved schemas. Document source-backed contract gaps for human review rather than forcing a misleading mapping.
+- Produce a representative conversion report that traces each record to source evidence, canonical output, interpreted portions, and remaining gaps. Human review is required before Phase 4.
 
 ### Phase 4 — Validation and feedback
 
@@ -199,7 +200,7 @@ Do not begin source conversion before the contracts are approved.
 
 ### Phase 5 — Dataset expansion
 
-- Normalize the remaining source entries using the approved contracts.
+- Have Codex semantically interpret the remaining source records using the approved contracts and source-backed patterns; the Phase 3 prohibition on scripted semantic conversion applies equally to dataset expansion.
 - Process data in manageable, reviewable batches.
 - Apply established interpretation conventions consistently.
 - Validate each batch against the approved schemas.
@@ -224,6 +225,14 @@ Do not begin source conversion before the contracts are approved.
 - Report integration results, test coverage, and remaining limitations.
 
 Stop after the authorized milestone. Do not automatically proceed to the next roadmap phase or domain.
+
+## Semantic interpretation versus automation
+
+- Codex is the offline semantic interpreter for mechanics-bearing source records. Its reasoning must consider the entire approved domain contract and source evidence, not only previously hardcoded cases.
+- Automate **deterministic verification and bookkeeping**, not semantic decisions. Validation scripts can reject malformed or inconsistent canonical data but cannot establish that a mechanic was correctly understood or that an omission was necessary.
+- Existing source-conversion scripts, if any, are not authoritative semantic interpreters. Do not use them to generate or overwrite canonical mechanics. Review their role before retaining, replacing, or removing them; preserve useful nonsemantic utilities.
+- A mechanically meaningful omission requires a source-backed explanation of why the **approved schema itself** cannot express it, or why the source is genuinely ambiguous. Missing implementation in a script, absence from the representative sample, or absence of a matching Phase 2 example is not an acceptable omission reason.
+- Treat canonical outputs as Codex-authored proposals until source-based human review and approval. Keep provenance, review evidence, and uncertainty outside canonical JSON.
 
 ## Validation and testing
 

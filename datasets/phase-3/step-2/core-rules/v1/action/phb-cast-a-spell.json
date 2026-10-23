@@ -1,0 +1,45 @@
+{
+  "id": "action:phb:cast-a-spell",
+  "name": "Cast a Spell",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 192,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:magic"
+      }
+    ]
+  },
+  "timing": {
+    "kind": "alternatives",
+    "options": [
+      {
+        "kind": "action"
+      },
+      {
+        "kind": "reaction",
+        "trigger": {
+          "kind": "SPELL_DEFINED_REACTION",
+          "actor": "spell-caster"
+        }
+      },
+      {
+        "kind": "varied_gametime"
+      }
+    ]
+  },
+  "capabilities": [
+    "CAST_SPELL"
+  ],
+  "operations": [
+    {
+      "kind": "SPELL_OPERATION",
+      "operation": "cast-spell"
+    }
+  ]
+}

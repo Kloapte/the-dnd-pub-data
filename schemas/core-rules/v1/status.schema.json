@@ -2,22 +2,285 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:thedndpub:schemas:core-rules:status:v1",
   "title": "Status",
-  "description": "A source-qualified game status, distinct from conditions and diseases.",
+  "allOf": [
+    {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/identity"
+    }
+  ],
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "source", "name", "page", "entries"],
+  "required": [
+    "id",
+    "name",
+    "sourceMetadata",
+    "mechanics"
+  ],
   "properties": {
-    "id": {"type": "string", "pattern": "^status:[^:]+:.+$"},
-    "source": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/nonEmptyString"},
-    "name": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"},
-    "page": {"type": "integer", "minimum": 1},
-    "sourceFlags": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceFlags"},
-    "entries": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/richTextArray"},
-    "reprintedAs": {
+    "id": {
+      "type": "string",
+      "pattern": "^status:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceMetadata": {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceMetadata"
+    },
+    "mechanics": {
       "type": "array",
       "minItems": 1,
-      "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reprintReference"}
-    },
-    "references": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/modelReference"}}
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "fraction",
+              "comparison"
+            ],
+            "properties": {
+              "kind": {
+                "const": "HIT_POINT_THRESHOLD"
+              },
+              "fraction": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 1
+              },
+              "comparison": {
+                "enum": [
+                  "at-or-below",
+                  "below"
+                ]
+              },
+              "reference": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "restriction",
+              "appliesWhen"
+            ],
+            "properties": {
+              "kind": {
+                "const": "TURN_RESTRICTION"
+              },
+              "restriction": {
+                "enum": [
+                  "cannot-move",
+                  "cannot-take-action",
+                  "cannot-take-reaction",
+                  "movement-limited"
+                ]
+              },
+              "appliesWhen": {
+                "enum": [
+                  "first-turn-of-combat",
+                  "until-first-turn-ends",
+                  "when-affected-creature-joins-combat"
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "roll",
+              "direction"
+            ],
+            "properties": {
+              "kind": {
+                "const": "ROLL_MODIFIER"
+              },
+              "roll": {
+                "enum": [
+                  "initiative",
+                  "attack"
+                ]
+              },
+              "direction": {
+                "enum": [
+                  "advantage",
+                  "disadvantage"
+                ]
+              },
+              "actor": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actor"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "ability",
+              "trigger",
+              "dc"
+            ],
+            "properties": {
+              "kind": {
+                "const": "MAINTENANCE_SAVE"
+              },
+              "ability": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+              },
+              "trigger": {
+                "enum": [
+                  "damage",
+                  "environmental-phenomenon"
+                ]
+              },
+              "separateEachTrigger": {
+                "type": "boolean"
+              },
+              "dc": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "formula",
+                  "base"
+                ],
+                "properties": {
+                  "formula": {
+                    "enum": [
+                      "fixed",
+                      "higher-of-base-or-damage-fraction"
+                    ]
+                  },
+                  "base": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "damageFraction": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "rounding": {
+                    "enum": [
+                      "up",
+                      "down"
+                    ]
+                  },
+                  "maximum": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": {
+                        "formula": {
+                          "const": "higher-of-base-or-damage-fraction"
+                        }
+                      }
+                    },
+                    "then": {
+                      "required": [
+                        "damageFraction"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "failure": {
+                "enum": [
+                  "status-ends",
+                  "effect-ends"
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "when"
+            ],
+            "properties": {
+              "kind": {
+                "const": "ENDING_CONDITION"
+              },
+              "when": {
+                "enum": [
+                  "another-concentration-spell-starts",
+                  "another-concentration-effect-starts",
+                  "incapacitated",
+                  "dies",
+                  "effect-duration-expires",
+                  "voluntarily"
+                ]
+              },
+              "automatic": {
+                "type": "boolean"
+              },
+              "actionRequired": {
+                "type": "boolean"
+              },
+              "reference": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "when": {
+                      "const": "voluntarily"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "actionRequired"
+                  ],
+                  "properties": {
+                    "actionRequired": {
+                      "const": false
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "when": {
+                      "enum": [
+                        "another-concentration-spell-starts",
+                        "another-concentration-effect-starts",
+                        "incapacitated",
+                        "dies",
+                        "effect-duration-expires"
+                      ]
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "automatic"
+                  ],
+                  "properties": {
+                    "automatic": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
   }
 }

@@ -1,0 +1,65 @@
+{
+  "id": "action:phb:attack",
+  "name": "Attack",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 192,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:attack"
+      }
+    ]
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "ATTACK_MELEE",
+    "ATTACK_RANGED",
+    "ATTACK_BAREHANDS"
+  ],
+  "operations": [
+    {
+      "kind": "ATTACK_RESOLUTION",
+      "attack": {
+        "kind": "ATTACK_ROLL",
+        "forms": [
+          "melee",
+          "ranged",
+          "unarmed"
+        ]
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "action",
+      "id": "action:dmg:disarm"
+    },
+    {
+      "targetType": "action",
+      "id": "action:phb:grapple"
+    },
+    {
+      "targetType": "action",
+      "id": "action:dmg:mark"
+    },
+    {
+      "targetType": "action",
+      "id": "action:phb:shove"
+    },
+    {
+      "targetType": "action",
+      "id": "action:dmg:shove-aside"
+    },
+    {
+      "targetType": "action",
+      "id": "action:phb:two-weapon-fighting"
+    }
+  ]
+}

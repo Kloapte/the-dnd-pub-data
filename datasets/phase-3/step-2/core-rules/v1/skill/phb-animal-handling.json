@@ -1,0 +1,19 @@
+{
+  "id": "skill:phb:animal-handling",
+  "name": "Animal Handling",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 178,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:animal-handling"
+      }
+    ]
+  },
+  "ability": "wisdom"
+}

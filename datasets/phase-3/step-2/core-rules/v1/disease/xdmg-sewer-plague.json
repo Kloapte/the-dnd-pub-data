@@ -1,0 +1,31 @@
+{
+  "id": "disease:xdmg:sewer-plague",
+  "name": "Sewer Plague",
+  "sourceMetadata": {
+    "source": "XDMG",
+    "page": 61,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "classification": "magical-contagion",
+  "infection": {
+    "transmission": [
+      "contact",
+      "wound"
+    ],
+    "savingThrow": {
+      "ability": "constitution",
+      "dc": 11
+    }
+  },
+  "symptoms": [
+    {
+      "kind": "CONDITION",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:exhaustion"
+      }
+    }
+  ]
+}

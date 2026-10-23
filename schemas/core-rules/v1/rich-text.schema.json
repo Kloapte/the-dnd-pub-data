@@ -1,7 +1,0 @@
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:thedndpub:schemas:core-rules:rich-text:v1",
-  "title": "Core Rules Rich Text Array",
-  "description": "A typed array of source-authored rich-text nodes. This helper schema does not define a domain entity.",
-  "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/richTextArray"
-}

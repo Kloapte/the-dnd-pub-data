@@ -1,28 +1,30 @@
 {
-  "id": "action:PHB:Attack",
-  "source": "PHB",
+  "id": "action:phb:attack",
   "name": "Attack",
-  "page": 192,
-  "sourceFlags": {
-    "srd": true,
-    "basicRules": true
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 192
   },
-  "timing": [
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "ATTACK_MELEE",
+    "ATTACK_RANGED",
+    "ATTACK_BAREHANDS"
+  ],
+  "operations": [
     {
-      "kind": "fixed",
-      "number": 1,
-      "unit": "action"
+      "kind": "ATTACK_RESOLUTION",
+      "attack": {
+        "kind": "ATTACK_ROLL",
+        "forms": [
+          "melee",
+          "ranged",
+          "unarmed"
+        ],
+        "target": "creature"
+      }
     }
-  ],
-  "entries": [
-    "The most common action to take in combat is the Attack action, whether you are swinging a sword, firing an arrow from a bow, or brawling with your fists.",
-    "With this action, you make one melee or ranged attack. See the \"{@book Making an Attack|phb|9|making an attack}\" section for the rules that govern attacks."
-  ],
-  "reprintedAs": [
-    "Attack|XPHB"
-  ],
-  "seeAlsoAction": [
-    "grapple",
-    "shove"
   ]
 }

@@ -9,6 +9,8 @@ This document is the authoritative policy for offline normalization and canonica
 - A domain may define narrowly scoped text or metadata only if a use case justifies it and its contract is explicitly approved. The approved metadata-only Source Registry is unaffected by this policy.
 - Use **domain-specific** models for actions, conditions, diseases, statuses, senses, rules, languages, etc. Share only cohesive cross-domain primitives such as identity, source attribution, and references. Do not build a universal mechanics engine by default.
 - Runtime Java consumes canonical contracts and performs deterministic operations; source-specific interpretation belongs offline.
+- **Codex itself performs offline semantic interpretation** by reading source records, understanding their mechanics, and authoring typed canonical JSON using the full approved domain research, schemas, and patterns. A deterministic source-text converter must not replace this reasoning.
+- Scripts may support exact source extraction, inventories, formatting, schema/integrity checks, reference verification, and coverage audits. They must not classify mechanics, select their meaning, or declare them unsupported based on a finite set of programmed extraction rules.
 
 ## 2. Entry-by-entry accountability
 
@@ -16,8 +18,11 @@ Every source `entries` element, including nested content, must be inspected and 
 
 1. **Interpreted** — its supported facts/mechanics are represented in canonical typed fields.
 2. **Duplicate** — its complete content adds no mechanics beyond facts already represented in canonical fields or another explicitly identified interpretation.
-3. **Omitted** — it cannot be interpreted reliably, is purely descriptive/nonmechanical, is out of approved scope, or has no suitable approved canonical representation.
+3. **Omitted** — it cannot be interpreted reliably, is purely descriptive/nonmechanical, is out of approved scope, or has no suitable approved canonical representation **after Codex has considered the complete relevant approved contract and patterns**.
 
+- A limitation of an automated conversion script, an unimplemented extraction pattern, or a record excluded from the representative selection is **not** evidence that a mechanic is unsupported by the canonical schema.
+- Before recording a mechanical omission, Codex must check the complete applicable schema, shared definitions, Phase 2 examples/research, and source evidence. In external reports distinguish `SCHEMA_UNSUPPORTED`, `SOURCE_AMBIGUOUS`, `REFERENCE_UNRESOLVED`, `EXTERNAL_DEPENDENCY`, `OUT_OF_SCOPE`, and `NON_MECHANICAL`; these are audit reasons, not canonical fields. If a mechanic is expressible but has not yet been interpreted, finish the interpretation rather than marking it omitted.
+- If a source portion is already represented in canonical fields, classify it as interpreted; classify redundant source wording as duplicate only when it adds no independent mechanic. Never label a represented mechanic omitted.
 - **Never silently discard an entry.** A source entry containing both interpretable and uninterpretable parts must have each part accounted for. Record the *complete original entry* in the relevant external report when any portion is omitted or treated as duplicate, and identify the affected portion(s).
 - For omitted content, write `/doc/<model>/omitted.md`; for duplicates, `/doc/<model>/duplicate.md`. Use stable model-specific directory names, and maintain `/doc/INDEX.md` links.
 - Each record must identify the source object (canonical ID when available, otherwise type + exact source code + name), original source file/locator, reason, and **complete original entry** (including nested text/structure). Also identify any related canonical field or dependency when useful.
@@ -27,6 +32,7 @@ Every source `entries` element, including nested content, must be inspected and 
 
 ## 3. Mechanical interpretation
 
+- Codex must reason over the complete mechanics of each selected source record, including interactions and dependencies beyond the sample; selection size must not limit interpretation depth.
 - Prefer specific typed concepts within each model: action modes and timing, condition effects, disease incubation/progression/recovery, sense capabilities, status thresholds, rule procedures, etc.
 - Encode prerequisites, actors, targets, triggering events, scope, units, duration, exceptions, and source-edition distinctions when they affect behavior.
 - Use consistent enums/value objects only for genuinely shared semantics; do not collapse distinct mechanics merely because their source text looks similar.
@@ -62,7 +68,7 @@ Every source `entries` element, including nested content, must be inspected and 
 
 ## 7. Validation and approval
 
-- Schema validity is necessary but insufficient. Verify semantic correctness, source-record coverage, per-entry accounting, reference integrity, ID collisions, edition separation, and representative gameplay behavior.
+- Schema validity is necessary but insufficient. Deterministic validation cannot substitute for Codex source interpretation or human mechanical review. Verify semantic correctness, source-record coverage, per-entry accounting, reference integrity, ID collisions, edition separation, and representative gameplay behavior.
 - Schema design and revisions must be approved before representative conversion. Stop at each authorized roadmap phase; do not proceed automatically.
 - A design that cannot encode a meaningful mechanic should report the gap and seek a contract decision, not silently preserve the original prose or generate an unsupported runtime interpreter.
 - These boundaries apply to future mechanics-bearing domains; do not retroactively rewrite approved datasets without authorization.

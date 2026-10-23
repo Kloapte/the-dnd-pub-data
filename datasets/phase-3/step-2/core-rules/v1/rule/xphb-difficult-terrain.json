@@ -1,0 +1,22 @@
+{
+  "id": "rule:xphb:difficult-terrain",
+  "name": "Difficult Terrain",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 366,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "mechanics": [
+    {
+      "componentId": "difficult-terrain",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "DIFFICULT_TERRAIN",
+      "procedure": "movement-cost",
+      "extraFeetPerFoot": 1,
+      "cumulative": false
+    }
+  ]
+}

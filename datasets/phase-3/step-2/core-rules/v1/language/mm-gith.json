@@ -1,0 +1,39 @@
+{
+  "id": "language:mm:gith",
+  "name": "Gith",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 160,
+    "citations": [
+      {
+        "source": "MTF",
+        "page": 90
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xmm:gith"
+      }
+    ]
+  },
+  "script": "Tir'su",
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:githzerai-monk"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:githyanki-warrior"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:githzerai-zerth"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:githyanki-knight"
+    }
+  ]
+}

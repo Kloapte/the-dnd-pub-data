@@ -1,0 +1,20 @@
+{
+  "id": "status:xphb:surprised",
+  "name": "Surprised",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 376,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "mechanics": [
+    {
+      "kind": "ROLL_MODIFIER",
+      "roll": "initiative",
+      "direction": "disadvantage",
+      "actor": "affected-creature"
+    }
+  ]
+}

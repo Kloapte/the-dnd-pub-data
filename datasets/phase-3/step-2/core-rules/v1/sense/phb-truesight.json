@@ -1,0 +1,35 @@
+{
+  "id": "sense:phb:truesight",
+  "name": "Truesight",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 183,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "sense",
+        "id": "sense:xphb:truesight"
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "kind": "SIGHT",
+      "perceives": [
+        "visible-creatures",
+        "invisible-creatures",
+        "visual-detail",
+        "illusions",
+        "true-forms",
+        "ethereal-plane"
+      ],
+      "conditions": [
+        "darkness"
+      ],
+      "darknessAs": "bright-light"
+    }
+  ]
+}

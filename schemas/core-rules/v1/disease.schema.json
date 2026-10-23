@@ -2,23 +2,310 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:thedndpub:schemas:core-rules:disease:v1",
   "title": "Disease",
-  "description": "A source-qualified disease description with optional source classification.",
+  "allOf": [
+    {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/identity"
+    }
+  ],
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "source", "name", "page", "entries"],
+  "required": [
+    "id",
+    "name",
+    "sourceMetadata"
+  ],
   "properties": {
-    "id": {"type": "string", "pattern": "^disease:[^:]+:.+$"},
-    "source": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/nonEmptyString"},
-    "name": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/displayText"},
-    "page": {"type": "integer", "minimum": 1},
-    "sourceFlags": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceFlags"},
-    "type": {"enum": ["Magical Contagion"]},
-    "entries": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/richTextArray"},
-    "reprintedAs": {
+    "id": {
+      "type": "string",
+      "pattern": "^disease:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceMetadata": {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceMetadata"
+    },
+    "classification": {
+      "enum": [
+        "magical-contagion"
+      ]
+    },
+    "infection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "transmission": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "contact",
+              "inhalation",
+              "ingestion",
+              "wound",
+              "magical-exposure"
+            ]
+          }
+        },
+        "savingThrow": {
+          "$ref": "#/$defs/savingThrow"
+        }
+      },
+      "minProperties": 1
+    },
+    "incubation": {
+      "$ref": "#/$defs/interval"
+    },
+    "symptoms": {
       "type": "array",
       "minItems": 1,
-      "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reprintReference"}
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "condition"
+            ],
+            "properties": {
+              "kind": {
+                "const": "CONDITION"
+              },
+              "condition": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "roll",
+              "direction",
+              "ability"
+            ],
+            "properties": {
+              "kind": {
+                "const": "ABILITY_ROLL_MODIFIER"
+              },
+              "roll": {
+                "enum": [
+                  "ability-check",
+                  "saving-throw"
+                ]
+              },
+              "direction": {
+                "enum": [
+                  "advantage",
+                  "disadvantage"
+                ]
+              },
+              "ability": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "sense"
+            ],
+            "properties": {
+              "kind": {
+                "const": "SENSE_IMPAIRMENT"
+              },
+              "sense": {
+                "enum": [
+                  "sight",
+                  "hearing",
+                  "smell",
+                  "taste",
+                  "touch"
+                ]
+              },
+              "condition": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+              }
+            }
+          }
+        ]
+      }
     },
-    "references": {"type": "array", "minItems": 1, "items": {"$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/modelReference"}}
+    "progression": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "trigger",
+          "outcome"
+        ],
+        "properties": {
+          "trigger": {
+            "enum": [
+              "elapsed-time",
+              "saving-throw-success",
+              "saving-throw-failure",
+              "failure-count"
+            ]
+          },
+          "interval": {
+            "$ref": "#/$defs/interval"
+          },
+          "savingThrow": {
+            "$ref": "#/$defs/savingThrow"
+          },
+          "outcome": {
+            "enum": [
+              "symptom-begins",
+              "disease-ends",
+              "transformation"
+            ]
+          },
+          "target": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+          }
+        }
+      }
+    },
+    "recovery": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "method"
+        ],
+        "properties": {
+          "method": {
+            "enum": [
+              "saving-throw",
+              "rest",
+              "spell",
+              "divine-intervention"
+            ]
+          },
+          "savingThrow": {
+            "$ref": "#/$defs/savingThrow"
+          },
+          "reference": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+          },
+          "immunityAfterRecovery": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+      }
+    }
+  },
+  "anyOf": [
+    {
+      "required": [
+        "infection"
+      ]
+    },
+    {
+      "required": [
+        "incubation"
+      ]
+    },
+    {
+      "required": [
+        "symptoms"
+      ]
+    },
+    {
+      "required": [
+        "progression"
+      ]
+    },
+    {
+      "required": [
+        "recovery"
+      ]
+    }
+  ],
+  "$defs": {
+    "interval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "amount",
+        "unit"
+      ],
+      "properties": {
+        "amount": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "unit": {
+          "enum": [
+            "minute",
+            "hour",
+            "day",
+            "week"
+          ]
+        }
+      }
+    },
+    "savingThrow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ability",
+        "dc"
+      ],
+      "properties": {
+        "ability": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+        },
+        "dc": {
+          "type": "number",
+          "minimum": 1
+        },
+        "dcReduction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "dieCount",
+            "dieSize"
+          ],
+          "properties": {
+            "dieCount": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "dieSize": {
+              "type": "integer",
+              "minimum": 2
+            }
+          }
+        },
+        "frequency": {
+          "enum": [
+            "once",
+            "each-hour",
+            "each-day",
+            "each-long-rest",
+            "triggered"
+          ]
+        }
+      }
+    }
   }
 }

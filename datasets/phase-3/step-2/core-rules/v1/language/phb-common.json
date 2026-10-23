@@ -1,0 +1,36 @@
+{
+  "id": "language:phb:common",
+  "name": "Common",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:common"
+      }
+    ]
+  },
+  "category": "standard",
+  "script": "Common",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "humanoid"
+        ],
+        "tags": [
+          {
+            "group": "any race",
+            "value": "human"
+          }
+        ]
+      }
+    }
+  ]
+}

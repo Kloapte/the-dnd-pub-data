@@ -1,0 +1,30 @@
+{
+  "id": "rule:xphb:ability-check",
+  "name": "Ability Check",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 360
+  },
+  "mechanics": [
+    {
+      "componentId": "ability-check",
+      "kind": "D20_TEST",
+      "subtype": "ABILITY_CHECK",
+      "abilities": [
+        "strength",
+        "dexterity",
+        "constitution",
+        "intelligence",
+        "wisdom",
+        "charisma"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:d20-test",
+      "relationship": "uses"
+    }
+  ]
+}

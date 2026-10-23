@@ -1,0 +1,33 @@
+{
+  "id": "sense:phb:darkvision",
+  "name": "Darkvision",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 183,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "sense",
+        "id": "sense:xphb:darkvision"
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "kind": "SIGHT",
+      "perceives": [
+        "visible-creatures",
+        "objects",
+        "visual-detail"
+      ],
+      "conditions": [
+        "darkness"
+      ],
+      "darknessAs": "dim-light",
+      "colorPerception": "grayscale"
+    }
+  ]
+}

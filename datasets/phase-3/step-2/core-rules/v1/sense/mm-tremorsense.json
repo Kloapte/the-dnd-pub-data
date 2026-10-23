@@ -1,0 +1,29 @@
+{
+  "id": "sense:mm:tremorsense",
+  "name": "Tremorsense",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 9,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "sense",
+        "id": "sense:xphb:tremorsense"
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "kind": "NONVISUAL_PERCEPTION",
+      "medium": "vibration",
+      "restrictions": [
+        "requires-contact",
+        "cannot-detect-flying",
+        "cannot-detect-incorporeal"
+      ]
+    }
+  ]
+}

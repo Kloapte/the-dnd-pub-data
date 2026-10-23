@@ -1,21 +1,26 @@
 {
-  "id": "language:PHB:Common",
-  "source": "PHB",
+  "id": "language:phb:common",
   "name": "Common",
-  "page": 123,
-  "sourceFlags": {
-    "srd": true,
-    "basicRules": true
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123
   },
-  "reprintedAs": [
-    "Common|XPHB"
-  ],
-  "typicalSpeakers": [
-    "{@filter humans|bestiary|type=humanoid|tag=any race;human}"
-  ],
-  "type": "standard",
+  "category": "standard",
   "script": "Common",
-  "fonts": [
-    "fonts/languages/PHB/Human/Harpers.ttf"
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "humanoid"
+        ],
+        "tags": [
+          {
+            "group": "any race",
+            "value": "human"
+          }
+        ]
+      }
+    }
   ]
 }

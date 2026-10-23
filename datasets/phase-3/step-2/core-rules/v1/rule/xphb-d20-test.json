@@ -1,0 +1,39 @@
+{
+  "id": "rule:xphb:d20-test",
+  "name": "D20 Test",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 364,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "mechanics": [
+    {
+      "componentId": "d20-test",
+      "kind": "D20_TEST",
+      "subtype": "TEST",
+      "includes": [
+        "ABILITY_CHECK",
+        "ATTACK_ROLL",
+        "SAVING_THROW"
+      ],
+      "dmDeterminesWhenWarranted": true
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:ability-check"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:attack-roll"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:saving-throw"
+    }
+  ]
+}

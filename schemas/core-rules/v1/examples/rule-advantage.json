@@ -1,0 +1,36 @@
+{
+  "id": "rule:xphb:advantage",
+  "name": "Advantage",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 360
+  },
+  "mechanics": [
+    {
+      "componentId": "advantage",
+      "kind": "D20_TEST",
+      "subtype": "TEST_MODIFIER",
+      "modifier": {
+        "kind": "D20_ROLL_MODIFIER",
+        "roll": "d20-test",
+        "direction": "advantage",
+        "diceCount": 2,
+        "select": "higher",
+        "cancelsOpposite": true,
+        "multipleInstancesStack": false
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:d20-test",
+      "relationship": "modifies"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:disadvantage",
+      "relationship": "cancels-with"
+    }
+  ]
+}

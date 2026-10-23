@@ -1,13 +1,36 @@
 {
-  "id": "disease:XDMG:Cackle Fever",
-  "source": "XDMG",
-  "name": "Cackle Fever",
-  "page": 61,
-  "sourceFlags": {
-    "srd52": true
+  "id": "disease:phb:blinding-sickness",
+  "name": "Blinding Sickness",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 227
   },
-  "type": "Magical Contagion",
-  "entries": [
-    "A creature suffers the following effects {@dice 1d4} days after infection:"
+  "symptoms": [
+    {
+      "kind": "ABILITY_ROLL_MODIFIER",
+      "roll": "ability-check",
+      "direction": "disadvantage",
+      "ability": "wisdom"
+    },
+    {
+      "kind": "ABILITY_ROLL_MODIFIER",
+      "roll": "saving-throw",
+      "direction": "disadvantage",
+      "ability": "wisdom"
+    },
+    {
+      "kind": "CONDITION",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:blinded"
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "spell",
+      "id": "spell:phb:contagion",
+      "relationship": "can-be-inflicted-by"
+    }
   ]
 }

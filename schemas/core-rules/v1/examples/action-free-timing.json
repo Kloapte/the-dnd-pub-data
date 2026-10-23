@@ -1,14 +1,28 @@
 {
-  "id": "action:PHB:End Concentration",
-  "source": "PHB",
+  "id": "action:xphb:end-concentration",
   "name": "End Concentration",
-  "page": 203,
-  "timing": [
-    {
-      "kind": "free"
-    }
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 363
+  },
+  "timing": {
+    "kind": "free"
+  },
+  "capabilities": [
+    "END_CONCENTRATION"
   ],
-  "entries": [
-    "If a spell must be maintained with {@status concentration}, that fact appears in its Duration entry. You can end concentration at any time (no action required)."
+  "operations": [
+    {
+      "kind": "END_STATUS",
+      "appliesWhen": {
+        "kind": "ACTION_TAKEN"
+      },
+      "target": {
+        "targetType": "status",
+        "id": "status:xphb:concentration"
+      },
+      "recipient": "affected-creature",
+      "actor": "affected-creature"
+    }
   ]
 }

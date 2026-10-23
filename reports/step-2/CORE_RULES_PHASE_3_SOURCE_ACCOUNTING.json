@@ -1,0 +1,1798 @@
+{
+  "title": "Step 2 Phase 3 Core Rules representative source-entry accounting",
+  "sourceFiles": [
+    "actions.json",
+    "variantrules.json",
+    "skills.json",
+    "conditionsdiseases.json",
+    "senses.json",
+    "languages.json"
+  ],
+  "selectionCount": 34,
+  "canonicalRecordCount": 33,
+  "convertedRecordCount": 16,
+  "partiallyConvertedRecordCount": 17,
+  "unsupportedRecordCount": 1,
+  "records": [
+    {
+      "canonicalId": "action:phb:attack",
+      "model": "action",
+      "name": "Attack",
+      "source": "PHB",
+      "sourceFile": "actions.json",
+      "sourceObjectPath": "$.action[1]",
+      "sourceEntryCount": 3,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.action[1].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "Action examples and description of common use",
+              "reason": "The sword, bow, and fist examples are illustrative use cases; typed attack capabilities represent the relevant forms.",
+              "cause": "NON_MECHANICAL"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.action[1].entries[1]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Melee and ranged attack capability",
+              "reason": "The canonical capabilities and ATTACK_RESOLUTION represent the action mechanics."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Exactly one attack, the Making an Attack procedure, and its separately defined resolution",
+              "reason": "The approved Action schema has no attack-count field or complete attack procedure; the referenced book section has no exact standalone canonical identity in this selection.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 2,
+          "sourcePath": "$.action[1].entries[2]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "Additional attacks granted by features such as Extra Attack",
+              "reason": "The action record points to a feature-dependent count, but the Action schema has no composable attack-count modifier and the granting feature belongs to the Class domain.",
+              "cause": "EXTERNAL_DEPENDENCY"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "action/phb-attack.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "action:xphb:dodge",
+      "model": "action",
+      "name": "Dodge",
+      "source": "XPHB",
+      "sourceFile": "actions.json",
+      "sourceObjectPath": "$.action[11]",
+      "sourceEntryCount": 2,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.action[11].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "Attack disadvantage when the attacker sees the affected creature, Dexterity save advantage, and duration to the start of the next turn are represented."
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.action[11].entries[1]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "Incapacitation and Speed 0 end the benefit; both are represented with XPHB Condition and typed state mechanics."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "action/xphb-dodge.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "action:phb:grapple",
+      "model": "action",
+      "name": "Grapple",
+      "source": "PHB",
+      "sourceFile": "actions.json",
+      "sourceObjectPath": "$.action[18]",
+      "sourceEntryCount": 3,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.action[18].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "Attack replacement, special melee attack, and target size/reach limits are represented as typed action/check structure."
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.action[18].entries[1]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "Contested Athletics check, target choice of Strength/Athletics or Dexterity/Acrobatics, automatic success on Incapacitated, Grappled application, and voluntary release are represented."
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 2,
+          "sourcePath": "$.action[18].entries[2]",
+          "nestedSourcePaths": [
+            "$.action[18].entries[2].entries[0]"
+          ],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "complete source entry",
+              "reason": "Dragging or carrying the Grappled target while moving and the half-speed exception for a target at least two sizes smaller are not expressible by the approved Action movement operations.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "action/phb-grapple.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "action:phb:shove",
+      "model": "action",
+      "name": "Shove",
+      "source": "PHB",
+      "sourceFile": "actions.json",
+      "sourceObjectPath": "$.action[38]",
+      "sourceEntryCount": 2,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.action[38].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "Attack replacement, special melee attack, and target size/reach limits are represented."
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.action[38].entries[1]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "The attacker Strength (Athletics) check, target-selected Strength (Athletics) or Dexterity (Acrobatics) defense, automatic success against Incapacitated, and exclusive Prone/push outcome are represented."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "action/phb-shove.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "action:phb:cast-a-spell",
+      "model": "action",
+      "name": "Cast a Spell",
+      "source": "PHB",
+      "sourceFile": "actions.json",
+      "sourceObjectPath": "$.action[3]",
+      "sourceEntryCount": 1,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.action[3].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Casting-time alternatives: action, reaction, and variable in-game time",
+              "reason": "The approved typed alternatives structure represents the source-listed timing modes; the spell-defined reaction trigger preserves that specific spell timing is determined by the spell."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Introductory examples of spellcasters and the PHB Chapter 10 reference",
+              "reason": "The introductory statement is context; the chapter-level spellcasting procedure is outside this Action record and no canonical book-section target type exists.",
+              "cause": "EXTERNAL_DEPENDENCY"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "action/phb-cast-a-spell.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "action:dmg:mark",
+      "model": "action",
+      "name": "Mark",
+      "source": "DMG",
+      "sourceFile": "actions.json",
+      "sourceObjectPath": "$.action[29]",
+      "sourceEntryCount": 2,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.action[29].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "The optional-rule design purpose",
+              "reason": "This introductory sentence gives context and adds no independent mechanical rule.",
+              "cause": "NON_MECHANICAL"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.action[29].entries[1]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Mark trigger, opportunity-attack advantage, duration, per-turn limit, and reaction availability without consuming a reaction",
+              "reason": "The typed ROLL_MODIFIER represents the attack benefit and restrictions; reaction.availabilityRequired is true and reaction.consumed is false."
+            },
+            {
+              "classification": "DUPLICATE",
+              "portion": "Incapacitated and Shocking Grasp examples of being unable to take reactions",
+              "reason": "The reaction availability requirement represents the general restriction; the named examples add no additional behavior to this Action operation."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Canonical targets for the unqualified Incapacitated and Shocking Grasp tags",
+              "reason": "The mechanical restriction is represented as requiring reaction availability, but the source tags do not identify one PHB or XPHB target identity.",
+              "cause": "REFERENCE_UNRESOLVED"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "action/dmg-mark.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "rule:xphb:d20-test",
+      "model": "rule",
+      "name": "D20 Test",
+      "source": "XPHB",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[44]",
+      "sourceEntryCount": 1,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.variantrule[44].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "All three included D20 roll subtypes and the DM decision about whether a test is warranted are represented."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "rule/xphb-d20-test.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "rule:xphb:critical-hit",
+      "model": "rule",
+      "name": "Critical Hit",
+      "source": "XPHB",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[38]",
+      "sourceEntryCount": 1,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.variantrule[38].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "Natural 20, automatic hit, doubled attack damage dice, and modifiers applied once are represented by linked attack and damage components."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "rule/xphb-critical-hit.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "rule:xphb:unarmed-strike",
+      "model": "rule",
+      "name": "Unarmed Strike",
+      "source": "XPHB",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[225]",
+      "sourceEntryCount": 3,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.variantrule[225].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "The forceful-body attack, five-foot target distance, and Damage/Grapple/Shove option set are represented by the shared attack and option components."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "The five-foot range also applies to the Grapple and Shove options",
+              "reason": "ATTACK_ROLL.reachFeet can express range for the attack/damage branch, but the approved UNARMED_STRIKE_OPTION structure has no range field for its saving-throw options.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.variantrule[225].entries[1]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "The source explicitly requires choosing one effect option. The canonical OR composition records these exclusive alternatives; this record-specific convention means the option is selected before its branch-specific attack or saving-throw resolution. No generic execution-order model is inferred."
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 2,
+          "sourcePath": "$.variantrule[225].entries[2]",
+          "nestedSourcePaths": [
+            "$.variantrule[225].entries[2].entries[0]",
+            "$.variantrule[225].entries[2].entries[0].entries[0]",
+            "$.variantrule[225].entries[2].entries[1]",
+            "$.variantrule[225].entries[2].entries[1].entries[0]",
+            "$.variantrule[225].entries[2].entries[2]",
+            "$.variantrule[225].entries[2].entries[2].entries[0]"
+          ],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Damage, Grapple and Shove mechanics",
+              "reason": "The attack/damage option, shared Strength/Dexterity save and DC, Grappled application, size/free-hand limits, and Shove outcome choice are represented."
+            },
+            {
+              "classification": "DUPLICATE",
+              "portion": "The Grapple DC also governs escape attempts",
+              "reason": "A typed relation on the Rule references the XPHB Grappled condition and states that escape attempts use the same DC."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "rule/xphb-unarmed-strike.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "rule:xphb:difficult-terrain",
+      "model": "rule",
+      "name": "Difficult Terrain",
+      "source": "XPHB",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[53]",
+      "sourceEntryCount": 3,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.variantrule[53].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "DUPLICATE",
+              "portion": "complete source entry",
+              "reason": "The example is fully implied by the represented one extra foot of movement cost per foot through difficult terrain."
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.variantrule[53].entries[1]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Non-cumulative application",
+              "reason": "The component explicitly sets cumulative to false."
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 2,
+          "sourcePath": "$.variantrule[53].entries[2]",
+          "nestedSourcePaths": [
+            "$.variantrule[53].entries[2].items[0]",
+            "$.variantrule[53].entries[2].items[1]",
+            "$.variantrule[53].entries[2].items[2]",
+            "$.variantrule[53].entries[2].items[3]",
+            "$.variantrule[53].entries[2].items[4]",
+            "$.variantrule[53].entries[2].items[5]"
+          ],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "Listed space contents and the open-ended similar-feature adjudication",
+              "reason": "The approved movement component cannot express the qualifying terrain conditions or the DM-adjudicated similarity test.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "rule/xphb-difficult-terrain.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "rule:dmg:downtime-activity-crafting-a-magic-item",
+      "model": "rule",
+      "name": "Downtime Activity: Crafting a Magic Item",
+      "source": "DMG",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[62]",
+      "sourceEntryCount": 10,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.variantrule[62].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Magic-item crafting activity and item-created outcome",
+              "reason": "The approved DOWNTIME_PROCEDURE component represents the activity named and described in this source record."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Source-specific procedure details for this entry",
+              "reason": "The approved Rule schema cannot model the precise optionality, prerequisites, rarity tables, cost/work formula, spell-slot/material expenditure, cooperative contributions, campaign choices, or lifestyle exception without loss.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.variantrule[62].entries[1]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Magic-item crafting activity and item-created outcome",
+              "reason": "The approved DOWNTIME_PROCEDURE component represents the activity named and described in this source record."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Source-specific procedure details for this entry",
+              "reason": "The approved Rule schema cannot model the precise optionality, prerequisites, rarity tables, cost/work formula, spell-slot/material expenditure, cooperative contributions, campaign choices, or lifestyle exception without loss.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 2,
+          "sourcePath": "$.variantrule[62].entries[2]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Magic-item crafting activity and item-created outcome",
+              "reason": "The approved DOWNTIME_PROCEDURE component represents the activity named and described in this source record."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Source-specific procedure details for this entry",
+              "reason": "The approved Rule schema cannot model the precise optionality, prerequisites, rarity tables, cost/work formula, spell-slot/material expenditure, cooperative contributions, campaign choices, or lifestyle exception without loss.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 3,
+          "sourcePath": "$.variantrule[62].entries[3]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Magic-item crafting activity and item-created outcome",
+              "reason": "The approved DOWNTIME_PROCEDURE component represents the activity named and described in this source record."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Source-specific procedure details for this entry",
+              "reason": "The approved Rule schema cannot model the precise optionality, prerequisites, rarity tables, cost/work formula, spell-slot/material expenditure, cooperative contributions, campaign choices, or lifestyle exception without loss.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 4,
+          "sourcePath": "$.variantrule[62].entries[4]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Magic-item crafting activity and item-created outcome",
+              "reason": "The approved DOWNTIME_PROCEDURE component represents the activity named and described in this source record."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Source-specific procedure details for this entry",
+              "reason": "The approved Rule schema cannot model the precise optionality, prerequisites, rarity tables, cost/work formula, spell-slot/material expenditure, cooperative contributions, campaign choices, or lifestyle exception without loss.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 5,
+          "sourcePath": "$.variantrule[62].entries[5]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Magic-item crafting activity and item-created outcome",
+              "reason": "The approved DOWNTIME_PROCEDURE component represents the activity named and described in this source record."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Source-specific procedure details for this entry",
+              "reason": "The approved Rule schema cannot model the precise optionality, prerequisites, rarity tables, cost/work formula, spell-slot/material expenditure, cooperative contributions, campaign choices, or lifestyle exception without loss.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 6,
+          "sourcePath": "$.variantrule[62].entries[6]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Magic-item crafting activity and item-created outcome",
+              "reason": "The approved DOWNTIME_PROCEDURE component represents the activity named and described in this source record."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Source-specific procedure details for this entry",
+              "reason": "The approved Rule schema cannot model the precise optionality, prerequisites, rarity tables, cost/work formula, spell-slot/material expenditure, cooperative contributions, campaign choices, or lifestyle exception without loss.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 7,
+          "sourcePath": "$.variantrule[62].entries[7]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Magic-item crafting activity and item-created outcome",
+              "reason": "The approved DOWNTIME_PROCEDURE component represents the activity named and described in this source record."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Source-specific procedure details for this entry",
+              "reason": "The approved Rule schema cannot model the precise optionality, prerequisites, rarity tables, cost/work formula, spell-slot/material expenditure, cooperative contributions, campaign choices, or lifestyle exception without loss.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 8,
+          "sourcePath": "$.variantrule[62].entries[8]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Magic-item crafting activity and item-created outcome",
+              "reason": "The approved DOWNTIME_PROCEDURE component represents the activity named and described in this source record."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Source-specific procedure details for this entry",
+              "reason": "The approved Rule schema cannot model the precise optionality, prerequisites, rarity tables, cost/work formula, spell-slot/material expenditure, cooperative contributions, campaign choices, or lifestyle exception without loss.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 9,
+          "sourcePath": "$.variantrule[62].entries[9]",
+          "nestedSourcePaths": [
+            "$.variantrule[62].entries[9].entries[0]",
+            "$.variantrule[62].entries[9].entries[1]",
+            "$.variantrule[62].entries[9].entries[2]"
+          ],
+          "classifications": [
+            {
+              "classification": "DUPLICATE",
+              "portion": "Magic-item formula as a prerequisite",
+              "reason": "The source already states that a formula is required to begin crafting; the inset explains the same prerequisite."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Formula rarity, item-rarity relationship, availability, and sale costs",
+              "reason": "The approved downtime component has no formula model or rarity/cost table.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "rule/dmg-downtime-activity-crafting-a-magic-item.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "skill:phb:acrobatics",
+      "model": "skill",
+      "name": "Acrobatics",
+      "source": "PHB",
+      "sourceFile": "skills.json",
+      "sourceObjectPath": "$.skill[0]",
+      "sourceEntryCount": 1,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.skill[0].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "DUPLICATE",
+              "portion": "The explicit dexterity association",
+              "reason": "The structured source ability field is represented in the canonical Skill. The same association in descriptive text adds no separate mechanic."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Descriptive examples and suggested task contexts",
+              "reason": "These examples illustrate when a DM might call for the skill but are not independent mechanics in the approved Skill contract.",
+              "cause": "NON_MECHANICAL"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "skill/phb-acrobatics.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "skill:phb:animal-handling",
+      "model": "skill",
+      "name": "Animal Handling",
+      "source": "PHB",
+      "sourceFile": "skills.json",
+      "sourceObjectPath": "$.skill[2]",
+      "sourceEntryCount": 1,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.skill[2].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "DUPLICATE",
+              "portion": "The explicit wisdom association",
+              "reason": "The structured source ability field is represented in the canonical Skill. The same association in descriptive text adds no separate mechanic."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Descriptive examples and suggested task contexts",
+              "reason": "These examples illustrate when a DM might call for the skill but are not independent mechanics in the approved Skill contract.",
+              "cause": "NON_MECHANICAL"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "skill/phb-animal-handling.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "skill:xphb:survival",
+      "model": "skill",
+      "name": "Survival",
+      "source": "XPHB",
+      "sourceFile": "skills.json",
+      "sourceObjectPath": "$.skill[35]",
+      "sourceEntryCount": 1,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.skill[35].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "Descriptive examples and suggested task contexts",
+              "reason": "These examples illustrate when a DM might call for the skill but are not independent mechanics in the approved Skill contract.",
+              "cause": "NON_MECHANICAL"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "skill/xphb-survival.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "condition:phb:blinded",
+      "model": "condition",
+      "name": "Blinded",
+      "source": "PHB",
+      "sourceFile": "conditionsdiseases.json",
+      "sourceObjectPath": "$.condition[0]",
+      "sourceEntryCount": 1,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.condition[0].entries[0]",
+          "nestedSourcePaths": [
+            "$.condition[0].entries[0].items[0]",
+            "$.condition[0].entries[0].items[1]"
+          ],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "Loss of sight, automatic failure of sight-dependent ability checks, and both attack-roll directions are represented."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "condition/phb-blinded.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "condition:xphb:blinded",
+      "model": "condition",
+      "name": "Blinded",
+      "source": "XPHB",
+      "sourceFile": "conditionsdiseases.json",
+      "sourceObjectPath": "$.condition[1]",
+      "sourceEntryCount": 2,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.condition[1].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "complete source entry",
+              "reason": "The introductory sentence only introduces the condition effects.",
+              "cause": "NON_MECHANICAL"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.condition[1].entries[1]",
+          "nestedSourcePaths": [
+            "$.condition[1].entries[1].entries[0]",
+            "$.condition[1].entries[1].entries[0].entries[0]",
+            "$.condition[1].entries[1].entries[1]",
+            "$.condition[1].entries[1].entries[1].entries[0]"
+          ],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "Sight removal, sight-dependent check failure, and attack-roll advantage/disadvantage directions are represented."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "condition/xphb-blinded.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "condition:phb:exhaustion",
+      "model": "condition",
+      "name": "Exhaustion",
+      "source": "PHB",
+      "sourceFile": "conditionsdiseases.json",
+      "sourceObjectPath": "$.condition[6]",
+      "sourceEntryCount": 6,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.condition[6].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "complete source entry",
+              "reason": "The triggering examples are context rather than a specific exhaustion-application procedure.",
+              "cause": "NON_MECHANICAL"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.condition[6].entries[1]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "All six cumulative PHB level effects are represented at their source thresholds."
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 2,
+          "sourcePath": "$.condition[6].entries[2]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "An existing level increases by the amount specified by the applying effect; canonical application is add-specified-levels."
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 3,
+          "sourcePath": "$.condition[6].entries[3]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "DUPLICATE",
+              "portion": "complete source entry",
+              "reason": "The current level includes all lower levels, already represented by cumulative level mechanics and the threshold effects."
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 4,
+          "sourcePath": "$.condition[6].entries[4]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "DUPLICATE",
+              "portion": "complete source entry",
+              "reason": "All effects end below level 1, already represented by endsAtLevel=0 and each effect threshold."
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 5,
+          "sourcePath": "$.condition[6].entries[5]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "Long-rest recovery with food and drink and recovery from being raised from the dead are represented."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "condition/phb-exhaustion.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "condition:xphb:exhaustion",
+      "model": "condition",
+      "name": "Exhaustion",
+      "source": "XPHB",
+      "sourceFile": "conditionsdiseases.json",
+      "sourceObjectPath": "$.condition[7]",
+      "sourceEntryCount": 2,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.condition[7].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "complete source entry",
+              "reason": "The introductory sentence only introduces the condition effects.",
+              "cause": "NON_MECHANICAL"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.condition[7].entries[1]",
+          "nestedSourcePaths": [
+            "$.condition[7].entries[1].entries[0]",
+            "$.condition[7].entries[1].entries[0].entries[0]",
+            "$.condition[7].entries[1].entries[1]",
+            "$.condition[7].entries[1].entries[1].entries[0]",
+            "$.condition[7].entries[1].entries[2]",
+            "$.condition[7].entries[1].entries[2].entries[0]",
+            "$.condition[7].entries[1].entries[3]",
+            "$.condition[7].entries[1].entries[3].entries[0]"
+          ],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "Cumulative one-level application, death at level six, the D20 Test penalty and Speed reduction per level, and one-level Long Rest recovery are represented."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "condition/xphb-exhaustion.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "disease:phb:blinding-sickness",
+      "model": "disease",
+      "name": "Blinding Sickness",
+      "source": "PHB",
+      "sourceFile": "conditionsdiseases.json",
+      "sourceObjectPath": "$.disease[1]",
+      "sourceEntryCount": 2,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.disease[1].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Disadvantage on Wisdom ability checks and saving throws, and the Blinded condition.",
+              "reason": "Represented in canonical typed fields."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Pain and the appearance of milky-white eyes.",
+              "reason": "The condition and roll modifiers are represented; descriptive symptoms have no approved Disease field.",
+              "cause": "NON_MECHANICAL"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.disease[1].entries[1]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "The explicit Contagion spell relationship is represented as a typed Spell reference."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "disease/phb-blinding-sickness.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "disease:xdmg:sewer-plague",
+      "model": "disease",
+      "name": "Sewer Plague",
+      "source": "XDMG",
+      "sourceFile": "conditionsdiseases.json",
+      "sourceObjectPath": "$.disease[18]",
+      "sourceEntryCount": 3,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.disease[18].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Contact/wound transmission categories and DC 11 Constitution infection save",
+              "reason": "Disease.infection represents the stated routes and saving-throw input."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Humanoid-only target, contaminated source qualification, environmental origin, and 1d4-day incubation",
+              "reason": "The approved Disease schema has no target-susceptibility predicate or random-die incubation interval.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            },
+            {
+              "classification": "DUPLICATE",
+              "portion": "Otyughs and rats as examples of carriers",
+              "reason": "These are illustrative carrier examples; the supported wound/contact routes are represented without asserting an exhaustive carrier list."
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.disease[18].entries[1]",
+          "nestedSourcePaths": [
+            "$.disease[18].entries[1].items[0]",
+            "$.disease[18].entries[1].items[1]",
+            "$.disease[18].entries[1].items[2]"
+          ],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Exhaustion as a disease symptom",
+              "reason": "The typed CONDITION symptom references the expressly XPHB-qualified Exhaustion condition."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Exactly one level after incubation, Hit Point Dice recovery reduction, and Long Rest restrictions while Exhaustion is present",
+              "reason": "The Disease schema cannot express condition-level application, symptom timing, or these condition-dependent recovery restrictions.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 2,
+          "sourcePath": "$.disease[18].entries[2]",
+          "nestedSourcePaths": [
+            "$.disease[18].entries[2].entries[0]",
+            "$.disease[18].entries[2].entries[0].entries[0]"
+          ],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "Daily dawn Constitution saves, conditional Exhaustion increase/decrease, and disease ending only at Exhaustion level zero",
+              "reason": "Progression has no condition-level change or conditional threshold outcome; mapping success directly to disease termination would be inaccurate.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "disease/xdmg-sewer-plague.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "disease:dmg:cackle-fever",
+      "model": "disease",
+      "name": "Cackle Fever",
+      "source": "DMG",
+      "sourceFile": "conditionsdiseases.json",
+      "sourceObjectPath": "$.disease[4]",
+      "sourceEntryCount": 5,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.disease[4].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "complete source entry",
+              "reason": "Humanoid susceptibility, gnome immunity, laughter description, and nickname are not represented by Disease fields.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.disease[4].entries[1]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "complete source entry",
+              "reason": "Random 1d4-hour incubation, fever/disorientation, and Exhaustion that cannot be removed until cure are not expressible together in the approved schema.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 2,
+          "sourcePath": "$.disease[4].entries[2]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "complete source entry",
+              "reason": "Stress-triggered DC 13 Constitution saving throw is unsupported as a Disease trigger.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 3,
+          "sourcePath": "$.disease[4].entries[3]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "complete source entry",
+              "reason": "Save failure damage, timed incapacitation/laughter, repeated end-of-turn saves, secondary infection, and 24-hour source-specific immunity are unsupported.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 4,
+          "sourcePath": "$.disease[4].entries[4]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "complete source entry",
+              "reason": "Long-rest save, random DC reduction, recovery threshold, and indefinite-madness consequence after three failures are unsupported.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": null,
+      "conversionStatus": "unsupported",
+      "disposition": "unsupported",
+      "reason": "No reliable non-empty canonical mechanics subset can be extracted without losing linked behavior: susceptibility/immunity, random incubation, stress-triggered saving throws, psychic damage and timed incapacitation, repeated saves, secondary infection/immunity, and long-rest DC reduction/recovery/madness are not supported as a cohesive disease procedure."
+    },
+    {
+      "canonicalId": "status:xphb:bloodied",
+      "model": "status",
+      "name": "Bloodied",
+      "source": "XPHB",
+      "sourceFile": "conditionsdiseases.json",
+      "sourceObjectPath": "$.status[0]",
+      "sourceEntryCount": 1,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.status[0].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "Bloodied applies at half or fewer Hit Points; the exact threshold and inclusive comparison are represented."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "status/xphb-bloodied.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "status:phb:concentration",
+      "model": "status",
+      "name": "Concentration",
+      "source": "PHB",
+      "sourceFile": "conditionsdiseases.json",
+      "sourceObjectPath": "$.status[1]",
+      "sourceEntryCount": 5,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.status[1].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Concentration is a maintained status; loss terminates it.",
+              "reason": "Represented in canonical typed fields."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "The maintained spell itself ends when Concentration is lost.",
+              "reason": "The approved Status model records status loss but does not link the lost state to each dependent spell effect.",
+              "cause": "EXTERNAL_DEPENDENCY"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.status[1].entries[1]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Voluntary termination without an action.",
+              "reason": "Represented in canonical typed fields."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "The maximum Concentration duration is specified by the individual spell.",
+              "reason": "The Status record has no general duration field; spell-specific duration remains on the referenced spell.",
+              "cause": "EXTERNAL_DEPENDENCY"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 2,
+          "sourcePath": "$.status[1].entries[2]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "complete source entry",
+              "reason": "Normal movement and attacks do not interrupt Concentration; the approved Status model does not contain continuing-activity permissions.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 3,
+          "sourcePath": "$.status[1].entries[3]",
+          "nestedSourcePaths": [
+            "$.status[1].entries[3].items[0]",
+            "$.status[1].entries[3].items[0].entries[0]",
+            "$.status[1].entries[3].items[1]",
+            "$.status[1].entries[3].items[1].entries[0]",
+            "$.status[1].entries[3].items[2]",
+            "$.status[1].entries[3].items[2].entries[0]"
+          ],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "Another Concentration spell, separate Constitution saves for each damage source with DC max(10, half damage), and incapacitation/death are represented."
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 4,
+          "sourcePath": "$.status[1].entries[4]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "A DM-adjudicated environmental phenomenon may require a DC 10 Constitution save; represented as a separate environmental maintenance save."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "status/phb-concentration.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "status:xphb:concentration",
+      "model": "status",
+      "name": "Concentration",
+      "source": "XPHB",
+      "sourceFile": "conditionsdiseases.json",
+      "sourceObjectPath": "$.status[2]",
+      "sourceEntryCount": 2,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.status[2].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Concentration sustains an effect; voluntary ending, duration, and losing Concentration ends the effect.",
+              "reason": "Represented in canonical typed fields."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "The example list of possible maximum durations (one minute, one hour, or another duration).",
+              "reason": "Status contains no general duration field; durations are defined by the effect record.",
+              "cause": "EXTERNAL_DEPENDENCY"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.status[2].entries[1]",
+          "nestedSourcePaths": [
+            "$.status[2].entries[1].entries[0]",
+            "$.status[2].entries[1].entries[0].entries[0]",
+            "$.status[2].entries[1].entries[1]",
+            "$.status[2].entries[1].entries[1].entries[0]",
+            "$.status[2].entries[1].entries[2]",
+            "$.status[2].entries[1].entries[2].entries[0]"
+          ],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "Starting another Concentration effect, damage-based Constitution save with round-down and maximum DC 30, and incapacitation/death are represented."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "status/xphb-concentration.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "status:phb:surprised",
+      "model": "status",
+      "name": "Surprised",
+      "source": "PHB",
+      "sourceFile": "conditionsdiseases.json",
+      "sourceObjectPath": "$.status[3]",
+      "sourceEntryCount": 3,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.status[3].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "OMITTED",
+              "portion": "complete source entry",
+              "reason": "Narrative examples introduce surprise but do not define a separate mechanic.",
+              "cause": "NON_MECHANICAL"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.status[3].entries[1]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "A creature that fails to notice a threat is Surprised at encounter start, and group members can differ.",
+              "reason": "Represented in canonical typed fields."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "DM determination using hiding creaturesÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Dexterity (Stealth) checks against each opposing creatureÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s passive Wisdom (Perception).",
+              "reason": "The approved Status model represents resulting turn restrictions but not the perception/Stealth determination procedure.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 2,
+          "sourcePath": "$.status[3].entries[2]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "First-turn movement/action restrictions and reaction restriction until that turn ends",
+              "reason": "The Status mechanics encode the duration and restrictions for an affected creature."
+            },
+            {
+              "classification": "DUPLICATE",
+              "portion": "Different creatures in one group may have different Surprise states",
+              "reason": "Status is represented on an affected creature; this statement does not add a second group-level mechanic."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "status/phb-surprised.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "status:xphb:surprised",
+      "model": "status",
+      "name": "Surprised",
+      "source": "XPHB",
+      "sourceFile": "conditionsdiseases.json",
+      "sourceObjectPath": "$.status[4]",
+      "sourceEntryCount": 1,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.status[4].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "complete source entry",
+              "reason": "Surprised gives Disadvantage on Initiative when caught unaware at combat start; represented as an Initiative modifier."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "status/xphb-surprised.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "sense:phb:darkvision",
+      "model": "sense",
+      "name": "Darkvision",
+      "source": "PHB",
+      "sourceFile": "senses.json",
+      "sourceObjectPath": "$.sense[2]",
+      "sourceEntryCount": 1,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.sense[2].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Darkness treated as dim light and grayscale color perception in darkness",
+              "reason": "The SIGHT capability records darknessAs dim-light and grayscale perception."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Dim light treated as bright light",
+              "reason": "The approved SIGHT structure has no distinct transformation for dim-light conditions; darknessAs applies to darkness.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "sense/phb-darkvision.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "sense:mm:tremorsense",
+      "model": "sense",
+      "name": "Tremorsense",
+      "source": "MM",
+      "sourceFile": "senses.json",
+      "sourceObjectPath": "$.sense[4]",
+      "sourceEntryCount": 1,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.sense[4].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Detecting vibration sources through shared ground or substance, and inability to detect flying or incorporeal creatures.",
+              "reason": "Represented in canonical typed fields."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Pinpointing the origin of vibrations.",
+              "reason": "The Sense contract records what may be detected and environmental restrictions but has no precision/location capability.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "sense/mm-tremorsense.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "sense:xphb:tremorsense",
+      "model": "sense",
+      "name": "Tremorsense",
+      "source": "XPHB",
+      "sourceFile": "senses.json",
+      "sourceObjectPath": "$.sense[5]",
+      "sourceEntryCount": 2,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.sense[5].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Nonvisual detection of creatures and movement (including moving objects) through shared contact with a surface or liquid; airborne targets are excluded",
+              "reason": "The Sense capability records vibration medium, creatures/movement, nonvisual mode, and the shared-contact restriction."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Pinpointed location of detected creatures and moving objects",
+              "reason": "The approved Sense schema has no location-precision field.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        },
+        {
+          "sourceEntryIndex": 1,
+          "sourcePath": "$.sense[5].entries[1]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Nonvisual perception",
+              "reason": "The NONVISUAL_PERCEPTION kind represents that this sense is not sight."
+            },
+            {
+              "classification": "DUPLICATE",
+              "portion": "Explicit statement that Tremorsense is not a form of sight",
+              "reason": "The typed NONVISUAL_PERCEPTION capability already records this distinction."
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "sense/xphb-tremorsense.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "sense:phb:truesight",
+      "model": "sense",
+      "name": "Truesight",
+      "source": "PHB",
+      "sourceFile": "senses.json",
+      "sourceObjectPath": "$.sense[6]",
+      "sourceEntryCount": 1,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.sense[6].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "Normal/magical darkness, invisible creatures, illusions, true forms, and Ethereal Plane perception",
+              "reason": "The SIGHT capability represents the source-listed qualitative capabilities."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Invisible objects and the automatic detection/save outcome against visual illusions",
+              "reason": "The approved Sense schema cannot distinguish seeing invisible objects from objects generally or encode automatic illusion detection and saving-throw success.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "sense/phb-truesight.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "language:phb:common",
+      "model": "language",
+      "name": "Common",
+      "source": "PHB",
+      "sourceFile": "languages.json",
+      "sourceObjectPath": "$.language[30]",
+      "sourceEntryCount": 0,
+      "entries": [],
+      "canonicalOutput": "language/phb-common.json",
+      "conversionStatus": "converted"
+    },
+    {
+      "canonicalId": "language:xphb:common",
+      "model": "language",
+      "name": "Common",
+      "source": "XPHB",
+      "sourceFile": "languages.json",
+      "sourceObjectPath": "$.language[32]",
+      "sourceEntryCount": 0,
+      "entries": [],
+      "canonicalOutput": "language/xphb-common.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "language:mm:gith",
+      "model": "language",
+      "name": "Gith",
+      "source": "MM",
+      "sourceFile": "languages.json",
+      "sourceObjectPath": "$.language[71]",
+      "sourceEntryCount": 1,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.language[71].entries[0]",
+          "nestedSourcePaths": [
+            "$.language[71].entries[0].entries[0]",
+            "$.language[71].entries[0].entries[1]"
+          ],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "The source names the script TirÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢su, retained in the canonical script field, and identifies Githzerai and Githyanki as speaker groups.",
+              "reason": "Represented in canonical typed fields."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "The circular letter layout, word/sentence cluster construction, dialect/accent distinctions, and opposite writing directions.",
+              "reason": "The approved Language model preserves a script name and dialect references but has no script mechanics or dialect identities available for these unrepresented source details.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "language/mm-gith.json",
+      "conversionStatus": "partial"
+    },
+    {
+      "canonicalId": "language:phb:thieves-cant",
+      "model": "language",
+      "name": "Thieves' Cant",
+      "source": "PHB",
+      "sourceFile": "languages.json",
+      "sourceObjectPath": "$.language[173]",
+      "sourceEntryCount": 1,
+      "entries": [
+        {
+          "sourceEntryIndex": 0,
+          "sourcePath": "$.language[173].entries[0]",
+          "nestedSourcePaths": [],
+          "classifications": [
+            {
+              "classification": "INTERPRETED",
+              "portion": "The entry identifies ThievesÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Cant as a secret communication language.",
+              "reason": "Represented in canonical typed fields."
+            },
+            {
+              "classification": "OMITTED",
+              "portion": "Only knowledgeable creatures understand it, and conveying a message takes four times as long as plain speech.",
+              "reason": "The approved Language contract has no communication-access or time-cost mechanics.",
+              "cause": "SCHEMA_UNSUPPORTED"
+            }
+          ]
+        }
+      ],
+      "canonicalOutput": "language/phb-thieves-cant.json",
+      "conversionStatus": "partial"
+    }
+  ],
+  "sourceFieldIssues": [
+    {
+      "model": "action",
+      "canonicalId": "action:dmg:mark",
+      "sourceFile": "actions.json",
+      "sourceObjectPath": "$.action[29]",
+      "sourceField": "seeAlsoAction",
+      "sourceValue": [
+        "attack"
+      ],
+      "reason": "Source link does not resolve to one source Action record in the pinned dataset (0 matches).",
+      "disposition": "OMITTED",
+      "cause": "REFERENCE_UNRESOLVED"
+    },
+    {
+      "model": "action",
+      "canonicalId": "action:dmg:mark",
+      "sourceFile": "actions.json",
+      "sourceObjectPath": "$.action[29]",
+      "sourceField": "fromVariant",
+      "sourceValue": "Action Options",
+      "reason": "Editorial provenance label is not a supported canonical sourceMetadata field; the exact source and page are retained.",
+      "disposition": "OMITTED",
+      "cause": "OUT_OF_APPROVED_SCOPE"
+    },
+    {
+      "model": "rule",
+      "canonicalId": "rule:xphb:d20-test",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[44]",
+      "sourceField": "ruleType",
+      "sourceValue": "C",
+      "reason": "Source classification code is retained only in the external accounting report; its meaning is unresolved and no mapping is inferred.",
+      "disposition": "OMITTED",
+      "cause": "SOURCE_AMBIGUOUS"
+    },
+    {
+      "model": "rule",
+      "canonicalId": "rule:xphb:critical-hit",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[38]",
+      "sourceField": "ruleType",
+      "sourceValue": "C",
+      "reason": "Source classification code is retained only in the external accounting report; its meaning is unresolved and no mapping is inferred.",
+      "disposition": "OMITTED",
+      "cause": "SOURCE_AMBIGUOUS"
+    },
+    {
+      "model": "rule",
+      "canonicalId": "rule:xphb:unarmed-strike",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[225]",
+      "sourceField": "ruleType",
+      "sourceValue": "C",
+      "reason": "Source classification code is retained only in the external accounting report; its meaning is unresolved and no mapping is inferred.",
+      "disposition": "OMITTED",
+      "cause": "SOURCE_AMBIGUOUS"
+    },
+    {
+      "model": "rule",
+      "canonicalId": "rule:xphb:difficult-terrain",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[53]",
+      "sourceField": "ruleType",
+      "sourceValue": "C",
+      "reason": "Source classification code is retained only in the external accounting report; its meaning is unresolved and no mapping is inferred.",
+      "disposition": "OMITTED",
+      "cause": "SOURCE_AMBIGUOUS"
+    },
+    {
+      "model": "rule",
+      "canonicalId": "rule:dmg:downtime-activity-crafting-a-magic-item",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[62]",
+      "sourceField": "ruleType",
+      "sourceValue": "O",
+      "reason": "Source classification code is retained only in the external accounting report; its meaning is unresolved and no mapping is inferred.",
+      "disposition": "OMITTED",
+      "cause": "SOURCE_AMBIGUOUS"
+    },
+    {
+      "model": "language",
+      "canonicalId": "language:xphb:common",
+      "sourceFile": "languages.json",
+      "sourceObjectPath": "$.language[32]",
+      "sourceField": "origin",
+      "sourceValue": "Sigil",
+      "reason": "The source value is a place name (Sigil), while Language.origin only accepts canonical references and no source-backed canonical place entity is available in this domain selection.",
+      "disposition": "OMITTED",
+      "cause": "REFERENCE_UNRESOLVED"
+    },
+    {
+      "model": "language",
+      "canonicalId": "language:mm:gith",
+      "sourceFile": "languages.json",
+      "sourceObjectPath": "$.language[71]",
+      "sourceField": "dialects",
+      "sourceValue": [
+        "Githzerai",
+        "Githyanki"
+      ],
+      "reason": "The listed dialect names Githzerai and Githyanki have no matching Language source records, so canonical targets cannot be resolved without inventing identities.",
+      "disposition": "OMITTED",
+      "cause": "REFERENCE_UNRESOLVED"
+    },
+    {
+      "model": "language",
+      "canonicalId": "language:phb:thieves-cant",
+      "sourceFile": "languages.json",
+      "sourceObjectPath": "$.language[173]",
+      "sourceField": "typicalSpeakers",
+      "sourceValue": [
+        "{@creature assassin||assassins}",
+        "{@class rogue||rogues}"
+      ],
+      "reason": "The source lists creature and class tags; the creature link lacks an explicit source qualifier and the approved Language typicalSpeakers contract accepts only creature targets/filters, not class identities. No speaker reference is guessed.",
+      "disposition": "OMITTED",
+      "cause": "REFERENCE_UNRESOLVED"
+    },
+    {
+      "model": "action",
+      "canonicalId": "action:dmg:mark",
+      "sourceFile": "actions.json",
+      "sourceObjectPath": "$.action[29].entries[1]",
+      "sourceField": "inlineReference.condition",
+      "sourceValue": "{@condition incapacitated}",
+      "reason": "The tag omits a source qualifier and the repository has PHB and XPHB Incapacitated records; reaction behavior is represented, but this link target is not guessed.",
+      "disposition": "OMITTED",
+      "cause": "REFERENCE_UNRESOLVED"
+    },
+    {
+      "model": "action",
+      "canonicalId": "action:dmg:mark",
+      "sourceFile": "actions.json",
+      "sourceObjectPath": "$.action[29].entries[1]",
+      "sourceField": "inlineReference.spell",
+      "sourceValue": "{@spell shocking grasp}",
+      "reason": "The tag omits a source qualifier and the repository has PHB and XPHB versions; the target identity is not guessed.",
+      "disposition": "OMITTED",
+      "cause": "REFERENCE_UNRESOLVED"
+    },
+    {
+      "model": "disease",
+      "canonicalId": "disease:dmg:cackle-fever",
+      "sourceFile": "conditionsdiseases.json",
+      "sourceObjectPath": "$.disease[4].entries[1]",
+      "sourceField": "inlineReference.condition",
+      "sourceValue": "{@condition exhaustion}",
+      "reason": "The tag omits a source qualifier and PHB/XPHB Exhaustion mechanics differ; no target edition is established by the tag.",
+      "disposition": "OMITTED",
+      "cause": "SOURCE_AMBIGUOUS"
+    },
+    {
+      "model": "disease",
+      "canonicalId": "disease:dmg:cackle-fever",
+      "sourceFile": "conditionsdiseases.json",
+      "sourceObjectPath": "$.disease[4].entries[3]",
+      "sourceField": "inlineReference.condition",
+      "sourceValue": "{@condition incapacitated}",
+      "reason": "The tag omits a source qualifier and the source object does not establish a condition target identity; the full tag remains in the omitted entry register.",
+      "disposition": "OMITTED",
+      "cause": "REFERENCE_UNRESOLVED"
+    }
+  ],
+  "interpretationMethod": "Codex directly interpreted each selected source object against the complete approved schemas, Phase 1 research, Phase 2 examples, and Phase 2 Action/Rule research.",
+  "previousPhase3Conversion": "The prior deterministic converter is retired and its canonical outputs were treated as unverified drafts.",
+  "sourceEntryRootCount": 74,
+  "dispositionCounts": {
+    "interpreted": 51,
+    "duplicate": 11,
+    "omitted": 46
+  },
+  "sourceFieldIssueCount": 14
+}

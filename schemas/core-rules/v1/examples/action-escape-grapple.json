@@ -1,0 +1,91 @@
+{
+  "id": "action:xphb:escape-a-grapple",
+  "name": "Escape a Grapple",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 367,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "ESCAPE_GRAPPLE"
+  ],
+  "operations": [
+    {
+      "kind": "CHECK_OR_CONTEST",
+      "resolution": "against-dc",
+      "actor": "acting-creature",
+      "abilities": [
+        "strength",
+        "dexterity"
+      ],
+      "abilitySelection": "acting-creature-chooses",
+      "dcSource": {
+        "targetType": "rule",
+        "id": "rule:xphb:grappling",
+        "relationship": "escape-dc-defined-by"
+      },
+      "failure": "no-effect",
+      "operationId": "escape-check",
+      "target": "affected-creature"
+    },
+    {
+      "kind": "END_CONDITION",
+      "target": {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled"
+      },
+      "appliesWhen": {
+        "kind": "CHECK_SUCCEEDED",
+        "operationId": "escape-check"
+      },
+      "recipient": "affected-creature",
+      "actor": "affected-creature",
+      "operationId": "escape-condition"
+    },
+    {
+      "kind": "END_CONDITION",
+      "target": {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled"
+      },
+      "appliesWhen": {
+        "kind": "CONDITION_MET",
+        "condition": {
+          "kind": "HAS_CONDITION",
+          "actor": "grappler",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:incapacitated"
+          }
+        }
+      },
+      "recipient": "affected-creature",
+      "actor": "grappler",
+      "operationId": "grappler-incapacitated"
+    },
+    {
+      "kind": "END_CONDITION",
+      "target": {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled"
+      },
+      "appliesWhen": {
+        "kind": "CONDITION_MET",
+        "condition": {
+          "kind": "DISTANCE_EXCEEDS_RANGE",
+          "actor": "grappled-creature",
+          "target": "grappler",
+          "range": "grapple"
+        }
+      },
+      "recipient": "affected-creature",
+      "operationId": "grapple-range-exceeded"
+    }
+  ]
+}

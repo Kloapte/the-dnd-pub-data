@@ -2,520 +2,1030 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:thedndpub:schemas:core-rules:common:v1",
   "title": "Core Rules Shared Definitions",
-  "description": "Reusable structural definitions for Step 2 core rules entities.",
   "$defs": {
-    "nonEmptyString": {
-      "type": "string",
-      "minLength": 1,
-      "pattern": "^\\S+$"
-    },
-    "displayText": {
-      "type": "string",
-      "minLength": 1
-    },
     "identity": {
       "type": "object",
       "required": [
         "id",
-        "source",
         "name"
       ],
       "properties": {
         "id": {
-          "$ref": "#/$defs/displayText",
-          "description": "Stable source-qualified identifier: <type>:<source>:<exact source name>."
-        },
-        "source": {
-          "$ref": "#/$defs/nonEmptyString",
-          "description": "Exact source code; references the approved Source Registry."
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Canonical <type>:<lowercase-source>:<slug> identifier."
         },
         "name": {
-          "$ref": "#/$defs/displayText",
-          "description": "Exact source entity name."
+          "type": "string",
+          "minLength": 1
         }
       }
     },
-    "sourceFlags": {
-      "type": "object",
-      "minProperties": 1,
-      "additionalProperties": false,
-      "properties": {
-        "srd": {
-          "type": "boolean"
-        },
-        "srd52": {
-          "type": "boolean"
-        },
-        "basicRules": {
-          "type": "boolean"
-        },
-        "basicRules2024": {
-          "type": "boolean"
-        }
-      },
-      "description": "Only source-supplied publication membership flags; no inferred values."
-    },
-    "sourceCitation": {
+    "sourceMetadata": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "source",
-        "page"
+        "source"
       ],
       "properties": {
         "source": {
-          "$ref": "#/$defs/nonEmptyString"
+          "type": "string",
+          "minLength": 1
         },
         "page": {
           "type": "integer",
           "minimum": 1
+        },
+        "flags": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "srd": {
+              "type": "boolean"
+            },
+            "srd52": {
+              "type": "boolean"
+            },
+            "basicRules": {
+              "type": "boolean"
+            },
+            "basicRules2024": {
+              "type": "boolean"
+            }
+          }
+        },
+        "citations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "source",
+              "page"
+            ],
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "page": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          }
+        },
+        "reprintedAs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/reference"
+          }
         }
       },
-      "description": "A source-supplied additional-source citation, not a resolved entity reference."
+      "description": "Exact source code, supplied page/flags, and explicit reprint targets."
     },
-    "modelReference": {
+    "reference": {
       "type": "object",
       "additionalProperties": false,
       "required": [
         "targetType",
-        "name"
+        "id"
       ],
       "properties": {
         "targetType": {
-          "$ref": "#/$defs/nonEmptyString"
-        },
-        "source": {
-          "$ref": "#/$defs/nonEmptyString"
-        },
-        "name": {
-          "$ref": "#/$defs/displayText"
+          "enum": [
+            "action",
+            "background",
+            "class",
+            "class-feature",
+            "condition",
+            "creature",
+            "disease",
+            "feat",
+            "item",
+            "language",
+            "object",
+            "optional-feature",
+            "rule",
+            "sense",
+            "skill",
+            "source",
+            "spell",
+            "status",
+            "subclass",
+            "subclass-feature",
+            "vehicle"
+          ]
         },
         "id": {
-          "$ref": "#/$defs/displayText",
-          "pattern": "^[A-Za-z0-9-]+:[^:]+:.+$",
-          "description": "Include only when a source-qualified stable target identity is established from source evidence."
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
         },
-        "rawToken": {
-          "$ref": "#/$defs/displayText",
-          "description": "Optional exact source reference token retained for traceability."
+        "relationship": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operation": {
+          "enum": [
+            "END_STATUS",
+            "END_CONDITION"
+          ]
         }
       },
-      "allOf": [
-        {
-          "if": {
-            "required": ["id"]
-          },
-          "then": {
-            "required": ["source"]
-          }
-        }
-      ],
-      "description": "An explicit reference. Missing source or id remains missing; no target is inferred."
+      "description": "Resolved canonical target. Relationship/operation describes the edge, not target type."
     },
-    "reprintReference": {
+    "ability": {
+      "enum": [
+        "strength",
+        "dexterity",
+        "constitution",
+        "intelligence",
+        "wisdom",
+        "charisma"
+      ]
+    },
+    "actor": {
+      "enum": [
+        "affected-creature",
+        "attacker",
+        "observer",
+        "source",
+        "target"
+      ]
+    },
+    "actionTrigger": {
       "oneOf": [
         {
-          "$ref": "#/$defs/displayText"
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "target"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SPELL_CASTING_OBSERVED"
+            },
+            "actor": {
+              "const": "observer"
+            },
+            "target": {
+              "const": "spell-caster"
+            }
+          }
         },
         {
           "type": "object",
           "additionalProperties": false,
           "required": [
-            "uid",
-            "tag"
+            "kind",
+            "actor"
           ],
           "properties": {
-            "uid": {
-              "$ref": "#/$defs/displayText"
+            "kind": {
+              "const": "SPELL_DEFINED_REACTION"
             },
-            "tag": {
-              "$ref": "#/$defs/nonEmptyString"
+            "actor": {
+              "const": "spell-caster"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "target"
+          ],
+          "properties": {
+            "kind": {
+              "const": "MELEE_ATTACK_MADE"
+            },
+            "actor": {
+              "const": "attacker"
+            },
+            "target": {
+              "const": "creature"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "target"
+          ],
+          "properties": {
+            "kind": {
+              "const": "OPPORTUNITY_ATTACK"
+            },
+            "actor": {
+              "const": "attacker"
+            },
+            "target": {
+              "const": "marked-target"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "target"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ATTACK_AGAINST_AFFECTED"
+            },
+            "actor": {
+              "const": "attacker"
+            },
+            "target": {
+              "const": "affected-creature"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "target"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SAVING_THROW_BY_AFFECTED"
+            },
+            "actor": {
+              "const": "affected-creature"
+            },
+            "target": {
+              "const": "affected-creature"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "target"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CREATURE_LEAVES_REACH"
+            },
+            "actor": {
+              "const": "moving-creature"
+            },
+            "target": {
+              "const": "opportunity-attacker"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor"
+          ],
+          "properties": {
+            "kind": {
+              "const": "PERCEIVABLE_CIRCUMSTANCE"
+            },
+            "actor": {
+              "const": "observer"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "target"
+          ],
+          "properties": {
+            "kind": {
+              "const": "GRAPPLER_RELEASES"
+            },
+            "actor": {
+              "const": "grappler"
+            },
+            "target": {
+              "const": "grappled-creature"
             }
           }
         }
-      ],
-      "description": "Preserves supplied reprint link values, including the observed typed uid/tag form."
-    },
-    "internalLink": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "path"
-      ],
-      "properties": {
-        "type": {
-          "const": "internal"
-        },
-        "path": {
-          "$ref": "#/$defs/displayText"
-        },
-        "hash": {
-          "$ref": "#/$defs/displayText"
-        }
-      },
-      "description": "Noncanonical page navigation metadata. It is not a domain entity reference."
-    },
-    "richTextArray": {
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "$ref": "#/$defs/richText"
-      }
-    },
-    "richText": {
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/$defs/entriesNode"
-        },
-        {
-          "$ref": "#/$defs/listNode"
-        },
-        {
-          "$ref": "#/$defs/tableNode"
-        },
-        {
-          "$ref": "#/$defs/insetNode"
-        },
-        {
-          "$ref": "#/$defs/sectionNode"
-        },
-        {
-          "$ref": "#/$defs/itemNode"
-        },
-        {
-          "$ref": "#/$defs/inlineNode"
-        },
-        {
-          "$ref": "#/$defs/linkNode"
-        },
-        {
-          "$ref": "#/$defs/imageNode"
-        },
-        {
-          "$ref": "#/$defs/quoteNode"
-        }
-      ],
-      "description": "Source-authored prose and presentation structure. Inline tags remain literal text."
-    },
-    "entriesNode": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "entries"
-      ],
-      "properties": {
-        "type": {
-          "const": "entries"
-        },
-        "name": {
-          "$ref": "#/$defs/displayText"
-        },
-        "entries": {
-          "$ref": "#/$defs/richTextArray"
-        },
-        "source": {
-          "$ref": "#/$defs/nonEmptyString"
-        },
-        "page": {
-          "type": "integer",
-          "minimum": 1
-        }
-      }
-    },
-    "listNode": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "items"
-      ],
-      "properties": {
-        "type": {
-          "const": "list"
-        },
-        "name": {
-          "$ref": "#/$defs/displayText"
-        },
-        "style": {
-          "$ref": "#/$defs/displayText"
-        },
-        "columns": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "items": {
-          "$ref": "#/$defs/richTextArray"
-        }
-      }
-    },
-    "tableCell": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "number"
-        },
-        {
-          "$ref": "#/$defs/richText"
-        }
       ]
     },
-    "tableData": {
+    "d20RollModifier": {
       "type": "object",
       "additionalProperties": false,
+      "required": [
+        "kind",
+        "roll",
+        "direction"
+      ],
       "properties": {
-        "genTables": {
+        "kind": {
+          "const": "D20_ROLL_MODIFIER"
+        },
+        "roll": {
+          "enum": [
+            "attack",
+            "ability-check",
+            "saving-throw",
+            "d20-test"
+          ]
+        },
+        "direction": {
+          "enum": [
+            "advantage",
+            "disadvantage",
+            "bonus",
+            "penalty"
+          ]
+        },
+        "amount": {
+          "type": "number"
+        },
+        "diceCount": {
+          "const": 2
+        },
+        "select": {
+          "enum": [
+            "higher",
+            "lower"
+          ]
+        },
+        "cancelsOpposite": {
+          "type": "boolean"
+        },
+        "multipleInstancesStack": {
+          "type": "boolean"
+        },
+        "ability": {
+          "$ref": "#/$defs/ability"
+        }
+      }
+    },
+    "attackRoll": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "forms"
+      ],
+      "properties": {
+        "kind": {
+          "const": "ATTACK_ROLL"
+        },
+        "forms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "melee",
+              "ranged",
+              "spell",
+              "weapon",
+              "unarmed"
+            ]
+          }
+        },
+        "target": {
+          "enum": [
+            "armor-class",
+            "creature",
+            "object"
+          ]
+        },
+        "reachFeet": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "bonus": {
           "type": "object",
           "additionalProperties": false,
           "required": [
-            "tableInclude"
+            "ability",
+            "proficiencyBonus"
           ],
           "properties": {
-            "tableInclude": {
+            "ability": {
+              "$ref": "#/$defs/ability"
+            },
+            "proficiencyBonus": {
+              "type": "boolean"
+            }
+          }
+        },
+        "criticalOn": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "criticalHitAutomaticallyHits": {
+          "type": "boolean"
+        }
+      }
+    },
+    "difficultyClass": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "value"
+          ],
+          "properties": {
+            "kind": {
+              "const": "FIXED"
+            },
+            "value": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "EFFECT_DEFINED"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "base",
+            "ability",
+            "proficiencyBonus"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ABILITY_PLUS_PROFICIENCY"
+            },
+            "base": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "ability": {
+              "$ref": "#/$defs/ability"
+            },
+            "proficiencyBonus": {
               "type": "boolean"
             }
           }
         }
-      },
-      "minProperties": 1
+      ]
     },
-    "tableNode": {
+    "savingThrow": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "type",
-        "colLabels",
-        "colStyles",
-        "rows"
+        "kind",
+        "abilities",
+        "abilitySelection",
+        "dc"
       ],
       "properties": {
-        "type": {
-          "const": "table"
+        "kind": {
+          "const": "SAVING_THROW"
         },
-        "caption": {
-          "$ref": "#/$defs/displayText"
-        },
-        "colLabels": {
+        "abilities": {
           "type": "array",
           "minItems": 1,
+          "uniqueItems": true,
           "items": {
-            "type": "string"
+            "$ref": "#/$defs/ability"
           }
         },
-        "colStyles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "abilitySelection": {
+          "enum": [
+            "target-chooses",
+            "rule-specified",
+            "effect"
+          ]
         },
-        "rows": {
+        "dc": {
+          "$ref": "#/$defs/difficultyClass"
+        },
+        "mayChooseToFail": {
+          "type": "boolean"
+        },
+        "automaticFailureWhenAbilityScoreAbsent": {
+          "type": "boolean"
+        }
+      }
+    },
+    "damageRoll": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "damageTypes",
+        "base"
+      ],
+      "properties": {
+        "kind": {
+          "const": "DAMAGE_ROLL"
+        },
+        "damageTypes": {
           "type": "array",
           "minItems": 1,
+          "uniqueItems": true,
           "items": {
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "$ref": "#/$defs/tableCell"
+            "enum": [
+              "acid",
+              "bludgeoning",
+              "cold",
+              "fire",
+              "force",
+              "lightning",
+              "necrotic",
+              "piercing",
+              "poison",
+              "psychic",
+              "radiant",
+              "slashing",
+              "thunder"
+            ]
+          }
+        },
+        "base": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "count",
+                "die"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "DICE"
+                },
+                "count": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "die": {
+                  "enum": [
+                    "d4",
+                    "d6",
+                    "d8",
+                    "d10",
+                    "d12",
+                    "d20"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "amount"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "FIXED"
+                },
+                "amount": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              }
+            }
+          ]
+        },
+        "abilityModifier": {
+          "$ref": "#/$defs/ability"
+        }
+      }
+    },
+    "componentApplicability": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "componentId"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ON_HIT"
+            },
+            "componentId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
             }
           }
         },
-        "footnotes": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "string"
-          }
-        },
-        "isNameGenerator": {
-          "type": "boolean"
-        },
-        "data": {
-          "$ref": "#/$defs/tableData"
-        }
-      }
-    },
-    "insetNode": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "name",
-        "entries"
-      ],
-      "properties": {
-        "type": {
-          "const": "inset"
-        },
-        "name": {
-          "$ref": "#/$defs/displayText"
-        },
-        "entries": {
-          "$ref": "#/$defs/richTextArray"
-        },
-        "source": {
-          "$ref": "#/$defs/nonEmptyString"
-        },
-        "page": {
-          "type": "integer",
-          "minimum": 1
-        }
-      }
-    },
-    "sectionNode": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "name",
-        "entries"
-      ],
-      "properties": {
-        "type": {
-          "const": "section"
-        },
-        "name": {
-          "$ref": "#/$defs/displayText"
-        },
-        "entries": {
-          "$ref": "#/$defs/richTextArray"
-        }
-      }
-    },
-    "itemNode": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "name"
-      ],
-      "properties": {
-        "type": {
-          "const": "item"
-        },
-        "name": {
-          "$ref": "#/$defs/displayText"
-        },
-        "entry": {
-          "type": "string"
-        },
-        "entries": {
-          "$ref": "#/$defs/richTextArray"
-        }
-      },
-      "oneOf": [
         {
+          "type": "object",
+          "additionalProperties": false,
           "required": [
-            "entry"
+            "kind",
+            "componentId"
           ],
-          "not": {
-            "required": [
-              "entries"
-            ]
+          "properties": {
+            "kind": {
+              "const": "ON_FAILED_SAVE"
+            },
+            "componentId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
           }
         },
         {
+          "type": "object",
+          "additionalProperties": false,
           "required": [
-            "entries"
+            "kind",
+            "componentId"
           ],
-          "not": {
-            "required": [
-              "entry"
-            ]
+          "properties": {
+            "kind": {
+              "const": "ON_CRITICAL_HIT"
+            },
+            "componentId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
           }
         }
       ]
     },
-    "inlineNode": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "entries"
-      ],
-      "properties": {
-        "type": {
-          "const": "inline"
+    "operationApplicability": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "operationId"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CHECK_SUCCEEDED"
+            },
+            "operationId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
+          }
         },
-        "entries": {
-          "$ref": "#/$defs/richTextArray"
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "choiceGroupId"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CHOICE_SELECTED"
+            },
+            "choiceGroupId": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "operationId"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SAVE_FAILED"
+            },
+            "operationId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "event"
+          ],
+          "properties": {
+            "kind": {
+              "const": "TRIGGER_OCCURRED"
+            },
+            "event": {
+              "$ref": "#/$defs/actionTrigger"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ACTION_TAKEN"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "condition"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CONDITION_MET"
+            },
+            "condition": {
+              "$ref": "#/$defs/conditionPredicate"
+            }
+          }
         }
-      }
+      ]
     },
-    "linkNode": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "href",
-        "entry"
-      ],
-      "properties": {
-        "type": {
-          "const": "link"
+    "turnTiming": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "action",
+                "bonus-action",
+                "free"
+              ]
+            }
+          }
         },
-        "href": {
-          "$ref": "#/$defs/internalLink"
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "trigger"
+          ],
+          "properties": {
+            "kind": {
+              "const": "reaction"
+            },
+            "trigger": {
+              "$ref": "#/$defs/actionTrigger"
+            }
+          }
         },
-        "entry": {
-          "type": "string"
+        {
+          "$ref": "#/$defs/gameTimeTiming"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "varied_gametime"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "options"
+          ],
+          "properties": {
+            "kind": {
+              "const": "alternatives"
+            },
+            "options": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/turnTiming"
+                  }
+                ]
+              }
+            }
+          }
         }
-      }
+      ]
     },
-    "imageNode": {
+    "gameTimeTiming": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "type",
-        "href"
+        "kind",
+        "amount",
+        "unit"
       ],
       "properties": {
-        "type": {
-          "const": "image"
+        "kind": {
+          "const": "fixed_gametime"
         },
-        "href": {
-          "$ref": "#/$defs/internalLink"
-        },
-        "width": {
+        "amount": {
           "type": "number",
           "exclusiveMinimum": 0
         },
-        "height": {
-          "type": "number",
-          "exclusiveMinimum": 0
-        },
-        "title": {
-          "$ref": "#/$defs/displayText"
-        },
-        "credit": {
-          "$ref": "#/$defs/displayText"
+        "unit": {
+          "enum": [
+            "minute",
+            "hour",
+            "day"
+          ]
         }
       }
     },
-    "quoteNode": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "entries",
-        "by"
-      ],
-      "properties": {
-        "type": {
-          "const": "quote"
+    "conditionReference": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/reference"
         },
-        "entries": {
-          "$ref": "#/$defs/richTextArray"
-        },
-        "by": {
-          "$ref": "#/$defs/displayText"
+        {
+          "type": "object",
+          "required": [
+            "targetType"
+          ],
+          "properties": {
+            "targetType": {
+              "const": "condition"
+            }
+          }
         }
-      }
+      ]
+    },
+    "conditionPredicate": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "condition"
+          ],
+          "properties": {
+            "kind": {
+              "const": "HAS_CONDITION"
+            },
+            "actor": {
+              "enum": [
+                "acting-creature",
+                "target",
+                "affected-creature",
+                "grappler",
+                "attacker",
+                "grappled-creature",
+                "marked-target"
+              ]
+            },
+            "condition": {
+              "$ref": "#/$defs/conditionReference"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SPEED_IS_ZERO"
+            },
+            "actor": {
+              "enum": [
+                "acting-creature",
+                "target",
+                "affected-creature",
+                "grappler",
+                "attacker",
+                "grappled-creature",
+                "marked-target"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "target"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CAN_SEE"
+            },
+            "actor": {
+              "enum": [
+                "acting-creature",
+                "target",
+                "affected-creature",
+                "grappler",
+                "attacker",
+                "observer",
+                "grappled-creature",
+                "marked-target"
+              ]
+            },
+            "target": {
+              "enum": [
+                "acting-creature",
+                "target",
+                "affected-creature",
+                "grappler",
+                "attacker",
+                "spell-caster",
+                "moving-creature",
+                "grappled-creature",
+                "marked-target"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "target",
+            "range"
+          ],
+          "properties": {
+            "kind": {
+              "const": "DISTANCE_EXCEEDS_RANGE"
+            },
+            "actor": {
+              "const": "grappled-creature"
+            },
+            "target": {
+              "const": "grappler"
+            },
+            "range": {
+              "const": "grapple"
+            }
+          }
+        }
+      ]
     }
   }
 }

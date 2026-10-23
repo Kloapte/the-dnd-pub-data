@@ -1,0 +1,21 @@
+{
+  "id": "rule:xphb:d20-test",
+  "name": "D20 Test",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 364
+  },
+  "mechanics": [
+    {
+      "componentId": "d20-test",
+      "kind": "D20_TEST",
+      "subtype": "TEST",
+      "includes": [
+        "ABILITY_CHECK",
+        "ATTACK_ROLL",
+        "SAVING_THROW"
+      ],
+      "dmDeterminesWhenWarranted": true
+    }
+  ]
+}

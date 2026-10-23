@@ -1,0 +1,24 @@
+{
+  "id": "sense:xphb:tremorsense",
+  "name": "Tremorsense",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 377,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "capabilities": [
+    {
+      "kind": "NONVISUAL_PERCEPTION",
+      "medium": "vibration",
+      "detects": [
+        "creatures",
+        "movement"
+      ],
+      "restrictions": [
+        "requires-contact"
+      ]
+    }
+  ]
+}

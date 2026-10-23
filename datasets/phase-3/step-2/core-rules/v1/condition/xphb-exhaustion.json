@@ -1,0 +1,47 @@
+{
+  "id": "condition:xphb:exhaustion",
+  "name": "Exhaustion",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 365,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "levelMechanics": {
+    "maximumLevel": 6,
+    "cumulative": true,
+    "application": "add-one-level",
+    "endsAtLevel": 0,
+    "recovery": [
+      {
+        "method": "long-rest",
+        "levelsRemoved": 1
+      }
+    ]
+  },
+  "effects": [
+    {
+      "kind": "CHECK_ROLL_MODIFIER",
+      "roll": "d20-test",
+      "direction": "penalty",
+      "actor": "affected-creature",
+      "duration": "while-level-threshold-is-met",
+      "minimumLevel": 1,
+      "amountPerLevel": 2
+    },
+    {
+      "kind": "MOVEMENT_MODIFIER",
+      "movement": "speed-flat",
+      "actor": "affected-creature",
+      "duration": "while-level-threshold-is-met",
+      "minimumLevel": 1,
+      "amountPerLevel": -5
+    },
+    {
+      "kind": "FATAL_EXHAUSTION_THRESHOLD",
+      "atLevel": 6
+    }
+  ]
+}

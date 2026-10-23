@@ -564,7 +564,9 @@ Evaluate source identity, publication metadata, aliases, and parent relationship
 
 **Phase 1 status:** Source and domain analysis is completed and approved.
 
-**Phase 2 status:** Canonical model and JSON Schema design is completed and awaiting review. Phase 3 has not begun.
+**Phase 2 status:** Revised canonical model and JSON Schema design is completed and explicitly approved.
+
+**Phase 3 status:** Representative conversion is completed and awaiting review. Phase 4 has not begun.
 
 ### Objective
 
@@ -624,7 +626,7 @@ Semantic enrichment includes actions, rules, skills, conditions, diseases, statu
 
 - Establish language identity and relationships.
 - Identify language categories and relevant metadata.
-- Preserve language scripts and their relationships.
+- Preserve script names on Language records and supported origin/dialect relationships. Font-only language-script records do not form a canonical model.
 - Preserve references used by creatures and characters.
 
 ### Coordination and submodel analysis

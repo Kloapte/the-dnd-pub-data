@@ -1,14 +1,29 @@
 {
-  "id": "action:PHB:Cast a Spell",
-  "source": "PHB",
+  "id": "action:phb:cast-a-spell",
   "name": "Cast a Spell",
-  "page": 192,
-  "timing": [
-    {
-      "kind": "varies"
-    }
-  ],
-  "entries": [
-    "Each spell has a casting time, which specifies whether the caster must use an action, a reaction, minutes, or even hours to cast it."
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 192
+  },
+  "timing": {
+    "kind": "alternatives",
+    "options": [
+      {
+        "kind": "action"
+      },
+      {
+        "kind": "reaction",
+        "trigger": {
+          "kind": "SPELL_DEFINED_REACTION",
+          "actor": "spell-caster"
+        }
+      },
+      {
+        "kind": "varied_gametime"
+      }
+    ]
+  },
+  "capabilities": [
+    "CAST_SPELL"
   ]
 }

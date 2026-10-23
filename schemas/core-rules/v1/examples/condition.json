@@ -1,29 +1,53 @@
 {
-  "id": "condition:PHB:Blinded",
-  "source": "PHB",
+  "id": "condition:phb:blinded",
   "name": "Blinded",
-  "page": 290,
-  "sourceFlags": {
-    "srd": true,
-    "basicRules": true
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 290,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "citations": [
+      {
+        "source": "RMR",
+        "page": 62
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:blinded"
+      }
+    ]
   },
-  "entries": [
+  "effects": [
     {
-      "type": "list",
-      "items": [
-        "A blinded creature can't see and automatically fails any ability check that requires sight.",
-        "Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage."
-      ]
-    }
-  ],
-  "otherSources": [
+      "kind": "REMOVE_SENSE",
+      "sense": "sight",
+      "actor": "affected-creature"
+    },
     {
-      "source": "RMR",
-      "page": 62
+      "kind": "AUTOMATIC_CHECK_FAILURE",
+      "roll": "ability-check",
+      "requirement": "requires-sight",
+      "actor": "affected-creature"
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "advantage",
+      "actor": "attacker",
+      "target": "affected-creature",
+      "appliesWhen": "attack-targets-affected"
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "disadvantage",
+      "actor": "affected-creature",
+      "target": "target",
+      "appliesWhen": "affected-creature-attacks"
     }
-  ],
-  "reprintedAs": [
-    "Blinded|XPHB"
-  ],
-  "hasFluffImages": true
+  ]
 }

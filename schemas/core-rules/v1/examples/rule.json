@@ -1,23 +1,58 @@
 {
-  "id": "rule:XPHB:Ability Check",
-  "source": "XPHB",
-  "name": "Ability Check",
-  "page": 360,
-  "sourceFlags": {
-    "srd52": true,
-    "basicRules2024": true
-  },
-  "ruleType": "C",
-  "entries": [
-    "An ability check is a {@variantrule D20 Test|XPHB} that represents using one of the six abilities—or a specific skill associated with an ability—to overcome a challenge."
-  ],
-  "references": [
-    {
-      "targetType": "variantrule",
-      "source": "XPHB",
-      "name": "D20 Test",
-      "id": "rule:XPHB:D20 Test",
-      "rawToken": "{@variantrule D20 Test|XPHB}"
+  "id": "rule:xphb:critical-hit",
+  "name": "Critical Hit",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 364,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
     }
-  ]
+  },
+  "mechanics": [
+    {
+      "componentId": "critical-attack",
+      "kind": "D20_TEST",
+      "subtype": "ATTACK_ROLL",
+      "roll": {
+        "kind": "ATTACK_ROLL",
+        "forms": [
+          "melee",
+          "ranged",
+          "spell",
+          "weapon"
+        ],
+        "target": "armor-class",
+        "criticalOn": 20,
+        "criticalHitAutomaticallyHits": true
+      }
+    },
+    {
+      "componentId": "critical-damage",
+      "kind": "DAMAGE_HEALTH_STATE",
+      "subtype": "DAMAGE",
+      "damageModifier": {
+        "kind": "CRITICAL_HIT_DAMAGE_MODIFIER",
+        "diceMultiplier": 2,
+        "modifierApplications": 1,
+        "appliesWhen": {
+          "kind": "ON_CRITICAL_HIT",
+          "componentId": "critical-attack"
+        }
+      }
+    }
+  ],
+  "composition": {
+    "kind": "AND",
+    "members": [
+      {
+        "kind": "COMPONENT",
+        "componentId": "critical-attack"
+      },
+      {
+        "kind": "COMPONENT",
+        "componentId": "critical-damage"
+      }
+    ]
+  }
 }
