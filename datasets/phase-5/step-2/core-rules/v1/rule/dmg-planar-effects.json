@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:planar-effects",
+  "name": "Planar Effects",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 50
+  },
+  "ruleType": "OPTIONAL"
+}

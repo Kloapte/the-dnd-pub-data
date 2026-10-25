@@ -1,0 +1,36 @@
+{
+  "id": "language:phb:primordial",
+  "name": "Primordial",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "citations": [
+      {
+        "source": "EEPC",
+        "page": 9
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:primordial"
+      }
+    ]
+  },
+  "category": "exotic",
+  "script": "Dwarvish",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "elemental"
+        ]
+      }
+    }
+  ]
+}

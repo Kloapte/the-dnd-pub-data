@@ -1,0 +1,28 @@
+{
+  "id": "language:mm:gnoll",
+  "name": "Gnoll",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 163,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xmm:gnoll"
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:gnoll"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:gnoll-pack-lord"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:gnoll-fang-of-yeenoghu"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "language:psi:common",
+  "name": "Common",
+  "sourceMetadata": {
+    "source": "PSI",
+    "page": 9
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:psi:vampire-neonate"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:psi:werewolf-krallenhorde"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:psi:geist"
+    }
+  ]
+}

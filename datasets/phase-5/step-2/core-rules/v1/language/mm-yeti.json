@@ -1,0 +1,24 @@
+{
+  "id": "language:mm:yeti",
+  "name": "Yeti",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 305,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xmm:yeti"
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:yeti"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:abominable-yeti"
+    }
+  ]
+}

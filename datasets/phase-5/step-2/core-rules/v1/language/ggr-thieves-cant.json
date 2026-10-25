@@ -1,0 +1,9 @@
+{
+  "id": "language:ggr:thieves-cant",
+  "name": "Thieves' Cant",
+  "sourceMetadata": {
+    "source": "GGR",
+    "page": 9
+  },
+  "category": "secret"
+}

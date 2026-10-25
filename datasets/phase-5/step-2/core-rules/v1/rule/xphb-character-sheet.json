@@ -1,0 +1,13 @@
+{
+  "id": "rule:xphb:character-sheet",
+  "name": "Character Sheet",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 363,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE"
+}

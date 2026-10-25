@@ -1,0 +1,31 @@
+{
+  "id": "language:phb:abyssal",
+  "name": "Abyssal",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:abyssal"
+      }
+    ]
+  },
+  "category": "exotic",
+  "script": "Infernal",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "selector": {
+          "kind": "TAG",
+          "value": "demon"
+        }
+      }
+    }
+  ]
+}

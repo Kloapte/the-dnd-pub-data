@@ -10,11 +10,11 @@
   "entries": [
     {
       "file": "condition.schema.json",
-      "sha256": "ce9f878d7a708ceea85b7dc0120bc7ca2b0dc64eaf676fb9ed836dc4488a8937"
+      "sha256": "116863e97858ff402dfcbd5a094c0853f0230d7db8b32b7be22346d2ba2aa845"
     },
     {
       "file": "examples/condition-blinded-xphb.json",
-      "sha256": "c7e93cf176b7df10b338a6cdbfb50d37b3affdc3013a371922d212c14759b571"
+      "sha256": "79e31a526d64ec10190fe4c32ba0b01f8098d3414d27981ef30d22f44896ecd6"
     },
     {
       "file": "examples/condition-exhaustion-phb.json",
@@ -26,11 +26,11 @@
     },
     {
       "file": "examples/condition.json",
-      "sha256": "2f18b100fcd101e4980276eb75f3fed55844cd5d57deaa44eca85363f7556c6a"
+      "sha256": "bf2c82d030983fd24ed783c9340f0e5f65329f0948acbabf3639e8ba4d590a28"
     },
     {
       "file": "disease.schema.json",
-      "sha256": "5c65513a3cf84569dda728b2e1886df3f6e85e453664b5464dce63c5bba5e490"
+      "sha256": "5dfe2e55668ffc95ee6bc36532f4f13986e0a400675af6847bb4f6461d219f3f"
     },
     {
       "file": "examples/disease.json",
@@ -38,7 +38,7 @@
     },
     {
       "file": "language.schema.json",
-      "sha256": "6b3ec6e956e260ad19df23f999c05809bf5a59e08916f3c5df0831349c537987"
+      "sha256": "92ee4fb8e964bd6b3c5c56321f9601b6c094df0cfd538b98156407e59ef8295b"
     },
     {
       "file": "examples/language.json",
@@ -46,11 +46,11 @@
     },
     {
       "file": "sense.schema.json",
-      "sha256": "1d16a9dce3627d0bb7a3c8001d17e959a12e51aa0bd5ac3c0a43dfc919b966ee"
+      "sha256": "5ca29a3c4a39cbf06e09f3d6406df2bb7efea1d23acfa8852738b4c2d66a2d6a"
     },
     {
       "file": "examples/sense.json",
-      "sha256": "6c1bdac8c9d711c84b3aee911870eac15bfa0a3568f1bda62e0b6f2767bf4440"
+      "sha256": "36088f69f6eef78767e5a2845ae9d22ff05c9d8cd4bf3016eec164475555c59d"
     },
     {
       "file": "skill.schema.json",
@@ -58,11 +58,11 @@
     },
     {
       "file": "examples/skill.json",
-      "sha256": "8b561e57fbc18827a2bb650505f2b3ff3a67c6912f2fca61802511a08aa2df51"
+      "sha256": "4ed5bd359af52b2a0ea475f985b832d2195ae11e3b61cce748a9946035a8af79"
     },
     {
       "file": "status.schema.json",
-      "sha256": "a69b2da44fdc27a4f9bae5a940288b980e109bd52c22db6c4c26fc751c3b3a32"
+      "sha256": "802f3854c039c9d4a8e506bad1a62fac1716cc9457de63676ea1f32c7f88031e"
     },
     {
       "file": "examples/status-bloodied.json",
@@ -70,7 +70,7 @@
     },
     {
       "file": "examples/status-concentration-phb.json",
-      "sha256": "bea5b235f7ac3157be6d47ef362832b12ba29d99e79d6c22dcebc052bbf106f3"
+      "sha256": "2bae1760a730b8fd6af9cda45b0d48b8d876b7f12386bdb3e5d60d12593196e2"
     },
     {
       "file": "examples/status-concentration-xphb.json",

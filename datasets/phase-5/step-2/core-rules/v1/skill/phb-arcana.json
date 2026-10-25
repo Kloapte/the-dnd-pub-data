@@ -1,0 +1,19 @@
+{
+  "id": "skill:phb:arcana",
+  "name": "Arcana",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 177,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:arcana"
+      }
+    ]
+  },
+  "ability": "intelligence"
+}

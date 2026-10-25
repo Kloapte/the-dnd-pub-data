@@ -1,0 +1,10 @@
+{
+  "id": "language:erlw:goblin",
+  "name": "Goblin",
+  "sourceMetadata": {
+    "source": "ERLW",
+    "page": 6
+  },
+  "category": "standard",
+  "script": "Goblin"
+}

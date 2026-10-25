@@ -15,5 +15,18 @@
       }
     ]
   },
-  "category": "secret"
+  "category": "secret",
+  "communicationModes": [
+    "ORDINARY_CONVERSATION"
+  ],
+  "communicationCapabilities": [
+    {
+      "kind": "CONCEALED_MESSAGE",
+      "channel": "ORDINARY_CONVERSATION",
+      "comprehension": {
+        "kind": "REQUIRES_LANGUAGE_KNOWLEDGE"
+      },
+      "communicationDurationMultiplier": 4
+    }
+  ]
 }

@@ -1,0 +1,69 @@
+{
+  "id": "rule:xphb:area-of-effect",
+  "name": "Area of Effect",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 361,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "area-of-effect-rules",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "AREA_OF_EFFECT",
+      "shapes": [
+        "cone",
+        "cube",
+        "cylinder",
+        "emanation",
+        "line",
+        "sphere"
+      ],
+      "originPlacement": "DEFINED_BY_SHAPE",
+      "lineOfEffect": {
+        "kind": "STRAIGHT_LINE_FROM_ORIGIN",
+        "locationIncludedWhen": "AT_LEAST_ONE_UNBLOCKED_LINE",
+        "blockedBy": {
+          "targetType": "rule",
+          "id": "rule:xphb:cover",
+          "coverLevel": "total"
+        }
+      },
+      "unseenOriginPlacement": "NEAR_SIDE_OF_INTERVENING_OBSTRUCTION"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:cover"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:cone-area-of-effect"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:cube-area-of-effect"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:cylinder-area-of-effect"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:emanation-area-of-effect"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:line-area-of-effect"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:sphere-area-of-effect"
+    }
+  ]
+}

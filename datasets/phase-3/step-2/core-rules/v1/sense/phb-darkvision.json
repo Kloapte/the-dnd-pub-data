@@ -27,7 +27,8 @@
         "darkness"
       ],
       "darknessAs": "dim-light",
-      "colorPerception": "grayscale"
+      "colorPerception": "grayscale",
+      "dimLightAs": "bright-light"
     }
   ]
 }

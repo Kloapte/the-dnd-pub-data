@@ -1,0 +1,31 @@
+{
+  "id": "rule:xphb:fly-speed",
+  "name": "Fly Speed",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 367,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "fly-speed-capability",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "FLYING",
+      "procedure": "movement-mode",
+      "speedType": "fly",
+      "details": {
+        "kind": "FLY_SPEED_CAPABILITY",
+        "travelMode": "AIR",
+        "staysAloftUntil": [
+          "LANDS",
+          "FALLS",
+          "DIES"
+        ]
+      }
+    }
+  ]
+}

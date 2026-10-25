@@ -1,0 +1,21 @@
+{
+  "id": "language:hotdq:netherese",
+  "name": "Netherese",
+  "sourceMetadata": {
+    "source": "HotDQ",
+    "page": 93,
+    "citations": [
+      {
+        "source": "ToD",
+        "page": 188
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:frhof:netherese"
+      }
+    ]
+  },
+  "script": "Draconic"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "action:xphb:dash",
+  "name": "Dash",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 365,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "DASH"
+  ],
+  "operations": [
+    {
+      "kind": "MOVEMENT_INCREASE",
+      "movement": "current-turn-movement",
+      "amount": 1,
+      "unit": "current-speed",
+      "speedSelection": "CHOOSE_SPECIAL_SPEED_FOR_EACH_USE",
+      "appliesWhen": {
+        "kind": "AFTER_SPEED_MODIFIERS"
+      },
+      "operationId": "dash"
+    }
+  ]
+}

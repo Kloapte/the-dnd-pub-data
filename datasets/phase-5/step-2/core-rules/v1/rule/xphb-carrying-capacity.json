@@ -1,0 +1,62 @@
+{
+  "id": "rule:xphb:carrying-capacity",
+  "name": "Carrying Capacity",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 362,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "strength-size-carry-limits",
+      "kind": "CARRYING_CAPACITY_RULE",
+      "subtype": "SIZE_STRENGTH_CAPACITY",
+      "weightUnit": "POUND",
+      "strengthBasis": "STRENGTH_SCORE",
+      "sizeMultipliers": [
+        {
+          "sizes": [
+            "TINY"
+          ],
+          "carryMultiplier": 7.5,
+          "dragLiftPushMultiplier": 15
+        },
+        {
+          "sizes": [
+            "SMALL",
+            "MEDIUM"
+          ],
+          "carryMultiplier": 15,
+          "dragLiftPushMultiplier": 30
+        },
+        {
+          "sizes": [
+            "LARGE"
+          ],
+          "carryMultiplier": 30,
+          "dragLiftPushMultiplier": 60
+        },
+        {
+          "sizes": [
+            "HUGE"
+          ],
+          "carryMultiplier": 60,
+          "dragLiftPushMultiplier": 120
+        },
+        {
+          "sizes": [
+            "GARGANTUAN"
+          ],
+          "carryMultiplier": 120,
+          "dragLiftPushMultiplier": 240
+        }
+      ],
+      "dragLiftPushSpeedCapFeet": 5,
+      "speedCapAppliesWhenAboveCarryCapacity": true
+    }
+  ]
+}

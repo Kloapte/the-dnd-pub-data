@@ -1,0 +1,30 @@
+{
+  "id": "language:phb:giant",
+  "name": "Giant",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:giant"
+      }
+    ]
+  },
+  "category": "standard",
+  "script": "Dwarvish",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "giant"
+        ]
+      }
+    }
+  ]
+}

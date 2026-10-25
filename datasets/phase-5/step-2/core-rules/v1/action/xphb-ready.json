@@ -1,0 +1,17 @@
+{
+  "id": "action:xphb:ready",
+  "name": "Ready",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 372,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "READY"
+  ]
+}

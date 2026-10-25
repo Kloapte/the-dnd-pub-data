@@ -1,0 +1,45 @@
+{
+  "id": "rule:xphb:grappling",
+  "name": "Grappling",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 367,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:unarmed-strike",
+      "relationship": "character-grapple-initiation"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:grappled",
+      "relationship": "successful-grapple-applies"
+    },
+    {
+      "targetType": "action",
+      "id": "action:xphb:escape-a-grapple",
+      "relationship": "escape-check-and-ending"
+    },
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:athletics",
+      "relationship": "escape-check-option"
+    },
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:acrobatics",
+      "relationship": "escape-check-option"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:incapacitated",
+      "relationship": "grapple-ending-condition"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "language:scag:chessentan",
+  "name": "Chessentan",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:frhof:chessentan"
+      }
+    ]
+  },
+  "script": "Thorass"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "language:scag:shaaran",
+  "name": "Shaaran",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112
+  },
+  "script": "Dethek"
+}

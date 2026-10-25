@@ -1,0 +1,71 @@
+{
+  "id": "condition:phb:invisible",
+  "name": "Invisible",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 291,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "citations": [
+      {
+        "source": "RMR",
+        "page": 62
+      },
+      {
+        "source": "HftT",
+        "page": 48
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:invisible"
+      }
+    ]
+  },
+  "effects": [
+    {
+      "kind": "VISIBILITY_CAPABILITY",
+      "actor": "affected-creature",
+      "capability": "cannot-be-seen-without-magic-or-special-sense"
+    },
+    {
+      "kind": "VISIBILITY_CAPABILITY",
+      "actor": "affected-creature",
+      "capability": "heavily-obscured-for-hiding"
+    },
+    {
+      "kind": "VISIBILITY_CAPABILITY",
+      "actor": "affected-creature",
+      "capability": "location-detectable-by-noise-or-tracks"
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "disadvantage",
+      "actor": "attacker",
+      "target": "affected-creature",
+      "appliesWhen": "attack-targets-affected",
+      "duration": "while-condition-active",
+      "applicability": {
+        "kind": "OBSERVER_CANNOT_SEE_AFFECTED",
+        "observer": "attacker"
+      }
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "advantage",
+      "actor": "affected-creature",
+      "target": "target",
+      "appliesWhen": "affected-creature-attacks",
+      "duration": "while-condition-active",
+      "applicability": {
+        "kind": "OBSERVER_CANNOT_SEE_AFFECTED",
+        "observer": "target"
+      }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "rule:xphb:burrow-speed",
+  "name": "Burrow Speed",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 362,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "burrowing-movement",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "BURROWING",
+      "procedure": "movement-mode",
+      "speedType": "burrow",
+      "details": {
+        "kind": "BURROWING_MOVEMENT",
+        "permittedMaterials": [
+          "sand",
+          "earth",
+          "mud",
+          "ice"
+        ],
+        "solidRock": {
+          "requiresSourceDefinedTrait": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "id": "condition:phb:unconscious",
+  "name": "Unconscious",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 292,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "citations": [
+      {
+        "source": "RMR",
+        "page": 62
+      },
+      {
+        "source": "HftT",
+        "page": 48
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:unconscious"
+      }
+    ]
+  },
+  "effects": [
+    {
+      "kind": "MOVEMENT_MODIFIER",
+      "movement": "speed-flat",
+      "amount": 0,
+      "actor": "affected-creature",
+      "duration": "while-condition-active"
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "advantage",
+      "actor": "attacker",
+      "target": "affected-creature",
+      "appliesWhen": "attack-targets-affected",
+      "duration": "while-condition-active"
+    },
+    {
+      "kind": "CONDITION_INTERACTION",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:incapacitated"
+      },
+      "interaction": "apply",
+      "lifecycle": "while-source-condition-active"
+    },
+    {
+      "kind": "CONDITION_INTERACTION",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:prone"
+      },
+      "interaction": "apply",
+      "lifecycle": "persists-after-source-condition-ends"
+    },
+    {
+      "kind": "ACTIVITY_RESTRICTION",
+      "actor": "affected-creature",
+      "activities": [
+        "movement",
+        "speech"
+      ],
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    },
+    {
+      "kind": "AWARENESS_RESTRICTION",
+      "actor": "affected-creature",
+      "awareness": "unaware"
+    },
+    {
+      "kind": "DROP_HELD_OBJECTS",
+      "actor": "affected-creature",
+      "effect": "drop-held-objects"
+    },
+    {
+      "kind": "AUTOMATIC_SAVING_THROW_FAILURE",
+      "actor": "affected-creature",
+      "abilities": [
+        "strength",
+        "dexterity"
+      ],
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    },
+    {
+      "kind": "CRITICAL_HIT_ON_HIT",
+      "attacker": "attacker",
+      "target": "affected-creature",
+      "distanceFeet": 5,
+      "requiresSuccessfulHit": true,
+      "result": "critical-hit"
+    }
+  ]
+}

@@ -5,6 +5,7 @@
     "source": "XPHB",
     "page": 377
   },
+  "ruleType": "CORE",
   "mechanics": [
     {
       "componentId": "unarmed-attack",
@@ -80,7 +81,8 @@
       "appliesWhen": {
         "kind": "ON_FAILED_SAVE",
         "componentId": "unarmed-grapple-save"
-      }
+      },
+      "reachFeet": 5
     },
     {
       "componentId": "unarmed-shove-outcome",
@@ -109,7 +111,8 @@
       "appliesWhen": {
         "kind": "ON_FAILED_SAVE",
         "componentId": "unarmed-grapple-save"
-      }
+      },
+      "reachFeet": 5
     }
   ],
   "composition": {
@@ -151,5 +154,12 @@
         ]
       }
     ]
-  }
+  },
+  "references": [
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:grappled",
+      "relationship": "grapple-escape-attempts-use-this-dc"
+    }
+  ]
 }

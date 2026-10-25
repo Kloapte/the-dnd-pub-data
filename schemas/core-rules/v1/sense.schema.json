@@ -56,7 +56,8 @@
                     "visual-detail",
                     "illusions",
                     "true-forms",
-                    "ethereal-plane"
+                    "ethereal-plane",
+                    "invisible-objects"
                   ]
                 }
               },
@@ -82,6 +83,29 @@
                   "normal",
                   "grayscale"
                 ]
+              },
+              "dimLightAs": {
+                "enum": [
+                  "dim-light",
+                  "bright-light",
+                  "no-benefit"
+                ]
+              },
+              "illusionInteraction": {
+                "type": "object",
+                "additionalProperties": false,
+                "minProperties": 1,
+                "properties": {
+                  "appearance": {
+                    "const": "transparent"
+                  },
+                  "detection": {
+                    "const": "automatic"
+                  },
+                  "savingThrowOutcome": {
+                    "const": "automatic-success"
+                  }
+                }
               }
             },
             "description": "Qualitative sense capabilities only; creature-specific numeric ranges belong to creature records."
@@ -127,6 +151,47 @@
                     "requires-surface"
                   ]
                 }
+              },
+              "locationPrecision": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "VIBRATION_ORIGIN"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "targets"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "DETECTED_TARGETS"
+                      },
+                      "targets": {
+                        "type": "array",
+                        "minItems": 1,
+                        "uniqueItems": true,
+                        "items": {
+                          "enum": [
+                            "creatures",
+                            "movement",
+                            "objects"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
               }
             },
             "description": "Qualitative nonvisual perception capability; no range is defined here."

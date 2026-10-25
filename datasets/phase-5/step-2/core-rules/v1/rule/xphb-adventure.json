@@ -1,0 +1,19 @@
+{
+  "id": "rule:xphb:adventure",
+  "name": "Adventure",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 360,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:encounter"
+    }
+  ]
+}

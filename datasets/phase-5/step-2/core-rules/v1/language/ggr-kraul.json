@@ -1,0 +1,24 @@
+{
+  "id": "language:ggr:kraul",
+  "name": "Kraul",
+  "sourceMetadata": {
+    "source": "GGR",
+    "page": 9
+  },
+  "category": "standard",
+  "script": "Kraul",
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:ggr:kraul-warrior"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:ggr:kraul-death-priest"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:ggr:devkarin-lich"
+    }
+  ]
+}

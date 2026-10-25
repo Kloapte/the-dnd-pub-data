@@ -1,0 +1,112 @@
+{
+  "id": "disease:fraif:mudpox",
+  "name": "Mudpox",
+  "sourceMetadata": {
+    "source": "FRAiF",
+    "page": 98
+  },
+  "infection": {
+    "transmission": [
+      "contact"
+    ],
+    "savingThrow": {
+      "ability": "constitution",
+      "dc": 12
+    },
+    "exposures": [
+      {
+        "kind": "CONTACT_WITH_CONTAMINATED_MATERIAL",
+        "materials": [
+          "contaminated-mud"
+        ]
+      },
+      {
+        "kind": "CONTACT_WITH_INFECTED_CREATURE",
+        "contact": "SKIN",
+        "sourceState": "INFECTED",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 12
+        },
+        "onFailure": "INFECTION",
+        "eligibleCreatureTypes": [
+          "humanoid"
+        ],
+        "onSuccessImmunity": {
+          "kind": "DISEASE_IMMUNITY",
+          "scope": "EXPOSING_CREATURE",
+          "duration": {
+            "amount": 24,
+            "unit": "hour"
+          }
+        }
+      }
+    ]
+  },
+  "recovery": [
+    {
+      "method": "spell",
+      "reference": {
+        "targetType": "spell",
+        "id": "spell:xphb:heal",
+        "relationship": "immediate-cure"
+      }
+    },
+    {
+      "method": "spell",
+      "reference": {
+        "targetType": "spell",
+        "id": "spell:xphb:lesser-restoration",
+        "relationship": "immediate-cure"
+      }
+    }
+  ],
+  "applicability": {
+    "targetCreatureTypes": [
+      "beast",
+      "humanoid"
+    ]
+  },
+  "progression": [
+    {
+      "kind": "SAVING_THROW_BRANCH",
+      "branchId": "daily-dawn-recovery",
+      "trigger": {
+        "kind": "DAILY_AT",
+        "time": "DAWN"
+      },
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 12
+      },
+      "onSuccess": [
+        {
+          "kind": "NO_EFFECT"
+        }
+      ],
+      "onFailure": [
+        {
+          "kind": "CHANGE_CONDITION_LEVEL",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:exhaustion"
+          },
+          "amount": 1
+        },
+        {
+          "kind": "VOMIT_PREVIOUS_DAY_FOOD"
+        }
+      ],
+      "outcomeCounter": {
+        "branchId": "daily-dawn-recovery",
+        "countedOutcome": "SUCCESS",
+        "threshold": 3,
+        "sequence": "CONSECUTIVE",
+        "reset": "ON_OPPOSITE_OUTCOME",
+        "onThreshold": {
+          "kind": "END_DISEASE"
+        }
+      }
+    }
+  ]
+}

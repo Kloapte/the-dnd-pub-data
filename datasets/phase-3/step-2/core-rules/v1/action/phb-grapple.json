@@ -98,6 +98,25 @@
       "recipient": "grappled-creature",
       "actor": "grappler",
       "operationId": "release-grappled"
+    },
+    {
+      "kind": "MOVE_WITH_GRAPPLED_TARGET",
+      "operationId": "move-grappled-target",
+      "actor": "acting-creature",
+      "target": "grappled-creature",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:grappled"
+      },
+      "modes": [
+        "drag",
+        "carry"
+      ],
+      "speedCost": {
+        "kind": "SPEED_MULTIPLIER",
+        "multiplier": 0.5,
+        "waivedWhenTargetAtLeastSizesSmaller": 2
+      }
     }
   ],
   "references": [

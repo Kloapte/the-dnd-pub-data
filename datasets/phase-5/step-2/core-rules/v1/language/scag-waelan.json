@@ -1,0 +1,9 @@
+{
+  "id": "language:scag:waelan",
+  "name": "Waelan",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112
+  },
+  "script": "Thorass"
+}

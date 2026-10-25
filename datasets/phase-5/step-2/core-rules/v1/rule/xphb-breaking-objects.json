@@ -1,0 +1,35 @@
+{
+  "id": "rule:xphb:breaking-objects",
+  "name": "Breaking Objects",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 362,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:ability-check",
+      "relationship": "no-ability-scores-prevent-checks"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:saving-throw",
+      "relationship": "no-ability-scores-fail-saves"
+    },
+    {
+      "targetType": "action",
+      "id": "action:xphb:attack",
+      "relationship": "fragile-object-break-action"
+    },
+    {
+      "targetType": "action",
+      "id": "action:xphb:utilize",
+      "relationship": "fragile-object-break-action"
+    }
+  ]
+}

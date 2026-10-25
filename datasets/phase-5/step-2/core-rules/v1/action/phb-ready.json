@@ -1,0 +1,24 @@
+{
+  "id": "action:phb:ready",
+  "name": "Ready",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 193,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:ready"
+      }
+    ]
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "READY"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "skill:phb:sleight-of-hand",
+  "name": "Sleight of Hand",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 177,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:sleight-of-hand"
+      }
+    ]
+  },
+  "ability": "dexterity"
+}

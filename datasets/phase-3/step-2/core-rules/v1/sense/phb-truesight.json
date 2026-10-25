@@ -24,12 +24,17 @@
         "visual-detail",
         "illusions",
         "true-forms",
-        "ethereal-plane"
+        "ethereal-plane",
+        "invisible-objects"
       ],
       "conditions": [
         "darkness"
       ],
-      "darknessAs": "bright-light"
+      "darknessAs": "bright-light",
+      "illusionInteraction": {
+        "detection": "automatic",
+        "savingThrowOutcome": "automatic-success"
+      }
     }
   ]
 }

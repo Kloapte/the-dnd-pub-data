@@ -1,0 +1,9 @@
+{
+  "id": "language:vgm:qualith",
+  "name": "Qualith",
+  "sourceMetadata": {
+    "source": "VGM",
+    "page": 75
+  },
+  "script": "Qualith"
+}

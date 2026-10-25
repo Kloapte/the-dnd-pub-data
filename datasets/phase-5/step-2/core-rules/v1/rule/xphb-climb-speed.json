@@ -1,0 +1,35 @@
+{
+  "id": "rule:xphb:climb-speed",
+  "name": "Climb Speed",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 363,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "climb-speed-exception",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "CLIMBING",
+      "procedure": "speed-required",
+      "speedType": "climb",
+      "details": {
+        "kind": "CLIMB_SPEED_EXCEPTION",
+        "speedType": "climb",
+        "appliesTo": "VERTICAL_SURFACE",
+        "replacesSpeed": true,
+        "waivesClimbingExtraMovementCost": true
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:climbing"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "language:scag:uluik",
+  "name": "Uluik",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112
+  },
+  "script": "Thorass"
+}

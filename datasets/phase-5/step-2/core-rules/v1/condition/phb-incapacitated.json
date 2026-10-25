@@ -1,0 +1,41 @@
+{
+  "id": "condition:phb:incapacitated",
+  "name": "Incapacitated",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 290,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "citations": [
+      {
+        "source": "RMR",
+        "page": 62
+      },
+      {
+        "source": "HftT",
+        "page": 48
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:incapacitated"
+      }
+    ]
+  },
+  "effects": [
+    {
+      "kind": "ACTIVITY_RESTRICTION",
+      "actor": "affected-creature",
+      "activities": [
+        "action",
+        "reaction"
+      ],
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    }
+  ]
+}

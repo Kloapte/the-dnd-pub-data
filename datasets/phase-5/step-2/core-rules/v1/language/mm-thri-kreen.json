@@ -1,0 +1,20 @@
+{
+  "id": "language:mm:thri-kreen",
+  "name": "Thri-kreen",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 288,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xmm:thri-kreen"
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:thri-kreen"
+    }
+  ]
+}

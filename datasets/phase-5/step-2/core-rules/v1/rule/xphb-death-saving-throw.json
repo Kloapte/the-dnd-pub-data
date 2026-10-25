@@ -1,0 +1,22 @@
+{
+  "id": "rule:xphb:death-saving-throw",
+  "name": "Death Saving Throw",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 365,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "death-saving-throw",
+      "kind": "D20_TEST",
+      "subtype": "DEATH_SAVING_THROW",
+      "trigger": "start-of-turn-at-zero-hit-points",
+      "appliesTo": "PLAYER_CHARACTER"
+    }
+  ]
+}

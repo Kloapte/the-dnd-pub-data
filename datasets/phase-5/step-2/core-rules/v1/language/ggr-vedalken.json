@@ -1,0 +1,16 @@
+{
+  "id": "language:ggr:vedalken",
+  "name": "Vedalken",
+  "sourceMetadata": {
+    "source": "GGR",
+    "page": 9,
+    "citations": [
+      {
+        "source": "PSK",
+        "page": 23
+      }
+    ]
+  },
+  "category": "standard",
+  "script": "Vedalken"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "language:mm:sphinx",
+  "name": "Sphinx",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 281
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:gynosphinx"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:androsphinx"
+    }
+  ]
+}

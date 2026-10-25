@@ -191,7 +191,13 @@
                 "minimum": 1
               },
               "duration": {
-                "const": "while-level-threshold-is-met"
+                "enum": [
+                  "while-level-threshold-is-met",
+                  "while-condition-active"
+                ]
+              },
+              "applicability": {
+                "$ref": "#/$defs/applicability"
               }
             }
           },
@@ -214,7 +220,8 @@
                   "ability-check",
                   "saving-throw",
                   "attack",
-                  "d20-test"
+                  "d20-test",
+                  "initiative"
                 ]
               },
               "direction": {
@@ -226,7 +233,7 @@
                 ]
               },
               "actor": {
-                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/actor"
+                "$ref": "#/$defs/role"
               },
               "ability": {
                 "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
@@ -235,7 +242,13 @@
                 "type": "number"
               },
               "duration": {
-                "const": "while-level-threshold-is-met"
+                "enum": [
+                  "while-level-threshold-is-met",
+                  "while-condition-active"
+                ]
+              },
+              "applicability": {
+                "$ref": "#/$defs/applicability"
               },
               "minimumLevel": {
                 "type": "integer",
@@ -272,7 +285,10 @@
                 "type": "number"
               },
               "duration": {
-                "const": "while-level-threshold-is-met"
+                "enum": [
+                  "while-level-threshold-is-met",
+                  "while-condition-active"
+                ]
               },
               "minimumLevel": {
                 "type": "integer",
@@ -401,6 +417,48 @@
                 ]
               }
             }
+          },
+          {
+            "$ref": "#/$defs/activityRestriction"
+          },
+          {
+            "$ref": "#/$defs/relationalRestriction"
+          },
+          {
+            "$ref": "#/$defs/automaticSavingThrowFailure"
+          },
+          {
+            "$ref": "#/$defs/conditionInteraction"
+          },
+          {
+            "$ref": "#/$defs/movementConstraint"
+          },
+          {
+            "$ref": "#/$defs/conditionEnding"
+          },
+          {
+            "$ref": "#/$defs/grappledMovementCost"
+          },
+          {
+            "$ref": "#/$defs/criticalHitOnHit"
+          },
+          {
+            "$ref": "#/$defs/physicalState"
+          },
+          {
+            "$ref": "#/$defs/damageMitigation"
+          },
+          {
+            "$ref": "#/$defs/equipmentAndAwareness"
+          },
+          {
+            "$ref": "#/$defs/visibilityCapability"
+          },
+          {
+            "$ref": "#/$defs/categoryImmunity"
+          },
+          {
+            "$ref": "#/$defs/diseaseSuspension"
           }
         ]
       }
@@ -410,6 +468,650 @@
       "minItems": 1,
       "items": {
         "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+      }
+    }
+  },
+  "$defs": {
+    "diseaseSuspension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "lifecycle",
+        "preservesInstance",
+        "scheduling"
+      ],
+      "properties": {
+        "kind": {
+          "const": "SUSPEND_ACTIVE_DISEASES"
+        },
+        "lifecycle": {
+          "const": "while-condition-active"
+        },
+        "preservesInstance": {
+          "const": true
+        },
+        "scheduling": {
+          "const": "UNRESOLVED_BY_SOURCE"
+        }
+      }
+    },
+    "role": {
+      "enum": [
+        "affected-creature",
+        "attacker",
+        "target",
+        "charmer",
+        "fear-source",
+        "observer",
+        "effect-creator",
+        "grappler"
+      ]
+    },
+    "conditionReference": {
+      "allOf": [
+        {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        },
+        {
+          "type": "object",
+          "required": [
+            "targetType"
+          ],
+          "properties": {
+            "targetType": {
+              "const": "condition"
+            }
+          }
+        }
+      ]
+    },
+    "applicability": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "WHILE_CONDITION_ACTIVE"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "role"
+          ],
+          "properties": {
+            "kind": {
+              "const": "FEAR_SOURCE_IN_LINE_OF_SIGHT"
+            },
+            "role": {
+              "const": "fear-source"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "role"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CHARMER_SOCIAL_INTERACTION"
+            },
+            "role": {
+              "const": "charmer"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "observer"
+          ],
+          "properties": {
+            "kind": {
+              "const": "OBSERVER_CANNOT_SEE_AFFECTED"
+            },
+            "observer": {
+              "$ref": "#/$defs/role"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "creature"
+          ],
+          "properties": {
+            "kind": {
+              "const": "TARGET_IS_NOT_CREATURE"
+            },
+            "creature": {
+              "$ref": "#/$defs/role"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "observer"
+          ],
+          "properties": {
+            "kind": {
+              "const": "OBSERVER_CAN_SEE_AFFECTED"
+            },
+            "observer": {
+              "$ref": "#/$defs/role"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "otherCreature",
+            "distanceFeet",
+            "relation"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CREATURE_DISTANCE"
+            },
+            "otherCreature": {
+              "$ref": "#/$defs/role"
+            },
+            "distanceFeet": {
+              "type": "number",
+              "minimum": 0
+            },
+            "relation": {
+              "enum": [
+                "within",
+                "beyond"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "activityRestriction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "actor",
+        "activities",
+        "appliesWhen"
+      ],
+      "properties": {
+        "kind": {
+          "const": "ACTIVITY_RESTRICTION"
+        },
+        "actor": {
+          "$ref": "#/$defs/role"
+        },
+        "activities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "action",
+              "bonus-action",
+              "reaction",
+              "speech",
+              "movement"
+            ]
+          }
+        },
+        "appliesWhen": {
+          "$ref": "#/$defs/applicability"
+        },
+        "speechLimitation": {
+          "enum": [
+            "none",
+            "faltering"
+          ]
+        }
+      }
+    },
+    "relationalRestriction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "actor",
+        "otherCreature",
+        "prohibitedOperation",
+        "appliesWhen"
+      ],
+      "properties": {
+        "kind": {
+          "const": "RELATIONAL_RESTRICTION"
+        },
+        "actor": {
+          "$ref": "#/$defs/role"
+        },
+        "otherCreature": {
+          "$ref": "#/$defs/role"
+        },
+        "prohibitedOperation": {
+          "enum": [
+            "attack",
+            "harmful-ability-or-magical-effect",
+            "damaging-ability-or-magical-effect",
+            "target-creature-with-effect-requiring-sight",
+            "willingly-move-closer"
+          ]
+        },
+        "appliesWhen": {
+          "$ref": "#/$defs/applicability"
+        }
+      }
+    },
+    "automaticSavingThrowFailure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "actor",
+        "abilities",
+        "appliesWhen"
+      ],
+      "properties": {
+        "kind": {
+          "const": "AUTOMATIC_SAVING_THROW_FAILURE"
+        },
+        "actor": {
+          "$ref": "#/$defs/role"
+        },
+        "abilities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "strength",
+              "dexterity"
+            ]
+          }
+        },
+        "appliesWhen": {
+          "$ref": "#/$defs/applicability"
+        }
+      }
+    },
+    "conditionInteraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "condition",
+        "interaction",
+        "lifecycle"
+      ],
+      "properties": {
+        "kind": {
+          "const": "CONDITION_INTERACTION"
+        },
+        "condition": {
+          "$ref": "#/$defs/conditionReference"
+        },
+        "interaction": {
+          "enum": [
+            "apply",
+            "immune-to"
+          ]
+        },
+        "lifecycle": {
+          "enum": [
+            "while-source-condition-active",
+            "persists-after-source-condition-ends"
+          ]
+        }
+      }
+    },
+    "movementConstraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "actor",
+        "constraint",
+        "appliesWhen"
+      ],
+      "properties": {
+        "kind": {
+          "const": "MOVEMENT_CONSTRAINT"
+        },
+        "actor": {
+          "$ref": "#/$defs/role"
+        },
+        "constraint": {
+          "enum": [
+            "cannot-increase-speed",
+            "crawl-only",
+            "cannot-move",
+            "cannot-willingly-move-closer-to-source",
+            "cannot-stand-when-speed-zero"
+          ]
+        },
+        "appliesWhen": {
+          "$ref": "#/$defs/applicability"
+        },
+        "endingCondition": {
+          "$ref": "#/$defs/conditionReference"
+        },
+        "otherCreature": {
+          "$ref": "#/$defs/role"
+        },
+        "standingCost": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "speedFraction",
+            "rounding"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SPEND_SPEED_TO_STAND"
+            },
+            "speedFraction": {
+              "const": 0.5
+            },
+            "rounding": {
+              "const": "down"
+            }
+          }
+        }
+      }
+    },
+    "conditionEnding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "condition",
+        "when"
+      ],
+      "properties": {
+        "kind": {
+          "const": "CONDITION_ENDING"
+        },
+        "condition": {
+          "$ref": "#/$defs/conditionReference"
+        },
+        "when": {
+          "enum": [
+            "grappler-incapacitated",
+            "target-outside-grappler-reach",
+            "creature-stands"
+          ]
+        }
+      }
+    },
+    "grappledMovementCost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "actor",
+        "target",
+        "movementMode",
+        "movementCost",
+        "waiver"
+      ],
+      "properties": {
+        "kind": {
+          "const": "GRAPPLED_MOVEMENT_COST"
+        },
+        "actor": {
+          "const": "grappler"
+        },
+        "target": {
+          "const": "affected-creature"
+        },
+        "movementMode": {
+          "const": "drag-or-carry"
+        },
+        "movementCost": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "multiplier"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "SPEED_MULTIPLIER"
+                },
+                "multiplier": {
+                  "const": 0.5
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "additionalFeetPerFoot"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "EXTRA_FEET_PER_FOOT"
+                },
+                "additionalFeetPerFoot": {
+                  "const": 1
+                }
+              }
+            }
+          ]
+        },
+        "waiver": {
+          "enum": [
+            "target-two-or-more-sizes-smaller",
+            "target-tiny-or-two-or-more-sizes-smaller"
+          ]
+        }
+      }
+    },
+    "criticalHitOnHit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "attacker",
+        "target",
+        "distanceFeet",
+        "requiresSuccessfulHit",
+        "result"
+      ],
+      "properties": {
+        "kind": {
+          "const": "CRITICAL_HIT_ON_HIT"
+        },
+        "attacker": {
+          "const": "attacker"
+        },
+        "target": {
+          "const": "affected-creature"
+        },
+        "distanceFeet": {
+          "const": 5
+        },
+        "requiresSuccessfulHit": {
+          "const": true
+        },
+        "result": {
+          "const": "critical-hit"
+        },
+        "rule": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        }
+      }
+    },
+    "physicalState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "state",
+        "weightMultiplier",
+        "aging"
+      ],
+      "properties": {
+        "kind": {
+          "const": "PHYSICAL_STATE"
+        },
+        "state": {
+          "enum": [
+            "inanimate-stone",
+            "inanimate-source-substance"
+          ]
+        },
+        "includesWornAndCarriedNonmagicalObjects": {
+          "type": "boolean"
+        },
+        "weightMultiplier": {
+          "const": 10
+        },
+        "aging": {
+          "const": "ceases"
+        }
+      }
+    },
+    "damageMitigation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "damageTypes",
+        "mitigation"
+      ],
+      "properties": {
+        "kind": {
+          "const": "DAMAGE_MITIGATION"
+        },
+        "damageTypes": {
+          "const": "all"
+        },
+        "mitigation": {
+          "enum": [
+            "resistance",
+            "immunity"
+          ]
+        }
+      }
+    },
+    "equipmentAndAwareness": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "effect"
+          ],
+          "properties": {
+            "kind": {
+              "const": "DROP_HELD_OBJECTS"
+            },
+            "actor": {
+              "$ref": "#/$defs/role"
+            },
+            "effect": {
+              "const": "drop-held-objects"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "awareness"
+          ],
+          "properties": {
+            "kind": {
+              "const": "AWARENESS_RESTRICTION"
+            },
+            "actor": {
+              "$ref": "#/$defs/role"
+            },
+            "awareness": {
+              "const": "unaware"
+            }
+          }
+        }
+      ]
+    },
+    "visibilityCapability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "actor",
+        "capability"
+      ],
+      "properties": {
+        "kind": {
+          "const": "VISIBILITY_CAPABILITY"
+        },
+        "actor": {
+          "$ref": "#/$defs/role"
+        },
+        "capability": {
+          "enum": [
+            "cannot-be-seen-without-magic-or-special-sense",
+            "heavily-obscured-for-hiding",
+            "location-detectable-by-noise-or-tracks",
+            "equipment-concealed"
+          ]
+        }
+      }
+    },
+    "categoryImmunity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "category",
+        "lifecycle"
+      ],
+      "properties": {
+        "kind": {
+          "const": "CATEGORY_IMMUNITY"
+        },
+        "category": {
+          "const": "poison-and-disease"
+        },
+        "lifecycle": {
+          "const": "while-condition-active"
+        }
       }
     }
   }

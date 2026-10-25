@@ -23,7 +23,10 @@
         "requires-contact",
         "cannot-detect-flying",
         "cannot-detect-incorporeal"
-      ]
+      ],
+      "locationPrecision": {
+        "kind": "VIBRATION_ORIGIN"
+      }
     }
   ]
 }

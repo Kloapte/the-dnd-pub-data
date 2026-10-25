@@ -1,0 +1,28 @@
+{
+  "id": "rule:xphb:cone-area-of-effect",
+  "name": "Cone [Area of Effect]",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 364,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "cone-shape",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "AREA_OF_EFFECT",
+      "shape": "cone",
+      "origin": "point-in-space",
+      "originPlacement": "POINT_AND_DIRECTION",
+      "dimensionParameters": [
+        "MAXIMUM_LENGTH"
+      ],
+      "coneWidthRule": "WIDTH_EQUALS_DISTANCE_FROM_ORIGIN",
+      "originIncluded": "EXCLUDED_UNLESS_CREATOR_CHOOSES"
+    }
+  ]
+}

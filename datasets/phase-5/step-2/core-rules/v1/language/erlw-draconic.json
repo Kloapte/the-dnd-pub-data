@@ -1,0 +1,40 @@
+{
+  "id": "language:erlw:draconic",
+  "name": "Draconic",
+  "sourceMetadata": {
+    "source": "ERLW",
+    "page": 6
+  },
+  "category": "exotic",
+  "script": "Draconic",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "dragon"
+        ],
+        "sources": [
+          "ERLW"
+        ]
+      }
+    },
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "humanoid"
+        ],
+        "tags": [
+          {
+            "group": "any race",
+            "value": "dragonborn"
+          }
+        ],
+        "sources": [
+          "ERLW"
+        ]
+      }
+    }
+  ]
+}

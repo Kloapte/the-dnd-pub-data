@@ -1,0 +1,41 @@
+{
+  "id": "condition:phb:deafened",
+  "name": "Deafened",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 290,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "citations": [
+      {
+        "source": "RMR",
+        "page": 62
+      },
+      {
+        "source": "HftT",
+        "page": 48
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:deafened"
+      }
+    ]
+  },
+  "effects": [
+    {
+      "kind": "REMOVE_SENSE",
+      "sense": "hearing",
+      "actor": "affected-creature"
+    },
+    {
+      "kind": "AUTOMATIC_CHECK_FAILURE",
+      "roll": "ability-check",
+      "requirement": "requires-hearing",
+      "actor": "affected-creature"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "language:ggr:draconic",
+  "name": "Draconic",
+  "sourceMetadata": {
+    "source": "GGR",
+    "page": 9
+  },
+  "category": "standard",
+  "script": "Draconic",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "dragon"
+        ],
+        "sources": [
+          "GGR"
+        ]
+      }
+    }
+  ]
+}

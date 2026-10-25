@@ -1,0 +1,10 @@
+{
+  "id": "language:erlw:common",
+  "name": "Common",
+  "sourceMetadata": {
+    "source": "ERLW",
+    "page": 6
+  },
+  "category": "standard",
+  "script": "Common"
+}

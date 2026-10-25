@@ -1,0 +1,27 @@
+{
+  "id": "rule:xphb:crawling",
+  "name": "Crawling",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 364,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "crawling-movement-cost",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "CRAWLING",
+      "procedure": "movement-cost",
+      "details": {
+        "kind": "CRAWLING_MOVEMENT",
+        "additionalFeetPerFoot": 1,
+        "difficultTerrainAdditionalFeetPerFoot": 2,
+        "difficultTerrainCostRelationship": "DO_NOT_ADD"
+      }
+    }
+  ]
+}

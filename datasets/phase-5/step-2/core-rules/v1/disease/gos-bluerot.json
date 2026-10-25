@@ -1,0 +1,125 @@
+{
+  "id": "disease:gos:bluerot",
+  "name": "Bluerot",
+  "sourceMetadata": {
+    "source": "GoS",
+    "page": 234
+  },
+  "applicability": {
+    "targetCreatureTypes": [
+      "humanoid"
+    ]
+  },
+  "infection": {
+    "transmission": [
+      "wound"
+    ],
+    "exposures": [
+      {
+        "kind": "WOUND_BY_CONTAGION_CARRIER"
+      }
+    ]
+  },
+  "incubation": {
+    "kind": "DICE_ROLL",
+    "count": 1,
+    "die": 4,
+    "unit": "hour"
+  },
+  "effects": [
+    {
+      "kind": "ABILITY_SCORE_CHANGE",
+      "ability": "constitution",
+      "change": "LOSS",
+      "amount": {
+        "kind": "DICE_ROLL",
+        "count": 1,
+        "die": 4,
+        "unit": "points"
+      },
+      "minimum": 3,
+      "lifecycle": "WHILE_DISEASE_ACTIVE"
+    },
+    {
+      "kind": "ABILITY_SCORE_CHANGE",
+      "ability": "charisma",
+      "change": "LOSS",
+      "amount": {
+        "kind": "DICE_ROLL",
+        "count": 1,
+        "die": 4,
+        "unit": "points"
+      },
+      "minimum": 3,
+      "lifecycle": "WHILE_DISEASE_ACTIVE"
+    },
+    {
+      "kind": "DAMAGE_VULNERABILITY",
+      "damageTypes": [
+        "radiant"
+      ],
+      "lifecycle": "WHILE_DISEASE_ACTIVE"
+    },
+    {
+      "kind": "PHYSIOLOGICAL_CAPABILITY",
+      "capability": "BREATHE_UNDERWATER",
+      "lifecycle": "WHILE_DISEASE_ACTIVE"
+    },
+    {
+      "kind": "TRIGGERED_RECOVERY_RESTRICTION",
+      "trigger": "DISEASE_DAMAGE_REDUCES_HP_TO_ZERO",
+      "restriction": "CANNOT_REGAIN_HIT_POINTS_UNTIL_DISEASE_CURED",
+      "stabilizationAllowed": true
+    }
+  ],
+  "progression": [
+    {
+      "kind": "SAVING_THROW_BRANCH",
+      "branchId": "long-rest-recovery",
+      "trigger": {
+        "kind": "LONG_REST_COMPLETED",
+        "phase": "AFTER_INFECTION"
+      },
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 12
+      },
+      "onSuccess": [
+        {
+          "kind": "CHANGE_ABILITY_SCORE",
+          "ability": "constitution",
+          "amount": 1,
+          "minimum": 3
+        },
+        {
+          "kind": "CHANGE_ABILITY_SCORE",
+          "ability": "charisma",
+          "amount": 1,
+          "minimum": 3
+        }
+      ],
+      "onFailure": [
+        {
+          "kind": "DAMAGE",
+          "count": 4,
+          "die": 8,
+          "damageType": "necrotic"
+        }
+      ]
+    }
+  ],
+  "termination": {
+    "kind": "ALL_LOST_ABILITY_SCORE_POINTS_RESTORED",
+    "abilities": [
+      "constitution",
+      "charisma"
+    ]
+  },
+  "references": [
+    {
+      "targetType": "spell",
+      "id": "spell:phb:contagion",
+      "relationship": "can-be-inflicted-by"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "id": "disease:toa:throat-leeches",
+  "name": "Throat Leeches",
+  "sourceMetadata": {
+    "source": "ToA",
+    "page": 40
+  },
+  "applicability": {
+    "targetCreatureTypes": [
+      "giant",
+      "humanoid"
+    ]
+  },
+  "infection": {
+    "transmission": [
+      "ingestion"
+    ],
+    "exposures": [
+      {
+        "kind": "INGEST_CONTAMINATED_MATERIAL",
+        "material": "WATER",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 12
+        },
+        "onFailure": "INFECTION",
+        "targetCreatureTypes": [
+          "giant",
+          "humanoid"
+        ],
+        "safeAlternatives": [
+          "RAINWATER",
+          "BOILED_WATER",
+          "MAGICALLY_PURIFIED_WATER"
+        ]
+      }
+    ]
+  },
+  "incubation": {
+    "kind": "DICE_ROLL",
+    "count": 1,
+    "die": 6,
+    "unit": "hour"
+  },
+  "symptoms": [
+    {
+      "kind": "CONDITION_LEVEL_CHANGE",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:exhaustion"
+      },
+      "amount": 1,
+      "onlyProgressionBranchCanReduce": true
+    }
+  ],
+  "progression": [
+    {
+      "kind": "SAVING_THROW_BRANCH",
+      "branchId": "long-rest-recovery",
+      "trigger": {
+        "kind": "LONG_REST_COMPLETED",
+        "phase": "AFTER_SYMPTOM_ONSET"
+      },
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 12
+      },
+      "onSuccess": [
+        {
+          "kind": "CHANGE_CONDITION_LEVEL",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:exhaustion"
+          },
+          "amount": -1
+        }
+      ],
+      "onFailure": [
+        {
+          "kind": "CHANGE_CONDITION_LEVEL",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:exhaustion"
+          },
+          "amount": 1
+        }
+      ],
+      "endsWhen": {
+        "kind": "CONDITION_LEVEL_AT_OR_BELOW",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "level": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "language:rot:ice-toad",
+  "name": "Ice Toad",
+  "sourceMetadata": {
+    "source": "RoT",
+    "page": 90,
+    "citations": [
+      {
+        "source": "ToD",
+        "page": 185
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:rot:ice-toad"
+    }
+  ]
+}

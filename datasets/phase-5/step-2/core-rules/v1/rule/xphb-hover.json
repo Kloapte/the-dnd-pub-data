@@ -1,0 +1,35 @@
+{
+  "id": "rule:xphb:hover",
+  "name": "Hover",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 368,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "hover-prevents-fall",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "HOVERING",
+      "procedure": "fall-prevention",
+      "details": {
+        "kind": "HOVER_PREVENTION",
+        "appliesWhile": "FLYING",
+        "appliesUnderRule": {
+          "targetType": "rule",
+          "id": "rule:xphb:flying"
+        }
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:flying"
+    }
+  ]
+}

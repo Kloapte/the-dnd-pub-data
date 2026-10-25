@@ -1,0 +1,94 @@
+{
+  "id": "action:dmg:climb-onto-a-bigger-creature",
+  "name": "Climb onto a Bigger Creature",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 271
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "ENTER_CREATURE_SPACE"
+  ],
+  "operations": [
+    {
+      "kind": "CHECK_OR_CONTEST",
+      "operationId": "climb-entry-contest",
+      "resolution": "contested-check",
+      "actor": "both",
+      "participants": [
+        {
+          "role": "acting-creature",
+          "selection": "PARTICIPANT_CHOOSES",
+          "options": [
+            {
+              "ability": "strength",
+              "skill": {
+                "targetType": "skill",
+                "id": "skill:phb:athletics"
+              }
+            },
+            {
+              "ability": "dexterity",
+              "skill": {
+                "targetType": "skill",
+                "id": "skill:phb:acrobatics"
+              }
+            }
+          ]
+        },
+        {
+          "role": "target",
+          "selection": "RULE_SPECIFIED",
+          "options": [
+            {
+              "ability": "dexterity",
+              "skill": {
+                "targetType": "skill",
+                "id": "skill:phb:acrobatics"
+              }
+            }
+          ]
+        }
+      ],
+      "requirement": "ALWAYS_REQUIRED"
+    },
+    {
+      "kind": "ENTER_CREATURE_SPACE",
+      "operationId": "enter-larger-creature-space",
+      "actor": "acting-creature",
+      "target": "larger-creature",
+      "positioning": "DM_ADJUDICATED",
+      "entryCheckId": "climb-entry-contest",
+      "movesWithTarget": true,
+      "movementCost": "TARGET_SPACE_IS_DIFFICULT_TERRAIN",
+      "movementWithinSpace": "PERMITTED_AS_DIFFICULT_TERRAIN",
+      "attackModifier": "ADVANTAGE_AGAINST_TARGET",
+      "counterattack": "DM_ADJUDICATED_BY_POSITION",
+      "appliesWhen": {
+        "kind": "CHECK_SUCCEEDED",
+        "operationId": "climb-entry-contest"
+      },
+      "dislodgingProcedure": {
+        "actionCost": "ACTION",
+        "initiator": "larger-creature",
+        "initiatorOptions": [
+          "STRENGTH_ATHLETICS"
+        ],
+        "opponentOptions": [
+          "STRENGTH_ATHLETICS",
+          "DEXTERITY_ACROBATICS"
+        ],
+        "opponentChoosesOption": true
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "action",
+      "id": "action:phb:grapple",
+      "relationship": "alternative-way-to-climb-onto-creature"
+    }
+  ]
+}

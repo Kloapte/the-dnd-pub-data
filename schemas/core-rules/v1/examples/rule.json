@@ -9,6 +9,7 @@
       "basicRules2024": true
     }
   },
+  "ruleType": "CORE",
   "mechanics": [
     {
       "componentId": "critical-attack",
@@ -20,7 +21,8 @@
           "melee",
           "ranged",
           "spell",
-          "weapon"
+          "weapon",
+          "unarmed"
         ],
         "target": "armor-class",
         "criticalOn": 20,

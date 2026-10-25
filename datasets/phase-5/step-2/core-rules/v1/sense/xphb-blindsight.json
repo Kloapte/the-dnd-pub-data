@@ -1,0 +1,34 @@
+{
+  "id": "sense:xphb:blindsight",
+  "name": "Blindsight",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 361,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "capabilities": [
+    {
+      "kind": "SIGHT",
+      "perceives": [
+        "visible-creatures",
+        "invisible-creatures",
+        "objects",
+        "invisible-objects",
+        "visual-detail"
+      ],
+      "conditions": [
+        "darkness"
+      ]
+    },
+    {
+      "kind": "CONDITION_INTERACTION",
+      "interaction": {
+        "targetType": "condition",
+        "id": "condition:xphb:blinded"
+      },
+      "effect": "bypasses-sight-restriction"
+    }
+  ]
+}

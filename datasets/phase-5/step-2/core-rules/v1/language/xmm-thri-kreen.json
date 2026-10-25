@@ -1,0 +1,18 @@
+{
+  "id": "language:xmm:thri-kreen",
+  "name": "Thri-kreen",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 306
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:thri-kreen-marauder"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:thri-kreen-psion"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "id": "disease:egw:frigid-woe",
+  "name": "Frigid Woe",
+  "sourceMetadata": {
+    "source": "EGW",
+    "page": 125
+  },
+  "infection": {
+    "transmission": [
+      "magical-exposure"
+    ],
+    "exposures": [
+      {
+        "kind": "ENVIRONMENTAL_CONTACT",
+        "environment": "AIRBORNE_SPORES",
+        "trigger": "CONTACT",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 11
+        },
+        "onFailure": "INFECTION"
+      }
+    ]
+  },
+  "incubation": {
+    "kind": "DICE_ROLL",
+    "count": 1,
+    "die": 4,
+    "unit": "day"
+  },
+  "effects": [
+    {
+      "kind": "SPEED_CHANGE",
+      "amount": -5,
+      "unit": "feet",
+      "lifecycle": "WHILE_DISEASE_ACTIVE"
+    },
+    {
+      "kind": "TRANSFORMATION_OUTCOME",
+      "target": {
+        "kind": "UNNORMALIZED_SOURCE_ENTITY",
+        "name": "ice statue"
+      },
+      "trigger": "SPEED_REACHES_ZERO",
+      "deathOfSubject": true,
+      "outcomeAfter": "DEATH"
+    }
+  ],
+  "progression": [
+    {
+      "kind": "SAVING_THROW_BRANCH",
+      "branchId": "ten-day-speed-progression",
+      "trigger": {
+        "kind": "REPEATING_ELAPSED_TIME",
+        "interval": {
+          "amount": 10,
+          "unit": "day"
+        },
+        "relativeTo": "SYMPTOM_ONSET"
+      },
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 11
+      },
+      "onSuccess": [
+        {
+          "kind": "NO_EFFECT"
+        }
+      ],
+      "onFailure": [
+        {
+          "kind": "CHANGE_SPEED",
+          "amount": -5,
+          "unit": "feet"
+        }
+      ]
+    }
+  ],
+  "recovery": [
+    {
+      "method": "treatment",
+      "treatment": {
+        "kind": "MANUFACTURED_ANTIDOTE",
+        "action": "drink-as-action",
+        "outcome": "ENDS_DISEASE",
+        "onlyCureMethod": true
+      }
+    }
+  ]
+}

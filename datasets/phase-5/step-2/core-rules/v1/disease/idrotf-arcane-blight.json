@@ -1,0 +1,76 @@
+{
+  "id": "disease:idrotf:arcane-blight",
+  "name": "Arcane Blight",
+  "sourceMetadata": {
+    "source": "IDRotF",
+    "page": 233
+  },
+  "applicability": {
+    "targetCreatureTypes": [
+      "humanoid"
+    ]
+  },
+  "infection": {
+    "savingThrow": {
+      "ability": "constitution",
+      "dc": 15
+    },
+    "exposures": [
+      {
+        "kind": "ENVIRONMENTAL_EXPOSURE",
+        "environment": "NECROPOLIS",
+        "duration": {
+          "amount": 12,
+          "unit": "hour"
+        },
+        "trigger": "TIME_IN_AREA",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 15
+        },
+        "onFailure": "INFECTION"
+      }
+    ]
+  },
+  "recovery": [
+    {
+      "id": "arcane-blight-recovery",
+      "method": "saving-throw",
+      "dcTrackId": "arcane-blight",
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 15,
+        "dcReduction": {
+          "dieCount": 1,
+          "dieSize": 6
+        },
+        "frequency": "each-long-rest",
+        "dcTrackId": "arcane-blight"
+      },
+      "endsWhenDcAtOrBelow": 0,
+      "immunityAfterRecovery": true,
+      "outcomeCounter": {
+        "branchId": "arcane-blight-recovery",
+        "countedOutcome": "FAILURE",
+        "threshold": 3,
+        "sequence": "UNSPECIFIED_BY_SOURCE",
+        "reset": "UNSPECIFIED_BY_SOURCE",
+        "onThreshold": {
+          "kind": "TRANSFORM_CREATURE",
+          "target": {
+            "kind": "UNNORMALIZED_SOURCE_ENTITY",
+            "name": "nothic"
+          }
+        }
+      }
+    },
+    {
+      "method": "spell",
+      "reference": {
+        "targetType": "spell",
+        "id": "spell:phb:greater-restoration",
+        "relationship": "ends-infection"
+      }
+    }
+  ]
+}

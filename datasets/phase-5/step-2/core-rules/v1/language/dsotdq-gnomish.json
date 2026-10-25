@@ -1,0 +1,10 @@
+{
+  "id": "language:dsotdq:gnomish",
+  "name": "Gnomish",
+  "sourceMetadata": {
+    "source": "DSotDQ",
+    "page": 9
+  },
+  "category": "standard",
+  "script": "Common"
+}

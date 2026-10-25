@@ -1,0 +1,14 @@
+{
+  "id": "language:xmm:blink-dog",
+  "name": "Blink Dog",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 46
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:blink-dog"
+    }
+  ]
+}

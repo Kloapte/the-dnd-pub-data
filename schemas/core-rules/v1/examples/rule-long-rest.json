@@ -1,0 +1,111 @@
+{
+  "id": "rule:xphb:long-rest",
+  "name": "Long Rest",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 370,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "long-rest-procedure",
+      "kind": "REST_PROCEDURE",
+      "subtype": "LONG_REST",
+      "duration": 8,
+      "unit": "hours",
+      "durationQualifier": "AT_LEAST",
+      "minimumHitPointsToStart": 1,
+      "minimumHoursBetweenStarts": 16,
+      "permittedActivities": [
+        "READING",
+        "TALKING",
+        "EATING",
+        "STANDING_WATCH"
+      ],
+      "activityLimits": [
+        {
+          "activity": "SLEEP",
+          "amount": 6,
+          "unit": "hours",
+          "limit": "MINIMUM"
+        },
+        {
+          "activity": "LIGHT_ACTIVITY",
+          "amount": 2,
+          "unit": "hours",
+          "limit": "MAXIMUM"
+        }
+      ],
+      "interruptions": [
+        "INITIATIVE",
+        "NON_CANTRIP_SPELL",
+        "DAMAGE",
+        "PHYSICAL_EXERTION"
+      ],
+      "physicalExertionInterruptionHours": 1,
+      "interruptionOutcome": "RESUME_WITH_ADDED_DURATION",
+      "shortRestBenefitThresholdHours": 1,
+      "addedDurationPerInterruption": {
+        "amount": 1,
+        "unit": "hour"
+      },
+      "recoveryOutcomes": [
+        {
+          "kind": "RESTORE_ALL",
+          "resource": "HIT_POINTS"
+        },
+        {
+          "kind": "RESTORE_ALL",
+          "resource": "HIT_DICE"
+        },
+        {
+          "kind": "RESTORE_ALL",
+          "resource": "REDUCED_HIT_POINT_MAXIMUM"
+        },
+        {
+          "kind": "RESTORE_ALL",
+          "resource": "REDUCED_ABILITY_SCORES"
+        },
+        {
+          "kind": "REDUCE_CONDITION_LEVEL",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:exhaustion"
+          },
+          "levels": 1
+        },
+        {
+          "kind": "RECHARGE_AS_DEFINED_BY_FEATURE",
+          "resource": "CLASS_FEATURE",
+          "restType": "LONG_REST"
+        }
+      ],
+      "conditionDuringSleep": {
+        "targetType": "condition",
+        "id": "condition:xphb:unconscious"
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:unconscious"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:exhaustion"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:short-rest"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:initiative"
+    }
+  ]
+}

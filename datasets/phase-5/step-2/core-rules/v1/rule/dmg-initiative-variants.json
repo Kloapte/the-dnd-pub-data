@@ -1,0 +1,30 @@
+{
+  "id": "rule:dmg:initiative-variants",
+  "name": "Initiative Variants",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 270
+  },
+  "ruleType": "OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "initiative-score-variant",
+      "kind": "INITIATIVE_PROCEDURE",
+      "subtype": "INITIATIVE_SCORE",
+      "scoreConstruction": "PASSIVE_DEXTERITY_CHECK",
+      "base": 10,
+      "ability": "dexterity"
+    },
+    {
+      "componentId": "side-initiative",
+      "kind": "INITIATIVE_PROCEDURE",
+      "subtype": "SIDE_INITIATIVE",
+      "roll": "UNMODIFIED_D20",
+      "higherRollActsFirst": true,
+      "tieResolution": "REROLL_TIED_SIDES",
+      "membersChooseOrder": true,
+      "roundEndsAfterAllSidesAct": true,
+      "multipleSidesOrderedByRoll": true
+    }
+  ]
+}

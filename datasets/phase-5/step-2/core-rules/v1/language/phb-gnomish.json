@@ -1,0 +1,42 @@
+{
+  "id": "language:phb:gnomish",
+  "name": "Gnomish",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "citations": [
+      {
+        "source": "PHB",
+        "page": 35
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:gnomish"
+      }
+    ]
+  },
+  "category": "standard",
+  "script": "Dwarvish",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "humanoid"
+        ],
+        "tags": [
+          {
+            "group": "any race",
+            "value": "gnome"
+          }
+        ]
+      }
+    }
+  ]
+}

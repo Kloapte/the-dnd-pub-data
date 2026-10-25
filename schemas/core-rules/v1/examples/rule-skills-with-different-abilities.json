@@ -1,0 +1,47 @@
+{
+  "id": "rule:phb:skills-with-different-abilities",
+  "name": "Skills with Different Abilities",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 175
+  },
+  "ruleType": "VARIANT",
+  "mechanics": [
+    {
+      "componentId": "ability-variation",
+      "kind": "SKILL_PROCEDURE",
+      "subtype": "ABILITY_VARIATION",
+      "decisionMaker": "DM",
+      "eligibleRequester": "DM_OR_PLAYER",
+      "decision": "DISCRETIONARY",
+      "pairings": [
+        {
+          "skill": {
+            "targetType": "skill",
+            "id": "skill:phb:athletics"
+          },
+          "usualAbility": "strength",
+          "alternativeAbility": "constitution",
+          "context": "SWIMMING_STAMINA",
+          "status": "SOURCE_EXAMPLE"
+        },
+        {
+          "skill": {
+            "targetType": "skill",
+            "id": "skill:phb:intimidation"
+          },
+          "usualAbility": "charisma",
+          "alternativeAbility": "strength",
+          "context": "DISPLAY_OF_RAW_STRENGTH",
+          "status": "SOURCE_EXAMPLE"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:ability-check"
+    }
+  ]
+}

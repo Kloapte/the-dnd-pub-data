@@ -1,0 +1,22 @@
+{
+  "id": "language:mtf:kruthik",
+  "name": "Kruthik",
+  "sourceMetadata": {
+    "source": "MTF",
+    "page": 211
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mtf:young-kruthik"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mtf:adult-kruthik"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mtf:kruthik-hive-lord"
+    }
+  ]
+}

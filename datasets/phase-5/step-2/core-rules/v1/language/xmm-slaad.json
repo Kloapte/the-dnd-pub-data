@@ -1,0 +1,30 @@
+{
+  "id": "language:xmm:slaad",
+  "name": "Slaad",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 285
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:blue-slaad"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:death-slaad"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:gray-slaad"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:green-slaad"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:red-slaad"
+    }
+  ]
+}

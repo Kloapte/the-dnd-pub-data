@@ -1,0 +1,59 @@
+{
+  "id": "condition:phb:charmed",
+  "name": "Charmed",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 290,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "citations": [
+      {
+        "source": "RMR",
+        "page": 62
+      },
+      {
+        "source": "HftT",
+        "page": 48
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:charmed"
+      }
+    ]
+  },
+  "effects": [
+    {
+      "kind": "RELATIONAL_RESTRICTION",
+      "actor": "affected-creature",
+      "otherCreature": "charmer",
+      "prohibitedOperation": "attack",
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    },
+    {
+      "kind": "RELATIONAL_RESTRICTION",
+      "actor": "affected-creature",
+      "otherCreature": "charmer",
+      "prohibitedOperation": "harmful-ability-or-magical-effect",
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    },
+    {
+      "kind": "CHECK_ROLL_MODIFIER",
+      "roll": "ability-check",
+      "direction": "advantage",
+      "actor": "charmer",
+      "duration": "while-condition-active",
+      "applicability": {
+        "kind": "CHARMER_SOCIAL_INTERACTION",
+        "role": "charmer"
+      }
+    }
+  ]
+}

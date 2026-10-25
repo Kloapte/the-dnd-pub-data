@@ -1,0 +1,18 @@
+{
+  "id": "language:xmm:worg",
+  "name": "Worg",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 335
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:dire-worg"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:worg"
+    }
+  ]
+}

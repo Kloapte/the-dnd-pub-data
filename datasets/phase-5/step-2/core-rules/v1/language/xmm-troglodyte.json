@@ -1,0 +1,14 @@
+{
+  "id": "language:xmm:troglodyte",
+  "name": "Troglodyte",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 309
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:troglodyte"
+    }
+  ]
+}

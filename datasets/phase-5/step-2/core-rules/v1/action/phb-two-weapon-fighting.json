@@ -1,0 +1,45 @@
+{
+  "id": "action:phb:two-weapon-fighting",
+  "name": "Two-Weapon Fighting",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 195,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:two-weapon-fighting"
+      }
+    ]
+  },
+  "timing": {
+    "kind": "bonus-action"
+  },
+  "capabilities": [
+    "ATTACK_MELEE",
+    "ATTACK_RANGED"
+  ],
+  "operations": [
+    {
+      "kind": "ATTACK_RESOLUTION",
+      "attack": {
+        "kind": "ATTACK_ROLL",
+        "forms": [
+          "melee",
+          "ranged",
+          "weapon"
+        ],
+        "target": "creature"
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "action",
+      "id": "action:phb:attack"
+    }
+  ]
+}

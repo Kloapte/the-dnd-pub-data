@@ -1,0 +1,30 @@
+{
+  "id": "language:xmm:modron",
+  "name": "Modron",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 217
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:modron-duodrone"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:modron-monodrone"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:modron-pentadrone"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:modron-quadrone"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:modron-tridrone"
+    }
+  ]
+}

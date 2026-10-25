@@ -1,0 +1,22 @@
+{
+  "id": "language:ggr:merfolk",
+  "name": "Merfolk",
+  "sourceMetadata": {
+    "source": "GGR",
+    "page": 9
+  },
+  "category": "standard",
+  "script": "Merfolk",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "selector": {
+          "kind": "TAG",
+          "value": "any race;merfolk",
+          "source": "GGR"
+        }
+      }
+    }
+  ]
+}

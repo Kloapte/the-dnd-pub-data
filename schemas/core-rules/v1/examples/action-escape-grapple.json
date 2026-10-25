@@ -15,23 +15,49 @@
   "capabilities": [
     "ESCAPE_GRAPPLE"
   ],
+  "requirements": [
+    {
+      "kind": "condition",
+      "reference": {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled"
+      }
+    }
+  ],
   "operations": [
     {
       "kind": "CHECK_OR_CONTEST",
+      "operationId": "escape-grapple-check",
       "resolution": "against-dc",
       "actor": "acting-creature",
-      "abilities": [
-        "strength",
-        "dexterity"
+      "participants": [
+        {
+          "role": "acting-creature",
+          "selection": "PARTICIPANT_CHOOSES",
+          "options": [
+            {
+              "ability": "strength",
+              "skill": {
+                "targetType": "skill",
+                "id": "skill:xphb:athletics"
+              }
+            },
+            {
+              "ability": "dexterity",
+              "skill": {
+                "targetType": "skill",
+                "id": "skill:xphb:acrobatics"
+              }
+            }
+          ]
+        }
       ],
-      "abilitySelection": "acting-creature-chooses",
       "dcSource": {
         "targetType": "rule",
-        "id": "rule:xphb:grappling",
-        "relationship": "escape-dc-defined-by"
+        "id": "rule:xphb:unarmed-strike",
+        "relationship": "grapple-option-save-dc"
       },
       "failure": "no-effect",
-      "operationId": "escape-check",
       "target": "affected-creature"
     },
     {
@@ -42,11 +68,11 @@
       },
       "appliesWhen": {
         "kind": "CHECK_SUCCEEDED",
-        "operationId": "escape-check"
+        "operationId": "escape-grapple-check"
       },
-      "recipient": "affected-creature",
-      "actor": "affected-creature",
-      "operationId": "escape-condition"
+      "recipient": "acting-creature",
+      "actor": "acting-creature",
+      "operationId": "end-grappled-on-success"
     },
     {
       "kind": "END_CONDITION",
@@ -65,9 +91,9 @@
           }
         }
       },
-      "recipient": "affected-creature",
+      "recipient": "acting-creature",
       "actor": "grappler",
-      "operationId": "grappler-incapacitated"
+      "operationId": "end-grappled-if-grappler-incapacitated"
     },
     {
       "kind": "END_CONDITION",
@@ -84,8 +110,23 @@
           "range": "grapple"
         }
       },
-      "recipient": "affected-creature",
-      "operationId": "grapple-range-exceeded"
+      "recipient": "acting-creature",
+      "actor": "acting-creature",
+      "operationId": "end-grappled-if-out-of-range"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:grappled"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:incapacitated"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:unarmed-strike"
     }
   ]
 }

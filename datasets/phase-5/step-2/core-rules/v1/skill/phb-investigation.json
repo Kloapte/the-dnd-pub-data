@@ -1,0 +1,19 @@
+{
+  "id": "skill:phb:investigation",
+  "name": "Investigation",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 178,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:investigation"
+      }
+    ]
+  },
+  "ability": "intelligence"
+}

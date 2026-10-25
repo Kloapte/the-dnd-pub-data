@@ -1,0 +1,15 @@
+{
+  "id": "language:scag:rashemi",
+  "name": "Rashemi",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:frhof:rashemi"
+      }
+    ]
+  },
+  "script": "Thorass"
+}

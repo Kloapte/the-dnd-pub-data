@@ -1,0 +1,24 @@
+{
+  "id": "language:skt:bothii",
+  "name": "Bothii",
+  "sourceMetadata": {
+    "source": "SKT",
+    "page": 86,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:frhof:bothii"
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:skt:uthgardt-barbarian-leader"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:skt:uthgardt-shaman"
+    }
+  ]
+}

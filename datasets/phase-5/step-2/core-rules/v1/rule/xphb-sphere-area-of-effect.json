@@ -1,0 +1,27 @@
+{
+  "id": "rule:xphb:sphere-area-of-effect",
+  "name": "Sphere [Area of Effect]",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 374,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "sphere-shape",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "AREA_OF_EFFECT",
+      "shape": "sphere",
+      "origin": "point-in-space",
+      "originPlacement": "POINT_IN_SPACE",
+      "dimensionParameters": [
+        "RADIUS"
+      ],
+      "originIncluded": "INCLUDED"
+    }
+  ]
+}

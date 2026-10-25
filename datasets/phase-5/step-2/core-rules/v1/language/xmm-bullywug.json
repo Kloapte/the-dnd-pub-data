@@ -1,0 +1,18 @@
+{
+  "id": "language:xmm:bullywug",
+  "name": "Bullywug",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 64
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:bullywug-bog-sage"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:bullywug-warrior"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "language:phb:deep-speech",
+  "name": "Deep Speech",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:deep-speech"
+      }
+    ]
+  },
+  "category": "exotic"
+}

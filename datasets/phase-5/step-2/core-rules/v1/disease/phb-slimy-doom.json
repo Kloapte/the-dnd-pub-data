@@ -1,0 +1,37 @@
+{
+  "id": "disease:phb:slimy-doom",
+  "name": "Slimy Doom",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 227
+  },
+  "symptoms": [
+    {
+      "kind": "ABILITY_ROLL_MODIFIER",
+      "roll": "ability-check",
+      "direction": "disadvantage",
+      "ability": "constitution"
+    },
+    {
+      "kind": "ABILITY_ROLL_MODIFIER",
+      "roll": "saving-throw",
+      "direction": "disadvantage",
+      "ability": "constitution"
+    }
+  ],
+  "effects": [
+    {
+      "kind": "TRIGGERED_CONDITION",
+      "trigger": "ANY_DAMAGE",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:stunned"
+      },
+      "duration": {
+        "amount": 1,
+        "unit": "turn"
+      },
+      "endsAt": "END_OF_NEXT_TURN"
+    }
+  ]
+}

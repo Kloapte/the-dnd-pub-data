@@ -1,0 +1,27 @@
+{
+  "id": "rule:xphb:cube-area-of-effect",
+  "name": "Cube [Area of Effect]",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 364,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "cube-shape",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "AREA_OF_EFFECT",
+      "shape": "cube",
+      "origin": "point-in-space",
+      "originPlacement": "ANY_CUBE_FACE",
+      "dimensionParameters": [
+        "SIDE_LENGTH"
+      ],
+      "originIncluded": "EXCLUDED_UNLESS_CREATOR_CHOOSES"
+    }
+  ]
+}

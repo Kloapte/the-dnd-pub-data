@@ -1,0 +1,24 @@
+{
+  "id": "action:xphb:utilize",
+  "name": "Utilize",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 377,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "UTILIZE"
+  ],
+  "operations": [
+    {
+      "kind": "OBJECT_USE",
+      "operationId": "use-object",
+      "activationRequirement": "ACTION_REQUIRED_BY_OBJECT"
+    }
+  ]
+}

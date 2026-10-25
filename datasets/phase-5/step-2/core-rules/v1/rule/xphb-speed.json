@@ -1,0 +1,39 @@
+{
+  "id": "rule:xphb:speed",
+  "name": "Speed",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 374,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "special-speed-selection",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "SPECIAL_SPEEDS",
+      "procedure": "speed-selection",
+      "details": {
+        "kind": "SPECIAL_SPEED_SELECTION",
+        "canSwitchDuringMove": true,
+        "subtractDistanceAlreadyMoved": true,
+        "switchProhibitedWhenRemainingDistanceAtMost": 0
+      }
+    },
+    {
+      "componentId": "special-speed-adjustment",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "SPECIAL_SPEEDS",
+      "procedure": "speed-adjustment",
+      "details": {
+        "kind": "SPECIAL_SPEED_ADJUSTMENT",
+        "affectedSpeedTypes": "ALL_SPECIAL_SPEEDS",
+        "changeAmountRelationship": "EQUAL_TO_SPEED_CHANGE",
+        "durationRelationship": "SAME_DURATION"
+      }
+    }
+  ]
+}

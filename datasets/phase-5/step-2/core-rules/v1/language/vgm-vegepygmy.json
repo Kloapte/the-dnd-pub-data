@@ -1,0 +1,18 @@
+{
+  "id": "language:vgm:vegepygmy",
+  "name": "Vegepygmy",
+  "sourceMetadata": {
+    "source": "VGM",
+    "page": 196
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:vgm:vegepygmy"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:vgm:vegepygmy-chief"
+    }
+  ]
+}

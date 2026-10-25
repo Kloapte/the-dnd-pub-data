@@ -1,0 +1,21 @@
+{
+  "id": "language:psi:draconic",
+  "name": "Draconic",
+  "sourceMetadata": {
+    "source": "PSI",
+    "page": 9
+  },
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "dragon"
+        ],
+        "sources": [
+          "PSI"
+        ]
+      }
+    }
+  ]
+}

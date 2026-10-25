@@ -1,0 +1,65 @@
+{
+  "id": "condition:xphb:invisible",
+  "name": "Invisible",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 370,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "effects": [
+    {
+      "kind": "VISIBILITY_CAPABILITY",
+      "actor": "affected-creature",
+      "capability": "equipment-concealed"
+    },
+    {
+      "kind": "RELATIONAL_RESTRICTION",
+      "actor": "effect-creator",
+      "otherCreature": "affected-creature",
+      "prohibitedOperation": "target-creature-with-effect-requiring-sight",
+      "appliesWhen": {
+        "kind": "OBSERVER_CANNOT_SEE_AFFECTED",
+        "observer": "effect-creator"
+      }
+    },
+    {
+      "kind": "CHECK_ROLL_MODIFIER",
+      "roll": "initiative",
+      "direction": "advantage",
+      "actor": "affected-creature",
+      "duration": "while-condition-active",
+      "applicability": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "disadvantage",
+      "actor": "attacker",
+      "target": "affected-creature",
+      "appliesWhen": "attack-targets-affected",
+      "duration": "while-condition-active",
+      "applicability": {
+        "kind": "OBSERVER_CANNOT_SEE_AFFECTED",
+        "observer": "attacker"
+      }
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "advantage",
+      "actor": "affected-creature",
+      "target": "target",
+      "appliesWhen": "affected-creature-attacks",
+      "duration": "while-condition-active",
+      "applicability": {
+        "kind": "OBSERVER_CANNOT_SEE_AFFECTED",
+        "observer": "target"
+      }
+    }
+  ]
+}

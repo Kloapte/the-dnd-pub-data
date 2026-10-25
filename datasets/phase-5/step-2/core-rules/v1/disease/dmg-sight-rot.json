@@ -1,0 +1,89 @@
+{
+  "id": "disease:dmg:sight-rot",
+  "name": "Sight Rot",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 257,
+    "flags": {
+      "srd": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "disease",
+        "id": "disease:xdmg:sight-rot"
+      }
+    ]
+  },
+  "infection": {
+    "transmission": [
+      "ingestion"
+    ],
+    "savingThrow": {
+      "ability": "constitution",
+      "dc": 15
+    }
+  },
+  "incubation": {
+    "amount": 1,
+    "unit": "day"
+  },
+  "symptoms": [
+    {
+      "kind": "SENSE_IMPAIRMENT",
+      "sense": "sight"
+    }
+  ],
+  "effects": [
+    {
+      "kind": "ROLL_MODIFIER_TRACK",
+      "rolls": [
+        "ATTACK",
+        "ABILITY_CHECK"
+      ],
+      "amount": -1,
+      "requiresSense": "SIGHT",
+      "trigger": "LONG_REST_COMPLETED",
+      "step": -1,
+      "threshold": -5,
+      "appliesConditionAtThreshold": {
+        "targetType": "condition",
+        "id": "condition:phb:blinded"
+      },
+      "startsAfterSymptomOnset": true,
+      "conditionUntil": "SIGHT_RESTORED_BY_MAGIC"
+    }
+  ],
+  "recovery": [
+    {
+      "method": "treatment",
+      "treatment": {
+        "kind": "HERBALISM_KIT_OINTMENT",
+        "action": "apply-to-eyes-before-long-rest",
+        "outcome": "PREVENTS_NEXT_PROGRESSION",
+        "preventsNextLongRestProgression": true,
+        "usesRequired": 1,
+        "requiresProficiency": "HERBALISM_KIT",
+        "preparationTime": {
+          "amount": 1,
+          "unit": "hour"
+        },
+        "material": "EYEBRIGHT"
+      }
+    },
+    {
+      "method": "treatment",
+      "treatment": {
+        "kind": "HERBALISM_KIT_OINTMENT",
+        "action": "apply-to-eyes-before-long-rest",
+        "outcome": "ENDS_DISEASE",
+        "usesRequired": 3,
+        "requiresProficiency": "HERBALISM_KIT",
+        "preparationTime": {
+          "amount": 1,
+          "unit": "hour"
+        },
+        "material": "EYEBRIGHT"
+      }
+    }
+  ]
+}

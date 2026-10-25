@@ -1,0 +1,71 @@
+{
+  "id": "rule:xge:sleep",
+  "name": "Sleep",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 77
+  },
+  "ruleType": "OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "sleeping-in-armor-rest-limit",
+      "kind": "REST_PROCEDURE",
+      "subtype": "LONG_REST",
+      "duration": 8,
+      "unit": "hours",
+      "recoveryLimitations": [
+        {
+          "appliesWhen": "SLEEPING_IN_MEDIUM_OR_HEAVY_ARMOR",
+          "limitedOutcome": {
+            "kind": "RESTORE_FRACTION",
+            "resource": "HIT_DICE",
+            "numerator": 1,
+            "denominator": 4,
+            "minimum": 1,
+            "rounding": "DOWN"
+          }
+        },
+        {
+          "appliesWhen": "SLEEPING_IN_MEDIUM_OR_HEAVY_ARMOR",
+          "limitedOutcome": {
+            "kind": "NO_CONDITION_LEVEL_REDUCTION",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:phb:exhaustion"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "componentId": "sleep-deprivation-procedure",
+      "kind": "REST_PROCEDURE",
+      "subtype": "LONG_REST",
+      "duration": 24,
+      "unit": "hours",
+      "deprivationProcedure": {
+        "intervalHours": 24,
+        "savingThrow": {
+          "ability": "constitution",
+          "baseDc": 10,
+          "increasePerConsecutiveInterval": 5
+        },
+        "failureOutcome": {
+          "kind": "INCREASE_CONDITION_LEVEL",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:exhaustion"
+          },
+          "levels": 1
+        },
+        "dcResetOnLongRest": true
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "condition",
+      "id": "condition:phb:exhaustion"
+    }
+  ]
+}

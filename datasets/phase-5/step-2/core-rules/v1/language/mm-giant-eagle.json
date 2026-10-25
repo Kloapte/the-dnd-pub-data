@@ -1,0 +1,14 @@
+{
+  "id": "language:mm:giant-eagle",
+  "name": "Giant Eagle",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 324
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:giant-eagle"
+    }
+  ]
+}

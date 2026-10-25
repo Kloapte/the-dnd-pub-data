@@ -1,0 +1,20 @@
+{
+  "id": "language:mm:worg",
+  "name": "Worg",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 341,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xmm:worg"
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:worg"
+    }
+  ]
+}

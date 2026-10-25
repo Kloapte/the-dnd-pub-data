@@ -1,0 +1,12 @@
+{
+  "id": "skill:xphb:intimidation",
+  "name": "Intimidation",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 14,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "ability": "charisma"
+}

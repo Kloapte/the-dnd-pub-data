@@ -36,7 +36,8 @@
         "formula": "fixed",
         "base": 10
       },
-      "failure": "status-ends"
+      "failure": "status-ends",
+      "requirement": "dm-may-require"
     },
     {
       "kind": "ENDING_CONDITION",

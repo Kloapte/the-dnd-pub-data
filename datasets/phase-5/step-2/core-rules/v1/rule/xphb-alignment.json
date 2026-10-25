@@ -1,0 +1,13 @@
+{
+  "id": "rule:xphb:alignment",
+  "name": "Alignment",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 360,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE"
+}

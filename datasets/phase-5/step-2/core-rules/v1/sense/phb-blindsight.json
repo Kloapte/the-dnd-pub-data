@@ -1,0 +1,24 @@
+{
+  "id": "sense:phb:blindsight",
+  "name": "Blindsight",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 183,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "sense",
+        "id": "sense:xphb:blindsight"
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "kind": "NONVISUAL_PERCEPTION",
+      "medium": "other"
+    }
+  ]
+}

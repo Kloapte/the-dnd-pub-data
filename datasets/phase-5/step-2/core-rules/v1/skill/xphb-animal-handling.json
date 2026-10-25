@@ -1,0 +1,12 @@
+{
+  "id": "skill:xphb:animal-handling",
+  "name": "Animal Handling",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 14,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "ability": "wisdom"
+}

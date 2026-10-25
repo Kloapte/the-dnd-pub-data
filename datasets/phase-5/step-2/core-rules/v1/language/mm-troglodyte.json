@@ -1,0 +1,20 @@
+{
+  "id": "language:mm:troglodyte",
+  "name": "Troglodyte",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 290,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xmm:troglodyte"
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:troglodyte"
+    }
+  ]
+}

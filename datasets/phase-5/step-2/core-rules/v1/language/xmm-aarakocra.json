@@ -1,0 +1,18 @@
+{
+  "id": "language:xmm:aarakocra",
+  "name": "Aarakocra",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 10
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:aarakocra-aeromancer"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:aarakocra-skirmisher"
+    }
+  ]
+}

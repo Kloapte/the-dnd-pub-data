@@ -1,0 +1,20 @@
+{
+  "id": "language:idrotf:loross",
+  "name": "Loross",
+  "sourceMetadata": {
+    "source": "IDRotF",
+    "page": 221
+  },
+  "script": "Draconic",
+  "intelligibility": [
+    {
+      "kind": "MUTUAL_INTELLIGIBILITY",
+      "mode": "SPOKEN",
+      "directionality": "MUTUAL",
+      "language": {
+        "targetType": "language",
+        "id": "language:phb:elvish"
+      }
+    }
+  ]
+}

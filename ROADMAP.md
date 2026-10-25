@@ -67,6 +67,8 @@ Each normalization domain in Steps 1–Z follows the six-phase normalization wor
 
 Every phase is a separate milestone requiring approval before proceeding.
 
+Beginning with Step 3, Phase 1 must complete full-catalog semantic discovery before Phase 2 schema design. This prospective workflow change does not reopen or alter approval states for Steps 1 or 2.
+
 Coordinating domains within a step preserves separate cohesive domain contracts and all phase approval checkpoints. Step 6 applies the same six phases to incremental enrichment of existing spells, with contract changes reviewed before conversion.
 
 The approved roadmap sequence and scope remain unchanged. Step 0 is complete and approved. Step 1 is complete and approved through all six phases. Step 2, Phase 1 is complete and awaiting review; Phase 2 and all later work remain subject to their approval checkpoints.
@@ -109,6 +111,8 @@ Account for all source domains and ancillary arrays. Unlisted sources are not au
 ### Objective
 
 Understand the source structures, their game semantics, dependencies, and potential canonical domain models before designing contracts or generating normalized data.
+
+Analyze every in-scope source record. Structural enumeration and semantic interpretation are related but distinct: scripts may inventory records and structural variants, while Codex directly interprets each record's meaningful mechanics. This is discovery, not canonical conversion.
 
 This phase is primarily investigative. Do not modify production code, approved schemas, or normalized datasets.
 
@@ -159,6 +163,24 @@ Distinguish source facts from interpretations. Do not infer unsupported values.
 Determine whether full semantic enrichment is feasible for the domain.
 
 If semantic normalization would introduce excessive complexity, unreliable assumptions, or disproportionate maintenance costs, explain the issue and propose an alternative for approval.
+
+Semantic discovery covers the full in-scope catalog, not a representative sample. For every source record, inspect its structure and mechanically meaningful nested entries and clauses; identify mechanic families, variants, prerequisites, triggers, targets, effects, outcomes, durations, exceptions, interactions, source and edition differences, references, external dependencies, ambiguities, missing information, and unusual mechanics that may require specialized representation. Do not generate canonical records during Phase 1.
+
+#### 1.2.1 Catalog-wide mechanic-pattern inventory
+
+Include a coverage matrix that accounts for every in-scope source record and records, for each observed pattern:
+
+- Mechanic family and descriptive name.
+- Source records and exact source paths.
+- Occurrence count.
+- Source-backed semantic description.
+- Significant variants and exceptions.
+- Cross-domain dependencies.
+- Ambiguities or unavailable source information.
+- Candidate reusable canonical representation.
+- Representative common, difficult, and unusual examples.
+
+Record a pattern as unresolved with its source evidence when it cannot be classified reliably. Do not invent a classification or interpretation. This inventory supports contract design; it is not a canonical dataset.
 
 ### 1.3 Dependency analysis
 
@@ -267,6 +289,10 @@ Include representative source examples where useful.
 
 The analysis must provide sufficient information to make an informed decision about the canonical model.
 
+### Phase 1 approval gate
+
+Phase 1 is not ready for approval from structural inventory alone. Review catalog completeness, mechanic-family coverage, unusual and complex cases, external dependencies, source ambiguities, and proposed model boundaries. If the catalog requires multiple discovery batches, review them incrementally; Phase 1 is complete only after every in-scope record has been semantically analyzed. Do not substitute statistical sampling for full-catalog discovery.
+
 **Approval checkpoint:** Stop and request approval before proceeding to Phase 2.
 
 ---
@@ -295,6 +321,10 @@ Design the canonical domain model and its JSON Schema contracts based on the app
 - Document mappings between source structures and canonical properties.
 - Evaluate compatibility with existing normalized models.
 - Validate the schemas and examples.
+- Evaluate every mechanic family in the complete, approved Phase 1 inventory. Classify each as `SUPPORTED`, `DEFERRED`, `SOURCE_AMBIGUOUS`, `UNSUPPORTED`, or `OUT_OF_SCOPE` in analysis records only; these classifications are not canonical JSON fields.
+- Produce a source-to-schema coverage matrix listing each mechanic family, proposed schema definition or field, source examples, expected representation, known limitations, dependencies, and estimated affected record count.
+- Assess common mechanics, rare mechanics, outliers, and complex combinations. Address observed requirements without adding speculative capabilities.
+- Provide examples for major mechanic families and difficult combinations to test schema expressiveness; examples are not full dataset conversion.
 
 Do not introduce speculative fields unsupported by the source or approved domain design.
 
@@ -310,6 +340,8 @@ Do not begin source conversion during this phase.
 
 Store machine-readable schemas in the designated schema directory and system documentation under `/doc`.
 
+Phase 2 is not ready for approval until the proposed contracts have been evaluated against the complete approved Phase 1 inventory and every discovered family has an explicit coverage disposition.
+
 **Approval checkpoint:** Stop and request approval before proceeding to Phase 3.
 
 ---
@@ -322,11 +354,10 @@ Validate the proposed contracts by converting a small, representative set of sou
 
 ### Activities
 
-- Select representative source entries.
-- Include common structures and meaningful submodel variations.
-- Include optional properties and conditional structures.
-- Include known edge cases and outliers.
-- Include entries with dependencies and references.
+- Keep conversion small and reviewable; select entries using the Phase 1 pattern inventory and Phase 2 coverage matrix.
+- Include common mechanics, distinct families, interacting mechanics, edition differences, known outliers, cross-domain references, and ambiguous or partially representable cases.
+- Include optional properties, conditional structures, and meaningful submodel variations.
+- Use the sample to test contract breadth, not only straightforward cases.
 - Convert the selected entries into canonical JSON.
 - Apply semantic enrichment according to the approved model.
 - Preserve source identity, references, and provenance.
@@ -366,6 +397,8 @@ Verify that the proposed domain model accurately and maintainably represents the
 - Assess the maintainability of the generated models.
 - Propose contract improvements where necessary.
 - Repeat representative conversion and validation after approved changes.
+- Compare representative results against the catalog-wide coverage matrix and verify that discovered mechanics are represented, deferred, unsupported, or ambiguous as approved.
+- Obtain human approval for significant contract changes; validation findings do not authorize silent schema changes.
 
 Schema compliance alone does not establish semantic correctness.
 
@@ -386,7 +419,7 @@ Continue the feedback loop until the representative conversion is accepted.
 
 ## Phase 5 — Dataset expansion
 
-**Status:** Completed and approved. The canonical Source dataset is stored at `src/main/resources/normalized/sources/sources.json`; provenance, conversion tooling, and reports remain outside runtime resources.
+**Status:** Step 2 Core Rules Foundation Phase 5 is authorized and in progress; 99 of 554 non-representative source records have been examined. Disease contracts and all 29 Disease records have been refined and are awaiting human review; expansion of the remaining domains has not resumed. Phase 5 is not approved. The previously completed Source Registry dataset remains a separate approved artifact.
 
 ### Objective
 
@@ -405,6 +438,7 @@ Normalize the remaining source entries using the approved contracts and interpre
 - Detect unexpected source structures and new semantic variations.
 - Preserve previously approved interpretations.
 - Report significant contract problems before introducing changes.
+- If recurring gaps indicate a deficient Phase 1 inventory or Phase 2 contract, document source evidence and request approval for targeted refinement. Do not restart earlier phases automatically or expand an approved schema silently.
 - Perform final coverage and integrity validation.
 
 Do not silently omit entries that cannot be normalized.

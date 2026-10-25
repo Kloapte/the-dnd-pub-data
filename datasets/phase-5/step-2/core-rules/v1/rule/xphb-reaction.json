@@ -1,0 +1,30 @@
+{
+  "id": "rule:xphb:reaction",
+  "name": "Reaction",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 372,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "action",
+      "id": "action:xphb:opportunity-attack",
+      "relationship": "universally-available-reaction"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:action",
+      "relationship": "same-turn-action-coexistence"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:bonus-action",
+      "relationship": "same-turn-bonus-action-coexistence"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "language:ggr:sphinx",
+  "name": "Sphinx",
+  "sourceMetadata": {
+    "source": "GGR",
+    "page": 9
+  },
+  "category": "standard",
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:ggr:sphinx-of-judgment"
+    }
+  ]
+}

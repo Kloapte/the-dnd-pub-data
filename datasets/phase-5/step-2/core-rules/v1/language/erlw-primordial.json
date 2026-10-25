@@ -1,0 +1,23 @@
+{
+  "id": "language:erlw:primordial",
+  "name": "Primordial",
+  "sourceMetadata": {
+    "source": "ERLW",
+    "page": 6
+  },
+  "category": "exotic",
+  "script": "Primordial",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "elemental"
+        ],
+        "sources": [
+          "ERLW"
+        ]
+      }
+    }
+  ]
+}

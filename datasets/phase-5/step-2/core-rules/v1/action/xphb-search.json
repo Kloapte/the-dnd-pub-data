@@ -1,0 +1,93 @@
+{
+  "id": "action:xphb:search",
+  "name": "Search",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 373,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "SEARCH"
+  ],
+  "references": [
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:insight"
+    },
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:medicine"
+    },
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:perception"
+    },
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:survival"
+    }
+  ],
+  "operations": [
+    {
+      "kind": "CHECK_OR_CONTEST",
+      "operationId": "search-check",
+      "resolution": "against-dc",
+      "actor": "acting-creature",
+      "abilities": [
+        "wisdom"
+      ],
+      "dc": {
+        "kind": "EFFECT_DEFINED"
+      },
+      "requirement": "ALWAYS_REQUIRED",
+      "target": "target"
+    }
+  ],
+  "skillTaskGuidance": [
+    {
+      "kind": "SKILL_TASK_GUIDANCE",
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:xphb:insight"
+      },
+      "tasks": [
+        "CREATURE_STATE_OF_MIND"
+      ]
+    },
+    {
+      "kind": "SKILL_TASK_GUIDANCE",
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:xphb:medicine"
+      },
+      "tasks": [
+        "AILMENT_OR_CAUSE_OF_DEATH"
+      ]
+    },
+    {
+      "kind": "SKILL_TASK_GUIDANCE",
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:xphb:perception"
+      },
+      "tasks": [
+        "CONCEALED_CREATURE_OR_OBJECT"
+      ]
+    },
+    {
+      "kind": "SKILL_TASK_GUIDANCE",
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:xphb:survival"
+      },
+      "tasks": [
+        "TRACKS_OR_FOOD"
+      ]
+    }
+  ]
+}

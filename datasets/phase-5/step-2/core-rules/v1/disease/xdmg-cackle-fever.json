@@ -1,0 +1,176 @@
+{
+  "id": "disease:xdmg:cackle-fever",
+  "name": "Cackle Fever",
+  "sourceMetadata": {
+    "source": "XDMG",
+    "page": 61,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "applicability": {
+    "targetCreatureTypes": [
+      "humanoid"
+    ],
+    "excludedTargets": [
+      {
+        "targetType": "race",
+        "id": "race:phb:gnome"
+      }
+    ]
+  },
+  "infection": {
+    "exposures": [
+      {
+        "kind": "INGEST_TAINTED_MATERIAL",
+        "material": "POTION_OR_ELIXIR",
+        "event": "INGESTED",
+        "outcome": "INFECTION"
+      },
+      {
+        "kind": "INFECTED_CREATURE_PROXIMITY",
+        "distanceFeet": 10,
+        "trigger": "START_TURN_WITHIN_DISTANCE",
+        "sourceState": "INFECTED",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 10
+        },
+        "onFailure": "INFECTION",
+        "onSuccessImmunity": {
+          "kind": "DISEASE_IMMUNITY",
+          "scope": "EXPOSING_CREATURE",
+          "duration": {
+            "amount": 24,
+            "unit": "hour"
+          }
+        },
+        "targetCreatureTypes": [
+          "humanoid"
+        ],
+        "excludedTargets": [
+          {
+            "targetType": "race",
+            "id": "race:phb:gnome"
+          }
+        ]
+      }
+    ]
+  },
+  "incubation": {
+    "kind": "DICE_ROLL",
+    "count": 1,
+    "die": 4,
+    "unit": "day"
+  },
+  "symptoms": [
+    {
+      "kind": "CONDITION_LEVEL_CHANGE",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:exhaustion"
+      },
+      "amount": 1,
+      "cannotReduceUntilDiseaseEnds": true
+    },
+    {
+      "kind": "TEMPORARY_CONDITION",
+      "activation": "triggered-by-progression",
+      "symptomId": "mad-laughter",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:incapacitated"
+      },
+      "duration": {
+        "amount": 1,
+        "unit": "minute"
+      },
+      "repeatSaveToEnd": {
+        "ability": "constitution",
+        "dc": 13,
+        "trigger": "end-of-each-turn",
+        "dcTrackId": "cackle-fever-dc"
+      },
+      "automaticSuccessAfter": {
+        "amount": 1,
+        "unit": "minute"
+      }
+    }
+  ],
+  "progression": [
+    {
+      "kind": "SAVING_THROW_BRANCH",
+      "branchId": "damage-triggered-laughter-save",
+      "trigger": {
+        "kind": "DAMAGE_WHILE_CONDITION_ACTIVE",
+        "damageType": "ANY_EXCEPT_PSYCHIC",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:exhaustion"
+        }
+      },
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 13,
+        "dcTrackId": "cackle-fever-dc"
+      },
+      "onSuccess": [
+        {
+          "kind": "NO_EFFECT"
+        }
+      ],
+      "onFailure": [
+        {
+          "kind": "DAMAGE",
+          "count": 1,
+          "die": 10,
+          "damageType": "psychic"
+        },
+        {
+          "kind": "START_SYMPTOM",
+          "symptomId": "mad-laughter"
+        }
+      ]
+    },
+    {
+      "kind": "SAVING_THROW_BRANCH",
+      "branchId": "long-rest-recovery",
+      "trigger": {
+        "kind": "LONG_REST_COMPLETED",
+        "phase": "AFTER_INFECTION"
+      },
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 13
+      },
+      "onSuccess": [
+        {
+          "kind": "NO_EFFECT"
+        }
+      ],
+      "onFailure": [
+        {
+          "kind": "NO_EFFECT"
+        }
+      ],
+      "outcomeCounter": {
+        "branchId": "long-rest-recovery",
+        "countedOutcome": "SUCCESS",
+        "threshold": 3,
+        "sequence": "UNSPECIFIED_BY_SOURCE",
+        "reset": "UNSPECIFIED_BY_SOURCE",
+        "onThreshold": {
+          "kind": "END_DISEASE"
+        },
+        "immunityAfterRecovery": {
+          "kind": "DISEASE_IMMUNITY",
+          "scope": "DISEASE",
+          "duration": {
+            "amount": 1,
+            "unit": "year"
+          }
+        }
+      }
+    }
+  ]
+}

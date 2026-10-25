@@ -1,0 +1,26 @@
+{
+  "id": "language:xmm:gnoll",
+  "name": "Gnoll",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 141
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:gnoll-demoniac"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:gnoll-fang-of-yeenoghu"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:gnoll-pack-lord"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:gnoll-warrior"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "language:scag:guran",
+  "name": "Guran",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112
+  },
+  "script": "Thorass",
+  "origin": [
+    {
+      "targetType": "language",
+      "id": "language:scag:roushoum"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:rashemi"
+    }
+  ]
+}

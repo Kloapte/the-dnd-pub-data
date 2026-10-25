@@ -1,0 +1,48 @@
+{
+  "id": "rule:phb:downtime-activity-recuperating",
+  "name": "Downtime Activity: Recuperating",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 187
+  },
+  "mechanics": [
+    {
+      "componentId": "recuperating-activity",
+      "kind": "DOWNTIME_PROCEDURE",
+      "subtype": "ACTIVITY",
+      "procedure": "recuperate",
+      "duration": {
+        "amount": 3,
+        "unit": "day"
+      },
+      "savingThrow": {
+        "componentId": "recuperating-save",
+        "kind": "D20_TEST",
+        "subtype": "SAVING_THROW",
+        "savingThrow": {
+          "kind": "SAVING_THROW",
+          "abilities": [
+            "constitution"
+          ],
+          "abilitySelection": "rule-specified",
+          "dc": {
+            "kind": "FIXED",
+            "value": 15
+          }
+        }
+      },
+      "recoveryOutcomes": [
+        {
+          "kind": "END_EFFECT",
+          "effect": "PREVENTS_HIT_POINT_RECOVERY"
+        },
+        {
+          "kind": "ADVANTAGE_ON_SAVES",
+          "effect": "DISEASE_OR_POISON_RECOVERY",
+          "durationHours": 24
+        }
+      ],
+      "recoverySelection": "CHOOSE_ONE_ON_SUCCESS"
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "id": "action:xphb:study",
+  "name": "Study",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 375,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "STUDY"
+  ],
+  "references": [
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:arcana"
+    },
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:history"
+    },
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:investigation"
+    },
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:nature"
+    },
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:religion"
+    }
+  ],
+  "operations": [
+    {
+      "kind": "CHECK_OR_CONTEST",
+      "operationId": "study-check",
+      "resolution": "against-dc",
+      "actor": "acting-creature",
+      "abilities": [
+        "intelligence"
+      ],
+      "dc": {
+        "kind": "EFFECT_DEFINED"
+      },
+      "requirement": "ALWAYS_REQUIRED",
+      "target": "target"
+    }
+  ],
+  "skillTaskGuidance": [
+    {
+      "kind": "SKILL_TASK_GUIDANCE",
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:xphb:arcana"
+      },
+      "tasks": [
+        "SPELLS",
+        "MAGIC_ITEMS",
+        "ELDRITCH_SYMBOLS",
+        "MAGICAL_TRADITIONS",
+        "PLANES_OF_EXISTENCE"
+      ],
+      "creatureGroups": [
+        "ABERRATIONS",
+        "CONSTRUCTS",
+        "ELEMENTALS",
+        "FEY",
+        "MONSTROSITIES"
+      ]
+    },
+    {
+      "kind": "SKILL_TASK_GUIDANCE",
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:xphb:history"
+      },
+      "tasks": [
+        "HISTORIC_EVENTS_AND_PEOPLE",
+        "ANCIENT_CIVILIZATIONS",
+        "WARS"
+      ],
+      "creatureGroups": [
+        "GIANTS",
+        "HUMANOIDS"
+      ]
+    },
+    {
+      "kind": "SKILL_TASK_GUIDANCE",
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:xphb:investigation"
+      },
+      "tasks": [
+        "TRAPS",
+        "CIPHERS",
+        "RIDDLES",
+        "GADGETRY"
+      ]
+    },
+    {
+      "kind": "SKILL_TASK_GUIDANCE",
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:xphb:nature"
+      },
+      "tasks": [
+        "TERRAIN",
+        "FLORA",
+        "WEATHER"
+      ],
+      "creatureGroups": [
+        "BEASTS",
+        "DRAGONS",
+        "OOZES",
+        "PLANTS"
+      ]
+    },
+    {
+      "kind": "SKILL_TASK_GUIDANCE",
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:xphb:religion"
+      },
+      "tasks": [
+        "DEITIES",
+        "RELIGIOUS_HIERARCHIES_AND_RITES",
+        "HOLY_SYMBOLS",
+        "CULTS"
+      ],
+      "creatureGroups": [
+        "CELESTIALS",
+        "FIENDS",
+        "UNDEAD"
+      ]
+    }
+  ]
+}

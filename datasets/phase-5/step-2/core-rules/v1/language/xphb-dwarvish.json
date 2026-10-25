@@ -1,0 +1,13 @@
+{
+  "id": "language:xphb:dwarvish",
+  "name": "Dwarvish",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 37,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "standard"
+}

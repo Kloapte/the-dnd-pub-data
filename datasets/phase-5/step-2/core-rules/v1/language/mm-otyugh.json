@@ -1,0 +1,20 @@
+{
+  "id": "language:mm:otyugh",
+  "name": "Otyugh",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 248,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xmm:otyugh"
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:otyugh"
+    }
+  ]
+}

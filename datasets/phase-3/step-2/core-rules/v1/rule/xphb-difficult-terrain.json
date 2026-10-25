@@ -9,6 +9,7 @@
       "basicRules2024": true
     }
   },
+  "ruleType": "CORE",
   "mechanics": [
     {
       "componentId": "difficult-terrain",
@@ -16,7 +17,41 @@
       "subtype": "DIFFICULT_TERRAIN",
       "procedure": "movement-cost",
       "extraFeetPerFoot": 1,
-      "cumulative": false
+      "cumulative": false,
+      "qualifyingSpaces": [
+        {
+          "kind": "CREATURE_PRESENCE",
+          "restriction": "not-tiny-and-not-ally"
+        },
+        {
+          "kind": "FURNITURE_SIZE",
+          "size": "same-or-larger-than-creature"
+        },
+        {
+          "kind": "SURFACE_MATERIAL",
+          "materials": [
+            "heavy-snow",
+            "ice",
+            "rubble",
+            "undergrowth"
+          ]
+        },
+        {
+          "kind": "LIQUID_DEPTH",
+          "depth": "shin-to-waist"
+        },
+        {
+          "kind": "NARROW_OPENING",
+          "size": "one-size-smaller-than-creature"
+        },
+        {
+          "kind": "SLOPE",
+          "minimumDegrees": 20
+        },
+        {
+          "kind": "DM_ADJUDICATED_SIMILAR"
+        }
+      ]
     }
   ]
 }

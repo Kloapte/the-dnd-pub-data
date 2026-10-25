@@ -1,0 +1,34 @@
+{
+  "id": "rule:xphb:emanation-area-of-effect",
+  "name": "Emanation [Area of Effect]",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 366,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "emanation-shape",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "AREA_OF_EFFECT",
+      "shape": "emanation",
+      "origin": "source",
+      "originPlacement": "CREATURE_OR_OBJECT",
+      "dimensionParameters": [
+        "EXTENT"
+      ],
+      "originIncluded": "EXCLUDED_UNLESS_CREATOR_CHOOSES",
+      "originBehavior": {
+        "kind": "EMANATION",
+        "followsOriginUnless": [
+          "INSTANTANEOUS",
+          "STATIONARY"
+        ]
+      }
+    }
+  ]
+}

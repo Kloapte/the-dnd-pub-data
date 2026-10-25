@@ -1,0 +1,41 @@
+{
+  "id": "rule:xphb:disadvantage",
+  "name": "Disadvantage",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 366,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "disadvantage",
+      "kind": "D20_TEST",
+      "subtype": "TEST_MODIFIER",
+      "modifier": {
+        "kind": "D20_ROLL_MODIFIER",
+        "roll": "d20-test",
+        "direction": "disadvantage",
+        "diceCount": 2,
+        "select": "lower",
+        "cancelsOpposite": true,
+        "multipleInstancesStack": false
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:d20-test",
+      "relationship": "modifies"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:advantage",
+      "relationship": "cancels-with"
+    }
+  ]
+}

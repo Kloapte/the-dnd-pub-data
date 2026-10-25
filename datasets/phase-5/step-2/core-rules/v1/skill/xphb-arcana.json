@@ -1,0 +1,12 @@
+{
+  "id": "skill:xphb:arcana",
+  "name": "Arcana",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 14,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "ability": "intelligence"
+}

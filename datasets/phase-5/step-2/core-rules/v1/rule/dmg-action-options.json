@@ -1,0 +1,41 @@
+{
+  "id": "rule:dmg:action-options",
+  "name": "Action Options",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 271
+  },
+  "ruleType": "OPTIONAL",
+  "references": [
+    {
+      "targetType": "action",
+      "id": "action:dmg:climb-onto-a-bigger-creature",
+      "relationship": "optional-action-procedure"
+    },
+    {
+      "targetType": "action",
+      "id": "action:dmg:disarm",
+      "relationship": "optional-action-procedure"
+    },
+    {
+      "targetType": "action",
+      "id": "action:dmg:mark",
+      "relationship": "optional-action-procedure"
+    },
+    {
+      "targetType": "action",
+      "id": "action:dmg:overrun",
+      "relationship": "optional-action-procedure"
+    },
+    {
+      "targetType": "action",
+      "id": "action:dmg:shove-aside",
+      "relationship": "optional-action-procedure"
+    },
+    {
+      "targetType": "action",
+      "id": "action:dmg:tumble",
+      "relationship": "optional-action-procedure"
+    }
+  ]
+}

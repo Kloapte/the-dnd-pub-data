@@ -1,0 +1,13 @@
+{
+  "id": "rule:xphb:improvised-weapons",
+  "name": "Improvised Weapons",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 369,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE"
+}

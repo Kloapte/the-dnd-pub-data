@@ -1,0 +1,22 @@
+{
+  "id": "language:xmm:sahuagin",
+  "name": "Sahuagin",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 265
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:sahuagin-baron"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:sahuagin-priest"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:sahuagin-warrior"
+    }
+  ]
+}

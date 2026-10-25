@@ -1,0 +1,105 @@
+{
+  "id": "disease:xdmg:sight-rot",
+  "name": "Sight Rot",
+  "sourceMetadata": {
+    "source": "XDMG",
+    "page": 61,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "infection": {
+    "transmission": [
+      "ingestion"
+    ],
+    "savingThrow": {
+      "ability": "constitution",
+      "dc": 15
+    },
+    "exposures": [
+      {
+        "kind": "INGEST_CONTAMINATED_MATERIAL",
+        "material": "WATER",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 15
+        },
+        "onFailure": "INFECTION",
+        "targetCreatureTypes": [
+          "beast",
+          "humanoid"
+        ]
+      },
+      {
+        "kind": "CONTACT_WITH_INFECTED_CREATURE",
+        "contact": "SKIN",
+        "sourceState": "INFECTED",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 15
+        },
+        "onFailure": "INFECTION",
+        "eligibleCreatureTypes": [
+          "humanoid"
+        ],
+        "onSuccessImmunity": {
+          "kind": "DISEASE_IMMUNITY",
+          "scope": "EXPOSING_CREATURE",
+          "duration": {
+            "amount": 24,
+            "unit": "hour"
+          }
+        }
+      }
+    ]
+  },
+  "symptoms": [
+    {
+      "kind": "CONDITION",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:blinded"
+      }
+    }
+  ],
+  "recovery": [
+    {
+      "method": "spell",
+      "reference": {
+        "targetType": "spell",
+        "id": "spell:xphb:heal",
+        "relationship": "cures-disease"
+      }
+    },
+    {
+      "method": "spell",
+      "reference": {
+        "targetType": "spell",
+        "id": "spell:xphb:lesser-restoration",
+        "relationship": "cures-disease"
+      }
+    },
+    {
+      "method": "treatment",
+      "treatment": {
+        "kind": "HERBALISM_KIT_OINTMENT",
+        "action": "apply-to-eyes",
+        "outcome": "SUPPRESSES_DISEASE",
+        "usesRequired": 3,
+        "duration": {
+          "amount": 24,
+          "unit": "hour"
+        },
+        "totalDurationRequired": {
+          "amount": 72,
+          "unit": "hour"
+        },
+        "requiresProficiency": "HERBALISM_KIT",
+        "preparationTime": {
+          "amount": 1,
+          "unit": "hour"
+        }
+      }
+    }
+  ]
+}

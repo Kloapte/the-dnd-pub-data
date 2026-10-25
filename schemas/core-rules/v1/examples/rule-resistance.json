@@ -1,0 +1,42 @@
+{
+  "id": "rule:xphb:resistance",
+  "name": "Resistance",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 373,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "damage-resistance",
+      "kind": "DAMAGE_HEALTH_STATE",
+      "subtype": "RESISTANCE",
+      "damageTypes": [
+        "acid",
+        "bludgeoning",
+        "cold",
+        "fire",
+        "force",
+        "lightning",
+        "necrotic",
+        "piercing",
+        "poison",
+        "psychic",
+        "radiant",
+        "slashing",
+        "thunder"
+      ],
+      "resolutionModifier": {
+        "operation": "HALVE",
+        "multiplier": 0.5,
+        "rounding": "DOWN",
+        "oncePerDamageInstance": true,
+        "sameOperationDoesNotStack": true
+      }
+    }
+  ]
+}

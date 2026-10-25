@@ -8,7 +8,15 @@ const reportPath = path.join(
 );
 const dataRoot = path.join(workspace, 'src/main/resources/data');
 const documentationRoot = path.join(workspace, 'doc');
-const manifest = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+const manifests = [JSON.parse(fs.readFileSync(reportPath, 'utf8'))];
+const phase5ManifestPath = path.join(
+    workspace,
+    'reports/step-2/CORE_RULES_PHASE_5_SOURCE_ACCOUNTING.json'
+);
+if (fs.existsSync(phase5ManifestPath)) {
+    manifests.push(JSON.parse(fs.readFileSync(phase5ManifestPath, 'utf8')));
+}
+const records = manifests.flatMap(manifest => manifest.records);
 const sourceData = new Map();
 
 function sourceObject(record) {
@@ -64,11 +72,11 @@ function registerSection(record, entryPlan, entry, classification) {
 }
 
 const registers = new Map();
-for (const model of new Set(manifest.records.map(record => record.model))) {
+for (const model of new Set(records.map(record => record.model))) {
     registers.set(model, { OMITTED: [], DUPLICATE: [] });
 }
 
-for (const record of manifest.records) {
+for (const record of records) {
     const source = sourceObject(record);
     const entries = source.entries ?? [];
     for (const entryPlan of record.entries) {
@@ -97,7 +105,7 @@ for (const [model, sections] of registers) {
 
         fs.mkdirSync(directory, { recursive: true });
         const header = [
-            `# ${model[0].toUpperCase()}${model.slice(1)} source content ${classification.toLowerCase()} during Step 2 Phase 3 representative conversion`,
+            `# ${model[0].toUpperCase()}${model.slice(1)} source content ${classification.toLowerCase()} during Step 2 Core Rules conversion`,
             '',
             'This restricted internal register preserves complete original entries for audit. Do not publish or distribute excerpts without a licensing review.',
             ''
@@ -108,6 +116,7 @@ for (const [model, sections] of registers) {
 
 console.log(JSON.stringify({
     modelRegisters: registers.size,
+    sourceRecords: records.length,
     omittedEntries: [...registers.values()].reduce((sum, value) => sum + value.OMITTED.length, 0),
     duplicateEntries: [...registers.values()].reduce((sum, value) => sum + value.DUPLICATE.length, 0)
 }, null, 2));

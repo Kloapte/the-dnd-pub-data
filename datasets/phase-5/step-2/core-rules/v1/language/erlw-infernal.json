@@ -1,0 +1,23 @@
+{
+  "id": "language:erlw:infernal",
+  "name": "Infernal",
+  "sourceMetadata": {
+    "source": "ERLW",
+    "page": 6
+  },
+  "category": "exotic",
+  "script": "Infernal",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "fiend"
+        ],
+        "sources": [
+          "ERLW"
+        ]
+      }
+    }
+  ]
+}

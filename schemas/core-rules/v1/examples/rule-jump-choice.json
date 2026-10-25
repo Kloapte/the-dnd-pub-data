@@ -1,0 +1,43 @@
+{
+  "id": "rule:xphb:jumping",
+  "name": "Jumping",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 370,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "jump-procedure-selection",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "JUMPING",
+      "procedure": "jump-distance",
+      "details": {
+        "kind": "JUMP_PROCEDURE_SELECTION",
+        "selection": "ONE",
+        "horizontal": {
+          "targetType": "rule",
+          "id": "rule:xphb:long-jump"
+        },
+        "vertical": {
+          "targetType": "rule",
+          "id": "rule:xphb:high-jump"
+        }
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:long-jump"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:high-jump"
+    }
+  ]
+}

@@ -9,6 +9,7 @@
       "basicRules2024": true
     }
   },
+  "ruleType": "CORE",
   "mechanics": [
     {
       "componentId": "unarmed-attack",
@@ -84,7 +85,8 @@
       "appliesWhen": {
         "kind": "ON_FAILED_SAVE",
         "componentId": "unarmed-grapple-save"
-      }
+      },
+      "reachFeet": 5
     },
     {
       "componentId": "unarmed-shove-outcome",
@@ -113,7 +115,8 @@
       "appliesWhen": {
         "kind": "ON_FAILED_SAVE",
         "componentId": "unarmed-grapple-save"
-      }
+      },
+      "reachFeet": 5
     }
   ],
   "composition": {

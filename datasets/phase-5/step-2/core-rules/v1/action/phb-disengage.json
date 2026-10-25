@@ -1,0 +1,31 @@
+{
+  "id": "action:phb:disengage",
+  "name": "Disengage",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 192,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:disengage"
+      }
+    ]
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "DISENGAGE"
+  ],
+  "operations": [
+    {
+      "kind": "MOVEMENT_PERMISSION",
+      "permission": "no-opportunity-attack",
+      "duration": "current-turn"
+    }
+  ]
+}

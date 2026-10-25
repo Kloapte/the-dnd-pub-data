@@ -1,0 +1,14 @@
+{
+  "id": "language:mm:giant-owl",
+  "name": "Giant Owl",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 327
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:giant-owl"
+    }
+  ]
+}

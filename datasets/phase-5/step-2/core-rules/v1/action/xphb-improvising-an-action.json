@@ -1,0 +1,23 @@
+{
+  "id": "action:xphb:improvising-an-action",
+  "name": "Improvising an Action",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 15,
+    "flags": {
+      "basicRules2024": true
+    }
+  },
+  "timing": {
+    "kind": "varied_gametime"
+  },
+  "capabilities": [
+    "IMPROVISE"
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:d20-test"
+    }
+  ]
+}

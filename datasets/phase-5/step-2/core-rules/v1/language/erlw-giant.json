@@ -1,0 +1,10 @@
+{
+  "id": "language:erlw:giant",
+  "name": "Giant",
+  "sourceMetadata": {
+    "source": "ERLW",
+    "page": 6
+  },
+  "category": "standard",
+  "script": "Giant"
+}

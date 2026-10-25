@@ -1,0 +1,37 @@
+{
+  "id": "action:xphb:two-weapon-fighting",
+  "name": "Two-Weapon Fighting",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 213,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "timing": {
+    "kind": "bonus-action"
+  },
+  "capabilities": [
+    "ATTACK_MELEE"
+  ],
+  "operations": [
+    {
+      "kind": "ATTACK_RESOLUTION",
+      "attack": {
+        "kind": "ATTACK_ROLL",
+        "forms": [
+          "melee",
+          "weapon"
+        ],
+        "target": "creature"
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "action",
+      "id": "action:xphb:attack"
+    }
+  ]
+}

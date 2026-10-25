@@ -1,0 +1,47 @@
+{
+  "id": "rule:xphb:short-rest",
+  "name": "Short Rest",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 373,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "short-rest-procedure",
+      "kind": "REST_PROCEDURE",
+      "subtype": "SHORT_REST",
+      "duration": 1,
+      "unit": "hour",
+      "durationQualifier": "EXACT",
+      "minimumHitPointsToStart": 1,
+      "permittedActivities": [
+        "LIGHT_ACTIVITY"
+      ],
+      "interruptions": [
+        "INITIATIVE",
+        "NON_CANTRIP_SPELL",
+        "DAMAGE"
+      ],
+      "interruptionOutcome": "NO_BENEFITS",
+      "recoveryOutcomes": [
+        {
+          "kind": "SPEND_RESOURCE_TO_RECOVER",
+          "resource": "HIT_DICE",
+          "formula": "DIE_PLUS_CONSTITUTION_MODIFIER",
+          "minimumPerDie": 1,
+          "additionalChoiceAfterEachRoll": true
+        },
+        {
+          "kind": "RECHARGE_AS_DEFINED_BY_FEATURE",
+          "resource": "CLASS_FEATURE",
+          "restType": "SHORT_REST"
+        }
+      ]
+    }
+  ]
+}

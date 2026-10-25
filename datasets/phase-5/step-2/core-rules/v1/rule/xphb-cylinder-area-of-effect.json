@@ -1,0 +1,28 @@
+{
+  "id": "rule:xphb:cylinder-area-of-effect",
+  "name": "Cylinder [Area of Effect]",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 364,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "cylinder-shape",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "AREA_OF_EFFECT",
+      "shape": "cylinder",
+      "origin": "point-in-space",
+      "originPlacement": "CENTER_OF_TOP_OR_BOTTOM",
+      "dimensionParameters": [
+        "BASE_RADIUS",
+        "HEIGHT"
+      ],
+      "originIncluded": "INCLUDED"
+    }
+  ]
+}

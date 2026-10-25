@@ -1,0 +1,37 @@
+{
+  "id": "disease:phb:filth-fever",
+  "name": "Filth Fever",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 227
+  },
+  "symptoms": [
+    {
+      "kind": "ABILITY_ROLL_MODIFIER",
+      "roll": "ability-check",
+      "direction": "disadvantage",
+      "ability": "strength"
+    },
+    {
+      "kind": "ABILITY_ROLL_MODIFIER",
+      "roll": "saving-throw",
+      "direction": "disadvantage",
+      "ability": "strength"
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "actor": "affected-creature",
+      "direction": "DISADVANTAGE",
+      "roll": "ATTACK",
+      "ability": "strength",
+      "lifecycle": "WHILE_DISEASE_ACTIVE"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "spell",
+      "id": "spell:phb:contagion",
+      "relationship": "can-be-inflicted-by"
+    }
+  ]
+}

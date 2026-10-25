@@ -51,6 +51,146 @@
         },
         "savingThrow": {
           "$ref": "#/$defs/savingThrow"
+        },
+        "exposures": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "WOUND_BY_CONTAGION_CARRIER"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "materials"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "CONTACT_WITH_CONTAMINATED_MATERIAL"
+                  },
+                  "materials": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                      "enum": [
+                        "filth",
+                        "offal",
+                        "contaminated-mud",
+                        "tainted-water",
+                        "contaminated-food",
+                        "bile-lichen-spores"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "$ref": "#/$defs/typedExposure"
+              }
+            ]
+          }
+        },
+        "exposureProcedures": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/typedExposure"
+          }
+        },
+        "secondaryExposures": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "exposureId",
+              "kind",
+              "trigger",
+              "symptomId",
+              "distance",
+              "unit",
+              "savingThrow",
+              "onFailure",
+              "onSuccess"
+            ],
+            "properties": {
+              "exposureId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+              },
+              "kind": {
+                "const": "NEARBY_SYMPTOMATIC_CREATURE"
+              },
+              "trigger": {
+                "const": "target-starts-turn-within-distance"
+              },
+              "symptomId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+              },
+              "distance": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "unit": {
+                "const": "feet"
+              },
+              "savingThrow": {
+                "$ref": "#/$defs/savingThrow"
+              },
+              "onFailure": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "INFECT_TARGET"
+                  }
+                }
+              },
+              "onSuccess": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "symptomId",
+                  "source",
+                  "duration"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "SOURCE_RELATIVE_IMMUNITY"
+                  },
+                  "symptomId": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+                  },
+                  "source": {
+                    "const": "exposing-creature"
+                  },
+                  "duration": {
+                    "$ref": "#/$defs/interval"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "minProperties": 1
@@ -133,46 +273,331 @@
                 "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
               }
             }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "condition",
+              "amount"
+            ],
+            "properties": {
+              "kind": {
+                "const": "CONDITION_LEVEL_CHANGE"
+              },
+              "condition": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+              },
+              "amount": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "cannotReduceUntilDiseaseEnds": {
+                "type": "boolean"
+              },
+              "onlyProgressionBranchCanReduce": {
+                "const": true
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "activation",
+              "kind",
+              "symptomId",
+              "condition",
+              "duration",
+              "repeatSaveToEnd"
+            ],
+            "properties": {
+              "kind": {
+                "const": "TEMPORARY_CONDITION"
+              },
+              "symptomId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+              },
+              "condition": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+              },
+              "duration": {
+                "$ref": "#/$defs/interval"
+              },
+              "repeatSaveToEnd": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "ability",
+                  "dc",
+                  "trigger"
+                ],
+                "properties": {
+                  "ability": {
+                    "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+                  },
+                  "dc": {
+                    "type": "number",
+                    "minimum": 1
+                  },
+                  "trigger": {
+                    "const": "end-of-each-turn"
+                  },
+                  "dcTrackId": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+                  }
+                }
+              },
+              "activation": {
+                "const": "triggered-by-progression"
+              },
+              "automaticSuccessAfter": {
+                "$ref": "#/$defs/interval"
+              }
+            }
+          },
+          {
+            "$ref": "#/$defs/diseaseEffect"
           }
         ]
+      }
+    },
+    "effects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/diseaseEffect"
       }
     },
     "progression": {
       "type": "array",
       "minItems": 1,
       "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "trigger",
-          "outcome"
-        ],
-        "properties": {
-          "trigger": {
-            "enum": [
-              "elapsed-time",
-              "saving-throw-success",
-              "saving-throw-failure",
-              "failure-count"
-            ]
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "trigger",
+              "outcome"
+            ],
+            "properties": {
+              "trigger": {
+                "enum": [
+                  "elapsed-time",
+                  "saving-throw-success",
+                  "saving-throw-failure",
+                  "failure-count"
+                ]
+              },
+              "interval": {
+                "$ref": "#/$defs/interval"
+              },
+              "savingThrow": {
+                "$ref": "#/$defs/savingThrow"
+              },
+              "outcome": {
+                "enum": [
+                  "symptom-begins",
+                  "disease-ends",
+                  "transformation"
+                ]
+              },
+              "target": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+              }
+            }
           },
-          "interval": {
-            "$ref": "#/$defs/interval"
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "branchId",
+              "trigger",
+              "savingThrow",
+              "onSuccess",
+              "onFailure"
+            ],
+            "properties": {
+              "kind": {
+                "const": "SAVING_THROW_BRANCH"
+              },
+              "branchId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+              },
+              "trigger": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "time"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "DAILY_AT"
+                      },
+                      "time": {
+                        "const": "DAWN"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "examples"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "GREAT_STRESS"
+                      },
+                      "examples": {
+                        "type": "array",
+                        "minItems": 1,
+                        "uniqueItems": true,
+                        "items": {
+                          "enum": [
+                            "entering-combat",
+                            "taking-damage",
+                            "fear",
+                            "nightmare"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "symptomId"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "END_OF_TURN_WHILE_SYMPTOM_ACTIVE"
+                      },
+                      "symptomId": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+                      }
+                    }
+                  },
+                  {
+                    "$ref": "#/$defs/progressionTrigger"
+                  }
+                ]
+              },
+              "savingThrow": {
+                "$ref": "#/$defs/savingThrow"
+              },
+              "onSuccess": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/progressionOutcome"
+                }
+              },
+              "onFailure": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/progressionOutcome"
+                }
+              },
+              "outcomeCounter": {
+                "$ref": "#/$defs/outcomeCounter"
+              },
+              "endsWhen": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "condition",
+                      "level"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "CONDITION_LEVEL_AT_OR_BELOW"
+                      },
+                      "condition": {
+                        "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+                      },
+                      "level": {
+                        "type": "integer",
+                        "minimum": 0
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "value"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "SAVING_THROW_DC_AT_OR_BELOW"
+                      },
+                      "value": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    }
+                  }
+                ]
+              },
+              "onEnd": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/progressionOutcome"
+                }
+              }
+            }
           },
-          "savingThrow": {
-            "$ref": "#/$defs/savingThrow"
-          },
-          "outcome": {
-            "enum": [
-              "symptom-begins",
-              "disease-ends",
-              "transformation"
-            ]
-          },
-          "target": {
-            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "branchId",
+              "trigger",
+              "outcomes"
+            ],
+            "properties": {
+              "kind": {
+                "const": "TIMED_OUTCOME_BRANCH"
+              },
+              "branchId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+              },
+              "trigger": {
+                "$ref": "#/$defs/progressionTrigger"
+              },
+              "outcomes": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/progressionOutcome"
+                }
+              },
+              "interval": {
+                "$ref": "#/$defs/interval"
+              }
+            }
           }
-        }
+        ]
       }
     },
     "recovery": {
@@ -190,7 +615,10 @@
               "saving-throw",
               "rest",
               "spell",
-              "divine-intervention"
+              "divine-intervention",
+              "treatment",
+              "skill-check",
+              "magic-that-cures-disease"
             ]
           },
           "savingThrow": {
@@ -200,16 +628,359 @@
             "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
           },
           "immunityAfterRecovery": {
-            "type": "boolean"
+            "oneOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "$ref": "#/$defs/immunityDuration"
+              }
+            ]
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "dcTrackId": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "endsWhenDcAtOrBelow": {
+            "type": "number",
+            "minimum": 0
+          },
+          "failureThreshold": {
+            "$ref": "#/$defs/failureThreshold"
+          },
+          "trigger": {
+            "enum": [
+              "LONG_REST_CARE"
+            ]
+          },
+          "outcomeCounter": {
+            "$ref": "#/$defs/outcomeCounter"
+          },
+          "treatment": {
+            "$ref": "#/$defs/diseaseTreatment"
+          },
+          "ends": {
+            "enum": [
+              "DISEASE",
+              "SYMPTOM"
+            ]
+          },
+          "symptomId": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "ability": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+          },
+          "dc": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "performedBy": {
+            "enum": [
+              "ANOTHER_CREATURE"
+            ]
+          },
+          "outcome": {
+            "enum": [
+              "ENDS_DISEASE"
+            ]
+          },
+          "caregiverLongRestOutcome": {
+            "enum": [
+              "NO_LONG_REST_BENEFIT"
+            ]
+          },
+          "endsDisease": {
+            "const": true
+          },
+          "removesConditionLevels": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "condition",
+                "scope"
+              ],
+              "properties": {
+                "condition": {
+                  "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+                },
+                "scope": {
+                  "const": "LEVELS_ATTRIBUTABLE_TO_THIS_DISEASE"
+                }
+              }
+            }
           }
-        }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "method": {
+                  "const": "skill-check"
+                }
+              },
+              "required": [
+                "method"
+              ]
+            },
+            "then": {
+              "required": [
+                "reference",
+                "ability",
+                "dc",
+                "trigger",
+                "performedBy",
+                "outcome",
+                "caregiverLongRestOutcome"
+              ],
+              "properties": {
+                "reference": {
+                  "allOf": [
+                    {
+                      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+                    },
+                    {
+                      "properties": {
+                        "targetType": {
+                          "const": "skill"
+                        }
+                      },
+                      "required": [
+                        "targetType"
+                      ],
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "method": {
+                  "const": "magic-that-cures-disease"
+                }
+              },
+              "required": [
+                "method"
+              ]
+            },
+            "then": {
+              "required": [
+                "endsDisease"
+              ]
+            }
+          }
+        ]
       }
+    },
+    "effectProfile": {
+      "$ref": "#/$defs/effectProfile"
     },
     "references": {
       "type": "array",
       "minItems": 1,
       "items": {
         "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+      }
+    },
+    "applicability": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "targetCreatureTypes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "aberration",
+              "beast",
+              "celestial",
+              "construct",
+              "dragon",
+              "elemental",
+              "fey",
+              "fiend",
+              "giant",
+              "humanoid",
+              "monstrosity",
+              "ooze",
+              "plant",
+              "undead"
+            ]
+          }
+        },
+        "excludedTargets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+          }
+        },
+        "excludedSourceGroups": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "name"
+            ],
+            "properties": {
+              "kind": {
+                "const": "SOURCE_NAMED_CREATURE_GROUP"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "enum": [
+                  "RATS_AND_WERERATS"
+                ]
+              }
+            }
+          }
+        },
+        "automaticSuccessForDiseaseImmuneTargets": {
+          "const": true
+        }
+      }
+    },
+    "conditionGatedRestrictions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "condition",
+              "minimumLevel",
+              "multiplier"
+            ],
+            "properties": {
+              "kind": {
+                "const": "HIT_DICE_RECOVERY_MULTIPLIER"
+              },
+              "condition": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+              },
+              "minimumLevel": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "multiplier": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "condition",
+              "minimumLevel",
+              "preventedRecoveries"
+            ],
+            "properties": {
+              "kind": {
+                "const": "LONG_REST_PREVENTED_RECOVERY"
+              },
+              "condition": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+              },
+              "minimumLevel": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "preventedRecoveries": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "hit-points",
+                    "condition-level-reduction"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "termination": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "abilities"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ALL_LOST_ABILITY_SCORE_POINTS_RESTORED"
+            },
+            "abilities": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "condition",
+            "level"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CONDITION_LEVEL_AT_OR_BELOW"
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "level": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      ]
+    },
+    "targetTraits": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "LIVING",
+          "BREATHING"
+        ]
       }
     }
   },
@@ -238,30 +1009,1736 @@
       "required": [
         "recovery"
       ]
+    },
+    {
+      "required": [
+        "effects"
+      ]
     }
   ],
   "$defs": {
-    "interval": {
+    "progressionTrigger": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "phase"
+          ],
+          "properties": {
+            "kind": {
+              "const": "LONG_REST_COMPLETED"
+            },
+            "phase": {
+              "enum": [
+                "AFTER_INFECTION",
+                "AFTER_SYMPTOM_ONSET"
+              ]
+            },
+            "area": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "interval",
+            "relativeTo"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ELAPSED_TIME"
+            },
+            "interval": {
+              "$ref": "#/$defs/interval"
+            },
+            "relativeTo": {
+              "enum": [
+                "INFECTION",
+                "SYMPTOM_ONSET",
+                "LAST_EVENT"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "damageType",
+            "condition"
+          ],
+          "properties": {
+            "kind": {
+              "const": "DAMAGE_WHILE_CONDITION_ACTIVE"
+            },
+            "damageType": {
+              "enum": [
+                "ANY_EXCEPT_PSYCHIC",
+                "ANY"
+              ]
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "LONG_REST_OR_EXCITEMENT"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "interval",
+            "relativeTo"
+          ],
+          "properties": {
+            "kind": {
+              "const": "REPEATING_ELAPSED_TIME"
+            },
+            "interval": {
+              "$ref": "#/$defs/interval"
+            },
+            "relativeTo": {
+              "enum": [
+                "INFECTION",
+                "SYMPTOM_ONSET",
+                "LAST_EVENT"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "PARTY_DEFEATED_AND_CREATURE_STABILIZED"
+            }
+          }
+        }
+      ]
+    },
+    "outcomeCounter": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "amount",
-        "unit"
+        "branchId",
+        "countedOutcome",
+        "threshold",
+        "sequence",
+        "reset",
+        "onThreshold"
       ],
       "properties": {
-        "amount": {
-          "type": "number",
-          "exclusiveMinimum": 0
+        "branchId": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
         },
-        "unit": {
+        "countedOutcome": {
           "enum": [
-            "minute",
-            "hour",
-            "day",
-            "week"
+            "SUCCESS",
+            "FAILURE"
+          ]
+        },
+        "threshold": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sequence": {
+          "enum": [
+            "CONSECUTIVE",
+            "NOT_REQUIRED",
+            "UNSPECIFIED_BY_SOURCE"
+          ]
+        },
+        "reset": {
+          "enum": [
+            "ON_OPPOSITE_OUTCOME",
+            "NEVER",
+            "UNSPECIFIED_BY_SOURCE"
+          ]
+        },
+        "onThreshold": {
+          "$ref": "#/$defs/progressionOutcome"
+        },
+        "immunityAfterRecovery": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/$defs/immunityDuration"
+            }
           ]
         }
       }
+    },
+    "immunityDuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "scope"
+      ],
+      "properties": {
+        "kind": {
+          "const": "DISEASE_IMMUNITY"
+        },
+        "scope": {
+          "enum": [
+            "DISEASE",
+            "EXPOSING_CREATURE"
+          ]
+        },
+        "duration": {
+          "$ref": "#/$defs/interval"
+        },
+        "permanent": {
+          "const": true
+        }
+      }
+    },
+    "typedExposure": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "material",
+            "event",
+            "outcome"
+          ],
+          "properties": {
+            "kind": {
+              "const": "INGEST_TAINTED_MATERIAL"
+            },
+            "material": {
+              "enum": [
+                "POTION",
+                "ELIXIR",
+                "POTION_OR_ELIXIR"
+              ]
+            },
+            "event": {
+              "const": "INGESTED"
+            },
+            "outcome": {
+              "const": "INFECTION"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "material",
+            "savingThrow",
+            "onFailure"
+          ],
+          "properties": {
+            "kind": {
+              "const": "INGEST_CONTAMINATED_MATERIAL"
+            },
+            "material": {
+              "enum": [
+                "FOOD",
+                "WATER",
+                "POTION",
+                "ALCHEMICAL_WASTE",
+                "MUD",
+                "SPORES"
+              ]
+            },
+            "savingThrow": {
+              "$ref": "#/$defs/savingThrow"
+            },
+            "onFailure": {
+              "const": "INFECTION"
+            },
+            "targetCreatureTypes": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "contaminationAfter": {
+              "$ref": "#/$defs/interval"
+            },
+            "safeAlternatives": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "RAINWATER",
+                  "BOILED_WATER",
+                  "MAGICALLY_PURIFIED_WATER"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "contact",
+            "savingThrow",
+            "onFailure"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CONTACT_WITH_INFECTED_CREATURE"
+            },
+            "contact": {
+              "enum": [
+                "SKIN",
+                "PHYSICAL",
+                "WOUND"
+              ]
+            },
+            "sourceState": {
+              "enum": [
+                "INFECTED",
+                "SYMPTOM_ACTIVE"
+              ]
+            },
+            "savingThrow": {
+              "$ref": "#/$defs/savingThrow"
+            },
+            "onFailure": {
+              "const": "INFECTION"
+            },
+            "onSuccessImmunity": {
+              "$ref": "#/$defs/immunityDuration"
+            },
+            "eligibleCreatureTypes": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "excludedCreatureTypes": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "targetCreatureTypes": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "site": {
+              "enum": [
+                "VISIBLE_LICHEN_PATCH",
+                "INFECTED_SKIN"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "distanceFeet",
+            "trigger",
+            "sourceState",
+            "savingThrow",
+            "onFailure"
+          ],
+          "properties": {
+            "kind": {
+              "const": "INFECTED_CREATURE_PROXIMITY"
+            },
+            "distanceFeet": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "trigger": {
+              "enum": [
+                "START_TURN_WITHIN_DISTANCE",
+                "ENTERS_AREA"
+              ]
+            },
+            "sourceState": {
+              "enum": [
+                "INFECTED",
+                "SYMPTOM_ACTIVE"
+              ]
+            },
+            "savingThrow": {
+              "$ref": "#/$defs/savingThrow"
+            },
+            "onFailure": {
+              "const": "INFECTION"
+            },
+            "onSuccessImmunity": {
+              "$ref": "#/$defs/immunityDuration"
+            },
+            "targetCreatureTypes": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "excludedTargets": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "environment",
+            "duration",
+            "savingThrow",
+            "onFailure"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ENVIRONMENTAL_EXPOSURE"
+            },
+            "environment": {
+              "enum": [
+                "NECROPOLIS",
+                "CONTAMINATED_AREA",
+                "MAGICAL_MIST",
+                "AIRBORNE_SPORES"
+              ]
+            },
+            "duration": {
+              "$ref": "#/$defs/interval"
+            },
+            "savingThrow": {
+              "$ref": "#/$defs/savingThrow"
+            },
+            "onFailure": {
+              "const": "INFECTION"
+            },
+            "trigger": {
+              "enum": [
+                "CONTACT",
+                "TIME_IN_AREA"
+              ]
+            },
+            "targetCreatureTypes": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "environment",
+            "trigger",
+            "savingThrow",
+            "onFailure"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ENVIRONMENTAL_CONTACT"
+            },
+            "environment": {
+              "enum": [
+                "MAGICAL_MIST",
+                "POLLUTED_AIR",
+                "CONTAMINATED_WATER",
+                "INFECTED_AREA",
+                "AIRBORNE_SPORES"
+              ]
+            },
+            "trigger": {
+              "const": "CONTACT"
+            },
+            "savingThrow": {
+              "$ref": "#/$defs/savingThrow"
+            },
+            "onFailure": {
+              "const": "INFECTION"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "area",
+            "savingThrow",
+            "onFailure"
+          ],
+          "properties": {
+            "kind": {
+              "const": "LONG_REST_IN_QUALIFYING_AREA"
+            },
+            "area": {
+              "type": "string",
+              "minLength": 1
+            },
+            "savingThrow": {
+              "$ref": "#/$defs/savingThrow"
+            },
+            "onFailure": {
+              "const": "INFECTION"
+            },
+            "noRepellentSincePreviousLongRest": {
+              "const": true
+            },
+            "targetCreatureTypes": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "sourceCreatures",
+            "savingThrow",
+            "onFailure"
+          ],
+          "properties": {
+            "kind": {
+              "const": "QUALIFYING_DAMAGE_AND_ENCOUNTER_END"
+            },
+            "sourceCreatures": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "encounterEndRequired": {
+              "const": true
+            },
+            "savingThrow": {
+              "$ref": "#/$defs/savingThrow"
+            },
+            "onFailure": {
+              "const": "INFECTION"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "savingThrow",
+            "onFailure"
+          ],
+          "properties": {
+            "kind": {
+              "const": "WOUND_BY_CONTAGION_CARRIER"
+            },
+            "savingThrow": {
+              "$ref": "#/$defs/savingThrow"
+            },
+            "onFailure": {
+              "const": "INFECTION"
+            },
+            "excludedCreatureTypes": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "automaticSuccessForExcludedTargets": {
+              "const": true
+            },
+            "sourceCreatures": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "RAT",
+                  "GIANT_RAT",
+                  "SWARM_OF_RATS",
+                  "WERERAT"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "diseaseEffect": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "direction",
+            "roll",
+            "lifecycle"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ATTACK_ROLL_MODIFIER"
+            },
+            "actor": {
+              "const": "affected-creature"
+            },
+            "direction": {
+              "enum": [
+                "ADVANTAGE",
+                "DISADVANTAGE",
+                "BONUS",
+                "PENALTY"
+              ]
+            },
+            "roll": {
+              "const": "ATTACK"
+            },
+            "amount": {
+              "type": "number"
+            },
+            "ability": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+            },
+            "requiresSense": {
+              "enum": [
+                "SIGHT"
+              ]
+            },
+            "lifecycle": {
+              "enum": [
+                "WHILE_DISEASE_ACTIVE",
+                "WHILE_SYMPTOM_ACTIVE"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "ability",
+            "change",
+            "minimum",
+            "lifecycle"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ABILITY_SCORE_CHANGE"
+            },
+            "ability": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+            },
+            "change": {
+              "enum": [
+                "LOSS",
+                "RESTORE_LOST_POINTS"
+              ]
+            },
+            "amount": {
+              "$ref": "#/$defs/abilityScoreAmount"
+            },
+            "minimum": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "lifecycle": {
+              "enum": [
+                "WHILE_DISEASE_ACTIVE"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "damageTypes",
+            "lifecycle"
+          ],
+          "properties": {
+            "kind": {
+              "const": "DAMAGE_VULNERABILITY"
+            },
+            "damageTypes": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "ALL",
+                  "radiant",
+                  "poison",
+                  "necrotic",
+                  "fire",
+                  "cold",
+                  "psychic"
+                ]
+              }
+            },
+            "lifecycle": {
+              "enum": [
+                "WHILE_DISEASE_ACTIVE"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "amount",
+            "unit",
+            "lifecycle"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SPEED_CHANGE"
+            },
+            "amount": {
+              "type": "number"
+            },
+            "unit": {
+              "const": "feet"
+            },
+            "lifecycle": {
+              "enum": [
+                "WHILE_DISEASE_ACTIVE",
+                "AFTER_EACH_INTERVAL"
+              ]
+            },
+            "interval": {
+              "$ref": "#/$defs/interval"
+            },
+            "threshold": {
+              "type": "number"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "damage",
+            "trigger"
+          ],
+          "properties": {
+            "kind": {
+              "const": "DAMAGE_ON_TRIGGER"
+            },
+            "damage": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+            },
+            "trigger": {
+              "enum": [
+                "START_OF_TURN",
+                "ON_DAMAGE",
+                "SYMPTOM_ONSET"
+              ]
+            },
+            "damageTypeRestriction": {
+              "enum": [
+                "ANY",
+                "ANY_EXCEPT_PSYCHIC"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "restriction",
+            "lifecycle"
+          ],
+          "properties": {
+            "kind": {
+              "const": "DISEASE_RESTRICTION"
+            },
+            "restriction": {
+              "enum": [
+                "NO_NONMAGICAL_HP_OR_HIT_DICE_RECOVERY",
+                "HALF_HP_FROM_HIT_DICE",
+                "CANNOT_CAST_VERBAL_COMPONENT",
+                "CONSTITUTION_CHECK_TO_DASH",
+                "CANNOT_REGAIN_HP_AT_ZERO_FROM_DISEASE_DAMAGE",
+                "NO_HIT_POINTS_FROM_LONG_REST",
+                "NO_HIT_DICE_RECOVERY"
+              ]
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "minimumLevel": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "lifecycle": {
+              "enum": [
+                "WHILE_DISEASE_ACTIVE",
+                "WHILE_CONDITION_ACTIVE",
+                "AFTER_SYMPTOM_ONSET"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "capability",
+            "lifecycle"
+          ],
+          "properties": {
+            "kind": {
+              "const": "PHYSIOLOGICAL_CAPABILITY"
+            },
+            "capability": {
+              "enum": [
+                "BREATHE_UNDERWATER",
+                "AWARENESS_REDUCED",
+                "AWARENESS_ABSENT",
+                "SPEAKS_WORD_UNINTENTIONALLY",
+                "HALLUCINATIONS",
+                "FEVER",
+                "DISORIENTATION"
+              ]
+            },
+            "lifecycle": {
+              "enum": [
+                "WHILE_DISEASE_ACTIVE",
+                "WHILE_SYMPTOM_ACTIVE",
+                "AFTER_SYMPTOM_ONSET",
+                "AFTER_INFECTION_DURATION"
+              ]
+            },
+            "symptomId": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            },
+            "beginsAfterInfection": {
+              "$ref": "#/$defs/interval"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "target",
+            "trigger"
+          ],
+          "properties": {
+            "kind": {
+              "const": "TRANSFORMATION_OUTCOME"
+            },
+            "target": {
+              "$ref": "#/$defs/transformationTarget"
+            },
+            "trigger": {
+              "enum": [
+                "DEATH_WHILE_INFECTED",
+                "CONDITION_LEVEL_THRESHOLD",
+                "SPEED_REACHES_ZERO",
+                "EGGS_HATCH"
+              ]
+            },
+            "deathOfSubject": {
+              "const": true
+            },
+            "outcomeAfter": {
+              "enum": [
+                "DEATH",
+                "BECOMES_TRANSFORMED_CREATURE"
+              ]
+            },
+            "threshold": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "exception": {
+              "enum": [
+                "DOES_NOT_DIE"
+              ]
+            },
+            "creatureTypeAfter": {
+              "enum": [
+                "construct",
+                "undead",
+                "ooze",
+                "humanoid",
+                "beast"
+              ]
+            },
+            "immunities": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "damageType"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "DAMAGE_TYPE"
+                      },
+                      "damageType": {
+                        "enum": [
+                          "poison"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "condition"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "CONDITION"
+                      },
+                      "condition": {
+                        "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "rolls",
+            "direction",
+            "lifecycle"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ABILITY_ROLL_MODIFIER"
+            },
+            "rolls": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "ABILITY_CHECK",
+                  "SAVING_THROW",
+                  "ATTACK"
+                ]
+              }
+            },
+            "direction": {
+              "enum": [
+                "ADVANTAGE",
+                "DISADVANTAGE"
+              ]
+            },
+            "ability": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+            },
+            "lifecycle": {
+              "enum": [
+                "WHILE_DISEASE_ACTIVE",
+                "WHILE_SYMPTOM_ACTIVE"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "rolls",
+            "amount",
+            "requiresSense",
+            "trigger"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ROLL_MODIFIER_TRACK"
+            },
+            "rolls": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "ATTACK",
+                  "ABILITY_CHECK"
+                ]
+              }
+            },
+            "amount": {
+              "type": "number"
+            },
+            "requiresSense": {
+              "const": "SIGHT"
+            },
+            "trigger": {
+              "const": "LONG_REST_COMPLETED"
+            },
+            "step": {
+              "type": "number"
+            },
+            "threshold": {
+              "type": "number"
+            },
+            "appliesConditionAtThreshold": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "startsAfterSymptomOnset": {
+              "const": true
+            },
+            "conditionUntil": {
+              "enum": [
+                "SIGHT_RESTORED_BY_MAGIC"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "condition",
+            "amount",
+            "lifecycle"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CONDITION_LEVEL_CHANGE"
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "amount": {
+              "type": "integer",
+              "not": {
+                "const": 0
+              }
+            },
+            "lifecycle": {
+              "enum": [
+                "ON_SYMPTOM_ONSET",
+                "WHILE_DISEASE_ACTIVE"
+              ]
+            },
+            "cannotReduceUntilDiseaseEnds": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "condition",
+            "amount",
+            "every",
+            "relativeTo"
+          ],
+          "properties": {
+            "kind": {
+              "const": "REPEATING_CONDITION_LEVEL_CHANGE"
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "amount": {
+              "type": "integer",
+              "not": {
+                "const": 0
+              }
+            },
+            "every": {
+              "$ref": "#/$defs/interval"
+            },
+            "relativeTo": {
+              "enum": [
+                "SYMPTOM_ONSET",
+                "INFECTION",
+                "LAST_CHANGE"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "trigger",
+            "condition",
+            "duration"
+          ],
+          "properties": {
+            "kind": {
+              "const": "TRIGGERED_CONDITION"
+            },
+            "trigger": {
+              "enum": [
+                "ANY_DAMAGE",
+                "FAILED_SAVING_THROW",
+                "DISEASE_SYMPTOM"
+              ]
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "duration": {
+              "$ref": "#/$defs/interval"
+            },
+            "endsAt": {
+              "enum": [
+                "END_OF_NEXT_TURN",
+                "SUCCESSFUL_SAVING_THROW",
+                "AUTOMATIC_AFTER_DURATION"
+              ]
+            },
+            "savingThrow": {
+              "$ref": "#/$defs/savingThrow"
+            },
+            "automaticSuccessAfter": {
+              "$ref": "#/$defs/interval"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "roll",
+            "ability",
+            "direction",
+            "condition"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CONDITION_GATED_CHECK"
+            },
+            "roll": {
+              "enum": [
+                "ACTION",
+                "ABILITY_CHECK",
+                "SPELL_CAST"
+              ]
+            },
+            "ability": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+            },
+            "direction": {
+              "enum": [
+                "ADVANTAGE",
+                "DISADVANTAGE",
+                "MUST_SUCCEED"
+              ]
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "dc": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "dcFormula": {
+              "enum": [
+                "BASE_PLUS_CONDITION_LEVEL"
+              ]
+            },
+            "outcome": {
+              "enum": [
+                "ACTION_UNAVAILABLE",
+                "SPELL_FAILS_NO_EFFECT",
+                "ACTION_AND_BONUS_ACTION_WASTED",
+                "SPELL_SLOT_NOT_EXPENDED"
+              ]
+            },
+            "creatureGroupsWithAdvantage": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "DUERGAR",
+                  "DERRO"
+                ]
+              }
+            },
+            "minimumLevel": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "relation",
+            "condition",
+            "lifecycle"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CONDITION_RELATION"
+            },
+            "relation": {
+              "enum": [
+                "CONDITION_IMMUNITY",
+                "ENDS_DISEASE",
+                "REMOVES_CONDITION_LEVELS"
+              ]
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "lifecycle": {
+              "enum": [
+                "WHILE_DISEASE_ACTIVE",
+                "ON_RECOVERY"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "reference",
+            "relation",
+            "appliesWhen"
+          ],
+          "properties": {
+            "kind": {
+              "const": "REFERENCED_PROCEDURE"
+            },
+            "reference": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "relation": {
+              "enum": [
+                "BEHAVES_AS_EFFECT",
+                "CURES_DISEASE",
+                "PREVENTS_EXPOSURE",
+                "ENDS_TRANSFORMATION"
+              ]
+            },
+            "appliesWhen": {
+              "enum": [
+                "DURING_COMBAT",
+                "ON_DISEASE_RECOVERY",
+                "ON_EXPOSURE",
+                "LONG_REST_CARE",
+                "AFTER_SPORE_CONTAMINATION"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "trigger",
+            "restriction"
+          ],
+          "properties": {
+            "kind": {
+              "const": "TRIGGERED_RECOVERY_RESTRICTION"
+            },
+            "trigger": {
+              "const": "DISEASE_DAMAGE_REDUCES_HP_TO_ZERO"
+            },
+            "restriction": {
+              "const": "CANNOT_REGAIN_HIT_POINTS_UNTIL_DISEASE_CURED"
+            },
+            "stabilizationAllowed": {
+              "const": true
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "component",
+            "ability",
+            "dc",
+            "condition",
+            "onFailure",
+            "spellSlotOutcome"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SPELL_CASTING_SAVE"
+            },
+            "component": {
+              "const": "SOMATIC"
+            },
+            "ability": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+            },
+            "dc": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "onFailure": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "SPELL_DISSIPATES",
+                  "ACTION_OR_BONUS_ACTION_OR_REACTION_WASTED"
+                ]
+              }
+            },
+            "spellSlotOutcome": {
+              "const": "NOT_EXPENDED"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "trigger",
+            "condition",
+            "level"
+          ],
+          "properties": {
+            "kind": {
+              "const": "DEATH_AT_CONDITION_LEVEL"
+            },
+            "trigger": {
+              "const": "CONDITION_LEVEL_REACHED"
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "level": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "interval"
+          ],
+          "properties": {
+            "kind": {
+              "const": "FOOD_SPORE_CONTAMINATION"
+            },
+            "interval": {
+              "$ref": "#/$defs/interval"
+            },
+            "material": {
+              "const": "FOOD"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "heightFeet",
+            "lifecycle"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SUSPENDED_LOCATION"
+            },
+            "heightFeet": {
+              "type": "number",
+              "minimum": 0
+            },
+            "lifecycle": {
+              "const": "WHILE_RESTRAINED"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actionRequired",
+            "ability",
+            "dc",
+            "condition",
+            "successOutcome"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ESCAPE_CHECK"
+            },
+            "actionRequired": {
+              "const": true
+            },
+            "ability": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+            },
+            "dc": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "successOutcome": {
+              "enum": [
+                "END_CONDITION",
+                "DESTROY_INFESTATION"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "drive",
+            "lifecycle",
+            "beginsAfterInfection"
+          ],
+          "properties": {
+            "kind": {
+              "const": "BEHAVIORAL_DRIVE"
+            },
+            "drive": {
+              "enum": [
+                "SEEK_UNINFECTED_GROUPS_TO_SPREAD_DISEASE"
+              ]
+            },
+            "lifecycle": {
+              "const": "AFTER_INFECTION_DURATION"
+            },
+            "beginsAfterInfection": {
+              "$ref": "#/$defs/interval"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "condition",
+            "comparison",
+            "level",
+            "outcome"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CONDITION_THRESHOLD_OUTCOME"
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "comparison": {
+              "enum": [
+                "BELOW",
+                "AT_OR_BELOW",
+                "AT_OR_ABOVE"
+              ]
+            },
+            "level": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "outcome": {
+              "$ref": "#/$defs/progressionOutcome"
+            }
+          }
+        }
+      ]
+    },
+    "transformationTarget": {
+      "oneOf": [
+        {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "name"
+          ],
+          "properties": {
+            "kind": {
+              "const": "UNNORMALIZED_SOURCE_ENTITY"
+            },
+            "source": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "diseaseTreatment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "action",
+        "outcome"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "HERBALISM_KIT_OINTMENT",
+            "MANUFACTURED_ANTIDOTE"
+          ]
+        },
+        "action": {
+          "enum": [
+            "apply-before-long-rest",
+            "apply-to-eyes",
+            "drink-as-action",
+            "apply-to-eyes-before-long-rest"
+          ]
+        },
+        "duration": {
+          "$ref": "#/$defs/interval"
+        },
+        "outcome": {
+          "enum": [
+            "PREVENTS_NEXT_PROGRESSION",
+            "SUPPRESSES_DISEASE",
+            "ENDS_DISEASE",
+            "PREVENTS_NEXT_PROGRESSION"
+          ]
+        },
+        "usesRequired": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "totalDurationRequired": {
+          "$ref": "#/$defs/interval"
+        },
+        "requiresProficiency": {
+          "const": "HERBALISM_KIT"
+        },
+        "preparationTime": {
+          "$ref": "#/$defs/interval"
+        },
+        "material": {
+          "enum": [
+            "EYEBRIGHT",
+            "MANUFACTURED_ANTIDOTE"
+          ]
+        },
+        "preventsNextLongRestProgression": {
+          "const": true
+        },
+        "onlyCureMethod": {
+          "const": true
+        }
+      }
+    },
+    "effectProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "sourceDisease",
+        "components"
+      ],
+      "properties": {
+        "kind": {
+          "const": "REUSE_DISEASE_EFFECT_PROFILE"
+        },
+        "sourceDisease": {
+          "allOf": [
+            {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            {
+              "type": "object",
+              "required": [
+                "targetType"
+              ],
+              "properties": {
+                "targetType": {
+                  "const": "disease"
+                }
+              }
+            }
+          ]
+        },
+        "components": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "symptoms",
+              "progression",
+              "recovery"
+            ]
+          }
+        }
+      }
+    },
+    "interval": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "properties": {
+            "amount": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "unit": {
+              "enum": [
+                "minute",
+                "hour",
+                "day",
+                "week",
+                "year",
+                "turn"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "count",
+            "die",
+            "unit"
+          ],
+          "properties": {
+            "kind": {
+              "const": "DICE_ROLL"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "die": {
+              "type": "integer",
+              "minimum": 2
+            },
+            "unit": {
+              "enum": [
+                "minute",
+                "hour",
+                "day",
+                "week",
+                "year",
+                "turn"
+              ]
+            }
+          }
+        }
+      ]
     },
     "savingThrow": {
       "type": "object",
@@ -294,7 +2771,8 @@
               "type": "integer",
               "minimum": 2
             }
-          }
+          },
+          "description": "On a successful recovery save, reduce the linked DC by this die roll when dcTrackId is present."
         },
         "frequency": {
           "enum": [
@@ -304,8 +2782,347 @@
             "each-long-rest",
             "triggered"
           ]
+        },
+        "dcTrackId": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "advantageForNaturalArmor": {
+          "const": true
+        },
+        "dcVariation": {
+          "enum": [
+            "REGIONAL_PLAGUE_SEVERITY"
+          ]
         }
       }
+    },
+    "failureThreshold": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "count",
+        "outcome"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "outcome": {
+          "$ref": "#/$defs/progressionOutcome"
+        }
+      }
+    },
+    "progressionOutcome": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "NO_EFFECT"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "condition",
+            "amount"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CHANGE_CONDITION_LEVEL"
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "amount": {
+              "type": "integer",
+              "not": {
+                "const": 0
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "count",
+            "die",
+            "damageType"
+          ],
+          "properties": {
+            "kind": {
+              "const": "DAMAGE"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "die": {
+              "type": "integer",
+              "minimum": 2
+            },
+            "damageType": {
+              "enum": [
+                "acid",
+                "bludgeoning",
+                "cold",
+                "fire",
+                "force",
+                "lightning",
+                "necrotic",
+                "piercing",
+                "poison",
+                "psychic",
+                "radiant",
+                "slashing",
+                "thunder"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "symptomId"
+          ],
+          "properties": {
+            "kind": {
+              "const": "START_SYMPTOM"
+            },
+            "symptomId": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "symptomId"
+          ],
+          "properties": {
+            "kind": {
+              "const": "END_SYMPTOM"
+            },
+            "symptomId": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "reference",
+            "procedure"
+          ],
+          "properties": {
+            "kind": {
+              "const": "RULE_PROCEDURE_OUTCOME"
+            },
+            "reference": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "procedure": {
+              "const": "indefinite-madness"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "END_DISEASE"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "condition"
+          ],
+          "properties": {
+            "kind": {
+              "const": "APPLY_CONDITION"
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "ability",
+            "amount",
+            "minimum"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CHANGE_ABILITY_SCORE"
+            },
+            "ability": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "minimum": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "amount",
+            "unit"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CHANGE_SPEED"
+            },
+            "amount": {
+              "type": "number"
+            },
+            "unit": {
+              "const": "feet"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "target"
+          ],
+          "properties": {
+            "kind": {
+              "const": "TRANSFORM_CREATURE"
+            },
+            "target": {
+              "$ref": "#/$defs/transformationTarget"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "immunity"
+          ],
+          "properties": {
+            "kind": {
+              "const": "GRANT_DISEASE_IMMUNITY"
+            },
+            "immunity": {
+              "$ref": "#/$defs/immunityDuration"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "VOMIT_PREVIOUS_DAY_FOOD"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "KILL_HOST"
+            }
+          }
+        }
+      ]
+    },
+    "abilityScoreAmount": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "count",
+            "die",
+            "unit"
+          ],
+          "properties": {
+            "kind": {
+              "const": "DICE_ROLL"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "die": {
+              "type": "integer",
+              "minimum": 2
+            },
+            "unit": {
+              "const": "points"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "properties": {
+            "amount": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "unit": {
+              "const": "points"
+            }
+          }
+        }
+      ]
     }
   }
 }

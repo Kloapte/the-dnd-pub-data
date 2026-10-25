@@ -1,0 +1,20 @@
+{
+  "id": "language:mm:umber-hulk",
+  "name": "Umber Hulk",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 292,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xmm:umber-hulk"
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:umber-hulk"
+    }
+  ]
+}

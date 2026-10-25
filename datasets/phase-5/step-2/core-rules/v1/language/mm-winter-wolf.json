@@ -1,0 +1,14 @@
+{
+  "id": "language:mm:winter-wolf",
+  "name": "Winter Wolf",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 340
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:winter-wolf"
+    }
+  ]
+}

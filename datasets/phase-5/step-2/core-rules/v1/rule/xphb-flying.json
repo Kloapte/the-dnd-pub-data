@@ -1,0 +1,40 @@
+{
+  "id": "rule:xphb:flying",
+  "name": "Flying",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 367,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "flying-fall-rule",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "FLYING",
+      "procedure": "fall-trigger",
+      "details": {
+        "kind": "FLIGHT_FALLING",
+        "fallingTriggers": [
+          "INCAPACITATED",
+          "PRONE",
+          "FLY_SPEED_ZERO"
+        ],
+        "hoverPreventsFall": true
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:incapacitated"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:prone"
+    }
+  ]
+}

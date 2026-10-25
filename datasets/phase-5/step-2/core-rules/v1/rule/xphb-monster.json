@@ -1,0 +1,19 @@
+{
+  "id": "rule:xphb:monster",
+  "name": "Monster",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 371,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:creature"
+    }
+  ]
+}

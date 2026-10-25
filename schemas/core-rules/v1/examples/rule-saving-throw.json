@@ -5,6 +5,7 @@
     "source": "XPHB",
     "page": 373
   },
+  "ruleType": "CORE",
   "mechanics": [
     {
       "componentId": "saving-throw",

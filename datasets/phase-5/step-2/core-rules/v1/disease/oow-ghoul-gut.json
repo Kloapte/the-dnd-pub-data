@@ -1,0 +1,88 @@
+{
+  "id": "disease:oow:ghoul-gut",
+  "name": "Ghoul Gut",
+  "sourceMetadata": {
+    "source": "OoW",
+    "page": 111
+  },
+  "infection": {
+    "transmission": [
+      "ingestion"
+    ],
+    "exposures": [
+      {
+        "kind": "INGEST_CONTAMINATED_MATERIAL",
+        "material": "WATER",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 12
+        },
+        "onFailure": "INFECTION"
+      }
+    ]
+  },
+  "recovery": [
+    {
+      "method": "skill-check",
+      "reference": {
+        "targetType": "skill",
+        "id": "skill:phb:medicine"
+      },
+      "ability": "wisdom",
+      "dc": 15,
+      "trigger": "LONG_REST_CARE",
+      "performedBy": "ANOTHER_CREATURE",
+      "outcome": "ENDS_DISEASE",
+      "caregiverLongRestOutcome": "NO_LONG_REST_BENEFIT"
+    }
+  ],
+  "effects": [
+    {
+      "kind": "DISEASE_RESTRICTION",
+      "restriction": "NO_NONMAGICAL_HP_OR_HIT_DICE_RECOVERY",
+      "lifecycle": "WHILE_DISEASE_ACTIVE"
+    }
+  ],
+  "progression": [
+    {
+      "kind": "TIMED_OUTCOME_BRANCH",
+      "branchId": "symptoms-begin",
+      "trigger": {
+        "kind": "LONG_REST_OR_EXCITEMENT"
+      },
+      "outcomes": [
+        {
+          "kind": "DAMAGE",
+          "count": 2,
+          "die": 4,
+          "damageType": "necrotic"
+        }
+      ]
+    },
+    {
+      "kind": "SAVING_THROW_BRANCH",
+      "branchId": "long-rest-recovery",
+      "trigger": {
+        "kind": "LONG_REST_COMPLETED",
+        "phase": "AFTER_INFECTION"
+      },
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 12
+      },
+      "onSuccess": [
+        {
+          "kind": "END_DISEASE"
+        }
+      ],
+      "onFailure": [
+        {
+          "kind": "DAMAGE",
+          "count": 2,
+          "die": 4,
+          "damageType": "necrotic"
+        }
+      ]
+    }
+  ]
+}

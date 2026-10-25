@@ -1,0 +1,22 @@
+{
+  "id": "rule:xge:simultaneous-effects",
+  "name": "Simultaneous Effects",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 77,
+    "reprintedAs": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:simultaneous-effects"
+      }
+    ]
+  },
+  "ruleType": "OPTIONAL",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:simultaneous-effects",
+      "relationship": "reprinted-in"
+    }
+  ]
+}

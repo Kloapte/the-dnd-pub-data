@@ -1,0 +1,23 @@
+{
+  "id": "language:erlw:daelkyr",
+  "name": "Daelkyr",
+  "sourceMetadata": {
+    "source": "ERLW",
+    "page": 6
+  },
+  "category": "exotic",
+  "script": "Daelkyr",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "aberration"
+        ],
+        "sources": [
+          "ERLW"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "rule:phb:playing-on-a-grid",
+  "name": "Playing on a Grid",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 192
+  },
+  "ruleType": "VARIANT",
+  "mechanics": [
+    {
+      "componentId": "grid-movement-cost",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "GRID_MOVEMENT",
+      "procedure": "grid-movement-cost",
+      "details": {
+        "kind": "GRID_MOVEMENT_COST",
+        "gridUnitFeet": 5,
+        "movementUnitFeet": 5,
+        "minimumMovementRemaining": 1,
+        "extraCostRequiresFullPayment": true
+      }
+    }
+  ]
+}

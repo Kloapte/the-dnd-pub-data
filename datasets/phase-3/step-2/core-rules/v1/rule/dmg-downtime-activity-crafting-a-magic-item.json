@@ -11,6 +11,7 @@
       }
     ]
   },
+  "ruleType": "OPTIONAL",
   "mechanics": [
     {
       "componentId": "craft-magic-item",

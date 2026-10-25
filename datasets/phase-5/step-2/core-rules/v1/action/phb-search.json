@@ -1,0 +1,52 @@
+{
+  "id": "action:phb:search",
+  "name": "Search",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 193,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:search"
+      }
+    ]
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "SEARCH"
+  ],
+  "references": [
+    {
+      "targetType": "skill",
+      "id": "skill:phb:perception"
+    },
+    {
+      "targetType": "skill",
+      "id": "skill:phb:investigation"
+    }
+  ],
+  "operations": [
+    {
+      "kind": "CHECK_OR_CONTEST",
+      "operationId": "search-check",
+      "resolution": "against-dc",
+      "actor": "acting-creature",
+      "abilities": [
+        "wisdom",
+        "intelligence"
+      ],
+      "abilitySelection": "DM-DETERMINES",
+      "dc": {
+        "kind": "EFFECT_DEFINED"
+      },
+      "requirement": "DM_MAY_REQUIRE",
+      "target": "target"
+    }
+  ]
+}

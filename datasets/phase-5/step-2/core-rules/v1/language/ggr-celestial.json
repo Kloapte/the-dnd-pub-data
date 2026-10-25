@@ -1,0 +1,22 @@
+{
+  "id": "language:ggr:celestial",
+  "name": "Celestial",
+  "sourceMetadata": {
+    "source": "GGR",
+    "page": 9
+  },
+  "category": "standard",
+  "script": "Celestial",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "selector": {
+          "kind": "TAG",
+          "value": "angel",
+          "source": "GGR"
+        }
+      }
+    }
+  ]
+}

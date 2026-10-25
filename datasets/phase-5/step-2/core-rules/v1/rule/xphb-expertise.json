@@ -1,0 +1,33 @@
+{
+  "id": "rule:xphb:expertise",
+  "name": "Expertise",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 367,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "expertise-proficiency-scaling",
+      "kind": "PROFICIENCY_RULE",
+      "subtype": "BONUS_SCALING",
+      "checkType": "ABILITY_CHECK",
+      "requiresSkillProficiency": true,
+      "multiplier": 2,
+      "unlessAlreadyDoubledByAnotherFeature": true,
+      "assignment": "ONE_SKILL_IN_WHICH_PROFICIENT",
+      "maximumInstancesPerSkill": 1
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:proficiency",
+      "relationship": "scales"
+    }
+  ]
+}

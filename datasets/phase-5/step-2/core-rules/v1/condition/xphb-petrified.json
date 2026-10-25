@@ -1,0 +1,71 @@
+{
+  "id": "condition:xphb:petrified",
+  "name": "Petrified",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 372,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "effects": [
+    {
+      "kind": "MOVEMENT_MODIFIER",
+      "movement": "speed-flat",
+      "amount": 0,
+      "actor": "affected-creature",
+      "duration": "while-condition-active"
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "advantage",
+      "actor": "attacker",
+      "target": "affected-creature",
+      "appliesWhen": "attack-targets-affected",
+      "duration": "while-condition-active"
+    },
+    {
+      "kind": "PHYSICAL_STATE",
+      "state": "inanimate-stone",
+      "weightMultiplier": 10,
+      "aging": "ceases",
+      "includesWornAndCarriedNonmagicalObjects": true
+    },
+    {
+      "kind": "AUTOMATIC_SAVING_THROW_FAILURE",
+      "actor": "affected-creature",
+      "abilities": [
+        "strength",
+        "dexterity"
+      ],
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    },
+    {
+      "kind": "DAMAGE_MITIGATION",
+      "damageTypes": "all",
+      "mitigation": "resistance"
+    },
+    {
+      "kind": "CONDITION_INTERACTION",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:poisoned"
+      },
+      "interaction": "immune-to",
+      "lifecycle": "while-source-condition-active"
+    },
+    {
+      "kind": "CONDITION_INTERACTION",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:incapacitated"
+      },
+      "interaction": "apply",
+      "lifecycle": "while-source-condition-active"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "language:erlw:dwarvish",
+  "name": "Dwarvish",
+  "sourceMetadata": {
+    "source": "ERLW",
+    "page": 6
+  },
+  "category": "standard",
+  "script": "Dwarvish"
+}

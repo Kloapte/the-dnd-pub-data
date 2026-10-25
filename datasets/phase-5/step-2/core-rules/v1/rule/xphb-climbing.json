@@ -1,0 +1,46 @@
+{
+  "id": "rule:xphb:climbing",
+  "name": "Climbing",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 363,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "climbing-movement",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "CLIMBING",
+      "procedure": "movement-cost",
+      "speedType": "climb",
+      "details": {
+        "kind": "CLIMBING_MOVEMENT",
+        "mode": "climbing",
+        "additionalFeetPerFoot": 1,
+        "difficultTerrainAdditionalFeetPerFoot": 2,
+        "difficultTerrainCostRelationship": "DO_NOT_ADD",
+        "waivedWhenUsingSpeedType": "climb",
+        "optionalCheck": {
+          "trigger": "SLIPPERY_OR_FEW_HANDHOLDS",
+          "dmMayRequire": true,
+          "ability": "strength",
+          "skill": {
+            "targetType": "skill",
+            "id": "skill:xphb:athletics"
+          },
+          "dc": 15
+        }
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:athletics"
+    }
+  ]
+}

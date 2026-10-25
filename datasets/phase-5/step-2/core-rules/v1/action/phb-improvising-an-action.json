@@ -1,0 +1,23 @@
+{
+  "id": "action:phb:improvising-an-action",
+  "name": "Improvising an Action",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 193,
+    "flags": {
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:improvising-an-action"
+      }
+    ]
+  },
+  "timing": {
+    "kind": "varied_gametime"
+  },
+  "capabilities": [
+    "IMPROVISE"
+  ]
+}

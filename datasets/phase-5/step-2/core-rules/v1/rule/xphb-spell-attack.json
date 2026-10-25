@@ -1,0 +1,33 @@
+{
+  "id": "rule:xphb:spell-attack",
+  "name": "Spell Attack",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 374,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "spell-attack",
+      "kind": "SPELL_MAGIC",
+      "subtype": "SPELL_ATTACK",
+      "attackRoll": {
+        "kind": "ATTACK_ROLL",
+        "forms": [
+          "spell"
+        ]
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:attack-roll",
+      "relationship": "uses-attack-roll-procedure"
+    }
+  ]
+}

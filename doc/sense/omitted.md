@@ -1,58 +1,98 @@
-# Sense source content omitted during Step 2 Phase 3 representative conversion
+# Sense source content omitted during Step 2 Core Rules conversion
 
 This restricted internal register preserves complete original entries for audit. Do not publish or distribute excerpts without a licensing review.
-### sense:phb:darkvision — entry 0
+### sense:phb:blindsight — entry 0
 
 - Source file: `src/main/resources/data/senses.json`
-- Source object: `$.sense[2]`
-- Source entry path: `$.sense[2].entries[0]`
-- Canonical output: `sense/phb-darkvision.json`
-- OMITTED: Dim light treated as bright light — The approved SIGHT structure has no distinct transformation for dim-light conditions; darknessAs applies to darkness.; cause: `SCHEMA_UNSUPPORTED`
+- Source object: `$.sense[0]`
+- Source entry path: `$.sense[0].entries[0]`
+- Canonical output: `sense/phb-blindsight.json`
+- OMITTED: Creature examples and descriptive explanation of who may have Blindsight — These examples do not add a separate capability or procedure beyond the defined nonvisual sense.; cause: `NON_MECHANICAL`
 
 Complete original source entry:
 
 ```json
-"Many creatures in fantasy gaming worlds, especially those that dwell underground, have darkvision. Within a specified range, a creature with darkvision can see in dim light as if it were bright light and in darkness as if it were dim light, so areas of darkness are only lightly obscured as far as that creature is concerned. However, the creature can't discern color in that darkness, only shades of gray."
+"A creature with blindsight can perceive its surroundings without relying on sight, within a specific radius. Creatures without eyes, such as oozes, and creatures with echolocation or heightened senses, such as bats and true dragons, have this sense."
 ```
 
-### sense:mm:tremorsense — entry 0
+### sense:xphb:blindsight — entry 0
 
 - Source file: `src/main/resources/data/senses.json`
-- Source object: `$.sense[4]`
-- Source entry path: `$.sense[4].entries[0]`
-- Canonical output: `sense/mm-tremorsense.json`
-- OMITTED: Pinpointing the origin of vibrations. — The Sense contract records what may be detected and environmental restrictions but has no precision/location capability.; cause: `SCHEMA_UNSUPPORTED`
+- Source object: `$.sense[1]`
+- Source entry path: `$.sense[1].entries[0]`
+- Canonical output: `sense/xphb-blindsight.json`
+- OMITTED: The exclusion for targets behind Total Cover — The approved Sense contract has no typed cover obstruction applicability.; cause: `SCHEMA_UNSUPPORTED`
 
 Complete original source entry:
 
 ```json
-"A creature with tremorsense can detect and pinpoint the origin of vibrations within a specific radius, provided that the creature and the source of the vibrations are in contact with the same ground or substance. Tremorsense can't be used to detect flying or incorporeal creatures. Many burrowing creatures, such as ankhegs and umber hulks, have this special sense."
+"If you have Blindsight, you can see within a specific range without relying on physical sight. Within that range, you can see anything that isn't behind {@variantrule Cover|XPHB|Total Cover} even if you have the {@condition Blinded|XPHB} condition or are in {@variantrule Darkness|XPHB}. Moreover, in that range, you can see something that has the {@condition Invisible|XPHB} condition."
 ```
 
-### sense:xphb:tremorsense — entry 0
+### sense:xphb:truesight — entry 0
 
 - Source file: `src/main/resources/data/senses.json`
-- Source object: `$.sense[5]`
-- Source entry path: `$.sense[5].entries[0]`
-- Canonical output: `sense/xphb-tremorsense.json`
-- OMITTED: Pinpointed location of detected creatures and moving objects — The approved Sense schema has no location-precision field.; cause: `SCHEMA_UNSUPPORTED`
+- Source object: `$.sense[7]`
+- Source entry path: `$.sense[7].entries[0]`
+- Canonical output: `sense/xphb-truesight.json`
+- OMITTED: Introductory statement that Truesight enhances vision within a specified range — The introduction contains no distinct capability beyond the listed behaviors; the range is creature-specific and excluded from Sense.; cause: `NON_MECHANICAL`
 
 Complete original source entry:
 
 ```json
-"A creature with Tremorsense can pinpoint the location of creatures and moving objects within a specific range, provided that the creature with Tremorsense and anything it is detecting are both in contact with the same surface (such as the ground, a wall, or a ceiling) or the same liquid."
+"If you have Truesight, your vision is enhanced within a specified range. Within that range, your vision pierces through the following:"
 ```
 
-### sense:phb:truesight — entry 0
+### sense:xphb:truesight — entry 1
 
 - Source file: `src/main/resources/data/senses.json`
-- Source object: `$.sense[6]`
-- Source entry path: `$.sense[6].entries[0]`
-- Canonical output: `sense/phb-truesight.json`
-- OMITTED: Invisible objects and the automatic detection/save outcome against visual illusions — The approved Sense schema cannot distinguish seeing invisible objects from objects generally or encode automatic illusion detection and saving-throw success.; cause: `SCHEMA_UNSUPPORTED`
+- Source object: `$.sense[7]`
+- Source entry path: `$.sense[7].entries[1]`
+- Canonical output: `sense/xphb-truesight.json`
+- OMITTED: Seeing in normal and magical Darkness — The approved Sense contract does not distinguish normal from magical Darkness and has no Darkness-penetration capability that preserves this distinction.; cause: `SCHEMA_UNSUPPORTED`
 
 Complete original source entry:
 
 ```json
-"A creature with truesight can, out to a specific range, see in normal and magical darkness, see invisible creatures and objects, automatically detect visual illusions and succeed on saving throws against them, and perceives the original form of a shapechanger or a creature that is transformed by magic. Furthermore, the creature can see into the Ethereal Plane."
+{
+  "type": "list",
+  "style": "list-hang-notitle",
+  "items": [
+    {
+      "type": "item",
+      "name": "Darkness",
+      "entries": [
+        "You can see in normal and magical {@variantrule Darkness|XPHB}."
+      ]
+    },
+    {
+      "type": "item",
+      "name": "Invisibility",
+      "entries": [
+        "You see creatures and objects that have the {@condition Invisible|XPHB} condition."
+      ]
+    },
+    {
+      "type": "item",
+      "name": "Visual Illusions",
+      "entries": [
+        "Visual illusions appear transparent to you, and you automatically succeed on {@variantrule Saving Throw|XPHB|saving throws} against them."
+      ]
+    },
+    {
+      "type": "item",
+      "name": "Transformations",
+      "entries": [
+        "You discern the true form of any creature or object you see that has been transformed by magic."
+      ]
+    },
+    {
+      "type": "item",
+      "name": "Ethereal Plane",
+      "entries": [
+        "You see into the Ethereal Plane."
+      ]
+    }
+  ]
+}
 ```

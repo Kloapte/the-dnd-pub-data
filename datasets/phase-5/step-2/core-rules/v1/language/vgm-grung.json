@@ -1,0 +1,22 @@
+{
+  "id": "language:vgm:grung",
+  "name": "Grung",
+  "sourceMetadata": {
+    "source": "VGM",
+    "page": 156
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:vgm:grung"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:vgm:grung-wildling"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:vgm:grung-elite-warrior"
+    }
+  ]
+}

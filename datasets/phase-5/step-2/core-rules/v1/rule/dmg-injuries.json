@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:injuries",
+  "name": "Injuries",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 272
+  },
+  "ruleType": "OPTIONAL"
+}

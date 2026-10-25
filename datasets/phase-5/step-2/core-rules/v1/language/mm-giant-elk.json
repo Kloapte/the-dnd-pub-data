@@ -1,0 +1,14 @@
+{
+  "id": "language:mm:giant-elk",
+  "name": "Giant Elk",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 325
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:giant-elk"
+    }
+  ]
+}

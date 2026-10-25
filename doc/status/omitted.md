@@ -1,4 +1,4 @@
-# Status source content omitted during Step 2 Phase 3 representative conversion
+# Status source content omitted during Step 2 Core Rules conversion
 
 This restricted internal register preserves complete original entries for audit. Do not publish or distribute excerpts without a licensing review.
 ### status:phb:concentration — entry 0

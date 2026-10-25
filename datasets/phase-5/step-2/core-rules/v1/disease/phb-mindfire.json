@@ -1,0 +1,45 @@
+{
+  "id": "disease:phb:mindfire",
+  "name": "Mindfire",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 227
+  },
+  "symptoms": [
+    {
+      "kind": "ABILITY_ROLL_MODIFIER",
+      "roll": "ability-check",
+      "direction": "disadvantage",
+      "ability": "intelligence"
+    },
+    {
+      "kind": "ABILITY_ROLL_MODIFIER",
+      "roll": "saving-throw",
+      "direction": "disadvantage",
+      "ability": "intelligence"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "spell",
+      "id": "spell:phb:contagion",
+      "relationship": "can-be-inflicted-by"
+    },
+    {
+      "targetType": "spell",
+      "id": "spell:phb:confusion",
+      "relationship": "combat-behavior"
+    }
+  ],
+  "effects": [
+    {
+      "kind": "REFERENCED_PROCEDURE",
+      "reference": {
+        "targetType": "spell",
+        "id": "spell:phb:confusion"
+      },
+      "relation": "BEHAVES_AS_EFFECT",
+      "appliesWhen": "DURING_COMBAT"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "skill:xphb:nature",
+  "name": "Nature",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 14,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "ability": "intelligence"
+}

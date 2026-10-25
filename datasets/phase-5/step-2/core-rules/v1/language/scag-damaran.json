@@ -1,0 +1,15 @@
+{
+  "id": "language:scag:damaran",
+  "name": "Damaran",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:frhof:damaran"
+      }
+    ]
+  },
+  "script": "Dethek"
+}

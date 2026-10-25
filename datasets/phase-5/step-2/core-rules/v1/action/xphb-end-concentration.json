@@ -1,0 +1,18 @@
+{
+  "id": "action:xphb:end-concentration",
+  "name": "End Concentration",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 363,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "timing": {
+    "kind": "free"
+  },
+  "capabilities": [
+    "END_CONCENTRATION"
+  ]
+}

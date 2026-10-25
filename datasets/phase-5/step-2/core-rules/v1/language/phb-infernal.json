@@ -1,0 +1,31 @@
+{
+  "id": "language:phb:infernal",
+  "name": "Infernal",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:infernal"
+      }
+    ]
+  },
+  "category": "exotic",
+  "script": "Infernal",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "selector": {
+          "kind": "TAG",
+          "value": "devil"
+        }
+      }
+    }
+  ]
+}

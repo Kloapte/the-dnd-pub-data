@@ -1,0 +1,86 @@
+{
+  "id": "condition:xphb:prone",
+  "name": "Prone",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 372,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "effects": [
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "disadvantage",
+      "actor": "affected-creature",
+      "target": "target",
+      "appliesWhen": "affected-creature-attacks",
+      "duration": "while-condition-active"
+    },
+    {
+      "kind": "MOVEMENT_CONSTRAINT",
+      "actor": "affected-creature",
+      "constraint": "crawl-only",
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      },
+      "endingCondition": {
+        "targetType": "condition",
+        "id": "condition:xphb:prone"
+      },
+      "standingCost": {
+        "kind": "SPEND_SPEED_TO_STAND",
+        "speedFraction": 0.5,
+        "rounding": "down"
+      }
+    },
+    {
+      "kind": "MOVEMENT_CONSTRAINT",
+      "actor": "affected-creature",
+      "constraint": "cannot-stand-when-speed-zero",
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    },
+    {
+      "kind": "CONDITION_ENDING",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:prone"
+      },
+      "when": "creature-stands"
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "advantage",
+      "actor": "attacker",
+      "target": "affected-creature",
+      "appliesWhen": "attack-targets-affected",
+      "duration": "while-condition-active",
+      "applicability": {
+        "kind": "CREATURE_DISTANCE",
+        "otherCreature": "attacker",
+        "distanceFeet": 5,
+        "relation": "within"
+      }
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "disadvantage",
+      "actor": "attacker",
+      "target": "affected-creature",
+      "appliesWhen": "attack-targets-affected",
+      "duration": "while-condition-active",
+      "applicability": {
+        "kind": "CREATURE_DISTANCE",
+        "otherCreature": "attacker",
+        "distanceFeet": 5,
+        "relation": "beyond"
+      }
+    }
+  ]
+}

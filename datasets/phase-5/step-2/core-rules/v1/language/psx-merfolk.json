@@ -1,0 +1,9 @@
+{
+  "id": "language:psx:merfolk",
+  "name": "Merfolk",
+  "sourceMetadata": {
+    "source": "PSX",
+    "page": 6
+  },
+  "script": "Merfolk"
+}

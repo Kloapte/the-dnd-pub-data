@@ -1,0 +1,36 @@
+{
+  "id": "language:mm:modron",
+  "name": "Modron",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 224,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xmm:modron"
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:monodrone"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:duodrone"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:tridrone"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:quadrone"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:pentadrone"
+    }
+  ]
+}

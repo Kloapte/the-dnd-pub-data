@@ -1,0 +1,25 @@
+{
+  "id": "condition:xphb:deafened",
+  "name": "Deafened",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 365,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "effects": [
+    {
+      "kind": "REMOVE_SENSE",
+      "sense": "hearing",
+      "actor": "affected-creature"
+    },
+    {
+      "kind": "AUTOMATIC_CHECK_FAILURE",
+      "roll": "ability-check",
+      "requirement": "requires-hearing",
+      "actor": "affected-creature"
+    }
+  ]
+}

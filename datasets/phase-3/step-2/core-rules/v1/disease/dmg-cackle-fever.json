@@ -1,0 +1,163 @@
+{
+  "id": "disease:dmg:cackle-fever",
+  "name": "Cackle Fever",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 257,
+    "flags": {
+      "srd": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "disease",
+        "id": "disease:xdmg:cackle-fever"
+      }
+    ]
+  },
+  "applicability": {
+    "targetCreatureTypes": [
+      "humanoid"
+    ],
+    "excludedTargets": [
+      {
+        "targetType": "race",
+        "id": "race:phb:gnome"
+      }
+    ]
+  },
+  "infection": {
+    "secondaryExposures": [
+      {
+        "exposureId": "mad-laughter-spread",
+        "kind": "NEARBY_SYMPTOMATIC_CREATURE",
+        "trigger": "target-starts-turn-within-distance",
+        "symptomId": "mad-laughter",
+        "distance": 10,
+        "unit": "feet",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 10
+        },
+        "onFailure": {
+          "kind": "INFECT_TARGET"
+        },
+        "onSuccess": {
+          "kind": "SOURCE_RELATIVE_IMMUNITY",
+          "symptomId": "mad-laughter",
+          "source": "exposing-creature",
+          "duration": {
+            "amount": 24,
+            "unit": "hour"
+          }
+        }
+      }
+    ]
+  },
+  "incubation": {
+    "kind": "DICE_ROLL",
+    "count": 1,
+    "die": 4,
+    "unit": "hour"
+  },
+  "symptoms": [
+    {
+      "kind": "CONDITION_LEVEL_CHANGE",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:exhaustion"
+      },
+      "amount": 1,
+      "cannotReduceUntilDiseaseEnds": true
+    },
+    {
+      "kind": "TEMPORARY_CONDITION",
+      "activation": "triggered-by-progression",
+      "symptomId": "mad-laughter",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:incapacitated"
+      },
+      "duration": {
+        "amount": 1,
+        "unit": "minute"
+      },
+      "repeatSaveToEnd": {
+        "ability": "constitution",
+        "dc": 13,
+        "trigger": "end-of-each-turn",
+        "dcTrackId": "cackle-fever-dc"
+      }
+    }
+  ],
+  "progression": [
+    {
+      "kind": "SAVING_THROW_BRANCH",
+      "branchId": "great-stress-save",
+      "trigger": {
+        "kind": "GREAT_STRESS",
+        "examples": [
+          "entering-combat",
+          "taking-damage",
+          "fear",
+          "nightmare"
+        ]
+      },
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 13,
+        "dcTrackId": "cackle-fever-dc"
+      },
+      "onSuccess": [
+        {
+          "kind": "NO_EFFECT"
+        }
+      ],
+      "onFailure": [
+        {
+          "kind": "DAMAGE",
+          "count": 1,
+          "die": 10,
+          "damageType": "psychic"
+        },
+        {
+          "kind": "START_SYMPTOM",
+          "symptomId": "mad-laughter"
+        }
+      ]
+    }
+  ],
+  "recovery": [
+    {
+      "id": "cackle-fever-recovery",
+      "method": "saving-throw",
+      "dcTrackId": "cackle-fever-dc",
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 13,
+        "dcReduction": {
+          "dieCount": 1,
+          "dieSize": 6
+        },
+        "frequency": "each-long-rest",
+        "dcTrackId": "cackle-fever-dc"
+      },
+      "endsWhenDcAtOrBelow": 0,
+      "outcomeCounter": {
+        "branchId": "cackle-fever-recovery",
+        "countedOutcome": "FAILURE",
+        "threshold": 3,
+        "sequence": "UNSPECIFIED_BY_SOURCE",
+        "reset": "UNSPECIFIED_BY_SOURCE",
+        "onThreshold": {
+          "kind": "RULE_PROCEDURE_OUTCOME",
+          "reference": {
+            "targetType": "rule",
+            "id": "rule:dmg:madness",
+            "relationship": "indefinite-madness-options"
+          },
+          "procedure": "indefinite-madness"
+        }
+      }
+    }
+  ]
+}

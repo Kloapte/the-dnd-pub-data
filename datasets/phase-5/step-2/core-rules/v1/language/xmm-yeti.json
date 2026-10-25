@@ -1,0 +1,18 @@
+{
+  "id": "language:xmm:yeti",
+  "name": "Yeti",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 339
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:abominable-yeti"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:yeti"
+    }
+  ]
+}

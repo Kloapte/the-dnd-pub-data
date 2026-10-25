@@ -1,0 +1,165 @@
+{
+  "id": "disease:fraif:the-rusting",
+  "name": "The Rusting",
+  "sourceMetadata": {
+    "source": "FRAiF",
+    "page": 165
+  },
+  "infection": {
+    "transmission": [
+      "wound",
+      "magical-exposure"
+    ],
+    "exposures": [
+      {
+        "kind": "WOUND_BY_CONTAGION_CARRIER",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 10
+        },
+        "onFailure": "INFECTION",
+        "excludedCreatureTypes": [
+          "construct",
+          "undead"
+        ],
+        "automaticSuccessForExcludedTargets": true
+      },
+      {
+        "kind": "ENVIRONMENTAL_EXPOSURE",
+        "environment": "CONTAMINATED_AREA",
+        "duration": {
+          "amount": 1,
+          "unit": "hour"
+        },
+        "trigger": "TIME_IN_AREA",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 10
+        },
+        "onFailure": "INFECTION"
+      }
+    ]
+  },
+  "symptoms": [
+    {
+      "kind": "CONDITION_LEVEL_CHANGE",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:exhaustion"
+      },
+      "amount": 1
+    }
+  ],
+  "progression": [
+    {
+      "kind": "SAVING_THROW_BRANCH",
+      "branchId": "daily-exhaustion",
+      "trigger": {
+        "kind": "DAILY_AT",
+        "time": "DAWN"
+      },
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 10
+      },
+      "onFailure": [
+        {
+          "kind": "CHANGE_CONDITION_LEVEL",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:exhaustion"
+          },
+          "amount": 1
+        }
+      ],
+      "onSuccess": [
+        {
+          "kind": "CHANGE_CONDITION_LEVEL",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:exhaustion"
+          },
+          "amount": -1
+        }
+      ],
+      "endsWhen": {
+        "kind": "CONDITION_LEVEL_AT_OR_BELOW",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:exhaustion"
+        },
+        "level": 0
+      }
+    }
+  ],
+  "recovery": [
+    {
+      "method": "spell",
+      "reference": {
+        "targetType": "spell",
+        "id": "spell:phb:remove-curse",
+        "relationship": "ends-curse"
+      }
+    }
+  ],
+  "conditionGatedRestrictions": [
+    {
+      "kind": "LONG_REST_PREVENTED_RECOVERY",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:exhaustion"
+      },
+      "minimumLevel": 1,
+      "preventedRecoveries": [
+        "condition-level-reduction"
+      ]
+    }
+  ],
+  "effects": [
+    {
+      "kind": "SPEED_CHANGE",
+      "amount": -5,
+      "unit": "feet",
+      "lifecycle": "WHILE_DISEASE_ACTIVE"
+    },
+    {
+      "kind": "TRANSFORMATION_OUTCOME",
+      "target": {
+        "kind": "UNNORMALIZED_SOURCE_ENTITY",
+        "name": "Rusted"
+      },
+      "trigger": "CONDITION_LEVEL_THRESHOLD",
+      "threshold": 6,
+      "exception": "DOES_NOT_DIE",
+      "creatureTypeAfter": "construct",
+      "immunities": [
+        {
+          "kind": "DAMAGE_TYPE",
+          "damageType": "poison"
+        },
+        {
+          "kind": "CONDITION",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:exhaustion"
+          }
+        },
+        {
+          "kind": "CONDITION",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:petrified"
+          }
+        },
+        {
+          "kind": "CONDITION",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:poisoned"
+          }
+        }
+      ],
+      "outcomeAfter": "BECOMES_TRANSFORMED_CREATURE"
+    }
+  ]
+}

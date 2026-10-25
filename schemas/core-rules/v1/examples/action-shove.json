@@ -38,7 +38,15 @@
       "targetWithinReach": true,
       "operationId": "shove-check",
       "replacesOneAttack": true,
-      "target": "target"
+      "target": "target",
+      "automaticSuccessWhen": {
+        "kind": "HAS_CONDITION",
+        "actor": "target",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:incapacitated"
+        }
+      }
     },
     {
       "kind": "FORCED_MOVEMENT",

@@ -1,0 +1,38 @@
+{
+  "id": "rule:xge:downtime-activity-relaxation",
+  "name": "Downtime Activity: Relaxation",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 131
+  },
+  "ruleType": "VARIANT_OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "relaxation-activity",
+      "kind": "DOWNTIME_PROCEDURE",
+      "subtype": "ACTIVITY",
+      "procedure": "relaxation",
+      "duration": {
+        "amount": 1,
+        "unit": "week"
+      },
+      "minimumLifestyle": "MODEST",
+      "sourceDefinedRecoveryCadence": "ADVANTAGE_WHILE_ACTIVITY_CONTINUES",
+      "recoveryOutcomes": [
+        {
+          "kind": "RESTORE_ONE_REDUCED_ABILITY_SCORE",
+          "resource": "ABILITY_SCORE",
+          "effect": "REDUCED_SCORE"
+        }
+      ],
+      "excludeOngoingMagicalEffects": true,
+      "recoverySelection": "CHOOSE_ONE_AT_ACTIVITY_END",
+      "ongoingBenefits": [
+        {
+          "kind": "END_EFFECT",
+          "effect": "PREVENTS_HIT_POINT_RECOVERY"
+        }
+      ]
+    }
+  ]
+}

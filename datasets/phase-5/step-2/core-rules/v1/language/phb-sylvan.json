@@ -1,0 +1,30 @@
+{
+  "id": "language:phb:sylvan",
+  "name": "Sylvan",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:sylvan"
+      }
+    ]
+  },
+  "category": "exotic",
+  "script": "Elvish",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "fey"
+        ]
+      }
+    }
+  ]
+}

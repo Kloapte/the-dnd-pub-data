@@ -1,0 +1,68 @@
+{
+  "id": "rule:dmg:flanking",
+  "name": "Flanking",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 251
+  },
+  "ruleType": "OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "flanking",
+      "kind": "POSITIONAL_MODIFIER",
+      "subtype": "FLANKING",
+      "requiresMiniatures": true,
+      "targetRole": "ENEMY",
+      "participants": [
+        "ATTACKER",
+        "ALLY"
+      ],
+      "participantsMustSeeTarget": true,
+      "participantsCannotHaveCondition": {
+        "targetType": "condition",
+        "id": "condition:phb:incapacitated"
+      },
+      "requiresAdjacentPositions": true,
+      "squareGrid": {
+        "relativePosition": "OPPOSITE_SIDES_OR_CORNERS",
+        "attackApplicability": "MELEE_ATTACKS",
+        "tieBreakProcedure": "CENTER_LINE_CROSSES_OPPOSITE_SIDES_OR_CORNERS"
+      },
+      "hexGrid": {
+        "relativePosition": "OPPOSITE_SIDES",
+        "attackApplicability": "ATTACK_ROLLS",
+        "targetSizeSeparations": [
+          {
+            "targetSizeGroup": "TINY_SMALL_MEDIUM",
+            "hexesBetween": 2,
+            "comparison": "EXACTLY"
+          },
+          {
+            "targetSizeGroup": "LARGE",
+            "hexesBetween": 4,
+            "comparison": "EXACTLY"
+          },
+          {
+            "targetSizeGroup": "HUGE",
+            "hexesBetween": 5,
+            "comparison": "EXACTLY"
+          },
+          {
+            "targetSizeGroup": "GARGANTUAN",
+            "hexesBetween": 6,
+            "comparison": "AT_LEAST"
+          }
+        ]
+      },
+      "largeOrLargerSpaceRule": {
+        "appliesToFlankerSize": "LARGE_OR_LARGER",
+        "qualification": "AT_LEAST_ONE_SPACE_CELL_QUALIFIES"
+      },
+      "benefit": {
+        "kind": "D20_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage"
+      }
+    }
+  ]
+}

@@ -5,6 +5,7 @@
     "source": "XPHB",
     "page": 364
   },
+  "ruleType": "CORE",
   "mechanics": [
     {
       "componentId": "d20-test",

@@ -1,0 +1,15 @@
+{
+  "id": "language:scag:turmic",
+  "name": "Turmic",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:frhof:turmic"
+      }
+    ]
+  },
+  "script": "Thorass"
+}

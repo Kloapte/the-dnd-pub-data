@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:facing",
+  "name": "Facing",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 252
+  },
+  "ruleType": "OPTIONAL"
+}

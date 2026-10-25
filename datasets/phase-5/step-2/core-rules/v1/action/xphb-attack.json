@@ -1,0 +1,39 @@
+{
+  "id": "action:xphb:attack",
+  "name": "Attack",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 361,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "ATTACK_MELEE",
+    "ATTACK_RANGED",
+    "ATTACK_BAREHANDS"
+  ],
+  "operations": [
+    {
+      "kind": "ATTACK_RESOLUTION",
+      "attack": {
+        "kind": "ATTACK_ROLL",
+        "forms": [
+          "melee",
+          "ranged",
+          "unarmed",
+          "weapon"
+        ]
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "action",
+      "id": "action:xphb:two-weapon-fighting"
+    }
+  ]
+}

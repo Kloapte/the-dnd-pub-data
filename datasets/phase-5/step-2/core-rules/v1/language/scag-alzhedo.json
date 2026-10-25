@@ -1,0 +1,15 @@
+{
+  "id": "language:scag:alzhedo",
+  "name": "Alzhedo",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:frhof:alzhedo"
+      }
+    ]
+  },
+  "script": "Thorass"
+}

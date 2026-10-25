@@ -1,5 +1,5 @@
 {
-  "title": "Step 2 Phase 3 Core Rules representative source-entry accounting",
+  "title": "Step 2 Phase 3 Core Rules representative source-entry accounting, revised during Phase 4",
   "sourceFiles": [
     "actions.json",
     "variantrules.json",
@@ -9,10 +9,10 @@
     "languages.json"
   ],
   "selectionCount": 34,
-  "canonicalRecordCount": 33,
-  "convertedRecordCount": 16,
-  "partiallyConvertedRecordCount": 17,
-  "unsupportedRecordCount": 1,
+  "canonicalRecordCount": 34,
+  "convertedRecordCount": 25,
+  "partiallyConvertedRecordCount": 9,
+  "unsupportedRecordCount": 0,
   "records": [
     {
       "canonicalId": "action:phb:attack",
@@ -47,10 +47,15 @@
               "reason": "The canonical capabilities and ATTACK_RESOLUTION represent the action mechanics."
             },
             {
+              "classification": "INTERPRETED",
+              "portion": "Exactly one melee or ranged attack",
+              "reason": "The single ATTACK_RESOLUTION operation represents one attack by this Action."
+            },
+            {
               "classification": "OMITTED",
-              "portion": "Exactly one attack, the Making an Attack procedure, and its separately defined resolution",
-              "reason": "The approved Action schema has no attack-count field or complete attack procedure; the referenced book section has no exact standalone canonical identity in this selection.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "portion": "The separately defined Making an Attack procedure",
+              "reason": "The source directs attack resolution to a Rule procedure that is not represented by the Action entity.",
+              "cause": "EXTERNAL_DEPENDENCY"
             }
           ]
         },
@@ -149,16 +154,15 @@
           ],
           "classifications": [
             {
-              "classification": "OMITTED",
-              "portion": "complete source entry",
-              "reason": "Dragging or carrying the Grappled target while moving and the half-speed exception for a target at least two sizes smaller are not expressible by the approved Action movement operations.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "classification": "INTERPRETED",
+              "portion": "Dragging or carrying the Grappled target while moving, with half-Speed cost waived when the target is at least two sizes smaller",
+              "reason": "The MOVE_WITH_GRAPPLED_TARGET operation records the grappling relationship, voluntary drag/carry modes, half-Speed cost, and exact size exception."
             }
           ]
         }
       ],
       "canonicalOutput": "action/phb-grapple.json",
-      "conversionStatus": "partial"
+      "conversionStatus": "converted"
     },
     {
       "canonicalId": "action:phb:shove",
@@ -343,14 +347,8 @@
           "classifications": [
             {
               "classification": "INTERPRETED",
-              "portion": "complete source entry",
-              "reason": "The forceful-body attack, five-foot target distance, and Damage/Grapple/Shove option set are represented by the shared attack and option components."
-            },
-            {
-              "classification": "OMITTED",
-              "portion": "The five-foot range also applies to the Grapple and Shove options",
-              "reason": "ATTACK_ROLL.reachFeet can express range for the attack/damage branch, but the approved UNARMED_STRIKE_OPTION structure has no range field for its saving-throw options.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "portion": "The forceful-body attack, five-foot target distance, and Damage/Grapple/Shove option set",
+              "reason": "The shared attack and option components now include five-foot reach on both saving-throw options."
             }
           ]
         },
@@ -392,7 +390,7 @@
         }
       ],
       "canonicalOutput": "rule/xphb-unarmed-strike.json",
-      "conversionStatus": "partial"
+      "conversionStatus": "converted"
     },
     {
       "canonicalId": "rule:xphb:difficult-terrain",
@@ -440,16 +438,15 @@
           ],
           "classifications": [
             {
-              "classification": "OMITTED",
-              "portion": "Listed space contents and the open-ended similar-feature adjudication",
-              "reason": "The approved movement component cannot express the qualifying terrain conditions or the DM-adjudicated similarity test.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "classification": "INTERPRETED",
+              "portion": "Qualifying space contents and similar DM-adjudicated cases",
+              "reason": "Typed qualifying-space predicates represent creature/ally/size, furniture size, listed materials, liquid depth, opening size, slope threshold, and similar adjudication."
             }
           ]
         }
       ],
       "canonicalOutput": "rule/xphb-difficult-terrain.json",
-      "conversionStatus": "partial"
+      "conversionStatus": "converted"
     },
     {
       "canonicalId": "rule:dmg:downtime-activity-crafting-a-magic-item",
@@ -999,19 +996,19 @@
           "classifications": [
             {
               "classification": "INTERPRETED",
-              "portion": "Contact/wound transmission categories and DC 11 Constitution infection save",
-              "reason": "Disease.infection represents the stated routes and saving-throw input."
+              "portion": "Humanoid applicability, qualified wound/contact exposures, and DC 11 Constitution infection save",
+              "reason": "Applicability, exposure variants, and infection saving throw preserve the source restrictions and procedure."
+            },
+            {
+              "classification": "INTERPRETED",
+              "portion": "Named carriers as illustrative examples of wound transmission",
+              "reason": "The source names otyughs and rats as examples rather than a closed source list; the typed wound-by-carrier route preserves the general mechanic."
             },
             {
               "classification": "OMITTED",
-              "portion": "Humanoid-only target, contaminated source qualification, environmental origin, and 1d4-day incubation",
-              "reason": "The approved Disease schema has no target-susceptibility predicate or random-die incubation interval.",
-              "cause": "SCHEMA_UNSUPPORTED"
-            },
-            {
-              "classification": "DUPLICATE",
-              "portion": "Otyughs and rats as examples of carriers",
-              "reason": "These are illustrative carrier examples; the supported wound/contact routes are represented without asserting an exhaustive carrier list."
+              "portion": "Fouled potions/alchemical waste as origin and sewer/refuse heaps as disease ecology",
+              "reason": "Descriptive ecology has no canonical Disease mechanic field and is not required to express transmission behavior.",
+              "cause": "NON_MECHANICAL"
             }
           ]
         },
@@ -1026,14 +1023,8 @@
           "classifications": [
             {
               "classification": "INTERPRETED",
-              "portion": "Exhaustion as a disease symptom",
-              "reason": "The typed CONDITION symptom references the expressly XPHB-qualified Exhaustion condition."
-            },
-            {
-              "classification": "OMITTED",
-              "portion": "Exactly one level after incubation, Hit Point Dice recovery reduction, and Long Rest restrictions while Exhaustion is present",
-              "reason": "The Disease schema cannot express condition-level application, symptom timing, or these condition-dependent recovery restrictions.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "portion": "Symptoms begin after 1d4 days with one XPHB Exhaustion level; while any level remains, Hit Point Dice restore half normal HP and a Long Rest restores neither lost HP nor an Exhaustion level",
+              "reason": "Random incubation, quantified condition change, and both Exhaustion-gated rest restrictions are represented by typed Disease fields."
             }
           ]
         },
@@ -1046,16 +1037,15 @@
           ],
           "classifications": [
             {
-              "classification": "OMITTED",
-              "portion": "Daily dawn Constitution saves, conditional Exhaustion increase/decrease, and disease ending only at Exhaustion level zero",
-              "reason": "Progression has no condition-level change or conditional threshold outcome; mapping success directly to disease termination would be inaccurate.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "classification": "INTERPRETED",
+              "portion": "Daily at dawn DC 11 Constitution save; failure adds one Exhaustion level, success removes one; disease ends only at Exhaustion level zero",
+              "reason": "A saving-throw branch distinguishes outcomes and disease termination threshold."
             }
           ]
         }
       ],
       "canonicalOutput": "disease/xdmg-sewer-plague.json",
-      "conversionStatus": "partial"
+      "conversionStatus": "converted"
     },
     {
       "canonicalId": "disease:dmg:cackle-fever",
@@ -1072,10 +1062,20 @@
           "nestedSourcePaths": [],
           "classifications": [
             {
+              "classification": "INTERPRETED",
+              "portion": "Humanoid susceptibility and gnome immunity",
+              "reason": "Typed applicability and excluded race reference preserve both target rules."
+            },
+            {
+              "classification": "DUPLICATE",
+              "portion": "Fits of mad laughter",
+              "reason": "The timed Incapacitated mad-laughter procedure in source entry 3 represents this symptom with its mechanical duration and ending save."
+            },
+            {
               "classification": "OMITTED",
-              "portion": "complete source entry",
-              "reason": "Humanoid susceptibility, gnome immunity, laughter description, and nickname are not represented by Disease fields.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "portion": "The common name and morbid nickname ?the shrieks?",
+              "reason": "Descriptive naming does not add a disease procedure or mechanical effect. ",
+              "cause": "NON_MECHANICAL"
             }
           ]
         },
@@ -1085,10 +1085,15 @@
           "nestedSourcePaths": [],
           "classifications": [
             {
+              "classification": "INTERPRETED",
+              "portion": "Symptoms manifest after 1d4 hours; one PHB Exhaustion level cannot be removed until the disease ends",
+              "reason": "Dice-roll incubation and the condition-level change with removal restriction are represented. Unqualified condition tags in this 2014 DMG record resolve to the 2014 PHB condition definitions."
+            },
+            {
               "classification": "OMITTED",
-              "portion": "complete source entry",
-              "reason": "Random 1d4-hour incubation, fever/disorientation, and Exhaustion that cannot be removed until cure are not expressible together in the approved schema.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "portion": "Fever and disorientation",
+              "reason": "The source names these symptoms without specifying mechanical consequences; no mechanics are inferred.",
+              "cause": "NON_MECHANICAL"
             }
           ]
         },
@@ -1098,10 +1103,9 @@
           "nestedSourcePaths": [],
           "classifications": [
             {
-              "classification": "OMITTED",
-              "portion": "complete source entry",
-              "reason": "Stress-triggered DC 13 Constitution saving throw is unsupported as a Disease trigger.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "classification": "INTERPRETED",
+              "portion": "Great-stress events trigger a DC 13 Constitution save, with source-listed examples",
+              "reason": "A typed GREAT_STRESS branch records the trigger category, examples, and save."
             }
           ]
         },
@@ -1111,10 +1115,9 @@
           "nestedSourcePaths": [],
           "classifications": [
             {
-              "classification": "OMITTED",
-              "portion": "complete source entry",
-              "reason": "Save failure damage, timed incapacitation/laughter, repeated end-of-turn saves, secondary infection, and 24-hour source-specific immunity are unsupported.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "classification": "INTERPRETED",
+              "portion": "Failure deals 1d10 psychic damage and starts one-minute Incapacitated mad laughter; end-of-turn saves can end it; nearby Humanoids save against infection and successful saves grant source-relative 24-hour immunity",
+              "reason": "Typed progression outcomes, temporary condition, repeated save, and secondary exposure outcome represent the linked behavior. Unqualified condition tags in this 2014 DMG record resolve to the 2014 PHB condition definitions."
             }
           ]
         },
@@ -1124,18 +1127,15 @@
           "nestedSourcePaths": [],
           "classifications": [
             {
-              "classification": "OMITTED",
-              "portion": "complete source entry",
-              "reason": "Long-rest save, random DC reduction, recovery threshold, and indefinite-madness consequence after three failures are unsupported.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "classification": "INTERPRETED",
+              "portion": "At each Long Rest a DC 13 Constitution save can reduce the linked DC by 1d6; recovery occurs at DC 0; three failed recovery saves cause an indefinite-madness procedure",
+              "reason": "Typed recovery tracks success-based DC reduction and termination threshold, plus the three-failure Rule procedure reference."
             }
           ]
         }
       ],
-      "canonicalOutput": null,
-      "conversionStatus": "unsupported",
-      "disposition": "unsupported",
-      "reason": "No reliable non-empty canonical mechanics subset can be extracted without losing linked behavior: susceptibility/immunity, random incubation, stress-triggered saving throws, psychic damage and timed incapacitation, repeated saves, secondary infection/immunity, and long-rest DC reduction/recovery/madness are not supported as a cohesive disease procedure."
+      "canonicalOutput": "disease/dmg-cackle-fever.json",
+      "conversionStatus": "converted"
     },
     {
       "canonicalId": "status:xphb:bloodied",
@@ -1247,7 +1247,7 @@
             {
               "classification": "INTERPRETED",
               "portion": "complete source entry",
-              "reason": "A DM-adjudicated environmental phenomenon may require a DC 10 Constitution save; represented as a separate environmental maintenance save."
+              "reason": "The environmental-phenomenon trigger is distinct and the source says the DM might decide to require a DC 10 Constitution save; the PHB-specific requirement marker records that this save is optional at DM discretion."
             }
           ]
         }
@@ -1407,20 +1407,14 @@
           "classifications": [
             {
               "classification": "INTERPRETED",
-              "portion": "Darkness treated as dim light and grayscale color perception in darkness",
-              "reason": "The SIGHT capability records darknessAs dim-light and grayscale perception."
-            },
-            {
-              "classification": "OMITTED",
-              "portion": "Dim light treated as bright light",
-              "reason": "The approved SIGHT structure has no distinct transformation for dim-light conditions; darknessAs applies to darkness.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "portion": "Within-range dim light as bright light; darkness as dim light; grayscale color perception in darkness",
+              "reason": "Independent dimLightAs and darknessAs capabilities preserve both transformations and the color restriction."
             }
           ]
         }
       ],
       "canonicalOutput": "sense/phb-darkvision.json",
-      "conversionStatus": "partial"
+      "conversionStatus": "converted"
     },
     {
       "canonicalId": "sense:mm:tremorsense",
@@ -1438,20 +1432,14 @@
           "classifications": [
             {
               "classification": "INTERPRETED",
-              "portion": "Detecting vibration sources through shared ground or substance, and inability to detect flying or incorporeal creatures.",
-              "reason": "Represented in canonical typed fields."
-            },
-            {
-              "classification": "OMITTED",
-              "portion": "Pinpointing the origin of vibrations.",
-              "reason": "The Sense contract records what may be detected and environmental restrictions but has no precision/location capability.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "portion": "Vibration detection restrictions and pinpointing vibration origin",
+              "reason": "Typed VIBRATION_ORIGIN precision accompanies the existing shared-medium and target restrictions."
             }
           ]
         }
       ],
       "canonicalOutput": "sense/mm-tremorsense.json",
-      "conversionStatus": "partial"
+      "conversionStatus": "converted"
     },
     {
       "canonicalId": "sense:xphb:tremorsense",
@@ -1469,14 +1457,8 @@
           "classifications": [
             {
               "classification": "INTERPRETED",
-              "portion": "Nonvisual detection of creatures and movement (including moving objects) through shared contact with a surface or liquid; airborne targets are excluded",
-              "reason": "The Sense capability records vibration medium, creatures/movement, nonvisual mode, and the shared-contact restriction."
-            },
-            {
-              "classification": "OMITTED",
-              "portion": "Pinpointed location of detected creatures and moving objects",
-              "reason": "The approved Sense schema has no location-precision field.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "portion": "Nonvisual creature/movement detection through contact with a surface or liquid, airborne exclusion, and pinpointing detected creatures and moving objects",
+              "reason": "DETECTED_TARGETS precision records the edition-specific pinpointing targets; entry 1 separately duplicates nonvisual classification."
             }
           ]
         },
@@ -1499,7 +1481,7 @@
         }
       ],
       "canonicalOutput": "sense/xphb-tremorsense.json",
-      "conversionStatus": "partial"
+      "conversionStatus": "converted"
     },
     {
       "canonicalId": "sense:phb:truesight",
@@ -1517,20 +1499,14 @@
           "classifications": [
             {
               "classification": "INTERPRETED",
-              "portion": "Normal/magical darkness, invisible creatures, illusions, true forms, and Ethereal Plane perception",
-              "reason": "The SIGHT capability represents the source-listed qualitative capabilities."
-            },
-            {
-              "classification": "OMITTED",
-              "portion": "Invisible objects and the automatic detection/save outcome against visual illusions",
-              "reason": "The approved Sense schema cannot distinguish seeing invisible objects from objects generally or encode automatic illusion detection and saving-throw success.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "portion": "Darkness, invisible creatures and objects, illusions, true forms, Ethereal Plane perception, automatic illusion detection, and automatic success on relevant illusion saves",
+              "reason": "The PHB record now includes invisible-objects and typed automatic illusion detection and save outcome; no transparency is inferred."
             }
           ]
         }
       ],
       "canonicalOutput": "sense/phb-truesight.json",
-      "conversionStatus": "partial"
+      "conversionStatus": "converted"
     },
     {
       "canonicalId": "language:phb:common",
@@ -1606,14 +1582,13 @@
           "classifications": [
             {
               "classification": "INTERPRETED",
-              "portion": "The entry identifies ThievesÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Cant as a secret communication language.",
-              "reason": "Represented in canonical typed fields."
+              "portion": "Secret-language classification",
+              "reason": "The secret communication classification is represented by category secret."
             },
             {
-              "classification": "OMITTED",
-              "portion": "Only knowledgeable creatures understand it, and conveying a message takes four times as long as plain speech.",
-              "reason": "The approved Language contract has no communication-access or time-cost mechanics.",
-              "cause": "SCHEMA_UNSUPPORTED"
+              "classification": "INTERPRETED",
+              "portion": "Concealed message comprehension and communication duration",
+              "reason": "The typed CONCEALED_MESSAGE capability requires knowledge of Thieves Cant and preserves the four-times communication duration."
             }
           ]
         }
@@ -1646,61 +1621,6 @@
       "reason": "Editorial provenance label is not a supported canonical sourceMetadata field; the exact source and page are retained.",
       "disposition": "OMITTED",
       "cause": "OUT_OF_APPROVED_SCOPE"
-    },
-    {
-      "model": "rule",
-      "canonicalId": "rule:xphb:d20-test",
-      "sourceFile": "variantrules.json",
-      "sourceObjectPath": "$.variantrule[44]",
-      "sourceField": "ruleType",
-      "sourceValue": "C",
-      "reason": "Source classification code is retained only in the external accounting report; its meaning is unresolved and no mapping is inferred.",
-      "disposition": "OMITTED",
-      "cause": "SOURCE_AMBIGUOUS"
-    },
-    {
-      "model": "rule",
-      "canonicalId": "rule:xphb:critical-hit",
-      "sourceFile": "variantrules.json",
-      "sourceObjectPath": "$.variantrule[38]",
-      "sourceField": "ruleType",
-      "sourceValue": "C",
-      "reason": "Source classification code is retained only in the external accounting report; its meaning is unresolved and no mapping is inferred.",
-      "disposition": "OMITTED",
-      "cause": "SOURCE_AMBIGUOUS"
-    },
-    {
-      "model": "rule",
-      "canonicalId": "rule:xphb:unarmed-strike",
-      "sourceFile": "variantrules.json",
-      "sourceObjectPath": "$.variantrule[225]",
-      "sourceField": "ruleType",
-      "sourceValue": "C",
-      "reason": "Source classification code is retained only in the external accounting report; its meaning is unresolved and no mapping is inferred.",
-      "disposition": "OMITTED",
-      "cause": "SOURCE_AMBIGUOUS"
-    },
-    {
-      "model": "rule",
-      "canonicalId": "rule:xphb:difficult-terrain",
-      "sourceFile": "variantrules.json",
-      "sourceObjectPath": "$.variantrule[53]",
-      "sourceField": "ruleType",
-      "sourceValue": "C",
-      "reason": "Source classification code is retained only in the external accounting report; its meaning is unresolved and no mapping is inferred.",
-      "disposition": "OMITTED",
-      "cause": "SOURCE_AMBIGUOUS"
-    },
-    {
-      "model": "rule",
-      "canonicalId": "rule:dmg:downtime-activity-crafting-a-magic-item",
-      "sourceFile": "variantrules.json",
-      "sourceObjectPath": "$.variantrule[62]",
-      "sourceField": "ruleType",
-      "sourceValue": "O",
-      "reason": "Source classification code is retained only in the external accounting report; its meaning is unresolved and no mapping is inferred.",
-      "disposition": "OMITTED",
-      "cause": "SOURCE_AMBIGUOUS"
     },
     {
       "model": "language",
@@ -1762,37 +1682,67 @@
       "reason": "The tag omits a source qualifier and the repository has PHB and XPHB versions; the target identity is not guessed.",
       "disposition": "OMITTED",
       "cause": "REFERENCE_UNRESOLVED"
-    },
-    {
-      "model": "disease",
-      "canonicalId": "disease:dmg:cackle-fever",
-      "sourceFile": "conditionsdiseases.json",
-      "sourceObjectPath": "$.disease[4].entries[1]",
-      "sourceField": "inlineReference.condition",
-      "sourceValue": "{@condition exhaustion}",
-      "reason": "The tag omits a source qualifier and PHB/XPHB Exhaustion mechanics differ; no target edition is established by the tag.",
-      "disposition": "OMITTED",
-      "cause": "SOURCE_AMBIGUOUS"
-    },
-    {
-      "model": "disease",
-      "canonicalId": "disease:dmg:cackle-fever",
-      "sourceFile": "conditionsdiseases.json",
-      "sourceObjectPath": "$.disease[4].entries[3]",
-      "sourceField": "inlineReference.condition",
-      "sourceValue": "{@condition incapacitated}",
-      "reason": "The tag omits a source qualifier and the source object does not establish a condition target identity; the full tag remains in the omitted entry register.",
-      "disposition": "OMITTED",
-      "cause": "REFERENCE_UNRESOLVED"
     }
   ],
   "interpretationMethod": "Codex directly interpreted each selected source object against the complete approved schemas, Phase 1 research, Phase 2 examples, and Phase 2 Action/Rule research.",
   "previousPhase3Conversion": "The prior deterministic converter is retired and its canonical outputs were treated as unverified drafts.",
   "sourceEntryRootCount": 74,
   "dispositionCounts": {
-    "interpreted": 51,
+    "interpreted": 62,
     "duplicate": 11,
-    "omitted": 46
+    "omitted": 33
   },
-  "sourceFieldIssueCount": 14
+  "sourceFieldIssueCount": 7,
+  "sourceFieldMappings": [
+    {
+      "model": "rule",
+      "canonicalId": "rule:xphb:d20-test",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[44]",
+      "sourceField": "ruleType",
+      "sourceValue": "C",
+      "canonicalValue": "CORE",
+      "disposition": "INTERPRETED"
+    },
+    {
+      "model": "rule",
+      "canonicalId": "rule:xphb:critical-hit",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[38]",
+      "sourceField": "ruleType",
+      "sourceValue": "C",
+      "canonicalValue": "CORE",
+      "disposition": "INTERPRETED"
+    },
+    {
+      "model": "rule",
+      "canonicalId": "rule:xphb:unarmed-strike",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[225]",
+      "sourceField": "ruleType",
+      "sourceValue": "C",
+      "canonicalValue": "CORE",
+      "disposition": "INTERPRETED"
+    },
+    {
+      "model": "rule",
+      "canonicalId": "rule:xphb:difficult-terrain",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[53]",
+      "sourceField": "ruleType",
+      "sourceValue": "C",
+      "canonicalValue": "CORE",
+      "disposition": "INTERPRETED"
+    },
+    {
+      "model": "rule",
+      "canonicalId": "rule:dmg:downtime-activity-crafting-a-magic-item",
+      "sourceFile": "variantrules.json",
+      "sourceObjectPath": "$.variantrule[62]",
+      "sourceField": "ruleType",
+      "sourceValue": "O",
+      "canonicalValue": "OPTIONAL",
+      "disposition": "INTERPRETED"
+    }
+  ]
 }

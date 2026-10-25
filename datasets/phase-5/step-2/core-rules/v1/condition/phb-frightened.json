@@ -1,0 +1,63 @@
+{
+  "id": "condition:phb:frightened",
+  "name": "Frightened",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 290,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "citations": [
+      {
+        "source": "RMR",
+        "page": 62
+      },
+      {
+        "source": "HftT",
+        "page": 48
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:frightened"
+      }
+    ]
+  },
+  "effects": [
+    {
+      "kind": "CHECK_ROLL_MODIFIER",
+      "roll": "ability-check",
+      "direction": "disadvantage",
+      "actor": "affected-creature",
+      "duration": "while-condition-active",
+      "applicability": {
+        "kind": "FEAR_SOURCE_IN_LINE_OF_SIGHT",
+        "role": "fear-source"
+      }
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "disadvantage",
+      "actor": "affected-creature",
+      "target": "target",
+      "appliesWhen": "affected-creature-attacks",
+      "duration": "while-condition-active",
+      "applicability": {
+        "kind": "FEAR_SOURCE_IN_LINE_OF_SIGHT",
+        "role": "fear-source"
+      }
+    },
+    {
+      "kind": "MOVEMENT_CONSTRAINT",
+      "actor": "affected-creature",
+      "constraint": "cannot-willingly-move-closer-to-source",
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      },
+      "otherCreature": "fear-source"
+    }
+  ]
+}

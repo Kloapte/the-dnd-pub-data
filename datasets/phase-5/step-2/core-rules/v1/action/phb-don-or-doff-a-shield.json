@@ -1,0 +1,35 @@
+{
+  "id": "action:phb:don-or-doff-a-shield",
+  "name": "Don or Doff a Shield",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 146,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:don-or-doff-a-shield"
+      }
+    ]
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "DON_SHIELD",
+    "DOFF_SHIELD"
+  ],
+  "operations": [
+    {
+      "kind": "OBJECT_OPERATION",
+      "operation": "don-shield"
+    },
+    {
+      "kind": "OBJECT_OPERATION",
+      "operation": "doff-shield"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "language:scag:midani",
+  "name": "Midani",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:frhof:midani"
+      }
+    ]
+  },
+  "script": "Thorass"
+}

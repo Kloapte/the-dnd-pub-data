@@ -1,0 +1,65 @@
+{
+  "id": "action:dmg:disarm",
+  "name": "Disarm",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 271
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "ATTACK_MELEE"
+  ],
+  "requirements": [
+    {
+      "kind": "target"
+    },
+    {
+      "kind": "weapon"
+    }
+  ],
+  "operations": [
+    {
+      "kind": "ATTACK_CONTESTED_BY_CHECK",
+      "operationId": "disarm-contest",
+      "attacker": "acting-creature",
+      "attack": {
+        "kind": "ATTACK_ROLL",
+        "forms": [
+          "melee",
+          "weapon"
+        ],
+        "target": "creature"
+      },
+      "target": "target",
+      "defenderOptions": [
+        {
+          "ability": "strength",
+          "skill": {
+            "targetType": "skill",
+            "id": "skill:phb:athletics"
+          }
+        },
+        {
+          "ability": "dexterity",
+          "skill": {
+            "targetType": "skill",
+            "id": "skill:phb:acrobatics"
+          }
+        }
+      ],
+      "defenderChooses": true,
+      "successOutcome": "TARGET_DROPS_HELD_ITEM",
+      "attackDamageOnSuccess": false,
+      "defenderCheckSizeModifier": "ADVANTAGE_IF_TARGET_LARGER_DISADVANTAGE_IF_SMALLER",
+      "attackDisadvantageWhenItemHeldWithAtLeastHands": 2
+    }
+  ],
+  "references": [
+    {
+      "targetType": "action",
+      "id": "action:phb:attack"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "language:ggr:goblin",
+  "name": "Goblin",
+  "sourceMetadata": {
+    "source": "GGR",
+    "page": 9,
+    "citations": [
+      {
+        "source": "GGR",
+        "page": 16
+      }
+    ]
+  },
+  "category": "standard",
+  "script": "Common",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "selector": {
+          "kind": "TAG",
+          "value": "any race",
+          "source": "GGR"
+        }
+      }
+    }
+  ]
+}

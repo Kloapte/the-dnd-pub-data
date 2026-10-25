@@ -67,6 +67,10 @@ Semantic interpretation into domain-specific canonical mechanics is the intended
 
 Inspect all relevant source files and determine how the source information should be represented in the canonical DnD Pub model.
 
+- Inspect the entire in-scope catalog semantically, not only a representative sample. Separate deterministic structural enumeration from Codex's direct interpretation of mechanics.
+- Build a catalog-wide mechanic-pattern inventory with exact source records and paths, counts, semantic descriptions, variants, dependencies, ambiguities, candidate representations, and common/difficult examples. Account for every record; preserve unresolved classifications with source evidence.
+- Do not generate the complete canonical dataset during discovery. Phase 1 must cover the full catalog and pass its explicit review gate before Phase 2.
+
 Do not modify production code, approved schemas, or normalized datasets during this phase.
 
 #### 1.1 Structural analysis
@@ -157,6 +161,9 @@ Do not proceed to schema creation without approval.
 
 Using the approved analysis:
 
+- Design schemas against the complete approved Phase 1 pattern inventory. Maintain source-to-schema coverage for supported, deferred, ambiguous, unsupported, and out-of-scope mechanics; these are analysis classifications, not canonical fields.
+- Assess common and rare patterns, outliers, complex combinations, and affected record counts. Use examples to test schema expressiveness, not as a substitute for catalog coverage or conversion.
+
 - Design the canonical domain model.
 - Define shared components, specialized submodels, and references.
 - Create JSON Schema Draft 2020-12 contracts.
@@ -174,7 +181,7 @@ Do not begin source conversion before the contracts are approved.
 
 ### Phase 3 — Representative conversion
 
-- Select a small but representative set of source records, covering common structures, identified submodels, edge cases, and outliers.
+- Select a small, reviewable set from the Phase 1 inventory and Phase 2 coverage matrix. Cover common and distinct families, interacting mechanics, edition variants, outliers, dependencies, and difficult cases so the sample tests contract breadth.
 - **Codex must directly inspect and semantically interpret each selected source record**, including its nested entries, using the full approved Phase 1 analysis, Phase 2 research, contracts, examples, and reusable interpretation patterns. Phase 2 examples demonstrate schema capabilities; verify their mechanics against the actual source before reuse.
 - Codex must author the canonical JSON from its source-backed interpretation. **Do not replace this reasoning with a hardcoded source-to-canonical converter, keyword matching, regex extraction, switch-based mechanic recognition, or a scripted subset of known records.** Deterministic scripts may inventory source data, extract exact source objects, format output, check references, validate schemas/integrity, and audit accounting; they must not decide the meaning of source mechanics.
 - The representative selection limits **how many records** are interpreted, never **how completely each selected record** is interpreted. Examine every meaningful mechanic, prerequisite, exception, reference, and interaction even if related records are outside the sample.
@@ -208,6 +215,7 @@ Do not begin source conversion before the contracts are approved.
 - Detect missing entities, duplicate identifiers, and broken references.
 - Preserve provenance and previously approved interpretations.
 - Report unexpected source variations before introducing significant contract changes.
+- Treat unexpected contract gaps as exceptions: document source evidence and request approval for targeted refinement. Do not silently expand approved contracts or restart earlier phases automatically.
 - Produce a final coverage and exception report.
 - Do not claim complete normalization while entries remain unaccounted for.
 

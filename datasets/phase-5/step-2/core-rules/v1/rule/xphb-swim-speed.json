@@ -1,0 +1,33 @@
+{
+  "id": "rule:xphb:swim-speed",
+  "name": "Swim Speed",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 376,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "swim-speed-cost-exception",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "SWIMMING",
+      "procedure": "speed-required",
+      "speedType": "swim",
+      "details": {
+        "kind": "SWIM_SPEED_EXCEPTION",
+        "mode": "swimming",
+        "avoidsNormalExtraMovementCost": true
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:swimming"
+    }
+  ]
+}

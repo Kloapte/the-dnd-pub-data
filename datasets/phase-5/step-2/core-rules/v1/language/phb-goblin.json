@@ -1,0 +1,31 @@
+{
+  "id": "language:phb:goblin",
+  "name": "Goblin",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:goblin"
+      }
+    ]
+  },
+  "category": "standard",
+  "script": "Dwarvish",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "selector": {
+          "kind": "TAG",
+          "value": "goblinoid"
+        }
+      }
+    }
+  ]
+}

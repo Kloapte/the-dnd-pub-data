@@ -5,12 +5,14 @@
     "source": "XPHB",
     "page": 365
   },
+  "ruleType": "CORE",
   "mechanics": [
     {
       "componentId": "death-save",
       "kind": "D20_TEST",
       "subtype": "DEATH_SAVING_THROW",
-      "trigger": "start-of-turn-at-zero-hit-points"
+      "trigger": "start-of-turn-at-zero-hit-points",
+      "appliesTo": "PLAYER_CHARACTER"
     }
   ]
 }

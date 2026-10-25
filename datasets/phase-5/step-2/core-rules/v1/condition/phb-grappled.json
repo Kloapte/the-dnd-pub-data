@@ -1,0 +1,61 @@
+{
+  "id": "condition:phb:grappled",
+  "name": "Grappled",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 290,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "citations": [
+      {
+        "source": "RMR",
+        "page": 62
+      },
+      {
+        "source": "HftT",
+        "page": 48
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled"
+      }
+    ]
+  },
+  "effects": [
+    {
+      "kind": "MOVEMENT_MODIFIER",
+      "movement": "speed-flat",
+      "amount": 0,
+      "actor": "affected-creature",
+      "duration": "while-condition-active"
+    },
+    {
+      "kind": "MOVEMENT_CONSTRAINT",
+      "actor": "affected-creature",
+      "constraint": "cannot-increase-speed",
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    },
+    {
+      "kind": "CONDITION_ENDING",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:grappled"
+      },
+      "when": "grappler-incapacitated"
+    },
+    {
+      "kind": "CONDITION_ENDING",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:grappled"
+      },
+      "when": "target-outside-grappler-reach"
+    }
+  ]
+}

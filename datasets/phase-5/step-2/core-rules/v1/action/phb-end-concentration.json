@@ -1,0 +1,24 @@
+{
+  "id": "action:phb:end-concentration",
+  "name": "End Concentration",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 203,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:end-concentration"
+      }
+    ]
+  },
+  "timing": {
+    "kind": "free"
+  },
+  "capabilities": [
+    "END_CONCENTRATION"
+  ]
+}

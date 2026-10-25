@@ -1,0 +1,15 @@
+{
+  "id": "language:scag:thayan",
+  "name": "Thayan",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:frhof:thayan"
+      }
+    ]
+  },
+  "script": "Thorass"
+}

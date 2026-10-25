@@ -1,0 +1,45 @@
+{
+  "id": "rule:xphb:hit-points",
+  "name": "Hit Points",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 368,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "current-hit-points",
+      "kind": "DAMAGE_HEALTH_STATE",
+      "subtype": "HIT_POINTS",
+      "rule": "current"
+    },
+    {
+      "componentId": "maximum-hit-points",
+      "kind": "DAMAGE_HEALTH_STATE",
+      "subtype": "HIT_POINTS",
+      "rule": "maximum"
+    },
+    {
+      "componentId": "zero-hit-points",
+      "kind": "DAMAGE_HEALTH_STATE",
+      "subtype": "HIT_POINTS",
+      "rule": "zero-hit-points"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:damage",
+      "relationship": "damage-reduces-hit-points"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:dmg:healing",
+      "relationship": "healing-restores-hit-points"
+    }
+  ]
+}

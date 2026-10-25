@@ -1,0 +1,10 @@
+{
+  "id": "language:erlw:riedran",
+  "name": "Riedran",
+  "sourceMetadata": {
+    "source": "ERLW",
+    "page": 6
+  },
+  "category": "standard",
+  "script": "Common"
+}

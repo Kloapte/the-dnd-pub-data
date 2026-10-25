@@ -1,0 +1,19 @@
+{
+  "id": "skill:phb:perception",
+  "name": "Perception",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 178,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:perception"
+      }
+    ]
+  },
+  "ability": "wisdom"
+}

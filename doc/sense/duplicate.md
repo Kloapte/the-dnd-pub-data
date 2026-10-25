@@ -1,4 +1,4 @@
-# Sense source content duplicate during Step 2 Phase 3 representative conversion
+# Sense source content duplicate during Step 2 Core Rules conversion
 
 This restricted internal register preserves complete original entries for audit. Do not publish or distribute excerpts without a licensing review.
 ### sense:xphb:tremorsense — entry 1

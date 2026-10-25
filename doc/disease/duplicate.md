@@ -1,16 +1,16 @@
-# Disease source content duplicate during Step 2 Phase 3 representative conversion
+# Disease source content duplicate during Step 2 Core Rules conversion
 
 This restricted internal register preserves complete original entries for audit. Do not publish or distribute excerpts without a licensing review.
-### disease:xdmg:sewer-plague — entry 0
+### disease:dmg:cackle-fever — entry 0
 
 - Source file: `src/main/resources/data/conditionsdiseases.json`
-- Source object: `$.disease[18]`
-- Source entry path: `$.disease[18].entries[0]`
-- Canonical output: `disease/xdmg-sewer-plague.json`
-- DUPLICATE: Otyughs and rats as examples of carriers — These are illustrative carrier examples; the supported wound/contact routes are represented without asserting an exhaustive carrier list.
+- Source object: `$.disease[4]`
+- Source entry path: `$.disease[4].entries[0]`
+- Canonical output: `disease/dmg-cackle-fever.json`
+- DUPLICATE: Fits of mad laughter — The timed Incapacitated mad-laughter procedure in source entry 3 represents this symptom with its mechanical duration and ending save.
 
 Complete original source entry:
 
 ```json
-"Fouled potions and alchemical waste can give rise to Sewer Plague, which incubates in sewers and refuse heaps and is sometimes transmitted by creatures that dwell in such areas, including otyughs and rats. Any Humanoid that is wounded by a creature that carries the contagion or that comes into contact with contaminated filth or offal must succeed on a {@dc 11} Constitution saving throw or become infected with Sewer Plague. A creature suffers the following effects {@dice 1d4} days after infection:"
+"This disease targets humanoids, although gnomes are strangely immune. While in the grips of this disease, victims frequently succumb to fits of mad laughter, giving the disease its common name and its morbid nickname: \"the shrieks.\""
 ```

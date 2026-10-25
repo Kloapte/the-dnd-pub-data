@@ -1,0 +1,29 @@
+{
+  "id": "language:ggr:elvish",
+  "name": "Elvish",
+  "sourceMetadata": {
+    "source": "GGR",
+    "page": 9
+  },
+  "category": "standard",
+  "script": "Elvish",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "humanoid"
+        ],
+        "tags": [
+          {
+            "group": "any race",
+            "value": "elf"
+          }
+        ],
+        "sources": [
+          "GGR"
+        ]
+      }
+    }
+  ]
+}

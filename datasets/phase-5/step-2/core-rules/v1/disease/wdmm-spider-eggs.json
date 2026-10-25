@@ -1,0 +1,107 @@
+{
+  "id": "disease:wdmm:spider-eggs",
+  "name": "Spider Eggs",
+  "sourceMetadata": {
+    "source": "WDMM",
+    "page": 47
+  },
+  "symptoms": [
+    {
+      "kind": "CONDITION",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:restrained"
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "spell",
+      "id": "spell:phb:lesser-restoration",
+      "relationship": "destroys-eggs"
+    }
+  ],
+  "effects": [
+    {
+      "kind": "CONDITION_GATED_CHECK",
+      "roll": "ABILITY_CHECK",
+      "ability": "strength",
+      "direction": "MUST_SUCCEED",
+      "dc": 15,
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:restrained"
+      },
+      "outcome": "ACTION_UNAVAILABLE"
+    },
+    {
+      "kind": "SUSPENDED_LOCATION",
+      "heightFeet": 10,
+      "lifecycle": "WHILE_RESTRAINED"
+    },
+    {
+      "kind": "ESCAPE_CHECK",
+      "actionRequired": true,
+      "ability": "strength",
+      "dc": 15,
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:restrained"
+      },
+      "successOutcome": "END_CONDITION"
+    }
+  ],
+  "progression": [
+    {
+      "kind": "TIMED_OUTCOME_BRANCH",
+      "branchId": "awakening-after-stabilization",
+      "trigger": {
+        "kind": "PARTY_DEFEATED_AND_CREATURE_STABILIZED"
+      },
+      "interval": {
+        "kind": "DICE_ROLL",
+        "count": 1,
+        "die": 4,
+        "unit": "hour"
+      },
+      "outcomes": [
+        {
+          "kind": "APPLY_CONDITION",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:restrained"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "TIMED_OUTCOME_BRANCH",
+      "branchId": "egg-hatching",
+      "trigger": {
+        "kind": "ELAPSED_TIME",
+        "interval": {
+          "kind": "DICE_ROLL",
+          "count": 2,
+          "die": 12,
+          "unit": "hour"
+        },
+        "relativeTo": "INFECTION"
+      },
+      "outcomes": [
+        {
+          "kind": "KILL_HOST"
+        }
+      ]
+    }
+  ],
+  "recovery": [
+    {
+      "method": "spell",
+      "reference": {
+        "targetType": "spell",
+        "id": "spell:phb:lesser-restoration",
+        "relationship": "kills-implanted-eggs"
+      }
+    }
+  ]
+}

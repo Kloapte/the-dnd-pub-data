@@ -1,0 +1,9 @@
+{
+  "id": "language:scag:shou",
+  "name": "Shou",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112
+  },
+  "script": "Thorass"
+}

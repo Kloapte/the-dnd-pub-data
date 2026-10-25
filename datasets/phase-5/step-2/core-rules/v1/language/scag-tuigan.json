@@ -1,0 +1,9 @@
+{
+  "id": "language:scag:tuigan",
+  "name": "Tuigan",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112
+  },
+  "script": "Thorass"
+}

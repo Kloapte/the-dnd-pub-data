@@ -1,0 +1,16 @@
+{
+  "id": "rule:xge:adamantine-weapons",
+  "name": "Adamantine Weapons",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 78
+  },
+  "ruleType": "OPTIONAL",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:critical-hit",
+      "relationship": "critical-hit-definition"
+    }
+  ]
+}

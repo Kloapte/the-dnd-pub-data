@@ -1,0 +1,20 @@
+{
+  "id": "language:mm:bullywug",
+  "name": "Bullywug",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 35,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xmm:bullywug"
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:bullywug"
+    }
+  ]
+}

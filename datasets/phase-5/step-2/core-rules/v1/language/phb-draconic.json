@@ -1,0 +1,36 @@
+{
+  "id": "language:phb:draconic",
+  "name": "Draconic",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "citations": [
+      {
+        "source": "PHB",
+        "page": 32
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:draconic"
+      }
+    ]
+  },
+  "category": "exotic",
+  "script": "Draconic",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "dragon"
+        ]
+      }
+    }
+  ]
+}

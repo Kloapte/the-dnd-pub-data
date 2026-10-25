@@ -1,0 +1,23 @@
+{
+  "id": "language:erlw:sylvan",
+  "name": "Sylvan",
+  "sourceMetadata": {
+    "source": "ERLW",
+    "page": 6
+  },
+  "category": "exotic",
+  "script": "Elvish",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "fey"
+        ],
+        "sources": [
+          "ERLW"
+        ]
+      }
+    }
+  ]
+}

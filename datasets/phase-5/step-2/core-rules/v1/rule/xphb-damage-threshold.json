@@ -1,0 +1,13 @@
+{
+  "id": "rule:xphb:damage-threshold",
+  "name": "Damage Threshold",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 364,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE"
+}

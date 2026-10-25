@@ -1,0 +1,47 @@
+{
+  "id": "rule:dmg:rest-variants",
+  "name": "Rest Variants",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 267
+  },
+  "ruleType": "VARIANT",
+  "mechanics": [
+    {
+      "componentId": "epic-heroism-short-rest",
+      "kind": "REST_PROCEDURE",
+      "subtype": "SHORT_REST",
+      "duration": 5,
+      "unit": "minutes",
+      "variant": "EPIC_HEROISM",
+      "durationQualifier": "EXACT"
+    },
+    {
+      "componentId": "epic-heroism-long-rest",
+      "kind": "REST_PROCEDURE",
+      "subtype": "LONG_REST",
+      "duration": 1,
+      "unit": "hour",
+      "variant": "EPIC_HEROISM",
+      "durationQualifier": "EXACT"
+    },
+    {
+      "componentId": "gritty-realism-short-rest",
+      "kind": "REST_PROCEDURE",
+      "subtype": "SHORT_REST",
+      "duration": 8,
+      "unit": "hours",
+      "variant": "GRITTY_REALISM",
+      "durationQualifier": "EXACT"
+    },
+    {
+      "componentId": "gritty-realism-long-rest",
+      "kind": "REST_PROCEDURE",
+      "subtype": "LONG_REST",
+      "duration": 7,
+      "unit": "days",
+      "variant": "GRITTY_REALISM",
+      "durationQualifier": "EXACT"
+    }
+  ]
+}

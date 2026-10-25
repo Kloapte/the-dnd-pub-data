@@ -1,0 +1,31 @@
+{
+  "id": "language:phb:orc",
+  "name": "Orc",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:orc"
+      }
+    ]
+  },
+  "category": "standard",
+  "script": "Dwarvish",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "selector": {
+          "kind": "TAG",
+          "value": "orc"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "id": "action:xphb:help",
+  "name": "Help",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 368,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "HELP",
+    "STABILIZE"
+  ],
+  "operations": [
+    {
+      "kind": "HELP_ASSISTANCE",
+      "operationId": "help-task-check",
+      "mode": "ABILITY_CHECK",
+      "actor": "helper",
+      "beneficiary": "ally",
+      "task": "TASK_BEING_AIDED",
+      "selectedProficiency": "SKILL_OR_TOOL",
+      "feasibilityDecision": "DM_DETERMINED",
+      "range": "NEAR_ENOUGH_TO_ASSIST_VERBALLY_OR_PHYSICALLY",
+      "roll": "ABILITY_CHECK",
+      "modifier": {
+        "kind": "D20_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "advantage"
+      },
+      "qualifyingRoll": "NEXT_ABILITY_CHECK_FOR_TASK",
+      "expiresAt": "START_OF_HELPER_NEXT_TURN",
+      "appliesWhen": {
+        "kind": "CHOICE_SELECTED",
+        "choiceGroupId": "help-mode"
+      }
+    },
+    {
+      "kind": "HELP_ASSISTANCE",
+      "operationId": "help-attack",
+      "mode": "ATTACK_ROLL",
+      "actor": "helper",
+      "beneficiary": "ally",
+      "opponent": "distracted-enemy",
+      "opponentWithinFeetOfHelper": 5,
+      "roll": "ATTACK_ROLL",
+      "modifier": {
+        "kind": "D20_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage"
+      },
+      "qualifyingRoll": "FIRST_ATTACK_ROLL_AGAINST_OPPONENT",
+      "expiresAt": "START_OF_HELPER_NEXT_TURN",
+      "appliesWhen": {
+        "kind": "CHOICE_SELECTED",
+        "choiceGroupId": "help-mode"
+      }
+    }
+  ],
+  "choiceGroups": [
+    {
+      "id": "help-mode",
+      "cardinality": {
+        "minimumSelected": 1,
+        "maximumSelected": 1
+      },
+      "trigger": {
+        "kind": "ACTION_TAKEN"
+      },
+      "members": [
+        {
+          "operationId": "help-task-check"
+        },
+        {
+          "operationId": "help-attack"
+        }
+      ]
+    }
+  ]
+}

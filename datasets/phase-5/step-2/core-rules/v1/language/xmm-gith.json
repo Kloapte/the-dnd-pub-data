@@ -1,0 +1,34 @@
+{
+  "id": "language:xmm:gith",
+  "name": "Gith",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 135
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:githyanki-dracomancer"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:githyanki-knight"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:githyanki-warrior"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:githzerai-monk"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:githzerai-psion"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:githzerai-zerth"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:cleaving-through-creatures",
+  "name": "Cleaving Through Creatures",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 272
+  },
+  "ruleType": "OPTIONAL"
+}

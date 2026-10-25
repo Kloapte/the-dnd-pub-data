@@ -1,0 +1,44 @@
+{
+  "id": "condition:phb:poisoned",
+  "name": "Poisoned",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 292,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "citations": [
+      {
+        "source": "RMR",
+        "page": 62
+      },
+      {
+        "source": "HftT",
+        "page": 48
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:poisoned"
+      }
+    ]
+  },
+  "effects": [
+    {
+      "kind": "CHECK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "disadvantage",
+      "actor": "affected-creature",
+      "duration": "while-level-threshold-is-met"
+    },
+    {
+      "kind": "CHECK_ROLL_MODIFIER",
+      "roll": "ability-check",
+      "direction": "disadvantage",
+      "actor": "affected-creature",
+      "duration": "while-level-threshold-is-met"
+    }
+  ]
+}

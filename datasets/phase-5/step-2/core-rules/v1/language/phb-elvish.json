@@ -1,0 +1,42 @@
+{
+  "id": "language:phb:elvish",
+  "name": "Elvish",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "citations": [
+      {
+        "source": "PHB",
+        "page": 21
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:elvish"
+      }
+    ]
+  },
+  "category": "standard",
+  "script": "Elvish",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "humanoid"
+        ],
+        "tags": [
+          {
+            "group": "any race",
+            "value": "elf"
+          }
+        ]
+      }
+    }
+  ]
+}

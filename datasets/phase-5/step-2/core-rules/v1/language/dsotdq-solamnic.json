@@ -1,0 +1,10 @@
+{
+  "id": "language:dsotdq:solamnic",
+  "name": "Solamnic",
+  "sourceMetadata": {
+    "source": "DSotDQ",
+    "page": 9
+  },
+  "category": "standard",
+  "script": "Common"
+}

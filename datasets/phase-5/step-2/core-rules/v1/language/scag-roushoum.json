@@ -1,0 +1,9 @@
+{
+  "id": "language:scag:roushoum",
+  "name": "Roushoum",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112
+  },
+  "script": "Thorass"
+}

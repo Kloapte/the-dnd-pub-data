@@ -1,0 +1,20 @@
+{
+  "id": "language:mm:aarakocra",
+  "name": "Aarakocra",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 12,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xmm:aarakocra"
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:aarakocra"
+    }
+  ]
+}

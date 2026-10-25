@@ -1,0 +1,9 @@
+{
+  "id": "language:mot:giant",
+  "name": "Giant",
+  "sourceMetadata": {
+    "source": "MOT",
+    "page": 9
+  },
+  "script": "Minotaur"
+}

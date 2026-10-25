@@ -1,0 +1,15 @@
+{
+  "id": "language:scag:untheric",
+  "name": "Untheric",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:frhof:untheric"
+      }
+    ]
+  },
+  "script": "Thorass"
+}

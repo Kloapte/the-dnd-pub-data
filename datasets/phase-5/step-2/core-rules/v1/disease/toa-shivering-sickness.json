@@ -1,0 +1,106 @@
+{
+  "id": "disease:toa:shivering-sickness",
+  "name": "Shivering Sickness",
+  "sourceMetadata": {
+    "source": "ToA",
+    "page": 40
+  },
+  "applicability": {
+    "targetCreatureTypes": [
+      "giant",
+      "humanoid"
+    ]
+  },
+  "infection": {
+    "transmission": [
+      "contact"
+    ],
+    "savingThrow": {
+      "ability": "constitution",
+      "dc": 11
+    },
+    "exposures": [
+      {
+        "kind": "QUALIFYING_DAMAGE_AND_ENCOUNTER_END",
+        "sourceCreatures": [
+          "insect swarms",
+          "giant centipedes",
+          "giant scorpions",
+          "giant wasps"
+        ],
+        "encounterEndRequired": true,
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 11
+        },
+        "onFailure": "INFECTION"
+      },
+      {
+        "kind": "LONG_REST_IN_QUALIFYING_AREA",
+        "area": "Chult insect exposure",
+        "noRepellentSincePreviousLongRest": true,
+        "targetCreatureTypes": [
+          "giant",
+          "humanoid"
+        ],
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 11,
+          "advantageForNaturalArmor": true
+        },
+        "onFailure": "INFECTION"
+      }
+    ]
+  },
+  "incubation": {
+    "kind": "DICE_ROLL",
+    "count": 2,
+    "die": 6,
+    "unit": "hour"
+  },
+  "effects": [
+    {
+      "kind": "ABILITY_ROLL_MODIFIER",
+      "rolls": [
+        "ABILITY_CHECK",
+        "ATTACK"
+      ],
+      "direction": "DISADVANTAGE",
+      "lifecycle": "WHILE_DISEASE_ACTIVE"
+    },
+    {
+      "kind": "DISEASE_RESTRICTION",
+      "restriction": "HALF_HP_FROM_HIT_DICE",
+      "lifecycle": "AFTER_SYMPTOM_ONSET"
+    },
+    {
+      "kind": "DISEASE_RESTRICTION",
+      "restriction": "NO_HIT_POINTS_FROM_LONG_REST",
+      "lifecycle": "AFTER_SYMPTOM_ONSET"
+    }
+  ],
+  "progression": [
+    {
+      "kind": "SAVING_THROW_BRANCH",
+      "branchId": "long-rest-recovery",
+      "trigger": {
+        "kind": "LONG_REST_COMPLETED",
+        "phase": "AFTER_SYMPTOM_ONSET"
+      },
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 11
+      },
+      "onSuccess": [
+        {
+          "kind": "END_DISEASE"
+        }
+      ],
+      "onFailure": [
+        {
+          "kind": "NO_EFFECT"
+        }
+      ]
+    }
+  ]
+}

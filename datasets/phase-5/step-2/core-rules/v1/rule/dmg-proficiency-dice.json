@@ -1,0 +1,66 @@
+{
+  "id": "rule:dmg:proficiency-dice",
+  "name": "Proficiency Dice",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 263
+  },
+  "ruleType": "OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "proficiency-die-replacement",
+      "kind": "PROFICIENCY_RULE",
+      "subtype": "PROFICIENCY_DICE_ALTERNATIVE",
+      "replaces": "PROFICIENCY_BONUS",
+      "appliesTo": [
+        "ABILITY_CHECK",
+        "ATTACK_ROLL",
+        "SAVING_THROW"
+      ],
+      "eligibleCreatureKinds": [
+        "PLAYER_CHARACTER",
+        "NPC_WITH_LEVELS"
+      ],
+      "levelBands": [
+        {
+          "minimumLevel": 1,
+          "maximumLevel": 4,
+          "proficiencyBonus": 2,
+          "die": "d4"
+        },
+        {
+          "minimumLevel": 5,
+          "maximumLevel": 8,
+          "proficiencyBonus": 3,
+          "die": "d6"
+        },
+        {
+          "minimumLevel": 9,
+          "maximumLevel": 12,
+          "proficiencyBonus": 4,
+          "die": "d8"
+        },
+        {
+          "minimumLevel": 13,
+          "maximumLevel": 16,
+          "proficiencyBonus": 5,
+          "die": "d10"
+        },
+        {
+          "minimumLevel": 17,
+          "maximumLevel": 20,
+          "proficiencyBonus": 6,
+          "die": "d12"
+        }
+      ],
+      "expertiseDiceCount": 2
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:expertise",
+      "relationship": "replaces-doubled-bonus-with-two-dice"
+    }
+  ]
+}

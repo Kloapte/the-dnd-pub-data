@@ -1,0 +1,19 @@
+{
+  "id": "rule:xphb:creature-type",
+  "name": "Creature Type",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 364,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:player-character"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "language:ggr:giant",
+  "name": "Giant",
+  "sourceMetadata": {
+    "source": "GGR",
+    "page": 9
+  },
+  "category": "standard",
+  "script": "Minotaur",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "giant"
+        ],
+        "sources": [
+          "ERLW"
+        ]
+      }
+    }
+  ]
+}

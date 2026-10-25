@@ -1,0 +1,132 @@
+{
+  "id": "action:xphb:escape-a-grapple",
+  "name": "Escape a Grapple",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 367,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "ESCAPE_GRAPPLE"
+  ],
+  "requirements": [
+    {
+      "kind": "condition",
+      "reference": {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled"
+      }
+    }
+  ],
+  "operations": [
+    {
+      "kind": "CHECK_OR_CONTEST",
+      "operationId": "escape-grapple-check",
+      "resolution": "against-dc",
+      "actor": "acting-creature",
+      "participants": [
+        {
+          "role": "acting-creature",
+          "selection": "PARTICIPANT_CHOOSES",
+          "options": [
+            {
+              "ability": "strength",
+              "skill": {
+                "targetType": "skill",
+                "id": "skill:xphb:athletics"
+              }
+            },
+            {
+              "ability": "dexterity",
+              "skill": {
+                "targetType": "skill",
+                "id": "skill:xphb:acrobatics"
+              }
+            }
+          ]
+        }
+      ],
+      "dcSource": {
+        "targetType": "rule",
+        "id": "rule:xphb:unarmed-strike",
+        "relationship": "grapple-option-save-dc"
+      },
+      "failure": "no-effect",
+      "target": "affected-creature"
+    },
+    {
+      "kind": "END_CONDITION",
+      "target": {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled"
+      },
+      "appliesWhen": {
+        "kind": "CHECK_SUCCEEDED",
+        "operationId": "escape-grapple-check"
+      },
+      "recipient": "acting-creature",
+      "actor": "acting-creature",
+      "operationId": "end-grappled-on-success"
+    },
+    {
+      "kind": "END_CONDITION",
+      "target": {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled"
+      },
+      "appliesWhen": {
+        "kind": "CONDITION_MET",
+        "condition": {
+          "kind": "HAS_CONDITION",
+          "actor": "grappler",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:incapacitated"
+          }
+        }
+      },
+      "recipient": "acting-creature",
+      "actor": "grappler",
+      "operationId": "end-grappled-if-grappler-incapacitated"
+    },
+    {
+      "kind": "END_CONDITION",
+      "target": {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled"
+      },
+      "appliesWhen": {
+        "kind": "CONDITION_MET",
+        "condition": {
+          "kind": "DISTANCE_EXCEEDS_RANGE",
+          "actor": "grappled-creature",
+          "target": "grappler",
+          "range": "grapple"
+        }
+      },
+      "recipient": "acting-creature",
+      "actor": "acting-creature",
+      "operationId": "end-grappled-if-out-of-range"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:grappled"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:incapacitated"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:unarmed-strike"
+    }
+  ]
+}

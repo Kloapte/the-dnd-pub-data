@@ -1,0 +1,42 @@
+{
+  "id": "language:phb:halfling",
+  "name": "Halfling",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "citations": [
+      {
+        "source": "PHB",
+        "page": 26
+      }
+    ],
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:halfling"
+      }
+    ]
+  },
+  "category": "standard",
+  "script": "Common",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "humanoid"
+        ],
+        "tags": [
+          {
+            "group": "any race",
+            "value": "halfling"
+          }
+        ]
+      }
+    }
+  ]
+}

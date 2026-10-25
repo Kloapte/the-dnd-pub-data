@@ -1,0 +1,13 @@
+{
+  "id": "rule:xphb:hazard",
+  "name": "Hazard",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 368,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE"
+}

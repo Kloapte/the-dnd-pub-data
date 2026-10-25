@@ -1,0 +1,26 @@
+{
+  "id": "language:oota:ixitxachitl",
+  "name": "Ixitxachitl",
+  "sourceMetadata": {
+    "source": "OotA",
+    "page": 225
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:oota:ixitxachitl"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:oota:ixitxachitl-cleric"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:oota:vampiric-ixitxachitl"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:oota:vampiric-ixitxachitl-cleric"
+    }
+  ]
+}

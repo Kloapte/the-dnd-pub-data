@@ -1,0 +1,22 @@
+{
+  "id": "rule:mm:player-characters-as-lycanthropes",
+  "name": "Player Characters as Lycanthropes",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 207,
+    "citations": [
+      {
+        "source": "CoS",
+        "page": 242
+      },
+      {
+        "source": "WDMM",
+        "page": 317
+      },
+      {
+        "source": "VRGR",
+        "page": 237
+      }
+    ]
+  }
+}

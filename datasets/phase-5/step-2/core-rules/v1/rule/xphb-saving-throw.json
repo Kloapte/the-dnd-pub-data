@@ -1,0 +1,43 @@
+{
+  "id": "rule:xphb:saving-throw",
+  "name": "Saving Throw",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 373,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "saving-throw",
+      "kind": "D20_TEST",
+      "subtype": "SAVING_THROW",
+      "savingThrow": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "strength",
+          "dexterity",
+          "constitution",
+          "intelligence",
+          "wisdom",
+          "charisma"
+        ],
+        "abilitySelection": "effect",
+        "dc": {
+          "kind": "EFFECT_DEFINED"
+        },
+        "mayChooseToFail": true,
+        "automaticFailureWhenAbilityScoreAbsent": true
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:d20-test"
+    }
+  ]
+}

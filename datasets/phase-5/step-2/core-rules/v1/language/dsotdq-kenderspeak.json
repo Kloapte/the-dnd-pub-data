@@ -1,0 +1,10 @@
+{
+  "id": "language:dsotdq:kenderspeak",
+  "name": "Kenderspeak",
+  "sourceMetadata": {
+    "source": "DSotDQ",
+    "page": 9
+  },
+  "category": "standard",
+  "script": "Common"
+}

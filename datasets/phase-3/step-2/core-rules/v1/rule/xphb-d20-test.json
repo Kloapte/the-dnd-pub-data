@@ -9,6 +9,7 @@
       "basicRules2024": true
     }
   },
+  "ruleType": "CORE",
   "mechanics": [
     {
       "componentId": "d20-test",

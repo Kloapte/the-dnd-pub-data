@@ -1,0 +1,45 @@
+{
+  "id": "rule:xphb:passive-perception",
+  "name": "Passive Perception",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 372,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "passive-perception-check",
+      "kind": "D20_TEST",
+      "subtype": "ABILITY_CHECK",
+      "abilities": [
+        "wisdom"
+      ],
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:xphb:perception"
+      },
+      "passiveScore": true,
+      "passiveScoreConstruction": {
+        "kind": "PASSIVE_SCORE_CONSTRUCTION",
+        "base": 10,
+        "addsCheckBonus": true,
+        "advantageAdjustment": 5,
+        "disadvantageAdjustment": -5
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:advantage"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:disadvantage"
+    }
+  ]
+}

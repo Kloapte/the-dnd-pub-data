@@ -1,0 +1,9 @@
+{
+  "id": "language:scag:halruaan",
+  "name": "Halruaan",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112
+  },
+  "script": "Draconic"
+}

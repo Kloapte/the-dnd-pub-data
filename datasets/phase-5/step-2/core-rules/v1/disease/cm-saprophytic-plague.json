@@ -1,0 +1,142 @@
+{
+  "id": "disease:cm:saprophytic-plague",
+  "name": "Saprophytic Plague",
+  "sourceMetadata": {
+    "source": "CM",
+    "page": 253
+  },
+  "infection": {
+    "exposures": [
+      {
+        "kind": "INFECTED_CREATURE_PROXIMITY",
+        "distanceFeet": 10,
+        "trigger": "ENTERS_AREA",
+        "sourceState": "INFECTED",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 20
+        },
+        "onFailure": "INFECTION",
+        "onSuccessImmunity": {
+          "kind": "DISEASE_IMMUNITY",
+          "scope": "DISEASE",
+          "duration": {
+            "amount": 24,
+            "unit": "hour"
+          }
+        },
+        "targetCreatureTypes": [
+          "beast",
+          "humanoid"
+        ]
+      },
+      {
+        "kind": "INGEST_CONTAMINATED_MATERIAL",
+        "material": "FOOD",
+        "onFailure": "INFECTION",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 20
+        },
+        "contaminationAfter": {
+          "kind": "DICE_ROLL",
+          "count": 2,
+          "die": 12,
+          "unit": "hour"
+        }
+      }
+    ]
+  },
+  "incubation": {
+    "kind": "DICE_ROLL",
+    "count": 1,
+    "die": 4,
+    "unit": "hour"
+  },
+  "symptoms": [
+    {
+      "kind": "CONDITION_LEVEL_CHANGE",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:exhaustion"
+      },
+      "amount": 1
+    }
+  ],
+  "applicability": {
+    "targetCreatureTypes": [
+      "beast",
+      "humanoid"
+    ],
+    "automaticSuccessForDiseaseImmuneTargets": true
+  },
+  "effects": [
+    {
+      "kind": "REPEATING_CONDITION_LEVEL_CHANGE",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:exhaustion"
+      },
+      "amount": 1,
+      "every": {
+        "amount": 24,
+        "unit": "hour"
+      },
+      "relativeTo": "SYMPTOM_ONSET"
+    },
+    {
+      "kind": "PHYSIOLOGICAL_CAPABILITY",
+      "capability": "AWARENESS_REDUCED",
+      "lifecycle": "AFTER_INFECTION_DURATION",
+      "beginsAfterInfection": {
+        "amount": 24,
+        "unit": "hour"
+      }
+    },
+    {
+      "kind": "PHYSIOLOGICAL_CAPABILITY",
+      "capability": "SPEAKS_WORD_UNINTENTIONALLY",
+      "lifecycle": "AFTER_INFECTION_DURATION",
+      "beginsAfterInfection": {
+        "amount": 24,
+        "unit": "hour"
+      }
+    },
+    {
+      "kind": "TRANSFORMATION_OUTCOME",
+      "target": {
+        "kind": "UNNORMALIZED_SOURCE_ENTITY",
+        "name": "lifeless magenta ooze"
+      },
+      "trigger": "DEATH_WHILE_INFECTED"
+    },
+    {
+      "kind": "FOOD_SPORE_CONTAMINATION",
+      "interval": {
+        "kind": "DICE_ROLL",
+        "count": 2,
+        "die": 12,
+        "unit": "hour"
+      },
+      "material": "FOOD"
+    },
+    {
+      "kind": "REFERENCED_PROCEDURE",
+      "reference": {
+        "targetType": "spell",
+        "id": "spell:phb:purify-food-and-drink"
+      },
+      "relation": "CURES_DISEASE",
+      "appliesWhen": "AFTER_SPORE_CONTAMINATION"
+    },
+    {
+      "kind": "BEHAVIORAL_DRIVE",
+      "drive": "SEEK_UNINFECTED_GROUPS_TO_SPREAD_DISEASE",
+      "lifecycle": "AFTER_INFECTION_DURATION",
+      "beginsAfterInfection": {
+        "amount": 24,
+        "unit": "hour"
+      }
+    }
+  ]
+}

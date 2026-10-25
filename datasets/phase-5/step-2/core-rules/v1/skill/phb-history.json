@@ -1,0 +1,19 @@
+{
+  "id": "skill:phb:history",
+  "name": "History",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 177,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:history"
+      }
+    ]
+  },
+  "ability": "intelligence"
+}

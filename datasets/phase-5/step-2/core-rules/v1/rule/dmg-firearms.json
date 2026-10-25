@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:firearms",
+  "name": "Firearms",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 267
+  },
+  "ruleType": "OPTIONAL"
+}

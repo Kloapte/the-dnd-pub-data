@@ -1,0 +1,14 @@
+{
+  "id": "language:psd:homarid",
+  "name": "Homarid",
+  "sourceMetadata": {
+    "source": "PSD",
+    "page": 15
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:psd:homarid"
+    }
+  ]
+}

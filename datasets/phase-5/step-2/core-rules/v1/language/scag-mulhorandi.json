@@ -1,0 +1,15 @@
+{
+  "id": "language:scag:mulhorandi",
+  "name": "Mulhorandi",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:frhof:mulhorandi"
+      }
+    ]
+  },
+  "script": "Thorass"
+}

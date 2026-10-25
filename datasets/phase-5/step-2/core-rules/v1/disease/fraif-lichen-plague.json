@@ -1,0 +1,133 @@
+{
+  "id": "disease:fraif:lichen-plague",
+  "name": "Lichen Plague",
+  "sourceMetadata": {
+    "source": "FRAiF",
+    "page": 98
+  },
+  "applicability": {
+    "targetCreatureTypes": [
+      "beast",
+      "giant",
+      "humanoid",
+      "monstrosity"
+    ]
+  },
+  "infection": {
+    "transmission": [
+      "contact"
+    ],
+    "exposures": [
+      {
+        "kind": "ENVIRONMENTAL_CONTACT",
+        "environment": "AIRBORNE_SPORES",
+        "trigger": "CONTACT",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 14
+        },
+        "onFailure": "INFECTION"
+      }
+    ],
+    "exposureProcedures": [
+      {
+        "kind": "CONTACT_WITH_INFECTED_CREATURE",
+        "contact": "SKIN",
+        "sourceState": "INFECTED",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 14
+        },
+        "onFailure": "INFECTION",
+        "eligibleCreatureTypes": [
+          "beast",
+          "giant",
+          "humanoid",
+          "monstrosity"
+        ],
+        "onSuccessImmunity": {
+          "kind": "DISEASE_IMMUNITY",
+          "scope": "DISEASE",
+          "duration": {
+            "amount": 24,
+            "unit": "hour"
+          }
+        },
+        "site": "VISIBLE_LICHEN_PATCH"
+      }
+    ]
+  },
+  "incubation": {
+    "kind": "DICE_ROLL",
+    "count": 1,
+    "die": 4,
+    "unit": "day"
+  },
+  "symptoms": [
+    {
+      "kind": "CONDITION_LEVEL_CHANGE",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:exhaustion"
+      },
+      "amount": 1,
+      "cannotReduceUntilDiseaseEnds": true
+    }
+  ],
+  "progression": [
+    {
+      "kind": "SAVING_THROW_BRANCH",
+      "branchId": "long-rest-exhaustion",
+      "trigger": {
+        "kind": "LONG_REST_COMPLETED",
+        "phase": "AFTER_SYMPTOM_ONSET"
+      },
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 14
+      },
+      "onSuccess": [
+        {
+          "kind": "NO_EFFECT"
+        }
+      ],
+      "onFailure": [
+        {
+          "kind": "CHANGE_CONDITION_LEVEL",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:exhaustion"
+          },
+          "amount": 1
+        }
+      ],
+      "outcomeCounter": {
+        "branchId": "long-rest-exhaustion",
+        "countedOutcome": "SUCCESS",
+        "threshold": 3,
+        "sequence": "NOT_REQUIRED",
+        "reset": "NEVER",
+        "onThreshold": {
+          "kind": "END_DISEASE"
+        },
+        "immunityAfterRecovery": {
+          "kind": "DISEASE_IMMUNITY",
+          "scope": "DISEASE",
+          "permanent": true
+        }
+      }
+    }
+  ],
+  "effects": [
+    {
+      "kind": "TRANSFORMATION_OUTCOME",
+      "target": {
+        "kind": "UNNORMALIZED_SOURCE_ENTITY",
+        "name": "Zombie"
+      },
+      "trigger": "DEATH_WHILE_INFECTED",
+      "deathOfSubject": true,
+      "outcomeAfter": "BECOMES_TRANSFORMED_CREATURE"
+    }
+  ]
+}

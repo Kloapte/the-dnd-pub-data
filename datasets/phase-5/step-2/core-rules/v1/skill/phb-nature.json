@@ -1,0 +1,19 @@
+{
+  "id": "skill:phb:nature",
+  "name": "Nature",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 178,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:nature"
+      }
+    ]
+  },
+  "ability": "intelligence"
+}

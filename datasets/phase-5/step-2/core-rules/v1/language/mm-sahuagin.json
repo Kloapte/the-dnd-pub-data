@@ -1,0 +1,28 @@
+{
+  "id": "language:mm:sahuagin",
+  "name": "Sahuagin",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 263,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xmm:sahuagin"
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:sahuagin"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:sahuagin-priestess"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:sahuagin-baron"
+    }
+  ]
+}

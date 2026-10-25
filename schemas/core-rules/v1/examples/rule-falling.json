@@ -1,0 +1,58 @@
+{
+  "id": "rule:xge:falling",
+  "name": "Falling",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 77
+  },
+  "ruleType": "OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "standard-fall-damage",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "FALLING",
+      "procedure": "fall-damage",
+      "details": {
+        "kind": "FALL_DAMAGE",
+        "distanceIncrementFeet": 10,
+        "dicePerIncrement": {
+          "diceCount": 1,
+          "dieSize": 6
+        },
+        "maximumDiceCount": 20,
+        "damageType": "bludgeoning",
+        "partialIncrementTreatment": "SOURCE_UNSPECIFIED",
+        "landingCondition": {
+          "kind": "APPLY_CONDITION",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:prone"
+          },
+          "appliesWhen": "FALL_DAMAGE_NOT_AVOIDED"
+        }
+      }
+    },
+    {
+      "componentId": "optional-flying-fall-trigger",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "FALLING",
+      "procedure": "fall-trigger",
+      "details": {
+        "kind": "FLYING_FALL_RULE",
+        "ruleStatus": "OPTIONAL",
+        "fallingTriggers": [
+          "PRONE",
+          "FLY_SPEED_ZERO",
+          "OTHERWISE_UNABLE_TO_MOVE"
+        ],
+        "prevention": "HOVER_OR_MAGIC_HOLD_ALOFT"
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "condition",
+      "id": "condition:phb:prone"
+    }
+  ]
+}

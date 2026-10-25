@@ -1,6 +1,7 @@
-# Rule source content duplicate during Step 2 Phase 3 representative conversion
+# Rule source content duplicate during Step 2 Core Rules conversion
 
 This restricted internal register preserves complete original entries for audit. Do not publish or distribute excerpts without a licensing review.
+
 ### rule:xphb:unarmed-strike — entry 2
 
 - Source file: `src/main/resources/data/variantrules.json`
@@ -76,4 +77,74 @@ Complete original source entry:
     "If the creation of magic items is commonplace in your campaign, a formula can have a rarity that matches the rarity of the item it allows a character to create. Formulas for common and uncommon items might even be for sale, each with a cost double that of its magic item."
   ]
 }
+```
+
+### rule:xphb:save — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[186]`
+- Source entry path: `$.variantrule[186].entries[0]`
+- Canonical output: `none`
+- DUPLICATE: ?Save? is another name for the Saving Throw procedure. — No independent mechanic is added; the source definition is represented by rule:xphb:saving-throw.
+
+Complete original source entry:
+
+```json
+"Save is another name for a {@variantrule Saving Throw|XPHB|saving throw}."
+```
+
+### rule:xphb:weapon-attack — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[230]`
+- Source entry path: `$.variantrule[230].entries[0]`
+- Canonical output: `none`
+- DUPLICATE: Weapon Attack is the weapon form already represented by the XPHB Attack Roll Rule. — No independent mechanic is added; the source definition is represented by rule:xphb:attack-roll.
+
+Complete original source entry:
+
+```json
+"A weapon attack is an attack roll made with a weapon."
+```
+
+### rule:dmg:skill-variants — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[202]`
+- Source entry path: `$.variantrule[202].entries[0]`
+- Canonical output: `rule/dmg-skill-variants.json`
+- DUPLICATE: The normal relationship between skills and their associated ability checks. — The source Skill records preserve each Skill identity and associated ability.
+
+Complete original source entry:
+
+```json
+"A skill dictates the circumstances under which a character can add his or her proficiency bonus to an ability check. Skills define those circumstances by referring to different aspects of the six ability scores. For example, {@skill Acrobatics} and {@skill Stealth} are two different aspects of Dexterity, and a character can specialize in either or both."
+```
+
+### rule:dmg:diagonals ? entry 52
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[52]`
+- Source entry path: `undefined`
+- Canonical output: `rule/dmg-diagonals.json`
+- DUPLICATE: Worked example of the alternating movement cost ? The example repeats the cost sequence represented by entry 1.
+
+Complete original source entry:
+
+```json
+undefined
+```
+
+### rule:dmg:diagonals ? entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[52]`
+- Source entry path: `$.variantrule[52].entries[2]`
+- Canonical output: `rule/dmg-diagonals.json`
+- DUPLICATE: Worked example of the alternating movement cost ? The example repeats the cost sequence represented by entry 1.
+
+Complete original source entry:
+
+```json
+"For example, a character might move one square diagonally (5 feet), then three squares straight (15 feet), and then another square diagonally (10 feet) for a total movement of 30 feet."
 ```

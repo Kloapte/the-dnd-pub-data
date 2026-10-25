@@ -1,0 +1,10 @@
+{
+  "id": "language:ggr:minotaur",
+  "name": "Minotaur",
+  "sourceMetadata": {
+    "source": "GGR",
+    "page": 9
+  },
+  "category": "standard",
+  "script": "Minotaur"
+}

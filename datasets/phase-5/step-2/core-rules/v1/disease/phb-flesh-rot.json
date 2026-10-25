@@ -1,0 +1,32 @@
+{
+  "id": "disease:phb:flesh-rot",
+  "name": "Flesh Rot",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 227
+  },
+  "symptoms": [
+    {
+      "kind": "ABILITY_ROLL_MODIFIER",
+      "roll": "ability-check",
+      "direction": "disadvantage",
+      "ability": "charisma"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "spell",
+      "id": "spell:phb:contagion",
+      "relationship": "can-be-inflicted-by"
+    }
+  ],
+  "effects": [
+    {
+      "kind": "DAMAGE_VULNERABILITY",
+      "damageTypes": [
+        "ALL"
+      ],
+      "lifecycle": "WHILE_DISEASE_ACTIVE"
+    }
+  ]
+}

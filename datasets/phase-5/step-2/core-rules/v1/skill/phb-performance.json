@@ -1,0 +1,19 @@
+{
+  "id": "skill:phb:performance",
+  "name": "Performance",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 179,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:performance"
+      }
+    ]
+  },
+  "ability": "charisma"
+}

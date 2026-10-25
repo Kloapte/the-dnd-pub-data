@@ -1,0 +1,13 @@
+{
+  "id": "language:xphb:primordial",
+  "name": "Primordial",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 37,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "rare"
+}

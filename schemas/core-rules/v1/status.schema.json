@@ -198,8 +198,43 @@
                   "status-ends",
                   "effect-ends"
                 ]
+              },
+              "requirement": {
+                "enum": [
+                  "dm-may-require"
+                ]
               }
-            }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "trigger": {
+                      "const": "environmental-phenomenon"
+                    }
+                  },
+                  "required": [
+                    "trigger"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "requirement": {
+                      "enum": [
+                        "dm-may-require"
+                      ]
+                    }
+                  }
+                },
+                "else": {
+                  "not": {
+                    "required": [
+                      "requirement"
+                    ]
+                  }
+                }
+              }
+            ]
           },
           {
             "type": "object",

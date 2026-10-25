@@ -23,5 +23,54 @@
   },
   "capabilities": [
     "IDENTIFY_SPELL"
+  ],
+  "references": [
+    {
+      "targetType": "skill",
+      "id": "skill:phb:arcana"
+    }
+  ],
+  "operations": [
+    {
+      "kind": "CHECK_OR_CONTEST",
+      "operationId": "identify-spell-check",
+      "resolution": "against-dc",
+      "actor": "acting-creature",
+      "abilities": [
+        "intelligence"
+      ],
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:phb:arcana"
+      },
+      "dc": {
+        "kind": "FIXED_PLUS_SPELL_LEVEL",
+        "base": 15,
+        "spellRole": "identified-spell"
+      },
+      "failure": "no-effect",
+      "target": "target"
+    },
+    {
+      "kind": "SPELL_IDENTIFICATION",
+      "operationId": "identify-spell-procedure",
+      "checkId": "identify-spell-check",
+      "checkAbility": "intelligence",
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:phb:arcana"
+      },
+      "modes": [
+        {
+          "timing": "REACTION_WHILE_CASTING",
+          "observation": "CASTING_PERCEIVED"
+        },
+        {
+          "timing": "ACTION_AFTER_CASTING",
+          "observation": "SPELL_EFFECT_PERCEIVED"
+        }
+      ],
+      "advantageWhen": "SPELL_CAST_AS_CLASS_SPELL_AND_OBSERVER_IS_MEMBER_OF_CLASS"
+    }
   ]
 }

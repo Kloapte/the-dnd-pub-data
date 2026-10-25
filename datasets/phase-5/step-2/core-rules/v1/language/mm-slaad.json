@@ -1,0 +1,40 @@
+{
+  "id": "language:mm:slaad",
+  "name": "Slaad",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 276,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xmm:slaad"
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:slaad-tadpole"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:red-slaad"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:blue-slaad"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:green-slaad"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:gray-slaad"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:death-slaad"
+    }
+  ]
+}

@@ -8,6 +8,7 @@ const workspace = path.resolve(__dirname, '..');
 const contractRoot = path.join(workspace, 'schemas/core-rules/v1');
 const exampleRoot = path.join(contractRoot, 'examples');
 const phase3Root = path.join(workspace, 'datasets/phase-3/step-2/core-rules/v1');
+const phase5Root = path.join(workspace, 'datasets/phase-5/step-2/core-rules/v1');
 const commonSchemaId = 'urn:thedndpub:schemas:core-rules:common:v1';
 const ajv = new Ajv2020({ allErrors: true, strict: true, strictRequired: false });
 const testResults = [];
@@ -15,6 +16,7 @@ const sourceConditionData = readJson(path.join(
     workspace,
     'src/main/resources/data/conditionsdiseases.json'
 ));
+let phase5LanguageReferenceIndexes;
 
 function canonicalSlug(value) {
     return value.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
@@ -25,6 +27,10 @@ function canonicalSlug(value) {
 const sourceConditionIds = new Set(sourceConditionData.condition.map(condition =>
     `condition:${condition.source.toLowerCase()}:${canonicalSlug(condition.name)}`
 ));
+const sourceRuleIds = new Set(readJson(path.join(
+    workspace,
+    'src/main/resources/data/variantrules.json'
+)).variantrule.map(rule => `rule:${canonicalSlug(rule.source)}:${canonicalSlug(rule.name)}`));
 
 function readJson(file) {
     return JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -113,10 +119,268 @@ function assertRuleIntegrity(rule) {
     const componentIds = mechanics.map(component => component.componentId);
     if (new Set(componentIds).size !== componentIds.length) fail(`${rule.id}: duplicate componentId`);
     const definitions = new Set();
+    const abilityScoreBands = [
+        [1, 1, -5], [2, 3, -4], [4, 5, -3], [6, 7, -2],
+        [8, 9, -1], [10, 11, 0], [12, 13, 1], [14, 15, 2],
+        [16, 17, 3], [18, 19, 4], [20, 21, 5], [22, 23, 6],
+        [24, 25, 7], [26, 27, 8], [28, 29, 9], [30, 30, 10]
+    ];
+    const proficiencyDieBands = [
+        [1, 4, 2, 'd4'], [5, 8, 3, 'd6'], [9, 12, 4, 'd8'],
+        [13, 16, 5, 'd10'], [17, 20, 6, 'd12']
+    ];
+    const proficiencyLevelBands = [
+        [1, 4, 2], [5, 8, 3], [9, 12, 4], [13, 16, 5],
+        [17, 20, 6], [21, 24, 7], [25, 28, 8], [29, 30, 9]
+    ];
+    const proficiencyChallengeRatingBands = [
+        [null, 0, 4, 2], [4, null, 8, 3], [8, null, 12, 4], [12, null, 16, 5],
+        [16, null, 20, 6], [20, null, 24, 7], [24, null, 28, 8], [28, null, 30, 9]
+    ];
     for (const component of mechanics) {
         const fingerprint = componentFingerprint(component);
         if (definitions.has(fingerprint)) fail(`${rule.id}: duplicate mechanical component definition`);
         definitions.add(fingerprint);
+        if (component.kind === 'ABILITY_SCORE_RULE' && component.subtype === 'MODIFIER_MAPPING') {
+            const actual = component.scoreBands.map(band => [
+                band.minimumScore, band.maximumScore, band.modifier
+            ]);
+            if (JSON.stringify(actual) !== JSON.stringify(abilityScoreBands)
+                    || JSON.stringify(component.abilities) !== JSON.stringify([
+                        'strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'
+                    ])) {
+                fail(`${rule.id}: ability modifier table must cover the source-defined scores and six abilities`);
+            }
+        }
+        if (component.kind === 'D20_TEST' && component.subtype === 'DIFFICULTY_CLASS'
+                && JSON.stringify(component.targetNumberFor) !== JSON.stringify([
+                    'ABILITY_CHECK', 'SAVING_THROW'
+                ])) {
+            fail(`${rule.id}: Difficulty Class must target ability checks and saving throws`);
+        }
+        if (component.kind === 'PROFICIENCY_RULE') {
+            if (component.subtype === 'BONUS_SCALING'
+                    && (component.multiplier !== 2 || component.requiresSkillProficiency !== true
+                        || component.unlessAlreadyDoubledByAnotherFeature !== true
+                        || component.assignment !== 'ONE_SKILL_IN_WHICH_PROFICIENT'
+                        || component.maximumInstancesPerSkill !== 1)) {
+                fail(`${rule.id}: Expertise scaling or skill assignment differs from the source`);
+            }
+            if (component.subtype === 'PROFICIENCY_DICE_ALTERNATIVE') {
+                const actual = component.levelBands.map(band => [
+                    band.minimumLevel, band.maximumLevel, band.proficiencyBonus, band.die
+                ]);
+                if (JSON.stringify(actual) !== JSON.stringify(proficiencyDieBands)
+                        || component.expertiseDiceCount !== 2
+                        || JSON.stringify(component.appliesTo) !== JSON.stringify([
+                            'ABILITY_CHECK', 'ATTACK_ROLL', 'SAVING_THROW'
+                        ])
+                        || JSON.stringify(component.eligibleCreatureKinds) !== JSON.stringify([
+                            'PLAYER_CHARACTER', 'NPC_WITH_LEVELS'
+                        ])) {
+                    fail(`${rule.id}: Proficiency Dice table, scope, or Expertise interaction differs from the source`);
+                }
+            }
+            if (component.subtype === 'BONUS_APPLICATION'
+                    && JSON.stringify(component.appliesTo) !== JSON.stringify([
+                        'SKILL_ASSOCIATED_ABILITY_CHECK', 'SAVING_THROW', 'WEAPON_ATTACK', 'TOOL_CHECK'
+                    ])) {
+                fail(`${rule.id}: proficiency application must preserve the source-listed D20 Test uses`);
+            }
+            if (component.subtype === 'BONUS_PROGRESSION') {
+                const levels = component.levelBands.map(band => [
+                    band.minimumLevel, band.maximumLevel, band.bonus
+                ]);
+                const challengeRatings = component.challengeRatingBands.map(band => [
+                    band.minimumChallengeRatingExclusive ?? null,
+                    band.minimumChallengeRatingInclusive ?? null,
+                    band.maximumChallengeRatingInclusive,
+                    band.bonus
+                ]);
+                if (component.progressionSource !== 'LEVEL_OR_CHALLENGE_RATING'
+                        || JSON.stringify(levels) !== JSON.stringify(proficiencyLevelBands)
+                        || JSON.stringify(challengeRatings) !== JSON.stringify(proficiencyChallengeRatingBands)) {
+                    fail(`${rule.id}: proficiency progression differs from the source table`);
+                }
+            }
+            if (component.subtype === 'ABILITY_CHECK_PROFICIENCY_VARIANT'
+                    && (component.replaces !== 'SKILL_PROFICIENCY'
+                        || JSON.stringify(component.proficiencySources) !== JSON.stringify([
+                            'CLASS_ASSOCIATED_ABILITY', 'BACKGROUND_SELECTED_ABILITY'
+                        ])
+                        || component.proficiencyCount !== 2
+                        || component.appliesTo !== 'ABILITY_CHECK_ASSOCIATED_WITH_EITHER_PROFICIENT_ABILITY'
+                        || component.startsAtLevel !== 1)) {
+                fail(`${rule.id}: ability-check proficiency variant differs from the DMG source`);
+            }
+        }
+        if (component.kind === 'INITIATIVE_PROCEDURE') {
+            if (rule.id === 'rule:xphb:initiative'
+                    && (component.subtype !== 'INITIATIVE_SCORE'
+                        || component.base !== 10 || component.ability !== 'dexterity'
+                        || component.advantageAdjustment !== 5 || component.disadvantageAdjustment !== -5)) {
+                fail(`${rule.id}: XPHB Initiative score or Advantage/Disadvantage adjustment differs from source`);
+            }
+            if (rule.id === 'rule:dmg:initiative-variants' && component.subtype === 'SIDE_INITIATIVE'
+                    && (component.roll !== 'UNMODIFIED_D20'
+                        || component.tieResolution !== 'REROLL_TIED_SIDES'
+                        || component.membersChooseOrder !== true
+                        || component.roundEndsAfterAllSidesAct !== true
+                        || component.multipleSidesOrderedByRoll !== true)) {
+                fail(`${rule.id}: Side Initiative procedure differs from source`);
+            }
+        }
+        if (component.kind === 'CARRYING_CAPACITY_RULE') {
+            if (rule.id === 'rule:xphb:carrying-capacity') {
+                const actual = component.sizeMultipliers.map(item => [
+                    item.sizes.join(','), item.carryMultiplier, item.dragLiftPushMultiplier
+                ]);
+                const expected = [
+                    ['TINY', 7.5, 15], ['SMALL,MEDIUM', 15, 30], ['LARGE', 30, 60],
+                    ['HUGE', 60, 120], ['GARGANTUAN', 120, 240]
+                ];
+                if (JSON.stringify(actual) !== JSON.stringify(expected)
+                        || component.dragLiftPushSpeedCapFeet !== 5
+                        || component.speedCapAppliesWhenAboveCarryCapacity !== true) {
+                    fail(`${rule.id}: size multipliers or drag/lift/push Speed cap differs from source`);
+                }
+            }
+            if (rule.id === 'rule:phb:encumbrance') {
+                const actual = component.encumbranceThresholds.map(item => [
+                    item.weightMultiplier, item.state, item.speedReductionFeet,
+                    item.abilityCheckDisadvantage.join(','), item.attackDisadvantage.join(','),
+                    item.savingThrowDisadvantage.join(',')
+                ]);
+                if (component.thresholdComparison !== 'GREATER_THAN'
+                        || JSON.stringify(actual) !== JSON.stringify([
+                            [5, 'ENCUMBERED', 10, '', '', ''],
+                            [10, 'HEAVILY_ENCUMBERED', 20,
+                                'strength,dexterity,constitution',
+                                'strength,dexterity,constitution',
+                                'strength,dexterity,constitution']
+                        ]) || component.heavyEncumbranceMaximum !== 'STANDARD_CARRYING_CAPACITY') {
+                    fail(`${rule.id}: Encumbrance thresholds or effects differ from PHB source`);
+                }
+            }
+        }
+        if (component.kind === 'REST_PROCEDURE') {
+            if (rule.id === 'rule:xphb:long-rest' && component.subtype === 'LONG_REST'
+                    && (component.duration !== 8 || component.unit !== 'hours'
+                        || component.durationQualifier !== 'AT_LEAST'
+                        || component.minimumHitPointsToStart !== 1
+                        || component.minimumHoursBetweenStarts !== 16
+                        || component.physicalExertionInterruptionHours !== 1
+                        || component.shortRestBenefitThresholdHours !== 1
+                        || component.addedDurationPerInterruption?.amount !== 1)) {
+                fail(`${rule.id}: XPHB Long Rest duration or interruption procedure differs from source`);
+            }
+            if (rule.id === 'rule:xphb:short-rest' && component.subtype === 'SHORT_REST'
+                    && (component.duration !== 1 || component.unit !== 'hour'
+                        || component.minimumHitPointsToStart !== 1
+                        || JSON.stringify(component.interruptions)
+                            !== JSON.stringify(['INITIATIVE', 'NON_CANTRIP_SPELL', 'DAMAGE'])
+                        || component.interruptionOutcome !== 'NO_BENEFITS')) {
+                fail(`${rule.id}: XPHB Short Rest duration or interruption rule differs from source`);
+            }
+            if (rule.id === 'rule:dmg:rest-variants') {
+                const actual = [component.subtype, component.duration, component.unit];
+                const allowed = [
+                    ['SHORT_REST', 5, 'minutes'], ['LONG_REST', 1, 'hour'],
+                    ['SHORT_REST', 8, 'hours'], ['LONG_REST', 7, 'days']
+                ];
+                if (!allowed.some(value => JSON.stringify(value) === JSON.stringify(actual))) {
+                    fail(`${rule.id}: Rest Variant duration is not source-defined`);
+                }
+            }
+            if (rule.id === 'rule:xge:sleep' && component.deprivationProcedure) {
+                const procedure = component.deprivationProcedure;
+                if (procedure.intervalHours !== 24 || procedure.savingThrow?.baseDc !== 10
+                        || procedure.savingThrow?.increasePerConsecutiveInterval !== 5
+                        || procedure.dcResetOnLongRest !== true
+                        || procedure.failureOutcome?.kind !== 'INCREASE_CONDITION_LEVEL'
+                        || procedure.failureOutcome.levels !== 1) {
+                    fail(`${rule.id}: sleep-deprivation save cadence or consequence differs from source`);
+                }
+            }
+        }
+        if (component.kind === 'DAMAGE_HEALTH_STATE'
+                && ['RESISTANCE', 'VULNERABILITY'].includes(component.subtype)) {
+            const expected = component.subtype === 'RESISTANCE'
+                ? ['HALVE', 0.5, 'DOWN'] : ['DOUBLE', 2, undefined];
+            const actual = [component.resolutionModifier?.operation,
+                component.resolutionModifier?.multiplier, component.resolutionModifier?.rounding];
+            if (JSON.stringify(actual) !== JSON.stringify(expected)
+                    || component.resolutionModifier?.oncePerDamageInstance !== true
+                    || component.resolutionModifier?.sameOperationDoesNotStack !== true) {
+                fail(`${rule.id}: Resistance/Vulnerability calculation differs from XPHB source`);
+            }
+        }
+        if (component.subtype === 'FLANKING') {
+            const hexSeparations = component.hexGrid?.targetSizeSeparations?.map(item => [
+                item.targetSizeGroup, item.hexesBetween, item.comparison
+            ]);
+            const expectedHexSeparations = [
+                ['TINY_SMALL_MEDIUM', 2, 'EXACTLY'],
+                ['LARGE', 4, 'EXACTLY'],
+                ['HUGE', 5, 'EXACTLY'],
+                ['GARGANTUAN', 6, 'AT_LEAST']
+            ];
+            if (component.requiresMiniatures !== true
+                    || component.targetRole !== 'ENEMY'
+                    || JSON.stringify(component.participants) !== JSON.stringify(['ATTACKER', 'ALLY'])
+                    || component.participantsMustSeeTarget !== true
+                    || component.participantsCannotHaveCondition?.id !== 'condition:phb:incapacitated'
+                    || component.largeOrLargerSpaceRule?.appliesToFlankerSize !== 'LARGE_OR_LARGER'
+                    || component.largeOrLargerSpaceRule?.qualification !== 'AT_LEAST_ONE_SPACE_CELL_QUALIFIES'
+                    || component.squareGrid?.tieBreakProcedure
+                        !== 'CENTER_LINE_CROSSES_OPPOSITE_SIDES_OR_CORNERS'
+                    || JSON.stringify(hexSeparations) !== JSON.stringify(expectedHexSeparations)
+                    || component.benefit?.roll !== 'attack'
+                    || component.benefit?.direction !== 'advantage') {
+                fail(`${rule.id}: Flanking geometry, eligibility, or Advantage differs from the DMG source`);
+            }
+        }
+        if (component.subtype === 'COVER') {
+            const expectedCover = {
+                half: [2, 2, 'dexterity', false],
+                'three-quarters': [5, 5, 'dexterity', false],
+                total: [undefined, undefined, undefined, true]
+            }[component.level];
+            if (!expectedCover
+                    || component.armorClassBonus !== expectedCover[0]
+                    || component.savingThrowBonus !== expectedCover[1]
+                    || component.savingThrowAbility !== expectedCover[2]
+                    || component.blocksTargeting !== expectedCover[3]
+                    || component.degreeSelection !== 'MOST_PROTECTIVE_ONLY') {
+                fail(`${rule.id}: Cover benefit or targeting differs from the XPHB source`);
+            }
+        }
+        if (component.subtype === 'ABILITY_VARIATION') {
+            const skillRecords = readJson(path.join(workspace, 'src/main/resources/data/skills.json')).skill;
+            const abilityNames = {
+                str: 'strength', dex: 'dexterity', con: 'constitution',
+                int: 'intelligence', wis: 'wisdom', cha: 'charisma'
+            };
+            if (component.decisionMaker !== 'DM'
+                    || component.eligibleRequester !== 'DM_OR_PLAYER'
+                    || component.decision !== 'DISCRETIONARY') {
+                fail(`${rule.id}: ability/Skill variation discretion differs from the PHB source`);
+            }
+            for (const pairing of component.pairings ?? []) {
+                if (pairing.skill?.targetType !== 'skill') fail(`${rule.id}: pairing must reference a Skill`);
+                const sourceSkill = skillRecords.find(skill =>
+                    `skill:${canonicalSlug(skill.source)}:${canonicalSlug(skill.name)}` === pairing.skill.id);
+                if (!sourceSkill || abilityNames[sourceSkill.ability] !== pairing.usualAbility
+                        || pairing.alternativeAbility === pairing.usualAbility) {
+                    fail(`${rule.id}: Skill ability pairing does not match its source Skill or vary its ability`);
+                }
+            }
+        }
+    }
+    for (const component of mechanics) {
+        if (component.subtype === 'ABILITY_CHECK' && component.passiveScoreConstruction) {
+            if (component.passiveScore !== true) fail(`${rule.id}: passive construction requires a passive check`);
+        }
     }
     const components = new Map(mechanics.map(component => [component.componentId, component]));
     const compositionLeaves = new Map();
@@ -200,6 +464,90 @@ function assertActionIntegrity(action) {
         operationApplicability(action, operation);
     }
 
+    const isCheck = operation => operation?.kind === 'CHECK_OR_CONTEST';
+    const skillAbilities = new Map([...phase3Files(path.join(phase3Root, 'skill')),
+        ...phase3Files(path.join(phase5Root, 'skill'))]
+        .map(file => readJson(file))
+        .map(skill => [skill.id, skill.ability]));
+    const validateAbilitySkillPairs = (owner, options) => {
+        for (const option of options ?? []) {
+            if (!option.skill) continue;
+            const skillAbility = skillAbilities.get(option.skill.id);
+            if (!skillAbility) fail(`${action.id}: unresolved Skill option ${option.skill.id}`);
+            if (skillAbility !== option.ability) {
+                fail(`${action.id}: ${owner} ability does not match Skill ${option.skill.id}`);
+            }
+        }
+    };
+    for (const operation of operations) {
+        if (operation.kind === 'OBJECT_OPERATION' && operation.interactionAllowance
+                && operation.operation !== 'ordinary-interaction') {
+            fail(`${action.id}: interaction allowance only applies to ordinary object interaction`);
+        }
+        for (const participant of operation.participants ?? []) {
+            validateAbilitySkillPairs(participant.role, participant.options);
+        }
+        validateAbilitySkillPairs('defender', operation.defenderOptions);
+        for (const option of operation.checkOptions ?? []) {
+            validateAbilitySkillPairs('check option', [option]);
+        }
+        if (operation.skill && operation.abilities?.length === 1) {
+            validateAbilitySkillPairs('check', [{
+                ability: operation.abilities[0],
+                skill: operation.skill
+            }]);
+        }
+        if (operation.opposingSkills && operation.opposingAbilities) {
+            if (operation.opposingSkills.length !== operation.opposingAbilities.length) {
+                fail(`${action.id}: opposing ability/Skill options must be paired`);
+            }
+            validateAbilitySkillPairs('opposing check', operation.opposingSkills.map((skill, index) => ({
+                ability: operation.opposingAbilities[index],
+                skill
+            })));
+        }
+        const appliesWhen = operation.appliesWhen;
+        if (appliesWhen?.kind === 'CHECK_RESOLUTION'
+                && !isCheck(byId.get(appliesWhen.operationId))) {
+            fail(`${action.id}: CHECK_RESOLUTION must reference a check operation`);
+        }
+        if (appliesWhen?.kind === 'ATTACK_RESOLUTION'
+                && !['ATTACK_RESOLUTION', 'ATTACK_CONTESTED_BY_CHECK']
+                    .includes(byId.get(appliesWhen.operationId)?.kind)) {
+            fail(`${action.id}: ATTACK_RESOLUTION must reference an attack operation`);
+        }
+        const linkedCheckId = operation.checkId ?? operation.entryCheckId;
+        if (linkedCheckId && !isCheck(byId.get(linkedCheckId))) {
+            fail(`${action.id}: unresolved or incompatible check reference ${linkedCheckId}`);
+        }
+        if (operation.kind === 'HIDE_PROCEDURE') {
+            if (!isCheck(byId.get(operation.checkId))) fail(`${action.id}: Hide must reference a check`);
+            if (operation.discoveryDc.checkId !== operation.checkId) {
+                fail(`${action.id}: Hide discovery DC must use the Hide check total`);
+            }
+        }
+        if (operation.kind === 'SPELL_IDENTIFICATION'
+                && !isCheck(byId.get(operation.checkId))) {
+            fail(`${action.id}: Spell identification must reference a check`);
+        }
+        if (operation.kind === 'INFLUENCE_PROCEDURE') {
+            const branches = operation.branches;
+            const willingness = branches.map(branch => branch.willingness).sort();
+            if (JSON.stringify(willingness) !== JSON.stringify(['HESITANT', 'UNWILLING', 'WILLING'])) {
+                fail(`${action.id}: Influence must define each willingness branch exactly once`);
+            }
+            for (const branch of branches) {
+                const checkRequired = branch.willingness === 'HESITANT';
+                if (branch.checkRequired !== checkRequired) {
+                    fail(`${action.id}: Influence check requirement contradicts willingness`);
+                }
+            }
+        }
+        if (operation.kind === 'ATTACK_CONTESTED_BY_CHECK' && operation.attackDamageOnSuccess !== false) {
+            fail(`${action.id}: disarm's contested attack cannot deal damage`);
+        }
+    }
+
     const groups = action.choiceGroups ?? [];
     const groupById = new Map();
     const memberOwner = new Map();
@@ -246,6 +594,114 @@ function assertActionIntegrity(action) {
     }
 }
 
+function assertDiseaseIntegrity(disease) {
+    const symptomIds = new Set();
+    const branchIds = new Set();
+    const exposureIds = new Set();
+    const dcTracks = new Set();
+    const addUnique = (set, value, label) => {
+        if (set.has(value)) fail(`${disease.id}: duplicate ${label} ${value}`);
+        set.add(value);
+    };
+    for (const symptom of disease.symptoms ?? []) {
+        if (symptom.symptomId) addUnique(symptomIds, symptom.symptomId, 'symptomId');
+    }
+    for (const recovery of disease.recovery ?? []) {
+        if (recovery.savingThrow?.dcTrackId) dcTracks.add(recovery.savingThrow.dcTrackId);
+    }
+    for (const effect of disease.effects ?? []) {
+        if (effect.symptomId) addUnique(symptomIds, effect.symptomId, 'symptomId');
+    }
+    for (const exposure of [
+        ...(disease.infection?.secondaryExposures ?? []),
+        ...(disease.infection?.exposures ?? []),
+        ...(disease.infection?.exposureProcedures ?? [])
+    ]) {
+        const id = exposure.exposureId ?? exposure.kind;
+        if (exposure.exposureId) addUnique(exposureIds, exposure.exposureId, 'exposureId');
+        if (exposure.symptomId && !symptomIds.has(exposure.symptomId)) {
+            fail(`${disease.id}: unresolved exposure symptom ${exposure.symptomId}`);
+        }
+        if (exposure.onSuccess?.symptomId && exposure.onSuccess.symptomId !== exposure.symptomId) {
+            fail(`${disease.id}: source-relative immunity must identify the exposed symptom`);
+        }
+    }
+    for (const branch of disease.progression ?? []) {
+        addUnique(branchIds, branch.branchId, 'branchId');
+        if (branch.kind === 'SAVING_THROW_BRANCH' && branch.savingThrow.dcTrackId) {
+            dcTracks.add(branch.savingThrow.dcTrackId);
+        }
+        const outcomes = [
+            ...(branch.onSuccess ?? []),
+            ...(branch.onFailure ?? []),
+            ...(branch.outcomes ?? []),
+            ...(branch.onEnd ?? [])
+        ];
+        for (const outcome of outcomes) {
+            if (outcome.symptomId && !symptomIds.has(outcome.symptomId)) {
+                fail(`${disease.id}: unresolved progression symptom ${outcome.symptomId}`);
+            }
+        }
+        if (branch.trigger?.symptomId && !symptomIds.has(branch.trigger.symptomId)) {
+            fail(`${disease.id}: unresolved trigger symptom ${branch.trigger.symptomId}`);
+        }
+        if (branch.outcomeCounter && branch.outcomeCounter.branchId !== branch.branchId) {
+            fail(`${disease.id}: counter is attached to a different saving-throw branch`);
+        }
+        if (branch.outcomeCounter?.sequence === 'UNSPECIFIED_BY_SOURCE'
+                && branch.outcomeCounter.reset !== 'UNSPECIFIED_BY_SOURCE') {
+            fail(`${disease.id}: unspecified counter sequence cannot have an executable reset policy`);
+        }
+    }
+    for (const symptom of disease.symptoms ?? []) {
+        const track = symptom.repeatSaveToEnd?.dcTrackId;
+        if (track && !dcTracks.has(track)) fail(`${disease.id}: unresolved symptom DC track ${track}`);
+    }
+    for (const recovery of disease.recovery ?? []) {
+        if (recovery.outcomeCounter && recovery.outcomeCounter.branchId !== recovery.id) {
+            fail(`${disease.id}: recovery counter must identify its recovery procedure`);
+        }
+        if (recovery.outcomeCounter?.sequence === 'UNSPECIFIED_BY_SOURCE'
+                && recovery.outcomeCounter.reset !== 'UNSPECIFIED_BY_SOURCE') {
+            fail(`${disease.id}: unspecified recovery-counter sequence cannot have an executable reset policy`);
+        }
+        if (recovery.dcTrackId && !dcTracks.has(recovery.dcTrackId)) {
+            fail(`${disease.id}: unresolved recovery DC track ${recovery.dcTrackId}`);
+        }
+        if (recovery.savingThrow?.dcTrackId && !dcTracks.has(recovery.savingThrow.dcTrackId)) {
+            fail(`${disease.id}: unresolved recovery saving-throw DC track ${recovery.savingThrow.dcTrackId}`);
+        }
+        if (recovery.savingThrow?.dcReduction && !recovery.savingThrow.dcTrackId) {
+            fail(`${disease.id}: DC reduction lacks a linked DC track`);
+        }
+    }
+    const procedureIds = new Set([
+        ...branchIds,
+        ...(disease.recovery ?? []).map(recovery => recovery.id).filter(Boolean)
+    ]);
+    for (const branch of disease.progression ?? []) {
+        const counter = branch.outcomeCounter;
+        if (counter && !procedureIds.has(counter.branchId)) {
+            fail(`${disease.id}: counter references missing procedure ${counter.branchId}`);
+        }
+    }
+    for (const recovery of disease.recovery ?? []) {
+        const counter = recovery.outcomeCounter;
+        if (counter && !procedureIds.has(counter.branchId)) {
+            fail(`${disease.id}: counter references missing procedure ${counter.branchId}`);
+        }
+    }
+    if (disease.effectProfile) {
+        if (disease.effectProfile.sourceDisease.id === disease.id) {
+            fail(`${disease.id}: Disease effect profile cannot reference itself`);
+        }
+        if (disease.effectProfile.sourceDisease.id !== 'disease:dmg:sight-rot'
+                || disease.id !== 'disease:gos:redface') {
+            fail(`${disease.id}: unsupported Disease effect-profile relationship`);
+        }
+    }
+}
+
 function assertCanonicalReferences(entity) {
     if (!/^[a-z][a-z0-9-]*:[a-z0-9-]+:[a-z0-9-]+$/.test(entity.id)) {
         fail(`${entity.id}: invalid canonical identity`);
@@ -261,8 +717,73 @@ function assertCanonicalReferences(entity) {
             if (value.targetType === 'condition' && !sourceConditionIds.has(value.id)) {
                 fail(`${entity.id}: unresolved source-backed Condition reference ${value.id}`);
             }
+            if (value.targetType === 'rule' && !sourceRuleIds.has(value.id)) {
+                fail(`${entity.id}: unresolved source-backed Rule reference ${value.id}`);
+            }
         }
         for (const child of Object.values(value)) visit(child);
+    };
+    visit(entity);
+}
+
+function assertPhase5DiseaseReferences(entity) {
+    const referenceIds = new Map();
+    const canonicalIds = records => new Set(records.map(record =>
+        `${record.targetType}:${canonicalSlug(record.source)}:${canonicalSlug(record.name)}`));
+    referenceIds.set('condition', sourceConditionIds);
+    referenceIds.set('disease', canonicalIds(sourceConditionData.disease.map(record => ({
+        ...record,
+        targetType: 'disease'
+    }))));
+    const races = readJson(path.join(workspace, 'src/main/resources/data/races.json')).race;
+    referenceIds.set('race', canonicalIds(races.map(record => ({ ...record, targetType: 'race' }))));
+    const spellFiles = fs.readdirSync(path.join(workspace, 'src/main/resources/data/spells'), { recursive: true })
+        .filter(file => file.endsWith('.json'));
+    const spells = spellFiles.flatMap(file => {
+        const value = readJson(path.join(workspace, 'src/main/resources/data/spells', file));
+        return value.spell ?? [];
+    });
+    referenceIds.set('spell', canonicalIds(spells.map(record => ({ ...record, targetType: 'spell' }))));
+    const visit = value => {
+        if (Array.isArray(value)) return value.forEach(visit);
+        if (!value || typeof value !== 'object') return;
+        if (value.targetType && value.id && referenceIds.has(value.targetType)) {
+            assert.ok(referenceIds.get(value.targetType).has(value.id),
+                `${entity.id}: Disease reference does not resolve to the pinned source inventory: ${value.id}`);
+        }
+        Object.values(value).forEach(visit);
+    };
+    visit(entity);
+}
+
+function assertPhase5LanguageReferences(entity) {
+    if (!phase5LanguageReferenceIndexes) {
+        const languageSource = readJson(path.join(workspace, 'src/main/resources/data/languages.json')).language;
+        const languageIds = new Set(languageSource.map(record =>
+            `language:${canonicalSlug(record.source)}:${canonicalSlug(record.name)}`));
+        const monsterDir = path.join(workspace, 'src/main/resources/data/monsters');
+        const creatureIds = new Set();
+        for (const file of fs.readdirSync(monsterDir)
+                .filter(name => name.startsWith('bestiary-') && name.endsWith('.json'))) {
+            const data = readJson(path.join(monsterDir, file));
+            for (const creature of data.monster ?? []) {
+                creatureIds.add(`creature:${canonicalSlug(creature.source)}:${canonicalSlug(creature.name)}`);
+            }
+        }
+        phase5LanguageReferenceIndexes = { languageIds, creatureIds };
+    }
+    const visit = value => {
+        if (Array.isArray(value)) return value.forEach(visit);
+        if (!value || typeof value !== 'object') return;
+        if (value.targetType === 'language') {
+            assert.ok(phase5LanguageReferenceIndexes.languageIds.has(value.id),
+                `${entity.id}: unresolved Language reference ${value.id}`);
+        }
+        if (value.targetType === 'creature' && value.id) {
+            assert.ok(phase5LanguageReferenceIndexes.creatureIds.has(value.id),
+                `${entity.id}: unresolved creature speaker ${value.id}`);
+        }
+        Object.values(value).forEach(visit);
     };
     visit(entity);
 }
@@ -412,7 +933,8 @@ function validatePhase3Records(schemaFiles) {
         sense: ['senses.json', 'sense'],
         language: ['languages.json', 'language'],
         spell: ['spells/spells-phb.json', 'spell'],
-        creature: ['monsters/bestiary-mm.json', 'monster']
+        creature: ['monsters/bestiary-mm.json', 'monster'],
+        race: ['races.json', 'race']
     };
     const sourceIds = targetType => {
         if (sourceIndexes.has(targetType)) return sourceIndexes.get(targetType);
@@ -449,9 +971,15 @@ function validatePhase3Records(schemaFiles) {
             assertSourceReferences(entity);
             assertNoSourceFallback(entity);
             assert.equal(entity.id, `${model}:${canonicalSlug(entity.sourceMetadata.source)}:${canonicalSlug(entity.name)}`);
-            assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata(model, sourceRecordForCanonical(entity)));
+            const expectedMetadata = expectedSourceMetadata(model, sourceRecordForCanonical(entity));
+            assert.deepEqual(entity.sourceMetadata, expectedMetadata);
             if (model === 'action') assertActionIntegrity(entity);
-            if (model === 'rule') assertRuleIntegrity(entity);
+            if (model === 'rule') {
+                const ruleTypeMap = { C: 'CORE', O: 'OPTIONAL', V: 'VARIANT', VO: 'VARIANT_OPTIONAL' };
+                assert.equal(entity.ruleType, ruleTypeMap[sourceRecordForCanonical(entity).ruleType]);
+                assertRuleIntegrity(entity);
+            }
+            if (model === 'disease') assertDiseaseIntegrity(entity);
             const raw = fs.readFileSync(file, 'utf8');
             assert.equal(raw, `${JSON.stringify(entity, null, 2)}\n`, file);
         });
@@ -460,9 +988,9 @@ function validatePhase3Records(schemaFiles) {
     check('Phase 3 source-entry accounting and omission/duplicate registers', () => {
         assert.equal(manifest.selectionCount, manifest.records.length);
         assert.equal(manifest.records.length, 34);
-        assert.equal(manifest.convertedRecordCount, 16);
-        assert.equal(manifest.partiallyConvertedRecordCount, 17);
-        assert.equal(manifest.unsupportedRecordCount, 1);
+        assert.equal(manifest.convertedRecordCount, 25);
+        assert.equal(manifest.partiallyConvertedRecordCount, 9);
+        assert.equal(manifest.unsupportedRecordCount, 0);
         assert.equal(manifest.canonicalRecordCount, entities.length);
         assert.equal(manifest.interpretationMethod.startsWith('Codex directly interpreted'), true);
         assert.equal(manifest.previousPhase3Conversion.includes('retired'), true);
@@ -555,7 +1083,7 @@ function validatePhase3Records(schemaFiles) {
             }
         }
         assert.deepEqual([...coveredOutputIds].sort(), [...outputById.keys()].sort());
-        assert.equal(manifest.records.filter(record => record.disposition === 'unsupported').length, 1);
+        assert.equal(manifest.records.filter(record => record.disposition === 'unsupported').length, 0);
     });
 
     check('Phase 3 Gith speaker references match explicit source creatures', () => {
@@ -581,13 +1109,20 @@ function validatePhase3Records(schemaFiles) {
         assert.equal(exhausted2024.effects.find(effect => effect.kind === 'CHECK_ROLL_MODIFIER').amountPerLevel, 2);
         assert.equal(exhausted2024.effects.find(effect => effect.kind === 'MOVEMENT_MODIFIER').amountPerLevel, -5);
         const phbConcentration = outputById.get('status:phb:concentration');
-        assert.ok(phbConcentration.mechanics.some(mechanic => mechanic.trigger === 'environmental-phenomenon'));
+        const environmentalSave = phbConcentration.mechanics.find(
+            mechanic => mechanic.trigger === 'environmental-phenomenon');
+        assert.equal(environmentalSave.requirement, 'dm-may-require');
+        assert.equal(phbConcentration.mechanics.find(mechanic => mechanic.trigger === 'damage').requirement,
+            undefined);
         const xphbConcentration = outputById.get('status:xphb:concentration');
         assert.equal(xphbConcentration.mechanics.find(mechanic => mechanic.trigger === 'damage').dc.rounding, 'down');
         assert.equal(xphbConcentration.mechanics.find(mechanic => mechanic.trigger === 'damage').dc.maximum, 30);
         const unarmed = outputById.get('rule:xphb:unarmed-strike');
         assert.equal(unarmed.composition.kind, 'OR');
         assert.equal(unarmed.mechanics.filter(mechanic => mechanic.subtype === 'SAVING_THROW').length, 1);
+        assert.deepEqual(unarmed.mechanics.filter(mechanic =>
+            mechanic.componentId === 'unarmed-grapple-outcome'
+            || mechanic.componentId === 'unarmed-shove-outcome').map(mechanic => mechanic.reachFeet), [5, 5]);
         assert.ok(unarmed.references.some(reference =>
             reference.id === 'condition:xphb:grappled'
             && reference.relationship === 'grapple-escape-attempts-use-this-dc'));
@@ -602,6 +1137,11 @@ function validatePhase3Records(schemaFiles) {
         ]);
         assert.equal(outputById.get('action:xphb:dodge').references.length, 4);
         assert.equal(outputById.get('condition:xphb:blinded').references.length, 3);
+        assert.ok(outputById.get('condition:xphb:blinded').effects.some(effect =>
+            effect.kind === 'ATTACK_ROLL_MODIFIER'
+            && effect.actor === 'affected-creature'
+            && effect.target === 'target'
+            && effect.direction === 'disadvantage'));
         assert.deepEqual(outputById.get('rule:xphb:d20-test').references.map(reference => reference.id), [
             'rule:xphb:ability-check',
             'rule:xphb:attack-roll',
@@ -611,15 +1151,1963 @@ function validatePhase3Records(schemaFiles) {
         const sewerPlague = outputById.get('disease:xdmg:sewer-plague');
         assert.equal(sewerPlague.infection.savingThrow.dc, 11);
         assert.equal(sewerPlague.classification, 'magical-contagion');
-        assert.ok(sewerPlague.symptoms.some(symptom =>
-            symptom.condition.id === 'condition:xphb:exhaustion'));
+        assert.deepEqual(sewerPlague.applicability.targetCreatureTypes, ['humanoid']);
+        assert.deepEqual(sewerPlague.incubation, { kind: 'DICE_ROLL', count: 1, die: 4, unit: 'day' });
+        assert.deepEqual(sewerPlague.infection.exposures.map(exposure => exposure.kind), [
+            'WOUND_BY_CONTAGION_CARRIER', 'CONTACT_WITH_CONTAMINATED_MATERIAL'
+        ]);
+        assert.equal(sewerPlague.infection.exposures[1].materials.join(','), 'filth,offal');
+        const sewerExhaustion = { targetType: 'condition', id: 'condition:xphb:exhaustion' };
+        assert.equal(sewerPlague.symptoms.find(symptom => symptom.kind === 'CONDITION_LEVEL_CHANGE').amount, 1);
+        assert.ok(sewerPlague.conditionGatedRestrictions.some(restriction =>
+            restriction.kind === 'HIT_DICE_RECOVERY_MULTIPLIER'
+            && restriction.condition.id === sewerExhaustion.id
+            && restriction.multiplier === 0.5));
+        assert.ok(sewerPlague.conditionGatedRestrictions.some(restriction =>
+            restriction.kind === 'LONG_REST_PREVENTED_RECOVERY'
+            && restriction.preventedRecoveries.includes('hit-points')
+            && restriction.preventedRecoveries.includes('condition-level-reduction')));
+        const sewerBranch = sewerPlague.progression.find(branch => branch.kind === 'SAVING_THROW_BRANCH');
+        assert.deepEqual(sewerBranch.trigger, { kind: 'DAILY_AT', time: 'DAWN' });
+        assert.equal(sewerBranch.savingThrow.dc, 11);
+        assert.equal(sewerBranch.onFailure[0].amount, 1);
+        assert.equal(sewerBranch.onSuccess[0].amount, -1);
+        assert.equal(sewerBranch.endsWhen.level, 0);
+        assert.equal(sewerBranch.endsWhen.condition.id, sewerExhaustion.id);
+        const cackle = outputById.get('disease:dmg:cackle-fever');
+        assert.deepEqual(cackle.incubation, { kind: 'DICE_ROLL', count: 1, die: 4, unit: 'hour' });
+        assert.deepEqual(cackle.applicability.targetCreatureTypes, ['humanoid']);
+        assert.equal(cackle.applicability.excludedTargets[0].id, 'race:phb:gnome');
+        assert.equal(cackle.symptoms.find(symptom => symptom.kind === 'CONDITION_LEVEL_CHANGE')
+            .cannotReduceUntilDiseaseEnds, true);
+        const cackleStress = cackle.progression.find(branch => branch.branchId === 'great-stress-save');
+        assert.equal(cackleStress.savingThrow.dc, 13);
+        assert.deepEqual(cackleStress.onFailure.map(outcome => outcome.kind), ['DAMAGE', 'START_SYMPTOM']);
+        assert.equal(cackleStress.onFailure[0].count, 1);
+        assert.equal(cackleStress.onFailure[0].die, 10);
+        const laughter = cackle.symptoms.find(symptom => symptom.kind === 'TEMPORARY_CONDITION');
+        assert.equal(laughter.condition.id, 'condition:phb:incapacitated');
+        assert.equal(laughter.repeatSaveToEnd.trigger, 'end-of-each-turn');
+        assert.equal(cackle.infection.secondaryExposures[0].distance, 10);
+        assert.equal(cackle.infection.secondaryExposures[0].onSuccess.duration.amount, 24);
+        assert.equal(cackle.infection.secondaryExposures[0].onSuccess.source, 'exposing-creature');
+        assert.equal(cackle.recovery[0].savingThrow.dcReduction.dieSize, 6);
+        assert.equal(cackle.recovery[0].endsWhenDcAtOrBelow, 0);
+        assert.equal(cackle.recovery[0].outcomeCounter.countedOutcome, 'FAILURE');
+        assert.equal(cackle.recovery[0].outcomeCounter.threshold, 3);
+        assert.equal(cackle.recovery[0].outcomeCounter.sequence, 'UNSPECIFIED_BY_SOURCE');
+        assert.equal(cackle.recovery[0].outcomeCounter.reset, 'UNSPECIFIED_BY_SOURCE');
+        assert.equal(cackle.recovery[0].outcomeCounter.onThreshold.reference.id, 'rule:dmg:madness');
+        assert.ok(cackle.sourceMetadata.reprintedAs.some(reference =>
+            reference.id === 'disease:xdmg:cackle-fever'));
+        const darkvision = outputById.get('sense:phb:darkvision');
+        assert.equal(darkvision.capabilities[0].darknessAs, 'dim-light');
+        assert.equal(darkvision.capabilities[0].dimLightAs, 'bright-light');
+        assert.equal(darkvision.capabilities[0].colorPerception, 'grayscale');
         const crafting = outputById.get('rule:dmg:downtime-activity-crafting-a-magic-item');
         assert.equal(crafting.mechanics[0].kind, 'DOWNTIME_PROCEDURE');
         assert.equal(crafting.mechanics[0].procedure, 'craft');
         const tremorsense = outputById.get('sense:xphb:tremorsense').capabilities[0];
         assert.ok(tremorsense.detects.includes('movement'));
         assert.ok(tremorsense.restrictions.includes('requires-contact'));
-        assert.equal(outputById.has('disease:dmg:cackle-fever'), false);
+        assert.deepEqual(tremorsense.locationPrecision, { kind: 'DETECTED_TARGETS', targets: ['creatures', 'movement'] });
+        assert.deepEqual(outputById.get('sense:mm:tremorsense').capabilities[0].locationPrecision,
+            { kind: 'VIBRATION_ORIGIN' });
+        const phbTruesight = outputById.get('sense:phb:truesight').capabilities[0];
+        assert.ok(phbTruesight.perceives.includes('invisible-objects'));
+        assert.deepEqual(phbTruesight.illusionInteraction, {
+            detection: 'automatic', savingThrowOutcome: 'automatic-success'
+        });
+        assert.equal(outputById.get('rule:xphb:difficult-terrain').mechanics[0].qualifyingSpaces.length, 7);
+        assert.equal(outputById.get('action:phb:grapple').operations.find(operation =>
+            operation.kind === 'MOVE_WITH_GRAPPLED_TARGET').speedCost.multiplier, 0.5);
+        assert.equal(outputById.get('action:phb:grapple').operations.find(operation =>
+            operation.kind === 'MOVE_WITH_GRAPPLED_TARGET').speedCost.waivedWhenTargetAtLeastSizesSmaller, 2);
+        assert.equal(outputById.get('skill:phb:acrobatics').sourceMetadata.page, 176);
+        const phbUnarmedExample = readJson(path.join(exampleRoot, 'rule-unarmed-strike.json'));
+        assert.ok(phbUnarmedExample.mechanics.filter(mechanic =>
+            mechanic.componentId === 'unarmed-grapple-outcome'
+            || mechanic.componentId === 'unarmed-shove-outcome').every(mechanic => mechanic.reachFeet === 5));
+        const criticalExample = readJson(path.join(exampleRoot, 'rule.json'));
+        assert.ok(criticalExample.mechanics[0].roll.forms.includes('unarmed'));
+        const phbSource = readJson(path.join(workspace, 'src/main/resources/data/conditionsdiseases.json'));
+        assert.ok(phbSource.disease.find(disease => disease.name === 'Cackle Fever'
+            && disease.source === 'DMG').entries[0].includes('gnomes are strangely immune'));
+        const sewerSource = phbSource.disease.find(disease => disease.name === 'Sewer Plague'
+            && disease.source === 'XDMG');
+        assert.ok(sewerSource.entries[0].includes('Any Humanoid'));
+        assert.ok(sewerSource.entries[2].entries[0].entries[0].includes('Daily at dawn'));
+    });
+
+    return { files: files.length, entities };
+}
+
+function validatePhase5Expansion() {
+    const files = phase3Files(phase5Root);
+    const manifest = readJson(path.join(
+        workspace,
+        'reports/step-2/CORE_RULES_PHASE_5_SOURCE_ACCOUNTING.json'
+    ));
+    const phase3Ids = new Set(phase3Files().map(file => readJson(file).id));
+    const entities = files.map(file => ({ file, entity: readJson(file) }));
+    const outputById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+    const uniqueSources = new Set();
+    const rules = readJson(path.join(workspace, 'src/main/resources/data/variantrules.json')).variantrule;
+
+    for (const { file, entity } of entities) {
+        const model = entity.id.split(':')[0];
+        const validator = ajv.getSchema(`urn:thedndpub:schemas:core-rules:${model}:v1`);
+        check(`Phase 5 canonical record ${path.relative(phase5Root, file)}`, () => {
+            assert.ok(validator, `${file}: no schema registered for ${model}`);
+            assert.equal(validator(entity), true, JSON.stringify(validator.errors));
+            assert.equal(phase3Ids.has(entity.id), false, `duplicate Phase 3 canonical ID ${entity.id}`);
+            assert.equal(uniqueSources.has(entity.id), false, `duplicate Phase 5 canonical ID ${entity.id}`);
+            uniqueSources.add(entity.id);
+            assert.equal(entity.id,
+                `${model}:${canonicalSlug(entity.sourceMetadata.source)}:${canonicalSlug(entity.name)}`);
+            const expectedMetadata = expectedSourceMetadata(model, sourceRecordForCanonical(entity));
+            if (entity.id === 'rule:dmg:planar-effects'
+                    || entity.id === 'rule:dmg:diagonals'
+                    || entity.id === 'rule:xge:falling'
+                    || entity.id === 'rule:dmg:firearms') {
+                delete expectedMetadata.reprintedAs;
+            }
+            assert.deepEqual(entity.sourceMetadata, expectedMetadata);
+            if (model === 'rule') {
+                const ruleTypeMap = { C: 'CORE', O: 'OPTIONAL', V: 'VARIANT', VO: 'VARIANT_OPTIONAL' };
+                assert.equal(entity.ruleType, ruleTypeMap[sourceRecordForCanonical(entity).ruleType]);
+            }
+            assertCanonicalReferences(entity);
+            assertNoSourceFallback(entity);
+            if (model === 'action') assertActionIntegrity(entity);
+            if (model === 'disease') {
+                assertDiseaseIntegrity(entity);
+                assertPhase5DiseaseReferences(entity);
+            }
+            if (model === 'language') assertPhase5LanguageReferences(entity);
+            if (model === 'skill') {
+                const abilityNames = {
+                    str: 'strength', dex: 'dexterity', con: 'constitution',
+                    int: 'intelligence', wis: 'wisdom', cha: 'charisma'
+                };
+                assert.equal(entity.ability, abilityNames[sourceRecordForCanonical(entity).ability]);
+            }
+            const raw = fs.readFileSync(file, 'utf8');
+            assert.equal(raw, `${JSON.stringify(entity, null, 2)}\n`, file);
+        });
+    }
+
+    check('Phase 5 batch source coverage and omission/duplicate registers', () => {
+        const expectedBatches = [
+            ['skill', 33, 3, 33, 33, 0, 0, 35],
+            ['condition', 26, 4, 26, 25, 1, 0, 39],
+            ['sense', 4, 4, 4, 1, 3, 0, 5],
+            ['action', 42, 0, 40, 27, 13, 2, 84],
+            ['disease', 26, 3, 25, 22, 3, 1, 73],
+            ['language', 197, 4, 197, 71, 126, 0, 40],
+            ['rule', 99, 5, 95, 56, 27, 16, 227]
+        ];
+        assert.deepEqual(manifest.batchResults.map(batch => [
+            batch.domain,
+            batch.sourceRecordsExamined,
+            batch.representativeRecordsExcluded,
+            batch.canonicalRecordCount,
+            batch.fullyRepresentedRecordCount,
+            batch.partiallyRepresentedRecordCount,
+            batch.unsupportedRecordCount,
+            batch.sourceEntryRootCount
+        ]), expectedBatches);
+        for (const batch of manifest.batchResults) {
+            const counts = { interpreted: 0, duplicate: 0, omitted: 0 };
+            for (const record of manifest.records.filter(record => record.model === batch.domain)) {
+                for (const entry of record.entries) {
+                    for (const item of entry.classifications) counts[item.classification.toLowerCase()]++;
+                }
+            }
+            assert.deepEqual(batch.dispositionCounts, counts, `${batch.domain} batch dispositions`);
+        }
+        assert.equal(manifest.records.length, expectedBatches.reduce((sum, batch) => sum + batch[1], 0));
+        assert.equal(manifest.canonicalRecordCount, files.length);
+        assert.equal(manifest.convertedRecordCount, expectedBatches.reduce((sum, batch) => sum + batch[4], 0));
+        assert.equal(manifest.partiallyConvertedRecordCount,
+            expectedBatches.reduce((sum, batch) => sum + batch[5], 0));
+        assert.equal(manifest.unsupportedRecordCount,
+            expectedBatches.reduce((sum, batch) => sum + batch[6], 0));
+        assert.equal(manifest.canonicalRecordCount,
+            expectedBatches.reduce((sum, batch) => sum + batch[3], 0));
+        assert.equal(manifest.sourceEntryRootCount,
+            manifest.records.reduce((sum, record) => sum + record.sourceEntryCount, 0));
+        const classifications = manifest.records.flatMap(record =>
+            record.entries.flatMap(entry => entry.classifications));
+        assert.deepEqual(manifest.dispositionCounts, {
+            interpreted: classifications.filter(item => item.classification === 'INTERPRETED').length,
+            duplicate: classifications.filter(item => item.classification === 'DUPLICATE').length,
+            omitted: classifications.filter(item => item.classification === 'OMITTED').length
+        });
+        const seen = new Set();
+        const covered = new Set();
+        for (const record of manifest.records) {
+            const sourceKey = `${record.model}|${record.source}|${record.name}`;
+            assert.equal(seen.has(sourceKey), false, `duplicate source record ${sourceKey}`);
+            seen.add(sourceKey);
+            assert.equal(phase3Ids.has(record.canonicalId), false, `representative repeated ${record.canonicalId}`);
+            const sourceRecord = sourceRecordForCanonical({
+                id: record.canonicalId,
+                name: record.name,
+                sourceMetadata: { source: record.source }
+            });
+            const sourceIndex = Number(record.sourceObjectPath.match(/\[(\d+)\]$/)[1]);
+            assert.equal(sourceRecord.name, record.name);
+            assert.equal(sourceRecord.source, record.source);
+            const sourceCollection = record.model === 'rule' ? 'variantrule' : record.model;
+            assert.equal(record.sourceObjectPath, `$.${sourceCollection}[${sourceIndex}]`);
+            assert.equal(record.sourceEntryCount, (sourceRecord.entries ?? []).length);
+            assert.deepEqual(record.entries.map(entry => entry.sourceEntryIndex),
+                (sourceRecord.entries ?? []).map((_, index) => index));
+            for (const entryPlan of record.entries) {
+                const sourceEntry = sourceRecord.entries[entryPlan.sourceEntryIndex];
+                assert.equal(entryPlan.sourcePath,
+                    `${record.sourceObjectPath}.entries[${entryPlan.sourceEntryIndex}]`);
+                assert.deepEqual(entryPlan.nestedSourcePaths,
+                    nestedSourcePaths(sourceEntry, entryPlan.sourcePath));
+                assert.ok(entryPlan.classifications.length > 0);
+                for (const item of entryPlan.classifications) {
+                    assert.ok(['INTERPRETED', 'DUPLICATE', 'OMITTED'].includes(item.classification));
+                    assert.ok(item.portion && item.reason);
+                    if (item.classification === 'OMITTED') {
+                        assert.ok([
+                            'SCHEMA_UNSUPPORTED', 'REFERENCE_UNRESOLVED', 'SOURCE_AMBIGUOUS',
+                            'EXTERNAL_DEPENDENCY', 'NON_MECHANICAL', 'OUT_OF_APPROVED_SCOPE'
+                        ].includes(item.cause));
+                    }
+                    if (item.classification === 'OMITTED' || item.classification === 'DUPLICATE') {
+                        const file = path.join(workspace, 'doc', record.model,
+                            `${item.classification.toLowerCase()}.md`);
+                        assert.ok(fs.existsSync(file), `missing Skill ${item.classification} register`);
+                        const content = fs.readFileSync(file, 'utf8');
+                        assert.ok(content.includes(`entry ${entryPlan.sourceEntryIndex}`));
+                        assert.ok(content.includes(JSON.stringify(sourceEntry, null, 2)),
+                            `${record.model} register does not preserve ${record.canonicalId}`
+                            + ` entry ${entryPlan.sourceEntryIndex}`);
+                    }
+                }
+            }
+            if (record.canonicalOutput) {
+                assert.ok(outputById.has(record.canonicalId), `missing Phase 5 output ${record.canonicalId}`);
+                covered.add(record.canonicalId);
+            } else if (record.disposition === 'duplicate') {
+                assert.equal(record.conversionStatus, 'fully-represented');
+                assert.equal(outputById.has(record.canonicalId), false);
+                assert.ok(record.duplicateOf);
+                assert.ok(outputById.has(record.duplicateOf) || phase3Ids.has(record.duplicateOf),
+                    `missing duplicate target ${record.duplicateOf}`);
+                assert.ok(record.entries.flatMap(entry => entry.classifications)
+                    .every(item => item.classification === 'DUPLICATE'));
+            } else {
+                assert.equal(record.disposition, 'unsupported');
+                assert.equal(outputById.has(record.canonicalId), false);
+                assert.ok(record.reason);
+            }
+        }
+        assert.deepEqual([...covered].sort(), [...outputById.keys()].sort());
+
+        check('Phase 5 Rule inventory and approved mechanics batches', () => {
+            const rules = readJson(path.join(workspace,
+                'src/main/resources/data/variantrules.json')).variantrule;
+            const phase3Rules = phase3Files().map(file => readJson(file))
+                .filter(entity => entity.id.startsWith('rule:'));
+            const phase5Rules = entities.map(({ entity }) => entity)
+                .filter(entity => entity.id.startsWith('rule:'));
+            assert.equal(rules.length, 231);
+            assert.equal(phase3Rules.length, 5);
+            assert.equal(phase5Rules.length, 95);
+            assert.deepEqual(phase5Rules.map(entity => entity.id).sort(), [
+                'rule:dmg:action-options',
+                'rule:dmg:cleaving-through-creatures',
+                'rule:dmg:diagonals',
+                'rule:dmg:facing',
+                'rule:dmg:flanking',
+                'rule:dmg:firearms',
+                'rule:dmg:healing',
+                'rule:dmg:hitting-cover',
+                'rule:dmg:initiative-variants',
+                'rule:dmg:injuries',
+                'rule:dmg:massive-damage',
+                'rule:dmg:planar-effects',
+                'rule:dmg:proficiency-dice',
+                'rule:dmg:rest-variants',
+                'rule:dmg:skill-variants',
+                'rule:xge:adamantine-weapons',
+                'rule:xge:simultaneous-effects',
+                'rule:phb:downtime-activity-recuperating',
+                'rule:phb:encumbrance',
+                'rule:phb:multiclassing',
+                'rule:phb:playing-on-a-grid',
+                'rule:phb:skills-with-different-abilities',
+                'rule:xge:downtime-activity-relaxation',
+                'rule:xge:falling',
+                'rule:xge:sleep',
+                'rule:xge:tool-proficiencies',
+                'rule:xphb:action',
+                'rule:xphb:ability-check',
+                'rule:xphb:ability-score-and-modifier',
+                'rule:xphb:advantage',
+                'rule:xphb:adventure',
+                'rule:xphb:alignment',
+                'rule:xphb:area-of-effect',
+                'rule:xphb:attack-roll',
+                'rule:xphb:bonus-action',
+                'rule:xphb:breaking-objects',
+                'rule:xphb:campaign',
+                'rule:xphb:character-sheet',
+                'rule:xphb:burrow-speed',
+                'rule:xphb:carrying-capacity',
+                'rule:xphb:climb-speed',
+                'rule:xphb:climbing',
+                'rule:xphb:cone-area-of-effect',
+                'rule:xphb:cover',
+                'rule:xphb:creature',
+                'rule:xphb:creature-type',
+                'rule:xphb:crawling',
+                'rule:xphb:cube-area-of-effect',
+                'rule:xphb:cylinder-area-of-effect',
+                'rule:xphb:death-saving-throw',
+                'rule:xphb:damage',
+                'rule:xphb:damage-roll',
+                'rule:xphb:damage-threshold',
+                'rule:xphb:damage-types',
+                'rule:xphb:difficulty-class',
+                'rule:xphb:disadvantage',
+                'rule:xphb:encounter',
+                'rule:xphb:emanation-area-of-effect',
+                'rule:xphb:expertise',
+                'rule:xphb:fly-speed',
+                'rule:xphb:flying',
+                'rule:xphb:grappling',
+                'rule:xphb:hit-points',
+                'rule:xphb:high-jump',
+                'rule:xphb:hazard',
+                'rule:xphb:hover',
+                'rule:xphb:initiative',
+                'rule:xphb:immunity',
+                'rule:xphb:improvised-weapons',
+                'rule:xphb:jumping',
+                'rule:xphb:line-area-of-effect',
+                'rule:xphb:long-jump',
+                'rule:xphb:long-rest',
+                'rule:xphb:monster',
+                'rule:xphb:knocking-out-a-creature',
+                'rule:xphb:occupied-space',
+                'rule:xphb:passive-perception',
+                'rule:xphb:player-character',
+                'rule:xphb:proficiency',
+                'rule:xphb:reach',
+                'rule:xphb:reaction',
+                'rule:xphb:resistance',
+                'rule:xphb:saving-throw',
+                'rule:xphb:simultaneous-effects',
+                'rule:xphb:size',
+                'rule:xphb:short-rest',
+                'rule:xphb:skill',
+                'rule:xphb:speed',
+                'rule:xphb:spell-attack',
+                'rule:xphb:sphere-area-of-effect',
+                'rule:xphb:swim-speed',
+                'rule:xphb:swimming',
+                'rule:xphb:target',
+                'rule:xphb:vulnerability',
+                'rule:mm:player-characters-as-lycanthropes'
+            ].sort());
+            const initiative = manifest.records.find(record =>
+                record.canonicalId === 'rule:xphb:initiative');
+            assert.equal(initiative.conversionStatus, 'partially-represented');
+            assert.equal(initiative.canonicalOutput, 'rule/xphb-initiative.json');
+            assert.equal(outputById.has('rule:xphb:initiative'), true);
+            assert.equal(initiative.entries[1].classifications[0].classification, 'INTERPRETED');
+            assert.equal(phase5Rules.reduce((sum, entity) => sum + (entity.mechanics?.length ?? 0), 0), 72);
+            const byId = new Map(phase5Rules.map(entity => [entity.id, entity]));
+            assert.deepEqual(byId.get('rule:xphb:ability-check').mechanics[0].abilities, [
+                'strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'
+            ]);
+            assert.deepEqual(byId.get('rule:xphb:attack-roll').mechanics[0].roll.forms,
+                ['weapon', 'unarmed', 'spell']);
+            assert.deepEqual(byId.get('rule:xphb:saving-throw').mechanics[0].savingThrow, {
+                kind: 'SAVING_THROW',
+                abilities: ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'],
+                abilitySelection: 'effect',
+                dc: { kind: 'EFFECT_DEFINED' },
+                mayChooseToFail: true,
+                automaticFailureWhenAbilityScoreAbsent: true
+            });
+            assert.deepEqual(byId.get('rule:xphb:advantage').mechanics[0].modifier, {
+                kind: 'D20_ROLL_MODIFIER', roll: 'd20-test', direction: 'advantage', diceCount: 2,
+                select: 'higher', cancelsOpposite: true, multipleInstancesStack: false
+            });
+            assert.deepEqual(byId.get('rule:xphb:disadvantage').mechanics[0].modifier, {
+                kind: 'D20_ROLL_MODIFIER', roll: 'd20-test', direction: 'disadvantage', diceCount: 2,
+                select: 'lower', cancelsOpposite: true, multipleInstancesStack: false
+            });
+            assert.equal(byId.get('rule:xphb:death-saving-throw').mechanics[0].trigger,
+                'start-of-turn-at-zero-hit-points');
+            assert.equal(byId.get('rule:xphb:death-saving-throw').mechanics[0].appliesTo, 'PLAYER_CHARACTER');
+            assert.equal(byId.get('rule:dmg:hitting-cover').mechanics, undefined);
+            assert.deepEqual(byId.get('rule:xphb:passive-perception').mechanics[0].skill,
+                { targetType: 'skill', id: 'skill:xphb:perception' });
+            const ruleTypeMap = { C: 'CORE', O: 'OPTIONAL', V: 'VARIANT', VO: 'VARIANT_OPTIONAL' };
+            const mappings = manifest.sourceFieldMappings.filter(mapping => mapping.model === 'rule');
+            for (const mapping of mappings) {
+                const sourceIndex = Number(mapping.sourceObjectPath.match(/\[(\d+)\]$/)[1]);
+                const sourceRule = readJson(path.join(workspace,
+                    'src/main/resources/data/variantrules.json')).variantrule[sourceIndex];
+                assert.equal(sourceRule.ruleType, mapping.sourceValue);
+                assert.equal(mapping.canonicalValue, ruleTypeMap[mapping.sourceValue]);
+            }
+            assert.deepEqual(new Set(mappings.map(mapping => mapping.sourceValue)),
+                new Set(['C', 'O', 'V', 'VO']));
+            const d20Test = phase3Rules.find(entity => entity.id === 'rule:xphb:d20-test');
+            for (const entity of phase5Rules) {
+                assert.equal(entity.ruleType,
+                    ruleTypeMap[sourceRecordForCanonical(entity).ruleType]);
+            }
+            const validateRule = ajv.getSchema('urn:thedndpub:schemas:core-rules:rule:v1');
+            for (const ruleType of Object.values(ruleTypeMap)) {
+                const candidate = structuredClone(d20Test);
+                candidate.ruleType = ruleType;
+                assert.equal(validateRule(candidate), true, JSON.stringify(validateRule.errors));
+            }
+            const invalidType = structuredClone(d20Test);
+            invalidType.ruleType = 'UNKNOWN';
+            rejects('Rule schema rejects an unknown ruleType', () => validateRule(invalidType) === true);
+            const wrongMapping = structuredClone(byId.get('rule:xphb:advantage'));
+            wrongMapping.ruleType = 'OPTIONAL';
+            rejects('Rule source-fidelity assertion rejects a wrong ruleType mapping', () =>
+                wrongMapping.ruleType === ruleTypeMap[sourceRecordForCanonical(wrongMapping).ruleType]);
+        });
+
+        check('R-GAP-01 ability score modifier mapping matches the source range', () => {
+            const sourceRule = sourceRecordForCanonical({
+                id: 'rule:xphb:ability-score-and-modifier',
+                name: 'Ability Score and Modifier',
+                sourceMetadata: { source: 'XPHB' }
+            });
+            const entity = entities.map(({ entity }) => entity)
+                .find(candidate => candidate.id === 'rule:xphb:ability-score-and-modifier');
+            assert.deepEqual(sourceRule, rules[1]);
+            assert.ok(sourceRule.entries[0].includes('six ability scores'));
+            const mapping = entity.mechanics[0];
+            assert.equal(mapping.minimumScore, 1);
+            assert.equal(mapping.maximumScore, 30);
+            assert.deepEqual(mapping.scoreBands, [
+                { minimumScore: 1, maximumScore: 1, modifier: -5 },
+                { minimumScore: 2, maximumScore: 3, modifier: -4 },
+                { minimumScore: 4, maximumScore: 5, modifier: -3 },
+                { minimumScore: 6, maximumScore: 7, modifier: -2 },
+                { minimumScore: 8, maximumScore: 9, modifier: -1 },
+                { minimumScore: 10, maximumScore: 11, modifier: 0 },
+                { minimumScore: 12, maximumScore: 13, modifier: 1 },
+                { minimumScore: 14, maximumScore: 15, modifier: 2 },
+                { minimumScore: 16, maximumScore: 17, modifier: 3 },
+                { minimumScore: 18, maximumScore: 19, modifier: 4 },
+                { minimumScore: 20, maximumScore: 21, modifier: 5 },
+                { minimumScore: 22, maximumScore: 23, modifier: 6 },
+                { minimumScore: 24, maximumScore: 25, modifier: 7 },
+                { minimumScore: 26, maximumScore: 27, modifier: 8 },
+                { minimumScore: 28, maximumScore: 29, modifier: 9 },
+                { minimumScore: 30, maximumScore: 30, modifier: 10 }
+            ]);
+        });
+
+        check('R-GAP-05 reuses finite source-backed Difficulty Class values', () => {
+            const sourceRule = rules[54];
+            const entity = entities.map(({ entity }) => entity)
+                .find(candidate => candidate.id === 'rule:xphb:difficulty-class');
+            assert.equal(sourceRule.name, 'Difficulty Class');
+            assert.ok(sourceRule.entries[0].includes('target number'));
+            assert.deepEqual(entity.mechanics[0].targetNumberFor, ['ABILITY_CHECK', 'SAVING_THROW']);
+            const validateRule = ajv.getSchema('urn:thedndpub:schemas:core-rules:rule:v1');
+            const abilityCheck = readJson(path.join(exampleRoot, 'rule-ability-check.json'));
+            const values = [
+                { kind: 'FIXED', value: 15 },
+                { kind: 'ABILITY_PLUS_PROFICIENCY', base: 8, ability: 'strength', proficiencyBonus: true },
+                { kind: 'FIXED_PLUS_SPELL_LEVEL', base: 15, spellRole: 'identified-spell' },
+                { kind: 'GREATER_OF_FIXED_AND_TARGET_ABILITY_SCORE', minimum: 15, targetRole: 'target', ability: 'charisma' }
+            ];
+            for (const dc of values) {
+                const candidate = structuredClone(abilityCheck);
+                candidate.mechanics[0].dc = dc;
+                assert.equal(validateRule(candidate), true, JSON.stringify(validateRule.errors));
+            }
+            const identifySpell = entities.map(({ entity }) => entity)
+                .find(candidate => candidate.id === 'action:xge:identify-a-spell');
+            const identifyProcedure = identifySpell.operations.find(operation =>
+                operation.kind === 'SPELL_IDENTIFICATION');
+            assert.equal(identifySpell.operations.find(operation =>
+                operation.operationId === identifyProcedure.checkId).dc.kind, 'FIXED_PLUS_SPELL_LEVEL');
+            const influence = entities.map(({ entity }) => entity)
+                .find(candidate => candidate.id === 'action:xphb:influence');
+            assert.equal(influence.operations.find(operation => operation.kind === 'INFLUENCE_PROCEDURE')
+                .branches.find(branch => branch.willingness === 'HESITANT').dc.kind,
+            'GREATER_OF_FIXED_AND_TARGET_ABILITY_SCORE');
+        });
+
+        check('R-GAP-06 preserves distinct proficiency application and scaling rules', () => {
+            const findRule = (name, source) => rules.find(candidate =>
+                candidate.name === name && candidate.source === source);
+            const findCanonical = id => entities.map(({ entity }) => entity)
+                .find(candidate => candidate.id === id);
+            const expertiseSource = findRule('Expertise', 'XPHB');
+            assert.ok(expertiseSource.entries[0].includes('Proficiency Bonus} is doubled'));
+            assert.ok(expertiseSource.entries[0].includes('unless the bonus is doubled by another feature'));
+            assert.ok(expertiseSource.entries[1].includes("can't have Expertise in the same skill proficiency more than once"));
+            const expertise = findCanonical('rule:xphb:expertise').mechanics[0];
+            assert.equal(expertise.multiplier, 2);
+            assert.equal(expertise.requiresSkillProficiency, true);
+            assert.equal(expertise.unlessAlreadyDoubledByAnotherFeature, true);
+            assert.equal(expertise.maximumInstancesPerSkill, 1);
+
+            const proficiencySource = findRule('Proficiency', 'XPHB');
+            assert.ok(proficiencySource.entries[0].includes('any {@variantrule D20 Test|XPHB}'));
+            const proficiency = findCanonical('rule:xphb:proficiency').mechanics[0];
+            assert.deepEqual(proficiency.appliesTo, [
+                'SKILL_ASSOCIATED_ABILITY_CHECK', 'SAVING_THROW', 'WEAPON_ATTACK', 'TOOL_CHECK'
+            ]);
+            const progression = findCanonical('rule:xphb:proficiency').mechanics[1];
+            assert.equal(progression.subtype, 'BONUS_PROGRESSION');
+            const expectedLevelBands = [
+                [1, 4, 2], [5, 8, 3], [9, 12, 4], [13, 16, 5],
+                [17, 20, 6], [21, 24, 7], [25, 28, 8], [29, 30, 9]
+            ];
+            const expectedChallengeRatingBands = [
+                [null, 0, 4, 2], [4, null, 8, 3], [8, null, 12, 4], [12, null, 16, 5],
+                [16, null, 20, 6], [20, null, 24, 7], [24, null, 28, 8], [28, null, 30, 9]
+            ];
+            assert.deepEqual(progression.levelBands.map(band => [
+                band.minimumLevel, band.maximumLevel, band.bonus
+            ]), expectedLevelBands);
+            assert.deepEqual(progression.challengeRatingBands.map(band => [
+                band.minimumChallengeRatingExclusive ?? null,
+                band.minimumChallengeRatingInclusive ?? null,
+                band.maximumChallengeRatingInclusive,
+                band.bonus
+            ]), expectedChallengeRatingBands);
+
+            const diceSource = findRule('Proficiency Dice', 'DMG');
+            const table = diceSource.entries[3];
+            assert.equal(table.type, 'table');
+            const dice = findCanonical('rule:dmg:proficiency-dice').mechanics[0];
+            assert.deepEqual(dice.levelBands, [
+                { minimumLevel: 1, maximumLevel: 4, proficiencyBonus: 2, die: 'd4' },
+                { minimumLevel: 5, maximumLevel: 8, proficiencyBonus: 3, die: 'd6' },
+                { minimumLevel: 9, maximumLevel: 12, proficiencyBonus: 4, die: 'd8' },
+                { minimumLevel: 13, maximumLevel: 16, proficiencyBonus: 5, die: 'd10' },
+                { minimumLevel: 17, maximumLevel: 20, proficiencyBonus: 6, die: 'd12' }
+            ]);
+            assert.equal(dice.expertiseDiceCount, 2);
+            assert.deepEqual(dice.eligibleCreatureKinds, ['PLAYER_CHARACTER', 'NPC_WITH_LEVELS']);
+
+            const multiclassSource = findRule('Multiclassing', 'PHB');
+            assert.ok(multiclassSource.entries[6].entries[0].includes('total character level'));
+            assert.equal(findCanonical('rule:phb:multiclassing').mechanics[0].levelBasis,
+                'TOTAL_CHARACTER_LEVEL');
+            assert.equal(findCanonical('rule:phb:multiclassing').references, undefined);
+
+            const skillSource = findRule('Skill', 'XPHB');
+            assert.ok(skillSource.entries[0].includes('associated with an ability check'));
+            assert.equal(findCanonical('rule:xphb:skill').mechanics[0].onProficiency,
+                'ADD_PROFICIENCY_BONUS');
+
+            const toolSource = findRule('Tool Proficiencies', 'XGE');
+            assert.ok(JSON.stringify(toolSource.entries).includes('proficient with the tool and the skill'));
+            assert.equal(findCanonical('rule:xge:tool-proficiencies').mechanics[0].dmMayGrantAdvantage, true);
+        });
+
+        check('R-GAP-10 passive score uses the linked check and exact adjustments', () => {
+            const sourceRule = rules[166];
+            const entity = entities.map(({ entity }) => entity)
+                .find(candidate => candidate.id === 'rule:xphb:passive-perception');
+            const checkComponent = entity.mechanics[0];
+            assert.ok(sourceRule.entries[1].includes('equals 10 plus'));
+            assert.ok(sourceRule.entries[1].includes('increase the score by 5'));
+            assert.ok(sourceRule.entries[1].includes('decrease the score by 5'));
+            assert.equal(checkComponent.passiveScore, true);
+            assert.deepEqual(checkComponent.passiveScoreConstruction, {
+                kind: 'PASSIVE_SCORE_CONSTRUCTION',
+                base: 10,
+                addsCheckBonus: true,
+                advantageAdjustment: 5,
+                disadvantageAdjustment: -5
+            });
+            assert.deepEqual(checkComponent.abilities, ['wisdom']);
+            assert.deepEqual(checkComponent.skill, { targetType: 'skill', id: 'skill:xphb:perception' });
+        });
+
+        check('Batch 2 preserves death-save, Flanking, Cover, and Skill-variation source mechanics', () => {
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const deathSource = rules[51];
+            assert.equal(deathSource.name, 'Death Saving Throw');
+            assert.ok(deathSource.entries[0].includes('Player Character'));
+            const deathSave = ruleById.get('rule:xphb:death-saving-throw').mechanics[0];
+            assert.equal(deathSave.trigger, 'start-of-turn-at-zero-hit-points');
+            assert.equal(deathSave.appliesTo, 'PLAYER_CHARACTER');
+
+            const flankSource = rules[113];
+            const flanking = ruleById.get('rule:dmg:flanking');
+            assert.equal(flankSource.name, 'Flanking');
+            assert.equal(flanking.ruleType, 'OPTIONAL');
+            assertRuleIntegrity(flanking);
+            assertCanonicalReferences(flanking);
+
+            const coverSource = rules[32];
+            const cover = ruleById.get('rule:xphb:cover');
+            assert.equal(coverSource.name, 'Cover');
+            assert.equal(coverSource.source, 'XPHB');
+            assert.deepEqual(cover.mechanics.map(component => [
+                component.level,
+                component.armorClassBonus,
+                component.savingThrowBonus,
+                component.savingThrowAbility,
+                component.blocksTargeting,
+                component.degreeSelection
+            ]), [
+                ['half', 2, 2, 'dexterity', false, 'MOST_PROTECTIVE_ONLY'],
+                ['three-quarters', 5, 5, 'dexterity', false, 'MOST_PROTECTIVE_ONLY'],
+                ['total', undefined, undefined, undefined, true, 'MOST_PROTECTIVE_ONLY']
+            ]);
+            assert.equal(JSON.stringify(cover).includes('damageReduction'), false);
+
+            const skillVariationSource = rules[203];
+            const skillVariation = ruleById.get('rule:phb:skills-with-different-abilities').mechanics[0];
+            assert.equal(skillVariationSource.name, 'Skills with Different Abilities');
+            assert.deepEqual(skillVariation.pairings.map(pairing => [
+                pairing.skill.id, pairing.usualAbility, pairing.alternativeAbility, pairing.context
+            ]), [
+                ['skill:phb:athletics', 'strength', 'constitution', 'SWIMMING_STAMINA'],
+                ['skill:phb:intimidation', 'charisma', 'strength', 'DISPLAY_OF_RAW_STRENGTH']
+            ]);
+            assert.equal(skillVariation.eligibleRequester, 'DM_OR_PLAYER');
+
+            const dmSkillVariants = ruleById.get('rule:dmg:skill-variants');
+            assert.equal(dmSkillVariants.mechanics[0].subtype, 'ABILITY_CHECK_PROFICIENCY_VARIANT');
+            assert.equal(dmSkillVariants.mechanics[0].startsAtLevel, 1);
+            const hittingCover = ruleById.get('rule:dmg:hitting-cover');
+            assert.equal(hittingCover.mechanics, undefined);
+            assertCanonicalReferences({
+                id: 'rule:test:reference-only-target',
+                references: [{ targetType: 'rule', id: hittingCover.id }]
+            });
+            const hittingCoverInventory = manifest.ruleCatalogInventory.find(item =>
+                item.canonicalId === 'rule:dmg:hitting-cover');
+            assert.equal(hittingCoverInventory.coverage, 'UNSUPPORTED');
+            assert.equal(hittingCoverInventory.canonicalOutput,
+                'datasets/phase-5/step-2/core-rules/v1/rule/dmg-hitting-cover.json');
+        });
+
+        check('Batch 3 preserves initiative, capacity, rest, and damage source mechanics', () => {
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            assert.equal(rules[136].name, 'Initiative');
+            assert.ok(rules[136].entries[1].includes('10 plus your Dexterity modifier'));
+            assert.equal(rules[137].name, 'Initiative Variants');
+            assert.ok(rules[137].entries[2].entries[1].includes('Neither roll receives any modifiers'));
+            assert.equal(rules[24].name, 'Carrying Capacity');
+            assert.ok(rules[24].entries[2].rows[0][1].includes('7.5'));
+            assert.equal(rules[99].name, 'Encumbrance');
+            assert.ok(rules[99].entries[2].includes('10 times your Strength score'));
+            assert.equal(rules[147].name, 'Long Rest');
+            assert.ok(rules[147].entries[0].includes('at least 8 hours'));
+            assert.equal(rules[195].name, 'Short Rest');
+            assert.ok(rules[195].entries[5].includes('confers no benefits'));
+            assert.equal(rules[182].name, 'Resistance');
+            assert.equal(rules[227].name, 'Vulnerability');
+            const initiative = ruleById.get('rule:xphb:initiative').mechanics[0];
+            assert.deepEqual([
+                initiative.base, initiative.ability,
+                initiative.advantageAdjustment, initiative.disadvantageAdjustment
+            ], [10, 'dexterity', 5, -5]);
+            const side = ruleById.get('rule:dmg:initiative-variants').mechanics[1];
+            assert.deepEqual([
+                side.roll, side.tieResolution, side.membersChooseOrder,
+                side.roundEndsAfterAllSidesAct, side.multipleSidesOrderedByRoll
+            ], ['UNMODIFIED_D20', 'REROLL_TIED_SIDES', true, true, true]);
+            assert.equal(ruleById.get('rule:dmg:initiative-variants').mechanics.length, 2,
+                'Speed Factor remains explicitly unsupported');
+
+            const capacity = ruleById.get('rule:xphb:carrying-capacity').mechanics[0];
+            assert.deepEqual(capacity.sizeMultipliers.map(row => [
+                row.sizes, row.carryMultiplier, row.dragLiftPushMultiplier
+            ]), [
+                [['TINY'], 7.5, 15], [['SMALL', 'MEDIUM'], 15, 30], [['LARGE'], 30, 60],
+                [['HUGE'], 60, 120], [['GARGANTUAN'], 120, 240]
+            ]);
+            assert.equal(capacity.dragLiftPushSpeedCapFeet, 5);
+            const encumbrance = ruleById.get('rule:phb:encumbrance').mechanics[0];
+            assert.equal(encumbrance.thresholdComparison, 'GREATER_THAN');
+            assert.deepEqual(encumbrance.encumbranceThresholds.map(row => [
+                row.weightMultiplier, row.speedReductionFeet, row.abilityCheckDisadvantage.length
+            ]), [[5, 10, 0], [10, 20, 3]]);
+
+            const longRest = ruleById.get('rule:xphb:long-rest').mechanics[0];
+            assert.deepEqual([
+                longRest.duration, longRest.durationQualifier, longRest.minimumHitPointsToStart,
+                longRest.minimumHoursBetweenStarts, longRest.physicalExertionInterruptionHours,
+                longRest.shortRestBenefitThresholdHours, longRest.addedDurationPerInterruption.amount
+            ], [8, 'AT_LEAST', 1, 16, 1, 1, 1]);
+            const shortRest = ruleById.get('rule:xphb:short-rest').mechanics[0];
+            assert.deepEqual(shortRest.interruptions, ['INITIATIVE', 'NON_CANTRIP_SPELL', 'DAMAGE']);
+            assert.equal(shortRest.interruptionOutcome, 'NO_BENEFITS');
+            const sleep = ruleById.get('rule:xge:sleep').mechanics[1].deprivationProcedure;
+            assert.deepEqual([
+                sleep.intervalHours, sleep.savingThrow.baseDc,
+                sleep.savingThrow.increasePerConsecutiveInterval, sleep.dcResetOnLongRest
+            ], [24, 10, 5, true]);
+            const healing = ruleById.get('rule:dmg:healing').mechanics;
+            const shortSurgeRecovery = healing[0].recoveryOutcomes[0];
+            assert.deepEqual([
+                shortSurgeRecovery.kind, shortSurgeRecovery.basis,
+                shortSurgeRecovery.fractionDenominator, shortSurgeRecovery.minimum,
+                shortSurgeRecovery.rounding
+            ], ['RESTORE_LEVEL_FRACTION', 'CHARACTER_LEVEL', 4, 1, 'DOWN']);
+            const armoredSleepRecovery = ruleById.get('rule:xge:sleep').mechanics[0]
+                .recoveryLimitations[0].limitedOutcome;
+            assert.deepEqual([
+                armoredSleepRecovery.kind, armoredSleepRecovery.numerator,
+                armoredSleepRecovery.denominator, armoredSleepRecovery.minimum,
+                armoredSleepRecovery.rounding
+            ], ['RESTORE_FRACTION', 1, 4, 1, 'DOWN']);
+            const restVariants = ruleById.get('rule:dmg:rest-variants').mechanics;
+            assert.deepEqual(restVariants.map(rest => [rest.subtype, rest.duration, rest.unit]), [
+                ['SHORT_REST', 5, 'minutes'], ['LONG_REST', 1, 'hour'],
+                ['SHORT_REST', 8, 'hours'], ['LONG_REST', 7, 'days']
+            ]);
+
+            const resistance = ruleById.get('rule:xphb:resistance').mechanics[0].resolutionModifier;
+            const vulnerability = ruleById.get('rule:xphb:vulnerability').mechanics[0].resolutionModifier;
+            assert.deepEqual([
+                resistance.operation, resistance.multiplier, resistance.rounding,
+                resistance.oncePerDamageInstance, resistance.sameOperationDoesNotStack
+            ], ['HALVE', 0.5, 'DOWN', true, true]);
+            assert.deepEqual([
+                vulnerability.operation, vulnerability.multiplier,
+                vulnerability.oncePerDamageInstance, vulnerability.sameOperationDoesNotStack
+            ], ['DOUBLE', 2, true, true]);
+
+            const planarIssue = manifest.sourceFieldIssues.find(issue =>
+                issue.canonicalId === 'rule:dmg:planar-effects' && issue.sourceField === 'reprintedAs');
+            assert.ok(planarIssue);
+            assert.equal(planarIssue.cause, 'REFERENCE_UNRESOLVED');
+            assert.equal(ruleById.get('rule:dmg:planar-effects').mechanics, undefined);
+            for (const id of ['rule:dmg:diagonals', 'rule:xge:falling']) {
+                const unresolvedReprint = manifest.sourceFieldIssues.find(issue =>
+                    issue.canonicalId === id && issue.sourceField === 'reprintedAs');
+                assert.ok(unresolvedReprint);
+                assert.equal(unresolvedReprint.cause, 'REFERENCE_UNRESOLVED');
+                assert.equal(Object.hasOwn(ruleById.get(id).sourceMetadata, 'reprintedAs'), false);
+            }
+        });
+
+        check('Rule catalog inventory reconciles identities, source paths, and explicit pending records', () => {
+            const inventory = manifest.ruleCatalogInventory;
+            const summary = manifest.ruleCatalogSummary;
+            const catalog = readJson(path.join(workspace,
+                'src/main/resources/data/variantrules.json')).variantrule;
+            assert.equal(inventory.length, 231);
+            assert.equal(new Set(inventory.map(item => item.canonicalId)).size, 231);
+            assert.equal(summary.totalSourceRecords, 231);
+            assert.equal(summary.sourceQualifiedIdentityCount, 231);
+            assert.equal(summary.reviewedAndAccountedCount, 104);
+            // This legacy field is intentionally unchanged pending a separately approved rename/correction.
+            assert.equal(summary.pendingSemanticReviewCount, 164);
+            assert.equal(summary.fullCount, 60);
+            assert.equal(summary.partialCount, 28);
+            assert.equal(summary.unsupportedCount, 16);
+            assert.equal(summary.pendingCount, 127);
+            assert.equal(summary.canonicalRuleOutputCount, 100);
+            const p5RuleAccounting = new Map(manifest.records
+                .filter(record => record.model === 'rule')
+                .map(record => [record.canonicalId, record]));
+            const p3RuleAccounting = new Map(readJson(path.join(workspace,
+                'reports/step-2/CORE_RULES_PHASE_3_SOURCE_ACCOUNTING.json')).records
+                .filter(record => record.model === 'rule')
+                .map(record => [record.canonicalId, record]));
+            const documentedGaps = fs.readFileSync(path.join(workspace,
+                'reports/step-2/CORE_RULES_FOUNDATION_PHASE_5_RULE_GAP_INVENTORY.md'), 'utf8');
+            const collectNestedTextPaths = (value, sourcePath, collected) => {
+                if (Array.isArray(value)) {
+                    value.forEach((item, index) =>
+                        collectNestedTextPaths(item, `${sourcePath}[${index}]`, collected));
+                } else if (value && typeof value === 'object') {
+                    for (const [key, child] of Object.entries(value)) {
+                        collectNestedTextPaths(child, `${sourcePath}.${key}`, collected);
+                    }
+                } else if (typeof value === 'string') {
+                    collected.push(sourcePath);
+                }
+            };
+            for (const [index, item] of inventory.entries()) {
+                const source = catalog[index];
+                assert.equal(item.sourceObjectPath, `$.variantrule[${index}]`);
+                assert.equal(item.canonicalId,
+                    `rule:${canonicalSlug(source.source)}:${canonicalSlug(source.name)}`);
+                assert.equal(item.name, source.name);
+                assert.equal(item.source, source.source);
+                assert.equal(item.page, source.page);
+                assert.equal(item.ruleType, source.ruleType);
+                assert.deepEqual(item.reprintedAs, source.reprintedAs);
+                assert.deepEqual(item.sourceEntryPaths,
+                    source.entries.map((_, entryIndex) => `${item.sourceObjectPath}.entries[${entryIndex}]`));
+                assert.equal(item.sourceEntryRootCount, source.entries.length);
+                const expectedNestedPaths = [];
+                source.entries.forEach((entry, entryIndex) => {
+                    const rootPath = `${item.sourceObjectPath}.entries[${entryIndex}]`;
+                    const leaves = [];
+                    collectNestedTextPaths(entry, rootPath, leaves);
+                    expectedNestedPaths.push(...leaves.filter(leaf => leaf !== rootPath));
+                });
+                assert.deepEqual(item.nestedClausePaths, expectedNestedPaths);
+                assert.equal(item.nestedClausePathCount, expectedNestedPaths.length);
+                const sourceFields = Object.fromEntries(Object.entries(source)
+                    .filter(([key]) => !['name', 'source', 'page', 'entries'].includes(key)));
+                assert.deepEqual(item.structuredSourceFields, sourceFields);
+                assert.equal(item.accountingRecordPresent,
+                    p3RuleAccounting.has(item.canonicalId) || p5RuleAccounting.has(item.canonicalId));
+                if (item.interpretationStatus === 'PENDING_SEMANTIC_REVIEW') {
+                    assert.equal(item.coverage, 'PENDING');
+                    assert.equal(item.accountingRecordPresent, false);
+                    assert.deepEqual(item.interpretedMechanics, []);
+                    assert.equal(item.canonicalOutput, undefined);
+                    assert.deepEqual(item.gapIds, []);
+                } else {
+                    assert.equal(item.accountingRecordPresent, true);
+                    assert.ok(p3RuleAccounting.has(item.canonicalId) || p5RuleAccounting.has(item.canonicalId));
+                    for (const gapId of item.gapIds) assert.ok(documentedGaps.includes(gapId), gapId);
+                }
+            }
+            assert.equal(inventory.filter(item => item.coverage === 'PENDING').length, 127);
+        });
+
+        check('RULE-CONV-01 converts exactly its 12 reference-only glossary Rules', () => {
+            const expectedIds = [
+                'rule:xphb:action', 'rule:xphb:adventure', 'rule:xphb:alignment',
+                'rule:xphb:campaign', 'rule:xphb:character-sheet', 'rule:xphb:creature',
+                'rule:xphb:creature-type', 'rule:xphb:encounter', 'rule:xphb:hazard',
+                'rule:xphb:monster', 'rule:xphb:player-character', 'rule:xphb:target'
+            ];
+            const batchIds = manifest.records.filter(record => record.model === 'rule'
+                    && expectedIds.includes(record.canonicalId)).map(record => record.canonicalId).sort();
+            const newlyAccountedIds = manifest.records.filter(record => expectedIds.includes(record.canonicalId))
+                .map(record => record.canonicalId);
+            const outputById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const ruleById = new Map([...outputById].filter(([id]) => id.startsWith('rule:')));
+            assert.deepEqual(batchIds, [...expectedIds].sort());
+            assert.deepEqual(newlyAccountedIds, expectedIds);
+            assert.equal(new Set(batchIds).size, 12);
+            assert.equal(ruleById.size, 95);
+            for (const id of expectedIds) {
+                const entity = ruleById.get(id);
+                assert.ok(entity, `missing canonical Rule output ${id}`);
+                assert.equal(Object.hasOwn(entity, 'mechanics'), false,
+                    `${id} must remain reference-only without fabricated mechanics`);
+                assert.equal(entity.ruleType, 'CORE');
+                assert.equal(entity.sourceMetadata.source, 'XPHB');
+                assert.deepEqual(entity.sourceMetadata.flags, { srd52: true, basicRules2024: true });
+                const account = manifest.records.find(record => record.canonicalId === id);
+                assert.equal(account.sourceFile, 'variantrules.json');
+                assert.equal(account.entries.length, account.sourceEntryCount);
+                for (const entry of account.entries) {
+                    assert.ok(entry.classifications.length > 0, `${id} entry ${entry.sourceEntryIndex}`);
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications.some(item => item.portion.includes(nestedPath)),
+                            `${id} nested path is not accounted: ${nestedPath}`);
+                    }
+                }
+                const inventory = manifest.ruleCatalogInventory.find(item => item.canonicalId === id);
+                const accountedPortions = account.entries.flatMap(entry =>
+                    entry.classifications.map(item => item.portion));
+                for (const nestedPath of inventory.nestedClausePaths) {
+                    assert.ok(accountedPortions.some(portion => portion.includes(nestedPath)),
+                        `${id} nested source clause is not accounted: ${nestedPath}`);
+                }
+                assert.equal(account.sourceObjectPath, inventory.sourceObjectPath);
+                assert.equal(account.sourceEntryCount, inventory.sourceEntryRootCount);
+                for (const reference of entity.references ?? []) {
+                    const resolved = reference.targetType === 'rule'
+                        ? ruleById.has(reference.id) || phase3Ids.has(reference.id)
+                        : outputById.has(reference.id);
+                    assert.ok(resolved, `${id} has unresolved canonical reference ${reference.id}`);
+                }
+            }
+            assert.deepEqual(
+                manifest.ruleCatalogInventory.filter(item => expectedIds.includes(item.canonicalId))
+                    .reduce((counts, item) => {
+                        counts[item.coverage]++;
+                        return counts;
+                    }, { FULL: 0, PARTIAL: 0, UNSUPPORTED: 0 }),
+                { FULL: 8, PARTIAL: 3, UNSUPPORTED: 1 }
+            );
+            assert.equal(manifest.ruleCatalogInventory.filter(item => item.coverage === 'PENDING').length, 127);
+            assert.equal(manifest.ruleCatalogSummary.pendingSemanticReviewCount, 164);
+        });
+
+        check('RULE-CONV-02 preserves combat Rule identities, references, omissions, and source accounting', () => {
+            const expected = [
+                ['rule:dmg:action-options', '$.variantrule[3]', 'PARTIAL', 7, 22],
+                ['rule:dmg:cleaving-through-creatures', '$.variantrule[27]', 'UNSUPPORTED', 2, 0],
+                ['rule:dmg:facing', '$.variantrule[105]', 'UNSUPPORTED', 6, 0],
+                ['rule:dmg:firearms', '$.variantrule[112]', 'UNSUPPORTED', 3, 15],
+                ['rule:dmg:injuries', '$.variantrule[138]', 'UNSUPPORTED', 6, 28],
+                ['rule:dmg:massive-damage', '$.variantrule[151]', 'UNSUPPORTED', 3, 16],
+                ['rule:mm:player-characters-as-lycanthropes', '$.variantrule[170]', 'UNSUPPORTED', 4, 29]
+            ];
+            const ids = expected.map(([id]) => id);
+            const batchRecords = manifest.records.filter(item => expected.some(([id]) => item.canonicalId === id));
+            assert.deepEqual(batchRecords.map(record => record.canonicalId), ids);
+            assert.equal(new Set(batchRecords.map(record => record.canonicalId)).size, 7);
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            for (const [id, sourceObjectPath, coverage, roots, nestedCount] of expected) {
+                const sourceIndex = Number(sourceObjectPath.match(/\[(\d+)\]/)[1]);
+                const source = rules[sourceIndex];
+                const inventory = manifest.ruleCatalogInventory.find(item => item.canonicalId === id);
+                const record = batchRecords.find(item => item.canonicalId === id);
+                const entity = ruleById.get(id);
+                assert.ok(entity, `missing canonical Rule ${id}`);
+                assert.equal(record.sourceObjectPath, sourceObjectPath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(inventory.nestedClausePathCount, nestedCount);
+                assert.equal(inventory.coverage, coverage);
+                assert.equal(inventory.accountingRecordPresent, true);
+                assert.equal(entity.name, source.name);
+                const expectedMetadata = expectedSourceMetadata('rule', source);
+                if (id === 'rule:dmg:firearms') delete expectedMetadata.reprintedAs;
+                assert.deepEqual(entity.sourceMetadata, expectedMetadata);
+                assert.equal(Object.hasOwn(entity, 'mechanics'), false,
+                    `${id} must not contain placeholder or skipped mechanics`);
+                if (coverage === 'UNSUPPORTED') {
+                    assert.equal(Object.hasOwn(entity, 'references'), false,
+                        `${id} must not imply unresolved or unsupported mechanics through references`);
+                }
+                assert.equal(record.entries.length, roots);
+                for (const entry of record.entries) {
+                    assert.ok(entry.classifications.length > 0, `${id} entry ${entry.sourceEntryIndex}`);
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications.some(item => item.portion.includes(nestedPath)),
+                            `${id} nested path is unaccounted: ${nestedPath}`);
+                    }
+                }
+                for (const path of inventory.nestedClausePaths) {
+                    assert.ok(record.entries.some(entry => entry.classifications.some(item =>
+                        item.portion.includes(path))), `${id} semantic nested path is unaccounted: ${path}`);
+                }
+                assertCanonicalReferences(entity);
+            }
+            const actionOptions = ruleById.get('rule:dmg:action-options');
+            assert.deepEqual(actionOptions.references.map(reference => reference.id), [
+                'action:dmg:climb-onto-a-bigger-creature', 'action:dmg:disarm', 'action:dmg:mark',
+                'action:dmg:overrun', 'action:dmg:shove-aside', 'action:dmg:tumble'
+            ]);
+            assert.equal(actionOptions.references.every(reference =>
+                outputById.has(reference.id) || phase3Ids.has(reference.id)), true);
+            const actions = new Map([
+                ...phase3Files().map(file => readJson(file)),
+                ...entities.map(({ entity }) => entity)
+            ].filter(entity => entity.id.startsWith('action:')).map(action => [action.id, action]));
+            assert.ok(actions.get('action:dmg:climb-onto-a-bigger-creature').operations
+                .some(operation => operation.operationId === 'climb-entry-contest'));
+            assert.equal(actions.get('action:dmg:disarm').operations[0].attackDamageOnSuccess, false);
+            assert.equal(actions.get('action:dmg:mark').operations[0].reaction.consumed, false);
+            assert.equal(actions.get('action:dmg:overrun').operations[1].uses, 'ONCE_THIS_TURN');
+            assert.equal(actions.get('action:dmg:shove-aside').operations[2].distance, 5);
+            assert.equal(actions.get('action:dmg:tumble').operations[1].permission, 'PASS_THROUGH_SPACE');
+            const gapCauses = new Map([
+                ['rule:dmg:cleaving-through-creatures', 'OUT_OF_APPROVED_SCOPE'],
+                ['rule:dmg:facing', 'OUT_OF_APPROVED_SCOPE'],
+                ['rule:dmg:injuries', 'OUT_OF_APPROVED_SCOPE'],
+                ['rule:dmg:massive-damage', 'OUT_OF_APPROVED_SCOPE']
+            ]);
+            for (const [id, cause] of gapCauses) {
+                const record = batchRecords.find(item => item.canonicalId === id);
+                assert.ok(record.entries.flatMap(entry => entry.classifications).some(item =>
+                    item.classification === 'OMITTED' && item.cause === cause));
+            }
+            const firearmIssue = manifest.sourceFieldIssues.find(issue =>
+                issue.canonicalId === 'rule:dmg:firearms' && issue.sourceField === 'reprintedAs');
+            assert.equal(firearmIssue?.cause, 'REFERENCE_UNRESOLVED');
+            assert.equal(manifest.ruleCatalogSummary.reviewedAndAccountedCount, 104);
+            assert.equal(manifest.ruleCatalogSummary.pendingCount, 127);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 100);
+            assert.equal(manifest.canonicalRecordCount, 420);
+            assert.equal(new Set(entities.map(({ entity }) => entity.id)).size, entities.length);
+        });
+
+        check('RULE-CONV-03 preserves combat, damage, and space mechanics and accounting', () => {
+            const expected = [
+                ['rule:xge:adamantine-weapons', '$.variantrule[4]', 'PARTIAL', 3, 0],
+                ['rule:xge:simultaneous-effects', '$.variantrule[198]', 'UNSUPPORTED', 1, 0],
+                ['rule:xphb:bonus-action', '$.variantrule[18]', 'PARTIAL', 1, 0],
+                ['rule:xphb:breaking-objects', '$.variantrule[19]', 'PARTIAL', 6, 58],
+                ['rule:xphb:damage', '$.variantrule[45]', 'FULL', 1, 0],
+                ['rule:xphb:damage-roll', '$.variantrule[46]', 'PARTIAL', 1, 0],
+                ['rule:xphb:damage-threshold', '$.variantrule[47]', 'UNSUPPORTED', 1, 0],
+                ['rule:xphb:damage-types', '$.variantrule[48]', 'PARTIAL', 2, 32],
+                ['rule:xphb:grappling', '$.variantrule[117]', 'PARTIAL', 2, 10],
+                ['rule:xphb:hit-points', '$.variantrule[127]', 'FULL', 1, 0],
+                ['rule:xphb:immunity', '$.variantrule[133]', 'UNSUPPORTED', 1, 0],
+                ['rule:xphb:improvised-weapons', '$.variantrule[134]', 'UNSUPPORTED', 2, 13],
+                ['rule:xphb:knocking-out-a-creature', '$.variantrule[142]', 'PARTIAL', 2, 0],
+                ['rule:xphb:occupied-space', '$.variantrule[162]', 'PARTIAL', 1, 0],
+                ['rule:xphb:reach', '$.variantrule[179]', 'FULL', 1, 0],
+                ['rule:xphb:reaction', '$.variantrule[180]', 'PARTIAL', 1, 0],
+                ['rule:xphb:simultaneous-effects', '$.variantrule[199]', 'UNSUPPORTED', 1, 0],
+                ['rule:xphb:size', '$.variantrule[200]', 'PARTIAL', 1, 0]
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            const sourceOrder = expected.slice().sort((left, right) =>
+                Number(left[1].match(/\[(\d+)\]/)[1]) - Number(right[1].match(/\[(\d+)\]/)[1]));
+            assert.deepEqual(records.map(record => record.canonicalId), sourceOrder.map(([id]) => id));
+            assert.equal(new Set(ids).size, 18);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 29);
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, coverage, roots, nestedCount] of expected) {
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                const entity = ruleById.get(id);
+                assert.ok(entity, `missing canonical Rule ${id}`);
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(item.nestedClausePathCount, nestedCount);
+                assert.equal(item.coverage, coverage);
+                assert.equal(item.accountingRecordPresent, true);
+                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                assert.equal(record.entries.length, roots);
+                for (const entry of record.entries) {
+                    assert.ok(entry.classifications.length > 0);
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications.some(disposition => disposition.portion.includes(nestedPath)));
+                    }
+                }
+                for (const nestedPath of item.nestedClausePaths) {
+                    assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath))), `${id} unaccounted nested path ${nestedPath}`);
+                }
+                assertCanonicalReferences(entity);
+                for (const reference of entity.references ?? []) {
+                    const resolved = reference.targetType === 'rule'
+                        ? ruleById.has(reference.id) || phase3Ids.has(reference.id)
+                        : outputById.has(reference.id) || phase3Ids.has(reference.id);
+                    assert.ok(resolved, `${id} has unresolved reference ${reference.id}`);
+                }
+            }
+            assert.deepEqual(expected.reduce((counts, [id, , coverage]) => {
+                counts[coverage]++;
+                return counts;
+            }, { FULL: 0, PARTIAL: 0, UNSUPPORTED: 0 }), { FULL: 3, PARTIAL: 10, UNSUPPORTED: 5 });
+            assert.deepEqual(ruleById.get('rule:xphb:hit-points').mechanics.map(item => item.rule),
+                ['current', 'maximum', 'zero-hit-points']);
+            assert.equal(ruleById.get('rule:xphb:damage-roll').mechanics, undefined);
+            assert.equal(ruleById.get('rule:xphb:damage-roll').references[0].id, 'rule:xphb:damage');
+            assert.deepEqual(ruleById.get('rule:xphb:reach').mechanics[0].roll,
+                { kind: 'ATTACK_ROLL', forms: ['melee'], reachFeet: 5 });
+            assert.deepEqual(ruleById.get('rule:xphb:grappling').references.map(item => item.id), [
+                'rule:xphb:unarmed-strike', 'condition:xphb:grappled', 'action:xphb:escape-a-grapple',
+                'skill:xphb:athletics', 'skill:xphb:acrobatics', 'condition:xphb:incapacitated'
+            ]);
+            assert.equal(ruleById.get('rule:xphb:breaking-objects').mechanics, undefined);
+            assert.equal(ruleById.get('rule:xphb:damage-threshold').mechanics, undefined);
+            assert.equal(ruleById.get('rule:xphb:immunity').mechanics, undefined);
+            assert.equal(ruleById.get('rule:xphb:improvised-weapons').mechanics, undefined);
+            assert.equal(ruleById.get('rule:xphb:simultaneous-effects').mechanics, undefined);
+            assert.equal(ruleById.get('rule:xge:simultaneous-effects').mechanics, undefined);
+            assert.equal(ruleById.get('rule:xge:simultaneous-effects').sourceMetadata.reprintedAs[0].id,
+                'rule:xphb:simultaneous-effects');
+            assert.equal(manifest.ruleCatalogSummary.reviewedAndAccountedCount, 104);
+            assert.equal(manifest.ruleCatalogSummary.pendingCount, 127);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 100);
+            assert.equal(manifest.canonicalRecordCount, 420);
+        });
+
+        check('RULE-CONV-01 preserves XPHB Action and glossary reference boundaries', () => {
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const action = ruleById.get('rule:xphb:action');
+            const actionTargets = action.references.map(reference => reference.id);
+            assert.equal(actionTargets.length, 11);
+            assert.ok(actionTargets.includes('action:xphb:attack'));
+            assert.ok(actionTargets.includes('action:xphb:utilize'));
+            assert.equal(actionTargets.includes('action:xphb:dodge'), false);
+            const actionAccounting = manifest.records.find(record => record.canonicalId === action.id);
+            const dodgeOmission = actionAccounting.entries[1].classifications.find(item =>
+                item.classification === 'OMITTED' && item.cause === 'REFERENCE_UNRESOLVED');
+            assert.ok(dodgeOmission?.portion.includes('items[1]'));
+            assert.equal(actionAccounting.entries[0].classifications[0].cause, 'SCHEMA_UNSUPPORTED');
+
+            assert.deepEqual(ruleById.get('rule:xphb:adventure').references, [
+                { targetType: 'rule', id: 'rule:xphb:encounter' }
+            ]);
+            assert.deepEqual(ruleById.get('rule:xphb:campaign').references, [
+                { targetType: 'rule', id: 'rule:xphb:adventure' }
+            ]);
+            assert.deepEqual(ruleById.get('rule:xphb:target').references, [
+                { targetType: 'rule', id: 'rule:xphb:attack-roll' },
+                { targetType: 'rule', id: 'rule:xphb:saving-throw' }
+            ]);
+            assert.deepEqual(ruleById.get('rule:xphb:hazard').references, undefined);
+            assert.equal(manifest.records.find(record => record.canonicalId === 'rule:xphb:hazard')
+                .conversionStatus, 'unsupported');
+        });
+
+        check('Batch 4 falling, area geometry, movement procedures, and movement costs match source', () => {
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const sourceById = new Map(rules.map(record => [
+                `rule:${canonicalSlug(record.source)}:${canonicalSlug(record.name)}`, record
+            ]));
+
+            const fall = ruleById.get('rule:xge:falling');
+            const fallDamage = fall.mechanics.find(component => component.details?.kind === 'FALL_DAMAGE').details;
+            assert.deepEqual([
+                fallDamage.distanceIncrementFeet,
+                fallDamage.dicePerIncrement.diceCount,
+                fallDamage.dicePerIncrement.dieSize,
+                fallDamage.maximumDiceCount,
+                fallDamage.damageType,
+                fallDamage.partialIncrementTreatment,
+                fallDamage.landingCondition.condition.id
+            ], [10, 1, 6, 20, 'bludgeoning', 'SOURCE_UNSPECIFIED', 'condition:phb:prone']);
+            const optionalFlight = fall.mechanics.find(component =>
+                component.details?.kind === 'FLYING_FALL_RULE').details;
+            assert.equal(optionalFlight.ruleStatus, 'OPTIONAL');
+            assert.deepEqual(optionalFlight.fallingTriggers, ['PRONE', 'FLY_SPEED_ZERO', 'OTHERWISE_UNABLE_TO_MOVE']);
+            assert.equal(optionalFlight.prevention, 'HOVER_OR_MAGIC_HOLD_ALOFT');
+            assert.ok(sourceById.get(fall.id).entries[0].includes('maximum of {@damage 20d6}'));
+            assert.ok(sourceById.get(fall.id).entries[2].entries[0].includes('unless it can hover'));
+            assert.equal(JSON.stringify(fall).includes('500'), false);
+            assert.equal(JSON.stringify(fall).includes('subtract the creature'), false);
+
+            const area = ruleById.get('rule:xphb:area-of-effect').mechanics[0];
+            assert.deepEqual(area.shapes, ['cone', 'cube', 'cylinder', 'emanation', 'line', 'sphere']);
+            assert.equal(area.lineOfEffect.locationIncludedWhen, 'AT_LEAST_ONE_UNBLOCKED_LINE');
+            assert.equal(area.lineOfEffect.blockedBy.coverLevel, 'total');
+            assert.equal(area.unseenOriginPlacement, 'NEAR_SIDE_OF_INTERVENING_OBSTRUCTION');
+            const shapeCases = [
+                ['cone', 'POINT_AND_DIRECTION', ['MAXIMUM_LENGTH'], 'EXCLUDED_UNLESS_CREATOR_CHOOSES'],
+                ['cube', 'ANY_CUBE_FACE', ['SIDE_LENGTH'], 'EXCLUDED_UNLESS_CREATOR_CHOOSES'],
+                ['cylinder', 'CENTER_OF_TOP_OR_BOTTOM', ['BASE_RADIUS', 'HEIGHT'], 'INCLUDED'],
+                ['emanation', 'CREATURE_OR_OBJECT', ['EXTENT'], 'EXCLUDED_UNLESS_CREATOR_CHOOSES'],
+                ['line', 'POINT_AND_DIRECTION', ['LENGTH', 'WIDTH'], 'EXCLUDED_UNLESS_CREATOR_CHOOSES'],
+                ['sphere', 'POINT_IN_SPACE', ['RADIUS'], 'INCLUDED']
+            ];
+            for (const [shape, placement, dimensions, included] of shapeCases) {
+                const identity = shape === 'emanation' ? 'rule:xphb:emanation-area-of-effect'
+                    : `rule:xphb:${shape}-area-of-effect`;
+                const component = ruleById.get(identity).mechanics[0];
+                assert.deepEqual([
+                    component.shape, component.originPlacement,
+                    component.dimensionParameters, component.originIncluded
+                ], [shape, placement, dimensions, included]);
+            }
+            assert.equal(ruleById.get('rule:xphb:cone-area-of-effect').mechanics[0].coneWidthRule,
+                'WIDTH_EQUALS_DISTANCE_FROM_ORIGIN');
+            assert.deepEqual(ruleById.get('rule:xphb:emanation-area-of-effect').mechanics[0].originBehavior,
+                { kind: 'EMANATION', followsOriginUnless: ['INSTANTANEOUS', 'STATIONARY'] });
+
+            const climb = ruleById.get('rule:xphb:climbing').mechanics[0].details;
+            assert.deepEqual([
+                climb.additionalFeetPerFoot, climb.difficultTerrainAdditionalFeetPerFoot,
+                climb.difficultTerrainCostRelationship, climb.waivedWhenUsingSpeedType,
+                climb.optionalCheck.dc, climb.optionalCheck.trigger
+            ], [1, 2, 'DO_NOT_ADD', 'climb', 15, 'SLIPPERY_OR_FEW_HANDHOLDS']);
+            const climbSpeed = ruleById.get('rule:xphb:climb-speed').mechanics[0].details;
+            assert.deepEqual([
+                climbSpeed.speedType, climbSpeed.appliesTo,
+                climbSpeed.replacesSpeed, climbSpeed.waivesClimbingExtraMovementCost
+            ], ['climb', 'VERTICAL_SURFACE', true, true]);
+            const crawling = ruleById.get('rule:xphb:crawling').mechanics[0].details;
+            assert.deepEqual([
+                crawling.additionalFeetPerFoot, crawling.difficultTerrainAdditionalFeetPerFoot,
+                crawling.difficultTerrainCostRelationship
+            ], [1, 2, 'DO_NOT_ADD']);
+            const swim = ruleById.get('rule:xphb:swimming').mechanics[0].details;
+            assert.deepEqual([
+                swim.additionalFeetPerFoot, swim.difficultTerrainAdditionalFeetPerFoot,
+                swim.difficultTerrainCostRelationship, swim.waivedWhenUsingSpeedType,
+                swim.optionalCheck.dc, swim.optionalCheck.trigger
+            ], [1, 2, 'DO_NOT_ADD', 'swim', 15, 'ROUGH_WATER_ANY_DISTANCE']);
+            assert.deepEqual(ruleById.get('rule:xphb:burrow-speed').mechanics[0].details.permittedMaterials,
+                ['sand', 'earth', 'mud', 'ice']);
+            assert.equal(ruleById.get('rule:xphb:high-jump').mechanics[0].details.distanceFormula.minimumFeet, 0);
+            assert.equal(ruleById.get('rule:xphb:long-jump').mechanics[0].details.obstacleCheck.failureOutcome,
+                'HIT_OBSTACLE');
+            assert.deepEqual(ruleById.get('rule:xphb:speed').mechanics.map(component => component.details.kind),
+                ['SPECIAL_SPEED_SELECTION', 'SPECIAL_SPEED_ADJUSTMENT']);
+            assert.equal(ruleById.get('rule:xphb:flying').mechanics[0].details.hoverPreventsFall, true);
+            assert.deepEqual(ruleById.get('rule:xphb:fly-speed').mechanics[0].details.staysAloftUntil,
+                ['LANDS', 'FALLS', 'DIES']);
+            assert.deepEqual(ruleById.get('rule:xphb:jumping').mechanics[0].details, {
+                kind: 'JUMP_PROCEDURE_SELECTION',
+                selection: 'ONE',
+                horizontal: { targetType: 'rule', id: 'rule:xphb:long-jump' },
+                vertical: { targetType: 'rule', id: 'rule:xphb:high-jump' }
+            });
+
+            const difficultTerrain = readJson(path.join(
+                phase3Root,
+                'rule/xphb-difficult-terrain.json'
+            )).mechanics[0];
+            assert.deepEqual([difficultTerrain.extraFeetPerFoot, difficultTerrain.cumulative], [1, false]);
+            const diagonal = ruleById.get('rule:dmg:diagonals').mechanics[0].details;
+            assert.deepEqual(diagonal.diagonalPatternFeet, [5, 10]);
+            assert.equal(diagonal.patternContinuesAcrossStraightMovement, true);
+            assert.equal(diagonal.ruleOptional, true);
+            const grid = ruleById.get('rule:phb:playing-on-a-grid').mechanics[0].details;
+            assert.deepEqual([
+                grid.gridUnitFeet, grid.movementUnitFeet,
+                grid.minimumMovementRemaining, grid.extraCostRequiresFullPayment
+            ], [5, 5, 1, true]);
+            assert.equal(JSON.stringify(grid).includes('RANGE'), false);
+        });
+
+        const languageRecords = manifest.records.filter(record => record.model === 'language');
+        check('Phase 5 Language source fields and linked speaker coverage', () => {
+            assert.equal(languageRecords.length, 197);
+            const languageOutputs = entities.map(({ entity }) => entity)
+                .filter(entity => entity.id.startsWith('language:'));
+            assert.equal(languageOutputs.length, 197);
+            const phase3Languages = phase3Files().map(file => readJson(file))
+                .filter(entity => entity.id.startsWith('language:'));
+            const sourceLanguages = readJson(path.join(workspace,
+                'src/main/resources/data/languages.json')).language;
+            const allLanguageIds = [...phase3Languages, ...languageOutputs].map(entity => entity.id);
+            assert.equal(sourceLanguages.length, 201);
+            assert.equal(new Set(allLanguageIds).size, 201);
+            assert.deepEqual(new Set(allLanguageIds), new Set(sourceLanguages.map(record =>
+                `language:${canonicalSlug(record.source)}:${canonicalSlug(record.name)}`)));
+            const knownFields = new Set([
+                'name', 'source', 'page', 'reprintedAs', 'type', 'script', 'typicalSpeakers',
+                'origin', 'dialects', 'additionalSources', 'otherSources', 'srd', 'srd52',
+                'basicRules', 'basicRules2024', 'entries', 'fonts', 'hasFluffImages'
+            ]);
+            for (const accountingRecord of languageRecords) {
+                const source = sourceRecordForCanonical({
+                    id: accountingRecord.canonicalId,
+                    name: accountingRecord.name,
+                    sourceMetadata: { source: accountingRecord.source }
+                });
+                for (const field of Object.keys(source)) {
+                    assert.ok(knownFields.has(field), `${accountingRecord.canonicalId}: unreviewed source field ${field}`);
+                    const hasIssue = manifest.sourceFieldIssues.some(issue =>
+                        issue.canonicalId === accountingRecord.canonicalId && issue.sourceField === field);
+                    const represented = [
+                        'name', 'source', 'page', 'reprintedAs', 'type', 'script',
+                        'additionalSources', 'otherSources', 'srd', 'srd52',
+                        'basicRules', 'basicRules2024', 'entries'
+                    ].includes(field)
+                        || (field === 'typicalSpeakers' && languageOutputs.find(entity =>
+                            entity.id === accountingRecord.canonicalId)?.typicalSpeakers?.length > 0)
+                        || (field === 'origin' && languageOutputs.find(entity =>
+                            entity.id === accountingRecord.canonicalId)?.origin?.length > 0)
+                        || (field === 'dialects' && languageOutputs.find(entity =>
+                            entity.id === accountingRecord.canonicalId)?.dialects?.length > 0);
+                    assert.ok(represented || hasIssue,
+                        `${accountingRecord.canonicalId}: source field ${field} is unaccounted`);
+                }
+            }
+            for (const entity of languageOutputs) {
+                const source = sourceRecordForCanonical(entity);
+                assert.equal(entity.category, source.type ?? undefined);
+                assert.equal(entity.script, source.script && source.script.toLowerCase() !== 'none'
+                    ? source.script : undefined);
+            }
+            const blinkDog = outputById.get('language:mm:blink-dog');
+            assert.deepEqual(blinkDog.typicalSpeakers, [
+                { targetType: 'creature', id: 'creature:mm:blink-dog' }
+            ]);
+            const guran = outputById.get('language:scag:guran');
+            assert.deepEqual(guran.origin.map(reference => reference.id), [
+                'language:scag:roushoum', 'language:scag:rashemi'
+            ]);
+            const loross = outputById.get('language:idrotf:loross');
+            assert.deepEqual(loross.intelligibility, [{
+                kind: 'MUTUAL_INTELLIGIBILITY',
+                mode: 'SPOKEN',
+                directionality: 'MUTUAL',
+                language: { targetType: 'language', id: 'language:phb:elvish' }
+            }]);
+            assert.deepEqual(outputById.get('language:phb:dwarvish').typicalSpeakers, [{
+                filter: {
+                    targetType: 'creature', creatureTypes: ['humanoid'],
+                    tags: [{ group: 'any race', value: 'dwarf' }]
+                }
+            }]);
+            assert.deepEqual(outputById.get('language:erlw:draconic').typicalSpeakers, [
+                { filter: { targetType: 'creature', creatureTypes: ['dragon'], sources: ['ERLW'] } },
+                {
+                    filter: {
+                        targetType: 'creature', creatureTypes: ['humanoid'],
+                        tags: [{ group: 'any race', value: 'dragonborn' }], sources: ['ERLW']
+                    }
+                }
+            ]);
+        });
+        check('Language exact tag selectors preserve source criteria without type inference', () => {
+            const expectedTags = new Map([
+                ['language:ggr:abyssal', [
+                    { value: 'demon', source: 'GGR' },
+                    { value: 'devil', source: 'GGR' }
+                ]],
+                ['language:phb:abyssal', [{ value: 'demon' }]],
+                ['language:ggr:celestial', [{ value: 'angel', source: 'GGR' }]],
+                ['language:ggr:goblin', [{ value: 'any race', source: 'GGR' }]],
+                ['language:phb:goblin', [{ value: 'goblinoid' }]],
+                ['language:phb:infernal', [{ value: 'devil' }]],
+                ['language:ggr:loxodon', [{ value: 'any race', source: 'GGR' }]],
+                ['language:ggr:merfolk', [{ value: 'any race;merfolk', source: 'GGR' }]],
+                ['language:phb:orc', [{ value: 'orc' }]]
+            ]);
+            for (const [id, expected] of expectedTags) {
+                const selectors = outputById.get(id).typicalSpeakers.map(speaker => speaker.filter.selector);
+                assert.deepEqual(selectors, expected.map(({ value, source }) => ({
+                    kind: 'TAG', value, ...(source ? { source } : {})
+                })), id);
+                assert.ok(outputById.get(id).typicalSpeakers.every(speaker =>
+                    !speaker.filter.creatureTypes && !speaker.filter.tags && !speaker.filter.sources), id);
+            }
+            const phbAbyssal = outputById.get('language:phb:abyssal').typicalSpeakers[0].filter.selector;
+            assert.equal(Object.hasOwn(phbAbyssal, 'source'), false);
+            const wrongSource = structuredClone(outputById.get('language:ggr:celestial'));
+            wrongSource.typicalSpeakers[0].filter.selector.source = 'PHB';
+            rejects('Language accounting detects an invented tag source scope', () => {
+                const expected = { kind: 'TAG', value: 'angel', source: 'GGR' };
+                return JSON.stringify(wrongSource.typicalSpeakers[0].filter.selector) === JSON.stringify(expected);
+            });
+            const inventedUnscopedSource = structuredClone(outputById.get('language:phb:abyssal'));
+            inventedUnscopedSource.typicalSpeakers[0].filter.selector.source = 'PHB';
+            rejects('Language accounting detects a source scope absent from the selector', () => {
+                return Object.hasOwn(inventedUnscopedSource.typicalSpeakers[0].filter.selector, 'source') === false;
+            });
+            const psiDemonic = outputById.get('language:psi:demonic');
+            assert.equal(psiDemonic.typicalSpeakers, undefined);
+            const psiIssue = manifest.sourceFieldIssues.find(issue =>
+                issue.canonicalId === 'language:psi:demonic' && issue.sourceField === 'typicalSpeakers');
+            assert.ok(psiIssue);
+            assert.equal(psiIssue.disposition, 'OMITTED');
+            assert.equal(psiIssue.cause, 'SCHEMA_UNSUPPORTED');
+            assert.match(psiIssue.reason, /empty source parameter/i);
+            assert.equal(manifest.sourceFieldIssues.some(issue =>
+                expectedTags.has(issue.canonicalId) && issue.sourceField === 'typicalSpeakers'), false);
+        });
+        check('Language schema rejects unsupported or contradictory tag selectors', () => {
+            const validateLanguage = ajv.getSchema('urn:thedndpub:schemas:core-rules:language:v1');
+            const abyssal = outputById.get('language:phb:abyssal');
+            const invalidCases = [
+                ['empty tag value', { kind: 'TAG', value: '' }],
+                ['empty tag source', { kind: 'TAG', value: 'demon', source: '' }],
+                ['unsupported search selector', { kind: 'SEARCH', value: 'demon' }],
+                ['unknown selector kind', { kind: 'CREATURE', value: 'demon' }],
+                ['inferred creature type combined with tag selector', {
+                    kind: 'TAG', value: 'demon', creatureTypes: ['fiend']
+                }]
+            ];
+            for (const [label, selector] of invalidCases) {
+                const candidate = structuredClone(abyssal);
+                candidate.typicalSpeakers[0].filter.selector = selector;
+                rejects(`Language rejects ${label}`, () => validateLanguage(candidate) === true);
+            }
+            const combined = structuredClone(abyssal);
+            combined.typicalSpeakers[0].filter.creatureTypes = ['fiend'];
+            rejects('Language rejects a tag selector intersected with creatureTypes',
+                () => validateLanguage(combined) === true);
+            const missingSelectorValue = structuredClone(abyssal);
+            delete missingSelectorValue.typicalSpeakers[0].filter.selector.value;
+            rejects('Language rejects a tag selector without a value',
+                () => validateLanguage(missingSelectorValue) === true);
+        });
+        check('Druidic and Thieves Cant retain distinct concealed-message procedures', () => {
+            const druidic = outputById.get('language:phb:druidic');
+            assert.deepEqual(druidic.communicationModes, ['SPOKEN', 'LEFT_MESSAGE']);
+            assert.deepEqual(druidic.communicationCapabilities, [{
+                kind: 'CONCEALED_MESSAGE',
+                channel: 'LEFT_MESSAGE',
+                comprehension: { kind: 'REQUIRES_LANGUAGE_KNOWLEDGE' },
+                recognition: {
+                    kind: 'AUTOMATIC_IF_LANGUAGE_KNOWN',
+                    otherwise: {
+                        kind: 'CHECK_FOR_PRESENCE',
+                        ability: 'wisdom',
+                        skill: { targetType: 'skill', id: 'skill:phb:perception' },
+                        dc: 15,
+                        outcome: 'DETECT_PRESENCE_ONLY'
+                    }
+                },
+                deciphering: { kind: 'MAGIC_REQUIRED_FOR_NON_KNOWERS' }
+            }]);
+            const thievesCant = phase3Files().map(file => readJson(file))
+                .find(entity => entity.id === 'language:phb:thieves-cant');
+            assert.deepEqual(thievesCant.communicationModes, ['ORDINARY_CONVERSATION']);
+            assert.deepEqual(thievesCant.communicationCapabilities, [{
+                kind: 'CONCEALED_MESSAGE',
+                channel: 'ORDINARY_CONVERSATION',
+                comprehension: { kind: 'REQUIRES_LANGUAGE_KNOWLEDGE' },
+                communicationDurationMultiplier: 4
+            }]);
+            const xphbCant = outputById.get('language:xphb:thieves-cant');
+            assert.equal(xphbCant.communicationCapabilities, undefined);
+            const validateLanguage = ajv.getSchema('urn:thedndpub:schemas:core-rules:language:v1');
+            const invalidDruidic = structuredClone(druidic);
+            invalidDruidic.communicationCapabilities[0].recognition.otherwise.outcome = 'DECIPHER_MESSAGE';
+            rejects('Language rejects Druidic presence detection as comprehension',
+                () => validateLanguage(invalidDruidic) === true);
+            const invalidCant = structuredClone(thievesCant);
+            delete invalidCant.communicationCapabilities[0].communicationDurationMultiplier;
+            rejects('Language rejects PHB Thieves Cant without its four-times duration',
+                () => validateLanguage(invalidCant) === true);
+            const cantWithDruidicDetection = structuredClone(thievesCant);
+            cantWithDruidicDetection.communicationCapabilities[0].recognition =
+                druidic.communicationCapabilities[0].recognition;
+            rejects('Language rejects Druidic detection mechanics assigned to Thieves Cant',
+                () => validateLanguage(cantWithDruidicDetection) === true);
+            const cantWithUnknownComprehension = structuredClone(thievesCant);
+            cantWithUnknownComprehension.communicationCapabilities[0].comprehension.kind = 'UNCONDITIONAL';
+            rejects('Language rejects unconditional Thieves Cant comprehension',
+                () => validateLanguage(cantWithUnknownComprehension) === true);
+            const druidicWithInventedSpell = structuredClone(druidic);
+            druidicWithInventedSpell.communicationCapabilities[0].spell = {
+                targetType: 'spell',
+                id: 'spell:phb:comprehend-languages'
+            };
+            rejects('Language rejects an unsupported specific deciphering spell identity',
+                () => validateLanguage(druidicWithInventedSpell) === true);
+            const xphbWithPhbMechanics = structuredClone(xphbCant);
+            xphbWithPhbMechanics.communicationCapabilities = thievesCant.communicationCapabilities;
+            rejects('Language source assertion rejects PHB Cant mechanics copied to XPHB', () => {
+                try {
+                    assert.equal(xphbWithPhbMechanics.communicationCapabilities, undefined);
+                    return true;
+                } catch {
+                    return false;
+                }
+            });
+        });
+        check('Loross encodes source-qualified mutual spoken intelligibility', () => {
+            const loross = outputById.get('language:idrotf:loross');
+            assert.deepEqual(loross.intelligibility, [{
+                kind: 'MUTUAL_INTELLIGIBILITY',
+                mode: 'SPOKEN',
+                directionality: 'MUTUAL',
+                language: { targetType: 'language', id: 'language:phb:elvish' }
+            }]);
+            assert.equal(loross.references, undefined);
+            assert.equal(outputById.get('language:psx:coalition-pidgin').intelligibility, undefined);
+            const validateLanguage = ajv.getSchema('urn:thedndpub:schemas:core-rules:language:v1');
+            const invalidLoross = structuredClone(loross);
+            invalidLoross.intelligibility[0].mode = 'WRITTEN';
+            rejects('Language rejects inferred written intelligibility',
+                () => validateLanguage(invalidLoross) === true);
+            const invalidReference = structuredClone(loross);
+            invalidReference.intelligibility[0].language.targetType = 'creature';
+            rejects('Language schema rejects non-Language intelligibility targets',
+                () => validateLanguage(invalidReference) === true);
+        });
+        check('Language source-entry accounting reflects the refinements', () => {
+            const druidic = manifest.records.find(record => record.canonicalId === 'language:phb:druidic');
+            assert.deepEqual(druidic.entries[0].classifications.map(item => item.classification), ['INTERPRETED']);
+            const loross = manifest.records.find(record => record.canonicalId === 'language:idrotf:loross');
+            const writtenTranslation = loross.entries[0].classifications.find(item =>
+                item.portion === 'Written translation eligibility and no-check outcome');
+            assert.equal(writtenTranslation.classification, 'OMITTED');
+            assert.equal(writtenTranslation.cause, 'EXTERNAL_DEPENDENCY');
+        });
+        const phase3ConditionIds = phase3Files()
+            .map(file => readJson(file))
+            .filter(entity => entity.id.startsWith('condition:'))
+            .map(entity => entity.id);
+        const allConditionIds = [...phase3ConditionIds,
+            ...[...outputById.keys()].filter(id => id.startsWith('condition:'))];
+        assert.equal(new Set(allConditionIds).size, 30);
+        assert.deepEqual([...new Set(allConditionIds)].sort(), [...sourceConditionIds].sort());
+        assert.deepEqual(
+            manifest.records.filter(record => record.model === 'condition')
+                .reduce((counts, record) => {
+                    counts[record.conversionStatus]++;
+                    return counts;
+                }, { converted: 0, partial: 0, unsupported: 0 }),
+            { converted: 25, partial: 1, unsupported: 0 }
+        );
+        const diseaseClassifications = manifest.records.filter(record => record.model === 'disease')
+            .flatMap(record => record.entries.flatMap(entry => entry.classifications));
+        assert.ok(diseaseClassifications.some(item => item.cause === 'SCHEMA_UNSUPPORTED'));
+        assert.ok(diseaseClassifications.some(item => item.cause === 'SOURCE_AMBIGUOUS'));
+    });
+
+    check('Phase 5 Disease refinements and source-fidelity corrections', () => {
+        const diseases = outputById;
+        const arcaneBlight = diseases.get('disease:idrotf:arcane-blight');
+        assert.equal(arcaneBlight.recovery[0].savingThrow.frequency, 'each-long-rest');
+        assert.equal(arcaneBlight.recovery[0].endsWhenDcAtOrBelow, 0);
+        assert.equal(arcaneBlight.recovery[0].immunityAfterRecovery, true);
+        assert.equal(arcaneBlight.recovery[0].outcomeCounter.reset, 'UNSPECIFIED_BY_SOURCE');
+        const dmgCackleFile = phase3Files().find(file =>
+            readJson(file).id === 'disease:dmg:cackle-fever');
+        const dmgCackle = readJson(dmgCackleFile);
+        assert.equal(dmgCackle.recovery[0].outcomeCounter.branchId, 'cackle-fever-recovery');
+        assert.equal(dmgCackle.recovery[0].outcomeCounter.countedOutcome, 'FAILURE');
+        assert.equal(dmgCackle.recovery[0].outcomeCounter.threshold, 3);
+        assert.equal(dmgCackle.recovery[0].outcomeCounter.sequence, 'UNSPECIFIED_BY_SOURCE');
+        assert.equal(dmgCackle.recovery[0].outcomeCounter.reset, 'UNSPECIFIED_BY_SOURCE');
+        const blueMist = diseases.get('disease:toa:blue-mist-fever');
+        assert.deepEqual(blueMist.infection.transmission, ['magical-exposure']);
+        assert.equal(blueMist.infection.exposures[0].environment, 'MAGICAL_MIST');
+        assert.equal(blueMist.incubation.die, 6);
+        assert.equal(blueMist.recovery[0].ends, 'SYMPTOM');
+        const bluerot = diseases.get('disease:gos:bluerot');
+        assert.equal(bluerot.infection.savingThrow, undefined);
+        assert.equal(bluerot.progression[0].savingThrow.dc, 12);
+        assert.equal(bluerot.effects.filter(effect => effect.kind === 'ABILITY_SCORE_CHANGE').length, 2);
+        const xphbCackle = diseases.get('disease:xdmg:cackle-fever');
+        assert.equal(xphbCackle.progression[0].trigger.kind, 'DAMAGE_WHILE_CONDITION_ACTIVE');
+        assert.equal(xphbCackle.progression[0].trigger.damageType, 'ANY_EXCEPT_PSYCHIC');
+        assert.equal(xphbCackle.infection.exposures[1].sourceState, 'INFECTED');
+        assert.equal(xphbCackle.progression[1].outcomeCounter.countedOutcome, 'SUCCESS');
+        assert.equal(xphbCackle.progression[1].outcomeCounter.immunityAfterRecovery.duration.unit, 'year');
+        assert.equal(xphbCackle.progression[1].outcomeCounter.reset, 'UNSPECIFIED_BY_SOURCE');
+        assert.equal(xphbCackle.progression[1].outcomeCounter.threshold, 3);
+        assert.equal(xphbCackle.progression[0].trigger.kind, 'DAMAGE_WHILE_CONDITION_ACTIVE');
+        assert.equal(xphbCackle.progression[0].trigger.damageType, 'ANY_EXCEPT_PSYCHIC');
+        const dmgSightRot = diseases.get('disease:dmg:sight-rot');
+        assert.equal(dmgSightRot.recovery.some(item => item.savingThrow), false);
+        assert.equal(dmgSightRot.effects[0].threshold, -5);
+        assert.equal(dmgSightRot.recovery[0].treatment.material, 'EYEBRIGHT');
+        const xphbSightRot = diseases.get('disease:xdmg:sight-rot');
+        assert.ok(xphbSightRot.recovery.some(item => item.reference?.id === 'spell:xphb:heal'));
+        assert.ok(xphbSightRot.recovery.some(item => item.reference?.id === 'spell:xphb:lesser-restoration'));
+        const shaking = diseases.get('disease:fraif:shaking-plague');
+        assert.ok(JSON.stringify(shaking).includes('condition:xphb:exhaustion'));
+        assert.equal(JSON.stringify(shaking).includes('condition:phb:exhaustion'), false);
+        assert.equal(shaking.symptoms[0].cannotReduceUntilDiseaseEnds, undefined);
+        assert.equal(shaking.progression[0].endsWhen.condition.id, 'condition:xphb:exhaustion');
+        assert.deepEqual(shaking.conditionGatedRestrictions[0].preventedRecoveries,
+            ['condition-level-reduction']);
+        const rusting = diseases.get('disease:fraif:the-rusting');
+        assert.ok(JSON.stringify(rusting).includes('condition:xphb:exhaustion'));
+        assert.equal(JSON.stringify(rusting).includes('condition:phb:exhaustion'), false);
+        assert.equal(rusting.symptoms[0].cannotReduceUntilDiseaseEnds, undefined);
+        assert.deepEqual(rusting.effects.find(effect => effect.kind === 'TRANSFORMATION_OUTCOME').immunities, [
+            { kind: 'DAMAGE_TYPE', damageType: 'poison' },
+            ...['exhaustion', 'petrified', 'poisoned'].map(name => ({
+                kind: 'CONDITION', condition: { targetType: 'condition', id: `condition:xphb:${name}` }
+            }))
+        ]);
+        const saprophytic = diseases.get('disease:cm:saprophytic-plague');
+        assert.deepEqual(saprophytic.applicability.targetCreatureTypes, ['beast', 'humanoid']);
+        assert.equal(saprophytic.symptoms[0].cannotReduceUntilDiseaseEnds, undefined);
+        const mudpox = diseases.get('disease:fraif:mudpox');
+        assert.deepEqual(mudpox.applicability.targetCreatureTypes, ['beast', 'humanoid']);
+        assert.equal(mudpox.progression[0].outcomeCounter.sequence, 'CONSECUTIVE');
+        assert.equal(mudpox.progression[0].trigger.kind, 'DAILY_AT');
+        assert.equal(mudpox.progression[0].trigger.time, 'DAWN');
+        assert.ok(mudpox.progression[0].onFailure.some(outcome => outcome.kind === 'VOMIT_PREVIOUS_DAY_FOOD'));
+        const lichen = diseases.get('disease:fraif:lichen-plague');
+        assert.equal(lichen.progression[0].outcomeCounter.sequence, 'NOT_REQUIRED');
+        assert.deepEqual(lichen.progression[0].outcomeCounter.immunityAfterRecovery, {
+            kind: 'DISEASE_IMMUNITY', scope: 'DISEASE', permanent: true
+        });
+        const frigidWoe = diseases.get('disease:egw:frigid-woe');
+        assert.equal(frigidWoe.progression[0].trigger.kind, 'REPEATING_ELAPSED_TIME');
+        assert.equal(frigidWoe.effects.find(effect => effect.kind === 'TRANSFORMATION_OUTCOME').trigger,
+                'SPEED_REACHES_ZERO');
+        const dmgSewer = diseases.get('disease:dmg:sewer-plague');
+        assert.equal(dmgSewer.progression[0].trigger.kind, 'LONG_REST_COMPLETED');
+        assert.equal(dmgSewer.progression[0].onFailure[0].condition.id, 'condition:phb:exhaustion');
+        assert.equal(dmgSewer.progression[0].onSuccess[0].condition.id, 'condition:phb:exhaustion');
+        const redface = diseases.get('disease:gos:redface');
+        assert.equal(redface.effectProfile.sourceDisease.id, 'disease:dmg:sight-rot');
+        assert.deepEqual(redface.effectProfile.components, ['symptoms', 'progression', 'recovery']);
+        const grackle = diseases.get('disease:oota:grackle-lung');
+        assert.equal(grackle.progression[0].trigger.kind, 'LONG_REST_COMPLETED');
+        assert.equal(grackle.effects.filter(effect => effect.kind === 'CONDITION_GATED_CHECK').length, 2);
+        assert.deepEqual(grackle.recovery[0].removesConditionLevels[0], {
+            condition: { targetType: 'condition', id: 'condition:phb:exhaustion' },
+            scope: 'LEVELS_ATTRIBUTABLE_TO_THIS_DISEASE'
+        });
+        assert.equal(grackle.effects.find(effect => effect.kind === 'CONDITION_THRESHOLD_OUTCOME')
+            .outcome.immunity.duration.unit, 'week');
+        const ghoulGut = diseases.get('disease:oow:ghoul-gut');
+        assert.equal(ghoulGut.recovery.some(item => item.method === 'saving-throw'), false);
+        assert.equal(ghoulGut.progression.filter(item => item.branchId === 'long-rest-recovery').length, 1);
+        assert.deepEqual(ghoulGut.recovery[0], {
+            method: 'skill-check', reference: { targetType: 'skill', id: 'skill:phb:medicine' },
+            ability: 'wisdom', dc: 15, trigger: 'LONG_REST_CARE', performedBy: 'ANOTHER_CREATURE',
+            outcome: 'ENDS_DISEASE', caregiverLongRestOutcome: 'NO_LONG_REST_BENEFIT'
+        });
+        const shivering = diseases.get('disease:toa:shivering-sickness');
+        assert.ok(shivering.effects.some(effect => effect.kind === 'DISEASE_RESTRICTION'
+            && effect.restriction === 'HALF_HP_FROM_HIT_DICE'
+            && effect.lifecycle === 'AFTER_SYMPTOM_ONSET'));
+        assert.ok(shivering.effects.some(effect => effect.kind === 'DISEASE_RESTRICTION'
+            && effect.restriction === 'NO_HIT_POINTS_FROM_LONG_REST'
+            && effect.lifecycle === 'AFTER_SYMPTOM_ONSET'));
+        assert.equal(shivering.effects.some(effect => effect.restriction === 'NO_NONMAGICAL_HP_OR_HIT_DICE_RECOVERY'),
+            false);
+        const gnawing = diseases.get('disease:vrgr:the-gnawing-plague');
+        assert.deepEqual(gnawing.infection.exposures[0].sourceCreatures,
+            ['RAT', 'GIANT_RAT', 'SWARM_OF_RATS', 'WERERAT']);
+        assert.equal(gnawing.infection.exposures[0].savingThrow.dcVariation, 'REGIONAL_PLAGUE_SEVERITY');
+        assert.equal(saprophytic.applicability.automaticSuccessForDiseaseImmuneTargets, true);
+        assert.ok(saprophytic.effects.filter(effect => effect.beginsAfterInfection)
+            .every(effect => effect.beginsAfterInfection.amount === 24
+                && effect.beginsAfterInfection.unit === 'hour'));
+        assert.ok(saprophytic.infection.exposures.some(exposure =>
+            exposure.kind === 'INGEST_CONTAMINATED_MATERIAL'
+            && exposure.contaminationAfter?.count === 2
+            && exposure.contaminationAfter?.die === 12));
+        assert.throws(() => assertDiseaseIntegrity({
+            ...dmgCackle,
+            recovery: [{
+                ...dmgCackle.recovery[0],
+                outcomeCounter: { ...dmgCackle.recovery[0].outcomeCounter, reset: 'NEVER' }
+            }]
+        }), /unspecified recovery-counter sequence/);
+        const unsupported = manifest.records.filter(record => record.model === 'disease'
+            && record.disposition === 'unsupported');
+        assert.deepEqual(unsupported.map(record => record.canonicalId), ['disease:tftyp:super-tetanus']);
+        assert.ok(diseases.has('disease:oota:grackle-lung'));
+        assert.equal(diseases.has('disease:tftyp:super-tetanus'), false);
+        const phase3DiseaseManifest = readJson(path.join(workspace,
+            'reports/step-2/CORE_RULES_PHASE_3_SOURCE_ACCOUNTING.json'));
+        const allDiseaseAccounting = [...phase3DiseaseManifest.records.filter(record => record.model === 'disease'),
+            ...manifest.records.filter(record => record.model === 'disease')];
+        assert.equal(allDiseaseAccounting.length, 29);
+        assert.equal(new Set(allDiseaseAccounting.map(record => record.canonicalId)).size, 29);
+        const petrified = readJson(path.join(phase5Root, 'condition/phb-petrified.json'));
+        assert.ok(petrified.effects.some(effect => effect.kind === 'CATEGORY_IMMUNITY'
+            && effect.category === 'poison-and-disease'));
+        assert.deepEqual(petrified.effects.find(effect => effect.kind === 'SUSPEND_ACTIVE_DISEASES'), {
+            kind: 'SUSPEND_ACTIVE_DISEASES',
+            lifecycle: 'while-condition-active',
+            preservesInstance: true,
+            scheduling: 'UNRESOLVED_BY_SOURCE'
+        });
+    });
+
+    check('Phase 5 Condition effects preserve supported actor and target direction', () => {
+        const deafened = outputById.get('condition:phb:deafened');
+        assert.deepEqual(deafened.effects.map(effect => effect.kind), ['REMOVE_SENSE', 'AUTOMATIC_CHECK_FAILURE']);
+        assert.equal(deafened.effects[0].sense, 'hearing');
+        assert.equal(deafened.effects[1].requirement, 'requires-hearing');
+        const grappled = outputById.get('condition:xphb:grappled');
+        assert.equal(grappled.effects[0].movement, 'speed-flat');
+        assert.equal(grappled.effects[0].amount, 0);
+        const paralyzed = outputById.get('condition:xphb:paralyzed');
+        assert.ok(paralyzed.effects.some(effect => effect.kind === 'ATTACK_ROLL_MODIFIER'
+            && effect.direction === 'advantage'
+            && effect.actor === 'attacker'
+            && effect.target === 'affected-creature'));
+        const restrained = outputById.get('condition:xphb:restrained');
+        assert.ok(restrained.effects.some(effect => effect.kind === 'ATTACK_ROLL_MODIFIER'
+            && effect.direction === 'disadvantage' && effect.actor === 'affected-creature'));
+        assert.ok(restrained.effects.some(effect => effect.kind === 'CHECK_ROLL_MODIFIER'
+            && effect.roll === 'saving-throw' && effect.ability === 'dexterity'));
+        assert.ok(restrained.effects.some(effect => effect.kind === 'ATTACK_ROLL_MODIFIER'
+            && effect.direction === 'disadvantage' && effect.actor === 'affected-creature'
+            && effect.target === 'target'));
+        const charmedPhb = outputById.get('condition:phb:charmed');
+        const charmedXphb = outputById.get('condition:xphb:charmed');
+        assert.ok(charmedPhb.effects.some(effect => effect.kind === 'RELATIONAL_RESTRICTION'
+            && effect.prohibitedOperation === 'harmful-ability-or-magical-effect'));
+        assert.ok(charmedXphb.effects.some(effect => effect.kind === 'RELATIONAL_RESTRICTION'
+            && effect.prohibitedOperation === 'damaging-ability-or-magical-effect'));
+        const frightened = outputById.get('condition:phb:frightened');
+        assert.ok(frightened.effects.some(effect => effect.kind === 'CHECK_ROLL_MODIFIER'
+            && effect.applicability?.kind === 'FEAR_SOURCE_IN_LINE_OF_SIGHT'));
+        assert.ok(frightened.effects.some(effect => effect.kind === 'MOVEMENT_CONSTRAINT'
+            && effect.constraint === 'cannot-willingly-move-closer-to-source'));
+        assert.deepEqual(outputById.get('condition:phb:incapacitated').effects[0].activities,
+            ['action', 'reaction']);
+        assert.deepEqual(outputById.get('condition:xphb:incapacitated').effects[0].activities,
+            ['action', 'bonus-action', 'reaction', 'speech']);
+        const grappledXphb = outputById.get('condition:xphb:grappled');
+        assert.deepEqual(grappledXphb.effects.find(effect => effect.kind === 'GRAPPLED_MOVEMENT_COST').movementCost,
+            { kind: 'EXTRA_FEET_PER_FOOT', additionalFeetPerFoot: 1 });
+        assert.equal(grappledXphb.effects.find(effect => effect.kind === 'GRAPPLED_MOVEMENT_COST').movementMode,
+            'drag-or-carry');
+        assert.equal(grappledXphb.effects.find(effect => effect.kind === 'GRAPPLED_MOVEMENT_COST').waiver,
+            'target-tiny-or-two-or-more-sizes-smaller');
+        assert.ok(grappledXphb.effects.some(effect => effect.kind === 'ATTACK_ROLL_MODIFIER'
+            && effect.applicability?.kind === 'TARGET_IS_NOT_CREATURE'
+            && effect.applicability.creature === 'grappler'));
+        for (const id of ['condition:phb:invisible', 'condition:xphb:invisible']) {
+            const invisible = outputById.get(id);
+            assert.ok(invisible.effects.filter(effect => effect.kind === 'ATTACK_ROLL_MODIFIER')
+                .every(effect => effect.applicability?.kind === 'OBSERVER_CANNOT_SEE_AFFECTED'));
+        }
+        for (const id of ['condition:phb:paralyzed', 'condition:xphb:paralyzed',
+            'condition:phb:unconscious', 'condition:xphb:unconscious']) {
+            assert.ok(outputById.get(id).effects.some(effect => effect.kind === 'CRITICAL_HIT_ON_HIT'
+                && effect.requiresSuccessfulHit === true && effect.distanceFeet === 5));
+        }
+        const criticalRule = readJson(path.join(phase3Root, 'rule/xphb-critical-hit.json'));
+        assert.equal(criticalRule.mechanics.find(mechanic => mechanic.subtype === 'DAMAGE')
+            .damageModifier.appliesWhen.kind, 'ON_CRITICAL_HIT');
+        for (const id of ['condition:xphb:paralyzed', 'condition:xphb:unconscious']) {
+            assert.ok(outputById.get(id).effects.some(effect => effect.kind === 'CRITICAL_HIT_ON_HIT'
+                && effect.rule?.id === criticalRule.id));
+        }
+        const prone = outputById.get('condition:xphb:prone');
+        assert.ok(prone.effects.some(effect => effect.kind === 'MOVEMENT_CONSTRAINT'
+            && effect.standingCost?.speedFraction === 0.5 && effect.standingCost.rounding === 'down'));
+        const petrifiedPhb = outputById.get('condition:phb:petrified');
+        assert.ok(petrifiedPhb.effects.some(effect => effect.kind === 'DAMAGE_MITIGATION'
+            && effect.damageTypes === 'all' && effect.mitigation === 'resistance'));
+        assert.ok(petrifiedPhb.effects.some(effect => effect.kind === 'CATEGORY_IMMUNITY'
+            && effect.category === 'poison-and-disease'));
+        assert.ok(petrifiedPhb.effects.some(effect => effect.kind === 'SUSPEND_ACTIVE_DISEASES'
+            && effect.preservesInstance === true
+            && effect.scheduling === 'UNRESOLVED_BY_SOURCE'));
+        const petrifiedXphb = outputById.get('condition:xphb:petrified');
+        assert.ok(petrifiedXphb.effects.some(effect => effect.kind === 'PHYSICAL_STATE'
+            && effect.includesWornAndCarriedNonmagicalObjects === true));
+        assert.ok(petrifiedXphb.effects.some(effect => effect.kind === 'CONDITION_INTERACTION'
+            && effect.condition.id === 'condition:xphb:poisoned' && effect.interaction === 'immune-to'));
+        assert.equal(petrifiedXphb.effects.some(effect => effect.kind === 'AWARENESS_RESTRICTION'), false);
+        assert.ok(outputById.get('condition:xphb:unconscious').effects.some(effect =>
+            effect.kind === 'CONDITION_INTERACTION'
+            && effect.condition.id === 'condition:xphb:prone'
+            && effect.lifecycle === 'persists-after-source-condition-ends'));
+        assert.ok(outputById.get('condition:xphb:invisible').effects.some(effect =>
+            effect.kind === 'RELATIONAL_RESTRICTION'
+            && effect.appliesWhen.kind === 'OBSERVER_CANNOT_SEE_AFFECTED'));
+        assert.equal([...outputById.keys()].filter(id => id.startsWith('condition:')).length, 26);
+    });
+
+    check('Phase 5 Sense capabilities preserve source-supported distinctions', () => {
+        const senses = readJson(path.join(workspace, 'src/main/resources/data/senses.json')).sense;
+        const blindsight = outputById.get('sense:xphb:blindsight');
+        assert.ok(senses[1].entries[0].includes('isn\'t behind'));
+        assert.ok(senses[1].entries[0].includes('Invisible'));
+        assert.ok(blindsight.capabilities.some(capability => capability.kind === 'CONDITION_INTERACTION'
+            && capability.interaction.id === 'condition:xphb:blinded'
+            && capability.effect === 'bypasses-sight-restriction'));
+        assert.ok(blindsight.capabilities[0].perceives.includes('invisible-objects'));
+        const darkvision = outputById.get('sense:xphb:darkvision').capabilities[0];
+        assert.deepEqual([darkvision.dimLightAs, darkvision.darknessAs, darkvision.colorPerception],
+            ['bright-light', 'dim-light', 'grayscale']);
+        const truesight = outputById.get('sense:xphb:truesight').capabilities[0];
+        assert.ok(truesight.perceives.includes('invisible-objects'));
+        assert.deepEqual(truesight.illusionInteraction, {
+            appearance: 'transparent', detection: 'automatic', savingThrowOutcome: 'automatic-success'
+        });
+        assert.equal(truesight.darknessAs, undefined);
+    });
+
+    check('Phase 5 Action movement, equipment, and voluntary termination patterns', () => {
+        const dash = outputById.get('action:phb:dash').operations[0];
+        assert.deepEqual([dash.kind, dash.movement, dash.amount, dash.unit],
+            ['MOVEMENT_INCREASE', 'current-turn-movement', 1, 'current-speed']);
+        const disengage = outputById.get('action:xphb:disengage').operations[0];
+        assert.deepEqual([disengage.kind, disengage.permission, disengage.duration],
+            ['MOVEMENT_PERMISSION', 'no-opportunity-attack', 'current-turn']);
+        assert.deepEqual(outputById.get('action:phb:don-or-doff-a-shield').operations.map(item => item.operation),
+            ['don-shield', 'doff-shield']);
+        for (const id of ['action:phb:end-concentration', 'action:xphb:end-concentration']) {
+            assert.deepEqual(outputById.get(id).timing, { kind: 'free' });
+            assert.ok(outputById.get(id).capabilities.includes('END_CONCENTRATION'));
+        }
+        assert.ok(outputById.get('action:xphb:dash').operations.length > 0);
+    });
+
+    check('Phase 5 Action catalog expansion preserves new source-backed patterns', () => {
+        const phbDodge = outputById.get('action:phb:dodge');
+        assert.deepEqual(phbDodge.operations[0].when, {
+            kind: 'CAN_SEE', actor: 'affected-creature', target: 'attacker'
+        });
+        assert.equal(phbDodge.operations[0].modifier.direction, 'disadvantage');
+        assert.equal(phbDodge.operations[1].modifier.direction, 'advantage');
+
+        const xphbAttack = outputById.get('action:xphb:attack');
+        assert.equal(xphbAttack.operations.length, 1,
+            'one ATTACK_RESOLUTION operation represents the source-defined single attack');
+        assert.deepEqual(xphbAttack.operations[0].attack.forms,
+            ['melee', 'ranged', 'unarmed', 'weapon']);
+        assert.ok(xphbAttack.references.some(reference =>
+            reference.id === 'action:xphb:two-weapon-fighting'));
+
+        for (const id of ['action:phb:escape-a-grapple', 'action:xphb:escape-a-grapple']) {
+            assert.ok(outputById.get(id).operations.some(operation => operation.kind === 'END_CONDITION'));
+        }
+        assert.equal(outputById.get('action:xphb:escape-a-grapple').operations[0].dcSource.id,
+            'rule:xphb:unarmed-strike');
+
+        const hideCheck = outputById.get('action:xphb:hide').operations[0];
+        assert.deepEqual([hideCheck.abilities[0], hideCheck.dc, hideCheck.skill.id],
+            ['dexterity', 15, 'skill:xphb:stealth']);
+        const identifySpell = outputById.get('action:xge:identify-a-spell');
+        assert.deepEqual(identifySpell.timing.options.map(option => option.kind), ['action', 'reaction']);
+        assert.equal(identifySpell.timing.options[1].trigger.kind, 'SPELL_CASTING_OBSERVED');
+
+        const magic = outputById.get('action:xphb:magic').operations[0];
+        assert.deepEqual(magic.alternatives, ['cast-spell', 'activate-feature', 'activate-magic-item']);
+        assert.equal(magic.longCasting.concentrationRequired, true);
+        assert.equal(magic.longCasting.spellSlotExpendedOnFailure, false);
+
+        for (const id of ['action:phb:opportunity-attack', 'action:xphb:opportunity-attack']) {
+            assert.equal(outputById.get(id).timing.kind, 'reaction');
+            assert.equal(outputById.get(id).timing.trigger.kind, 'CREATURE_LEAVES_REACH');
+        }
+        const phbOpportunity = outputById.get('action:phb:opportunity-attack').timing.trigger;
+        const xphbOpportunity = outputById.get('action:xphb:opportunity-attack').timing.trigger;
+        assert.equal(phbOpportunity.requiresHostility, true);
+        assert.deepEqual(phbOpportunity.excludedMovementSources,
+            ['disengage', 'teleportation', 'involuntary-movement']);
+        assert.deepEqual(xphbOpportunity.movementOrigins, ['action', 'bonus-action', 'reaction', 'speed']);
+        assert.equal(phbOpportunity.resolutionTiming, 'immediately-before-departure');
+        assert.equal(xphbOpportunity.resolutionTiming, 'immediately-before-departure');
+
+        const overrun = outputById.get('action:dmg:overrun');
+        const overrunCheck = overrun.operations.find(operation => operation.operationId === 'overrun-contest');
+        const overrunMovement = overrun.operations.find(operation => operation.kind === 'TRAVERSE_CREATURE_SPACE');
+        const tumble = outputById.get('action:dmg:tumble');
+        const tumbleCheck = tumble.operations.find(operation => operation.operationId === 'tumble-contest');
+        assert.deepEqual(overrun.timing.options.map(option => option.kind), ['action', 'bonus-action']);
+        assert.deepEqual([overrunCheck.abilities[0], overrunCheck.skill.id,
+            overrunCheck.opposingSkills[0].id], ['strength', 'skill:phb:athletics', 'skill:phb:athletics']);
+        assert.equal(overrunCheck.relativeSizeModifier,
+            'ADVANTAGE_IF_ACTOR_LARGER_DISADVANTAGE_IF_SMALLER');
+        assert.deepEqual(tumbleCheck.abilities, ['dexterity']);
+        assert.equal(tumbleCheck.skill.id, 'skill:phb:acrobatics');
+        assert.equal(overrunMovement.checkId, 'overrun-contest');
+        assert.equal(overrunMovement.uses, 'ONCE_THIS_TURN');
+        assert.deepEqual(overrunMovement.appliesWhen,
+            { kind: 'CHECK_SUCCEEDED', operationId: 'overrun-contest' });
+        assert.equal(tumble.operations.find(operation => operation.kind === 'TRAVERSE_CREATURE_SPACE').uses,
+            'ONCE_THIS_TURN');
+        assert.deepEqual(tumble.operations.find(operation => operation.kind === 'TRAVERSE_CREATURE_SPACE').appliesWhen,
+            { kind: 'CHECK_SUCCEEDED', operationId: 'tumble-contest' });
+
+        const climb = outputById.get('action:dmg:climb-onto-a-bigger-creature');
+        const enterSpace = climb.operations.find(operation => operation.kind === 'ENTER_CREATURE_SPACE');
+        assert.equal(enterSpace.entryCheckId, 'climb-entry-contest');
+        assert.deepEqual(enterSpace.appliesWhen,
+            { kind: 'CHECK_SUCCEEDED', operationId: 'climb-entry-contest' });
+        assert.equal(enterSpace.movesWithTarget, true);
+        assert.equal(enterSpace.movementCost, 'TARGET_SPACE_IS_DIFFICULT_TERRAIN');
+        assert.equal(enterSpace.attackModifier, 'ADVANTAGE_AGAINST_TARGET');
+        assert.equal(enterSpace.dislodgingProcedure.actionCost, 'ACTION');
+        assert.equal(enterSpace.positioning, 'DM_ADJUDICATED');
+
+        const phbDash = outputById.get('action:phb:dash').operations[0];
+        const xphbDash = outputById.get('action:xphb:dash').operations[0];
+        assert.equal(phbDash.speedSelection, undefined);
+        assert.equal(xphbDash.speedSelection, 'CHOOSE_SPECIAL_SPEED_FOR_EACH_USE');
+
+        for (const id of ['action:phb:use-an-object', 'action:xphb:utilize']) {
+            assert.equal(outputById.get(id).operations[0].kind, 'OBJECT_USE');
+            assert.equal(outputById.get(id).operations[0].activationRequirement, 'ACTION_REQUIRED_BY_OBJECT');
+        }
+        const itemActivation = outputById.get('action:dmg:activate-an-item');
+        assert.equal(itemActivation.operations[0].kind, 'OBJECT_OPERATION');
+        assert.equal(itemActivation.operations[0].operation, 'activate-magic-item');
+        assert.equal(itemActivation.operations[0].activation, 'item-defined');
+        assert.ok(itemActivation.references.some(reference =>
+            reference.id === 'action:phb:use-an-object'
+            && reference.relationship === 'distinct-from-item-activation'));
+        assert.equal(outputById.get('action:phb:use-an-object').operations[0]
+            .additionalObjectInteraction, 'ACTION_AFTER_ONE_FREE_INTERACTION');
+        assert.equal(outputById.get('action:xphb:utilize').operations[0].additionalObjectInteraction, undefined);
+        const ordinaryInteraction = outputById.get('action:phb:other-activity').operations[0];
+        assert.equal(ordinaryInteraction.operation, 'ordinary-interaction');
+        assert.deepEqual(ordinaryInteraction.interactionAllowance, {
+            kind: 'ONE_FREE_INTERACTION_PER_TURN',
+            placement: 'DURING_MOVEMENT_OR_ACTION',
+            additionalInteractionCost: 'ACTION'
+        });
+
+        for (const id of ['action:phb:help', 'action:xphb:help']) {
+            const help = outputById.get(id);
+            assert.deepEqual(help.choiceGroups[0].cardinality, { minimumSelected: 1, maximumSelected: 1 });
+            assert.deepEqual(help.choiceGroups[0].members.map(member => member.operationId),
+                ['help-task-check', 'help-attack']);
+            assert.ok(help.operations.every(operation => operation.appliesWhen.choiceGroupId === 'help-mode'));
+        }
+        assert.equal(outputById.get('action:xphb:help').operations[0].feasibilityDecision, 'DM_DETERMINED');
+
+        const hide = outputById.get('action:xphb:hide');
+        const hideProcedure = hide.operations.find(operation => operation.kind === 'HIDE_PROCEDURE');
+        assert.equal(hideProcedure.outOfEnemyLineOfSight, true);
+        assert.deepEqual(hideProcedure.concealmentOptions, ['HEAVILY_OBSCURED', 'THREE_QUARTERS_COVER', 'TOTAL_COVER']);
+        assert.equal(hideProcedure.condition.id, 'condition:xphb:invisible');
+        assert.equal(hideProcedure.discoveryDc.kind, 'HIDE_CHECK_TOTAL');
+        assert.equal(hideProcedure.endsWhen.length, 4);
+
+        const influence = outputById.get('action:xphb:influence').operations[0];
+        assert.deepEqual(influence.branches.map(branch => branch.willingness).sort(),
+            ['HESITANT', 'UNWILLING', 'WILLING']);
+        assert.equal(influence.branches.find(branch => branch.willingness === 'HESITANT').dc.kind,
+            'GREATER_OF_FIXED_AND_TARGET_ABILITY_SCORE');
+        const hesitantInfluence = influence.branches.find(branch => branch.willingness === 'HESITANT');
+        assert.deepEqual([hesitantInfluence.retryAfterHours, hesitantInfluence.retryAlternative],
+            [24, 'DM_DETERMINED_DURATION']);
+        const identify = outputById.get('action:xge:identify-a-spell');
+        assert.equal(identify.operations[0].dc.kind, 'FIXED_PLUS_SPELL_LEVEL');
+        assert.deepEqual(identify.operations[1].modes.map(mode => mode.timing),
+            ['REACTION_WHILE_CASTING', 'ACTION_AFTER_CASTING']);
+        assert.equal(identify.operations[1].checkAbility, 'intelligence');
+
+        const phbAttack = readJson(path.join(phase3Root, 'action/phb-attack.json'));
+        assert.equal(phbAttack.operations.length, 1);
+        const phase3Accounting = readJson(path.join(workspace,
+            'reports/step-2/CORE_RULES_PHASE_3_SOURCE_ACCOUNTING.json'));
+        const attackEntry = phase3Accounting.records.find(record => record.canonicalId === 'action:phb:attack')
+            .entries[1].classifications;
+        assert.ok(attackEntry.some(item => item.classification === 'INTERPRETED'
+            && item.portion === 'Exactly one melee or ranged attack'));
+        assert.ok(attackEntry.some(item => item.classification === 'OMITTED'
+            && item.cause === 'EXTERNAL_DEPENDENCY'
+            && item.portion === 'The separately defined Making an Attack procedure'));
+
+        const disarm = outputById.get('action:dmg:disarm').operations[0];
+        assert.equal(disarm.kind, 'ATTACK_CONTESTED_BY_CHECK');
+        assert.equal(disarm.attackDamageOnSuccess, false);
+        assert.equal(disarm.successOutcome, 'TARGET_DROPS_HELD_ITEM');
+        assert.equal(disarm.defenderOptions[0].skill.id, 'skill:phb:athletics');
+        assert.equal(disarm.defenderOptions[1].skill.id, 'skill:phb:acrobatics');
+        assert.equal(outputById.get('action:dmg:shove-aside').operations
+            .find(operation => operation.kind === 'MOVE_TARGET_TO_SPACE_WITHIN_REACH').distance, 5);
+        const searchGuidance = outputById.get('action:xphb:search').skillTaskGuidance;
+        assert.deepEqual(searchGuidance.map(row => [row.skill.id, row.tasks]), [
+            ['skill:xphb:insight', ['CREATURE_STATE_OF_MIND']],
+            ['skill:xphb:medicine', ['AILMENT_OR_CAUSE_OF_DEATH']],
+            ['skill:xphb:perception', ['CONCEALED_CREATURE_OR_OBJECT']],
+            ['skill:xphb:survival', ['TRACKS_OR_FOOD']]
+        ]);
+        const studyGuidance = outputById.get('action:xphb:study').skillTaskGuidance;
+        assert.equal(studyGuidance.length, 5);
+        assert.deepEqual(studyGuidance.map(row => row.skill.id), [
+            'skill:xphb:arcana', 'skill:xphb:history', 'skill:xphb:investigation',
+            'skill:xphb:nature', 'skill:xphb:religion'
+        ]);
+        assert.deepEqual(studyGuidance[0].creatureGroups,
+            ['ABERRATIONS', 'CONSTRUCTS', 'ELEMENTALS', 'FEY', 'MONSTROSITIES']);
+        const influenceSkills = influence.branches.find(branch => branch.willingness === 'HESITANT')
+            .checkOptions.map(option => option.skill.id);
+        assert.deepEqual(influenceSkills, [
+            'skill:xphb:deception', 'skill:xphb:intimidation', 'skill:xphb:performance',
+            'skill:xphb:persuasion', 'skill:xphb:animal-handling'
+        ]);
+
+        const stabilize = outputById.get('action:phb:stabilize-a-creature');
+        assert.equal(stabilize.operations[0].dc, 10);
+        assert.ok(stabilize.operations.some(operation => operation.operation === 'stabilize-creature'));
+        assert.ok(outputById.get('action:xphb:help').capabilities.includes('STABILIZE'));
+
+        for (const id of ['action:phb:two-weapon-fighting', 'action:xphb:two-weapon-fighting']) {
+            assert.equal(outputById.get(id).timing.kind, 'bonus-action');
+            assert.ok(outputById.get(id).operations.some(operation => operation.kind === 'ATTACK_RESOLUTION'));
+        }
+        assert.deepEqual(
+            manifest.records.filter(record => record.model === 'action')
+                .reduce((counts, record) => {
+                    counts[record.conversionStatus ?? record.disposition]++;
+                    return counts;
+                }, {converted: 0, partial: 0, unsupported: 0}),
+            {converted: 27, partial: 13, unsupported: 2}
+        );
     });
 
     return { files: files.length, entities };
@@ -629,6 +3117,215 @@ function testNegativeCases(examples) {
     const get = name => structuredClone(examples.find(([file]) => file === name)[1]);
     const actionValidator = ajv.getSchema('urn:thedndpub:schemas:core-rules:action:v1');
     const ruleValidator = ajv.getSchema('urn:thedndpub:schemas:core-rules:rule:v1');
+    const diseaseValidator = ajv.getSchema('urn:thedndpub:schemas:core-rules:disease:v1');
+    const conditionValidator = ajv.getSchema('urn:thedndpub:schemas:core-rules:condition:v1');
+
+    const referenceOnlyRule = get('rule-reference-only.json');
+    check('reference-only Rule is valid, source-backed, and mechanically empty', () => {
+        assert.equal(ruleValidator(referenceOnlyRule), true, JSON.stringify(ruleValidator.errors));
+        assert.equal(Object.hasOwn(referenceOnlyRule, 'mechanics'), false);
+        const sourceRecord = sourceRecordForCanonical(referenceOnlyRule);
+        assert.equal(referenceOnlyRule.id,
+            `rule:${canonicalSlug(sourceRecord.source)}:${canonicalSlug(sourceRecord.name)}`);
+        assert.deepEqual(referenceOnlyRule.sourceMetadata, expectedSourceMetadata('rule', sourceRecord));
+        assert.equal(referenceOnlyRule.ruleType, 'CORE');
+        assertRuleIntegrity(referenceOnlyRule);
+        assertCanonicalReferences(referenceOnlyRule);
+
+        const dodge = readJson(path.join(phase3Root, 'action', 'xphb-dodge.json'));
+        const containsReference = value => {
+            if (Array.isArray(value)) return value.some(containsReference);
+            if (!value || typeof value !== 'object') return false;
+            if (value.targetType === 'rule' && value.id === referenceOnlyRule.id) return true;
+            return Object.values(value).some(containsReference);
+        };
+        assert.ok(containsReference(dodge));
+        assertCanonicalReferences(dodge);
+    });
+
+    const referenceOnlyWithoutId = get('rule-reference-only.json');
+    delete referenceOnlyWithoutId.id;
+    rejects('reference-only Rule still requires canonical identity', () => ruleValidator(referenceOnlyWithoutId));
+
+    const referenceOnlyWithoutSource = get('rule-reference-only.json');
+    delete referenceOnlyWithoutSource.sourceMetadata;
+    rejects('reference-only Rule still requires source metadata', () => ruleValidator(referenceOnlyWithoutSource));
+
+    const invalidAbilityMapping = get('rule-ability-score-and-modifier.json');
+    invalidAbilityMapping.mechanics[0].scoreBands[0].modifier = -4;
+    rejects('ability modifier integrity rejects an incorrect boundary value', () => {
+        assertRuleIntegrity(invalidAbilityMapping);
+        return true;
+    });
+
+    const invalidDcFormula = get('rule-ability-check.json');
+    invalidDcFormula.mechanics[0].dc = {
+        kind: 'ARBITRARY_EXPRESSION',
+        expression: '8 + target score'
+    };
+    rejects('Rule check rejects an unsupported Difficulty Class expression', () =>
+        ruleValidator(invalidDcFormula));
+
+    const invalidProficiencyDie = get('rule-proficiency-dice.json');
+    invalidProficiencyDie.mechanics[0].levelBands[0].die = 'd20';
+    rejects('Proficiency Dice rejects an unobserved die size', () =>
+        ruleValidator(invalidProficiencyDie));
+
+    const invalidProficiencyProgression = get('rule-proficiency.json');
+    invalidProficiencyProgression.mechanics[1].levelBands[0].maximumLevel = 5;
+    rejects('proficiency progression rejects a source-inconsistent level boundary', () => {
+        assertRuleIntegrity(invalidProficiencyProgression);
+        return true;
+    });
+
+    const invalidPassiveAdjustment = get('rule-passive-perception.json');
+    invalidPassiveAdjustment.mechanics[0].passiveScoreConstruction.disadvantageAdjustment = -4;
+    rejects('passive score rejects an unsupported numeric adjustment', () =>
+        ruleValidator(invalidPassiveAdjustment));
+
+    const invalidExpertise = get('rule-expertise.json');
+    invalidExpertise.mechanics[0].maximumInstancesPerSkill = 2;
+    rejects('Expertise rejects repeated assignment to the same skill proficiency', () =>
+        ruleValidator(invalidExpertise));
+
+    const ineligibleDeathSave = get('rule-death-saving-throw.json');
+    ineligibleDeathSave.mechanics[0].appliesTo = 'CREATURE';
+    rejects('Death Saving Throw rejects inferred non-player-character eligibility', () =>
+        ruleValidator(ineligibleDeathSave));
+
+    const incorrectInitiative = get('rule-initiative-score.json');
+    incorrectInitiative.mechanics[0].advantageAdjustment = 4;
+    rejects('Initiative semantic assertion rejects an incorrect Advantage score adjustment', () => {
+        assertRuleIntegrity(incorrectInitiative);
+        return true;
+    });
+
+    const incorrectCapacity = get('rule-carrying-capacity.json');
+    incorrectCapacity.mechanics[0].sizeMultipliers[0].carryMultiplier = 8;
+    rejects('Carrying capacity assertion rejects an altered Tiny-size multiplier', () => {
+        assertRuleIntegrity(incorrectCapacity);
+        return true;
+    });
+
+    const incorrectEncumbrance = get('rule-carrying-capacity.json');
+    incorrectEncumbrance.id = 'rule:phb:encumbrance';
+    incorrectEncumbrance.name = 'Encumbrance';
+    incorrectEncumbrance.sourceMetadata = { source: 'PHB', page: 176 };
+    incorrectEncumbrance.ruleType = 'VARIANT';
+    incorrectEncumbrance.mechanics = [{
+        componentId: 'encumbrance',
+        kind: 'CARRYING_CAPACITY_RULE',
+        subtype: 'OPTIONAL_ENCUMBRANCE',
+        weightUnit: 'POUND',
+        strengthBasis: 'STRENGTH_SCORE',
+        thresholdComparison: 'GREATER_THAN',
+        heavyEncumbranceMaximum: 'STANDARD_CARRYING_CAPACITY',
+        encumbranceThresholds: [
+            {weightMultiplier: 5, state: 'ENCUMBERED', speedReductionFeet: 10,
+                abilityCheckDisadvantage: [], attackDisadvantage: [], savingThrowDisadvantage: []},
+            {weightMultiplier: 10, state: 'HEAVILY_ENCUMBERED', speedReductionFeet: 21,
+                abilityCheckDisadvantage: ['strength', 'dexterity', 'constitution'],
+                attackDisadvantage: ['strength', 'dexterity', 'constitution'],
+                savingThrowDisadvantage: ['strength', 'dexterity', 'constitution']}
+        ]
+    }];
+    rejects('Encumbrance assertion rejects an incorrect heavy threshold penalty', () => {
+        assertRuleIntegrity(incorrectEncumbrance);
+        return true;
+    });
+
+    const incorrectResistance = get('rule-resistance.json');
+    incorrectResistance.mechanics[0].resolutionModifier.rounding = 'UP';
+    rejects('Resistance schema rejects rounding up', () => ruleValidator(incorrectResistance));
+
+    const incorrectRest = get('rule-long-rest.json');
+    incorrectRest.mechanics[0].minimumHoursBetweenStarts = 8;
+    rejects('Long Rest assertion rejects an incorrect interval between starts', () => {
+        assertRuleIntegrity(incorrectRest);
+        return true;
+    });
+
+    const incorrectRecoveryRounding = get('rule-rest-recovery.json');
+    incorrectRecoveryRounding.mechanics[0].recoveryOutcomes[0].rounding = 'UP';
+    rejects('Rest recovery schema rejects rounding up for fractional Hit Dice', () =>
+        ruleValidator(incorrectRecoveryRounding));
+
+    const incorrectFlanking = get('rule-flanking.json');
+    incorrectFlanking.mechanics[0].hexGrid.targetSizeSeparations[1].hexesBetween = 3;
+    rejects('Flanking rejects a source-inconsistent hex separation', () => {
+        assertRuleIntegrity(incorrectFlanking);
+        return true;
+    });
+
+    const invalidCoverBonus = get('rule-cover.json');
+    invalidCoverBonus.mechanics[0].armorClassBonus = 3;
+    rejects('Cover rejects a non-source half-cover bonus', () => ruleValidator(invalidCoverBonus));
+
+    const totalCoverWithBonus = get('rule-cover.json');
+    totalCoverWithBonus.mechanics[2].armorClassBonus = 5;
+    rejects('Total Cover rejects an inapplicable numerical bonus', () => ruleValidator(totalCoverWithBonus));
+
+    const coverWithDamageReduction = get('rule-cover.json');
+    coverWithDamageReduction.mechanics[0].damageReduction = 0.5;
+    rejects('Cover rejects damage reduction as an unsupported mechanic', () => ruleValidator(coverWithDamageReduction));
+
+    const incorrectSkillPairing = get('rule-skills-with-different-abilities.json');
+    incorrectSkillPairing.mechanics[0].pairings[0].usualAbility = 'dexterity';
+    rejects('Skill variation checks the referenced Skill usual ability', () => {
+        assertRuleIntegrity(incorrectSkillPairing);
+        return true;
+    });
+
+    const malformedSkillVariant = get('rule-skill-variants.json');
+    malformedSkillVariant.mechanics[0].proficiencyCount = 1;
+    rejects('DMG ability-check proficiency variant requires two ability sources', () =>
+        ruleValidator(malformedSkillVariant));
+
+    rejects('Rule references to unknown source identities are rejected', () => assertCanonicalReferences({
+        id: 'rule:test:reference-holder',
+        references: [{ targetType: 'rule', id: 'rule:xphb:missing-rule' }]
+    }));
+
+    const typedConditionEffect = get('condition.json');
+    typedConditionEffect.effects.push({
+        kind: 'AUTOMATIC_SAVING_THROW_FAILURE',
+        actor: 'affected-creature',
+        abilities: ['strength', 'dexterity'],
+        appliesWhen: { kind: 'WHILE_CONDITION_ACTIVE' }
+    });
+    check('typed Condition saving-throw effect is valid', () => {
+        assert.equal(conditionValidator(typedConditionEffect), true,
+            JSON.stringify(conditionValidator.errors));
+    });
+
+    const invalidConditionSave = get('condition.json');
+    invalidConditionSave.effects.push({
+        kind: 'AUTOMATIC_SAVING_THROW_FAILURE',
+        actor: 'affected-creature',
+        abilities: ['charisma'],
+        appliesWhen: { kind: 'WHILE_CONDITION_ACTIVE' }
+    });
+    rejects('Condition automatic-save abilities are bounded', () => conditionValidator(invalidConditionSave));
+
+    const wrongConditionTargetType = get('condition.json');
+    wrongConditionTargetType.effects.push({
+        kind: 'CONDITION_INTERACTION',
+        condition: { targetType: 'status', id: 'status:phb:concentration' },
+        interaction: 'apply',
+        lifecycle: 'while-source-condition-active'
+    });
+    rejects('Condition interactions require Condition references', () => conditionValidator(wrongConditionTargetType));
+
+    const invalidCriticalHit = get('condition.json');
+    invalidCriticalHit.effects.push({
+        kind: 'CRITICAL_HIT_ON_HIT',
+        attacker: 'attacker',
+        target: 'affected-creature',
+        distanceFeet: 10,
+        requiresSuccessfulHit: true,
+        result: 'critical-hit'
+    });
+    rejects('Condition critical-hit distance is source-bounded', () => conditionValidator(invalidCriticalHit));
 
     const stringCondition = get('action-grapple.json');
     stringCondition.operations[0].automaticSuccessWhen = 'target-incapacitated';
@@ -684,6 +3381,32 @@ function testNegativeCases(examples) {
     const wrongGroupTrigger = get('action-shove.json');
     wrongGroupTrigger.choiceGroups[0].trigger.operationId = 'shove-push';
     rejects('choice trigger must match a check operation', () => assertActionIntegrity(wrongGroupTrigger));
+
+    const unresolvedTraversalCheck = get('action-overrun.json');
+    unresolvedTraversalCheck.operations.find(operation => operation.kind === 'TRAVERSE_CREATURE_SPACE').checkId = 'missing-check';
+    rejects('creature traversal must reference an existing check', () => assertActionIntegrity(unresolvedTraversalCheck));
+
+    const incompatibleTraversalOutcome = get('action-overrun.json');
+    incompatibleTraversalOutcome.operations.find(operation => operation.kind === 'TRAVERSE_CREATURE_SPACE')
+        .appliesWhen.operationId = 'overrun-passage';
+    rejects('creature traversal success must depend on a check', () => assertActionIntegrity(incompatibleTraversalOutcome));
+
+    const mismatchedAbilitySkill = get('action-climb-onto-a-bigger-creature.json');
+    mismatchedAbilitySkill.operations[0].participants[0].options[0].skill.id = 'skill:phb:acrobatics';
+    rejects('Action ability and Skill options must agree', () => assertActionIntegrity(mismatchedAbilitySkill));
+
+    const invalidInteractionAllowance = get('action-other-activity.json');
+    invalidInteractionAllowance.operations[0].interactionAllowance.additionalInteractionCost = 'BONUS_ACTION';
+    rejects('object interaction allowance has bounded Action cost', () => actionValidator(invalidInteractionAllowance));
+
+    const allowanceOnShield = get('action-other-activity.json');
+    allowanceOnShield.operations[0].operation = 'don-shield';
+    rejects('object interaction count cannot apply to equipment state changes', () =>
+        assertActionIntegrity(allowanceOnShield));
+
+    const helpChoiceMissingMember = get('action-help-xphb.json');
+    helpChoiceMissingMember.choiceGroups[0].members[1].operationId = 'unknown-help-mode';
+    rejects('Help choice references must resolve to operations', () => assertActionIntegrity(helpChoiceMissingMember));
 
     const missingComponent = get('rule.json');
     missingComponent.composition.members[0].componentId = 'missing';
@@ -766,11 +3489,72 @@ function testNegativeCases(examples) {
     const inlineDefinition = get('rule.json');
     inlineDefinition.composition.members[0].damage = { damageTypes: ['fire'] };
     rejects('inline component definitions in composition rejected', () => ruleValidator(inlineDefinition));
+
+    const unresolvedDiseaseSymptom = get('disease-cackle-fever.json');
+    unresolvedDiseaseSymptom.progression[0].onFailure[1].symptomId = 'missing-symptom';
+    rejects('Disease progression cannot reference an unknown symptom', () =>
+        assertDiseaseIntegrity(unresolvedDiseaseSymptom));
+
+    const unresolvedDiseaseTrack = get('disease-cackle-fever.json');
+    unresolvedDiseaseTrack.recovery[0].dcTrackId = 'missing-track';
+    rejects('Disease recovery cannot reference an unknown DC track', () =>
+        assertDiseaseIntegrity(unresolvedDiseaseTrack));
+
+    const metadataOnlyDisease = get('disease-cackle-fever.json');
+    delete metadataOnlyDisease.infection;
+    delete metadataOnlyDisease.incubation;
+    delete metadataOnlyDisease.symptoms;
+    delete metadataOnlyDisease.progression;
+    delete metadataOnlyDisease.recovery;
+    delete metadataOnlyDisease.conditionGatedRestrictions;
+    rejects('metadata-only Disease records are rejected', () => diseaseValidator(metadataOnlyDisease));
+
+    const invalidOptionalStatusSave = get('status-concentration-phb.json');
+    const damageSave = invalidOptionalStatusSave.mechanics.find(mechanic => mechanic.trigger === 'damage');
+    damageSave.requirement = 'dm-may-require';
+    rejects('DM optionality is restricted to environmental saves', () =>
+        ajv.getSchema('urn:thedndpub:schemas:core-rules:status:v1')(invalidOptionalStatusSave));
+
+    const invalidFallCap = get('rule-falling.json');
+    invalidFallCap.mechanics[0].details.maximumDiceCount = 21;
+    rejects('Falling damage rejects a maximum above the source-defined 20d6 cap', () => ruleValidator(invalidFallCap));
+
+    const guessedFallRounding = get('rule-falling.json');
+    guessedFallRounding.mechanics[0].details.partialIncrementTreatment = 'ROUND_UP';
+    rejects('Falling damage rejects an invented partial-distance rounding rule', () => ruleValidator(guessedFallRounding));
+
+    const invalidAreaOrigin = get('rule-area-of-effect.json');
+    invalidAreaOrigin.mechanics[0].lineOfEffect.blockedBy.coverLevel = 'three-quarters';
+    rejects('Area line of effect requires Total Cover to block the line', () => ruleValidator(invalidAreaOrigin));
+
+    const invalidEmanationOrigin = get('rule-emanation-area-of-effect.json');
+    invalidEmanationOrigin.mechanics[0].originIncluded = 'INCLUDED';
+    rejects('Emanation origin inclusion cannot override its source-defined default', () =>
+        ruleValidator(invalidEmanationOrigin));
+
+    const invalidClimbingCost = get('rule-movement-cost-procedure.json');
+    invalidClimbingCost.mechanics[0].details.difficultTerrainAdditionalFeetPerFoot = 3;
+    rejects('climbing cost rejects unsupported Difficult Terrain surcharges', () => ruleValidator(invalidClimbingCost));
+
+    const invalidDiagonalCost = get('rule-grid-movement-cost.json');
+    invalidDiagonalCost.mechanics[0].details.diagonalPatternFeet = [5, 5];
+    rejects('diagonal movement cost rejects a non-source-backed sequence', () => ruleValidator(invalidDiagonalCost));
+
+    const invalidCrawlingCost = get('rule-crawling-movement.json');
+    invalidCrawlingCost.mechanics[0].details.difficultTerrainAdditionalFeetPerFoot = 1;
+    rejects('crawling cost preserves the source-defined difficult-terrain surcharge', () =>
+        ruleValidator(invalidCrawlingCost));
+
+    const invalidJumpSelection = get('rule-jump-choice.json');
+    invalidJumpSelection.mechanics[0].details.horizontal.id = 'rule:xphb:high-jump';
+    rejects('Jumping keeps distinct horizontal and vertical procedure references', () =>
+        ruleValidator(invalidJumpSelection));
 }
 
 function run() {
     const schemaFiles = loadSchemas();
     const phase3Result = validatePhase3Records(schemaFiles);
+    const phase5Result = validatePhase5Expansion();
     const examples = loadExamples();
     const validators = new Map();
     for (const [file, example] of examples) {
@@ -807,6 +3591,10 @@ function run() {
         assert.equal(conditionValidator(dodge.operations[0].when), true);
         assert.equal(conditionValidator(escape.operations[2].appliesWhen.condition), true);
         assert.equal(triggerValidator(grapple.operations[2].appliesWhen.event), true);
+        const phbDodge = readJson(path.join(exampleRoot, 'action-dodge.json'));
+        assert.deepEqual(phbDodge.operations[0].appliesWhen, {
+            kind: 'ATTACK_AGAINST_AFFECTED', actor: 'attacker', target: 'affected-creature'
+        });
     });
     check('Shove has exactly one post-check outcome', () => {
         const shove = readJson(path.join(exampleRoot, 'action-shove.json'));
@@ -823,6 +3611,68 @@ function run() {
         for (const [, example] of examples) assertCanonicalReferences(example);
     });
     check('six approved domain contracts match the semantic baseline', assertApprovedDomainBaseline);
+    check('approved PHB Blinded citation fixture includes HftT page 48', () => {
+        const blinded = readJson(path.join(exampleRoot, 'condition.json'));
+        assert.ok(blinded.sourceMetadata.citations.some(citation =>
+            citation.source === 'HftT' && citation.page === 48));
+    });
+    check('six approved Phase 2 fixture corrections match pinned source records', () => {
+        const actions = readJson(path.join(workspace, 'src/main/resources/data/actions.json')).action;
+        const variables = readJson(path.join(workspace, 'src/main/resources/data/variantrules.json')).variantrule;
+        const skills = readJson(path.join(workspace, 'src/main/resources/data/skills.json')).skill;
+        const conditions = readJson(path.join(workspace, 'src/main/resources/data/conditionsdiseases.json'));
+        const sourceRecord = (records, name, source) => records.find(record =>
+            record.name === name && record.source === source);
+        const dodgeSource = sourceRecord(actions, 'Dodge', 'PHB');
+        assert.ok(JSON.stringify(dodgeSource.entries).includes('can see the attacker'));
+        const shoveSource = sourceRecord(actions, 'Shove', 'PHB');
+        assert.ok(JSON.stringify(shoveSource.entries).includes('incapacitated'));
+        const unarmedSource = sourceRecord(variables, 'Unarmed Strike', 'XPHB');
+        assert.ok(JSON.stringify(unarmedSource.entries).includes('any escape attempts equals'));
+        assert.ok(readJson(path.join(exampleRoot, 'rule-unarmed-strike.json')).references.some(reference =>
+            reference.relationship === 'grapple-escape-attempts-use-this-dc'));
+        const criticalSource = sourceRecord(variables, 'Critical Hit', 'XPHB');
+        assert.ok(JSON.stringify(criticalSource.entries).includes('attack'));
+        assert.ok(readJson(path.join(exampleRoot, 'rule.json')).mechanics[0].roll.forms.includes('unarmed'));
+        const acrobatics = sourceRecord(skills, 'Acrobatics', 'PHB');
+        assert.equal(acrobatics.page, 176);
+        assert.equal(readJson(path.join(exampleRoot, 'skill.json')).sourceMetadata.page, 176);
+        const blinded = sourceRecord(conditions.condition, 'Blinded', 'PHB');
+        assert.ok(blinded.otherSources.some(citation => citation.source === 'HftT' && citation.page === 48));
+        assert.ok(readJson(path.join(exampleRoot, 'condition.json')).sourceMetadata.citations.some(citation =>
+            citation.source === 'HftT' && citation.page === 48));
+    });
+    check('C1-C8 mechanics remain grounded in the selected source wording', () => {
+        const actions = readJson(path.join(workspace, 'src/main/resources/data/actions.json')).action;
+        const variableRules = readJson(path.join(workspace, 'src/main/resources/data/variantrules.json')).variantrule;
+        const statuses = readJson(path.join(workspace, 'src/main/resources/data/conditionsdiseases.json')).status;
+        const senses = readJson(path.join(workspace, 'src/main/resources/data/senses.json')).sense;
+        const find = (records, name, source) => records.find(record =>
+            record.name === name && record.source === source);
+        const grappleMovement = JSON.stringify(find(actions, 'Grapple', 'PHB').entries[2]);
+        assert.ok(grappleMovement.includes('drag or carry'));
+        assert.ok(grappleMovement.includes('speed is halved'));
+        assert.ok(grappleMovement.includes('two or more sizes smaller'));
+        const unarmed = JSON.stringify(find(variableRules, 'Unarmed Strike', 'XPHB').entries);
+        assert.ok(unarmed.includes('within 5 feet'));
+        assert.ok(unarmed.includes('any escape attempts equals'));
+        const terrain = JSON.stringify(find(variableRules, 'Difficult Terrain', 'XPHB').entries);
+        for (const evidence of ['Tiny or your ally', 'Furniture', 'shin- and waist-deep',
+            'one size smaller', '20 degrees or more']) assert.ok(terrain.includes(evidence), evidence);
+        assert.ok(JSON.stringify(find(statuses, 'Concentration', 'PHB').entries[4]).includes('DM might also decide'));
+        const darkvision = JSON.stringify(find(senses, 'Darkvision', 'PHB').entries);
+        for (const evidence of ['dim light as if it were bright light',
+            'darkness as if it were dim light', 'shades of gray']) assert.ok(darkvision.includes(evidence));
+        assert.ok(JSON.stringify(find(senses, 'Tremorsense', 'MM').entries).includes('pinpoint the origin'));
+        assert.ok(JSON.stringify(find(senses, 'Tremorsense', 'XPHB').entries)
+            .includes('pinpoint the location of creatures and moving objects'));
+        const phbTruesight = JSON.stringify(find(senses, 'Truesight', 'PHB').entries);
+        for (const evidence of ['invisible creatures and objects', 'automatically detect visual illusions',
+            'succeed on saving throws against them']) assert.ok(phbTruesight.includes(evidence));
+        const xphbTruesight = JSON.stringify(find(senses, 'Truesight', 'XPHB').entries);
+        assert.ok(xphbTruesight.includes('appear transparent'));
+        assert.ok(xphbTruesight.includes('automatically succeed'));
+    });
     check('schema and example JSON uses two-space formatting', () => {
         const files = [...schemaFiles.map(file => path.join(contractRoot, file)),
             ...examples.map(([file]) => path.join(exampleRoot, file))];
@@ -837,8 +3687,9 @@ function run() {
         draft202012SchemasCompiled: schemaFiles.length,
         examplesValidated: examples.length,
         phase3CanonicalRecordsValidated: phase3Result.files,
+        phase5CanonicalRecordsValidated: phase5Result.files,
         permanentChecksPassed: testResults.length,
-        ruleComponentsChecked: ruleExamples.reduce((sum, [, rule]) => sum + rule.mechanics.length, 0),
+        ruleComponentsChecked: ruleExamples.reduce((sum, [, rule]) => sum + (rule.mechanics?.length ?? 0), 0),
         actionRecordsChecked: actionExamples.length
     }, null, 2));
 }

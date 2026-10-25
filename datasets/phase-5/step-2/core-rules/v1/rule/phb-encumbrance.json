@@ -1,0 +1,50 @@
+{
+  "id": "rule:phb:encumbrance",
+  "name": "Encumbrance",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 176
+  },
+  "ruleType": "VARIANT",
+  "mechanics": [
+    {
+      "componentId": "optional-encumbrance-thresholds",
+      "kind": "CARRYING_CAPACITY_RULE",
+      "subtype": "OPTIONAL_ENCUMBRANCE",
+      "weightUnit": "POUND",
+      "strengthBasis": "STRENGTH_SCORE",
+      "encumbranceThresholds": [
+        {
+          "weightMultiplier": 5,
+          "state": "ENCUMBERED",
+          "speedReductionFeet": 10,
+          "abilityCheckDisadvantage": [],
+          "attackDisadvantage": [],
+          "savingThrowDisadvantage": []
+        },
+        {
+          "weightMultiplier": 10,
+          "state": "HEAVILY_ENCUMBERED",
+          "speedReductionFeet": 20,
+          "abilityCheckDisadvantage": [
+            "strength",
+            "dexterity",
+            "constitution"
+          ],
+          "attackDisadvantage": [
+            "strength",
+            "dexterity",
+            "constitution"
+          ],
+          "savingThrowDisadvantage": [
+            "strength",
+            "dexterity",
+            "constitution"
+          ]
+        }
+      ],
+      "heavyEncumbranceMaximum": "STANDARD_CARRYING_CAPACITY",
+      "thresholdComparison": "GREATER_THAN"
+    }
+  ]
+}

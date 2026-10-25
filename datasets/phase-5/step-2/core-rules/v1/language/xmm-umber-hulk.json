@@ -1,0 +1,14 @@
+{
+  "id": "language:xmm:umber-hulk",
+  "name": "Umber Hulk",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 312
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:umber-hulk"
+    }
+  ]
+}

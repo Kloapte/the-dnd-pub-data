@@ -1,0 +1,18 @@
+{
+  "id": "language:skt:yikaria",
+  "name": "Yikaria",
+  "sourceMetadata": {
+    "source": "SKT",
+    "page": 244
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:skt:yakfolk-priest"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:skt:yakfolk-warrior"
+    }
+  ]
+}

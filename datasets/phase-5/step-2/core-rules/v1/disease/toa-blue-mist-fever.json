@@ -1,0 +1,57 @@
+{
+  "id": "disease:toa:blue-mist-fever",
+  "name": "Blue Mist Fever",
+  "sourceMetadata": {
+    "source": "ToA",
+    "page": 40
+  },
+  "applicability": {
+    "targetCreatureTypes": [
+      "giant",
+      "humanoid"
+    ]
+  },
+  "infection": {
+    "transmission": [
+      "magical-exposure"
+    ],
+    "exposures": [
+      {
+        "kind": "ENVIRONMENTAL_CONTACT",
+        "environment": "MAGICAL_MIST",
+        "trigger": "CONTACT",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 13
+        },
+        "onFailure": "INFECTION"
+      }
+    ]
+  },
+  "incubation": {
+    "kind": "DICE_ROLL",
+    "count": 1,
+    "die": 6,
+    "unit": "hour"
+  },
+  "effects": [
+    {
+      "kind": "PHYSIOLOGICAL_CAPABILITY",
+      "capability": "HALLUCINATIONS",
+      "symptomId": "blue-monkey-hallucinations",
+      "lifecycle": "WHILE_SYMPTOM_ACTIVE"
+    }
+  ],
+  "recovery": [
+    {
+      "method": "saving-throw",
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 13,
+        "frequency": "each-day"
+      },
+      "ends": "SYMPTOM",
+      "symptomId": "blue-monkey-hallucinations"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "id": "action:dmg:shove-aside",
+  "name": "Shove Aside",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 272
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "SHOVE"
+  ],
+  "operations": [
+    {
+      "kind": "CHECK_OR_CONTEST",
+      "operationId": "shove-aside-check",
+      "resolution": "contested-check",
+      "actor": "acting-creature",
+      "abilities": [
+        "strength"
+      ],
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:phb:athletics"
+      },
+      "opposingAbilities": [
+        "strength",
+        "dexterity"
+      ],
+      "opposingAbilitySelection": "target-chooses",
+      "opposingSkills": [
+        {
+          "targetType": "skill",
+          "id": "skill:phb:athletics"
+        },
+        {
+          "targetType": "skill",
+          "id": "skill:phb:acrobatics"
+        }
+      ],
+      "target": "target",
+      "targetLimit": "no-more-than-one-size-larger",
+      "targetWithinReach": true,
+      "automaticSuccessWhen": {
+        "kind": "HAS_CONDITION",
+        "actor": "target",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:incapacitated"
+        }
+      }
+    },
+    {
+      "kind": "ROLL_MODIFIER",
+      "actor": "acting-creature",
+      "target": "acting-creature",
+      "modifier": {
+        "kind": "D20_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "disadvantage"
+      },
+      "appliesWhen": {
+        "kind": "CHECK_RESOLUTION",
+        "operationId": "shove-aside-check"
+      }
+    },
+    {
+      "kind": "MOVE_TARGET_TO_SPACE_WITHIN_REACH",
+      "operationId": "shove-aside-lateral-movement",
+      "actor": "acting-creature",
+      "target": "other-creature",
+      "distance": 5,
+      "unit": "feet",
+      "destination": "VALID_SPACE_WITHIN_REACH_LATERALLY",
+      "appliesWhen": {
+        "kind": "CHECK_SUCCEEDED",
+        "operationId": "shove-aside-check"
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "action",
+      "id": "action:phb:shove",
+      "relationship": "uses-special-shove-attack"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:phb:incapacitated"
+    }
+  ]
+}

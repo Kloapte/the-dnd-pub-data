@@ -1,0 +1,37 @@
+{
+  "id": "condition:xphb:incapacitated",
+  "name": "Incapacitated",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 369,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "effects": [
+    {
+      "kind": "ACTIVITY_RESTRICTION",
+      "actor": "affected-creature",
+      "activities": [
+        "action",
+        "bonus-action",
+        "reaction",
+        "speech"
+      ],
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    },
+    {
+      "kind": "CHECK_ROLL_MODIFIER",
+      "roll": "initiative",
+      "direction": "disadvantage",
+      "actor": "affected-creature",
+      "duration": "while-condition-active",
+      "applicability": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    }
+  ]
+}

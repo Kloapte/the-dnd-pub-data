@@ -1,0 +1,14 @@
+{
+  "id": "language:xmm:hook-horror",
+  "name": "Hook Horror",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 173
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:hook-horror"
+    }
+  ]
+}

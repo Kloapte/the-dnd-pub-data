@@ -1,0 +1,142 @@
+{
+  "id": "disease:oota:grackle-lung",
+  "name": "Grackle-Lung",
+  "sourceMetadata": {
+    "source": "OotA",
+    "page": 54
+  },
+  "targetTraits": [
+    "LIVING",
+    "BREATHING"
+  ],
+  "symptoms": [
+    {
+      "kind": "CONDITION_LEVEL_CHANGE",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:exhaustion"
+      },
+      "amount": 1
+    }
+  ],
+  "progression": [
+    {
+      "kind": "SAVING_THROW_BRANCH",
+      "branchId": "long-rest-in-gracklstugh",
+      "trigger": {
+        "kind": "LONG_REST_COMPLETED",
+        "phase": "AFTER_INFECTION",
+        "area": "Gracklstugh"
+      },
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 11
+      },
+      "onSuccess": [
+        {
+          "kind": "NO_EFFECT"
+        }
+      ],
+      "onFailure": [
+        {
+          "kind": "CHANGE_CONDITION_LEVEL",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:exhaustion"
+          },
+          "amount": 1
+        }
+      ],
+      "endsWhen": {
+        "kind": "CONDITION_LEVEL_AT_OR_BELOW",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "level": 0
+      }
+    }
+  ],
+  "effects": [
+    {
+      "kind": "DEATH_AT_CONDITION_LEVEL",
+      "trigger": "CONDITION_LEVEL_REACHED",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:exhaustion"
+      },
+      "level": 6
+    },
+    {
+      "kind": "CONDITION_GATED_CHECK",
+      "roll": "ACTION",
+      "ability": "constitution",
+      "direction": "MUST_SUCCEED",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:exhaustion"
+      },
+      "dc": 10,
+      "dcFormula": "BASE_PLUS_CONDITION_LEVEL",
+      "outcome": "ACTION_UNAVAILABLE",
+      "minimumLevel": 1,
+      "creatureGroupsWithAdvantage": [
+        "DUERGAR",
+        "DERRO"
+      ]
+    },
+    {
+      "kind": "CONDITION_GATED_CHECK",
+      "roll": "SPELL_CAST",
+      "ability": "constitution",
+      "direction": "MUST_SUCCEED",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:exhaustion"
+      },
+      "dc": 10,
+      "dcFormula": "BASE_PLUS_CONDITION_LEVEL",
+      "outcome": "SPELL_FAILS_NO_EFFECT",
+      "minimumLevel": 1,
+      "creatureGroupsWithAdvantage": [
+        "DUERGAR",
+        "DERRO"
+      ]
+    },
+    {
+      "kind": "CONDITION_THRESHOLD_OUTCOME",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:exhaustion"
+      },
+      "comparison": "BELOW",
+      "level": 1,
+      "outcome": {
+        "kind": "GRANT_DISEASE_IMMUNITY",
+        "immunity": {
+          "kind": "DISEASE_IMMUNITY",
+          "scope": "DISEASE",
+          "duration": {
+            "amount": 1,
+            "unit": "week"
+          }
+        }
+      }
+    }
+  ],
+  "recovery": [
+    {
+      "method": "magic-that-cures-disease",
+      "endsDisease": true,
+      "removesConditionLevels": [
+        {
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:exhaustion"
+          },
+          "scope": "LEVELS_ATTRIBUTABLE_TO_THIS_DISEASE"
+        }
+      ]
+    }
+  ]
+}

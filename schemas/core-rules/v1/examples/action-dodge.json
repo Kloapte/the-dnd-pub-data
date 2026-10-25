@@ -46,8 +46,8 @@
       "operationId": "dodge-modifier-1",
       "when": {
         "kind": "CAN_SEE",
-        "actor": "attacker",
-        "target": "affected-creature"
+        "actor": "affected-creature",
+        "target": "attacker"
       }
     },
     {

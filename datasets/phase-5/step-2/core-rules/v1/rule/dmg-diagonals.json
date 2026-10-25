@@ -1,0 +1,27 @@
+{
+  "id": "rule:dmg:diagonals",
+  "name": "Diagonals",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 252
+  },
+  "ruleType": "OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "diagonal-movement-cost",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "GRID_MOVEMENT",
+      "procedure": "grid-movement-cost",
+      "details": {
+        "kind": "DIAGONAL_MOVEMENT_COST",
+        "gridUnitFeet": 5,
+        "diagonalPatternFeet": [
+          5,
+          10
+        ],
+        "patternContinuesAcrossStraightMovement": true,
+        "ruleOptional": true
+      }
+    }
+  ]
+}

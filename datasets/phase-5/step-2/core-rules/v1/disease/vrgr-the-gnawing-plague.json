@@ -1,0 +1,131 @@
+{
+  "id": "disease:vrgr:the-gnawing-plague",
+  "name": "The Gnawing Plague",
+  "sourceMetadata": {
+    "source": "VRGR",
+    "page": 153
+  },
+  "infection": {
+    "transmission": [
+      "wound",
+      "contact"
+    ],
+    "exposures": [
+      {
+        "kind": "WOUND_BY_CONTAGION_CARRIER",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 10,
+          "dcVariation": "REGIONAL_PLAGUE_SEVERITY"
+        },
+        "onFailure": "INFECTION",
+        "sourceCreatures": [
+          "RAT",
+          "GIANT_RAT",
+          "SWARM_OF_RATS",
+          "WERERAT"
+        ]
+      },
+      {
+        "kind": "CONTACT_WITH_INFECTED_CREATURE",
+        "contact": "PHYSICAL",
+        "sourceState": "INFECTED",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 10,
+          "dcVariation": "REGIONAL_PLAGUE_SEVERITY"
+        },
+        "onFailure": "INFECTION"
+      }
+    ]
+  },
+  "incubation": {
+    "kind": "DICE_ROLL",
+    "count": 1,
+    "die": 2,
+    "unit": "day"
+  },
+  "symptoms": [
+    {
+      "kind": "CONDITION_LEVEL_CHANGE",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:exhaustion"
+      },
+      "amount": 1
+    }
+  ],
+  "conditionGatedRestrictions": [
+    {
+      "kind": "HIT_DICE_RECOVERY_MULTIPLIER",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:exhaustion"
+      },
+      "minimumLevel": 1,
+      "multiplier": 0.5
+    },
+    {
+      "kind": "LONG_REST_PREVENTED_RECOVERY",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:phb:exhaustion"
+      },
+      "minimumLevel": 1,
+      "preventedRecoveries": [
+        "hit-points"
+      ]
+    }
+  ],
+  "applicability": {
+    "excludedSourceGroups": [
+      {
+        "kind": "SOURCE_NAMED_CREATURE_GROUP",
+        "name": "RATS_AND_WERERATS"
+      }
+    ]
+  },
+  "progression": [
+    {
+      "kind": "SAVING_THROW_BRANCH",
+      "branchId": "long-rest-recovery",
+      "trigger": {
+        "kind": "LONG_REST_COMPLETED",
+        "phase": "AFTER_SYMPTOM_ONSET"
+      },
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 10,
+        "dcVariation": "REGIONAL_PLAGUE_SEVERITY"
+      },
+      "onFailure": [
+        {
+          "kind": "CHANGE_CONDITION_LEVEL",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:exhaustion"
+          },
+          "amount": 1
+        }
+      ],
+      "onSuccess": [
+        {
+          "kind": "CHANGE_CONDITION_LEVEL",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:exhaustion"
+          },
+          "amount": -1
+        }
+      ],
+      "endsWhen": {
+        "kind": "CONDITION_LEVEL_AT_OR_BELOW",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "level": 0
+      }
+    }
+  ]
+}

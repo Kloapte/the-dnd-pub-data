@@ -1,0 +1,36 @@
+{
+  "id": "action:phb:dash",
+  "name": "Dash",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 192,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:dash"
+      }
+    ]
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "DASH"
+  ],
+  "operations": [
+    {
+      "kind": "MOVEMENT_INCREASE",
+      "movement": "current-turn-movement",
+      "amount": 1,
+      "unit": "current-speed",
+      "appliesWhen": {
+        "kind": "AFTER_SPEED_MODIFIERS"
+      },
+      "operationId": "dash"
+    }
+  ]
+}

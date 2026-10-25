@@ -1,0 +1,53 @@
+{
+  "id": "condition:xphb:grappled",
+  "name": "Grappled",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 367,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "effects": [
+    {
+      "kind": "MOVEMENT_MODIFIER",
+      "movement": "speed-flat",
+      "amount": 0,
+      "actor": "affected-creature",
+      "duration": "while-condition-active"
+    },
+    {
+      "kind": "MOVEMENT_CONSTRAINT",
+      "actor": "affected-creature",
+      "constraint": "cannot-increase-speed",
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "disadvantage",
+      "actor": "affected-creature",
+      "target": "target",
+      "appliesWhen": "affected-creature-attacks",
+      "duration": "while-condition-active",
+      "applicability": {
+        "kind": "TARGET_IS_NOT_CREATURE",
+        "creature": "grappler"
+      }
+    },
+    {
+      "kind": "GRAPPLED_MOVEMENT_COST",
+      "actor": "grappler",
+      "target": "affected-creature",
+      "waiver": "target-tiny-or-two-or-more-sizes-smaller",
+      "movementCost": {
+        "kind": "EXTRA_FEET_PER_FOOT",
+        "additionalFeetPerFoot": 1
+      },
+      "movementMode": "drag-or-carry"
+    }
+  ]
+}

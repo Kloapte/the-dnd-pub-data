@@ -1,0 +1,22 @@
+{
+  "id": "language:ggr:loxodon",
+  "name": "Loxodon",
+  "sourceMetadata": {
+    "source": "GGR",
+    "page": 9
+  },
+  "category": "standard",
+  "script": "Elvish",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "selector": {
+          "kind": "TAG",
+          "value": "any race",
+          "source": "GGR"
+        }
+      }
+    }
+  ]
+}

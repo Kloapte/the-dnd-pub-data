@@ -1,0 +1,27 @@
+{
+  "id": "sense:xphb:darkvision",
+  "name": "Darkvision",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 365,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "capabilities": [
+    {
+      "kind": "SIGHT",
+      "perceives": [
+        "visible-creatures",
+        "objects",
+        "visual-detail"
+      ],
+      "conditions": [
+        "darkness"
+      ],
+      "darknessAs": "dim-light",
+      "colorPerception": "grayscale",
+      "dimLightAs": "bright-light"
+    }
+  ]
+}

@@ -5,6 +5,7 @@
     "source": "XPHB",
     "page": 366
   },
+  "ruleType": "CORE",
   "mechanics": [
     {
       "componentId": "difficult-terrain",

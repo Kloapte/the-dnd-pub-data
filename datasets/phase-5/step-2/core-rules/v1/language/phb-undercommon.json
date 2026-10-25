@@ -1,0 +1,20 @@
+{
+  "id": "language:phb:undercommon",
+  "name": "Undercommon",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:undercommon"
+      }
+    ]
+  },
+  "category": "exotic",
+  "script": "Elvish"
+}

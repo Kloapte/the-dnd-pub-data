@@ -1,0 +1,59 @@
+{
+  "id": "rule:xphb:action",
+  "name": "Action",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 360,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "action",
+      "id": "action:xphb:attack"
+    },
+    {
+      "targetType": "action",
+      "id": "action:xphb:dash"
+    },
+    {
+      "targetType": "action",
+      "id": "action:xphb:help"
+    },
+    {
+      "targetType": "action",
+      "id": "action:xphb:disengage"
+    },
+    {
+      "targetType": "action",
+      "id": "action:xphb:hide"
+    },
+    {
+      "targetType": "action",
+      "id": "action:xphb:influence"
+    },
+    {
+      "targetType": "action",
+      "id": "action:xphb:magic"
+    },
+    {
+      "targetType": "action",
+      "id": "action:xphb:ready"
+    },
+    {
+      "targetType": "action",
+      "id": "action:xphb:search"
+    },
+    {
+      "targetType": "action",
+      "id": "action:xphb:study"
+    },
+    {
+      "targetType": "action",
+      "id": "action:xphb:utilize"
+    }
+  ]
+}

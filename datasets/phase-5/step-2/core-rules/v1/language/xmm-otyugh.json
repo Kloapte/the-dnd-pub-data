@@ -1,0 +1,14 @@
+{
+  "id": "language:xmm:otyugh",
+  "name": "Otyugh",
+  "sourceMetadata": {
+    "source": "XMM",
+    "page": 233
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:xmm:otyugh"
+    }
+  ]
+}

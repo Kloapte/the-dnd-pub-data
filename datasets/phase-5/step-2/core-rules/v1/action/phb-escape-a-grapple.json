@@ -1,0 +1,102 @@
+{
+  "id": "action:phb:escape-a-grapple",
+  "name": "Escape a Grapple",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 195,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:escape-a-grapple"
+      }
+    ]
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "ESCAPE_GRAPPLE"
+  ],
+  "requirements": [
+    {
+      "kind": "condition",
+      "reference": {
+        "targetType": "condition",
+        "id": "condition:phb:grappled"
+      }
+    }
+  ],
+  "operations": [
+    {
+      "kind": "CHECK_OR_CONTEST",
+      "operationId": "escape-grapple-check",
+      "resolution": "contested-check",
+      "actor": "both",
+      "participants": [
+        {
+          "role": "acting-creature",
+          "selection": "PARTICIPANT_CHOOSES",
+          "options": [
+            {
+              "ability": "strength",
+              "skill": {
+                "targetType": "skill",
+                "id": "skill:phb:athletics"
+              }
+            },
+            {
+              "ability": "dexterity",
+              "skill": {
+                "targetType": "skill",
+                "id": "skill:phb:acrobatics"
+              }
+            }
+          ]
+        },
+        {
+          "role": "target",
+          "selection": "RULE_SPECIFIED",
+          "options": [
+            {
+              "ability": "strength",
+              "skill": {
+                "targetType": "skill",
+                "id": "skill:phb:athletics"
+              }
+            }
+          ]
+        }
+      ],
+      "target": "affected-creature"
+    },
+    {
+      "kind": "END_CONDITION",
+      "target": {
+        "targetType": "condition",
+        "id": "condition:phb:grappled"
+      },
+      "appliesWhen": {
+        "kind": "CHECK_SUCCEEDED",
+        "operationId": "escape-grapple-check"
+      },
+      "recipient": "acting-creature",
+      "actor": "acting-creature",
+      "operationId": "end-grappled-on-success"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "action",
+      "id": "action:phb:grapple",
+      "relationship": "escape-procedure-for"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:phb:grappled"
+    }
+  ]
+}

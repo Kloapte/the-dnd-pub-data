@@ -1,0 +1,34 @@
+{
+  "id": "rule:xphb:attack-roll",
+  "name": "Attack Roll",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 361,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "attack-roll",
+      "kind": "D20_TEST",
+      "subtype": "ATTACK_ROLL",
+      "roll": {
+        "kind": "ATTACK_ROLL",
+        "forms": [
+          "weapon",
+          "unarmed",
+          "spell"
+        ]
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:d20-test"
+    }
+  ]
+}

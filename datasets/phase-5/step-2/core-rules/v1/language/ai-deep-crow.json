@@ -1,0 +1,14 @@
+{
+  "id": "language:ai:deep-crow",
+  "name": "Deep Crow",
+  "sourceMetadata": {
+    "source": "AI",
+    "page": 210
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:ai:deep-crow"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "language:ggr:sylvan",
+  "name": "Sylvan",
+  "sourceMetadata": {
+    "source": "GGR",
+    "page": 9,
+    "citations": [
+      {
+        "source": "GGR",
+        "page": 15
+      }
+    ]
+  },
+  "category": "standard",
+  "script": "Elvish",
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:ggr:conclave-dryad"
+    }
+  ]
+}

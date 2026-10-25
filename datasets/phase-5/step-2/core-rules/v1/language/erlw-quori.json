@@ -1,0 +1,16 @@
+{
+  "id": "language:erlw:quori",
+  "name": "Quori",
+  "sourceMetadata": {
+    "source": "ERLW",
+    "page": 6
+  },
+  "category": "exotic",
+  "script": "Quori",
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:erlw:inspired"
+    }
+  ]
+}

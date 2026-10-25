@@ -1,0 +1,73 @@
+{
+  "id": "condition:xphb:paralyzed",
+  "name": "Paralyzed",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 371,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "effects": [
+    {
+      "kind": "MOVEMENT_MODIFIER",
+      "movement": "speed-flat",
+      "amount": 0,
+      "actor": "affected-creature",
+      "duration": "while-condition-active"
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "advantage",
+      "actor": "attacker",
+      "target": "affected-creature",
+      "appliesWhen": "attack-targets-affected",
+      "duration": "while-condition-active"
+    },
+    {
+      "kind": "ACTIVITY_RESTRICTION",
+      "actor": "affected-creature",
+      "activities": [
+        "movement",
+        "speech"
+      ],
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    },
+    {
+      "kind": "CONDITION_INTERACTION",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:incapacitated"
+      },
+      "interaction": "apply",
+      "lifecycle": "while-source-condition-active"
+    },
+    {
+      "kind": "AUTOMATIC_SAVING_THROW_FAILURE",
+      "actor": "affected-creature",
+      "abilities": [
+        "strength",
+        "dexterity"
+      ],
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    },
+    {
+      "kind": "CRITICAL_HIT_ON_HIT",
+      "attacker": "attacker",
+      "target": "affected-creature",
+      "distanceFeet": 5,
+      "requiresSuccessfulHit": true,
+      "result": "critical-hit",
+      "rule": {
+        "targetType": "rule",
+        "id": "rule:xphb:critical-hit"
+      }
+    }
+  ]
+}

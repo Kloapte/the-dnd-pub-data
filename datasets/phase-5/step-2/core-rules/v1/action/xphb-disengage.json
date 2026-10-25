@@ -1,0 +1,24 @@
+{
+  "id": "action:xphb:disengage",
+  "name": "Disengage",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 366,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "timing": {
+    "kind": "action"
+  },
+  "capabilities": [
+    "DISENGAGE"
+  ],
+  "operations": [
+    {
+      "kind": "MOVEMENT_PERMISSION",
+      "permission": "no-opportunity-attack",
+      "duration": "current-turn"
+    }
+  ]
+}

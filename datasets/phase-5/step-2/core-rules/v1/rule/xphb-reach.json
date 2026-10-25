@@ -1,0 +1,27 @@
+{
+  "id": "rule:xphb:reach",
+  "name": "Reach",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 372,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "default-melee-reach",
+      "kind": "D20_TEST",
+      "subtype": "ATTACK_ROLL",
+      "roll": {
+        "kind": "ATTACK_ROLL",
+        "forms": [
+          "melee"
+        ],
+        "reachFeet": 5
+      }
+    }
+  ]
+}

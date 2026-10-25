@@ -1,0 +1,28 @@
+{
+  "id": "rule:xphb:line-area-of-effect",
+  "name": "Line [Area of Effect]",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 370,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "line-shape",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "AREA_OF_EFFECT",
+      "shape": "line",
+      "origin": "point-in-space",
+      "originPlacement": "POINT_AND_DIRECTION",
+      "dimensionParameters": [
+        "LENGTH",
+        "WIDTH"
+      ],
+      "originIncluded": "EXCLUDED_UNLESS_CREATOR_CHOOSES"
+    }
+  ]
+}

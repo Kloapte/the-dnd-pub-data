@@ -1,0 +1,28 @@
+{
+  "id": "sense:xphb:truesight",
+  "name": "Truesight",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 377,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "capabilities": [
+    {
+      "kind": "SIGHT",
+      "perceives": [
+        "invisible-creatures",
+        "invisible-objects",
+        "illusions",
+        "true-forms",
+        "ethereal-plane"
+      ],
+      "illusionInteraction": {
+        "appearance": "transparent",
+        "detection": "automatic",
+        "savingThrowOutcome": "automatic-success"
+      }
+    }
+  ]
+}

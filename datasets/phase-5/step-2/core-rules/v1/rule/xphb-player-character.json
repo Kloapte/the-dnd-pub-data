@@ -1,0 +1,13 @@
+{
+  "id": "rule:xphb:player-character",
+  "name": "Player Character",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 372,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE"
+}

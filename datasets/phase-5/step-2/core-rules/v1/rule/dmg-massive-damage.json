@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:massive-damage",
+  "name": "Massive Damage",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 273
+  },
+  "ruleType": "OPTIONAL"
+}

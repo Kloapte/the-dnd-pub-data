@@ -1,0 +1,29 @@
+{
+  "id": "language:ggr:common",
+  "name": "Common",
+  "sourceMetadata": {
+    "source": "GGR",
+    "page": 9
+  },
+  "category": "standard",
+  "script": "Common",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "humanoid"
+        ],
+        "tags": [
+          {
+            "group": "any race",
+            "value": "human"
+          }
+        ],
+        "sources": [
+          "GGR"
+        ]
+      }
+    }
+  ]
+}

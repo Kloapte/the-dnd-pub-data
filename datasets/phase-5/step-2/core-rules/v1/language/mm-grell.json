@@ -1,0 +1,14 @@
+{
+  "id": "language:mm:grell",
+  "name": "Grell",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 172
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:grell"
+    }
+  ]
+}

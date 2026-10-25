@@ -48,6 +48,7 @@
     "typicalSpeakers": {
       "type": "array",
       "minItems": 1,
+      "description": "Each item is an alternative speaker selector. A tag selector stores an exact source criterion and is distinct from creature types and resolved creature identities.",
       "items": {
         "oneOf": [
           {
@@ -78,8 +79,7 @@
                 "type": "object",
                 "additionalProperties": false,
                 "required": [
-                  "targetType",
-                  "creatureTypes"
+                  "targetType"
                 ],
                 "properties": {
                   "targetType": {
@@ -137,11 +137,111 @@
                       "type": "string",
                       "minLength": 1
                     }
+                  },
+                  "selector": {
+                    "$ref": "#/$defs/creatureTagSelector"
                   }
-                }
+                },
+                "oneOf": [
+                  {
+                    "required": [
+                      "creatureTypes"
+                    ],
+                    "not": {
+                      "required": [
+                        "selector"
+                      ]
+                    }
+                  },
+                  {
+                    "required": [
+                      "selector"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "creatureTypes"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "tags"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "sources"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
               }
             }
           }
+        ]
+      }
+    },
+    "communicationCapabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/concealedMessage"
+      }
+    },
+    "intelligibility": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "mode",
+          "directionality",
+          "language"
+        ],
+        "properties": {
+          "kind": {
+            "const": "MUTUAL_INTELLIGIBILITY"
+          },
+          "mode": {
+            "const": "SPOKEN"
+          },
+          "directionality": {
+            "const": "MUTUAL"
+          },
+          "language": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "targetType",
+              "id"
+            ],
+            "properties": {
+              "targetType": {
+                "const": "language"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^language:[a-z0-9-]+:[a-z0-9-]+$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "communicationModes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "SPOKEN",
+          "LEFT_MESSAGE",
+          "ORDINARY_CONVERSATION"
         ]
       }
     },
@@ -158,6 +258,181 @@
       "items": {
         "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
       }
+    }
+  },
+  "$defs": {
+    "creatureTagSelector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "value"
+      ],
+      "properties": {
+        "kind": {
+          "const": "TAG"
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "concealedMessage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "channel",
+        "comprehension"
+      ],
+      "properties": {
+        "kind": {
+          "const": "CONCEALED_MESSAGE"
+        },
+        "channel": {
+          "enum": [
+            "LEFT_MESSAGE",
+            "ORDINARY_CONVERSATION"
+          ]
+        },
+        "comprehension": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "REQUIRES_LANGUAGE_KNOWLEDGE"
+            }
+          }
+        },
+        "recognition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "otherwise"
+          ],
+          "properties": {
+            "kind": {
+              "const": "AUTOMATIC_IF_LANGUAGE_KNOWN"
+            },
+            "otherwise": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "ability",
+                "skill",
+                "dc",
+                "outcome"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "CHECK_FOR_PRESENCE"
+                },
+                "ability": {
+                  "const": "wisdom"
+                },
+                "skill": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "targetType",
+                    "id"
+                  ],
+                  "properties": {
+                    "targetType": {
+                      "const": "skill"
+                    },
+                    "id": {
+                      "const": "skill:phb:perception"
+                    }
+                  }
+                },
+                "dc": {
+                  "const": 15
+                },
+                "outcome": {
+                  "const": "DETECT_PRESENCE_ONLY"
+                }
+              }
+            }
+          }
+        },
+        "deciphering": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "MAGIC_REQUIRED_FOR_NON_KNOWERS"
+            }
+          }
+        },
+        "communicationDurationMultiplier": {
+          "type": "integer",
+          "const": 4
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "channel": {
+                "const": "LEFT_MESSAGE"
+              }
+            },
+            "required": [
+              "channel"
+            ]
+          },
+          "then": {
+            "required": [
+              "recognition",
+              "deciphering"
+            ],
+            "not": {
+              "required": [
+                "communicationDurationMultiplier"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "channel": {
+                "const": "ORDINARY_CONVERSATION"
+              }
+            },
+            "required": [
+              "channel"
+            ]
+          },
+          "then": {
+            "required": [
+              "communicationDurationMultiplier"
+            ],
+            "not": {
+              "required": [
+                "recognition",
+                "deciphering"
+              ]
+            }
+          }
+        }
+      ]
     }
   }
 }

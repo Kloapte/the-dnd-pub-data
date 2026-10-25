@@ -1,0 +1,10 @@
+{
+  "id": "language:erlw:halfling",
+  "name": "Halfling",
+  "sourceMetadata": {
+    "source": "ERLW",
+    "page": 6
+  },
+  "category": "standard",
+  "script": "Common"
+}

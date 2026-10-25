@@ -1,0 +1,40 @@
+{
+  "id": "rule:xphb:knocking-out-a-creature",
+  "name": "Knocking Out a Creature",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 370,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:hit-points",
+      "relationship": "zero-hit-point-alternative"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:unconscious",
+      "relationship": "knockout-condition"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:short-rest",
+      "relationship": "knockout-starts-short-rest"
+    },
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:medicine",
+      "relationship": "first-aid-check"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:difficulty-class",
+      "relationship": "first-aid-dc"
+    }
+  ]
+}

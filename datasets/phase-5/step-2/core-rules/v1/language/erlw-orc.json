@@ -1,0 +1,10 @@
+{
+  "id": "language:erlw:orc",
+  "name": "Orc",
+  "sourceMetadata": {
+    "source": "ERLW",
+    "page": 6
+  },
+  "category": "exotic",
+  "script": "Goblin"
+}

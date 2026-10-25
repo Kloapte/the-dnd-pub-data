@@ -1,0 +1,14 @@
+{
+  "id": "language:vgm:tlincalli",
+  "name": "Tlincalli",
+  "sourceMetadata": {
+    "source": "VGM",
+    "page": 193
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:vgm:tlincalli"
+    }
+  ]
+}

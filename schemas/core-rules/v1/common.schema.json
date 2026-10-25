@@ -117,7 +117,8 @@
             "status",
             "subclass",
             "subclass-feature",
-            "vehicle"
+            "vehicle",
+            "race"
           ]
         },
         "id": {
@@ -149,10 +150,22 @@
     },
     "actor": {
       "enum": [
+        "acting-creature",
         "affected-creature",
         "attacker",
+        "beneficiary",
+        "enemy",
+        "grappled-creature",
+        "grappler",
+        "helper",
+        "hidden-creature",
+        "larger-creature",
+        "moving-creature",
+        "opportunity-attacker",
         "observer",
         "source",
+        "spell-caster",
+        "smaller-creature",
         "target"
       ]
     },
@@ -291,6 +304,40 @@
             },
             "target": {
               "const": "opportunity-attacker"
+            },
+            "requiresVisibility": {
+              "type": "boolean"
+            },
+            "requiresHostility": {
+              "type": "boolean"
+            },
+            "movementOrigins": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "action",
+                  "bonus-action",
+                  "reaction",
+                  "speed"
+                ]
+              }
+            },
+            "excludedMovementSources": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "disengage",
+                  "teleportation",
+                  "involuntary-movement"
+                ]
+              }
+            },
+            "resolutionTiming": {
+              "const": "immediately-before-departure"
             }
           }
         },
@@ -327,6 +374,82 @@
             },
             "target": {
               "const": "grappled-creature"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "target",
+            "volume"
+          ],
+          "properties": {
+            "kind": {
+              "const": "HIDDEN_CREATURE_MAKES_SOUND"
+            },
+            "actor": {
+              "const": "hidden-creature"
+            },
+            "target": {
+              "const": "observer"
+            },
+            "volume": {
+              "const": "louder-than-whisper"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor",
+            "target"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ENEMY_FINDS_HIDDEN_CREATURE"
+            },
+            "actor": {
+              "const": "enemy"
+            },
+            "target": {
+              "const": "hidden-creature"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor"
+          ],
+          "properties": {
+            "kind": {
+              "const": "HIDDEN_CREATURE_MAKES_ATTACK_ROLL"
+            },
+            "actor": {
+              "const": "hidden-creature"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "actor"
+          ],
+          "properties": {
+            "kind": {
+              "const": "HIDDEN_CREATURE_CASTS_VERBAL_SPELL"
+            },
+            "actor": {
+              "const": "hidden-creature"
             }
           }
         }
@@ -498,6 +621,52 @@
             },
             "proficiencyBonus": {
               "type": "boolean"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "base",
+            "spellRole"
+          ],
+          "properties": {
+            "kind": {
+              "const": "FIXED_PLUS_SPELL_LEVEL"
+            },
+            "base": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "spellRole": {
+              "const": "identified-spell"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "minimum",
+            "targetRole",
+            "ability"
+          ],
+          "properties": {
+            "kind": {
+              "const": "GREATER_OF_FIXED_AND_TARGET_ABILITY_SCORE"
+            },
+            "minimum": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "targetRole": {
+              "const": "target"
+            },
+            "ability": {
+              "$ref": "#/$defs/ability"
             }
           }
         }

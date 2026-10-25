@@ -1,0 +1,55 @@
+{
+  "id": "condition:xphb:restrained",
+  "name": "Restrained",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 373,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "effects": [
+    {
+      "kind": "MOVEMENT_MODIFIER",
+      "movement": "speed-flat",
+      "amount": 0,
+      "actor": "affected-creature",
+      "duration": "while-condition-active"
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "advantage",
+      "actor": "attacker",
+      "target": "affected-creature",
+      "appliesWhen": "attack-targets-affected",
+      "duration": "while-condition-active"
+    },
+    {
+      "kind": "ATTACK_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "disadvantage",
+      "actor": "affected-creature",
+      "target": "target",
+      "appliesWhen": "affected-creature-attacks",
+      "duration": "while-condition-active"
+    },
+    {
+      "kind": "CHECK_ROLL_MODIFIER",
+      "roll": "saving-throw",
+      "direction": "disadvantage",
+      "actor": "affected-creature",
+      "ability": "dexterity",
+      "duration": "while-condition-active"
+    },
+    {
+      "kind": "MOVEMENT_CONSTRAINT",
+      "actor": "affected-creature",
+      "constraint": "cannot-increase-speed",
+      "appliesWhen": {
+        "kind": "WHILE_CONDITION_ACTIVE"
+      }
+    }
+  ]
+}

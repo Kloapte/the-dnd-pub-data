@@ -12,8 +12,7 @@
   "required": [
     "id",
     "name",
-    "sourceMetadata",
-    "mechanics"
+    "sourceMetadata"
   ],
   "properties": {
     "id": {
@@ -27,6 +26,14 @@
     "sourceMetadata": {
       "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceMetadata"
     },
+    "ruleType": {
+      "enum": [
+        "CORE",
+        "OPTIONAL",
+        "VARIANT",
+        "VARIANT_OPTIONAL"
+      ]
+    },
     "mechanics": {
       "type": "array",
       "minItems": 1,
@@ -34,6 +41,15 @@
         "oneOf": [
           {
             "$ref": "#/$defs/d20Test"
+          },
+          {
+            "$ref": "#/$defs/abilityScoreModifier"
+          },
+          {
+            "$ref": "#/$defs/difficultyClassDefinition"
+          },
+          {
+            "$ref": "#/$defs/proficiencyRule"
           },
           {
             "$ref": "#/$defs/abilityCheck"
@@ -46,6 +62,12 @@
           },
           {
             "$ref": "#/$defs/deathSavingThrow"
+          },
+          {
+            "$ref": "#/$defs/flankingRule"
+          },
+          {
+            "$ref": "#/$defs/skillAbilityVariation"
           },
           {
             "$ref": "#/$defs/testModifier"
@@ -88,6 +110,12 @@
           },
           {
             "$ref": "#/$defs/rest"
+          },
+          {
+            "$ref": "#/$defs/initiative"
+          },
+          {
+            "$ref": "#/$defs/carryingCapacity"
           },
           {
             "$ref": "#/$defs/vehicle"
@@ -204,11 +232,46 @@
           "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
         },
         "dc": {
-          "type": "integer",
-          "minimum": 1
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/difficultyClass"
+            }
+          ]
         },
         "passiveScore": {
           "type": "boolean"
+        },
+        "passiveScoreConstruction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "base",
+            "addsCheckBonus",
+            "advantageAdjustment",
+            "disadvantageAdjustment"
+          ],
+          "properties": {
+            "kind": {
+              "const": "PASSIVE_SCORE_CONSTRUCTION"
+            },
+            "base": {
+              "const": 10
+            },
+            "addsCheckBonus": {
+              "const": true
+            },
+            "advantageAdjustment": {
+              "const": 5
+            },
+            "disadvantageAdjustment": {
+              "const": -5
+            }
+          }
         },
         "componentId": {
           "type": "string",
@@ -217,6 +280,814 @@
         },
         "appliesWhen": {
           "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        }
+      }
+    },
+    "abilityScoreModifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "minimumScore",
+        "maximumScore",
+        "scoreBands",
+        "abilities",
+        "appliesTo"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "ABILITY_SCORE_RULE"
+        },
+        "subtype": {
+          "const": "MODIFIER_MAPPING"
+        },
+        "minimumScore": {
+          "const": 1
+        },
+        "maximumScore": {
+          "const": 30
+        },
+        "scoreBands": {
+          "type": "array",
+          "minItems": 16,
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/abilityScoreBand"
+          }
+        },
+        "abilities": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+          }
+        },
+        "appliesTo": {
+          "const": "D20_TEST"
+        }
+      }
+    },
+    "abilityScoreBand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimumScore",
+        "maximumScore",
+        "modifier"
+      ],
+      "properties": {
+        "minimumScore": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30
+        },
+        "maximumScore": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30
+        },
+        "modifier": {
+          "type": "integer",
+          "minimum": -5,
+          "maximum": 10
+        }
+      }
+    },
+    "difficultyClassDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "targetNumberFor"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "D20_TEST"
+        },
+        "subtype": {
+          "const": "DIFFICULTY_CLASS"
+        },
+        "targetNumberFor": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "ABILITY_CHECK",
+              "SAVING_THROW"
+            ]
+          }
+        }
+      }
+    },
+    "proficiencyRule": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/proficiencyBonusApplication"
+        },
+        {
+          "$ref": "#/$defs/proficiencyBonusProgression"
+        },
+        {
+          "$ref": "#/$defs/proficiencyBonusScaling"
+        },
+        {
+          "$ref": "#/$defs/proficiencyBonusLevelBasis"
+        },
+        {
+          "$ref": "#/$defs/proficiencyDiceAlternative"
+        },
+        {
+          "$ref": "#/$defs/skillProficiencyApplication"
+        },
+        {
+          "$ref": "#/$defs/toolSkillProficiencySynergy"
+        },
+        {
+          "$ref": "#/$defs/abilityCheckProficiencyVariant"
+        }
+      ]
+    },
+    "flankingRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "requiresMiniatures",
+        "targetRole",
+        "participants",
+        "participantsMustSeeTarget",
+        "participantsCannotHaveCondition",
+        "requiresAdjacentPositions",
+        "squareGrid",
+        "hexGrid",
+        "largeOrLargerSpaceRule",
+        "benefit"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "POSITIONAL_MODIFIER"
+        },
+        "subtype": {
+          "const": "FLANKING"
+        },
+        "requiresMiniatures": {
+          "const": true
+        },
+        "targetRole": {
+          "const": "ENEMY"
+        },
+        "participants": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "ATTACKER",
+              "ALLY"
+            ]
+          }
+        },
+        "participantsMustSeeTarget": {
+          "const": true
+        },
+        "participantsCannotHaveCondition": {
+          "$ref": "#/$defs/conditionReference"
+        },
+        "requiresAdjacentPositions": {
+          "const": true
+        },
+        "squareGrid": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "relativePosition",
+            "attackApplicability",
+            "tieBreakProcedure"
+          ],
+          "properties": {
+            "relativePosition": {
+              "const": "OPPOSITE_SIDES_OR_CORNERS"
+            },
+            "attackApplicability": {
+              "const": "MELEE_ATTACKS"
+            },
+            "tieBreakProcedure": {
+              "const": "CENTER_LINE_CROSSES_OPPOSITE_SIDES_OR_CORNERS"
+            }
+          }
+        },
+        "hexGrid": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "relativePosition",
+            "attackApplicability",
+            "targetSizeSeparations"
+          ],
+          "properties": {
+            "relativePosition": {
+              "const": "OPPOSITE_SIDES"
+            },
+            "attackApplicability": {
+              "const": "ATTACK_ROLLS"
+            },
+            "targetSizeSeparations": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "$ref": "#/$defs/flankingHexSeparation"
+              }
+            }
+          }
+        },
+        "largeOrLargerSpaceRule": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "appliesToFlankerSize",
+            "qualification"
+          ],
+          "properties": {
+            "appliesToFlankerSize": {
+              "const": "LARGE_OR_LARGER"
+            },
+            "qualification": {
+              "const": "AT_LEAST_ONE_SPACE_CELL_QUALIFIES"
+            }
+          }
+        },
+        "benefit": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/d20RollModifier"
+        }
+      }
+    },
+    "flankingHexSeparation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetSizeGroup",
+        "hexesBetween",
+        "comparison"
+      ],
+      "properties": {
+        "targetSizeGroup": {
+          "enum": [
+            "TINY_SMALL_MEDIUM",
+            "LARGE",
+            "HUGE",
+            "GARGANTUAN"
+          ]
+        },
+        "hexesBetween": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 6
+        },
+        "comparison": {
+          "enum": [
+            "EXACTLY",
+            "AT_LEAST"
+          ]
+        }
+      }
+    },
+    "skillAbilityVariation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "decisionMaker",
+        "eligibleRequester",
+        "decision",
+        "pairings"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "SKILL_PROCEDURE"
+        },
+        "subtype": {
+          "const": "ABILITY_VARIATION"
+        },
+        "decisionMaker": {
+          "const": "DM"
+        },
+        "eligibleRequester": {
+          "enum": [
+            "DM_OR_PLAYER",
+            "DM"
+          ]
+        },
+        "decision": {
+          "const": "DISCRETIONARY"
+        },
+        "pairings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/skillAbilityPairingExample"
+          }
+        }
+      }
+    },
+    "skillAbilityPairingExample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "skill",
+        "usualAbility",
+        "alternativeAbility",
+        "context",
+        "status"
+      ],
+      "properties": {
+        "skill": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        },
+        "usualAbility": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+        },
+        "alternativeAbility": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+        },
+        "context": {
+          "enum": [
+            "SWIMMING_STAMINA",
+            "DISPLAY_OF_RAW_STRENGTH"
+          ]
+        },
+        "status": {
+          "const": "SOURCE_EXAMPLE"
+        }
+      }
+    },
+    "abilityCheckProficiencyVariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "replaces",
+        "proficiencySources",
+        "proficiencyCount",
+        "appliesTo",
+        "startsAtLevel"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "PROFICIENCY_RULE"
+        },
+        "subtype": {
+          "const": "ABILITY_CHECK_PROFICIENCY_VARIANT"
+        },
+        "replaces": {
+          "const": "SKILL_PROFICIENCY"
+        },
+        "proficiencySources": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": "CLASS_ASSOCIATED_ABILITY"
+            },
+            {
+              "const": "BACKGROUND_SELECTED_ABILITY"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "proficiencyCount": {
+          "const": 2
+        },
+        "appliesTo": {
+          "const": "ABILITY_CHECK_ASSOCIATED_WITH_EITHER_PROFICIENT_ABILITY"
+        },
+        "startsAtLevel": {
+          "const": 1
+        }
+      }
+    },
+    "proficiencyBonusApplication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "appliesTo",
+        "adds"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "PROFICIENCY_RULE"
+        },
+        "subtype": {
+          "const": "BONUS_APPLICATION"
+        },
+        "appliesTo": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "SKILL_ASSOCIATED_ABILITY_CHECK",
+              "SAVING_THROW",
+              "WEAPON_ATTACK",
+              "TOOL_CHECK"
+            ]
+          }
+        },
+        "adds": {
+          "const": "PROFICIENCY_BONUS"
+        }
+      }
+    },
+    "proficiencyBonusProgression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "progressionSource",
+        "levelBands",
+        "challengeRatingBands"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "PROFICIENCY_RULE"
+        },
+        "subtype": {
+          "const": "BONUS_PROGRESSION"
+        },
+        "progressionSource": {
+          "const": "LEVEL_OR_CHALLENGE_RATING"
+        },
+        "levelBands": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/proficiencyLevelBand"
+          }
+        },
+        "challengeRatingBands": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/proficiencyChallengeRatingBand"
+          }
+        }
+      }
+    },
+    "proficiencyLevelBand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimumLevel",
+        "maximumLevel",
+        "bonus"
+      ],
+      "properties": {
+        "minimumLevel": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30
+        },
+        "maximumLevel": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30
+        },
+        "bonus": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 9
+        }
+      }
+    },
+    "proficiencyChallengeRatingBand": {
+      "type": "object",
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "minimumChallengeRatingInclusive"
+          ]
+        },
+        {
+          "required": [
+            "minimumChallengeRatingExclusive"
+          ]
+        }
+      ],
+      "required": [
+        "maximumChallengeRatingInclusive",
+        "bonus"
+      ],
+      "properties": {
+        "minimumChallengeRatingInclusive": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 30
+        },
+        "minimumChallengeRatingExclusive": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 30
+        },
+        "maximumChallengeRatingInclusive": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 30
+        },
+        "bonus": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 9
+        }
+      }
+    },
+    "proficiencyBonusScaling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "checkType",
+        "requiresSkillProficiency",
+        "multiplier",
+        "unlessAlreadyDoubledByAnotherFeature",
+        "assignment",
+        "maximumInstancesPerSkill"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "PROFICIENCY_RULE"
+        },
+        "subtype": {
+          "const": "BONUS_SCALING"
+        },
+        "checkType": {
+          "const": "ABILITY_CHECK"
+        },
+        "requiresSkillProficiency": {
+          "const": true
+        },
+        "multiplier": {
+          "const": 2
+        },
+        "unlessAlreadyDoubledByAnotherFeature": {
+          "const": true
+        },
+        "assignment": {
+          "const": "ONE_SKILL_IN_WHICH_PROFICIENT"
+        },
+        "maximumInstancesPerSkill": {
+          "const": 1
+        }
+      }
+    },
+    "proficiencyBonusLevelBasis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "levelBasis"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "PROFICIENCY_RULE"
+        },
+        "subtype": {
+          "const": "BONUS_LEVEL_BASIS"
+        },
+        "levelBasis": {
+          "const": "TOTAL_CHARACTER_LEVEL"
+        }
+      }
+    },
+    "proficiencyDiceAlternative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "replaces",
+        "appliesTo",
+        "eligibleCreatureKinds",
+        "levelBands",
+        "expertiseDiceCount"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "PROFICIENCY_RULE"
+        },
+        "subtype": {
+          "const": "PROFICIENCY_DICE_ALTERNATIVE"
+        },
+        "replaces": {
+          "const": "PROFICIENCY_BONUS"
+        },
+        "appliesTo": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "ABILITY_CHECK",
+              "ATTACK_ROLL",
+              "SAVING_THROW"
+            ]
+          }
+        },
+        "eligibleCreatureKinds": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "PLAYER_CHARACTER",
+              "NPC_WITH_LEVELS"
+            ]
+          }
+        },
+        "levelBands": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/$defs/proficiencyDieLevelBand"
+          }
+        },
+        "expertiseDiceCount": {
+          "const": 2
+        }
+      }
+    },
+    "proficiencyDieLevelBand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimumLevel",
+        "maximumLevel",
+        "proficiencyBonus",
+        "die"
+      ],
+      "properties": {
+        "minimumLevel": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "maximumLevel": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "proficiencyBonus": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 6
+        },
+        "die": {
+          "enum": [
+            "d4",
+            "d6",
+            "d8",
+            "d10",
+            "d12"
+          ]
+        }
+      }
+    },
+    "skillProficiencyApplication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "associatedWith",
+        "onProficiency"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "PROFICIENCY_RULE"
+        },
+        "subtype": {
+          "const": "SKILL_PROFICIENCY_APPLICATION"
+        },
+        "associatedWith": {
+          "const": "ABILITY_CHECK"
+        },
+        "onProficiency": {
+          "const": "ADD_PROFICIENCY_BONUS"
+        }
+      }
+    },
+    "toolSkillProficiencySynergy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype",
+        "whenBothProficienciesApply",
+        "dmMayGrantAdvantage"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "PROFICIENCY_RULE"
+        },
+        "subtype": {
+          "const": "TOOL_SKILL_SYNERGY"
+        },
+        "whenBothProficienciesApply": {
+          "const": true
+        },
+        "dmMayGrantAdvantage": {
+          "const": true
         }
       }
     },
@@ -285,7 +1156,8 @@
         "componentId",
         "kind",
         "subtype",
-        "trigger"
+        "trigger",
+        "appliesTo"
       ],
       "properties": {
         "kind": {
@@ -296,6 +1168,9 @@
         },
         "trigger": {
           "const": "start-of-turn-at-zero-hit-points"
+        },
+        "appliesTo": {
+          "const": "PLAYER_CHARACTER"
         },
         "componentId": {
           "type": "string",
@@ -502,7 +1377,11 @@
             "FLYING",
             "JUMPING",
             "SWIMMING",
-            "TELEPORTATION"
+            "TELEPORTATION",
+            "BURROWING",
+            "HOVERING",
+            "SPECIAL_SPEEDS",
+            "GRID_MOVEMENT"
           ]
         },
         "procedure": {
@@ -511,7 +1390,14 @@
             "distance-limit",
             "fall-damage",
             "speed-required",
-            "destination"
+            "destination",
+            "movement-mode",
+            "speed-selection",
+            "speed-adjustment",
+            "fall-trigger",
+            "fall-prevention",
+            "jump-distance",
+            "grid-movement-cost"
           ]
         },
         "speedType": {
@@ -553,62 +1439,837 @@
         },
         "appliesWhen": {
           "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
-        }
-      }
-    },
-    "areaGeometry": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "componentId",
-        "kind",
-        "subtype",
-        "shape"
-      ],
-      "properties": {
-        "kind": {
-          "const": "MOVEMENT_SPATIAL"
         },
-        "subtype": {
-          "const": "AREA_OF_EFFECT"
-        },
-        "shape": {
-          "enum": [
-            "cone",
-            "cube",
-            "cylinder",
-            "emanation",
-            "line",
-            "sphere"
-          ]
-        },
-        "origin": {
-          "enum": [
-            "source",
-            "point-in-space",
-            "creature"
-          ]
-        },
-        "dimensions": {
+        "qualifyingSpaces": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "type": "number",
-            "exclusiveMinimum": 0
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "restriction"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "CREATURE_PRESENCE"
+                  },
+                  "restriction": {
+                    "const": "not-tiny-and-not-ally"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "size"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "FURNITURE_SIZE"
+                  },
+                  "size": {
+                    "const": "same-or-larger-than-creature"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "materials"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "SURFACE_MATERIAL"
+                  },
+                  "materials": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                      "enum": [
+                        "heavy-snow",
+                        "ice",
+                        "rubble",
+                        "undergrowth"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "depth"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "LIQUID_DEPTH"
+                  },
+                  "depth": {
+                    "const": "shin-to-waist"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "size"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "NARROW_OPENING"
+                  },
+                  "size": {
+                    "const": "one-size-smaller-than-creature"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "minimumDegrees"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "SLOPE"
+                  },
+                  "minimumDegrees": {
+                    "const": 20
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "DM_ADJUDICATED_SIMILAR"
+                  }
+                }
+              }
+            ]
           }
         },
-        "unit": {
-          "const": "feet"
-        },
-        "componentId": {
-          "type": "string",
-          "minLength": 1,
-          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
-        },
-        "appliesWhen": {
-          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        "details": {
+          "$ref": "#/$defs/movementDetails"
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "FALLING"
+              }
+            },
+            "required": [
+              "subtype"
+            ]
+          },
+          "then": {
+            "required": [
+              "details"
+            ],
+            "properties": {
+              "details": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "FALL_DAMAGE",
+                      "FLYING_FALL_RULE"
+                    ]
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "BURROWING"
+              }
+            },
+            "required": [
+              "subtype"
+            ]
+          },
+          "then": {
+            "required": [
+              "details"
+            ],
+            "properties": {
+              "details": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "BURROWING_MOVEMENT"
+                    ]
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "HOVERING"
+              }
+            },
+            "required": [
+              "subtype"
+            ]
+          },
+          "then": {
+            "required": [
+              "details"
+            ],
+            "properties": {
+              "details": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "HOVER_PREVENTION"
+                    ]
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "SWIMMING"
+              }
+            },
+            "required": [
+              "subtype"
+            ]
+          },
+          "then": {
+            "required": [
+              "details"
+            ],
+            "properties": {
+              "details": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "SWIMMING_MOVEMENT",
+                      "SWIM_SPEED_EXCEPTION"
+                    ]
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "SPECIAL_SPEEDS"
+              }
+            },
+            "required": [
+              "subtype"
+            ]
+          },
+          "then": {
+            "required": [
+              "details"
+            ],
+            "properties": {
+              "details": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "SPECIAL_SPEED_SELECTION",
+                      "SPECIAL_SPEED_ADJUSTMENT"
+                    ]
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "GRID_MOVEMENT"
+              }
+            },
+            "required": [
+              "subtype"
+            ]
+          },
+          "then": {
+            "required": [
+              "details"
+            ],
+            "properties": {
+              "details": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "GRID_MOVEMENT_COST",
+                      "DIAGONAL_MOVEMENT_COST"
+                    ]
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "CLIMBING"
+              }
+            },
+            "required": [
+              "subtype"
+            ]
+          },
+          "then": {
+            "required": [
+              "details"
+            ],
+            "properties": {
+              "details": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "CLIMBING_MOVEMENT",
+                      "CLIMB_SPEED_EXCEPTION"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "FLYING"
+              }
+            },
+            "required": [
+              "subtype"
+            ]
+          },
+          "then": {
+            "required": [
+              "details"
+            ],
+            "properties": {
+              "details": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "FLIGHT_FALLING",
+                      "FLY_SPEED_CAPABILITY"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "JUMPING"
+              }
+            },
+            "required": [
+              "subtype"
+            ]
+          },
+          "then": {
+            "required": [
+              "details"
+            ],
+            "properties": {
+              "details": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "HIGH_JUMP",
+                      "LONG_JUMP",
+                      "JUMP_PROCEDURE_SELECTION"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "CRAWLING"
+              }
+            },
+            "required": [
+              "subtype"
+            ]
+          },
+          "then": {
+            "required": [
+              "details"
+            ],
+            "properties": {
+              "details": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "CRAWLING_MOVEMENT"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "areaGeometry": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "componentId",
+            "kind",
+            "subtype",
+            "shape",
+            "originPlacement",
+            "dimensionParameters",
+            "originIncluded"
+          ],
+          "properties": {
+            "componentId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            },
+            "kind": {
+              "const": "MOVEMENT_SPATIAL"
+            },
+            "subtype": {
+              "const": "AREA_OF_EFFECT"
+            },
+            "shape": {
+              "enum": [
+                "cone",
+                "cube",
+                "cylinder",
+                "emanation",
+                "line",
+                "sphere"
+              ]
+            },
+            "origin": {
+              "enum": [
+                "source",
+                "point-in-space",
+                "creature",
+                "object",
+                "shape-defined"
+              ]
+            },
+            "dimensions": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "unit": {
+              "const": "feet"
+            },
+            "appliesWhen": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+            },
+            "originPlacement": {
+              "enum": [
+                "POINT_AND_DIRECTION",
+                "ANY_CUBE_FACE",
+                "CENTER_OF_TOP_OR_BOTTOM",
+                "CREATURE_OR_OBJECT",
+                "POINT_IN_SPACE"
+              ]
+            },
+            "dimensionParameters": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "MAXIMUM_LENGTH",
+                  "SIDE_LENGTH",
+                  "BASE_RADIUS",
+                  "HEIGHT",
+                  "EXTENT",
+                  "LENGTH",
+                  "WIDTH",
+                  "RADIUS"
+                ]
+              }
+            },
+            "originIncluded": {
+              "enum": [
+                "INCLUDED",
+                "EXCLUDED_UNLESS_CREATOR_CHOOSES"
+              ]
+            },
+            "coneWidthRule": {
+              "const": "WIDTH_EQUALS_DISTANCE_FROM_ORIGIN"
+            },
+            "originBehavior": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "followsOriginUnless"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "EMANATION"
+                },
+                "followsOriginUnless": {
+                  "const": [
+                    "INSTANTANEOUS",
+                    "STATIONARY"
+                  ]
+                }
+              }
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "shape": {
+                    "const": "cone"
+                  }
+                },
+                "required": [
+                  "shape"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "originPlacement": {
+                    "const": "POINT_AND_DIRECTION"
+                  },
+                  "dimensionParameters": {
+                    "const": [
+                      "MAXIMUM_LENGTH"
+                    ]
+                  },
+                  "originIncluded": {
+                    "const": "EXCLUDED_UNLESS_CREATOR_CHOOSES"
+                  }
+                },
+                "required": [
+                  "originPlacement",
+                  "dimensionParameters",
+                  "originIncluded",
+                  "coneWidthRule"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "shape": {
+                    "const": "cube"
+                  }
+                },
+                "required": [
+                  "shape"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "originPlacement": {
+                    "const": "ANY_CUBE_FACE"
+                  },
+                  "dimensionParameters": {
+                    "const": [
+                      "SIDE_LENGTH"
+                    ]
+                  },
+                  "originIncluded": {
+                    "const": "EXCLUDED_UNLESS_CREATOR_CHOOSES"
+                  }
+                },
+                "required": [
+                  "originPlacement",
+                  "dimensionParameters",
+                  "originIncluded"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "shape": {
+                    "const": "cylinder"
+                  }
+                },
+                "required": [
+                  "shape"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "originPlacement": {
+                    "const": "CENTER_OF_TOP_OR_BOTTOM"
+                  },
+                  "dimensionParameters": {
+                    "const": [
+                      "BASE_RADIUS",
+                      "HEIGHT"
+                    ]
+                  },
+                  "originIncluded": {
+                    "const": "INCLUDED"
+                  }
+                },
+                "required": [
+                  "originPlacement",
+                  "dimensionParameters",
+                  "originIncluded"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "shape": {
+                    "const": "emanation"
+                  }
+                },
+                "required": [
+                  "shape"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "originPlacement": {
+                    "const": "CREATURE_OR_OBJECT"
+                  },
+                  "dimensionParameters": {
+                    "const": [
+                      "EXTENT"
+                    ]
+                  },
+                  "originIncluded": {
+                    "const": "EXCLUDED_UNLESS_CREATOR_CHOOSES"
+                  }
+                },
+                "required": [
+                  "originPlacement",
+                  "dimensionParameters",
+                  "originIncluded",
+                  "originBehavior"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "shape": {
+                    "const": "line"
+                  }
+                },
+                "required": [
+                  "shape"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "originPlacement": {
+                    "const": "POINT_AND_DIRECTION"
+                  },
+                  "dimensionParameters": {
+                    "const": [
+                      "LENGTH",
+                      "WIDTH"
+                    ]
+                  },
+                  "originIncluded": {
+                    "const": "EXCLUDED_UNLESS_CREATOR_CHOOSES"
+                  }
+                },
+                "required": [
+                  "originPlacement",
+                  "dimensionParameters",
+                  "originIncluded"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "shape": {
+                    "const": "sphere"
+                  }
+                },
+                "required": [
+                  "shape"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "originPlacement": {
+                    "const": "POINT_IN_SPACE"
+                  },
+                  "dimensionParameters": {
+                    "const": [
+                      "RADIUS"
+                    ]
+                  },
+                  "originIncluded": {
+                    "const": "INCLUDED"
+                  }
+                },
+                "required": [
+                  "originPlacement",
+                  "dimensionParameters",
+                  "originIncluded"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "componentId",
+            "kind",
+            "subtype",
+            "shapes",
+            "originPlacement",
+            "lineOfEffect",
+            "unseenOriginPlacement"
+          ],
+          "properties": {
+            "componentId": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            },
+            "kind": {
+              "const": "MOVEMENT_SPATIAL"
+            },
+            "subtype": {
+              "const": "AREA_OF_EFFECT"
+            },
+            "shapes": {
+              "type": "array",
+              "minItems": 6,
+              "maxItems": 6,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "cone",
+                  "cube",
+                  "cylinder",
+                  "emanation",
+                  "line",
+                  "sphere"
+                ]
+              }
+            },
+            "originPlacement": {
+              "const": "DEFINED_BY_SHAPE"
+            },
+            "lineOfEffect": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "locationIncludedWhen",
+                "blockedBy"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "STRAIGHT_LINE_FROM_ORIGIN"
+                },
+                "locationIncludedWhen": {
+                  "const": "AT_LEAST_ONE_UNBLOCKED_LINE"
+                },
+                "blockedBy": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "targetType",
+                    "id",
+                    "coverLevel"
+                  ],
+                  "properties": {
+                    "targetType": {
+                      "const": "rule"
+                    },
+                    "id": {
+                      "const": "rule:xphb:cover"
+                    },
+                    "coverLevel": {
+                      "const": "total"
+                    }
+                  }
+                }
+              }
+            },
+            "unseenOriginPlacement": {
+              "const": "NEAR_SIDE_OF_INTERVENING_OBSTRUCTION"
+            }
+          }
+        }
+      ]
     },
     "cover": {
       "type": "object",
@@ -641,6 +2302,12 @@
           "type": "integer",
           "minimum": 0
         },
+        "savingThrowAbility": {
+          "const": "dexterity"
+        },
+        "degreeSelection": {
+          "const": "MOST_PROTECTIVE_ONLY"
+        },
         "blocksTargeting": {
           "type": "boolean"
         },
@@ -652,7 +2319,130 @@
         "appliesWhen": {
           "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "level": {
+                "const": "half"
+              }
+            },
+            "required": [
+              "level"
+            ]
+          },
+          "then": {
+            "required": [
+              "armorClassBonus",
+              "savingThrowBonus",
+              "savingThrowAbility",
+              "blocksTargeting",
+              "degreeSelection"
+            ],
+            "properties": {
+              "armorClassBonus": {
+                "const": 2
+              },
+              "savingThrowBonus": {
+                "const": 2
+              },
+              "savingThrowAbility": {
+                "const": "dexterity"
+              },
+              "blocksTargeting": {
+                "const": false
+              },
+              "degreeSelection": {
+                "const": "MOST_PROTECTIVE_ONLY"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "level": {
+                "const": "three-quarters"
+              }
+            },
+            "required": [
+              "level"
+            ]
+          },
+          "then": {
+            "required": [
+              "armorClassBonus",
+              "savingThrowBonus",
+              "savingThrowAbility",
+              "blocksTargeting",
+              "degreeSelection"
+            ],
+            "properties": {
+              "armorClassBonus": {
+                "const": 5
+              },
+              "savingThrowBonus": {
+                "const": 5
+              },
+              "savingThrowAbility": {
+                "const": "dexterity"
+              },
+              "blocksTargeting": {
+                "const": false
+              },
+              "degreeSelection": {
+                "const": "MOST_PROTECTIVE_ONLY"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "level": {
+                "const": "total"
+              }
+            },
+            "required": [
+              "level"
+            ]
+          },
+          "then": {
+            "required": [
+              "blocksTargeting",
+              "degreeSelection"
+            ],
+            "properties": {
+              "blocksTargeting": {
+                "const": true
+              },
+              "degreeSelection": {
+                "const": "MOST_PROTECTIVE_ONLY"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "armorClassBonus"
+                  ]
+                },
+                {
+                  "required": [
+                    "savingThrowBonus"
+                  ]
+                },
+                {
+                  "required": [
+                    "savingThrowAbility"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
     },
     "obscuration": {
       "type": "object",
@@ -732,7 +2522,11 @@
           "const": "DAMAGE_HEALTH_STATE"
         },
         "subtype": {
-          "const": "DAMAGE"
+          "enum": [
+            "DAMAGE",
+            "RESISTANCE",
+            "VULNERABILITY"
+          ]
         },
         "damageTypes": {
           "type": "array",
@@ -796,10 +2590,116 @@
             }
           }
         },
+        "resolutionModifier": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "operation",
+            "multiplier",
+            "oncePerDamageInstance"
+          ],
+          "properties": {
+            "operation": {
+              "enum": [
+                "HALVE",
+                "DOUBLE"
+              ]
+            },
+            "multiplier": {
+              "enum": [
+                0.5,
+                2
+              ]
+            },
+            "rounding": {
+              "enum": [
+                "DOWN"
+              ]
+            },
+            "oncePerDamageInstance": {
+              "const": true
+            },
+            "sameOperationDoesNotStack": {
+              "const": true
+            }
+          }
+        },
         "appliesWhen": {
           "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "enum": [
+                  "RESISTANCE",
+                  "VULNERABILITY"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "damageTypes",
+              "resolutionModifier"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "RESISTANCE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resolutionModifier": {
+                "properties": {
+                  "operation": {
+                    "const": "HALVE"
+                  },
+                  "multiplier": {
+                    "const": 0.5
+                  },
+                  "rounding": {
+                    "const": "DOWN"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "VULNERABILITY"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resolutionModifier": {
+                "properties": {
+                  "operation": {
+                    "const": "DOUBLE"
+                  },
+                  "multiplier": {
+                    "const": 2
+                  },
+                  "rounding": false
+                },
+                "type": "object"
+              }
+            }
+          }
+        }
+      ]
     },
     "hitPoints": {
       "type": "object",
@@ -1001,7 +2901,11 @@
             "work",
             "gamble",
             "carouse",
-            "franchise"
+            "franchise",
+            "recuperate",
+            "relaxation",
+            "recuperate",
+            "relaxation"
           ]
         },
         "duration": {
@@ -1036,6 +2940,27 @@
             "complication"
           ]
         },
+        "minimumLifestyle": {
+          "enum": [
+            "MODEST"
+          ]
+        },
+        "recoveryOutcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/recoveryOutcome"
+          }
+        },
+        "sourceDefinedRecoveryCadence": {
+          "enum": [
+            "ADVANTAGE_WHILE_ACTIVITY_CONTINUES",
+            "AT_ACTIVITY_END"
+          ]
+        },
+        "excludeOngoingMagicalEffects": {
+          "type": "boolean"
+        },
         "componentId": {
           "type": "string",
           "minLength": 1,
@@ -1043,6 +2968,22 @@
         },
         "appliesWhen": {
           "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        },
+        "savingThrow": {
+          "$ref": "#/$defs/savingThrow"
+        },
+        "recoverySelection": {
+          "enum": [
+            "CHOOSE_ONE_ON_SUCCESS",
+            "CHOOSE_ONE_AT_ACTIVITY_END"
+          ]
+        },
+        "ongoingBenefits": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/recoveryOutcome"
+          }
         }
       }
     },
@@ -1114,9 +3055,180 @@
         },
         "unit": {
           "enum": [
+            "minute",
+            "minutes",
             "hour",
-            "hours"
+            "hours",
+            "day",
+            "days",
+            "week",
+            "weeks"
           ]
+        },
+        "durationQualifier": {
+          "enum": [
+            "EXACT",
+            "AT_LEAST"
+          ]
+        },
+        "minimumHitPointsToStart": {
+          "const": 1
+        },
+        "minimumHoursBetweenStarts": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "activityLimits": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "activity",
+              "amount",
+              "unit",
+              "limit"
+            ],
+            "properties": {
+              "activity": {
+                "enum": [
+                  "SLEEP",
+                  "LIGHT_ACTIVITY"
+                ]
+              },
+              "amount": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "unit": {
+                "enum": [
+                  "hour",
+                  "hours"
+                ]
+              },
+              "limit": {
+                "enum": [
+                  "MINIMUM",
+                  "MAXIMUM"
+                ]
+              }
+            }
+          }
+        },
+        "interruptions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "INITIATIVE",
+              "NON_CANTRIP_SPELL",
+              "DAMAGE",
+              "PHYSICAL_EXERTION"
+            ]
+          }
+        },
+        "physicalExertionInterruptionHours": {
+          "const": 1
+        },
+        "interruptionOutcome": {
+          "enum": [
+            "NO_BENEFITS",
+            "RESUME_WITH_ADDED_DURATION"
+          ]
+        },
+        "shortRestBenefitThresholdHours": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "addedDurationPerInterruption": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "properties": {
+            "amount": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "unit": {
+              "enum": [
+                "hour",
+                "hours"
+              ]
+            }
+          }
+        },
+        "recoveryOutcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/recoveryOutcome"
+          }
+        },
+        "recoveryLimitations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "appliesWhen",
+              "limitedOutcome"
+            ],
+            "properties": {
+              "appliesWhen": {
+                "enum": [
+                  "SLEEPING_IN_MEDIUM_OR_HEAVY_ARMOR"
+                ]
+              },
+              "limitedOutcome": {
+                "$ref": "#/$defs/recoveryOutcome"
+              }
+            }
+          }
+        },
+        "deprivationProcedure": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "intervalHours",
+            "savingThrow",
+            "failureOutcome",
+            "dcResetOnLongRest"
+          ],
+          "properties": {
+            "intervalHours": {
+              "const": 24
+            },
+            "savingThrow": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "ability",
+                "baseDc",
+                "increasePerConsecutiveInterval"
+              ],
+              "properties": {
+                "ability": {
+                  "const": "constitution"
+                },
+                "baseDc": {
+                  "const": 10
+                },
+                "increasePerConsecutiveInterval": {
+                  "const": 5
+                }
+              }
+            },
+            "failureOutcome": {
+              "$ref": "#/$defs/recoveryOutcome"
+            },
+            "dcResetOnLongRest": {
+              "const": true
+            }
+          }
         },
         "interruption": {
           "enum": [
@@ -1145,8 +3257,629 @@
         },
         "appliesWhen": {
           "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        },
+        "variant": {
+          "enum": [
+            "EPIC_HEROISM",
+            "GRITTY_REALISM",
+            "HEALING_SURGE",
+            "SLOW_NATURAL_HEALING"
+          ]
+        },
+        "permittedActivities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "READING",
+              "TALKING",
+              "EATING",
+              "STANDING_WATCH",
+              "LIGHT_ACTIVITY"
+            ]
+          }
+        },
+        "conditionDuringSleep": {
+          "$ref": "#/$defs/conditionReference"
         }
       }
+    },
+    "recoveryOutcome": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "resource"
+          ],
+          "properties": {
+            "kind": {
+              "const": "RESTORE_ALL"
+            },
+            "resource": {
+              "enum": [
+                "HIT_POINTS",
+                "HIT_DICE",
+                "REDUCED_HIT_POINT_MAXIMUM",
+                "REDUCED_ABILITY_SCORES"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "resource",
+            "numerator",
+            "denominator",
+            "minimum",
+            "rounding"
+          ],
+          "properties": {
+            "kind": {
+              "const": "RESTORE_FRACTION"
+            },
+            "resource": {
+              "const": "HIT_DICE"
+            },
+            "numerator": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "denominator": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "minimum": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "rounding": {
+              "const": "DOWN"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "condition",
+            "levels"
+          ],
+          "properties": {
+            "kind": {
+              "const": "REDUCE_CONDITION_LEVEL"
+            },
+            "condition": {
+              "$ref": "#/$defs/conditionReference"
+            },
+            "levels": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "effect"
+          ],
+          "properties": {
+            "kind": {
+              "const": "END_EFFECT"
+            },
+            "effect": {
+              "enum": [
+                "PREVENTS_HIT_POINT_RECOVERY",
+                "DISEASE_OR_POISON"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "effect",
+            "durationHours"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ADVANTAGE_ON_SAVES"
+            },
+            "effect": {
+              "const": "DISEASE_OR_POISON_RECOVERY"
+            },
+            "durationHours": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "resource",
+            "restType"
+          ],
+          "properties": {
+            "kind": {
+              "const": "NO_REST_RECOVERY"
+            },
+            "resource": {
+              "enum": [
+                "HIT_POINTS",
+                "SPELL_SLOTS"
+              ]
+            },
+            "restType": {
+              "enum": [
+                "SHORT_REST",
+                "LONG_REST"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "resource",
+            "basis",
+            "minimum",
+            "fractionDenominator",
+            "rounding"
+          ],
+          "properties": {
+            "kind": {
+              "const": "RESTORE_LEVEL_FRACTION"
+            },
+            "resource": {
+              "const": "HIT_DICE"
+            },
+            "basis": {
+              "const": "CHARACTER_LEVEL"
+            },
+            "minimum": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "fractionDenominator": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "rounding": {
+              "const": "DOWN"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "resource",
+            "formula",
+            "minimumPerDie"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SPEND_RESOURCE_TO_RECOVER"
+            },
+            "resource": {
+              "const": "HIT_DICE"
+            },
+            "formula": {
+              "const": "DIE_PLUS_CONSTITUTION_MODIFIER"
+            },
+            "minimumPerDie": {
+              "const": 1
+            },
+            "additionalChoiceAfterEachRoll": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "resource",
+            "restType"
+          ],
+          "properties": {
+            "kind": {
+              "const": "RECHARGE_AS_DEFINED_BY_FEATURE"
+            },
+            "resource": {
+              "const": "CLASS_FEATURE"
+            },
+            "restType": {
+              "enum": [
+                "SHORT_REST",
+                "LONG_REST"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "resource",
+            "restType"
+          ],
+          "properties": {
+            "kind": {
+              "const": "RESET_LIMITED_USE"
+            },
+            "resource": {
+              "const": "HEALING_SURGE"
+            },
+            "restType": {
+              "enum": [
+                "SHORT_REST",
+                "LONG_REST"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "condition",
+            "levels"
+          ],
+          "properties": {
+            "kind": {
+              "const": "INCREASE_CONDITION_LEVEL"
+            },
+            "condition": {
+              "$ref": "#/$defs/conditionReference"
+            },
+            "levels": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "resource",
+            "effect"
+          ],
+          "properties": {
+            "kind": {
+              "const": "RESTORE_ONE_REDUCED_ABILITY_SCORE"
+            },
+            "resource": {
+              "const": "ABILITY_SCORE"
+            },
+            "effect": {
+              "const": "REDUCED_SCORE"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "condition"
+          ],
+          "properties": {
+            "kind": {
+              "const": "NO_CONDITION_LEVEL_REDUCTION"
+            },
+            "condition": {
+              "$ref": "#/$defs/conditionReference"
+            }
+          }
+        }
+      ]
+    },
+    "initiative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "INITIATIVE_PROCEDURE"
+        },
+        "subtype": {
+          "enum": [
+            "INITIATIVE_SCORE",
+            "SIDE_INITIATIVE"
+          ]
+        },
+        "scoreConstruction": {
+          "enum": [
+            "PASSIVE_DEXTERITY_CHECK",
+            "DEXTERITY_CHECK_SCORE"
+          ]
+        },
+        "base": {
+          "const": 10
+        },
+        "ability": {
+          "const": "dexterity"
+        },
+        "advantageAdjustment": {
+          "const": 5
+        },
+        "disadvantageAdjustment": {
+          "const": -5
+        },
+        "roll": {
+          "const": "UNMODIFIED_D20"
+        },
+        "higherRollActsFirst": {
+          "type": "boolean"
+        },
+        "tieResolution": {
+          "enum": [
+            "REROLL_TIED_SIDES",
+            "HIGHEST_DEXTERITY_THEN_ROLL"
+          ]
+        },
+        "membersChooseOrder": {
+          "type": "boolean"
+        },
+        "roundEndsAfterAllSidesAct": {
+          "type": "boolean"
+        },
+        "multipleSidesOrderedByRoll": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "INITIATIVE_SCORE"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "scoreConstruction",
+              "base",
+              "ability"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "SIDE_INITIATIVE"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "roll",
+              "higherRollActsFirst",
+              "tieResolution",
+              "membersChooseOrder",
+              "roundEndsAfterAllSidesAct",
+              "multipleSidesOrderedByRoll"
+            ]
+          }
+        }
+      ]
+    },
+    "carryingCapacity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentId",
+        "kind",
+        "subtype"
+      ],
+      "properties": {
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "const": "CARRYING_CAPACITY_RULE"
+        },
+        "subtype": {
+          "enum": [
+            "SIZE_STRENGTH_CAPACITY",
+            "OPTIONAL_ENCUMBRANCE"
+          ]
+        },
+        "weightUnit": {
+          "const": "POUND"
+        },
+        "strengthBasis": {
+          "const": "STRENGTH_SCORE"
+        },
+        "sizeMultipliers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "sizes",
+              "carryMultiplier",
+              "dragLiftPushMultiplier"
+            ],
+            "properties": {
+              "sizes": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "TINY",
+                    "SMALL",
+                    "MEDIUM",
+                    "LARGE",
+                    "HUGE",
+                    "GARGANTUAN"
+                  ]
+                }
+              },
+              "carryMultiplier": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "dragLiftPushMultiplier": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            }
+          }
+        },
+        "encumbranceThresholds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "weightMultiplier",
+              "state",
+              "speedReductionFeet",
+              "abilityCheckDisadvantage",
+              "attackDisadvantage",
+              "savingThrowDisadvantage"
+            ],
+            "properties": {
+              "weightMultiplier": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "state": {
+                "enum": [
+                  "ENCUMBERED",
+                  "HEAVILY_ENCUMBERED"
+                ]
+              },
+              "speedReductionFeet": {
+                "type": "number",
+                "minimum": 0
+              },
+              "abilityCheckDisadvantage": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "strength",
+                    "dexterity",
+                    "constitution"
+                  ]
+                }
+              },
+              "attackDisadvantage": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "strength",
+                    "dexterity",
+                    "constitution"
+                  ]
+                }
+              },
+              "savingThrowDisadvantage": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "strength",
+                    "dexterity",
+                    "constitution"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "heavyEncumbranceMaximum": {
+          "enum": [
+            "STANDARD_CARRYING_CAPACITY"
+          ]
+        },
+        "dragLiftPushSpeedCapFeet": {
+          "type": "number",
+          "minimum": 0
+        },
+        "speedCapAppliesWhenAboveCarryCapacity": {
+          "type": "boolean"
+        },
+        "thresholdComparison": {
+          "const": "GREATER_THAN"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "SIZE_STRENGTH_CAPACITY"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "weightUnit",
+              "strengthBasis",
+              "sizeMultipliers"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "const": "OPTIONAL_ENCUMBRANCE"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "weightUnit",
+              "strengthBasis",
+              "encumbranceThresholds",
+              "heavyEncumbranceMaximum"
+            ]
+          }
+        }
+      ]
     },
     "vehicle": {
       "type": "object",
@@ -1349,6 +4082,10 @@
         },
         "appliesWhen": {
           "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/componentApplicability"
+        },
+        "reachFeet": {
+          "type": "integer",
+          "minimum": 1
         }
       }
     },
@@ -1369,6 +4106,756 @@
           }
         }
       ]
+    },
+    "movementDetails": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/fallingDamageProcedure"
+        },
+        {
+          "$ref": "#/$defs/flyingFallRule"
+        },
+        {
+          "$ref": "#/$defs/burrowingMovement"
+        },
+        {
+          "$ref": "#/$defs/surfaceMovement"
+        },
+        {
+          "$ref": "#/$defs/flightFalling"
+        },
+        {
+          "$ref": "#/$defs/hoverPrevention"
+        },
+        {
+          "$ref": "#/$defs/jumpProcedure"
+        },
+        {
+          "$ref": "#/$defs/specialSpeedSelection"
+        },
+        {
+          "$ref": "#/$defs/specialSpeedAdjustment"
+        },
+        {
+          "$ref": "#/$defs/swimSpeedException"
+        },
+        {
+          "$ref": "#/$defs/gridMovementCost"
+        },
+        {
+          "$ref": "#/$defs/crawlingMovement"
+        },
+        {
+          "$ref": "#/$defs/climbSpeedException"
+        },
+        {
+          "$ref": "#/$defs/flySpeedCapability"
+        },
+        {
+          "$ref": "#/$defs/jumpProcedureSelection"
+        }
+      ]
+    },
+    "fallingDamageProcedure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "distanceIncrementFeet",
+        "dicePerIncrement",
+        "maximumDiceCount",
+        "damageType",
+        "partialIncrementTreatment",
+        "landingCondition"
+      ],
+      "properties": {
+        "kind": {
+          "const": "FALL_DAMAGE"
+        },
+        "distanceIncrementFeet": {
+          "const": 10
+        },
+        "dicePerIncrement": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "diceCount",
+            "dieSize"
+          ],
+          "properties": {
+            "diceCount": {
+              "const": 1
+            },
+            "dieSize": {
+              "const": 6
+            }
+          }
+        },
+        "maximumDiceCount": {
+          "const": 20
+        },
+        "damageType": {
+          "const": "bludgeoning"
+        },
+        "partialIncrementTreatment": {
+          "const": "SOURCE_UNSPECIFIED"
+        },
+        "landingCondition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "condition",
+            "appliesWhen"
+          ],
+          "properties": {
+            "kind": {
+              "const": "APPLY_CONDITION"
+            },
+            "condition": {
+              "$ref": "#/$defs/conditionReference"
+            },
+            "appliesWhen": {
+              "const": "FALL_DAMAGE_NOT_AVOIDED"
+            }
+          }
+        }
+      }
+    },
+    "flyingFallRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "ruleStatus",
+        "fallingTriggers",
+        "prevention"
+      ],
+      "properties": {
+        "kind": {
+          "const": "FLYING_FALL_RULE"
+        },
+        "ruleStatus": {
+          "enum": [
+            "CORE",
+            "OPTIONAL"
+          ]
+        },
+        "fallingTriggers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "PRONE",
+              "INCAPACITATED",
+              "FLY_SPEED_ZERO",
+              "OTHERWISE_UNABLE_TO_MOVE"
+            ]
+          }
+        },
+        "prevention": {
+          "enum": [
+            "HOVER",
+            "HOVER_OR_MAGIC_HOLD_ALOFT"
+          ]
+        }
+      }
+    },
+    "burrowingMovement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "permittedMaterials",
+        "solidRock"
+      ],
+      "properties": {
+        "kind": {
+          "const": "BURROWING_MOVEMENT"
+        },
+        "permittedMaterials": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "sand",
+              "earth",
+              "mud",
+              "ice"
+            ]
+          }
+        },
+        "solidRock": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requiresSourceDefinedTrait"
+          ],
+          "properties": {
+            "requiresSourceDefinedTrait": {
+              "const": true
+            }
+          }
+        }
+      }
+    },
+    "surfaceMovement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "mode",
+        "additionalFeetPerFoot",
+        "difficultTerrainAdditionalFeetPerFoot",
+        "difficultTerrainCostRelationship",
+        "waivedWhenUsingSpeedType",
+        "optionalCheck"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "CLIMBING_MOVEMENT",
+            "SWIMMING_MOVEMENT"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "climbing",
+            "swimming"
+          ]
+        },
+        "additionalFeetPerFoot": {
+          "const": 1
+        },
+        "difficultTerrainAdditionalFeetPerFoot": {
+          "const": 2
+        },
+        "difficultTerrainCostRelationship": {
+          "const": "DO_NOT_ADD"
+        },
+        "waivedWhenUsingSpeedType": {
+          "enum": [
+            "climb",
+            "swim"
+          ]
+        },
+        "optionalCheck": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "trigger",
+            "dmMayRequire",
+            "ability",
+            "skill",
+            "dc"
+          ],
+          "properties": {
+            "trigger": {
+              "enum": [
+                "SLIPPERY_OR_FEW_HANDHOLDS",
+                "ROUGH_WATER_ANY_DISTANCE"
+              ]
+            },
+            "dmMayRequire": {
+              "const": true
+            },
+            "ability": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/ability"
+            },
+            "skill": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            },
+            "dc": {
+              "const": 15
+            }
+          }
+        }
+      }
+    },
+    "flightFalling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "fallingTriggers",
+        "hoverPreventsFall"
+      ],
+      "properties": {
+        "kind": {
+          "const": "FLIGHT_FALLING"
+        },
+        "fallingTriggers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "INCAPACITATED",
+              "PRONE",
+              "FLY_SPEED_ZERO"
+            ]
+          }
+        },
+        "hoverPreventsFall": {
+          "const": true
+        }
+      }
+    },
+    "hoverPrevention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "appliesWhile",
+        "appliesUnderRule"
+      ],
+      "properties": {
+        "kind": {
+          "const": "HOVER_PREVENTION"
+        },
+        "appliesWhile": {
+          "const": "FLYING"
+        },
+        "appliesUnderRule": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        }
+      }
+    },
+    "jumpProcedure": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "distanceFormula",
+            "runningStartFeet",
+            "standingJumpMultiplier",
+            "movementCostPerFoot",
+            "reachFormula"
+          ],
+          "properties": {
+            "kind": {
+              "const": "HIGH_JUMP"
+            },
+            "distanceFormula": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "baseFeet",
+                "ability",
+                "minimumFeet"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "BASE_PLUS_ABILITY_MODIFIER"
+                },
+                "baseFeet": {
+                  "const": 3
+                },
+                "ability": {
+                  "const": "strength"
+                },
+                "minimumFeet": {
+                  "const": 0
+                }
+              }
+            },
+            "runningStartFeet": {
+              "const": 10
+            },
+            "standingJumpMultiplier": {
+              "const": 0.5
+            },
+            "movementCostPerFoot": {
+              "const": 1
+            },
+            "reachFormula": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "jumpHeightMultiplier",
+                "creatureHeightMultiplier"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "JUMP_HEIGHT_PLUS_CREATURE_HEIGHT"
+                },
+                "jumpHeightMultiplier": {
+                  "const": 1
+                },
+                "creatureHeightMultiplier": {
+                  "const": 1.5
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "distanceFormula",
+            "runningStartFeet",
+            "standingJumpMultiplier",
+            "movementCostPerFoot",
+            "landingCheck",
+            "obstacleCheck"
+          ],
+          "properties": {
+            "kind": {
+              "const": "LONG_JUMP"
+            },
+            "distanceFormula": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "input"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "UP_TO_SOURCE_VALUE"
+                },
+                "input": {
+                  "const": "STRENGTH_SCORE"
+                }
+              }
+            },
+            "runningStartFeet": {
+              "const": 10
+            },
+            "standingJumpMultiplier": {
+              "const": 0.5
+            },
+            "movementCostPerFoot": {
+              "const": 1
+            },
+            "landingCheck": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "trigger",
+                "ability",
+                "skill",
+                "dc",
+                "failureCondition"
+              ],
+              "properties": {
+                "trigger": {
+                  "const": "LAND_IN_DIFFICULT_TERRAIN"
+                },
+                "ability": {
+                  "const": "dexterity"
+                },
+                "skill": {
+                  "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+                },
+                "dc": {
+                  "const": 10
+                },
+                "failureCondition": {
+                  "$ref": "#/$defs/conditionReference"
+                }
+              }
+            },
+            "obstacleCheck": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "dmMayRequire",
+                "maximumObstacleHeightFraction",
+                "ability",
+                "skill",
+                "dc",
+                "failureOutcome"
+              ],
+              "properties": {
+                "dmMayRequire": {
+                  "const": true
+                },
+                "maximumObstacleHeightFraction": {
+                  "const": 0.25
+                },
+                "ability": {
+                  "const": "strength"
+                },
+                "skill": {
+                  "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+                },
+                "dc": {
+                  "const": 10
+                },
+                "failureOutcome": {
+                  "const": "HIT_OBSTACLE"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "specialSpeedSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "canSwitchDuringMove",
+        "subtractDistanceAlreadyMoved",
+        "switchProhibitedWhenRemainingDistanceAtMost"
+      ],
+      "properties": {
+        "kind": {
+          "const": "SPECIAL_SPEED_SELECTION"
+        },
+        "canSwitchDuringMove": {
+          "const": true
+        },
+        "subtractDistanceAlreadyMoved": {
+          "const": true
+        },
+        "switchProhibitedWhenRemainingDistanceAtMost": {
+          "const": 0
+        }
+      }
+    },
+    "specialSpeedAdjustment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "affectedSpeedTypes",
+        "changeAmountRelationship",
+        "durationRelationship"
+      ],
+      "properties": {
+        "kind": {
+          "const": "SPECIAL_SPEED_ADJUSTMENT"
+        },
+        "affectedSpeedTypes": {
+          "const": "ALL_SPECIAL_SPEEDS"
+        },
+        "changeAmountRelationship": {
+          "const": "EQUAL_TO_SPEED_CHANGE"
+        },
+        "durationRelationship": {
+          "const": "SAME_DURATION"
+        }
+      }
+    },
+    "swimSpeedException": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "mode",
+        "avoidsNormalExtraMovementCost"
+      ],
+      "properties": {
+        "kind": {
+          "const": "SWIM_SPEED_EXCEPTION"
+        },
+        "mode": {
+          "const": "swimming"
+        },
+        "avoidsNormalExtraMovementCost": {
+          "const": true
+        }
+      }
+    },
+    "gridMovementCost": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "gridUnitFeet",
+            "movementUnitFeet",
+            "minimumMovementRemaining",
+            "extraCostRequiresFullPayment"
+          ],
+          "properties": {
+            "kind": {
+              "const": "GRID_MOVEMENT_COST"
+            },
+            "gridUnitFeet": {
+              "const": 5
+            },
+            "movementUnitFeet": {
+              "const": 5
+            },
+            "minimumMovementRemaining": {
+              "const": 1
+            },
+            "extraCostRequiresFullPayment": {
+              "const": true
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "gridUnitFeet",
+            "diagonalPatternFeet",
+            "patternContinuesAcrossStraightMovement",
+            "ruleOptional"
+          ],
+          "properties": {
+            "kind": {
+              "const": "DIAGONAL_MOVEMENT_COST"
+            },
+            "gridUnitFeet": {
+              "const": 5
+            },
+            "diagonalPatternFeet": {
+              "const": [
+                5,
+                10
+              ]
+            },
+            "patternContinuesAcrossStraightMovement": {
+              "const": true
+            },
+            "ruleOptional": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "crawlingMovement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "additionalFeetPerFoot",
+        "difficultTerrainAdditionalFeetPerFoot",
+        "difficultTerrainCostRelationship"
+      ],
+      "properties": {
+        "kind": {
+          "const": "CRAWLING_MOVEMENT"
+        },
+        "additionalFeetPerFoot": {
+          "const": 1
+        },
+        "difficultTerrainAdditionalFeetPerFoot": {
+          "const": 2
+        },
+        "difficultTerrainCostRelationship": {
+          "const": "DO_NOT_ADD"
+        }
+      }
+    },
+    "climbSpeedException": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "speedType",
+        "appliesTo",
+        "replacesSpeed",
+        "waivesClimbingExtraMovementCost"
+      ],
+      "properties": {
+        "kind": {
+          "const": "CLIMB_SPEED_EXCEPTION"
+        },
+        "speedType": {
+          "const": "climb"
+        },
+        "appliesTo": {
+          "const": "VERTICAL_SURFACE"
+        },
+        "replacesSpeed": {
+          "const": true
+        },
+        "waivesClimbingExtraMovementCost": {
+          "const": true
+        }
+      }
+    },
+    "flySpeedCapability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "travelMode",
+        "staysAloftUntil"
+      ],
+      "properties": {
+        "kind": {
+          "const": "FLY_SPEED_CAPABILITY"
+        },
+        "travelMode": {
+          "const": "AIR"
+        },
+        "staysAloftUntil": {
+          "const": [
+            "LANDS",
+            "FALLS",
+            "DIES"
+          ]
+        }
+      }
+    },
+    "jumpProcedureSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "selection",
+        "horizontal",
+        "vertical"
+      ],
+      "properties": {
+        "kind": {
+          "const": "JUMP_PROCEDURE_SELECTION"
+        },
+        "selection": {
+          "const": "ONE"
+        },
+        "horizontal": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "targetType",
+            "id"
+          ],
+          "properties": {
+            "targetType": {
+              "const": "rule"
+            },
+            "id": {
+              "const": "rule:xphb:long-jump"
+            }
+          }
+        },
+        "vertical": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "targetType",
+            "id"
+          ],
+          "properties": {
+            "targetType": {
+              "const": "rule"
+            },
+            "id": {
+              "const": "rule:xphb:high-jump"
+            }
+          }
+        }
+      }
     }
   }
 }

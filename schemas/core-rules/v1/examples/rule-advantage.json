@@ -5,6 +5,7 @@
     "source": "XPHB",
     "page": 360
   },
+  "ruleType": "CORE",
   "mechanics": [
     {
       "componentId": "advantage",

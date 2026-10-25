@@ -1,0 +1,20 @@
+{
+  "id": "language:mm:blink-dog",
+  "name": "Blink Dog",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 318,
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xmm:blink-dog"
+      }
+    ]
+  },
+  "typicalSpeakers": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:blink-dog"
+    }
+  ]
+}

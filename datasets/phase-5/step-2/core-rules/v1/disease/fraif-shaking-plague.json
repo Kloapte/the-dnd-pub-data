@@ -1,0 +1,139 @@
+{
+  "id": "disease:fraif:shaking-plague",
+  "name": "Shaking Plague",
+  "sourceMetadata": {
+    "source": "FRAiF",
+    "page": 70
+  },
+  "applicability": {
+    "targetCreatureTypes": [
+      "humanoid"
+    ]
+  },
+  "infection": {
+    "transmission": [
+      "contact"
+    ],
+    "savingThrow": {
+      "ability": "constitution",
+      "dc": 11
+    },
+    "exposures": [
+      {
+        "kind": "CONTACT_WITH_INFECTED_CREATURE",
+        "contact": "SKIN",
+        "sourceState": "INFECTED",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 11
+        },
+        "onFailure": "INFECTION",
+        "eligibleCreatureTypes": [
+          "humanoid"
+        ],
+        "onSuccessImmunity": {
+          "kind": "DISEASE_IMMUNITY",
+          "scope": "EXPOSING_CREATURE",
+          "duration": {
+            "amount": 24,
+            "unit": "hour"
+          }
+        }
+      }
+    ]
+  },
+  "symptoms": [
+    {
+      "kind": "CONDITION_LEVEL_CHANGE",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:exhaustion"
+      },
+      "amount": 1
+    },
+    {
+      "kind": "ABILITY_ROLL_MODIFIER",
+      "roll": "ability-check",
+      "direction": "disadvantage",
+      "ability": "dexterity"
+    },
+    {
+      "kind": "ABILITY_ROLL_MODIFIER",
+      "roll": "saving-throw",
+      "direction": "disadvantage",
+      "ability": "dexterity"
+    }
+  ],
+  "progression": [
+    {
+      "kind": "SAVING_THROW_BRANCH",
+      "branchId": "daily-exhaustion",
+      "trigger": {
+        "kind": "DAILY_AT",
+        "time": "DAWN"
+      },
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 11
+      },
+      "onFailure": [
+        {
+          "kind": "CHANGE_CONDITION_LEVEL",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:exhaustion"
+          },
+          "amount": 1
+        }
+      ],
+      "onSuccess": [
+        {
+          "kind": "CHANGE_CONDITION_LEVEL",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:exhaustion"
+          },
+          "amount": -1
+        }
+      ],
+      "endsWhen": {
+        "kind": "CONDITION_LEVEL_AT_OR_BELOW",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:exhaustion"
+        },
+        "level": 0
+      }
+    }
+  ],
+  "conditionGatedRestrictions": [
+    {
+      "kind": "LONG_REST_PREVENTED_RECOVERY",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:exhaustion"
+      },
+      "minimumLevel": 1,
+      "preventedRecoveries": [
+        "condition-level-reduction"
+      ]
+    }
+  ],
+  "effects": [
+    {
+      "kind": "SPELL_CASTING_SAVE",
+      "component": "SOMATIC",
+      "ability": "constitution",
+      "dc": 11,
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:exhaustion"
+      },
+      "onFailure": [
+        "SPELL_DISSIPATES",
+        "ACTION_OR_BONUS_ACTION_OR_REACTION_WASTED"
+      ],
+      "spellSlotOutcome": "NOT_EXPENDED"
+    }
+  ]
+}

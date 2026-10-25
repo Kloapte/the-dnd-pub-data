@@ -1,0 +1,38 @@
+{
+  "id": "rule:xphb:high-jump",
+  "name": "High Jump",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 368,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "high-jump-procedure",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "JUMPING",
+      "procedure": "jump-distance",
+      "details": {
+        "kind": "HIGH_JUMP",
+        "distanceFormula": {
+          "kind": "BASE_PLUS_ABILITY_MODIFIER",
+          "baseFeet": 3,
+          "ability": "strength",
+          "minimumFeet": 0
+        },
+        "runningStartFeet": 10,
+        "standingJumpMultiplier": 0.5,
+        "movementCostPerFoot": 1,
+        "reachFormula": {
+          "kind": "JUMP_HEIGHT_PLUS_CREATURE_HEIGHT",
+          "jumpHeightMultiplier": 1,
+          "creatureHeightMultiplier": 1.5
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "language:phb:celestial",
+  "name": "Celestial",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 123,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "language",
+        "id": "language:xphb:celestial"
+      }
+    ]
+  },
+  "category": "exotic",
+  "script": "Celestial",
+  "typicalSpeakers": [
+    {
+      "filter": {
+        "targetType": "creature",
+        "creatureTypes": [
+          "celestial"
+        ]
+      }
+    }
+  ]
+}

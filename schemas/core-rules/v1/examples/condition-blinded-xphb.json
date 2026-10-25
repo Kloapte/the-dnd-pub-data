@@ -34,7 +34,7 @@
       "roll": "attack",
       "direction": "disadvantage",
       "actor": "affected-creature",
-      "target": "attacker",
+      "target": "target",
       "appliesWhen": "affected-creature-attacks"
     }
   ]

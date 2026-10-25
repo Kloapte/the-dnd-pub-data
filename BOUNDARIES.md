@@ -32,6 +32,7 @@ Every source `entries` element, including nested content, must be inspected and 
 
 ## 3. Mechanical interpretation
 
+- The six-phase workflow distinguishes catalog-wide semantic discovery from canonical conversion: Phase 1 identifies and accounts for mechanics across every in-scope source record; Phase 2 designs contracts against that evidence; Phases 3 and 5 author canonical records only for their approved representative set or conversion batches. Discovery does not generate a full canonical dataset or weaken the complete-record interpretation and source-accounting requirements for records actually converted.
 - Codex must reason over the complete mechanics of each selected source record, including interactions and dependencies beyond the sample; selection size must not limit interpretation depth.
 - Prefer specific typed concepts within each model: action modes and timing, condition effects, disease incubation/progression/recovery, sense capabilities, status thresholds, rule procedures, etc.
 - Encode prerequisites, actors, targets, triggering events, scope, units, duration, exceptions, and source-edition distinctions when they affect behavior.

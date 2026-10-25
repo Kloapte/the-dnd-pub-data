@@ -1,0 +1,32 @@
+{
+  "id": "disease:gos:redface",
+  "name": "Redface",
+  "sourceMetadata": {
+    "source": "GoS",
+    "page": 168
+  },
+  "infection": {
+    "transmission": [
+      "inhalation"
+    ]
+  },
+  "references": [
+    {
+      "targetType": "disease",
+      "id": "disease:dmg:sight-rot",
+      "relationship": "same-effects-as"
+    }
+  ],
+  "effectProfile": {
+    "kind": "REUSE_DISEASE_EFFECT_PROFILE",
+    "sourceDisease": {
+      "targetType": "disease",
+      "id": "disease:dmg:sight-rot"
+    },
+    "components": [
+      "symptoms",
+      "progression",
+      "recovery"
+    ]
+  }
+}

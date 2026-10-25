@@ -1,0 +1,69 @@
+{
+  "id": "rule:xphb:long-jump",
+  "name": "Long Jump",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 370,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "long-jump-procedure",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "JUMPING",
+      "procedure": "jump-distance",
+      "details": {
+        "kind": "LONG_JUMP",
+        "distanceFormula": {
+          "kind": "UP_TO_SOURCE_VALUE",
+          "input": "STRENGTH_SCORE"
+        },
+        "runningStartFeet": 10,
+        "standingJumpMultiplier": 0.5,
+        "movementCostPerFoot": 1,
+        "landingCheck": {
+          "trigger": "LAND_IN_DIFFICULT_TERRAIN",
+          "ability": "dexterity",
+          "skill": {
+            "targetType": "skill",
+            "id": "skill:xphb:acrobatics"
+          },
+          "dc": 10,
+          "failureCondition": {
+            "targetType": "condition",
+            "id": "condition:xphb:prone"
+          }
+        },
+        "obstacleCheck": {
+          "dmMayRequire": true,
+          "maximumObstacleHeightFraction": 0.25,
+          "ability": "strength",
+          "skill": {
+            "targetType": "skill",
+            "id": "skill:xphb:athletics"
+          },
+          "dc": 10,
+          "failureOutcome": "HIT_OBSTACLE"
+        }
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:prone"
+    },
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:acrobatics"
+    },
+    {
+      "targetType": "skill",
+      "id": "skill:xphb:athletics"
+    }
+  ]
+}
