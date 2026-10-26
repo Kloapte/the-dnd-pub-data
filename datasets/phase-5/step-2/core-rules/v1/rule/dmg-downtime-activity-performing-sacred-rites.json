@@ -1,0 +1,16 @@
+{
+  "id": "rule:dmg:downtime-activity-performing-sacred-rites",
+  "name": "Downtime Activity: Performing Sacred Rites",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 129
+  },
+  "ruleType": "OPTIONAL",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:phb:inspiration",
+      "relationship": "activity-grants-inspiration"
+    }
+  ]
+}

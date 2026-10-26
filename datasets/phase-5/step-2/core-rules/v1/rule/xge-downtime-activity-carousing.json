@@ -1,0 +1,33 @@
+{
+  "id": "rule:xge:downtime-activity-carousing",
+  "name": "Downtime Activity: Carousing",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 127
+  },
+  "ruleType": "VARIANT_OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "carousing-activity",
+      "kind": "DOWNTIME_PROCEDURE",
+      "subtype": "ACTIVITY",
+      "procedure": "carouse",
+      "duration": {
+        "amount": 1,
+        "unit": "week"
+      },
+      "check": {
+        "componentId": "carousing-contact-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "charisma"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:phb:persuasion"
+        }
+      }
+    }
+  ]
+}

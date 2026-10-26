@@ -1,0 +1,35 @@
+{
+  "id": "rule:xphb:dead",
+  "name": "Dead",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 365,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:hit-points",
+      "relationship": "dead-state-hit-points"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:condition",
+      "relationship": "revival-condition-interactions"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:attunement",
+      "relationship": "revival-ends-attunement"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:exhaustion",
+      "relationship": "revival-reduces-exhaustion"
+    }
+  ]
+}

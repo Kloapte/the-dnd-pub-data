@@ -1,0 +1,9 @@
+{
+  "id": "rule:xge:downtime-activity-pit-fighting",
+  "name": "Downtime Activity: Pit Fighting",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 131
+  },
+  "ruleType": "VARIANT_OPTIONAL"
+}

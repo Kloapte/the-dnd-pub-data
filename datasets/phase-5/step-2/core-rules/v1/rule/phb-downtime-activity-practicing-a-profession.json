@@ -1,0 +1,17 @@
+{
+  "id": "rule:phb:downtime-activity-practicing-a-profession",
+  "name": "Downtime Activity: Practicing a Profession",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 187
+  },
+  "mechanics": [
+    {
+      "componentId": "profession-activity",
+      "kind": "DOWNTIME_PROCEDURE",
+      "subtype": "ACTIVITY",
+      "procedure": "work",
+      "minimumLifestyle": "MODEST"
+    }
+  ]
+}

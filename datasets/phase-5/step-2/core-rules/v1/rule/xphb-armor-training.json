@@ -1,0 +1,25 @@
+{
+  "id": "rule:xphb:armor-training",
+  "name": "Armor Training",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 361,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:disadvantage",
+      "relationship": "untrained-armor-imposes-disadvantage"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:d20-test",
+      "relationship": "armor-penalty-applies-to-strength-or-dexterity-tests"
+    }
+  ]
+}

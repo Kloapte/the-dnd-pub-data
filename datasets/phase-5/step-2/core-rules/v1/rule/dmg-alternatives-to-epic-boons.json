@@ -1,0 +1,21 @@
+{
+  "id": "rule:dmg:alternatives-to-epic-boons",
+  "name": "Alternatives to Epic Boons",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 230
+  },
+  "ruleType": "VARIANT",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:phb:customizing-ability-scores",
+      "relationship": "ability-score-increase-reward-option"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:phb:feats",
+      "relationship": "feat-reward-option"
+    }
+  ]
+}

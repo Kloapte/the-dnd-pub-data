@@ -1,0 +1,20 @@
+{
+  "id": "rule:xphb:weapon",
+  "name": "Weapon",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 377,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:object",
+      "relationship": "weapon-is-an-object"
+    }
+  ]
+}

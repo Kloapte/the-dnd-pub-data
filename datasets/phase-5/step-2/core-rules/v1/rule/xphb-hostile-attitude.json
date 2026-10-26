@@ -1,0 +1,33 @@
+{
+  "id": "rule:xphb:hostile-attitude",
+  "name": "Hostile [Attitude]",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 368,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "hostile-attitude",
+      "kind": "SOCIAL_PROCEDURE",
+      "subtype": "ATTITUDE",
+      "attitude": "hostile"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:ability-check",
+      "relationship": "influence-check"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:disadvantage",
+      "relationship": "source-imposes-on-influence-check"
+    }
+  ]
+}

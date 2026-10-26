@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:new-ability-scores-honor-and-sanity",
+  "name": "New Ability Scores: Honor and Sanity",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 264
+  },
+  "ruleType": "OPTIONAL"
+}

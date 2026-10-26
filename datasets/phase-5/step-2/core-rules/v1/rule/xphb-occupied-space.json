@@ -15,6 +15,11 @@
       "targetType": "rule",
       "id": "rule:xphb:creature",
       "relationship": "creature-occupies-space"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:object",
+      "relationship": "object-completely-fills-space"
     }
   ]
 }

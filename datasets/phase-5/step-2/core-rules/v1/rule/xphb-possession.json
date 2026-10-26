@@ -1,0 +1,25 @@
+{
+  "id": "rule:xphb:possession",
+  "name": "Possession",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 372,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "spell",
+      "id": "spell:xphb:protection-from-evil-and-good",
+      "relationship": "prevents-possession"
+    },
+    {
+      "targetType": "spell",
+      "id": "spell:xphb:dispel-evil-and-good",
+      "relationship": "ends-possession"
+    }
+  ]
+}

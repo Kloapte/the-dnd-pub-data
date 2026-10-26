@@ -1,0 +1,20 @@
+{
+  "id": "rule:aag:ship-to-ship-combat",
+  "name": "Ship-to-Ship Combat",
+  "sourceMetadata": {
+    "source": "AAG",
+    "page": 24
+  },
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:dmg:initiative-variants",
+      "relationship": "source-referenced-side-initiative-variant"
+    },
+    {
+      "targetType": "action",
+      "id": "action:phb:ready",
+      "relationship": "source-referenced-ready-action-for-boarding"
+    }
+  ]
+}

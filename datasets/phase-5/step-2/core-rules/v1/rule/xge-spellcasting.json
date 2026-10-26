@@ -1,0 +1,28 @@
+{
+  "id": "rule:xge:spellcasting",
+  "name": "Spellcasting",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 85
+  },
+  "ruleType": "OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "identify-spell-check",
+      "kind": "D20_TEST",
+      "subtype": "ABILITY_CHECK",
+      "abilities": [
+        "intelligence"
+      ],
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:phb:arcana"
+      },
+      "dc": {
+        "kind": "FIXED_PLUS_SPELL_LEVEL",
+        "base": 15,
+        "spellRole": "identified-spell"
+      }
+    }
+  ]
+}

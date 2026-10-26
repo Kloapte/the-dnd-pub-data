@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:hero-points",
+  "name": "Hero Points",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 264
+  },
+  "ruleType": "OPTIONAL"
+}

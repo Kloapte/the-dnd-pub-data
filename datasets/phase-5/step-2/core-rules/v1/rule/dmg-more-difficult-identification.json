@@ -1,0 +1,16 @@
+{
+  "id": "rule:dmg:more-difficult-identification",
+  "name": "More Difficult Identification",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 136
+  },
+  "ruleType": "VARIANT",
+  "references": [
+    {
+      "targetType": "spell",
+      "id": "spell:phb:identify",
+      "relationship": "identifies-magic-item-properties"
+    }
+  ]
+}

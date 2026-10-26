@@ -1,0 +1,9 @@
+{
+  "id": "rule:phb:customizing-ability-scores",
+  "name": "Customizing Ability Scores",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 13
+  },
+  "ruleType": "VARIANT"
+}

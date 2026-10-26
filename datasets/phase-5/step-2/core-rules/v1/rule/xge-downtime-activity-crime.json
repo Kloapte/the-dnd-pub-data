@@ -1,0 +1,9 @@
+{
+  "id": "rule:xge:downtime-activity-crime",
+  "name": "Downtime Activity: Crime",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 130
+  },
+  "ruleType": "VARIANT_OPTIONAL"
+}

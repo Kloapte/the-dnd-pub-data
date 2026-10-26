@@ -1,0 +1,46 @@
+{
+  "id": "rule:vgm:familiars",
+  "name": "Familiars",
+  "sourceMetadata": {
+    "source": "VGM",
+    "page": 213
+  },
+  "ruleType": "VARIANT",
+  "references": [
+    {
+      "targetType": "spell",
+      "id": "spell:phb:find-familiar",
+      "relationship": "defines-familiar-options"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:vgm:cranium-rat",
+      "relationship": "example-familiar"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:crawling-claw",
+      "relationship": "example-familiar"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:vgm:gazer",
+      "relationship": "example-familiar"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:imp",
+      "relationship": "example-familiar"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:pseudodragon",
+      "relationship": "example-familiar"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:quasit",
+      "relationship": "example-familiar"
+    }
+  ]
+}

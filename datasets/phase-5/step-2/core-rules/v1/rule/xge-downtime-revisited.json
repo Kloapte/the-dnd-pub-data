@@ -1,0 +1,76 @@
+{
+  "id": "rule:xge:downtime-revisited",
+  "name": "Downtime Revisited",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 123
+  },
+  "ruleType": "VARIANT_OPTIONAL",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xge:downtime-activity-buying-a-magic-item",
+      "relationship": "listed-as-example-downtime-activity"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xge:downtime-activity-carousing",
+      "relationship": "listed-as-example-downtime-activity"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xge:downtime-activity-crafting-an-item",
+      "relationship": "listed-as-example-downtime-activity"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xge:downtime-activity-crime",
+      "relationship": "listed-as-example-downtime-activity"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xge:downtime-activity-gambling",
+      "relationship": "listed-as-example-downtime-activity"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xge:downtime-activity-pit-fighting",
+      "relationship": "listed-as-example-downtime-activity"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xge:downtime-activity-relaxation",
+      "relationship": "listed-as-example-downtime-activity"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xge:downtime-activity-religious-service",
+      "relationship": "listed-as-example-downtime-activity"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xge:downtime-activity-research",
+      "relationship": "listed-as-example-downtime-activity"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xge:downtime-activity-scribing-a-spell-scroll",
+      "relationship": "listed-as-example-downtime-activity"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xge:downtime-activity-selling-a-magic-item",
+      "relationship": "listed-as-example-downtime-activity"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xge:downtime-activity-training",
+      "relationship": "listed-as-example-downtime-activity"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xge:downtime-activity-work",
+      "relationship": "listed-as-example-downtime-activity"
+    }
+  ]
+}

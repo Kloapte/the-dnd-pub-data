@@ -1,0 +1,8 @@
+{
+  "id": "rule:aag:crashing",
+  "name": "Crashing",
+  "sourceMetadata": {
+    "source": "AAG",
+    "page": 25
+  }
+}

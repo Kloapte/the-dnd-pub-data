@@ -1,0 +1,25 @@
+{
+  "id": "rule:xphb:unoccupied-space",
+  "name": "Unoccupied Space",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 377,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:occupied-space",
+      "relationship": "inverse-creature-occupancy"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:object",
+      "relationship": "space-is-unoccupied-only-if-no-object-completely-fills-it"
+    }
+  ]
+}

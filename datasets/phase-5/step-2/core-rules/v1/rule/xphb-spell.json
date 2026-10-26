@@ -1,0 +1,20 @@
+{
+  "id": "rule:xphb:spell",
+  "name": "Spell",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 374,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:magical-effect",
+      "relationship": "spell-is-a-magical-effect"
+    }
+  ]
+}

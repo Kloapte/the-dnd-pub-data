@@ -1,0 +1,15 @@
+{
+  "id": "rule:dmg:level-advancement-without-xp",
+  "name": "Level Advancement without XP",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 261
+  },
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:experience-points",
+      "relationship": "alternative-to-experience-point-leveling"
+    }
+  ]
+}

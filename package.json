@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "sync:core-rules:phase3-registers": "node tools/sync-phase-3-source-registers.cjs",
+    "aggregate:core-rules": "node tools/aggregate-core-rules-resources.cjs",
+    "generate:core-rules-reference-index": "node tools/generate-core-rules-reference-identities.cjs",
     "validate:core-rules": "node tools/validate-core-rules.cjs"
   },
   "devDependencies": {

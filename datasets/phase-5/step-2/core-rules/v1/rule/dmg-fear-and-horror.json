@@ -1,0 +1,48 @@
+{
+  "id": "rule:dmg:fear-and-horror",
+  "name": "Fear and Horror",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 266
+  },
+  "ruleType": "OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "fear-save",
+      "kind": "D20_TEST",
+      "subtype": "SAVING_THROW",
+      "savingThrow": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "wisdom"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "EFFECT_DEFINED"
+        }
+      }
+    },
+    {
+      "componentId": "horror-save",
+      "kind": "D20_TEST",
+      "subtype": "SAVING_THROW",
+      "savingThrow": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "charisma"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "EFFECT_DEFINED"
+        }
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "condition",
+      "id": "condition:phb:frightened",
+      "relationship": "fear-save-failure-condition"
+    }
+  ]
+}

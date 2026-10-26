@@ -1,0 +1,26 @@
+{
+  "id": "rule:dmg:renown",
+  "name": "Renown",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 22
+  },
+  "ruleType": "OPTIONAL",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:attitude",
+      "relationship": "renown-may-inform-default-attitude"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:friendly-attitude",
+      "relationship": "renown-threshold-example-attitude"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:indifferent-attitude",
+      "relationship": "renown-threshold-example-attitude"
+    }
+  ]
+}

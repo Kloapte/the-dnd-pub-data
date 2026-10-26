@@ -1,0 +1,3313 @@
+[
+  {
+    "id": "language:ai:deep-crow",
+    "name": "Deep Crow",
+    "sourceMetadata": {
+      "source": "AI",
+      "page": 210
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:ai:deep-crow"
+      }
+    ]
+  },
+  {
+    "id": "language:dsotdq:abanasinian",
+    "name": "Abanasinian",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Common"
+  },
+  {
+    "id": "language:dsotdq:common",
+    "name": "Common",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Common"
+  },
+  {
+    "id": "language:dsotdq:draconic",
+    "name": "Draconic",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "rare",
+    "script": "Draconic"
+  },
+  {
+    "id": "language:dsotdq:dwarvish",
+    "name": "Dwarvish",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Dwarvish"
+  },
+  {
+    "id": "language:dsotdq:elvish",
+    "name": "Elvish",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Elvish"
+  },
+  {
+    "id": "language:dsotdq:ergot",
+    "name": "Ergot",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Common"
+  },
+  {
+    "id": "language:dsotdq:gnomish",
+    "name": "Gnomish",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Common"
+  },
+  {
+    "id": "language:dsotdq:goblin",
+    "name": "Goblin",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "rare",
+    "script": "Dwarvish"
+  },
+  {
+    "id": "language:dsotdq:istarian",
+    "name": "Istarian",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "rare",
+    "script": "Istarian"
+  },
+  {
+    "id": "language:dsotdq:kenderspeak",
+    "name": "Kenderspeak",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Common"
+  },
+  {
+    "id": "language:dsotdq:kharolian",
+    "name": "Kharolian",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Common"
+  },
+  {
+    "id": "language:dsotdq:khur",
+    "name": "Khur",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Istarian"
+  },
+  {
+    "id": "language:dsotdq:kothian",
+    "name": "Kothian",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "rare",
+    "script": "Kothian"
+  },
+  {
+    "id": "language:dsotdq:nerakese",
+    "name": "Nerakese",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "rare",
+    "script": "Istarian"
+  },
+  {
+    "id": "language:dsotdq:nordmaarian",
+    "name": "Nordmaarian",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Istarian"
+  },
+  {
+    "id": "language:dsotdq:ogre",
+    "name": "Ogre",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "rare",
+    "script": "Ogre"
+  },
+  {
+    "id": "language:dsotdq:primordial",
+    "name": "Primordial",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "rare",
+    "script": "Primordial"
+  },
+  {
+    "id": "language:dsotdq:solamnic",
+    "name": "Solamnic",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Common"
+  },
+  {
+    "id": "language:dsotdq:sylvan",
+    "name": "Sylvan",
+    "sourceMetadata": {
+      "source": "DSotDQ",
+      "page": 9
+    },
+    "category": "rare",
+    "script": "Sylvan"
+  },
+  {
+    "id": "language:egw:marquesian",
+    "name": "Marquesian",
+    "sourceMetadata": {
+      "source": "EGW",
+      "page": 9
+    }
+  },
+  {
+    "id": "language:egw:naush",
+    "name": "Naush",
+    "sourceMetadata": {
+      "source": "EGW",
+      "page": 9
+    }
+  },
+  {
+    "id": "language:egw:zemnian",
+    "name": "Zemnian",
+    "sourceMetadata": {
+      "source": "EGW",
+      "page": 9
+    }
+  },
+  {
+    "id": "language:erlw:celestial",
+    "name": "Celestial",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "exotic",
+    "script": "Celestial",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "celestial"
+          ],
+          "sources": [
+            "ERLW"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:erlw:common",
+    "name": "Common",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "standard",
+    "script": "Common"
+  },
+  {
+    "id": "language:erlw:daelkyr",
+    "name": "Daelkyr",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "exotic",
+    "script": "Daelkyr",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "aberration"
+          ],
+          "sources": [
+            "ERLW"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:erlw:draconic",
+    "name": "Draconic",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "exotic",
+    "script": "Draconic",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "dragon"
+          ],
+          "sources": [
+            "ERLW"
+          ]
+        }
+      },
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "humanoid"
+          ],
+          "tags": [
+            {
+              "group": "any race",
+              "value": "dragonborn"
+            }
+          ],
+          "sources": [
+            "ERLW"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:erlw:dwarvish",
+    "name": "Dwarvish",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "standard",
+    "script": "Dwarvish"
+  },
+  {
+    "id": "language:erlw:elvish",
+    "name": "Elvish",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "standard",
+    "script": "Elvish"
+  },
+  {
+    "id": "language:erlw:giant",
+    "name": "Giant",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "standard",
+    "script": "Giant"
+  },
+  {
+    "id": "language:erlw:gnomish",
+    "name": "Gnomish",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "standard",
+    "script": "Dwarvish"
+  },
+  {
+    "id": "language:erlw:goblin",
+    "name": "Goblin",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "standard",
+    "script": "Goblin"
+  },
+  {
+    "id": "language:erlw:halfling",
+    "name": "Halfling",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "standard",
+    "script": "Common"
+  },
+  {
+    "id": "language:erlw:infernal",
+    "name": "Infernal",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "exotic",
+    "script": "Infernal",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "fiend"
+          ],
+          "sources": [
+            "ERLW"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:erlw:orc",
+    "name": "Orc",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "exotic",
+    "script": "Goblin"
+  },
+  {
+    "id": "language:erlw:primordial",
+    "name": "Primordial",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "exotic",
+    "script": "Primordial",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "elemental"
+          ],
+          "sources": [
+            "ERLW"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:erlw:quori",
+    "name": "Quori",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "exotic",
+    "script": "Quori",
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:erlw:inspired"
+      }
+    ]
+  },
+  {
+    "id": "language:erlw:riedran",
+    "name": "Riedran",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "standard",
+    "script": "Common"
+  },
+  {
+    "id": "language:erlw:sylvan",
+    "name": "Sylvan",
+    "sourceMetadata": {
+      "source": "ERLW",
+      "page": 6
+    },
+    "category": "exotic",
+    "script": "Elvish",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "fey"
+          ],
+          "sources": [
+            "ERLW"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:frhof:aglarondan",
+    "name": "Aglarondan",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:alzhedo",
+    "name": "Alzhedo",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:bothii",
+    "name": "Bothii",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:chessentan",
+    "name": "Chessentan",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:chondathan",
+    "name": "Chondathan",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:damaran",
+    "name": "Damaran",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:illuskan",
+    "name": "Illuskan",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:lantanese",
+    "name": "Lantanese",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:midani",
+    "name": "Midani",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:mulhorandi",
+    "name": "Mulhorandi",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:netherese",
+    "name": "Netherese",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:rashemi",
+    "name": "Rashemi",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:reghedjic",
+    "name": "Reghedjic",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:sespech",
+    "name": "Sespech",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:thayan",
+    "name": "Thayan",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:turmic",
+    "name": "Turmic",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:frhof:untheric",
+    "name": "Untheric",
+    "sourceMetadata": {
+      "source": "FRHoF",
+      "page": 49
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:ggr:abyssal",
+    "name": "Abyssal",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Infernal",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "selector": {
+            "kind": "TAG",
+            "value": "demon",
+            "source": "GGR"
+          }
+        }
+      },
+      {
+        "filter": {
+          "targetType": "creature",
+          "selector": {
+            "kind": "TAG",
+            "value": "devil",
+            "source": "GGR"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:ggr:celestial",
+    "name": "Celestial",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Celestial",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "selector": {
+            "kind": "TAG",
+            "value": "angel",
+            "source": "GGR"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:ggr:common",
+    "name": "Common",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Common",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "humanoid"
+          ],
+          "tags": [
+            {
+              "group": "any race",
+              "value": "human"
+            }
+          ],
+          "sources": [
+            "GGR"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:ggr:draconic",
+    "name": "Draconic",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Draconic",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "dragon"
+          ],
+          "sources": [
+            "GGR"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:ggr:druidic",
+    "name": "Druidic",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9
+    },
+    "category": "secret"
+  },
+  {
+    "id": "language:ggr:elvish",
+    "name": "Elvish",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Elvish",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "humanoid"
+          ],
+          "tags": [
+            {
+              "group": "any race",
+              "value": "elf"
+            }
+          ],
+          "sources": [
+            "GGR"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:ggr:giant",
+    "name": "Giant",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Minotaur",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "giant"
+          ],
+          "sources": [
+            "ERLW"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:ggr:goblin",
+    "name": "Goblin",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9,
+      "citations": [
+        {
+          "source": "GGR",
+          "page": 16
+        }
+      ]
+    },
+    "category": "standard",
+    "script": "Common",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "selector": {
+            "kind": "TAG",
+            "value": "any race",
+            "source": "GGR"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:ggr:kraul",
+    "name": "Kraul",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Kraul",
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:ggr:kraul-warrior"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:ggr:kraul-death-priest"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:ggr:devkarin-lich"
+      }
+    ]
+  },
+  {
+    "id": "language:ggr:loxodon",
+    "name": "Loxodon",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Elvish",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "selector": {
+            "kind": "TAG",
+            "value": "any race",
+            "source": "GGR"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:ggr:merfolk",
+    "name": "Merfolk",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Merfolk",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "selector": {
+            "kind": "TAG",
+            "value": "any race;merfolk",
+            "source": "GGR"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:ggr:minotaur",
+    "name": "Minotaur",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9
+    },
+    "category": "standard",
+    "script": "Minotaur"
+  },
+  {
+    "id": "language:ggr:sphinx",
+    "name": "Sphinx",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9
+    },
+    "category": "standard",
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:ggr:sphinx-of-judgment"
+      }
+    ]
+  },
+  {
+    "id": "language:ggr:sylvan",
+    "name": "Sylvan",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9,
+      "citations": [
+        {
+          "source": "GGR",
+          "page": 15
+        }
+      ]
+    },
+    "category": "standard",
+    "script": "Elvish",
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:ggr:conclave-dryad"
+      }
+    ]
+  },
+  {
+    "id": "language:ggr:thieves-cant",
+    "name": "Thieves' Cant",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9
+    },
+    "category": "secret"
+  },
+  {
+    "id": "language:ggr:vedalken",
+    "name": "Vedalken",
+    "sourceMetadata": {
+      "source": "GGR",
+      "page": 9,
+      "citations": [
+        {
+          "source": "PSK",
+          "page": 23
+        }
+      ]
+    },
+    "category": "standard",
+    "script": "Vedalken"
+  },
+  {
+    "id": "language:hotdq:netherese",
+    "name": "Netherese",
+    "sourceMetadata": {
+      "source": "HotDQ",
+      "page": 93,
+      "citations": [
+        {
+          "source": "ToD",
+          "page": 188
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:frhof:netherese"
+        }
+      ]
+    },
+    "script": "Draconic"
+  },
+  {
+    "id": "language:idrotf:loross",
+    "name": "Loross",
+    "sourceMetadata": {
+      "source": "IDRotF",
+      "page": 221
+    },
+    "script": "Draconic",
+    "intelligibility": [
+      {
+        "kind": "MUTUAL_INTELLIGIBILITY",
+        "mode": "SPOKEN",
+        "directionality": "MUTUAL",
+        "language": {
+          "targetType": "language",
+          "id": "language:phb:elvish"
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:mm:aarakocra",
+    "name": "Aarakocra",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 12,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:aarakocra"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:aarakocra"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:blink-dog",
+    "name": "Blink Dog",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 318,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:blink-dog"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:blink-dog"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:bullywug",
+    "name": "Bullywug",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 35,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:bullywug"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:bullywug"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:giant-eagle",
+    "name": "Giant Eagle",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 324
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:giant-eagle"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:giant-elk",
+    "name": "Giant Elk",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 325
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:giant-elk"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:giant-owl",
+    "name": "Giant Owl",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 327
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:giant-owl"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:gith",
+    "name": "Gith",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 160,
+      "citations": [
+        {
+          "source": "MTF",
+          "page": 90
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:gith"
+        }
+      ]
+    },
+    "script": "Tir'su",
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:githzerai-monk"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:githyanki-warrior"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:githzerai-zerth"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:githyanki-knight"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:gnoll",
+    "name": "Gnoll",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 163,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:gnoll"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:gnoll"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:gnoll-pack-lord"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:gnoll-fang-of-yeenoghu"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:grell",
+    "name": "Grell",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 172
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:grell"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:hook-horror",
+    "name": "Hook Horror",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 189,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:hook-horror"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:hook-horror"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:modron",
+    "name": "Modron",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 224,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:modron"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:monodrone"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:duodrone"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:tridrone"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:quadrone"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:pentadrone"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:otyugh",
+    "name": "Otyugh",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 248,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:otyugh"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:otyugh"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:sahuagin",
+    "name": "Sahuagin",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 263,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:sahuagin"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:sahuagin"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:sahuagin-priestess"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:sahuagin-baron"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:slaad",
+    "name": "Slaad",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 276,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:slaad"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:slaad-tadpole"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:red-slaad"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:blue-slaad"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:green-slaad"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:gray-slaad"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:death-slaad"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:sphinx",
+    "name": "Sphinx",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 281
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:gynosphinx"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:androsphinx"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:thri-kreen",
+    "name": "Thri-kreen",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 288,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:thri-kreen"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:thri-kreen"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:troglodyte",
+    "name": "Troglodyte",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 290,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:troglodyte"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:troglodyte"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:umber-hulk",
+    "name": "Umber Hulk",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 292,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:umber-hulk"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:umber-hulk"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:winter-wolf",
+    "name": "Winter Wolf",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 340
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:winter-wolf"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:worg",
+    "name": "Worg",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 341,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:worg"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:worg"
+      }
+    ]
+  },
+  {
+    "id": "language:mm:yeti",
+    "name": "Yeti",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 305,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xmm:yeti"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:yeti"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:abominable-yeti"
+      }
+    ]
+  },
+  {
+    "id": "language:mot:celestial",
+    "name": "Celestial",
+    "sourceMetadata": {
+      "source": "MOT",
+      "page": 9
+    },
+    "script": "Celestial"
+  },
+  {
+    "id": "language:mot:common",
+    "name": "Common",
+    "sourceMetadata": {
+      "source": "MOT",
+      "page": 9
+    },
+    "script": "Common"
+  },
+  {
+    "id": "language:mot:draconic",
+    "name": "Draconic",
+    "sourceMetadata": {
+      "source": "MOT",
+      "page": 9
+    },
+    "script": "Draconic"
+  },
+  {
+    "id": "language:mot:giant",
+    "name": "Giant",
+    "sourceMetadata": {
+      "source": "MOT",
+      "page": 9
+    },
+    "script": "Minotaur"
+  },
+  {
+    "id": "language:mot:leonin",
+    "name": "Leonin",
+    "sourceMetadata": {
+      "source": "MOT",
+      "page": 9
+    },
+    "script": "Common"
+  },
+  {
+    "id": "language:mot:minotaur",
+    "name": "Minotaur",
+    "sourceMetadata": {
+      "source": "MOT",
+      "page": 9
+    },
+    "script": "Minotaur"
+  },
+  {
+    "id": "language:mot:primordial",
+    "name": "Primordial",
+    "sourceMetadata": {
+      "source": "MOT",
+      "page": 9
+    },
+    "script": "Common"
+  },
+  {
+    "id": "language:mot:sphinx",
+    "name": "Sphinx",
+    "sourceMetadata": {
+      "source": "MOT",
+      "page": 9
+    }
+  },
+  {
+    "id": "language:mot:sylvan",
+    "name": "Sylvan",
+    "sourceMetadata": {
+      "source": "MOT",
+      "page": 9
+    },
+    "script": "Elvish"
+  },
+  {
+    "id": "language:mtf:kruthik",
+    "name": "Kruthik",
+    "sourceMetadata": {
+      "source": "MTF",
+      "page": 211
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:mtf:young-kruthik"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mtf:adult-kruthik"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mtf:kruthik-hive-lord"
+      }
+    ]
+  },
+  {
+    "id": "language:oota:ixitxachitl",
+    "name": "Ixitxachitl",
+    "sourceMetadata": {
+      "source": "OotA",
+      "page": 225
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:oota:ixitxachitl"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:oota:ixitxachitl-cleric"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:oota:vampiric-ixitxachitl"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:oota:vampiric-ixitxachitl-cleric"
+      }
+    ]
+  },
+  {
+    "id": "language:phb:abyssal",
+    "name": "Abyssal",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:abyssal"
+        }
+      ]
+    },
+    "category": "exotic",
+    "script": "Infernal",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "selector": {
+            "kind": "TAG",
+            "value": "demon"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:celestial",
+    "name": "Celestial",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:celestial"
+        }
+      ]
+    },
+    "category": "exotic",
+    "script": "Celestial",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "celestial"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:common",
+    "name": "Common",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:common"
+        }
+      ]
+    },
+    "category": "standard",
+    "script": "Common",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "humanoid"
+          ],
+          "tags": [
+            {
+              "group": "any race",
+              "value": "human"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:deep-speech",
+    "name": "Deep Speech",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:deep-speech"
+        }
+      ]
+    },
+    "category": "exotic"
+  },
+  {
+    "id": "language:phb:draconic",
+    "name": "Draconic",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "PHB",
+          "page": 32
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:draconic"
+        }
+      ]
+    },
+    "category": "exotic",
+    "script": "Draconic",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "dragon"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:druidic",
+    "name": "Druidic",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 64,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:druidic"
+        }
+      ]
+    },
+    "category": "secret",
+    "communicationModes": [
+      "SPOKEN",
+      "LEFT_MESSAGE"
+    ],
+    "communicationCapabilities": [
+      {
+        "kind": "CONCEALED_MESSAGE",
+        "channel": "LEFT_MESSAGE",
+        "comprehension": {
+          "kind": "REQUIRES_LANGUAGE_KNOWLEDGE"
+        },
+        "recognition": {
+          "kind": "AUTOMATIC_IF_LANGUAGE_KNOWN",
+          "otherwise": {
+            "kind": "CHECK_FOR_PRESENCE",
+            "ability": "wisdom",
+            "skill": {
+              "targetType": "skill",
+              "id": "skill:phb:perception"
+            },
+            "dc": 15,
+            "outcome": "DETECT_PRESENCE_ONLY"
+          }
+        },
+        "deciphering": {
+          "kind": "MAGIC_REQUIRED_FOR_NON_KNOWERS"
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:dwarvish",
+    "name": "Dwarvish",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "PHB",
+          "page": 18
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:dwarvish"
+        }
+      ]
+    },
+    "category": "standard",
+    "script": "Dwarvish",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "humanoid"
+          ],
+          "tags": [
+            {
+              "group": "any race",
+              "value": "dwarf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:elvish",
+    "name": "Elvish",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "PHB",
+          "page": 21
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:elvish"
+        }
+      ]
+    },
+    "category": "standard",
+    "script": "Elvish",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "humanoid"
+          ],
+          "tags": [
+            {
+              "group": "any race",
+              "value": "elf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:giant",
+    "name": "Giant",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:giant"
+        }
+      ]
+    },
+    "category": "standard",
+    "script": "Dwarvish",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "giant"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:gnomish",
+    "name": "Gnomish",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "PHB",
+          "page": 35
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:gnomish"
+        }
+      ]
+    },
+    "category": "standard",
+    "script": "Dwarvish",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "humanoid"
+          ],
+          "tags": [
+            {
+              "group": "any race",
+              "value": "gnome"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:goblin",
+    "name": "Goblin",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:goblin"
+        }
+      ]
+    },
+    "category": "standard",
+    "script": "Dwarvish",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "selector": {
+            "kind": "TAG",
+            "value": "goblinoid"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:halfling",
+    "name": "Halfling",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "PHB",
+          "page": 26
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:halfling"
+        }
+      ]
+    },
+    "category": "standard",
+    "script": "Common",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "humanoid"
+          ],
+          "tags": [
+            {
+              "group": "any race",
+              "value": "halfling"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:infernal",
+    "name": "Infernal",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:infernal"
+        }
+      ]
+    },
+    "category": "exotic",
+    "script": "Infernal",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "selector": {
+            "kind": "TAG",
+            "value": "devil"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:orc",
+    "name": "Orc",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:orc"
+        }
+      ]
+    },
+    "category": "standard",
+    "script": "Dwarvish",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "selector": {
+            "kind": "TAG",
+            "value": "orc"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:primordial",
+    "name": "Primordial",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "EEPC",
+          "page": 9
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:primordial"
+        }
+      ]
+    },
+    "category": "exotic",
+    "script": "Dwarvish",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "elemental"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:sylvan",
+    "name": "Sylvan",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:sylvan"
+        }
+      ]
+    },
+    "category": "exotic",
+    "script": "Elvish",
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "fey"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:phb:thieves-cant",
+    "name": "Thieves' Cant",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 94,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:thieves-cant"
+        }
+      ]
+    },
+    "category": "secret",
+    "communicationModes": [
+      "ORDINARY_CONVERSATION"
+    ],
+    "communicationCapabilities": [
+      {
+        "kind": "CONCEALED_MESSAGE",
+        "channel": "ORDINARY_CONVERSATION",
+        "comprehension": {
+          "kind": "REQUIRES_LANGUAGE_KNOWLEDGE"
+        },
+        "communicationDurationMultiplier": 4
+      }
+    ]
+  },
+  {
+    "id": "language:phb:undercommon",
+    "name": "Undercommon",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 123,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:xphb:undercommon"
+        }
+      ]
+    },
+    "category": "exotic",
+    "script": "Elvish"
+  },
+  {
+    "id": "language:psa:khenra",
+    "name": "Khenra",
+    "sourceMetadata": {
+      "source": "PSA",
+      "page": 18
+    }
+  },
+  {
+    "id": "language:psa:naga",
+    "name": "Naga",
+    "sourceMetadata": {
+      "source": "PSA",
+      "page": 18
+    }
+  },
+  {
+    "id": "language:psd:aven",
+    "name": "Aven",
+    "sourceMetadata": {
+      "source": "PSD",
+      "page": 6
+    }
+  },
+  {
+    "id": "language:psd:homarid",
+    "name": "Homarid",
+    "sourceMetadata": {
+      "source": "PSD",
+      "page": 15
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:psd:homarid"
+      }
+    ]
+  },
+  {
+    "id": "language:psd:keldon",
+    "name": "Keldon",
+    "sourceMetadata": {
+      "source": "PSD",
+      "page": 19
+    }
+  },
+  {
+    "id": "language:psi:common",
+    "name": "Common",
+    "sourceMetadata": {
+      "source": "PSI",
+      "page": 9
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:psi:vampire-neonate"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:psi:werewolf-krallenhorde"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:psi:geist"
+      }
+    ]
+  },
+  {
+    "id": "language:psi:demonic",
+    "name": "Demonic",
+    "sourceMetadata": {
+      "source": "PSI",
+      "page": 9
+    }
+  },
+  {
+    "id": "language:psi:draconic",
+    "name": "Draconic",
+    "sourceMetadata": {
+      "source": "PSI",
+      "page": 9
+    },
+    "typicalSpeakers": [
+      {
+        "filter": {
+          "targetType": "creature",
+          "creatureTypes": [
+            "dragon"
+          ],
+          "sources": [
+            "PSI"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "language:psi:primordial",
+    "name": "Primordial",
+    "sourceMetadata": {
+      "source": "PSI",
+      "page": 9
+    }
+  },
+  {
+    "id": "language:psx:coalition-pidgin",
+    "name": "Coalition Pidgin",
+    "sourceMetadata": {
+      "source": "PSX",
+      "page": 6
+    }
+  },
+  {
+    "id": "language:psx:common-trade-pidgin",
+    "name": "Common Trade Pidgin",
+    "sourceMetadata": {
+      "source": "PSX",
+      "page": 6
+    }
+  },
+  {
+    "id": "language:psx:itzocan",
+    "name": "Itzocan",
+    "sourceMetadata": {
+      "source": "PSX",
+      "page": 6
+    }
+  },
+  {
+    "id": "language:psx:merfolk",
+    "name": "Merfolk",
+    "sourceMetadata": {
+      "source": "PSX",
+      "page": 6
+    },
+    "script": "Merfolk"
+  },
+  {
+    "id": "language:psx:siren",
+    "name": "Siren",
+    "sourceMetadata": {
+      "source": "PSX",
+      "page": 17
+    }
+  },
+  {
+    "id": "language:psx:vampire",
+    "name": "Vampire",
+    "sourceMetadata": {
+      "source": "PSX",
+      "page": 6
+    }
+  },
+  {
+    "id": "language:rot:ice-toad",
+    "name": "Ice Toad",
+    "sourceMetadata": {
+      "source": "RoT",
+      "page": 90,
+      "citations": [
+        {
+          "source": "ToD",
+          "page": 185
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:rot:ice-toad"
+      }
+    ]
+  },
+  {
+    "id": "language:scag:alzhedo",
+    "name": "Alzhedo",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:frhof:alzhedo"
+        }
+      ]
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:scag:chessentan",
+    "name": "Chessentan",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:frhof:chessentan"
+        }
+      ]
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:scag:chondathan",
+    "name": "Chondathan",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:frhof:chondathan"
+        }
+      ]
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:scag:damaran",
+    "name": "Damaran",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:frhof:damaran"
+        }
+      ]
+    },
+    "script": "Dethek"
+  },
+  {
+    "id": "language:scag:dambrathan",
+    "name": "Dambrathan",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112
+    },
+    "script": "Espruar"
+  },
+  {
+    "id": "language:scag:guran",
+    "name": "Guran",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112
+    },
+    "script": "Thorass",
+    "origin": [
+      {
+        "targetType": "language",
+        "id": "language:scag:roushoum"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:rashemi"
+      }
+    ]
+  },
+  {
+    "id": "language:scag:halruaan",
+    "name": "Halruaan",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112
+    },
+    "script": "Draconic"
+  },
+  {
+    "id": "language:scag:illuskan",
+    "name": "Illuskan",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:frhof:illuskan"
+        }
+      ]
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:scag:midani",
+    "name": "Midani",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:frhof:midani"
+        }
+      ]
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:scag:mulhorandi",
+    "name": "Mulhorandi",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:frhof:mulhorandi"
+        }
+      ]
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:scag:rashemi",
+    "name": "Rashemi",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:frhof:rashemi"
+        }
+      ]
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:scag:roushoum",
+    "name": "Roushoum",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:scag:shaaran",
+    "name": "Shaaran",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112
+    },
+    "script": "Dethek"
+  },
+  {
+    "id": "language:scag:shou",
+    "name": "Shou",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:scag:thayan",
+    "name": "Thayan",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:frhof:thayan"
+        }
+      ]
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:scag:tuigan",
+    "name": "Tuigan",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:scag:turmic",
+    "name": "Turmic",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:frhof:turmic"
+        }
+      ]
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:scag:uluik",
+    "name": "Uluik",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:scag:untheric",
+    "name": "Untheric",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:frhof:untheric"
+        }
+      ]
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:scag:waelan",
+    "name": "Waelan",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112
+    },
+    "script": "Thorass"
+  },
+  {
+    "id": "language:skt:bothii",
+    "name": "Bothii",
+    "sourceMetadata": {
+      "source": "SKT",
+      "page": 86,
+      "reprintedAs": [
+        {
+          "targetType": "language",
+          "id": "language:frhof:bothii"
+        }
+      ]
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:skt:uthgardt-barbarian-leader"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:skt:uthgardt-shaman"
+      }
+    ]
+  },
+  {
+    "id": "language:skt:yikaria",
+    "name": "Yikaria",
+    "sourceMetadata": {
+      "source": "SKT",
+      "page": 244
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:skt:yakfolk-priest"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:skt:yakfolk-warrior"
+      }
+    ]
+  },
+  {
+    "id": "language:tftyp:olman",
+    "name": "Olman",
+    "sourceMetadata": {
+      "source": "TftYP",
+      "page": 238
+    }
+  },
+  {
+    "id": "language:vgm:grung",
+    "name": "Grung",
+    "sourceMetadata": {
+      "source": "VGM",
+      "page": 156
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:vgm:grung"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:vgm:grung-wildling"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:vgm:grung-elite-warrior"
+      }
+    ]
+  },
+  {
+    "id": "language:vgm:qualith",
+    "name": "Qualith",
+    "sourceMetadata": {
+      "source": "VGM",
+      "page": 75
+    },
+    "script": "Qualith"
+  },
+  {
+    "id": "language:vgm:tlincalli",
+    "name": "Tlincalli",
+    "sourceMetadata": {
+      "source": "VGM",
+      "page": 193
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:vgm:tlincalli"
+      }
+    ]
+  },
+  {
+    "id": "language:vgm:vegepygmy",
+    "name": "Vegepygmy",
+    "sourceMetadata": {
+      "source": "VGM",
+      "page": 196
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:vgm:vegepygmy"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:vgm:vegepygmy-chief"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:aarakocra",
+    "name": "Aarakocra",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 10
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:aarakocra-aeromancer"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:aarakocra-skirmisher"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:blink-dog",
+    "name": "Blink Dog",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 46
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:blink-dog"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:bullywug",
+    "name": "Bullywug",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 64
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:bullywug-bog-sage"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:bullywug-warrior"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:gith",
+    "name": "Gith",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 135
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:githyanki-dracomancer"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:githyanki-knight"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:githyanki-warrior"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:githzerai-monk"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:githzerai-psion"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:githzerai-zerth"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:gnoll",
+    "name": "Gnoll",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 141
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:gnoll-demoniac"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:gnoll-fang-of-yeenoghu"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:gnoll-pack-lord"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:gnoll-warrior"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:hook-horror",
+    "name": "Hook Horror",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 173
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:hook-horror"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:modron",
+    "name": "Modron",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 217
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:modron-duodrone"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:modron-monodrone"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:modron-pentadrone"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:modron-quadrone"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:modron-tridrone"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:otyugh",
+    "name": "Otyugh",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 233
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:otyugh"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:sahuagin",
+    "name": "Sahuagin",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 265
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:sahuagin-baron"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:sahuagin-priest"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:sahuagin-warrior"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:slaad",
+    "name": "Slaad",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 285
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:blue-slaad"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:death-slaad"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:gray-slaad"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:green-slaad"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:red-slaad"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:thri-kreen",
+    "name": "Thri-kreen",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 306
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:thri-kreen-marauder"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:thri-kreen-psion"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:troglodyte",
+    "name": "Troglodyte",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 309
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:troglodyte"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:umber-hulk",
+    "name": "Umber Hulk",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 312
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:umber-hulk"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:worg",
+    "name": "Worg",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 335
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:dire-worg"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:worg"
+      }
+    ]
+  },
+  {
+    "id": "language:xmm:yeti",
+    "name": "Yeti",
+    "sourceMetadata": {
+      "source": "XMM",
+      "page": 339
+    },
+    "typicalSpeakers": [
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:abominable-yeti"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:xmm:yeti"
+      }
+    ]
+  },
+  {
+    "id": "language:xphb:abyssal",
+    "name": "Abyssal",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "rare"
+  },
+  {
+    "id": "language:xphb:celestial",
+    "name": "Celestial",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "rare"
+  },
+  {
+    "id": "language:xphb:common",
+    "name": "Common",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:xphb:common-sign-language",
+    "name": "Common Sign Language",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:xphb:deep-speech",
+    "name": "Deep Speech",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "rare"
+  },
+  {
+    "id": "language:xphb:draconic",
+    "name": "Draconic",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "standard",
+    "script": "Draconic"
+  },
+  {
+    "id": "language:xphb:druidic",
+    "name": "Druidic",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "rare"
+  },
+  {
+    "id": "language:xphb:dwarvish",
+    "name": "Dwarvish",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:xphb:elvish",
+    "name": "Elvish",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:xphb:giant",
+    "name": "Giant",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:xphb:gnomish",
+    "name": "Gnomish",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:xphb:goblin",
+    "name": "Goblin",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:xphb:halfling",
+    "name": "Halfling",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:xphb:infernal",
+    "name": "Infernal",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "rare"
+  },
+  {
+    "id": "language:xphb:orc",
+    "name": "Orc",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "standard"
+  },
+  {
+    "id": "language:xphb:primordial",
+    "name": "Primordial",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "rare"
+  },
+  {
+    "id": "language:xphb:sylvan",
+    "name": "Sylvan",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "rare"
+  },
+  {
+    "id": "language:xphb:thieves-cant",
+    "name": "Thieves' Cant",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "rare"
+  },
+  {
+    "id": "language:xphb:undercommon",
+    "name": "Undercommon",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 37,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "category": "rare"
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "id": "rule:xphb:shape-shifting",
+  "name": "Shape-Shifting",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 373,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:condition",
+      "relationship": "ongoing-conditions-carry-over-between-forms"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:dead",
+      "relationship": "death-causes-reversion-to-true-form"
+    }
+  ]
+}

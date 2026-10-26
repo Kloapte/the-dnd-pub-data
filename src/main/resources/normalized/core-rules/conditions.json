@@ -1,0 +1,1888 @@
+[
+  {
+    "id": "condition:phb:blinded",
+    "name": "Blinded",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 290,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        },
+        {
+          "source": "HftT",
+          "page": 48
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:blinded"
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "REMOVE_SENSE",
+        "sense": "sight",
+        "actor": "affected-creature"
+      },
+      {
+        "kind": "AUTOMATIC_CHECK_FAILURE",
+        "roll": "ability-check",
+        "requirement": "requires-sight",
+        "actor": "affected-creature"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "target": "target",
+        "appliesWhen": "affected-creature-attacks"
+      }
+    ]
+  },
+  {
+    "id": "condition:phb:charmed",
+    "name": "Charmed",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 290,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        },
+        {
+          "source": "HftT",
+          "page": 48
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:charmed"
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "RELATIONAL_RESTRICTION",
+        "actor": "affected-creature",
+        "otherCreature": "charmer",
+        "prohibitedOperation": "attack",
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "RELATIONAL_RESTRICTION",
+        "actor": "affected-creature",
+        "otherCreature": "charmer",
+        "prohibitedOperation": "harmful-ability-or-magical-effect",
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "advantage",
+        "actor": "charmer",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "CHARMER_SOCIAL_INTERACTION",
+          "role": "charmer"
+        }
+      }
+    ]
+  },
+  {
+    "id": "condition:phb:deafened",
+    "name": "Deafened",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 290,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        },
+        {
+          "source": "HftT",
+          "page": 48
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:deafened"
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "REMOVE_SENSE",
+        "sense": "hearing",
+        "actor": "affected-creature"
+      },
+      {
+        "kind": "AUTOMATIC_CHECK_FAILURE",
+        "roll": "ability-check",
+        "requirement": "requires-hearing",
+        "actor": "affected-creature"
+      }
+    ]
+  },
+  {
+    "id": "condition:phb:exhaustion",
+    "name": "Exhaustion",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 291,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:exhaustion"
+        }
+      ]
+    },
+    "levelMechanics": {
+      "maximumLevel": 6,
+      "cumulative": true,
+      "application": "add-specified-levels",
+      "endsAtLevel": 0,
+      "recovery": [
+        {
+          "method": "long-rest",
+          "levelsRemoved": 1,
+          "requirements": [
+            "food",
+            "drink"
+          ]
+        },
+        {
+          "method": "raised-from-dead",
+          "levelsRemoved": 1
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "duration": "while-level-threshold-is-met",
+        "minimumLevel": 1
+      },
+      {
+        "kind": "RESTRICTION",
+        "restriction": "movement-limited",
+        "actor": "affected-creature",
+        "appliesWhen": "at-or-above-level",
+        "minimumLevel": 2,
+        "amount": 0.5,
+        "unit": "speed-fraction",
+        "duration": "while-level-threshold-is-met"
+      },
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "duration": "while-level-threshold-is-met",
+        "minimumLevel": 3
+      },
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "saving-throw",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "duration": "while-level-threshold-is-met",
+        "minimumLevel": 3
+      },
+      {
+        "kind": "HIT_POINT_MAX_MODIFIER",
+        "fraction": 0.5,
+        "minimumLevel": 4,
+        "actor": "affected-creature",
+        "appliesWhen": "at-or-above-level",
+        "duration": {
+          "kind": "while-condition-level-at-or-above",
+          "level": 4
+        }
+      },
+      {
+        "kind": "MOVEMENT_MODIFIER",
+        "movement": "speed-flat",
+        "actor": "affected-creature",
+        "amount": 0,
+        "duration": "while-level-threshold-is-met",
+        "minimumLevel": 5
+      },
+      {
+        "kind": "FATAL_EXHAUSTION_THRESHOLD",
+        "atLevel": 6
+      }
+    ]
+  },
+  {
+    "id": "condition:phb:frightened",
+    "name": "Frightened",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 290,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        },
+        {
+          "source": "HftT",
+          "page": 48
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:frightened"
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "FEAR_SOURCE_IN_LINE_OF_SIGHT",
+          "role": "fear-source"
+        }
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "target": "target",
+        "appliesWhen": "affected-creature-attacks",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "FEAR_SOURCE_IN_LINE_OF_SIGHT",
+          "role": "fear-source"
+        }
+      },
+      {
+        "kind": "MOVEMENT_CONSTRAINT",
+        "actor": "affected-creature",
+        "constraint": "cannot-willingly-move-closer-to-source",
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        },
+        "otherCreature": "fear-source"
+      }
+    ]
+  },
+  {
+    "id": "condition:phb:grappled",
+    "name": "Grappled",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 290,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        },
+        {
+          "source": "HftT",
+          "page": 48
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:grappled"
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "MOVEMENT_MODIFIER",
+        "movement": "speed-flat",
+        "amount": 0,
+        "actor": "affected-creature",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "MOVEMENT_CONSTRAINT",
+        "actor": "affected-creature",
+        "constraint": "cannot-increase-speed",
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "CONDITION_ENDING",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:grappled"
+        },
+        "when": "grappler-incapacitated"
+      },
+      {
+        "kind": "CONDITION_ENDING",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:grappled"
+        },
+        "when": "target-outside-grappler-reach"
+      }
+    ]
+  },
+  {
+    "id": "condition:phb:incapacitated",
+    "name": "Incapacitated",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 290,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        },
+        {
+          "source": "HftT",
+          "page": 48
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:incapacitated"
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "ACTIVITY_RESTRICTION",
+        "actor": "affected-creature",
+        "activities": [
+          "action",
+          "reaction"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      }
+    ]
+  },
+  {
+    "id": "condition:phb:invisible",
+    "name": "Invisible",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 291,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        },
+        {
+          "source": "HftT",
+          "page": 48
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:invisible"
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "VISIBILITY_CAPABILITY",
+        "actor": "affected-creature",
+        "capability": "cannot-be-seen-without-magic-or-special-sense"
+      },
+      {
+        "kind": "VISIBILITY_CAPABILITY",
+        "actor": "affected-creature",
+        "capability": "heavily-obscured-for-hiding"
+      },
+      {
+        "kind": "VISIBILITY_CAPABILITY",
+        "actor": "affected-creature",
+        "capability": "location-detectable-by-noise-or-tracks"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "OBSERVER_CANNOT_SEE_AFFECTED",
+          "observer": "attacker"
+        }
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "affected-creature",
+        "target": "target",
+        "appliesWhen": "affected-creature-attacks",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "OBSERVER_CANNOT_SEE_AFFECTED",
+          "observer": "target"
+        }
+      }
+    ]
+  },
+  {
+    "id": "condition:phb:paralyzed",
+    "name": "Paralyzed",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 291,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        },
+        {
+          "source": "HftT",
+          "page": 48
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:paralyzed"
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "MOVEMENT_MODIFIER",
+        "movement": "speed-flat",
+        "amount": 0,
+        "actor": "affected-creature",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "ACTIVITY_RESTRICTION",
+        "actor": "affected-creature",
+        "activities": [
+          "movement",
+          "speech"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "CONDITION_INTERACTION",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:incapacitated"
+        },
+        "interaction": "apply",
+        "lifecycle": "while-source-condition-active"
+      },
+      {
+        "kind": "AUTOMATIC_SAVING_THROW_FAILURE",
+        "actor": "affected-creature",
+        "abilities": [
+          "strength",
+          "dexterity"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "CRITICAL_HIT_ON_HIT",
+        "attacker": "attacker",
+        "target": "affected-creature",
+        "distanceFeet": 5,
+        "requiresSuccessfulHit": true,
+        "result": "critical-hit"
+      }
+    ]
+  },
+  {
+    "id": "condition:phb:petrified",
+    "name": "Petrified",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 291,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        },
+        {
+          "source": "HftT",
+          "page": 48
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:petrified"
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "MOVEMENT_MODIFIER",
+        "movement": "speed-flat",
+        "amount": 0,
+        "actor": "affected-creature",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "PHYSICAL_STATE",
+        "state": "inanimate-source-substance",
+        "includesWornAndCarriedNonmagicalObjects": true,
+        "weightMultiplier": 10,
+        "aging": "ceases"
+      },
+      {
+        "kind": "ACTIVITY_RESTRICTION",
+        "actor": "affected-creature",
+        "activities": [
+          "movement",
+          "speech"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "AWARENESS_RESTRICTION",
+        "actor": "affected-creature",
+        "awareness": "unaware"
+      },
+      {
+        "kind": "AUTOMATIC_SAVING_THROW_FAILURE",
+        "actor": "affected-creature",
+        "abilities": [
+          "strength",
+          "dexterity"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "DAMAGE_MITIGATION",
+        "damageTypes": "all",
+        "mitigation": "resistance"
+      },
+      {
+        "kind": "CATEGORY_IMMUNITY",
+        "category": "poison-and-disease",
+        "lifecycle": "while-condition-active"
+      },
+      {
+        "kind": "SUSPEND_ACTIVE_DISEASES",
+        "lifecycle": "while-condition-active",
+        "preservesInstance": true,
+        "scheduling": "UNRESOLVED_BY_SOURCE"
+      },
+      {
+        "kind": "CONDITION_INTERACTION",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:incapacitated"
+        },
+        "interaction": "apply",
+        "lifecycle": "while-source-condition-active"
+      }
+    ]
+  },
+  {
+    "id": "condition:phb:poisoned",
+    "name": "Poisoned",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 292,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        },
+        {
+          "source": "HftT",
+          "page": 48
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:poisoned"
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "duration": "while-level-threshold-is-met"
+      },
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "duration": "while-level-threshold-is-met"
+      }
+    ]
+  },
+  {
+    "id": "condition:phb:prone",
+    "name": "Prone",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 292,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        },
+        {
+          "source": "HftT",
+          "page": 48
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:prone"
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "target": "target",
+        "appliesWhen": "affected-creature-attacks",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "MOVEMENT_CONSTRAINT",
+        "actor": "affected-creature",
+        "constraint": "crawl-only",
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "CONDITION_ENDING",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:prone"
+        },
+        "when": "creature-stands"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "CREATURE_DISTANCE",
+          "otherCreature": "attacker",
+          "distanceFeet": 5,
+          "relation": "within"
+        }
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "CREATURE_DISTANCE",
+          "otherCreature": "attacker",
+          "distanceFeet": 5,
+          "relation": "beyond"
+        }
+      }
+    ]
+  },
+  {
+    "id": "condition:phb:restrained",
+    "name": "Restrained",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 292,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        },
+        {
+          "source": "HftT",
+          "page": 48
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:restrained"
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "MOVEMENT_MODIFIER",
+        "movement": "speed-flat",
+        "amount": 0,
+        "actor": "affected-creature",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "target": "target",
+        "appliesWhen": "affected-creature-attacks",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "saving-throw",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "ability": "dexterity",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "MOVEMENT_CONSTRAINT",
+        "actor": "affected-creature",
+        "constraint": "cannot-increase-speed",
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      }
+    ]
+  },
+  {
+    "id": "condition:phb:stunned",
+    "name": "Stunned",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 292,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        },
+        {
+          "source": "HftT",
+          "page": 48
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:stunned"
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "MOVEMENT_MODIFIER",
+        "movement": "speed-flat",
+        "amount": 0,
+        "actor": "affected-creature",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "CONDITION_INTERACTION",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:incapacitated"
+        },
+        "interaction": "apply",
+        "lifecycle": "while-source-condition-active"
+      },
+      {
+        "kind": "ACTIVITY_RESTRICTION",
+        "actor": "affected-creature",
+        "activities": [
+          "movement"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "ACTIVITY_RESTRICTION",
+        "actor": "affected-creature",
+        "activities": [
+          "speech"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        },
+        "speechLimitation": "faltering"
+      },
+      {
+        "kind": "AUTOMATIC_SAVING_THROW_FAILURE",
+        "actor": "affected-creature",
+        "abilities": [
+          "strength",
+          "dexterity"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      }
+    ]
+  },
+  {
+    "id": "condition:phb:unconscious",
+    "name": "Unconscious",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 292,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "citations": [
+        {
+          "source": "RMR",
+          "page": 62
+        },
+        {
+          "source": "HftT",
+          "page": 48
+        }
+      ],
+      "reprintedAs": [
+        {
+          "targetType": "condition",
+          "id": "condition:xphb:unconscious"
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "MOVEMENT_MODIFIER",
+        "movement": "speed-flat",
+        "amount": 0,
+        "actor": "affected-creature",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "CONDITION_INTERACTION",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:incapacitated"
+        },
+        "interaction": "apply",
+        "lifecycle": "while-source-condition-active"
+      },
+      {
+        "kind": "CONDITION_INTERACTION",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:prone"
+        },
+        "interaction": "apply",
+        "lifecycle": "persists-after-source-condition-ends"
+      },
+      {
+        "kind": "ACTIVITY_RESTRICTION",
+        "actor": "affected-creature",
+        "activities": [
+          "movement",
+          "speech"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "AWARENESS_RESTRICTION",
+        "actor": "affected-creature",
+        "awareness": "unaware"
+      },
+      {
+        "kind": "DROP_HELD_OBJECTS",
+        "actor": "affected-creature",
+        "effect": "drop-held-objects"
+      },
+      {
+        "kind": "AUTOMATIC_SAVING_THROW_FAILURE",
+        "actor": "affected-creature",
+        "abilities": [
+          "strength",
+          "dexterity"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "CRITICAL_HIT_ON_HIT",
+        "attacker": "attacker",
+        "target": "affected-creature",
+        "distanceFeet": 5,
+        "requiresSuccessfulHit": true,
+        "result": "critical-hit"
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:blinded",
+    "name": "Blinded",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 361,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "effects": [
+      {
+        "kind": "REMOVE_SENSE",
+        "sense": "sight",
+        "actor": "affected-creature"
+      },
+      {
+        "kind": "AUTOMATIC_CHECK_FAILURE",
+        "roll": "ability-check",
+        "requirement": "requires-sight",
+        "actor": "affected-creature"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "target": "target",
+        "appliesWhen": "affected-creature-attacks"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:attack"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:advantage"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:disadvantage"
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:charmed",
+    "name": "Charmed",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 361,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "effects": [
+      {
+        "kind": "RELATIONAL_RESTRICTION",
+        "actor": "affected-creature",
+        "otherCreature": "charmer",
+        "prohibitedOperation": "attack",
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "RELATIONAL_RESTRICTION",
+        "actor": "affected-creature",
+        "otherCreature": "charmer",
+        "prohibitedOperation": "damaging-ability-or-magical-effect",
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "advantage",
+        "actor": "charmer",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "CHARMER_SOCIAL_INTERACTION",
+          "role": "charmer"
+        }
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:deafened",
+    "name": "Deafened",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 365,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "effects": [
+      {
+        "kind": "REMOVE_SENSE",
+        "sense": "hearing",
+        "actor": "affected-creature"
+      },
+      {
+        "kind": "AUTOMATIC_CHECK_FAILURE",
+        "roll": "ability-check",
+        "requirement": "requires-hearing",
+        "actor": "affected-creature"
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:exhaustion",
+    "name": "Exhaustion",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 365,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "levelMechanics": {
+      "maximumLevel": 6,
+      "cumulative": true,
+      "application": "add-one-level",
+      "endsAtLevel": 0,
+      "recovery": [
+        {
+          "method": "long-rest",
+          "levelsRemoved": 1
+        }
+      ]
+    },
+    "effects": [
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "d20-test",
+        "direction": "penalty",
+        "actor": "affected-creature",
+        "duration": "while-level-threshold-is-met",
+        "minimumLevel": 1,
+        "amountPerLevel": 2
+      },
+      {
+        "kind": "MOVEMENT_MODIFIER",
+        "movement": "speed-flat",
+        "actor": "affected-creature",
+        "duration": "while-level-threshold-is-met",
+        "minimumLevel": 1,
+        "amountPerLevel": -5
+      },
+      {
+        "kind": "FATAL_EXHAUSTION_THRESHOLD",
+        "atLevel": 6
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:frightened",
+    "name": "Frightened",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 367,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "effects": [
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "FEAR_SOURCE_IN_LINE_OF_SIGHT",
+          "role": "fear-source"
+        }
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "target": "target",
+        "appliesWhen": "affected-creature-attacks",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "FEAR_SOURCE_IN_LINE_OF_SIGHT",
+          "role": "fear-source"
+        }
+      },
+      {
+        "kind": "MOVEMENT_CONSTRAINT",
+        "actor": "affected-creature",
+        "constraint": "cannot-willingly-move-closer-to-source",
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        },
+        "otherCreature": "fear-source"
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:grappled",
+    "name": "Grappled",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 367,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "effects": [
+      {
+        "kind": "MOVEMENT_MODIFIER",
+        "movement": "speed-flat",
+        "amount": 0,
+        "actor": "affected-creature",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "MOVEMENT_CONSTRAINT",
+        "actor": "affected-creature",
+        "constraint": "cannot-increase-speed",
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "target": "target",
+        "appliesWhen": "affected-creature-attacks",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "TARGET_IS_NOT_CREATURE",
+          "creature": "grappler"
+        }
+      },
+      {
+        "kind": "GRAPPLED_MOVEMENT_COST",
+        "actor": "grappler",
+        "target": "affected-creature",
+        "waiver": "target-tiny-or-two-or-more-sizes-smaller",
+        "movementCost": {
+          "kind": "EXTRA_FEET_PER_FOOT",
+          "additionalFeetPerFoot": 1
+        },
+        "movementMode": "drag-or-carry"
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:incapacitated",
+    "name": "Incapacitated",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 369,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "effects": [
+      {
+        "kind": "ACTIVITY_RESTRICTION",
+        "actor": "affected-creature",
+        "activities": [
+          "action",
+          "bonus-action",
+          "reaction",
+          "speech"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "initiative",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:invisible",
+    "name": "Invisible",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 370,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "effects": [
+      {
+        "kind": "VISIBILITY_CAPABILITY",
+        "actor": "affected-creature",
+        "capability": "equipment-concealed"
+      },
+      {
+        "kind": "RELATIONAL_RESTRICTION",
+        "actor": "effect-creator",
+        "otherCreature": "affected-creature",
+        "prohibitedOperation": "target-creature-with-effect-requiring-sight",
+        "appliesWhen": {
+          "kind": "OBSERVER_CANNOT_SEE_AFFECTED",
+          "observer": "effect-creator"
+        }
+      },
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "initiative",
+        "direction": "advantage",
+        "actor": "affected-creature",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "OBSERVER_CANNOT_SEE_AFFECTED",
+          "observer": "attacker"
+        }
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "affected-creature",
+        "target": "target",
+        "appliesWhen": "affected-creature-attacks",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "OBSERVER_CANNOT_SEE_AFFECTED",
+          "observer": "target"
+        }
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:paralyzed",
+    "name": "Paralyzed",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 371,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "effects": [
+      {
+        "kind": "MOVEMENT_MODIFIER",
+        "movement": "speed-flat",
+        "amount": 0,
+        "actor": "affected-creature",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "ACTIVITY_RESTRICTION",
+        "actor": "affected-creature",
+        "activities": [
+          "movement",
+          "speech"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "CONDITION_INTERACTION",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:incapacitated"
+        },
+        "interaction": "apply",
+        "lifecycle": "while-source-condition-active"
+      },
+      {
+        "kind": "AUTOMATIC_SAVING_THROW_FAILURE",
+        "actor": "affected-creature",
+        "abilities": [
+          "strength",
+          "dexterity"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "CRITICAL_HIT_ON_HIT",
+        "attacker": "attacker",
+        "target": "affected-creature",
+        "distanceFeet": 5,
+        "requiresSuccessfulHit": true,
+        "result": "critical-hit",
+        "rule": {
+          "targetType": "rule",
+          "id": "rule:xphb:critical-hit"
+        }
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:petrified",
+    "name": "Petrified",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 372,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "effects": [
+      {
+        "kind": "MOVEMENT_MODIFIER",
+        "movement": "speed-flat",
+        "amount": 0,
+        "actor": "affected-creature",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "PHYSICAL_STATE",
+        "state": "inanimate-stone",
+        "weightMultiplier": 10,
+        "aging": "ceases",
+        "includesWornAndCarriedNonmagicalObjects": true
+      },
+      {
+        "kind": "AUTOMATIC_SAVING_THROW_FAILURE",
+        "actor": "affected-creature",
+        "abilities": [
+          "strength",
+          "dexterity"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "DAMAGE_MITIGATION",
+        "damageTypes": "all",
+        "mitigation": "resistance"
+      },
+      {
+        "kind": "CONDITION_INTERACTION",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:poisoned"
+        },
+        "interaction": "immune-to",
+        "lifecycle": "while-source-condition-active"
+      },
+      {
+        "kind": "CONDITION_INTERACTION",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:incapacitated"
+        },
+        "interaction": "apply",
+        "lifecycle": "while-source-condition-active"
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:poisoned",
+    "name": "Poisoned",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 372,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "effects": [
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "duration": "while-level-threshold-is-met"
+      },
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "duration": "while-level-threshold-is-met"
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:prone",
+    "name": "Prone",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 372,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "effects": [
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "target": "target",
+        "appliesWhen": "affected-creature-attacks",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "MOVEMENT_CONSTRAINT",
+        "actor": "affected-creature",
+        "constraint": "crawl-only",
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        },
+        "endingCondition": {
+          "targetType": "condition",
+          "id": "condition:xphb:prone"
+        },
+        "standingCost": {
+          "kind": "SPEND_SPEED_TO_STAND",
+          "speedFraction": 0.5,
+          "rounding": "down"
+        }
+      },
+      {
+        "kind": "MOVEMENT_CONSTRAINT",
+        "actor": "affected-creature",
+        "constraint": "cannot-stand-when-speed-zero",
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "CONDITION_ENDING",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:prone"
+        },
+        "when": "creature-stands"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "CREATURE_DISTANCE",
+          "otherCreature": "attacker",
+          "distanceFeet": 5,
+          "relation": "within"
+        }
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active",
+        "applicability": {
+          "kind": "CREATURE_DISTANCE",
+          "otherCreature": "attacker",
+          "distanceFeet": 5,
+          "relation": "beyond"
+        }
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:restrained",
+    "name": "Restrained",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 373,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "effects": [
+      {
+        "kind": "MOVEMENT_MODIFIER",
+        "movement": "speed-flat",
+        "amount": 0,
+        "actor": "affected-creature",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "target": "target",
+        "appliesWhen": "affected-creature-attacks",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "CHECK_ROLL_MODIFIER",
+        "roll": "saving-throw",
+        "direction": "disadvantage",
+        "actor": "affected-creature",
+        "ability": "dexterity",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "MOVEMENT_CONSTRAINT",
+        "actor": "affected-creature",
+        "constraint": "cannot-increase-speed",
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:stunned",
+    "name": "Stunned",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 376,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "effects": [
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "CONDITION_INTERACTION",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:incapacitated"
+        },
+        "interaction": "apply",
+        "lifecycle": "while-source-condition-active"
+      },
+      {
+        "kind": "AUTOMATIC_SAVING_THROW_FAILURE",
+        "actor": "affected-creature",
+        "abilities": [
+          "strength",
+          "dexterity"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      }
+    ]
+  },
+  {
+    "id": "condition:xphb:unconscious",
+    "name": "Unconscious",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 376,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "effects": [
+      {
+        "kind": "MOVEMENT_MODIFIER",
+        "movement": "speed-flat",
+        "amount": 0,
+        "actor": "affected-creature",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "roll": "attack",
+        "direction": "advantage",
+        "actor": "attacker",
+        "target": "affected-creature",
+        "appliesWhen": "attack-targets-affected",
+        "duration": "while-condition-active"
+      },
+      {
+        "kind": "CONDITION_INTERACTION",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:incapacitated"
+        },
+        "interaction": "apply",
+        "lifecycle": "while-source-condition-active"
+      },
+      {
+        "kind": "CONDITION_INTERACTION",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:prone"
+        },
+        "interaction": "apply",
+        "lifecycle": "persists-after-source-condition-ends"
+      },
+      {
+        "kind": "AWARENESS_RESTRICTION",
+        "actor": "affected-creature",
+        "awareness": "unaware"
+      },
+      {
+        "kind": "DROP_HELD_OBJECTS",
+        "actor": "affected-creature",
+        "effect": "drop-held-objects"
+      },
+      {
+        "kind": "AUTOMATIC_SAVING_THROW_FAILURE",
+        "actor": "affected-creature",
+        "abilities": [
+          "strength",
+          "dexterity"
+        ],
+        "appliesWhen": {
+          "kind": "WHILE_CONDITION_ACTIVE"
+        }
+      },
+      {
+        "kind": "CRITICAL_HIT_ON_HIT",
+        "attacker": "attacker",
+        "target": "affected-creature",
+        "distanceFeet": 5,
+        "requiresSuccessfulHit": true,
+        "result": "critical-hit",
+        "rule": {
+          "targetType": "rule",
+          "id": "rule:xphb:critical-hit"
+        }
+      }
+    ]
+  }
+]

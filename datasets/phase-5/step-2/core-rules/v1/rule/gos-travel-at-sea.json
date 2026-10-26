@@ -1,0 +1,8 @@
+{
+  "id": "rule:gos:travel-at-sea",
+  "name": "Travel at Sea",
+  "sourceMetadata": {
+    "source": "GoS",
+    "page": 199
+  }
+}

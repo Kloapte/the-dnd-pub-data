@@ -1,0 +1,8 @@
+{
+  "id": "rule:gos:ship-stat-blocks",
+  "name": "Ship Stat Blocks",
+  "sourceMetadata": {
+    "source": "GoS",
+    "page": 186
+  }
+}

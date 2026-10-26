@@ -1,0 +1,13 @@
+{
+  "id": "rule:xphb:experience-points",
+  "name": "Experience Points",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 366,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE"
+}

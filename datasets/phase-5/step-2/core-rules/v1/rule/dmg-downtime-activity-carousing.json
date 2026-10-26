@@ -1,0 +1,15 @@
+{
+  "id": "rule:dmg:downtime-activity-carousing",
+  "name": "Downtime Activity: Carousing",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 128,
+    "reprintedAs": [
+      {
+        "targetType": "rule",
+        "id": "rule:xge:downtime-activity-carousing"
+      }
+    ]
+  },
+  "ruleType": "OPTIONAL"
+}

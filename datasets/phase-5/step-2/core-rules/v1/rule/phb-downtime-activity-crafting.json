@@ -1,0 +1,21 @@
+{
+  "id": "rule:phb:downtime-activity-crafting",
+  "name": "Downtime Activity: Crafting",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 187
+  },
+  "mechanics": [
+    {
+      "componentId": "crafting-activity",
+      "kind": "DOWNTIME_PROCEDURE",
+      "subtype": "ACTIVITY",
+      "procedure": "craft",
+      "duration": {
+        "amount": 1,
+        "unit": "day"
+      },
+      "outcome": "item-created"
+    }
+  ]
+}

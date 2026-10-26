@@ -1,0 +1,9 @@
+{
+  "id": "rule:xge:shared-campaign-variant-rules",
+  "name": "Shared Campaign Variant Rules",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 173
+  },
+  "ruleType": "VARIANT"
+}

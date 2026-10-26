@@ -1,0 +1,22 @@
+{
+  "id": "rule:xphb:lightly-obscured",
+  "name": "Lightly Obscured",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 370,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "light-obscuration",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "OBSCURATION",
+      "level": "lightly-obscured",
+      "sightEffect": "disadvantage-on-sight-dependent-perception"
+    }
+  ]
+}

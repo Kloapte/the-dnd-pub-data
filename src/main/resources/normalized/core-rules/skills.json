@@ -1,0 +1,560 @@
+[
+  {
+    "id": "skill:phb:acrobatics",
+    "name": "Acrobatics",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 176,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:acrobatics"
+        }
+      ]
+    },
+    "ability": "dexterity"
+  },
+  {
+    "id": "skill:phb:animal-handling",
+    "name": "Animal Handling",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 178,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:animal-handling"
+        }
+      ]
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "skill:phb:arcana",
+    "name": "Arcana",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 177,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:arcana"
+        }
+      ]
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "skill:phb:athletics",
+    "name": "Athletics",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 175,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:athletics"
+        }
+      ]
+    },
+    "ability": "strength"
+  },
+  {
+    "id": "skill:phb:deception",
+    "name": "Deception",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 178,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:deception"
+        }
+      ]
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "skill:phb:history",
+    "name": "History",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 177,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:history"
+        }
+      ]
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "skill:phb:insight",
+    "name": "Insight",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 178,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:insight"
+        }
+      ]
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "skill:phb:intimidation",
+    "name": "Intimidation",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 179,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:intimidation"
+        }
+      ]
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "skill:phb:investigation",
+    "name": "Investigation",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 178,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:investigation"
+        }
+      ]
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "skill:phb:medicine",
+    "name": "Medicine",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 178,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:medicine"
+        }
+      ]
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "skill:phb:nature",
+    "name": "Nature",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 178,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:nature"
+        }
+      ]
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "skill:phb:perception",
+    "name": "Perception",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 178,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:perception"
+        }
+      ]
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "skill:phb:performance",
+    "name": "Performance",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 179,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:performance"
+        }
+      ]
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "skill:phb:persuasion",
+    "name": "Persuasion",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 179,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:persuasion"
+        }
+      ]
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "skill:phb:religion",
+    "name": "Religion",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 178,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:religion"
+        }
+      ]
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "skill:phb:sleight-of-hand",
+    "name": "Sleight of Hand",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 177,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:sleight-of-hand"
+        }
+      ]
+    },
+    "ability": "dexterity"
+  },
+  {
+    "id": "skill:phb:stealth",
+    "name": "Stealth",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 177,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:stealth"
+        }
+      ]
+    },
+    "ability": "dexterity"
+  },
+  {
+    "id": "skill:phb:survival",
+    "name": "Survival",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 178,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "skill",
+          "id": "skill:xphb:survival"
+        }
+      ]
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "skill:xphb:acrobatics",
+    "name": "Acrobatics",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "dexterity"
+  },
+  {
+    "id": "skill:xphb:animal-handling",
+    "name": "Animal Handling",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "skill:xphb:arcana",
+    "name": "Arcana",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "skill:xphb:athletics",
+    "name": "Athletics",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "strength"
+  },
+  {
+    "id": "skill:xphb:deception",
+    "name": "Deception",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "skill:xphb:history",
+    "name": "History",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "skill:xphb:insight",
+    "name": "Insight",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "skill:xphb:intimidation",
+    "name": "Intimidation",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "skill:xphb:investigation",
+    "name": "Investigation",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "skill:xphb:medicine",
+    "name": "Medicine",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "skill:xphb:nature",
+    "name": "Nature",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "skill:xphb:perception",
+    "name": "Perception",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "wisdom"
+  },
+  {
+    "id": "skill:xphb:performance",
+    "name": "Performance",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "skill:xphb:persuasion",
+    "name": "Persuasion",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "charisma"
+  },
+  {
+    "id": "skill:xphb:religion",
+    "name": "Religion",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "intelligence"
+  },
+  {
+    "id": "skill:xphb:sleight-of-hand",
+    "name": "Sleight of Hand",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "dexterity"
+  },
+  {
+    "id": "skill:xphb:stealth",
+    "name": "Stealth",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "dexterity"
+  },
+  {
+    "id": "skill:xphb:survival",
+    "name": "Survival",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 14,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "ability": "wisdom"
+  }
+]

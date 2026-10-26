@@ -858,6 +858,86 @@ function phase3Files(directory = phase3Root) {
     }).sort();
 }
 
+function assertCoreRulesReferenceIdentityIndex(records) {
+    const targetTypes = new Set();
+    const visit = value => {
+        if (Array.isArray(value)) return value.forEach(visit);
+        if (!value || typeof value !== 'object') return;
+        if (typeof value.targetType === 'string' && typeof value.id === 'string') {
+            targetTypes.add(value.targetType);
+        }
+        Object.values(value).forEach(visit);
+    };
+    records.forEach(visit);
+
+    const sourceFiles = {
+        action: [['actions.json', 'action']],
+        rule: [['variantrules.json', 'variantrule']],
+        skill: [['skills.json', 'skill']],
+        condition: [['conditionsdiseases.json', 'condition']],
+        disease: [['conditionsdiseases.json', 'disease']],
+        status: [['conditionsdiseases.json', 'status']],
+        sense: [['senses.json', 'sense']],
+        language: [['languages.json', 'language']],
+        race: [['races.json', 'race']]
+    };
+    const expected = new Set();
+    for (const type of targetTypes) {
+        let catalogs = sourceFiles[type];
+        if (type === 'spell') {
+            const directory = path.join(workspace, 'src/main/resources/data/spells');
+            catalogs = fs.readdirSync(directory, { recursive: true })
+                .filter(file => file.endsWith('.json'))
+                .map(file => [path.join('spells', file), 'spell']);
+        } else if (type === 'creature') {
+            const directory = path.join(workspace, 'src/main/resources/data/monsters');
+            catalogs = fs.readdirSync(directory)
+                .filter(file => file.startsWith('bestiary-') && file.endsWith('.json'))
+                .map(file => [path.join('monsters', file), 'monster']);
+        }
+        assert.ok(catalogs, `no pinned source catalog for ${type}`);
+        for (const [file, property] of catalogs) {
+            const recordsInSource = readJson(path.join(workspace, 'src/main/resources/data', file))[property] ?? [];
+            for (const record of recordsInSource) {
+                expected.add(`${type}:${canonicalSlug(record.source)}:${canonicalSlug(record.name)}`);
+            }
+        }
+    }
+    const actual = readJson(path.join(
+        workspace,
+        'src/main/resources/data/core-rules/source-identities.json'
+    ));
+    assert.deepEqual(actual, [...expected].sort((left, right) => left.localeCompare(right)));
+}
+
+function assertConsolidatedCoreRulesResources(records) {
+    const resourceFiles = {
+        action: 'actions.json',
+        condition: 'conditions.json',
+        disease: 'diseases.json',
+        language: 'languages.json',
+        rule: 'rules.json',
+        sense: 'senses.json',
+        skill: 'skills.json',
+        status: 'statuses.json'
+    };
+    const byDomain = new Map(Object.keys(resourceFiles).map(domain => [domain, []]));
+    const identities = new Set();
+    for (const record of records) {
+        const domain = record.id.split(':')[0];
+        assert.ok(byDomain.has(domain), `unexpected canonical domain ${domain}`);
+        assert.equal(identities.has(record.id), false, `duplicate canonical identity ${record.id}`);
+        identities.add(record.id);
+        byDomain.get(domain).push(record);
+    }
+    for (const [domain, file] of Object.entries(resourceFiles)) {
+        const expected = byDomain.get(domain).sort((left, right) => left.id.localeCompare(right.id));
+        const actual = readJson(path.join(workspace, 'src/main/resources/data/core-rules', file));
+        assert.deepEqual(actual, expected, `${file} must exactly aggregate the validated canonical records`);
+    }
+    assert.equal(identities.size, 585);
+}
+
 function nestedSourcePaths(entry, parentPath, output = []) {
     if (!entry || typeof entry !== 'object') return output;
     for (const key of ['entries', 'items']) {
@@ -1269,7 +1349,14 @@ function validatePhase5Expansion() {
             if (entity.id === 'rule:dmg:planar-effects'
                     || entity.id === 'rule:dmg:diagonals'
                     || entity.id === 'rule:xge:falling'
-                    || entity.id === 'rule:dmg:firearms') {
+                    || entity.id === 'rule:dmg:firearms'
+                    || entity.id === 'rule:dmg:alien-technology'
+                    || entity.id === 'rule:dmg:level-advancement-without-xp'
+                    || entity.id === 'rule:dmg:renown'
+                    || entity.id === 'rule:dmg:loyalty'
+                    || entity.id === 'rule:dmg:explosives'
+                    || entity.id === 'rule:dmg:mixing-potions'
+                    || entity.id === 'rule:dmg:downtime-activity-training-to-gain-levels') {
                 delete expectedMetadata.reprintedAs;
             }
             assert.deepEqual(entity.sourceMetadata, expectedMetadata);
@@ -1305,7 +1392,7 @@ function validatePhase5Expansion() {
             ['action', 42, 0, 40, 27, 13, 2, 84],
             ['disease', 26, 3, 25, 22, 3, 1, 73],
             ['language', 197, 4, 197, 71, 126, 0, 40],
-            ['rule', 99, 5, 95, 56, 27, 16, 227]
+            ['rule', 226, 5, 226, 64, 89, 73, 630]
         ];
         assert.deepEqual(manifest.batchResults.map(batch => [
             batch.domain,
@@ -1411,6 +1498,31 @@ function validatePhase5Expansion() {
         }
         assert.deepEqual([...covered].sort(), [...outputById.keys()].sort());
 
+        check('Phase 5 source-field issues match pinned source values and manifest count', () => {
+            assert.equal(manifest.sourceFieldIssueCount, manifest.sourceFieldIssues.length);
+            assert.equal(manifest.sourceFieldIssues.length, 165);
+            const sourceDataByFile = new Map();
+            for (const issue of manifest.sourceFieldIssues) {
+                if (!sourceDataByFile.has(issue.sourceFile)) {
+                    sourceDataByFile.set(issue.sourceFile, readJson(path.join(
+                        workspace,
+                        'src/main/resources/data',
+                        issue.sourceFile
+                    )));
+                }
+                const sourceRecord = resolveSourcePath(
+                    sourceDataByFile.get(issue.sourceFile),
+                    issue.sourceObjectPath
+                );
+                assert.equal(issue.canonicalId,
+                    `${issue.model}:${canonicalSlug(sourceRecord.source)}:${canonicalSlug(sourceRecord.name)}`);
+                assert.ok(Object.hasOwn(sourceRecord, issue.sourceField),
+                    `${issue.canonicalId}: missing source field ${issue.sourceField}`);
+                assert.deepEqual(issue.sourceValue, sourceRecord[issue.sourceField],
+                    `${issue.canonicalId}: source field ${issue.sourceField} differs from pinned source`);
+            }
+        });
+
         check('Phase 5 Rule inventory and approved mechanics batches', () => {
             const rules = readJson(path.join(workspace,
                 'src/main/resources/data/variantrules.json')).variantrule;
@@ -1420,8 +1532,22 @@ function validatePhase5Expansion() {
                 .filter(entity => entity.id.startsWith('rule:'));
             assert.equal(rules.length, 231);
             assert.equal(phase3Rules.length, 5);
-            assert.equal(phase5Rules.length, 95);
+            assert.equal(phase5Rules.length, 226);
             assert.deepEqual(phase5Rules.map(entity => entity.id).sort(), [
+                'rule:aag:crashing',
+                'rule:aag:crew',
+                'rule:aag:ship-repairs',
+                'rule:aag:ship-to-ship-combat',
+                'rule:ai:downtime-and-franchise-activity-explore-territory',
+                'rule:ai:downtime-and-franchise-activity-franchise-restructuring',
+                'rule:ai:downtime-and-franchise-activity-headquarters-modification',
+                'rule:ai:downtime-and-franchise-activity-marketeering',
+                'rule:ai:downtime-and-franchise-activity-philanthropic-enterprise',
+                'rule:ai:downtime-and-franchise-activity-running-a-franchise',
+                'rule:ai:downtime-and-franchise-activity-schmoozing',
+                'rule:ai:downtime-and-franchise-activity-scrutineering',
+                'rule:ai:downtime-and-franchise-activity-shady-business-practice',
+                'rule:ai:downtime-and-franchise-activity-team-building',
                 'rule:dmg:action-options',
                 'rule:dmg:cleaving-through-creatures',
                 'rule:dmg:diagonals',
@@ -1437,6 +1563,17 @@ function validatePhase5Expansion() {
                 'rule:dmg:proficiency-dice',
                 'rule:dmg:rest-variants',
                 'rule:dmg:skill-variants',
+                'rule:esk:sidekicks',
+                'rule:gos:encounters-at-sea',
+                'rule:gos:mysterious-islands',
+                'rule:gos:ocean-environs',
+                'rule:gos:officers-and-crew',
+                'rule:gos:random-ships',
+                'rule:gos:ship-stat-blocks',
+                'rule:gos:ships-in-combat',
+                'rule:gos:superior-ship-upgrades',
+                'rule:gos:travel-at-sea',
+                'rule:tce:sidekicks',
                 'rule:xge:adamantine-weapons',
                 'rule:xge:simultaneous-effects',
                 'rule:phb:downtime-activity-recuperating',
@@ -1510,13 +1647,71 @@ function validatePhase5Expansion() {
                 'rule:xphb:short-rest',
                 'rule:xphb:skill',
                 'rule:xphb:speed',
+                'rule:xphb:stable',
                 'rule:xphb:spell-attack',
                 'rule:xphb:sphere-area-of-effect',
                 'rule:xphb:swim-speed',
                 'rule:xphb:swimming',
+                'rule:xphb:teleportation',
+                'rule:xphb:temporary-hit-points',
                 'rule:xphb:target',
+                'rule:xphb:unoccupied-space',
                 'rule:xphb:vulnerability',
-                'rule:mm:player-characters-as-lycanthropes'
+                'rule:mm:player-characters-as-lycanthropes',
+                'rule:xphb:bright-light',
+                'rule:xphb:darkness',
+                'rule:xphb:dim-light',
+                'rule:xphb:heavily-obscured',
+                'rule:xphb:lightly-obscured',
+                'rule:cos:prophet-s-gambit', 'rule:dmg:alien-technology', 'rule:dmg:fear-and-horror',
+                'rule:dmg:hero-points', 'rule:phb:equipment-sizes', 'rule:scag:human-languages',
+                'rule:vrgr:fear-and-stress', 'rule:xphb:attunement', 'rule:xphb:challenge-rating',
+                'rule:xphb:condition', 'rule:xphb:dead', 'rule:xphb:healing',
+                'rule:xphb:hit-point-dice', 'rule:xphb:object', 'rule:xphb:per-day',
+                'rule:xphb:round-down', 'rule:xphb:save', 'rule:xphb:stat-block',
+                'rule:xphb:weapon', 'rule:xphb:weapon-attack',
+                'rule:dmg:alternatives-to-epic-boons', 'rule:dmg:level-advancement-without-xp',
+                'rule:dmg:automatic-success',
+                'rule:dmg:milestones', 'rule:dmg:plot-points', 'rule:dmg:renown',
+                'rule:phb:customizing-ability-scores', 'rule:phb:feats',
+                'rule:tce:customizing-your-origin', 'rule:tce:optional-class-features',
+                'rule:xge:tying-knots', 'rule:xphb:experience-points',
+                'rule:dmg:loyalty', 'rule:xphb:ally', 'rule:xphb:enemy',
+                'rule:xphb:friendly-attitude', 'rule:xphb:hostile-attitude',
+                'rule:xphb:indifferent-attitude', 'rule:xphb:attitude', 'rule:xphb:nonplayer-character',
+                'rule:dmg:inspiration', 'rule:dmg:madness',
+                'rule:dmg:new-ability-scores-honor-and-sanity', 'rule:dmg:morale',
+                'rule:phb:inspiration', 'rule:psi:emrakul-s-madness',
+                'rule:xge:shared-campaign-variant-rules', 'rule:xphb:heroic-inspiration',
+                'rule:dmg:explosives', 'rule:dmg:mixing-potions',
+                'rule:dmg:more-difficult-identification', 'rule:dmg:scroll-mishaps',
+                'rule:dmg:spell-points', 'rule:dmg:wands-that-don-t-recharge',
+                'rule:mm:familiars', 'rule:mm:player-characters-as-vampires',
+                'rule:vgm:familiars', 'rule:vrgr:haunted-traps',
+                'rule:vrgr:survivors', 'rule:xge:spellcasting',
+                'rule:xphb:armor-class', 'rule:xphb:armor-training', 'rule:xphb:cantrip', 'rule:xphb:curses',
+                'rule:xphb:illusions', 'rule:xphb:magical-effect', 'rule:xphb:possession',
+                'rule:xphb:ritual', 'rule:xphb:shape-shifting', 'rule:xphb:spell',
+                'rule:xphb:spellcasting-focus', 'rule:xphb:telepathy',
+                'rule:dmg:downtime-activity-building-a-stronghold',
+                'rule:dmg:downtime-activity-carousing',
+                'rule:dmg:downtime-activity-gaining-renown',
+                'rule:dmg:downtime-activity-performing-sacred-rites',
+                'rule:dmg:downtime-activity-running-a-business',
+                'rule:dmg:downtime-activity-selling-magic-items',
+                'rule:dmg:downtime-activity-sowing-rumors',
+                'rule:dmg:downtime-activity-training-to-gain-levels',
+                'rule:phb:downtime-activity-crafting',
+                'rule:phb:downtime-activity-practicing-a-profession',
+                'rule:phb:downtime-activity-researching', 'rule:phb:downtime-activity-training',
+                'rule:xge:downtime-activity-buying-a-magic-item', 'rule:xge:downtime-activity-carousing',
+                'rule:xge:downtime-activity-crafting-an-item', 'rule:xge:downtime-activity-crime',
+                'rule:xge:downtime-activity-gambling', 'rule:xge:downtime-activity-pit-fighting',
+                'rule:xge:downtime-activity-religious-service', 'rule:xge:downtime-activity-research',
+                'rule:xge:downtime-activity-scribing-a-spell-scroll',
+                'rule:xge:downtime-activity-selling-a-magic-item',
+                'rule:xge:downtime-activity-training', 'rule:xge:downtime-activity-work',
+                'rule:xge:downtime-revisited'
             ].sort());
             const initiative = manifest.records.find(record =>
                 record.canonicalId === 'rule:xphb:initiative');
@@ -1524,7 +1719,7 @@ function validatePhase5Expansion() {
             assert.equal(initiative.canonicalOutput, 'rule/xphb-initiative.json');
             assert.equal(outputById.has('rule:xphb:initiative'), true);
             assert.equal(initiative.entries[1].classifications[0].classification, 'INTERPRETED');
-            assert.equal(phase5Rules.reduce((sum, entity) => sum + (entity.mechanics?.length ?? 0), 0), 72);
+            assert.equal(phase5Rules.reduce((sum, entity) => sum + (entity.mechanics?.length ?? 0), 0), 126);
             const byId = new Map(phase5Rules.map(entity => [entity.id, entity]));
             assert.deepEqual(byId.get('rule:xphb:ability-check').mechanics[0].abilities, [
                 'strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'
@@ -1913,14 +2108,15 @@ function validatePhase5Expansion() {
             assert.equal(new Set(inventory.map(item => item.canonicalId)).size, 231);
             assert.equal(summary.totalSourceRecords, 231);
             assert.equal(summary.sourceQualifiedIdentityCount, 231);
-            assert.equal(summary.reviewedAndAccountedCount, 104);
-            // This legacy field is intentionally unchanged pending a separately approved rename/correction.
-            assert.equal(summary.pendingSemanticReviewCount, 164);
-            assert.equal(summary.fullCount, 60);
-            assert.equal(summary.partialCount, 28);
-            assert.equal(summary.unsupportedCount, 16);
-            assert.equal(summary.pendingCount, 127);
-            assert.equal(summary.canonicalRuleOutputCount, 100);
+            assert.equal(summary.semanticReviewCompleteCount, 231);
+            assert.equal(summary.semanticReviewPendingCount, 0);
+            assert.equal(summary.conversionAccountedCount, 231);
+            assert.equal(summary.conversionPendingCount, 0);
+            assert.equal(Object.hasOwn(summary, 'pendingSemanticReviewCount'), false);
+            assert.equal(summary.fullCount, 68);
+            assert.equal(summary.partialCount, 90);
+            assert.equal(summary.unsupportedCount, 73);
+            assert.equal(summary.canonicalRuleOutputCount, 231);
             const p5RuleAccounting = new Map(manifest.records
                 .filter(record => record.model === 'rule')
                 .map(record => [record.canonicalId, record]));
@@ -1969,7 +2165,9 @@ function validatePhase5Expansion() {
                 assert.deepEqual(item.structuredSourceFields, sourceFields);
                 assert.equal(item.accountingRecordPresent,
                     p3RuleAccounting.has(item.canonicalId) || p5RuleAccounting.has(item.canonicalId));
-                if (item.interpretationStatus === 'PENDING_SEMANTIC_REVIEW') {
+                assert.equal(item.semanticReviewStatus, 'REVIEWED');
+                assert.equal(Object.hasOwn(item, 'interpretationStatus'), false);
+                if (item.semanticReviewStatus === 'PENDING') {
                     assert.equal(item.coverage, 'PENDING');
                     assert.equal(item.accountingRecordPresent, false);
                     assert.deepEqual(item.interpretedMechanics, []);
@@ -1981,7 +2179,73 @@ function validatePhase5Expansion() {
                     for (const gapId of item.gapIds) assert.ok(documentedGaps.includes(gapId), gapId);
                 }
             }
-            assert.equal(inventory.filter(item => item.coverage === 'PENDING').length, 127);
+            assert.equal(inventory.filter(item => item.coverage === 'PENDING').length, 0);
+        });
+
+        check('Rule catalog reconciliation restores all outputs and supported source references', () => {
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            const outputById = new Map(entities
+                .filter(({ entity }) => entity.id.startsWith('rule:'))
+                .map(({ entity }) => [entity.id, entity]));
+            const expectedNewRecords = {
+                'rule:xphb:armor-class': ['rule/xphb-armor-class.json', 'UNSUPPORTED'],
+                'rule:dmg:automatic-success': ['rule/dmg-automatic-success.json', 'UNSUPPORTED'],
+                'rule:xphb:save': ['rule/xphb-save.json', 'FULL'],
+                'rule:xphb:weapon-attack': ['rule/xphb-weapon-attack.json', 'FULL']
+            };
+            for (const [id, [file, coverage]] of Object.entries(expectedNewRecords)) {
+                const item = inventory.get(id);
+                const output = outputById.get(id);
+                assert.ok(item && output, `missing reconciled Rule ${id}`);
+                assert.equal(item.canonicalOutput, file);
+                assert.equal(item.coverage, coverage);
+                assert.equal(output.sourceMetadata.source, item.source);
+                assert.equal(output.sourceMetadata.page, item.page);
+                assert.equal(Object.hasOwn(output, 'mechanics'), false);
+            }
+            assert.equal(outputById.get('rule:xphb:save').references[0].id,
+                'rule:xphb:saving-throw');
+            assert.equal(outputById.get('rule:xphb:weapon-attack').references[0].id,
+                'rule:xphb:attack-roll');
+            assert.equal(outputById.size, 226);
+            assert.equal(inventory.size, 231);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+
+            const representedReferenceRules = {
+                'rule:xphb:curses': ['spell:xphb:remove-curse', 'spell:xphb:greater-restoration'],
+                'rule:xphb:possession': ['spell:xphb:protection-from-evil-and-good',
+                    'spell:xphb:dispel-evil-and-good'],
+                'rule:mm:familiars': ['spell:phb:find-familiar', 'creature:mm:crawling-claw',
+                    'creature:mm:imp', 'creature:mm:pseudodragon', 'creature:mm:quasit'],
+                'rule:vgm:familiars': ['spell:phb:find-familiar', 'creature:vgm:cranium-rat',
+                    'creature:mm:crawling-claw', 'creature:vgm:gazer', 'creature:mm:imp',
+                    'creature:mm:pseudodragon', 'creature:mm:quasit'],
+                'rule:mm:player-characters-as-lycanthropes': ['creature:mm:werebear',
+                    'creature:mm:wereboar', 'creature:mm:wererat', 'creature:mm:weretiger',
+                    'creature:mm:werewolf', 'creature:vrgr:wereraven', 'creature:wdmm:werebat',
+                    'creature:vrgr:loup-garou', 'spell:phb:remove-curse'],
+                'rule:mm:player-characters-as-vampires': ['creature:mm:vampire-spawn',
+                    'creature:mm:vampire', 'spell:phb:wish'],
+                'rule:dmg:more-difficult-identification': ['spell:phb:identify'],
+                'rule:dmg:inspiration': ['rule:xphb:advantage']
+            };
+            for (const [id, expectedReferences] of Object.entries(representedReferenceRules)) {
+                const item = inventory.get(id);
+                const output = outputById.get(id);
+                assert.ok(output, `missing reference-bearing Rule ${id}`);
+                assert.equal(item.coverage, 'PARTIAL');
+                assert.deepEqual(output.references.map(reference => reference.id), expectedReferences);
+                assert.deepEqual(output.mechanics, undefined);
+                assertPhase5DiseaseReferences(output);
+                assertPhase5LanguageReferences(output);
+            }
+            assert.deepEqual([
+                manifest.ruleCatalogSummary.fullCount,
+                manifest.ruleCatalogSummary.partialCount,
+                manifest.ruleCatalogSummary.unsupportedCount
+            ], [68, 90, 73]);
+            const referenceOnly = ['rule:xphb:armor-class', 'rule:dmg:automatic-success'];
+            for (const id of referenceOnly) assert.deepEqual(outputById.get(id).references, undefined);
         });
 
         check('RULE-CONV-01 converts exactly its 12 reference-only glossary Rules', () => {
@@ -2000,7 +2264,7 @@ function validatePhase5Expansion() {
             assert.deepEqual(batchIds, [...expectedIds].sort());
             assert.deepEqual(newlyAccountedIds, expectedIds);
             assert.equal(new Set(batchIds).size, 12);
-            assert.equal(ruleById.size, 95);
+            assert.equal(ruleById.size, 226);
             for (const id of expectedIds) {
                 const entity = ruleById.get(id);
                 assert.ok(entity, `missing canonical Rule output ${id}`);
@@ -2028,11 +2292,16 @@ function validatePhase5Expansion() {
                 }
                 assert.equal(account.sourceObjectPath, inventory.sourceObjectPath);
                 assert.equal(account.sourceEntryCount, inventory.sourceEntryRootCount);
+                assertPhase5DiseaseReferences(entity);
+                assertPhase5LanguageReferences(entity);
                 for (const reference of entity.references ?? []) {
-                    const resolved = reference.targetType === 'rule'
-                        ? ruleById.has(reference.id) || phase3Ids.has(reference.id)
-                        : outputById.has(reference.id);
-                    assert.ok(resolved, `${id} has unresolved canonical reference ${reference.id}`);
+                    if (reference.targetType === 'rule') {
+                        assert.ok(ruleById.has(reference.id) || phase3Ids.has(reference.id),
+                            `${id} has unresolved canonical Rule reference ${reference.id}`);
+                    } else if (!['spell', 'creature'].includes(reference.targetType)) {
+                        assert.ok(outputById.has(reference.id),
+                            `${id} has unresolved canonical reference ${reference.id}`);
+                    }
                 }
             }
             assert.deepEqual(
@@ -2043,8 +2312,8 @@ function validatePhase5Expansion() {
                     }, { FULL: 0, PARTIAL: 0, UNSUPPORTED: 0 }),
                 { FULL: 8, PARTIAL: 3, UNSUPPORTED: 1 }
             );
-            assert.equal(manifest.ruleCatalogInventory.filter(item => item.coverage === 'PENDING').length, 127);
-            assert.equal(manifest.ruleCatalogSummary.pendingSemanticReviewCount, 164);
+            assert.equal(manifest.ruleCatalogInventory.filter(item => item.coverage === 'PENDING').length, 0);
+            assert.equal(manifest.ruleCatalogSummary.semanticReviewPendingCount, 0);
         });
 
         check('RULE-CONV-02 preserves combat Rule identities, references, omissions, and source accounting', () => {
@@ -2055,7 +2324,7 @@ function validatePhase5Expansion() {
                 ['rule:dmg:firearms', '$.variantrule[112]', 'UNSUPPORTED', 3, 15],
                 ['rule:dmg:injuries', '$.variantrule[138]', 'UNSUPPORTED', 6, 28],
                 ['rule:dmg:massive-damage', '$.variantrule[151]', 'UNSUPPORTED', 3, 16],
-                ['rule:mm:player-characters-as-lycanthropes', '$.variantrule[170]', 'UNSUPPORTED', 4, 29]
+                ['rule:mm:player-characters-as-lycanthropes', '$.variantrule[170]', 'PARTIAL', 4, 29]
             ];
             const ids = expected.map(([id]) => id);
             const batchRecords = manifest.records.filter(item => expected.some(([id]) => item.canonicalId === id));
@@ -2130,10 +2399,10 @@ function validatePhase5Expansion() {
             const firearmIssue = manifest.sourceFieldIssues.find(issue =>
                 issue.canonicalId === 'rule:dmg:firearms' && issue.sourceField === 'reprintedAs');
             assert.equal(firearmIssue?.cause, 'REFERENCE_UNRESOLVED');
-            assert.equal(manifest.ruleCatalogSummary.reviewedAndAccountedCount, 104);
-            assert.equal(manifest.ruleCatalogSummary.pendingCount, 127);
-            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 100);
-            assert.equal(manifest.canonicalRecordCount, 420);
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
             assert.equal(new Set(entities.map(({ entity }) => entity.id)).size, entities.length);
         });
 
@@ -2177,7 +2446,11 @@ function validatePhase5Expansion() {
                 assert.equal(item.nestedClausePathCount, nestedCount);
                 assert.equal(item.coverage, coverage);
                 assert.equal(item.accountingRecordPresent, true);
-                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                const expectedMetadata = expectedSourceMetadata('rule', sourceRecordForCanonical(entity));
+                if (id === 'rule:dmg:downtime-activity-training-to-gain-levels') {
+                    delete expectedMetadata.reprintedAs;
+                }
+                assert.deepEqual(entity.sourceMetadata, expectedMetadata);
                 assert.equal(record.entries.length, roots);
                 for (const entry of record.entries) {
                     assert.ok(entry.classifications.length > 0);
@@ -2211,6 +2484,15 @@ function validatePhase5Expansion() {
                 'rule:xphb:unarmed-strike', 'condition:xphb:grappled', 'action:xphb:escape-a-grapple',
                 'skill:xphb:athletics', 'skill:xphb:acrobatics', 'condition:xphb:incapacitated'
             ]);
+            assert.ok(ruleById.get('rule:xphb:breaking-objects').references.some(reference =>
+                reference.id === 'rule:xphb:armor-class'
+                    && reference.relationship === 'material-armor-class-table-context'));
+            assert.deepEqual(ruleById.get('rule:xphb:occupied-space').references.map(reference => reference.id), [
+                'rule:xphb:creature', 'rule:xphb:object'
+            ]);
+            assert.deepEqual(ruleById.get('rule:xphb:unoccupied-space').references.map(reference => reference.id), [
+                'rule:xphb:occupied-space', 'rule:xphb:object'
+            ]);
             assert.equal(ruleById.get('rule:xphb:breaking-objects').mechanics, undefined);
             assert.equal(ruleById.get('rule:xphb:damage-threshold').mechanics, undefined);
             assert.equal(ruleById.get('rule:xphb:immunity').mechanics, undefined);
@@ -2219,10 +2501,1449 @@ function validatePhase5Expansion() {
             assert.equal(ruleById.get('rule:xge:simultaneous-effects').mechanics, undefined);
             assert.equal(ruleById.get('rule:xge:simultaneous-effects').sourceMetadata.reprintedAs[0].id,
                 'rule:xphb:simultaneous-effects');
-            assert.equal(manifest.ruleCatalogSummary.reviewedAndAccountedCount, 104);
-            assert.equal(manifest.ruleCatalogSummary.pendingCount, 127);
-            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 100);
-            assert.equal(manifest.canonicalRecordCount, 420);
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-04 preserves stable, teleportation, temporary HP, and occupancy boundaries', () => {
+            const expected = [
+                ['rule:xphb:stable', '$.variantrule[212]', 'FULL', 1],
+                ['rule:xphb:teleportation', '$.variantrule[220]', 'UNSUPPORTED', 4],
+                ['rule:xphb:temporary-hit-points', '$.variantrule[221]', 'FULL', 1],
+                ['rule:xphb:unoccupied-space', '$.variantrule[226]', 'PARTIAL', 1]
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            assert.deepEqual(records.map(record => record.canonicalId), ids);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 7);
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, coverage, rootCount] of expected) {
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                const entity = ruleById.get(id);
+                assert.ok(entity, `missing canonical Rule ${id}`);
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, rootCount);
+                assert.equal(item.nestedClausePathCount, 0);
+                assert.equal(item.coverage, coverage);
+                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                assert.equal(record.entries.length, rootCount);
+                for (const entry of record.entries) {
+                    assert.ok(entry.classifications.length > 0);
+                    assert.deepEqual(entry.nestedSourcePaths, []);
+                }
+                assertCanonicalReferences(entity);
+                for (const reference of entity.references ?? []) {
+                    assert.ok(ruleById.has(reference.id) || phase3Ids.has(reference.id),
+                        `${id} has unresolved reference ${reference.id}`);
+                }
+            }
+            assert.deepEqual(ruleById.get('rule:xphb:stable').mechanics[0], {
+                componentId: 'stable-death-state',
+                kind: 'DAMAGE_HEALTH_STATE',
+                subtype: 'DEATH',
+                procedure: 'stabilized'
+            });
+            assert.deepEqual(ruleById.get('rule:xphb:temporary-hit-points').mechanics[0], {
+                componentId: 'temporary-hit-points-buffer',
+                kind: 'DAMAGE_HEALTH_STATE',
+                subtype: 'HIT_POINTS',
+                rule: 'temporary-hit-points'
+            });
+            assert.equal(ruleById.get('rule:xphb:teleportation').mechanics, undefined);
+            assert.ok(records.find(record => record.canonicalId === 'rule:xphb:teleportation')
+                .entries[0].classifications.some(item => item.classification === 'OMITTED'
+                    && item.cause === 'OUT_OF_APPROVED_SCOPE'));
+            assert.ok(inventory.get('rule:xphb:teleportation').gapIds.includes('R-GAP-21'));
+            assert.equal(ruleById.get('rule:xphb:unoccupied-space').mechanics, undefined);
+            assert.ok(records.find(record => record.canonicalId === 'rule:xphb:unoccupied-space')
+                .entries[0].classifications.some(item => item.classification === 'OMITTED'
+                    && item.cause === 'SCHEMA_UNSUPPORTED'));
+            assert.deepEqual(expected.reduce((counts, [, , coverage]) => {
+                counts[coverage]++;
+                return counts;
+            }, { FULL: 0, PARTIAL: 0, UNSUPPORTED: 0 }), { FULL: 2, PARTIAL: 1, UNSUPPORTED: 1 });
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-05 keeps franchise downtime mechanics within skipped R-GAP-13', () => {
+            const expected = [
+                ['rule:ai:downtime-and-franchise-activity-explore-territory', '$.variantrule[84]', 2, 69],
+                ['rule:ai:downtime-and-franchise-activity-franchise-restructuring', '$.variantrule[85]', 2, 44],
+                ['rule:ai:downtime-and-franchise-activity-headquarters-modification', '$.variantrule[86]', 3, 44],
+                ['rule:ai:downtime-and-franchise-activity-marketeering', '$.variantrule[87]', 2, 54],
+                ['rule:ai:downtime-and-franchise-activity-philanthropic-enterprise', '$.variantrule[88]', 3, 48],
+                ['rule:ai:downtime-and-franchise-activity-running-a-franchise', '$.variantrule[89]', 2, 64]
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            assert.deepEqual(records.map(record => record.canonicalId), ids);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 14);
+            assert.equal(expected.reduce((sum, [, , , nestedCount]) => sum + nestedCount, 0), 323);
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, roots, nestedCount] of expected) {
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                const entity = ruleById.get(id);
+                assert.ok(entity, `missing referenceable Rule ${id}`);
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(item.nestedClausePathCount, nestedCount);
+                assert.equal(item.coverage, 'UNSUPPORTED');
+                assert.deepEqual(item.gapIds, ['R-GAP-13']);
+                assert.equal(item.accountingRecordPresent, true);
+                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                assert.equal(entity.mechanics, undefined);
+                assert.equal(entity.references, undefined);
+                assert.equal(record.conversionStatus, 'unsupported');
+                assert.equal(record.entries.length, roots);
+                for (const entry of record.entries) {
+                    assert.equal(entry.classifications.length, 1);
+                    const disposition = entry.classifications[0];
+                    assert.equal(disposition.classification, 'OMITTED');
+                    assert.ok(['NON_MECHANICAL', 'OUT_OF_APPROVED_SCOPE'].includes(disposition.cause));
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(disposition.portion.includes(nestedPath));
+                    }
+                }
+                for (const nestedPath of item.nestedClausePaths) {
+                    assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath))), `${id} unaccounted path ${nestedPath}`);
+                }
+            }
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-06 keeps four additional franchise activities within skipped R-GAP-13', () => {
+            const expected = [
+                ['rule:ai:downtime-and-franchise-activity-schmoozing', '$.variantrule[90]', 2, 46],
+                ['rule:ai:downtime-and-franchise-activity-scrutineering', '$.variantrule[91]', 2, 44],
+                ['rule:ai:downtime-and-franchise-activity-shady-business-practice', '$.variantrule[92]', 2, 53],
+                ['rule:ai:downtime-and-franchise-activity-team-building', '$.variantrule[93]', 3, 54]
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            assert.deepEqual(records.map(record => record.canonicalId), ids);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 9);
+            assert.equal(expected.reduce((sum, [, , , nestedCount]) => sum + nestedCount, 0), 197);
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, roots, nestedCount] of expected) {
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                const entity = ruleById.get(id);
+                assert.ok(entity, `missing referenceable Rule ${id}`);
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(item.nestedClausePathCount, nestedCount);
+                assert.equal(item.coverage, 'UNSUPPORTED');
+                assert.deepEqual(item.gapIds, ['R-GAP-13']);
+                assert.equal(item.accountingRecordPresent, true);
+                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                assert.equal(entity.mechanics, undefined);
+                assert.equal(entity.references, undefined);
+                assert.equal(record.conversionStatus, 'unsupported');
+                assert.equal(record.entries.length, roots);
+                for (const entry of record.entries) {
+                    assert.equal(entry.classifications.length, 1);
+                    const disposition = entry.classifications[0];
+                    assert.equal(disposition.classification, 'OMITTED');
+                    assert.ok(['NON_MECHANICAL', 'OUT_OF_APPROVED_SCOPE'].includes(disposition.cause));
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(disposition.portion.includes(nestedPath));
+                    }
+                }
+                for (const nestedPath of item.nestedClausePaths) {
+                    assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath))), `${id} unaccounted path ${nestedPath}`);
+                }
+            }
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-07 preserves maritime references and defers vessel procedures', () => {
+            const expected = [
+                ['rule:aag:crashing', '$.variantrule[33]', 4, 12],
+                ['rule:aag:crew', '$.variantrule[37]', 2, 0],
+                ['rule:gos:officers-and-crew', '$.variantrule[164]', 3, 27],
+                ['rule:aag:ship-repairs', '$.variantrule[191]', 2, 0],
+                ['rule:gos:ship-stat-blocks', '$.variantrule[192]', 5, 60],
+                ['rule:aag:ship-to-ship-combat', '$.variantrule[193]', 5, 29]
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            assert.deepEqual(records.map(record => record.canonicalId), ids);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 21);
+            assert.equal(expected.reduce((sum, [, , , nestedCount]) => sum + nestedCount, 0), 128);
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, roots, nestedCount] of expected) {
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                const entity = ruleById.get(id);
+                assert.ok(entity, `missing referenceable Rule ${id}`);
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(item.nestedClausePathCount, nestedCount);
+                assert.equal(item.coverage, 'UNSUPPORTED');
+                assert.ok(item.gapIds.includes('R-GAP-31'));
+                assert.equal(item.accountingRecordPresent, true);
+                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                assert.equal(entity.mechanics, undefined);
+                assert.equal(record.conversionStatus, 'unsupported');
+                assert.equal(record.entries.length, roots);
+                for (const entry of record.entries) {
+                    assert.equal(entry.classifications.length, 1);
+                    const disposition = entry.classifications[0];
+                    assert.equal(disposition.classification, 'OMITTED');
+                    assert.ok(disposition.cause);
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(disposition.portion.includes(nestedPath));
+                    }
+                }
+                for (const nestedPath of item.nestedClausePaths) {
+                    assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath))), `${id} unaccounted path ${nestedPath}`);
+                }
+            }
+            assert.deepEqual(ruleById.get('rule:aag:ship-to-ship-combat').references, [
+                {
+                    targetType: 'rule',
+                    id: 'rule:dmg:initiative-variants',
+                    relationship: 'source-referenced-side-initiative-variant'
+                },
+                {
+                    targetType: 'action',
+                    id: 'action:phb:ready',
+                    relationship: 'source-referenced-ready-action-for-boarding'
+                }
+            ]);
+            assert.deepEqual(inventory.get('rule:gos:officers-and-crew').gapIds, ['R-GAP-31', 'R-GAP-44']);
+            assert.ok(records.find(record => record.canonicalId === 'rule:aag:ship-repairs')
+                .entries[1].classifications[0].cause === 'REFERENCE_UNRESOLVED');
+            assert.ok(records.find(record => record.canonicalId === 'rule:gos:ship-stat-blocks')
+                .entries[4].classifications[0].cause === 'REFERENCE_UNRESOLVED');
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-08 accounts for ship combat and unavailable vehicle upgrades', () => {
+            const expected = [
+                ['rule:gos:ships-in-combat', '$.variantrule[194]', 5, 41],
+                ['rule:gos:superior-ship-upgrades', '$.variantrule[214]', 7, 42]
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            assert.deepEqual(records.map(record => record.canonicalId), ids);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 12);
+            assert.equal(expected.reduce((sum, [, , , nestedCount]) => sum + nestedCount, 0), 83);
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, roots, nestedCount] of expected) {
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                const entity = ruleById.get(id);
+                assert.ok(entity, `missing referenceable Rule ${id}`);
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(item.nestedClausePathCount, nestedCount);
+                assert.equal(item.coverage, 'UNSUPPORTED');
+                assert.deepEqual(item.gapIds, ['R-GAP-31']);
+                assert.equal(item.accountingRecordPresent, true);
+                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                assert.equal(entity.mechanics, undefined);
+                assert.equal(entity.references, undefined);
+                assert.equal(record.conversionStatus, 'unsupported');
+                assert.equal(record.entries.length, roots);
+                for (const entry of record.entries) {
+                    assert.equal(entry.classifications.length, 1);
+                    const disposition = entry.classifications[0];
+                    assert.equal(disposition.classification, 'OMITTED');
+                    assert.ok(['NON_MECHANICAL', 'OUT_OF_APPROVED_SCOPE', 'REFERENCE_UNRESOLVED']
+                        .includes(disposition.cause));
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(disposition.portion.includes(nestedPath));
+                    }
+                }
+                for (const nestedPath of item.nestedClausePaths) {
+                    assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath))), `${id} unaccounted path ${nestedPath}`);
+                }
+            }
+            assert.ok(records[1].entries.slice(2).every(entry =>
+                entry.classifications[0].cause === 'REFERENCE_UNRESOLVED'));
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-09 preserves the sea encounter identity and accounts for its random tables', () => {
+            const id = 'rule:gos:encounters-at-sea';
+            const record = manifest.records.find(item => item.canonicalId === id);
+            const item = manifest.ruleCatalogInventory.find(entry => entry.canonicalId === id);
+            const entity = entities.find(({ entity: candidate }) => candidate.id === id)?.entity;
+            assert.ok(entity, 'missing referenceable Rule');
+            assert.equal(record.sourceObjectPath, '$.variantrule[98]');
+            assert.equal(record.sourceEntryCount, 2);
+            assert.equal(item.nestedClausePathCount, 162);
+            assert.equal(item.coverage, 'UNSUPPORTED');
+            assert.deepEqual(item.gapIds, ['R-GAP-31', 'R-GAP-28']);
+            assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+            assert.equal(entity.mechanics, undefined);
+            assert.equal(entity.references, undefined);
+            assert.deepEqual(record.entries.map(entry => entry.classifications[0].cause), [
+                'NON_MECHANICAL', 'SCHEMA_UNSUPPORTED'
+            ]);
+            for (const nestedPath of item.nestedClausePaths) {
+                assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                    disposition.portion.includes(nestedPath))), `unaccounted nested path ${nestedPath}`);
+            }
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-10 keeps island generation and conditional outcome tables reference-only', () => {
+            const id = 'rule:gos:mysterious-islands';
+            const record = manifest.records.find(item => item.canonicalId === id);
+            const item = manifest.ruleCatalogInventory.find(entry => entry.canonicalId === id);
+            const entity = entities.find(({ entity: candidate }) => candidate.id === id)?.entity;
+            assert.ok(entity, 'missing referenceable Rule');
+            assert.equal(record.sourceObjectPath, '$.variantrule[158]');
+            assert.equal(record.sourceEntryCount, 4);
+            assert.equal(item.nestedClausePathCount, 417);
+            assert.equal(item.coverage, 'UNSUPPORTED');
+            assert.deepEqual(item.gapIds, ['R-GAP-28']);
+            assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+            assert.equal(entity.mechanics, undefined);
+            assert.equal(entity.references, undefined);
+            assert.deepEqual(record.entries.map(entry => entry.classifications[0].cause), [
+                'NON_MECHANICAL', 'SCHEMA_UNSUPPORTED', 'NON_MECHANICAL', 'SCHEMA_UNSUPPORTED'
+            ]);
+            for (const nestedPath of item.nestedClausePaths) {
+                assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                    disposition.portion.includes(nestedPath))), `unaccounted nested path ${nestedPath}`);
+            }
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-11 represents the supported kelp terrain rule and accounts for marine hazards', () => {
+            const id = 'rule:gos:ocean-environs';
+            const record = manifest.records.find(item => item.canonicalId === id);
+            const item = manifest.ruleCatalogInventory.find(entry => entry.canonicalId === id);
+            const entity = entities.find(({ entity: candidate }) => candidate.id === id)?.entity;
+            assert.ok(entity, 'missing referenceable Rule');
+            assert.equal(record.sourceObjectPath, '$.variantrule[163]');
+            assert.equal(record.sourceEntryCount, 14);
+            assert.equal(item.nestedClausePathCount, 349);
+            assert.equal(item.coverage, 'PARTIAL');
+            assert.deepEqual(item.gapIds, ['R-GAP-31']);
+            assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+            assert.deepEqual(entity.mechanics, [{
+                componentId: 'kelp-forest-difficult-terrain',
+                kind: 'MOVEMENT_SPATIAL',
+                subtype: 'DIFFICULT_TERRAIN',
+                procedure: 'movement-cost',
+                unit: 'feet',
+                extraFeetPerFoot: 1,
+                cumulative: true
+            }]);
+            assert.equal(entity.references, undefined);
+            assert.equal(record.conversionStatus, 'partially-represented');
+            assert.equal(record.entries.length, 14);
+            assert.ok(record.entries[6].classifications.some(disposition =>
+                disposition.classification === 'INTERPRETED'
+                    && disposition.portion.includes('dense kelp forest is difficult terrain')));
+            assert.ok(record.entries[6].classifications.some(disposition =>
+                disposition.classification === 'OMITTED' && disposition.cause === 'SCHEMA_UNSUPPORTED'
+                    && disposition.portion.includes('heavily obscures vision beyond 10 feet')));
+            for (const nestedPath of item.nestedClausePaths) {
+                assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                    disposition.portion.includes(nestedPath))), `unaccounted nested path ${nestedPath}`);
+            }
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-12 represents supported ghost-ship resistances and accounts for ship generation tables', () => {
+            const id = 'rule:gos:random-ships';
+            const record = manifest.records.find(item => item.canonicalId === id);
+            const item = manifest.ruleCatalogInventory.find(entry => entry.canonicalId === id);
+            const entity = entities.find(({ entity: candidate }) => candidate.id === id)?.entity;
+            assert.ok(entity, 'missing referenceable Rule');
+            assert.equal(record.sourceObjectPath, '$.variantrule[178]');
+            assert.equal(record.sourceEntryCount, 6);
+            assert.equal(item.nestedClausePathCount, 353);
+            assert.equal(item.coverage, 'PARTIAL');
+            assert.deepEqual(item.gapIds, ['R-GAP-31', 'R-GAP-28']);
+            assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+            assert.deepEqual(entity.mechanics, [{
+                componentId: 'ghost-ship-energy-damage-resistance',
+                kind: 'DAMAGE_HEALTH_STATE',
+                subtype: 'RESISTANCE',
+                damageTypes: ['acid', 'fire', 'lightning', 'thunder'],
+                resolutionModifier: {
+                    operation: 'HALVE',
+                    multiplier: 0.5,
+                    rounding: 'DOWN',
+                    oncePerDamageInstance: true,
+                    sameOperationDoesNotStack: true
+                }
+            }]);
+            assert.equal(entity.references, undefined);
+            assert.equal(record.conversionStatus, 'partially-represented');
+            assert.ok(record.entries[4].classifications.some(disposition =>
+                disposition.classification === 'INTERPRETED'
+                    && disposition.portion.includes('Ghost ships resist acid, fire, lightning, and thunder')));
+            assert.ok(record.entries[4].classifications.some(disposition =>
+                disposition.classification === 'OMITTED' && disposition.cause === 'SCHEMA_UNSUPPORTED'));
+            for (const nestedPath of item.nestedClausePaths) {
+                assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                    disposition.portion.includes(nestedPath))), `unaccounted nested path ${nestedPath}`);
+            }
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-13 accounts for the deferred ship travel, crew, and hazard procedures', () => {
+            const id = 'rule:gos:travel-at-sea';
+            const record = manifest.records.find(item => item.canonicalId === id);
+            const item = manifest.ruleCatalogInventory.find(entry => entry.canonicalId === id);
+            const entity = entities.find(({ entity: candidate }) => candidate.id === id)?.entity;
+            assert.ok(entity, 'missing referenceable Rule');
+            assert.equal(record.sourceObjectPath, '$.variantrule[223]');
+            assert.equal(record.sourceEntryCount, 4);
+            assert.equal(item.nestedClausePathCount, 307);
+            assert.equal(item.coverage, 'UNSUPPORTED');
+            assert.deepEqual(item.gapIds, ['R-GAP-31', 'R-GAP-28', 'R-GAP-44']);
+            assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+            assert.equal(entity.mechanics, undefined);
+            assert.equal(entity.references, undefined);
+            assert.deepEqual(record.entries[0].classifications.map(disposition => disposition.cause), [
+                'NON_MECHANICAL', 'REFERENCE_UNRESOLVED'
+            ]);
+            assert.equal(record.entries.slice(1).every(entry =>
+                entry.classifications[0].cause === 'OUT_OF_APPROVED_SCOPE'), true);
+            for (const nestedPath of item.nestedClausePaths) {
+                assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                    disposition.portion.includes(nestedPath))), `unaccounted nested path ${nestedPath}`);
+            }
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-15 preserves illumination and obscuration definitions with supported spatial mechanics', () => {
+            const expected = [
+                ['rule:xphb:bright-light', '$.variantrule[20]', 'UNSUPPORTED', 1],
+                ['rule:xphb:darkness', '$.variantrule[49]', 'FULL', 1],
+                ['rule:xphb:dim-light', '$.variantrule[55]', 'FULL', 1],
+                ['rule:xphb:heavily-obscured', '$.variantrule[122]', 'PARTIAL', 1],
+                ['rule:xphb:lightly-obscured', '$.variantrule[144]', 'PARTIAL', 1]
+            ];
+            const ids = expected.map(([id]) => id);
+            const byId = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, coverage, roots] of expected) {
+                const entity = byId.get(id);
+                const record = manifest.records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                assert.ok(entity, `missing Rule ${id}`);
+                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(item.coverage, coverage);
+                assert.equal(record.entries[0].sourcePath, `${sourcePath}.entries[0]`);
+            }
+            assert.equal(byId.get('rule:xphb:bright-light').mechanics, undefined);
+            assert.equal(byId.get('rule:xphb:darkness').references[0].id, 'rule:xphb:heavily-obscured');
+            assert.equal(byId.get('rule:xphb:dim-light').references[0].id, 'rule:xphb:lightly-obscured');
+            assert.deepEqual(byId.get('rule:xphb:heavily-obscured').mechanics[0], {
+                componentId: 'heavy-obscuration', kind: 'MOVEMENT_SPATIAL', subtype: 'OBSCURATION',
+                level: 'heavily-obscured', sightEffect: 'blocks-vision'
+            });
+            assert.equal(byId.get('rule:xphb:heavily-obscured').references[0].id, 'condition:xphb:blinded');
+            assert.deepEqual(byId.get('rule:xphb:lightly-obscured').mechanics[0], {
+                componentId: 'light-obscuration', kind: 'MOVEMENT_SPATIAL', subtype: 'OBSCURATION',
+                level: 'lightly-obscured', sightEffect: 'disadvantage-on-sight-dependent-perception'
+            });
+            for (const id of ['rule:xphb:heavily-obscured', 'rule:xphb:lightly-obscured']) {
+                const record = manifest.records.find(item => item.canonicalId === id);
+                assert.ok(record.entries[0].classifications.some(item =>
+                    item.classification === 'OMITTED' && item.cause === 'SCHEMA_UNSUPPORTED'));
+            }
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-16 preserves supported checks, saves, definitions, and edition-safe references', () => {
+            const expected = [
+                ['rule:cos:prophet-s-gambit', '$.variantrule[177]', 'UNSUPPORTED', 5, 92],
+                ['rule:dmg:alien-technology', '$.variantrule[7]', 'PARTIAL', 4, 14],
+                ['rule:dmg:fear-and-horror', '$.variantrule[109]', 'PARTIAL', 3, 7],
+                ['rule:dmg:hero-points', '$.variantrule[123]', 'UNSUPPORTED', 4, 0],
+                ['rule:phb:equipment-sizes', '$.variantrule[101]', 'UNSUPPORTED', 3, 0],
+                ['rule:scag:human-languages', '$.variantrule[131]', 'PARTIAL', 3, 59],
+                ['rule:vrgr:fear-and-stress', '$.variantrule[110]', 'PARTIAL', 4, 65],
+                ['rule:xphb:attunement', '$.variantrule[16]', 'PARTIAL', 1, 0],
+                ['rule:xphb:challenge-rating', '$.variantrule[25]', 'UNSUPPORTED', 1, 0],
+                ['rule:xphb:condition', '$.variantrule[30]', 'PARTIAL', 3, 17],
+                ['rule:xphb:dead', '$.variantrule[50]', 'PARTIAL', 2, 0],
+                ['rule:xphb:healing', '$.variantrule[121]', 'FULL', 1, 0]
+            ];
+            assert.equal(expected.reduce((sum, [, , , roots]) => sum + roots, 0), 34);
+            assert.equal(expected.reduce((sum, [, , , , nested]) => sum + nested, 0), 254);
+            const ids = expected.map(([id]) => id);
+            const byId = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, coverage, roots, nested] of expected) {
+                const record = manifest.records.find(item => item.canonicalId === id);
+                assert.ok(byId.has(id), `missing Rule ${id}`);
+                const expectedMetadata = expectedSourceMetadata('rule', sourceRecordForCanonical(byId.get(id)));
+                if (id === 'rule:dmg:alien-technology') delete expectedMetadata.reprintedAs;
+                assert.deepEqual(byId.get(id).sourceMetadata, expectedMetadata);
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(inventory.get(id).nestedClausePathCount, nested);
+                assert.equal(inventory.get(id).coverage, coverage);
+                assert.equal(record.entries.length, roots);
+                for (const entry of record.entries) {
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications.some(item => item.portion.includes(nestedPath)),
+                            `${id} nested path missing from disposition ${nestedPath}`);
+                    }
+                }
+            }
+            assert.equal(byId.get('rule:dmg:alien-technology').mechanics[0].abilities[0], 'intelligence');
+            assert.deepEqual(byId.get('rule:dmg:fear-and-horror').mechanics.map(item =>
+                item.savingThrow.abilities[0]), ['wisdom', 'charisma']);
+            assert.equal(byId.get('rule:vrgr:fear-and-stress').mechanics[0].savingThrow.dc.value, 15);
+            assert.equal(byId.get('rule:xphb:attunement').mechanics[0].subtype, 'ATTUNEMENT');
+            assert.equal(byId.get('rule:xphb:healing').mechanics[0].method, 'healing-effect');
+            assert.equal(byId.get('rule:xphb:condition').references.length, 15);
+            assert.equal(byId.get('rule:scag:human-languages').references.length, 21);
+            for (const id of ['rule:cos:prophet-s-gambit', 'rule:dmg:hero-points',
+                'rule:phb:equipment-sizes', 'rule:xphb:challenge-rating']) {
+                assert.equal(byId.get(id).mechanics, undefined);
+            }
+            assert.deepEqual(inventory.get('rule:cos:prophet-s-gambit').gapIds, ['R-GAP-22']);
+            assert.deepEqual(inventory.get('rule:dmg:hero-points').gapIds, ['R-GAP-46']);
+            assert.deepEqual(inventory.get('rule:vrgr:fear-and-stress').gapIds, ['R-GAP-16']);
+            const dead = manifest.records.find(item => item.canonicalId === 'rule:xphb:dead');
+            assert.ok(dead.entries[0].classifications.some(item => item.cause === 'REFERENCE_UNRESOLVED'));
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-17 preserves the supported glossary relationships and Hit Dice healing', () => {
+            const expected = [
+                ['rule:xphb:hit-point-dice', '$.variantrule[126]', 'PARTIAL', 1, 0],
+                ['rule:xphb:object', '$.variantrule[161]', 'UNSUPPORTED', 1, 0],
+                ['rule:xphb:per-day', '$.variantrule[167]', 'FULL', 1, 0],
+                ['rule:xphb:round-down', '$.variantrule[185]', 'UNSUPPORTED', 1, 0],
+                ['rule:xphb:stat-block', '$.variantrule[213]', 'PARTIAL', 2, 61],
+                ['rule:xphb:weapon', '$.variantrule[229]', 'PARTIAL', 1, 0]
+            ];
+            assert.equal(expected.reduce((sum, [, , , roots]) => sum + roots, 0), 7);
+            assert.equal(expected.reduce((sum, [, , , , nested]) => sum + nested, 0), 61);
+            const byId = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, coverage, roots, nested] of expected) {
+                const entity = byId.get(id);
+                const record = manifest.records.find(item => item.canonicalId === id);
+                assert.ok(entity, `missing Rule ${id}`);
+                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(inventory.get(id).nestedClausePathCount, nested);
+                assert.equal(inventory.get(id).coverage, coverage);
+                for (const entry of record.entries) {
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications.some(item => item.portion.includes(nestedPath)));
+                    }
+                }
+            }
+            assert.equal(byId.get('rule:xphb:hit-point-dice').mechanics[0].method, 'hit-dice');
+            assert.deepEqual(byId.get('rule:xphb:per-day').references, [
+                {targetType: 'rule', id: 'rule:xphb:long-rest', relationship: 'per-day-use-recharged-after-long-rest'}
+            ]);
+            assert.equal(byId.get('rule:xphb:stat-block').references.length, 22);
+            assert.deepEqual(byId.get('rule:xphb:weapon').references, [
+                {targetType: 'rule', id: 'rule:xphb:object', relationship: 'weapon-is-an-object'}
+            ]);
+            assert.equal(byId.get('rule:xphb:object').mechanics, undefined);
+            assert.equal(byId.get('rule:xphb:round-down').mechanics, undefined);
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-18 preserves character-progression identities, typed relationships, and skipped knot rules', () => {
+            const expected = [
+                ['rule:dmg:alternatives-to-epic-boons', '$.variantrule[10]', 'PARTIAL', 2, 7],
+                ['rule:dmg:level-advancement-without-xp', '$.variantrule[143]', 'PARTIAL', 4, 6],
+                ['rule:dmg:milestones', '$.variantrule[152]', 'PARTIAL', 4, 8],
+                ['rule:dmg:plot-points', '$.variantrule[173]', 'UNSUPPORTED', 5, 18],
+                ['rule:dmg:renown', '$.variantrule[181]', 'PARTIAL', 6, 76],
+                ['rule:phb:customizing-ability-scores', '$.variantrule[41]', 'UNSUPPORTED', 5, 13],
+                ['rule:phb:feats', '$.variantrule[111]', 'UNSUPPORTED', 4, 0],
+                ['rule:tce:customizing-your-origin', '$.variantrule[42]', 'PARTIAL', 5, 60],
+                ['rule:tce:optional-class-features', '$.variantrule[165]', 'UNSUPPORTED', 3, 0],
+                ['rule:xge:tying-knots', '$.variantrule[224]', 'UNSUPPORTED', 3, 0],
+                ['rule:xphb:experience-points', '$.variantrule[102]', 'UNSUPPORTED', 1, 0]
+            ];
+            assert.equal(expected.reduce((sum, [, , , roots]) => sum + roots, 0), 42);
+            assert.equal(expected.reduce((sum, [, , , , nested]) => sum + nested, 0), 188);
+            const byId = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, coverage, roots, nested] of expected) {
+                const entity = byId.get(id);
+                const record = manifest.records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                assert.ok(entity, `missing Rule ${id}`);
+                const expectedMetadata = expectedSourceMetadata('rule', sourceRecordForCanonical(entity));
+                if (id === 'rule:dmg:level-advancement-without-xp' || id === 'rule:dmg:renown') {
+                    delete expectedMetadata.reprintedAs;
+                }
+                assert.deepEqual(entity.sourceMetadata, expectedMetadata);
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(item.nestedClausePathCount, nested);
+                assert.equal(item.coverage, coverage);
+                assert.equal(entity.mechanics, undefined);
+                for (const entry of record.entries) {
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications.some(disposition => disposition.portion.includes(nestedPath)));
+                    }
+                }
+            }
+            assert.equal(byId.get('rule:dmg:alternatives-to-epic-boons').references.length, 2);
+            assert.equal(byId.get('rule:dmg:milestones').references.length, 4);
+            assert.equal(byId.get('rule:dmg:renown').references.length, 3);
+            assert.equal(byId.get('rule:tce:customizing-your-origin').references.length, 16);
+            assert.equal(byId.get('rule:xge:tying-knots').references[0].id,
+                'rule:phb:skills-with-different-abilities');
+            assert.deepEqual(inventory.get('rule:xge:tying-knots').gapIds, ['R-GAP-19']);
+            for (const id of ['rule:dmg:level-advancement-without-xp', 'rule:dmg:renown']) {
+                const issue = manifest.sourceFieldIssues.find(item =>
+                    item.canonicalId === id && item.sourceField === 'reprintedAs');
+                assert.equal(issue?.cause, 'REFERENCE_UNRESOLVED');
+            }
+            assert.ok(manifest.records.find(item => item.canonicalId === 'rule:xphb:experience-points')
+                .entries[0].classifications.some(item => item.cause === 'EXTERNAL_DEPENDENCY'));
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-29 preserves the downtime activity index and accounts generic procedure limits', () => {
+            const id = 'rule:xge:downtime-revisited';
+            const expectedTargets = [
+                'rule:xge:downtime-activity-buying-a-magic-item',
+                'rule:xge:downtime-activity-carousing',
+                'rule:xge:downtime-activity-crafting-an-item',
+                'rule:xge:downtime-activity-crime',
+                'rule:xge:downtime-activity-gambling',
+                'rule:xge:downtime-activity-pit-fighting',
+                'rule:xge:downtime-activity-relaxation',
+                'rule:xge:downtime-activity-religious-service',
+                'rule:xge:downtime-activity-research',
+                'rule:xge:downtime-activity-scribing-a-spell-scroll',
+                'rule:xge:downtime-activity-selling-a-magic-item',
+                'rule:xge:downtime-activity-training',
+                'rule:xge:downtime-activity-work'
+            ];
+            const entity = entities.find(({ entity: candidate }) => candidate.id === id)?.entity;
+            const record = manifest.records.find(item => item.canonicalId === id);
+            const inventory = manifest.ruleCatalogInventory.find(item => item.canonicalId === id);
+            assert.ok(entity, `missing Rule ${id}`);
+            assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+            assert.equal(entity.ruleType, 'VARIANT_OPTIONAL');
+            assert.equal(entity.mechanics, undefined);
+            assert.deepEqual(entity.references.map(reference => reference.id), expectedTargets);
+            assert.ok(entity.references.every(reference =>
+                reference.relationship === 'listed-as-example-downtime-activity'));
+            assert.equal(record.sourceObjectPath, '$.variantrule[94]');
+            assert.equal(record.sourceEntryCount, 7);
+            assert.equal(record.entries.length, 7);
+            assert.equal(inventory.nestedClausePathCount, 99);
+            assert.deepEqual(inventory.gapIds, ['R-GAP-13']);
+            assert.equal(inventory.coverage, 'PARTIAL');
+            for (const entry of record.entries) {
+                for (const nestedPath of entry.nestedSourcePaths) {
+                    assert.ok(entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath)), `unaccounted path ${nestedPath}`);
+                }
+            }
+            for (const nestedPath of inventory.nestedClausePaths) {
+                assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                    disposition.portion.includes(nestedPath))), `unaccounted nested path ${nestedPath}`);
+            }
+            const externalBooks = record.entries[0].classifications.find(item =>
+                item.classification === 'OMITTED' && item.cause === 'EXTERNAL_DEPENDENCY');
+            assert.ok(externalBooks?.portion.includes('PHB/DMG'));
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.partialCount, 90);
+            assert.equal(manifest.ruleCatalogSummary.unsupportedCount, 73);
+            assert.equal(manifest.canonicalRecordCount, 551);
+            assert.equal(new Set(entities.map(({ entity }) => entity.id)).size, entities.length);
+        });
+
+        check('RULE-CONV-28 preserves XGE research, crafting, sale, and work portions', () => {
+            const expected = [
+                ['rule:xge:downtime-activity-religious-service', '$.variantrule[72]', 'UNSUPPORTED', 4, 42],
+                ['rule:xge:downtime-activity-research', '$.variantrule[73]', 'PARTIAL', 4, 45],
+                ['rule:xge:downtime-activity-scribing-a-spell-scroll', '$.variantrule[76]', 'PARTIAL', 3, 64],
+                ['rule:xge:downtime-activity-selling-a-magic-item', '$.variantrule[77]', 'PARTIAL', 4, 57],
+                ['rule:xge:downtime-activity-training', '$.variantrule[81]', 'UNSUPPORTED', 3, 25],
+                ['rule:xge:downtime-activity-work', '$.variantrule[83]', 'PARTIAL', 4, 42]
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            assert.deepEqual(records.map(record => record.canonicalId), ids);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 22);
+            assert.equal(expected.reduce((sum, [, , , , nested]) => sum + nested, 0), 275);
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, coverage, roots, nested] of expected) {
+                const entity = ruleById.get(id);
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                assert.ok(entity, `missing Rule ${id}`);
+                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                assert.equal(entity.ruleType, 'VARIANT_OPTIONAL');
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(record.entries.length, roots);
+                assert.equal(item.nestedClausePathCount, nested);
+                assert.deepEqual(item.gapIds, ['R-GAP-13']);
+                assert.equal(item.coverage, coverage);
+                for (const entry of record.entries) {
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications.some(disposition =>
+                            disposition.portion.includes(nestedPath)), `${id} unaccounted path ${nestedPath}`);
+                    }
+                }
+                for (const nestedPath of item.nestedClausePaths) {
+                    assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath))), `${id} unaccounted nested clause ${nestedPath}`);
+                }
+                if (coverage === 'UNSUPPORTED') {
+                    assert.equal(entity.mechanics, undefined, `${id} must remain reference-only`);
+                    assert.equal(entity.references, undefined);
+                }
+            }
+            const research = ruleById.get('rule:xge:downtime-activity-research').mechanics[0];
+            assert.deepEqual([research.procedure, research.duration, research.check.abilities, research.outcome], [
+                'research', { amount: 1, unit: 'week' }, ['intelligence'], 'information-gained'
+            ]);
+            const scribing = ruleById.get('rule:xge:downtime-activity-scribing-a-spell-scroll').mechanics[0];
+            assert.deepEqual([scribing.procedure, scribing.outcome], ['craft', 'item-created']);
+            const sale = ruleById.get('rule:xge:downtime-activity-selling-a-magic-item').mechanics[0];
+            assert.deepEqual([sale.procedure, sale.duration, sale.check.abilities, sale.check.skill.id], [
+                'sell', { amount: 1, unit: 'week' }, ['charisma'], 'skill:phb:persuasion'
+            ]);
+            assert.deepEqual([ruleById.get('rule:xge:downtime-activity-work').mechanics[0].procedure,
+                ruleById.get('rule:xge:downtime-activity-work').mechanics[0].duration],
+                ['work', { amount: 1, unit: 'week' }]);
+            assert.equal(research.check.advantage, undefined);
+            assert.equal(scribing.duration, undefined,
+                'spell-level-dependent scribing durations must not be flattened');
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.partialCount, 90);
+            assert.equal(manifest.ruleCatalogSummary.unsupportedCount, 73);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-27 represents supported XGE downtime activity portions without table engines', () => {
+            const expected = [
+                ['rule:xge:downtime-activity-buying-a-magic-item', '$.variantrule[58]', 'PARTIAL', 6, 85],
+                ['rule:xge:downtime-activity-carousing', '$.variantrule[60]', 'PARTIAL', 4, 105],
+                ['rule:xge:downtime-activity-crafting-an-item', '$.variantrule[63]', 'PARTIAL', 5, 115],
+                ['rule:xge:downtime-activity-crime', '$.variantrule[64]', 'UNSUPPORTED', 4, 52],
+                ['rule:xge:downtime-activity-gambling', '$.variantrule[66]', 'PARTIAL', 4, 43],
+                ['rule:xge:downtime-activity-pit-fighting', '$.variantrule[68]', 'UNSUPPORTED', 4, 43]
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            assert.deepEqual(records.map(record => record.canonicalId), ids);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 27);
+            assert.equal(expected.reduce((sum, [, , , , nested]) => sum + nested, 0), 443);
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, coverage, roots, nested] of expected) {
+                const entity = ruleById.get(id);
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                assert.ok(entity, `missing Rule ${id}`);
+                const expectedMetadata = expectedSourceMetadata('rule', sourceRecordForCanonical(entity));
+                assert.deepEqual(entity.sourceMetadata, expectedMetadata);
+                assert.equal(entity.ruleType, 'VARIANT_OPTIONAL');
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(record.entries.length, roots);
+                assert.equal(item.nestedClausePathCount, nested);
+                assert.deepEqual(item.gapIds, ['R-GAP-13']);
+                assert.equal(item.coverage, coverage);
+                for (const entry of record.entries) {
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications.some(disposition =>
+                            disposition.portion.includes(nestedPath)), `${id} unaccounted path ${nestedPath}`);
+                    }
+                }
+                for (const nestedPath of item.nestedClausePaths) {
+                    assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath))), `${id} unaccounted nested path ${nestedPath}`);
+                }
+                if (coverage === 'UNSUPPORTED') {
+                    assert.equal(entity.mechanics, undefined, `${id} must remain reference-only`);
+                    assert.equal(entity.references, undefined);
+                }
+            }
+            const buying = ruleById.get('rule:xge:downtime-activity-buying-a-magic-item').mechanics[0];
+            assert.deepEqual([buying.procedure, buying.duration], ['buy', { amount: 1, unit: 'week' }]);
+            assert.deepEqual([buying.check.abilities, buying.check.skill.id],
+                [['charisma'], 'skill:phb:persuasion']);
+            const carousing = ruleById.get('rule:xge:downtime-activity-carousing').mechanics[0];
+            assert.deepEqual([carousing.procedure, carousing.duration], ['carouse', { amount: 1, unit: 'week' }]);
+            assert.equal(carousing.check.skill.id, 'skill:phb:persuasion');
+            assert.deepEqual(ruleById.get('rule:xge:downtime-activity-crafting-an-item').mechanics[0], {
+                componentId: 'craft-item-activity',
+                kind: 'DOWNTIME_PROCEDURE',
+                subtype: 'ACTIVITY',
+                procedure: 'craft',
+                outcome: 'item-created'
+            });
+            assert.deepEqual([ruleById.get('rule:xge:downtime-activity-gambling').mechanics[0].procedure,
+                ruleById.get('rule:xge:downtime-activity-gambling').mechanics[0].duration],
+                ['gamble', { amount: 1, unit: 'week' }]);
+            assert.equal(JSON.stringify(buying).includes('Magic Item Table'), false);
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.partialCount, 90);
+            assert.equal(manifest.ruleCatalogSummary.unsupportedCount, 73);
+            assert.equal(manifest.canonicalRecordCount, 551);
+            assert.equal(new Set(entities.map(({ entity }) => entity.id)).size, entities.length);
+        });
+
+        check('RULE-CONV-26 represents independent downtime procedures and accounts deferred detail', () => {
+            const expected = [
+                ['rule:phb:downtime-activity-researching', '$.variantrule[74]', 3],
+                ['rule:phb:downtime-activity-training', '$.variantrule[80]', 3]
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            assert.deepEqual(records.map(record => record.canonicalId), ids);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 6);
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, roots] of expected) {
+                const entity = ruleById.get(id);
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                assert.ok(entity, `missing Rule ${id}`);
+                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(record.entries.length, roots);
+                assert.equal(item.nestedClausePathCount, 0);
+                assert.deepEqual(item.gapIds, ['R-GAP-13']);
+                assert.equal(item.coverage, 'PARTIAL');
+                assert.ok(record.entries.every(entry => entry.classifications.length > 0));
+            }
+            const research = ruleById.get('rule:phb:downtime-activity-researching').mechanics[0];
+            assert.deepEqual([research.procedure, research.outcome], ['research', 'information-gained']);
+            assert.equal(research.duration, undefined);
+            assert.equal(research.check, undefined);
+            const training = ruleById.get('rule:phb:downtime-activity-training').mechanics[0];
+            assert.deepEqual([training.procedure, training.duration], ['train', { amount: 250, unit: 'day' }]);
+            assert.equal(training.outcome, undefined,
+                'language/tool proficiency alternatives must not become a generic resource outcome');
+            assert.equal(records.flatMap(record => record.entries)
+                .flatMap(entry => entry.classifications).filter(item => item.classification === 'INTERPRETED').length, 2);
+            assert.equal(records.flatMap(record => record.entries)
+                .flatMap(entry => entry.classifications).filter(item => item.classification === 'OMITTED').length, 6);
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.partialCount, 90);
+            assert.equal(manifest.ruleCatalogSummary.unsupportedCount, 73);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-25 represents supported downtime checks and outcomes with complete source accounting', () => {
+            const expected = [
+                ['rule:dmg:downtime-activity-building-a-stronghold', '$.variantrule[57]', 'UNSUPPORTED', 4, 35],
+                ['rule:dmg:downtime-activity-carousing', '$.variantrule[59]', 'UNSUPPORTED', 3, 20],
+                ['rule:dmg:downtime-activity-gaining-renown', '$.variantrule[65]', 'PARTIAL', 1, 0],
+                ['rule:dmg:downtime-activity-performing-sacred-rites', '$.variantrule[67]', 'PARTIAL', 3, 0],
+                ['rule:dmg:downtime-activity-running-a-business', '$.variantrule[75]', 'UNSUPPORTED', 4, 20],
+                ['rule:dmg:downtime-activity-selling-magic-items', '$.variantrule[78]', 'PARTIAL', 8, 43],
+                ['rule:dmg:downtime-activity-sowing-rumors', '$.variantrule[79]', 'PARTIAL', 5, 12],
+                ['rule:dmg:downtime-activity-training-to-gain-levels', '$.variantrule[82]', 'UNSUPPORTED', 3, 20],
+                ['rule:phb:downtime-activity-crafting', '$.variantrule[61]', 'PARTIAL', 4, 0],
+                ['rule:phb:downtime-activity-practicing-a-profession', '$.variantrule[69]', 'PARTIAL', 3, 0]
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            assert.deepEqual(records.map(record => record.canonicalId), ids);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 38);
+            assert.equal(expected.reduce((sum, [, , , , nested]) => sum + nested, 0), 150);
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, coverage, roots, nested] of expected) {
+                const entity = ruleById.get(id);
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                assert.ok(entity, `missing Rule ${id}`);
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(record.entries.length, roots);
+                assert.equal(item.nestedClausePathCount, nested);
+                assert.equal(item.coverage, coverage);
+                assert.deepEqual(item.gapIds, ['R-GAP-13']);
+                const sourceMetadata = expectedSourceMetadata('rule', sourceRecordForCanonical(entity));
+                if (id === 'rule:dmg:downtime-activity-training-to-gain-levels') {
+                    delete sourceMetadata.reprintedAs;
+                }
+                assert.deepEqual(entity.sourceMetadata, sourceMetadata);
+                for (const entry of record.entries) {
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications.some(disposition =>
+                            disposition.portion.includes(nestedPath)), `${id} unaccounted path ${nestedPath}`);
+                    }
+                }
+                for (const nestedPath of item.nestedClausePaths) {
+                    assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath))), `${id} unaccounted nested clause ${nestedPath}`);
+                }
+                if (coverage === 'UNSUPPORTED') {
+                    assert.equal(entity.mechanics, undefined, `${id} must remain reference-only`);
+                    assert.equal(entity.references, undefined, `${id} has no supported relationship to assert`);
+                }
+            }
+            const renown = ruleById.get('rule:dmg:downtime-activity-gaining-renown');
+            assert.deepEqual(renown.references, [{
+                targetType: 'rule', id: 'rule:dmg:renown', relationship: 'activity-advances-renown'
+            }]);
+            assert.deepEqual(ruleById.get('rule:dmg:downtime-activity-performing-sacred-rites').references, [{
+                targetType: 'rule', id: 'rule:phb:inspiration', relationship: 'activity-grants-inspiration'
+            }]);
+            const sale = ruleById.get('rule:dmg:downtime-activity-selling-magic-items').mechanics[0];
+            assert.equal(sale.procedure, 'sell');
+            assert.deepEqual([sale.check.abilities, sale.check.skill.id, sale.check.dc],
+                [['intelligence'], 'skill:phb:investigation', 20]);
+            const rumor = ruleById.get('rule:dmg:downtime-activity-sowing-rumors').mechanics[0];
+            assert.equal(rumor.subtype, 'INFLUENCE');
+            assert.deepEqual([rumor.check.abilities, rumor.check.dc], [['charisma'], 15]);
+            assert.deepEqual(ruleById.get('rule:phb:downtime-activity-crafting').mechanics[0], {
+                componentId: 'crafting-activity',
+                kind: 'DOWNTIME_PROCEDURE',
+                subtype: 'ACTIVITY',
+                procedure: 'craft',
+                duration: { amount: 1, unit: 'day' },
+                outcome: 'item-created'
+            });
+            const profession = ruleById.get('rule:phb:downtime-activity-practicing-a-profession').mechanics[0];
+            assert.deepEqual([profession.procedure, profession.minimumLifestyle], ['work', 'MODEST']);
+            assert.equal(JSON.stringify(rumor).includes('friendly'), false);
+            assert.equal(JSON.stringify(rumor).includes('hostile'), false);
+            assert.equal(JSON.stringify(ruleById.get('rule:dmg:downtime-activity-carousing')).includes('carouse'), false);
+            const trainingReprint = manifest.sourceFieldIssues.find(issue =>
+                issue.canonicalId === 'rule:dmg:downtime-activity-training-to-gain-levels'
+                    && issue.sourceField === 'reprintedAs');
+            assert.equal(trainingReprint?.cause, 'REFERENCE_UNRESOLVED');
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.partialCount, 90);
+            assert.equal(manifest.ruleCatalogSummary.unsupportedCount, 73);
+            assert.equal(manifest.canonicalRecordCount, 551);
+            assert.equal(new Set(entities.map(({ entity }) => entity.id)).size, entities.length);
+        });
+
+        check('RULE-CONV-24 represents survivor and spell checks while preserving spell-state boundaries', () => {
+            const expected = [
+                ['rule:vrgr:survivors', '$.variantrule[215]', 'PARTIAL', 7, 97, ['R-GAP-37']],
+                ['rule:xge:spellcasting', '$.variantrule[209]', 'PARTIAL', 5, 58, ['R-GAP-35', 'R-GAP-36']],
+                ['rule:xphb:armor-training', '$.variantrule[13]', 'PARTIAL', 1, 0, []],
+                ['rule:xphb:cantrip', '$.variantrule[23]', 'PARTIAL', 1, 0, []],
+                ['rule:xphb:curses', '$.variantrule[40]', 'PARTIAL', 1, 0, []],
+                ['rule:xphb:illusions', '$.variantrule[132]', 'UNSUPPORTED', 2, 0, []],
+                ['rule:xphb:magical-effect', '$.variantrule[150]', 'UNSUPPORTED', 1, 0, []],
+                ['rule:xphb:possession', '$.variantrule[174]', 'PARTIAL', 1, 0, []],
+                ['rule:xphb:ritual', '$.variantrule[184]', 'UNSUPPORTED', 1, 0, []],
+                ['rule:xphb:shape-shifting', '$.variantrule[189]', 'PARTIAL', 1, 0, []],
+                ['rule:xphb:spell', '$.variantrule[206]', 'PARTIAL', 1, 0, []],
+                ['rule:xphb:spellcasting-focus', '$.variantrule[210]', 'UNSUPPORTED', 1, 0, []],
+                ['rule:xphb:telepathy', '$.variantrule[219]', 'PARTIAL', 3, 0, []]
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            assert.deepEqual(records.map(record => record.canonicalId), ids);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 26);
+            assert.equal(expected.reduce((sum, [, , , , nested]) => sum + nested, 0), 155);
+            const byId = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, coverage, roots, nested, gaps] of expected) {
+                const entity = byId.get(id);
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                assert.ok(entity, `missing Rule ${id}`);
+                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(record.entries.length, roots);
+                assert.equal(item.nestedClausePathCount, nested);
+                assert.equal(item.coverage, coverage);
+                assert.deepEqual(item.gapIds, gaps);
+                for (const entry of record.entries) {
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications.some(disposition =>
+                            disposition.portion.includes(nestedPath)), `${id} unaccounted path ${nestedPath}`);
+                    }
+                }
+                for (const nestedPath of item.nestedClausePaths) {
+                    assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath))), `${id} unaccounted nested clause ${nestedPath}`);
+                }
+            }
+            const survivorBenefit = byId.get('rule:vrgr:survivors').mechanics[0];
+            assert.equal(survivorBenefit.componentId, 'desperate-scream-saving-throw');
+            assert.equal(survivorBenefit.test, 'saving-throw');
+            assert.equal(survivorBenefit.modifier.direction, 'advantage');
+            const identifyCheck = byId.get('rule:xge:spellcasting').mechanics[0];
+            assert.deepEqual(identifyCheck.abilities, ['intelligence']);
+            assert.equal(identifyCheck.skill.id, 'skill:phb:arcana');
+            assert.deepEqual(identifyCheck.dc, {
+                kind: 'FIXED_PLUS_SPELL_LEVEL',
+                base: 15,
+                spellRole: 'identified-spell'
+            });
+            assert.deepEqual(byId.get('rule:xphb:armor-training').references.map(reference => reference.id), [
+                'rule:xphb:disadvantage', 'rule:xphb:d20-test'
+            ]);
+            assert.equal(byId.get('rule:xphb:cantrip').references[0].id, 'rule:xphb:spell');
+            assert.deepEqual(byId.get('rule:xphb:shape-shifting').references.map(reference => reference.id), [
+                'rule:xphb:condition', 'rule:xphb:dead'
+            ]);
+            assert.equal(byId.get('rule:xphb:spell').references[0].id, 'rule:xphb:magical-effect');
+            assert.equal(byId.get('rule:xphb:telepathy').references[0].id, 'condition:xphb:incapacitated');
+            for (const id of ['rule:xphb:curses', 'rule:xphb:illusions', 'rule:xphb:magical-effect',
+                'rule:xphb:possession', 'rule:xphb:ritual', 'rule:xphb:spellcasting-focus']) {
+                assert.equal(byId.get(id).mechanics, undefined, `${id} must remain reference-only`);
+            }
+            assert.ok(records.find(record => record.canonicalId === 'rule:xphb:possession')
+                .entries[0].classifications.some(item => item.classification === 'INTERPRETED'));
+            assert.equal(records.find(record => record.canonicalId === 'rule:xphb:possession')
+                .entries[0].classifications.some(item => item.cause === 'REFERENCE_UNRESOLVED'), false);
+            assert.ok(records.find(record => record.canonicalId === 'rule:xge:spellcasting')
+                .entries[4].classifications[0].reason.includes('token/template placement'));
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.partialCount, 90);
+            assert.equal(manifest.ruleCatalogSummary.unsupportedCount, 73);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-23 preserves supported explosive outcomes and accounts magic/creature procedure gaps', () => {
+            const expected = [
+                ['rule:dmg:explosives', '$.variantrule[104]', 'PARTIAL', 5, 17, []],
+                ['rule:dmg:mixing-potions', '$.variantrule[153]', 'UNSUPPORTED', 3, 22, ['R-GAP-43']],
+                ['rule:dmg:more-difficult-identification', '$.variantrule[156]', 'PARTIAL', 1, 0, []],
+                ['rule:dmg:scroll-mishaps', '$.variantrule[188]', 'UNSUPPORTED', 2, 18, []],
+                ['rule:dmg:spell-points', '$.variantrule[208]', 'UNSUPPORTED', 9, 63, []],
+                ['rule:dmg:wands-that-don-t-recharge', '$.variantrule[228]', 'UNSUPPORTED', 1, 0, []],
+                ['rule:mm:familiars', '$.variantrule[107]', 'PARTIAL', 2, 0, []],
+                ['rule:mm:player-characters-as-vampires', '$.variantrule[171]', 'PARTIAL', 2, 4, []],
+                ['rule:vgm:familiars', '$.variantrule[108]', 'PARTIAL', 2, 0, []],
+                ['rule:vrgr:haunted-traps', '$.variantrule[118]', 'UNSUPPORTED', 4, 17, ['R-GAP-29']]
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            assert.deepEqual(records.map(record => record.canonicalId), ids);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 31);
+            assert.equal(expected.reduce((sum, [, , , , nested]) => sum + nested, 0), 141);
+            const byId = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, coverage, roots, nested, gaps] of expected) {
+                const entity = byId.get(id);
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                assert.ok(entity, `missing Rule ${id}`);
+                const expectedMetadata = expectedSourceMetadata('rule', sourceRecordForCanonical(entity));
+                if (['rule:dmg:explosives', 'rule:dmg:mixing-potions'].includes(id)) {
+                    delete expectedMetadata.reprintedAs;
+                }
+                assert.deepEqual(entity.sourceMetadata, expectedMetadata);
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(record.entries.length, roots);
+                assert.equal(item.nestedClausePathCount, nested);
+                assert.equal(item.coverage, coverage);
+                assert.deepEqual(item.gapIds, gaps);
+                for (const entry of record.entries) {
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications.some(disposition =>
+                            disposition.portion.includes(nestedPath)), `${id} unaccounted path ${nestedPath}`);
+                    }
+                }
+                for (const nestedPath of item.nestedClausePaths) {
+                    assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath))), `${id} unaccounted nested clause ${nestedPath}`);
+                }
+            }
+            const explosives = byId.get('rule:dmg:explosives');
+            assert.equal(explosives.mechanics.length, 17);
+            assert.equal(explosives.composition.kind, 'OR');
+            assert.equal(explosives.composition.members.length, 6);
+            assert.equal(explosives.mechanics.find(item => item.componentId === 'bomb-damage')
+                .damageRoll.base.count, 3);
+            assert.equal(explosives.mechanics.find(item => item.componentId === 'fragmentation-grenade-save')
+                .savingThrow.dc.value, 15);
+            assert.equal(explosives.mechanics.find(item => item.componentId === 'smoke-grenade-obscuration')
+                .level, 'heavily-obscured');
+            for (const id of ids.slice(1)) assert.equal(byId.get(id).mechanics, undefined, `${id} must be reference-only`);
+            const unresolvedReprints = ['rule:dmg:explosives', 'rule:dmg:mixing-potions'];
+            for (const id of unresolvedReprints) {
+                const issue = manifest.sourceFieldIssues.find(item =>
+                    item.canonicalId === id && item.sourceField === 'reprintedAs');
+                assert.equal(issue?.cause, 'REFERENCE_UNRESOLVED');
+                assert.equal(Object.hasOwn(byId.get(id).sourceMetadata, 'reprintedAs'), false);
+            }
+            assert.equal(byId.get('rule:mm:player-characters-as-vampires').sourceMetadata.citations[0].source, 'VRGR');
+            assert.ok(records.find(record => record.canonicalId === 'rule:dmg:spell-points')
+                .entries[2].classifications[0].reason.includes('Resource balance'));
+            assert.ok(records.find(record => record.canonicalId === 'rule:vrgr:haunted-traps')
+                .entries[1].classifications[0].reason.includes('R-GAP-29'));
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.partialCount, 90);
+            assert.equal(manifest.ruleCatalogSummary.unsupportedCount, 73);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-22 represents Inspiration benefit and preserves social, madness, and campaign boundaries', () => {
+            const expected = [
+                ['rule:dmg:morale', '$.variantrule[155]', 'UNSUPPORTED', 8, 8, ['R-GAP-44']],
+                ['rule:phb:inspiration', '$.variantrule[140]', 'PARTIAL', 3, 8, ['R-GAP-25']],
+                ['rule:psi:emrakul-s-madness', '$.variantrule[96]', 'PARTIAL', 7, 15, ['R-GAP-26', 'R-GAP-27']],
+                ['rule:xge:shared-campaign-variant-rules', '$.variantrule[190]', 'UNSUPPORTED', 5, 142, ['R-GAP-33']],
+                ['rule:xphb:heroic-inspiration', '$.variantrule[124]', 'PARTIAL', 2, 0, ['R-GAP-25']]
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            assert.deepEqual(records.map(record => record.canonicalId), ids);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 25);
+            assert.equal(expected.reduce((sum, [, , , , nested]) => sum + nested, 0), 173);
+            const byId = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, coverage, roots, nested, gaps] of expected) {
+                const entity = byId.get(id);
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                assert.ok(entity, `missing Rule ${id}`);
+                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(record.entries.length, roots);
+                assert.equal(item.nestedClausePathCount, nested);
+                assert.equal(item.coverage, coverage);
+                assert.deepEqual(item.gapIds, gaps);
+                for (const entry of record.entries) {
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications.some(disposition =>
+                            disposition.portion.includes(nestedPath)), `${id} unaccounted path ${nestedPath}`);
+                    }
+                }
+                for (const nestedPath of item.nestedClausePaths) {
+                    assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath))), `${id} unaccounted nested clause ${nestedPath}`);
+                }
+            }
+            assert.deepEqual(byId.get('rule:phb:inspiration').mechanics, [{
+                componentId: 'inspiration-benefit',
+                kind: 'D20_TEST',
+                subtype: 'TEST_MODIFIER',
+                test: 'd20-test',
+                modifier: {
+                    kind: 'D20_ROLL_MODIFIER',
+                    roll: 'd20-test',
+                    direction: 'advantage',
+                    diceCount: 2,
+                    select: 'higher',
+                    cancelsOpposite: true,
+                    multipleInstancesStack: false
+                }
+            }]);
+            assert.equal(byId.get('rule:dmg:morale').mechanics, undefined);
+            assert.equal(byId.get('rule:xge:shared-campaign-variant-rules').mechanics, undefined);
+            assert.equal(byId.get('rule:psi:emrakul-s-madness').references[0].id,
+                'rule:dmg:new-ability-scores-honor-and-sanity');
+            assert.equal(byId.get('rule:xphb:heroic-inspiration').references[0].id,
+                'rule:xphb:player-character');
+            assert.ok(records.find(record => record.canonicalId === 'rule:psi:emrakul-s-madness')
+                .entries[5].classifications[0].reason.includes('R-GAP-27'));
+            assert.ok(records.find(record => record.canonicalId === 'rule:xge:shared-campaign-variant-rules')
+                .entries[3].classifications[0].reason.includes('treasure-point economy'));
+            assert.ok(records.find(record => record.canonicalId === 'rule:xphb:heroic-inspiration')
+                .entries[0].classifications[0].reason.includes('arbitrary-die reroll'));
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-21 preserves optional Honor and Sanity identity without unsupported score mechanics', () => {
+            const id = 'rule:dmg:new-ability-scores-honor-and-sanity';
+            const entity = entities.map(({ entity }) => entity).find(item => item.id === id);
+            const record = manifest.records.find(item => item.canonicalId === id);
+            const item = manifest.ruleCatalogInventory.find(entry => entry.canonicalId === id);
+            assert.ok(entity, `missing referenceable Rule ${id}`);
+            assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+            assert.equal(entity.ruleType, 'OPTIONAL');
+            assert.equal(entity.mechanics, undefined);
+            assert.equal(entity.references, undefined);
+            assert.equal(record.sourceObjectPath, '$.variantrule[159]');
+            assert.equal(record.sourceEntryCount, 7);
+            assert.equal(record.entries.length, 7);
+            assert.equal(record.conversionStatus, 'unsupported');
+            assert.equal(item.nestedClausePathCount, 46);
+            assert.deepEqual(item.gapIds, ['R-GAP-26', 'R-GAP-24']);
+            assert.equal(item.coverage, 'UNSUPPORTED');
+            assert.ok(record.entries[3].classifications[0].reason.includes('score-generation'));
+            assert.ok(record.entries[4].classifications[0].reason.includes('fallback'));
+            assert.ok(record.entries[5].classifications[0].reason.includes('six-ability'));
+            assert.ok(record.entries[6].classifications[0].reason.includes('R-GAP-24'));
+            for (const entry of record.entries) {
+                assert.equal(entry.classifications.every(disposition =>
+                    disposition.classification === 'OMITTED'), true);
+                for (const nestedPath of entry.nestedSourcePaths) {
+                    assert.ok(entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath)), `unaccounted nested path ${nestedPath}`);
+                }
+            }
+            for (const nestedPath of item.nestedClausePaths) {
+                assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                    disposition.portion.includes(nestedPath))), `unaccounted nested clause ${nestedPath}`);
+            }
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.unsupportedCount, 73);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-20 references Inspiration benefit while deferring resource lifecycle and Madness outcomes', () => {
+            const expected = [
+                ['rule:dmg:inspiration', '$.variantrule[139]', 6, 44, 'R-GAP-25'],
+                ['rule:dmg:madness', '$.variantrule[149]', 4, 99, 'R-GAP-24']
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            assert.deepEqual(records.map(record => record.canonicalId), ids);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 10);
+            assert.equal(expected.reduce((sum, [, , , nested]) => sum + nested, 0), 143);
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, roots, nested, gapId] of expected) {
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                const entity = ruleById.get(id);
+                assert.ok(entity, `missing referenceable Rule ${id}`);
+                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(record.entries.length, roots);
+                assert.equal(item.nestedClausePathCount, nested);
+                assert.equal(item.coverage, id === 'rule:dmg:inspiration' ? 'PARTIAL' : 'UNSUPPORTED');
+                assert.deepEqual(item.gapIds, [gapId]);
+                assert.equal(item.canonicalOutput, record.canonicalOutput);
+                assert.equal(record.conversionStatus,
+                    id === 'rule:dmg:inspiration' ? 'partially-represented' : 'unsupported');
+                assert.equal(entity.mechanics, undefined);
+                if (id === 'rule:dmg:inspiration') {
+                    assert.deepEqual(entity.references, [{
+                        targetType: 'rule',
+                        id: 'rule:xphb:advantage',
+                        relationship: 'benefit-of-spending-inspiration'
+                    }]);
+                } else {
+                    assert.equal(entity.references, undefined);
+                }
+                assert.equal(entity.composition, undefined);
+                for (const entry of record.entries) {
+                    if (id === 'rule:dmg:inspiration' && entry.sourceEntryIndex === 0) {
+                        assert.deepEqual(entry.classifications.map(disposition => disposition.classification),
+                            ['INTERPRETED', 'OMITTED']);
+                    } else {
+                        assert.equal(entry.classifications.every(disposition =>
+                            disposition.classification === 'OMITTED'), true);
+                    }
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications.some(disposition =>
+                            disposition.portion.includes(nestedPath)), `${id} unaccounted path ${nestedPath}`);
+                    }
+                }
+                for (const nestedPath of item.nestedClausePaths) {
+                    assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath))), `${id} unaccounted nested clause ${nestedPath}`);
+                }
+            }
+            const inspiration = records.find(record => record.canonicalId === 'rule:dmg:inspiration');
+            assert.ok(inspiration.entries[0].classifications[1].reason.includes('R-GAP-25'));
+            assert.ok(inspiration.entries[5].classifications[0].reason.includes('R-GAP-25'));
+            const madness = records.find(record => record.canonicalId === 'rule:dmg:madness');
+            assert.equal(madness.entries[0].classifications[0].cause, 'NON_MECHANICAL');
+            assert.equal(madness.entries[1].classifications[0].cause, 'OUT_OF_APPROVED_SCOPE');
+            assert.ok(madness.entries[1].classifications[0].reason.includes('standalone mechanic'));
+            assert.ok(madness.entries[2].classifications[0].reason.includes('R-GAP-24'));
+            assert.ok(madness.entries[3].classifications[0].reason.includes('R-GAP-24'));
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.unsupportedCount, 73);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-19 represents social attitudes and accounts unsupported relationship resolution', () => {
+            const expected = [
+                ['rule:dmg:loyalty', '$.variantrule[148]', 'PARTIAL', 3, 10],
+                ['rule:xphb:ally', '$.variantrule[9]', 'PARTIAL', 1, 0],
+                ['rule:xphb:enemy', '$.variantrule[100]', 'PARTIAL', 1, 0],
+                ['rule:xphb:friendly-attitude', '$.variantrule[116]', 'PARTIAL', 1, 0],
+                ['rule:xphb:hostile-attitude', '$.variantrule[129]', 'PARTIAL', 1, 0],
+                ['rule:xphb:indifferent-attitude', '$.variantrule[135]', 'FULL', 1, 0],
+                ['rule:xphb:attitude', '$.variantrule[15]', 'FULL', 1, 0],
+                ['rule:xphb:nonplayer-character', '$.variantrule[160]', 'PARTIAL', 1, 0]
+            ];
+            assert.equal(expected.reduce((sum, [, , , roots]) => sum + roots, 0), 10);
+            assert.equal(expected.reduce((sum, [, , , , nested]) => sum + nested, 0), 10);
+            const byId = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, coverage, roots, nested] of expected) {
+                const entity = byId.get(id);
+                const record = manifest.records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                assert.ok(entity, `missing Rule ${id}`);
+                const source = sourceRecordForCanonical(entity);
+                const expectedMetadata = expectedSourceMetadata('rule', source);
+                if (id === 'rule:dmg:loyalty') delete expectedMetadata.reprintedAs;
+                assert.deepEqual(entity.sourceMetadata, expectedMetadata);
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(item.nestedClausePathCount, nested);
+                assert.equal(item.coverage, coverage);
+                for (const entry of record.entries) {
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications.some(disposition => disposition.portion.includes(nestedPath)));
+                    }
+                }
+            }
+            assert.deepEqual(byId.get('rule:xphb:attitude').mechanics.map(item => item.attitude),
+                ['friendly', 'hostile', 'indifferent']);
+            assert.equal(byId.get('rule:xphb:indifferent-attitude').mechanics[0].attitude, 'indifferent');
+            assert.equal(byId.get('rule:xphb:friendly-attitude').mechanics[0].attitude, 'friendly');
+            assert.equal(byId.get('rule:xphb:hostile-attitude').mechanics[0].attitude, 'hostile');
+            assert.equal(byId.get('rule:dmg:loyalty').mechanics[0].scoreThreshold, 10);
+            assert.equal(byId.get('rule:xphb:friendly-attitude').references[1].id, 'rule:xphb:advantage');
+            assert.equal(byId.get('rule:xphb:hostile-attitude').references[1].id, 'rule:xphb:disadvantage');
+            assert.equal(byId.get('rule:xphb:ally').mechanics, undefined);
+            assert.equal(byId.get('rule:xphb:enemy').mechanics, undefined);
+            assert.equal(byId.get('rule:xphb:nonplayer-character').references[0].id, 'rule:xphb:monster');
+            const reprintIssue = manifest.sourceFieldIssues.find(item =>
+                item.canonicalId === 'rule:dmg:loyalty' && item.sourceField === 'reprintedAs');
+            assert.equal(reprintIssue?.cause, 'REFERENCE_UNRESOLVED');
+            assert.equal(byId.get('rule:dmg:renown').references.every(reference => byId.has(reference.id)), true);
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
+        });
+
+        check('RULE-CONV-14 preserves both Sidekick identities and defers their edition-specific progression', () => {
+            const expected = [
+                ['rule:esk:sidekicks', '$.variantrule[196]', 8, 120],
+                ['rule:tce:sidekicks', '$.variantrule[197]', 5, 32]
+            ];
+            const ids = expected.map(([id]) => id);
+            const records = manifest.records.filter(record => ids.includes(record.canonicalId));
+            assert.deepEqual(records.map(record => record.canonicalId), ids);
+            assert.equal(records.reduce((sum, record) => sum + record.sourceEntryCount, 0), 13);
+            assert.equal(expected.reduce((sum, [, , , nested]) => sum + nested, 0), 152);
+            const ruleById = new Map(entities.map(({ entity }) => [entity.id, entity]));
+            const inventory = new Map(manifest.ruleCatalogInventory.map(item => [item.canonicalId, item]));
+            for (const [id, sourcePath, roots, nested] of expected) {
+                const record = records.find(item => item.canonicalId === id);
+                const item = inventory.get(id);
+                const entity = ruleById.get(id);
+                assert.ok(entity, `missing referenceable Rule ${id}`);
+                assert.equal(record.sourceObjectPath, sourcePath);
+                assert.equal(record.sourceEntryCount, roots);
+                assert.equal(item.nestedClausePathCount, nested);
+                assert.equal(item.coverage, 'UNSUPPORTED');
+                assert.deepEqual(item.gapIds, ['R-GAP-34']);
+                assert.deepEqual(entity.sourceMetadata, expectedSourceMetadata('rule', sourceRecordForCanonical(entity)));
+                assert.equal(entity.mechanics, undefined);
+                assert.equal(entity.references, undefined);
+                assert.equal(record.conversionStatus, 'unsupported');
+                assert.equal(record.entries.length, roots);
+                for (const entry of record.entries) {
+                    assert.equal(entry.classifications[0].classification, 'OMITTED');
+                    assert.ok(['NON_MECHANICAL', 'OUT_OF_APPROVED_SCOPE', 'REFERENCE_UNRESOLVED']
+                        .includes(entry.classifications[0].cause));
+                    for (const nestedPath of entry.nestedSourcePaths) {
+                        assert.ok(entry.classifications[0].portion.includes(nestedPath));
+                    }
+                }
+                for (const nestedPath of item.nestedClausePaths) {
+                    assert.ok(record.entries.some(entry => entry.classifications.some(disposition =>
+                        disposition.portion.includes(nestedPath))), `${id} unaccounted path ${nestedPath}`);
+                }
+            }
+            assert.equal(records[0].entries[5].classifications[0].cause, 'REFERENCE_UNRESOLVED');
+            assert.equal(manifest.ruleCatalogSummary.conversionAccountedCount, 231);
+            assert.equal(manifest.ruleCatalogSummary.conversionPendingCount, 0);
+            assert.equal(manifest.ruleCatalogSummary.canonicalRuleOutputCount, 231);
+            assert.equal(manifest.canonicalRecordCount, 551);
         });
 
         check('RULE-CONV-01 preserves XPHB Action and glossary reference boundaries', () => {
@@ -3555,6 +5276,16 @@ function run() {
     const schemaFiles = loadSchemas();
     const phase3Result = validatePhase3Records(schemaFiles);
     const phase5Result = validatePhase5Expansion();
+    const allCanonicalRecords = [
+        ...phase3Result.entities.map(({ entity }) => entity),
+        ...phase5Result.entities.map(({ entity }) => entity)
+    ];
+    check('consolidated application resources exactly match validated Phase 3 and Phase 5 records', () => {
+        assertConsolidatedCoreRulesResources(allCanonicalRecords);
+    });
+    check('runtime source identity index exactly covers referenced pinned source catalogs', () => {
+        assertCoreRulesReferenceIdentityIndex(allCanonicalRecords);
+    });
     const examples = loadExamples();
     const validators = new Map();
     for (const [file, example] of examples) {

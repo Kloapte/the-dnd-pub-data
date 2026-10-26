@@ -1,0 +1,30 @@
+{
+  "id": "rule:dmg:milestones",
+  "name": "Milestones",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 261
+  },
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:experience-points",
+      "relationship": "milestone-xp-award"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:encounter",
+      "relationship": "milestone-xp-equivalent-encounter-difficulty"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:short-rest",
+      "relationship": "optional-milestone-reward"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:hit-point-dice",
+      "relationship": "optional-milestone-recovery-reward"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "rule:xge:downtime-activity-selling-a-magic-item",
+  "name": "Downtime Activity: Selling a Magic Item",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 133
+  },
+  "ruleType": "VARIANT_OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "sell-magic-item-activity",
+      "kind": "DOWNTIME_PROCEDURE",
+      "subtype": "ACTIVITY",
+      "procedure": "sell",
+      "duration": {
+        "amount": 1,
+        "unit": "week"
+      },
+      "check": {
+        "componentId": "magic-item-sale-offer-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "charisma"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:phb:persuasion"
+        }
+      }
+    }
+  ]
+}

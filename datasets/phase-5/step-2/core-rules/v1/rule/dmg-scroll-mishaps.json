@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:scroll-mishaps",
+  "name": "Scroll Mishaps",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 140
+  },
+  "ruleType": "VARIANT"
+}

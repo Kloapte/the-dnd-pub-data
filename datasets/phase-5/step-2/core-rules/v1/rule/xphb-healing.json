@@ -1,0 +1,21 @@
+{
+  "id": "rule:xphb:healing",
+  "name": "Healing",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 368,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "healing-definition",
+      "kind": "DAMAGE_HEALTH_STATE",
+      "subtype": "HEALING",
+      "method": "healing-effect"
+    }
+  ]
+}

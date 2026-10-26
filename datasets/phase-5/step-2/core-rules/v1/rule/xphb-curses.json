@@ -1,0 +1,25 @@
+{
+  "id": "rule:xphb:curses",
+  "name": "Curses",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 364,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "spell",
+      "id": "spell:xphb:remove-curse",
+      "relationship": "removes-curse"
+    },
+    {
+      "targetType": "spell",
+      "id": "spell:xphb:greater-restoration",
+      "relationship": "removes-curse"
+    }
+  ]
+}

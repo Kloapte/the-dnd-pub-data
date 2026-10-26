@@ -1,0 +1,20 @@
+{
+  "id": "rule:xphb:weapon-attack",
+  "name": "Weapon Attack",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 377,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:attack-roll",
+      "relationship": "alias-of"
+    }
+  ]
+}

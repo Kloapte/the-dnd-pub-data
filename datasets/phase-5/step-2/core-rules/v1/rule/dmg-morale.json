@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:morale",
+  "name": "Morale",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 273
+  },
+  "ruleType": "OPTIONAL"
+}

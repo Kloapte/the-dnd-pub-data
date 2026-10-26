@@ -1,0 +1,18 @@
+{
+  "id": "rule:xge:downtime-activity-scribing-a-spell-scroll",
+  "name": "Downtime Activity: Scribing a Spell Scroll",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 133
+  },
+  "ruleType": "VARIANT_OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "scribe-spell-scroll-activity",
+      "kind": "DOWNTIME_PROCEDURE",
+      "subtype": "ACTIVITY",
+      "procedure": "craft",
+      "outcome": "item-created"
+    }
+  ]
+}

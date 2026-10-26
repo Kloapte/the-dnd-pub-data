@@ -1,0 +1,13 @@
+{
+  "id": "rule:xphb:ritual",
+  "name": "Ritual",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 373,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE"
+}

@@ -1,0 +1,116 @@
+{
+  "id": "rule:scag:human-languages",
+  "name": "Human Languages",
+  "sourceMetadata": {
+    "source": "SCAG",
+    "page": 112
+  },
+  "ruleType": "OPTIONAL",
+  "references": [
+    {
+      "targetType": "language",
+      "id": "language:phb:common",
+      "relationship": "language-assumed-known-with-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:dambrathan",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:midani",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:alzhedo",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:chondathan",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:damaran",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:waelan",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:guran",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:halruaan",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:illuskan",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:roushoum",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:chessentan",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:mulhorandi",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:rashemi",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:shaaran",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:shou",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:thayan",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:tuigan",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:turmic",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:uluik",
+      "relationship": "source-listed-human-ethnic-language"
+    },
+    {
+      "targetType": "language",
+      "id": "language:scag:untheric",
+      "relationship": "source-listed-human-ethnic-language"
+    }
+  ]
+}

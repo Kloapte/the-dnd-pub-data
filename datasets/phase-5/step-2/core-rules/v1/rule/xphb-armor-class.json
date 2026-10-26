@@ -1,0 +1,13 @@
+{
+  "id": "rule:xphb:armor-class",
+  "name": "Armor Class",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 361,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE"
+}

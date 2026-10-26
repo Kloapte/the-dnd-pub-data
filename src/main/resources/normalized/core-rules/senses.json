@@ -1,0 +1,252 @@
+[
+  {
+    "id": "sense:mm:tremorsense",
+    "name": "Tremorsense",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 9,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "sense",
+          "id": "sense:xphb:tremorsense"
+        }
+      ]
+    },
+    "capabilities": [
+      {
+        "kind": "NONVISUAL_PERCEPTION",
+        "medium": "vibration",
+        "restrictions": [
+          "requires-contact",
+          "cannot-detect-flying",
+          "cannot-detect-incorporeal"
+        ],
+        "locationPrecision": {
+          "kind": "VIBRATION_ORIGIN"
+        }
+      }
+    ]
+  },
+  {
+    "id": "sense:phb:blindsight",
+    "name": "Blindsight",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 183,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "sense",
+          "id": "sense:xphb:blindsight"
+        }
+      ]
+    },
+    "capabilities": [
+      {
+        "kind": "NONVISUAL_PERCEPTION",
+        "medium": "other"
+      }
+    ]
+  },
+  {
+    "id": "sense:phb:darkvision",
+    "name": "Darkvision",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 183,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "sense",
+          "id": "sense:xphb:darkvision"
+        }
+      ]
+    },
+    "capabilities": [
+      {
+        "kind": "SIGHT",
+        "perceives": [
+          "visible-creatures",
+          "objects",
+          "visual-detail"
+        ],
+        "conditions": [
+          "darkness"
+        ],
+        "darknessAs": "dim-light",
+        "colorPerception": "grayscale",
+        "dimLightAs": "bright-light"
+      }
+    ]
+  },
+  {
+    "id": "sense:phb:truesight",
+    "name": "Truesight",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 183,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "sense",
+          "id": "sense:xphb:truesight"
+        }
+      ]
+    },
+    "capabilities": [
+      {
+        "kind": "SIGHT",
+        "perceives": [
+          "visible-creatures",
+          "invisible-creatures",
+          "visual-detail",
+          "illusions",
+          "true-forms",
+          "ethereal-plane",
+          "invisible-objects"
+        ],
+        "conditions": [
+          "darkness"
+        ],
+        "darknessAs": "bright-light",
+        "illusionInteraction": {
+          "detection": "automatic",
+          "savingThrowOutcome": "automatic-success"
+        }
+      }
+    ]
+  },
+  {
+    "id": "sense:xphb:blindsight",
+    "name": "Blindsight",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 361,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "capabilities": [
+      {
+        "kind": "SIGHT",
+        "perceives": [
+          "visible-creatures",
+          "invisible-creatures",
+          "objects",
+          "invisible-objects",
+          "visual-detail"
+        ],
+        "conditions": [
+          "darkness"
+        ]
+      },
+      {
+        "kind": "CONDITION_INTERACTION",
+        "interaction": {
+          "targetType": "condition",
+          "id": "condition:xphb:blinded"
+        },
+        "effect": "bypasses-sight-restriction"
+      }
+    ]
+  },
+  {
+    "id": "sense:xphb:darkvision",
+    "name": "Darkvision",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 365,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "capabilities": [
+      {
+        "kind": "SIGHT",
+        "perceives": [
+          "visible-creatures",
+          "objects",
+          "visual-detail"
+        ],
+        "conditions": [
+          "darkness"
+        ],
+        "darknessAs": "dim-light",
+        "colorPerception": "grayscale",
+        "dimLightAs": "bright-light"
+      }
+    ]
+  },
+  {
+    "id": "sense:xphb:tremorsense",
+    "name": "Tremorsense",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 377,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "capabilities": [
+      {
+        "kind": "NONVISUAL_PERCEPTION",
+        "medium": "vibration",
+        "detects": [
+          "creatures",
+          "movement"
+        ],
+        "restrictions": [
+          "requires-contact"
+        ],
+        "locationPrecision": {
+          "kind": "DETECTED_TARGETS",
+          "targets": [
+            "creatures",
+            "movement"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "sense:xphb:truesight",
+    "name": "Truesight",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 377,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "capabilities": [
+      {
+        "kind": "SIGHT",
+        "perceives": [
+          "invisible-creatures",
+          "invisible-objects",
+          "illusions",
+          "true-forms",
+          "ethereal-plane"
+        ],
+        "illusionInteraction": {
+          "appearance": "transparent",
+          "detection": "automatic",
+          "savingThrowOutcome": "automatic-success"
+        }
+      }
+    ]
+  }
+]

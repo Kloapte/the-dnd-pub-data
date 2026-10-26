@@ -1,0 +1,16 @@
+{
+  "id": "rule:dmg:downtime-activity-gaining-renown",
+  "name": "Downtime Activity: Gaining Renown",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 129
+  },
+  "ruleType": "OPTIONAL",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:dmg:renown",
+      "relationship": "activity-advances-renown"
+    }
+  ]
+}

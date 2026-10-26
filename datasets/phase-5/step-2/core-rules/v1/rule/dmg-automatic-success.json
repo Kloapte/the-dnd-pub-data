@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:automatic-success",
+  "name": "Automatic Success",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 239
+  },
+  "ruleType": "VARIANT_OPTIONAL"
+}

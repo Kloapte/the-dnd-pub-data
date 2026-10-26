@@ -1,0 +1,60 @@
+{
+  "id": "rule:xphb:attitude",
+  "name": "Attitude",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 361,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "starting-friendly-attitude",
+      "kind": "SOCIAL_PROCEDURE",
+      "subtype": "ATTITUDE",
+      "attitude": "friendly"
+    },
+    {
+      "componentId": "starting-hostile-attitude",
+      "kind": "SOCIAL_PROCEDURE",
+      "subtype": "ATTITUDE",
+      "attitude": "hostile"
+    },
+    {
+      "componentId": "starting-indifferent-attitude",
+      "kind": "SOCIAL_PROCEDURE",
+      "subtype": "ATTITUDE",
+      "attitude": "indifferent"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:monster",
+      "relationship": "attitude-subject"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:player-character",
+      "relationship": "attitude-target"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:friendly-attitude",
+      "relationship": "starting-attitude-option"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:hostile-attitude",
+      "relationship": "starting-attitude-option"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:indifferent-attitude",
+      "relationship": "starting-attitude-option"
+    }
+  ]
+}

@@ -22,6 +22,11 @@
       "relationship": "no-ability-scores-fail-saves"
     },
     {
+      "targetType": "rule",
+      "id": "rule:xphb:armor-class",
+      "relationship": "material-armor-class-table-context"
+    },
+    {
       "targetType": "action",
       "id": "action:xphb:attack",
       "relationship": "fragile-object-break-action"

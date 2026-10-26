@@ -1,0 +1,33 @@
+{
+  "id": "rule:xge:downtime-activity-buying-a-magic-item",
+  "name": "Downtime Activity: Buying a Magic Item",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 126
+  },
+  "ruleType": "VARIANT_OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "buy-magic-item-activity",
+      "kind": "DOWNTIME_PROCEDURE",
+      "subtype": "ACTIVITY",
+      "procedure": "buy",
+      "duration": {
+        "amount": 1,
+        "unit": "week"
+      },
+      "check": {
+        "componentId": "find-magic-item-seller-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "charisma"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:phb:persuasion"
+        }
+      }
+    }
+  ]
+}

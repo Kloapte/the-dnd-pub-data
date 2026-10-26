@@ -1,0 +1,29 @@
+{
+  "id": "rule:xphb:heavily-obscured",
+  "name": "Heavily Obscured",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 368,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "heavy-obscuration",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "OBSCURATION",
+      "level": "heavily-obscured",
+      "sightEffect": "blocks-vision"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:blinded",
+      "relationship": "condition-while-attempting-to-see"
+    }
+  ]
+}

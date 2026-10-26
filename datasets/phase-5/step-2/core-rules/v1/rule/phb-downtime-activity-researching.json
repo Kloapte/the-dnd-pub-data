@@ -1,0 +1,17 @@
+{
+  "id": "rule:phb:downtime-activity-researching",
+  "name": "Downtime Activity: Researching",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 187
+  },
+  "mechanics": [
+    {
+      "componentId": "research-activity",
+      "kind": "DOWNTIME_PROCEDURE",
+      "subtype": "ACTIVITY",
+      "procedure": "research",
+      "outcome": "information-gained"
+    }
+  ]
+}

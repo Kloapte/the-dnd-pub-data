@@ -1,0 +1,6837 @@
+[
+  {
+    "id": "rule:aag:crashing",
+    "name": "Crashing",
+    "sourceMetadata": {
+      "source": "AAG",
+      "page": 25
+    }
+  },
+  {
+    "id": "rule:aag:crew",
+    "name": "Crew",
+    "sourceMetadata": {
+      "source": "AAG",
+      "page": 24
+    }
+  },
+  {
+    "id": "rule:aag:ship-repairs",
+    "name": "Ship Repairs",
+    "sourceMetadata": {
+      "source": "AAG",
+      "page": 25
+    }
+  },
+  {
+    "id": "rule:aag:ship-to-ship-combat",
+    "name": "Ship-to-Ship Combat",
+    "sourceMetadata": {
+      "source": "AAG",
+      "page": 24
+    },
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:dmg:initiative-variants",
+        "relationship": "source-referenced-side-initiative-variant"
+      },
+      {
+        "targetType": "action",
+        "id": "action:phb:ready",
+        "relationship": "source-referenced-ready-action-for-boarding"
+      }
+    ]
+  },
+  {
+    "id": "rule:ai:downtime-and-franchise-activity-explore-territory",
+    "name": "Downtime and Franchise Activity: Explore Territory",
+    "sourceMetadata": {
+      "source": "AI",
+      "page": 37
+    }
+  },
+  {
+    "id": "rule:ai:downtime-and-franchise-activity-franchise-restructuring",
+    "name": "Downtime and Franchise Activity: Franchise Restructuring",
+    "sourceMetadata": {
+      "source": "AI",
+      "page": 38
+    }
+  },
+  {
+    "id": "rule:ai:downtime-and-franchise-activity-headquarters-modification",
+    "name": "Downtime and Franchise Activity: Headquarters Modification",
+    "sourceMetadata": {
+      "source": "AI",
+      "page": 39
+    }
+  },
+  {
+    "id": "rule:ai:downtime-and-franchise-activity-marketeering",
+    "name": "Downtime and Franchise Activity: Marketeering",
+    "sourceMetadata": {
+      "source": "AI",
+      "page": 40
+    }
+  },
+  {
+    "id": "rule:ai:downtime-and-franchise-activity-philanthropic-enterprise",
+    "name": "Downtime and Franchise Activity: Philanthropic Enterprise",
+    "sourceMetadata": {
+      "source": "AI",
+      "page": 41
+    }
+  },
+  {
+    "id": "rule:ai:downtime-and-franchise-activity-running-a-franchise",
+    "name": "Downtime and Franchise Activity: Running a Franchise",
+    "sourceMetadata": {
+      "source": "AI",
+      "page": 42
+    }
+  },
+  {
+    "id": "rule:ai:downtime-and-franchise-activity-schmoozing",
+    "name": "Downtime and Franchise Activity: Schmoozing",
+    "sourceMetadata": {
+      "source": "AI",
+      "page": 45
+    }
+  },
+  {
+    "id": "rule:ai:downtime-and-franchise-activity-scrutineering",
+    "name": "Downtime and Franchise Activity: Scrutineering",
+    "sourceMetadata": {
+      "source": "AI",
+      "page": 43
+    }
+  },
+  {
+    "id": "rule:ai:downtime-and-franchise-activity-shady-business-practice",
+    "name": "Downtime and Franchise Activity: Shady Business Practice",
+    "sourceMetadata": {
+      "source": "AI",
+      "page": 43
+    }
+  },
+  {
+    "id": "rule:ai:downtime-and-franchise-activity-team-building",
+    "name": "Downtime and Franchise Activity: Team Building",
+    "sourceMetadata": {
+      "source": "AI",
+      "page": 45
+    }
+  },
+  {
+    "id": "rule:cos:prophet-s-gambit",
+    "name": "Prophet's Gambit",
+    "sourceMetadata": {
+      "source": "CoS",
+      "page": 243
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:action-options",
+    "name": "Action Options",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 271
+    },
+    "ruleType": "OPTIONAL",
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:dmg:climb-onto-a-bigger-creature",
+        "relationship": "optional-action-procedure"
+      },
+      {
+        "targetType": "action",
+        "id": "action:dmg:disarm",
+        "relationship": "optional-action-procedure"
+      },
+      {
+        "targetType": "action",
+        "id": "action:dmg:mark",
+        "relationship": "optional-action-procedure"
+      },
+      {
+        "targetType": "action",
+        "id": "action:dmg:overrun",
+        "relationship": "optional-action-procedure"
+      },
+      {
+        "targetType": "action",
+        "id": "action:dmg:shove-aside",
+        "relationship": "optional-action-procedure"
+      },
+      {
+        "targetType": "action",
+        "id": "action:dmg:tumble",
+        "relationship": "optional-action-procedure"
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:alien-technology",
+    "name": "Alien Technology",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 268
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "technology-understanding-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "intelligence"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:alternatives-to-epic-boons",
+    "name": "Alternatives to Epic Boons",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 230
+    },
+    "ruleType": "VARIANT",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:phb:customizing-ability-scores",
+        "relationship": "ability-score-increase-reward-option"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:phb:feats",
+        "relationship": "feat-reward-option"
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:automatic-success",
+    "name": "Automatic Success",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 239
+    },
+    "ruleType": "VARIANT_OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:cleaving-through-creatures",
+    "name": "Cleaving Through Creatures",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 272
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:diagonals",
+    "name": "Diagonals",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 252
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "diagonal-movement-cost",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "GRID_MOVEMENT",
+        "procedure": "grid-movement-cost",
+        "details": {
+          "kind": "DIAGONAL_MOVEMENT_COST",
+          "gridUnitFeet": 5,
+          "diagonalPatternFeet": [
+            5,
+            10
+          ],
+          "patternContinuesAcrossStraightMovement": true,
+          "ruleOptional": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:downtime-activity-building-a-stronghold",
+    "name": "Downtime Activity: Building a Stronghold",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 128
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:downtime-activity-carousing",
+    "name": "Downtime Activity: Carousing",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 128,
+      "reprintedAs": [
+        {
+          "targetType": "rule",
+          "id": "rule:xge:downtime-activity-carousing"
+        }
+      ]
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:downtime-activity-crafting-a-magic-item",
+    "name": "Downtime Activity: Crafting a Magic Item",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 128,
+      "citations": [
+        {
+          "source": "DMG",
+          "page": 141
+        }
+      ]
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "craft-magic-item",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "craft",
+        "outcome": "item-created"
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:downtime-activity-gaining-renown",
+    "name": "Downtime Activity: Gaining Renown",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 129
+    },
+    "ruleType": "OPTIONAL",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:dmg:renown",
+        "relationship": "activity-advances-renown"
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:downtime-activity-performing-sacred-rites",
+    "name": "Downtime Activity: Performing Sacred Rites",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 129
+    },
+    "ruleType": "OPTIONAL",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:phb:inspiration",
+        "relationship": "activity-grants-inspiration"
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:downtime-activity-running-a-business",
+    "name": "Downtime Activity: Running a Business",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 129
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:downtime-activity-selling-magic-items",
+    "name": "Downtime Activity: Selling Magic Items",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 129
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "search-for-magic-item-buyer",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "sell",
+        "check": {
+          "componentId": "find-magic-item-buyer-check",
+          "kind": "D20_TEST",
+          "subtype": "ABILITY_CHECK",
+          "abilities": [
+            "intelligence"
+          ],
+          "skill": {
+            "targetType": "skill",
+            "id": "skill:phb:investigation"
+          },
+          "dc": 20
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:downtime-activity-sowing-rumors",
+    "name": "Downtime Activity: Sowing Rumors",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 131
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "rumor-influence-check",
+        "kind": "SOCIAL_PROCEDURE",
+        "subtype": "INFLUENCE",
+        "check": {
+          "componentId": "rumor-charisma-check",
+          "kind": "D20_TEST",
+          "subtype": "ABILITY_CHECK",
+          "abilities": [
+            "charisma"
+          ],
+          "dc": 15
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:downtime-activity-training-to-gain-levels",
+    "name": "Downtime Activity: Training to Gain Levels",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 131
+    },
+    "ruleType": "VARIANT"
+  },
+  {
+    "id": "rule:dmg:explosives",
+    "name": "Explosives",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 267
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "bomb-area",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "AREA_OF_EFFECT",
+        "shape": "sphere",
+        "origin": "point-in-space",
+        "dimensions": [
+          5
+        ],
+        "unit": "feet",
+        "originPlacement": "POINT_IN_SPACE",
+        "dimensionParameters": [
+          "RADIUS"
+        ],
+        "originIncluded": "INCLUDED"
+      },
+      {
+        "componentId": "bomb-save",
+        "kind": "D20_TEST",
+        "subtype": "SAVING_THROW",
+        "savingThrow": {
+          "kind": "SAVING_THROW",
+          "abilities": [
+            "dexterity"
+          ],
+          "abilitySelection": "rule-specified",
+          "dc": {
+            "kind": "FIXED",
+            "value": 12
+          }
+        }
+      },
+      {
+        "componentId": "bomb-damage",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "DAMAGE",
+        "damageRoll": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "fire"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 3,
+            "die": "d6"
+          }
+        },
+        "appliesWhen": {
+          "kind": "ON_FAILED_SAVE",
+          "componentId": "bomb-save"
+        }
+      },
+      {
+        "componentId": "powder-horn-area",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "AREA_OF_EFFECT",
+        "shape": "sphere",
+        "origin": "object",
+        "dimensions": [
+          10
+        ],
+        "unit": "feet",
+        "originPlacement": "POINT_IN_SPACE",
+        "dimensionParameters": [
+          "RADIUS"
+        ],
+        "originIncluded": "INCLUDED"
+      },
+      {
+        "componentId": "powder-horn-save",
+        "kind": "D20_TEST",
+        "subtype": "SAVING_THROW",
+        "savingThrow": {
+          "kind": "SAVING_THROW",
+          "abilities": [
+            "dexterity"
+          ],
+          "abilitySelection": "rule-specified",
+          "dc": {
+            "kind": "FIXED",
+            "value": 12
+          }
+        }
+      },
+      {
+        "componentId": "powder-horn-damage",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "DAMAGE",
+        "damageRoll": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "fire"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 3,
+            "die": "d6"
+          }
+        },
+        "appliesWhen": {
+          "kind": "ON_FAILED_SAVE",
+          "componentId": "powder-horn-save"
+        }
+      },
+      {
+        "componentId": "powder-keg-area",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "AREA_OF_EFFECT",
+        "shape": "sphere",
+        "origin": "object",
+        "dimensions": [
+          10
+        ],
+        "unit": "feet",
+        "originPlacement": "POINT_IN_SPACE",
+        "dimensionParameters": [
+          "RADIUS"
+        ],
+        "originIncluded": "INCLUDED"
+      },
+      {
+        "componentId": "powder-keg-save",
+        "kind": "D20_TEST",
+        "subtype": "SAVING_THROW",
+        "savingThrow": {
+          "kind": "SAVING_THROW",
+          "abilities": [
+            "dexterity"
+          ],
+          "abilitySelection": "rule-specified",
+          "dc": {
+            "kind": "FIXED",
+            "value": 12
+          }
+        }
+      },
+      {
+        "componentId": "powder-keg-damage",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "DAMAGE",
+        "damageRoll": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "fire"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 7,
+            "die": "d6"
+          }
+        },
+        "appliesWhen": {
+          "kind": "ON_FAILED_SAVE",
+          "componentId": "powder-keg-save"
+        }
+      },
+      {
+        "componentId": "dynamite-area",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "AREA_OF_EFFECT",
+        "shape": "sphere",
+        "origin": "point-in-space",
+        "dimensions": [
+          5
+        ],
+        "unit": "feet",
+        "originPlacement": "POINT_IN_SPACE",
+        "dimensionParameters": [
+          "RADIUS"
+        ],
+        "originIncluded": "INCLUDED"
+      },
+      {
+        "componentId": "dynamite-save",
+        "kind": "D20_TEST",
+        "subtype": "SAVING_THROW",
+        "savingThrow": {
+          "kind": "SAVING_THROW",
+          "abilities": [
+            "dexterity"
+          ],
+          "abilitySelection": "rule-specified",
+          "dc": {
+            "kind": "FIXED",
+            "value": 12
+          }
+        }
+      },
+      {
+        "componentId": "dynamite-damage",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "DAMAGE",
+        "damageRoll": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "bludgeoning"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 3,
+            "die": "d6"
+          }
+        },
+        "appliesWhen": {
+          "kind": "ON_FAILED_SAVE",
+          "componentId": "dynamite-save"
+        }
+      },
+      {
+        "componentId": "fragmentation-grenade-area",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "AREA_OF_EFFECT",
+        "shape": "sphere",
+        "origin": "point-in-space",
+        "dimensions": [
+          20
+        ],
+        "unit": "feet",
+        "originPlacement": "POINT_IN_SPACE",
+        "dimensionParameters": [
+          "RADIUS"
+        ],
+        "originIncluded": "INCLUDED"
+      },
+      {
+        "componentId": "fragmentation-grenade-save",
+        "kind": "D20_TEST",
+        "subtype": "SAVING_THROW",
+        "savingThrow": {
+          "kind": "SAVING_THROW",
+          "abilities": [
+            "dexterity"
+          ],
+          "abilitySelection": "rule-specified",
+          "dc": {
+            "kind": "FIXED",
+            "value": 15
+          }
+        }
+      },
+      {
+        "componentId": "fragmentation-grenade-damage",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "DAMAGE",
+        "damageRoll": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "piercing"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 5,
+            "die": "d6"
+          }
+        },
+        "appliesWhen": {
+          "kind": "ON_FAILED_SAVE",
+          "componentId": "fragmentation-grenade-save"
+        }
+      },
+      {
+        "componentId": "smoke-grenade-area",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "AREA_OF_EFFECT",
+        "shape": "sphere",
+        "origin": "point-in-space",
+        "dimensions": [
+          20
+        ],
+        "unit": "feet",
+        "originPlacement": "POINT_IN_SPACE",
+        "dimensionParameters": [
+          "RADIUS"
+        ],
+        "originIncluded": "INCLUDED"
+      },
+      {
+        "componentId": "smoke-grenade-obscuration",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "OBSCURATION",
+        "level": "heavily-obscured",
+        "sightEffect": "blocks-vision"
+      }
+    ],
+    "composition": {
+      "kind": "OR",
+      "members": [
+        {
+          "kind": "AND",
+          "members": [
+            {
+              "kind": "COMPONENT",
+              "componentId": "bomb-area"
+            },
+            {
+              "kind": "COMPONENT",
+              "componentId": "bomb-save"
+            },
+            {
+              "kind": "COMPONENT",
+              "componentId": "bomb-damage"
+            }
+          ]
+        },
+        {
+          "kind": "AND",
+          "members": [
+            {
+              "kind": "COMPONENT",
+              "componentId": "powder-horn-area"
+            },
+            {
+              "kind": "COMPONENT",
+              "componentId": "powder-horn-save"
+            },
+            {
+              "kind": "COMPONENT",
+              "componentId": "powder-horn-damage"
+            }
+          ]
+        },
+        {
+          "kind": "AND",
+          "members": [
+            {
+              "kind": "COMPONENT",
+              "componentId": "powder-keg-area"
+            },
+            {
+              "kind": "COMPONENT",
+              "componentId": "powder-keg-save"
+            },
+            {
+              "kind": "COMPONENT",
+              "componentId": "powder-keg-damage"
+            }
+          ]
+        },
+        {
+          "kind": "AND",
+          "members": [
+            {
+              "kind": "COMPONENT",
+              "componentId": "dynamite-area"
+            },
+            {
+              "kind": "COMPONENT",
+              "componentId": "dynamite-save"
+            },
+            {
+              "kind": "COMPONENT",
+              "componentId": "dynamite-damage"
+            }
+          ]
+        },
+        {
+          "kind": "AND",
+          "members": [
+            {
+              "kind": "COMPONENT",
+              "componentId": "fragmentation-grenade-area"
+            },
+            {
+              "kind": "COMPONENT",
+              "componentId": "fragmentation-grenade-save"
+            },
+            {
+              "kind": "COMPONENT",
+              "componentId": "fragmentation-grenade-damage"
+            }
+          ]
+        },
+        {
+          "kind": "AND",
+          "members": [
+            {
+              "kind": "COMPONENT",
+              "componentId": "smoke-grenade-area"
+            },
+            {
+              "kind": "COMPONENT",
+              "componentId": "smoke-grenade-obscuration"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "rule:dmg:facing",
+    "name": "Facing",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 252
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:fear-and-horror",
+    "name": "Fear and Horror",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 266
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "fear-save",
+        "kind": "D20_TEST",
+        "subtype": "SAVING_THROW",
+        "savingThrow": {
+          "kind": "SAVING_THROW",
+          "abilities": [
+            "wisdom"
+          ],
+          "abilitySelection": "rule-specified",
+          "dc": {
+            "kind": "EFFECT_DEFINED"
+          }
+        }
+      },
+      {
+        "componentId": "horror-save",
+        "kind": "D20_TEST",
+        "subtype": "SAVING_THROW",
+        "savingThrow": {
+          "kind": "SAVING_THROW",
+          "abilities": [
+            "charisma"
+          ],
+          "abilitySelection": "rule-specified",
+          "dc": {
+            "kind": "EFFECT_DEFINED"
+          }
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "condition",
+        "id": "condition:phb:frightened",
+        "relationship": "fear-save-failure-condition"
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:firearms",
+    "name": "Firearms",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 267
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:flanking",
+    "name": "Flanking",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 251
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "flanking",
+        "kind": "POSITIONAL_MODIFIER",
+        "subtype": "FLANKING",
+        "requiresMiniatures": true,
+        "targetRole": "ENEMY",
+        "participants": [
+          "ATTACKER",
+          "ALLY"
+        ],
+        "participantsMustSeeTarget": true,
+        "participantsCannotHaveCondition": {
+          "targetType": "condition",
+          "id": "condition:phb:incapacitated"
+        },
+        "requiresAdjacentPositions": true,
+        "squareGrid": {
+          "relativePosition": "OPPOSITE_SIDES_OR_CORNERS",
+          "attackApplicability": "MELEE_ATTACKS",
+          "tieBreakProcedure": "CENTER_LINE_CROSSES_OPPOSITE_SIDES_OR_CORNERS"
+        },
+        "hexGrid": {
+          "relativePosition": "OPPOSITE_SIDES",
+          "attackApplicability": "ATTACK_ROLLS",
+          "targetSizeSeparations": [
+            {
+              "targetSizeGroup": "TINY_SMALL_MEDIUM",
+              "hexesBetween": 2,
+              "comparison": "EXACTLY"
+            },
+            {
+              "targetSizeGroup": "LARGE",
+              "hexesBetween": 4,
+              "comparison": "EXACTLY"
+            },
+            {
+              "targetSizeGroup": "HUGE",
+              "hexesBetween": 5,
+              "comparison": "EXACTLY"
+            },
+            {
+              "targetSizeGroup": "GARGANTUAN",
+              "hexesBetween": 6,
+              "comparison": "AT_LEAST"
+            }
+          ]
+        },
+        "largeOrLargerSpaceRule": {
+          "appliesToFlankerSize": "LARGE_OR_LARGER",
+          "qualification": "AT_LEAST_ONE_SPACE_CELL_QUALIFIES"
+        },
+        "benefit": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "attack",
+          "direction": "advantage"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:healing",
+    "name": "Healing",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 266
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "healing-surge-short-rest",
+        "kind": "REST_PROCEDURE",
+        "subtype": "SHORT_REST",
+        "duration": 1,
+        "unit": "hour",
+        "variant": "HEALING_SURGE",
+        "recoveryOutcomes": [
+          {
+            "kind": "RESTORE_LEVEL_FRACTION",
+            "resource": "HIT_DICE",
+            "basis": "CHARACTER_LEVEL",
+            "fractionDenominator": 4,
+            "minimum": 1,
+            "rounding": "DOWN"
+          },
+          {
+            "kind": "RESET_LIMITED_USE",
+            "resource": "HEALING_SURGE",
+            "restType": "SHORT_REST"
+          }
+        ]
+      },
+      {
+        "componentId": "healing-surge-long-rest",
+        "kind": "REST_PROCEDURE",
+        "subtype": "LONG_REST",
+        "duration": 8,
+        "unit": "hour",
+        "variant": "HEALING_SURGE",
+        "recoveryOutcomes": [
+          {
+            "kind": "RESTORE_ALL",
+            "resource": "HIT_DICE"
+          },
+          {
+            "kind": "RESET_LIMITED_USE",
+            "resource": "HEALING_SURGE",
+            "restType": "LONG_REST"
+          }
+        ]
+      },
+      {
+        "componentId": "slow-natural-healing-long-rest",
+        "kind": "REST_PROCEDURE",
+        "subtype": "LONG_REST",
+        "duration": 8,
+        "unit": "hours",
+        "variant": "SLOW_NATURAL_HEALING",
+        "recoveryOutcomes": [
+          {
+            "kind": "NO_REST_RECOVERY",
+            "resource": "HIT_POINTS",
+            "restType": "LONG_REST"
+          },
+          {
+            "kind": "SPEND_RESOURCE_TO_RECOVER",
+            "resource": "HIT_DICE",
+            "formula": "DIE_PLUS_CONSTITUTION_MODIFIER",
+            "minimumPerDie": 1,
+            "additionalChoiceAfterEachRoll": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:hero-points",
+    "name": "Hero Points",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 264
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:hitting-cover",
+    "name": "Hitting Cover",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 272
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:initiative-variants",
+    "name": "Initiative Variants",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 270
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "initiative-score-variant",
+        "kind": "INITIATIVE_PROCEDURE",
+        "subtype": "INITIATIVE_SCORE",
+        "scoreConstruction": "PASSIVE_DEXTERITY_CHECK",
+        "base": 10,
+        "ability": "dexterity"
+      },
+      {
+        "componentId": "side-initiative",
+        "kind": "INITIATIVE_PROCEDURE",
+        "subtype": "SIDE_INITIATIVE",
+        "roll": "UNMODIFIED_D20",
+        "higherRollActsFirst": true,
+        "tieResolution": "REROLL_TIED_SIDES",
+        "membersChooseOrder": true,
+        "roundEndsAfterAllSidesAct": true,
+        "multipleSidesOrderedByRoll": true
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:injuries",
+    "name": "Injuries",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 272
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:inspiration",
+    "name": "Inspiration",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 240
+    },
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:advantage",
+        "relationship": "benefit-of-spending-inspiration"
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:level-advancement-without-xp",
+    "name": "Level Advancement without XP",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 261
+    },
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:experience-points",
+        "relationship": "alternative-to-experience-point-leveling"
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:loyalty",
+    "name": "Loyalty",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 93
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "high-loyalty-threshold",
+        "kind": "SOCIAL_PROCEDURE",
+        "subtype": "LOYALTY",
+        "scoreThreshold": 10
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:madness",
+    "name": "Madness",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 258,
+      "flags": {
+        "srd": true
+      }
+    }
+  },
+  {
+    "id": "rule:dmg:massive-damage",
+    "name": "Massive Damage",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 273
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:milestones",
+    "name": "Milestones",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 261
+    },
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:experience-points",
+        "relationship": "milestone-xp-award"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:encounter",
+        "relationship": "milestone-xp-equivalent-encounter-difficulty"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:short-rest",
+        "relationship": "optional-milestone-reward"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:hit-point-dice",
+        "relationship": "optional-milestone-recovery-reward"
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:mixing-potions",
+    "name": "Mixing Potions",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 140
+    },
+    "ruleType": "VARIANT"
+  },
+  {
+    "id": "rule:dmg:morale",
+    "name": "Morale",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 273
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:more-difficult-identification",
+    "name": "More Difficult Identification",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 136
+    },
+    "ruleType": "VARIANT",
+    "references": [
+      {
+        "targetType": "spell",
+        "id": "spell:phb:identify",
+        "relationship": "identifies-magic-item-properties"
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:new-ability-scores-honor-and-sanity",
+    "name": "New Ability Scores: Honor and Sanity",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 264
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:planar-effects",
+    "name": "Planar Effects",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 50
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:plot-points",
+    "name": "Plot Points",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 269
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:dmg:proficiency-dice",
+    "name": "Proficiency Dice",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 263
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "proficiency-die-replacement",
+        "kind": "PROFICIENCY_RULE",
+        "subtype": "PROFICIENCY_DICE_ALTERNATIVE",
+        "replaces": "PROFICIENCY_BONUS",
+        "appliesTo": [
+          "ABILITY_CHECK",
+          "ATTACK_ROLL",
+          "SAVING_THROW"
+        ],
+        "eligibleCreatureKinds": [
+          "PLAYER_CHARACTER",
+          "NPC_WITH_LEVELS"
+        ],
+        "levelBands": [
+          {
+            "minimumLevel": 1,
+            "maximumLevel": 4,
+            "proficiencyBonus": 2,
+            "die": "d4"
+          },
+          {
+            "minimumLevel": 5,
+            "maximumLevel": 8,
+            "proficiencyBonus": 3,
+            "die": "d6"
+          },
+          {
+            "minimumLevel": 9,
+            "maximumLevel": 12,
+            "proficiencyBonus": 4,
+            "die": "d8"
+          },
+          {
+            "minimumLevel": 13,
+            "maximumLevel": 16,
+            "proficiencyBonus": 5,
+            "die": "d10"
+          },
+          {
+            "minimumLevel": 17,
+            "maximumLevel": 20,
+            "proficiencyBonus": 6,
+            "die": "d12"
+          }
+        ],
+        "expertiseDiceCount": 2
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:expertise",
+        "relationship": "replaces-doubled-bonus-with-two-dice"
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:renown",
+    "name": "Renown",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 22
+    },
+    "ruleType": "OPTIONAL",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:attitude",
+        "relationship": "renown-may-inform-default-attitude"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:friendly-attitude",
+        "relationship": "renown-threshold-example-attitude"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:indifferent-attitude",
+        "relationship": "renown-threshold-example-attitude"
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:rest-variants",
+    "name": "Rest Variants",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 267
+    },
+    "ruleType": "VARIANT",
+    "mechanics": [
+      {
+        "componentId": "epic-heroism-short-rest",
+        "kind": "REST_PROCEDURE",
+        "subtype": "SHORT_REST",
+        "duration": 5,
+        "unit": "minutes",
+        "variant": "EPIC_HEROISM",
+        "durationQualifier": "EXACT"
+      },
+      {
+        "componentId": "epic-heroism-long-rest",
+        "kind": "REST_PROCEDURE",
+        "subtype": "LONG_REST",
+        "duration": 1,
+        "unit": "hour",
+        "variant": "EPIC_HEROISM",
+        "durationQualifier": "EXACT"
+      },
+      {
+        "componentId": "gritty-realism-short-rest",
+        "kind": "REST_PROCEDURE",
+        "subtype": "SHORT_REST",
+        "duration": 8,
+        "unit": "hours",
+        "variant": "GRITTY_REALISM",
+        "durationQualifier": "EXACT"
+      },
+      {
+        "componentId": "gritty-realism-long-rest",
+        "kind": "REST_PROCEDURE",
+        "subtype": "LONG_REST",
+        "duration": 7,
+        "unit": "days",
+        "variant": "GRITTY_REALISM",
+        "durationQualifier": "EXACT"
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:scroll-mishaps",
+    "name": "Scroll Mishaps",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 140
+    },
+    "ruleType": "VARIANT"
+  },
+  {
+    "id": "rule:dmg:skill-variants",
+    "name": "Skill Variants",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 263
+    },
+    "ruleType": "VARIANT",
+    "mechanics": [
+      {
+        "componentId": "ability-check-proficiency",
+        "kind": "PROFICIENCY_RULE",
+        "subtype": "ABILITY_CHECK_PROFICIENCY_VARIANT",
+        "replaces": "SKILL_PROFICIENCY",
+        "proficiencySources": [
+          "CLASS_ASSOCIATED_ABILITY",
+          "BACKGROUND_SELECTED_ABILITY"
+        ],
+        "proficiencyCount": 2,
+        "appliesTo": "ABILITY_CHECK_ASSOCIATED_WITH_EITHER_PROFICIENT_ABILITY",
+        "startsAtLevel": 1
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:proficiency"
+      }
+    ]
+  },
+  {
+    "id": "rule:dmg:spell-points",
+    "name": "Spell Points",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 288
+    },
+    "ruleType": "VARIANT"
+  },
+  {
+    "id": "rule:dmg:wands-that-don-t-recharge",
+    "name": "Wands That Don't Recharge",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 141
+    },
+    "ruleType": "VARIANT"
+  },
+  {
+    "id": "rule:esk:sidekicks",
+    "name": "Sidekicks",
+    "sourceMetadata": {
+      "source": "ESK",
+      "page": 63
+    }
+  },
+  {
+    "id": "rule:gos:encounters-at-sea",
+    "name": "Encounters at Sea",
+    "sourceMetadata": {
+      "source": "GoS",
+      "page": 207
+    }
+  },
+  {
+    "id": "rule:gos:mysterious-islands",
+    "name": "Mysterious Islands",
+    "sourceMetadata": {
+      "source": "GoS",
+      "page": 211
+    }
+  },
+  {
+    "id": "rule:gos:ocean-environs",
+    "name": "Ocean Environs",
+    "sourceMetadata": {
+      "source": "GoS",
+      "page": 202
+    },
+    "mechanics": [
+      {
+        "componentId": "kelp-forest-difficult-terrain",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "DIFFICULT_TERRAIN",
+        "procedure": "movement-cost",
+        "unit": "feet",
+        "extraFeetPerFoot": 1,
+        "cumulative": true
+      }
+    ]
+  },
+  {
+    "id": "rule:gos:officers-and-crew",
+    "name": "Officers and Crew",
+    "sourceMetadata": {
+      "source": "GoS",
+      "page": 194
+    }
+  },
+  {
+    "id": "rule:gos:random-ships",
+    "name": "Random Ships",
+    "sourceMetadata": {
+      "source": "GoS",
+      "page": 208
+    },
+    "mechanics": [
+      {
+        "componentId": "ghost-ship-energy-damage-resistance",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "RESISTANCE",
+        "damageTypes": [
+          "acid",
+          "fire",
+          "lightning",
+          "thunder"
+        ],
+        "resolutionModifier": {
+          "operation": "HALVE",
+          "multiplier": 0.5,
+          "rounding": "DOWN",
+          "oncePerDamageInstance": true,
+          "sameOperationDoesNotStack": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:gos:ship-stat-blocks",
+    "name": "Ship Stat Blocks",
+    "sourceMetadata": {
+      "source": "GoS",
+      "page": 186
+    }
+  },
+  {
+    "id": "rule:gos:ships-in-combat",
+    "name": "Ships in Combat",
+    "sourceMetadata": {
+      "source": "GoS",
+      "page": 198
+    }
+  },
+  {
+    "id": "rule:gos:superior-ship-upgrades",
+    "name": "Superior Ship Upgrades",
+    "sourceMetadata": {
+      "source": "GoS",
+      "page": 196
+    }
+  },
+  {
+    "id": "rule:gos:travel-at-sea",
+    "name": "Travel at Sea",
+    "sourceMetadata": {
+      "source": "GoS",
+      "page": 199
+    }
+  },
+  {
+    "id": "rule:mm:familiars",
+    "name": "Familiars",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 347
+    },
+    "ruleType": "VARIANT",
+    "references": [
+      {
+        "targetType": "spell",
+        "id": "spell:phb:find-familiar",
+        "relationship": "defines-familiar-options"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:crawling-claw",
+        "relationship": "example-familiar"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:imp",
+        "relationship": "example-familiar"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:pseudodragon",
+        "relationship": "example-familiar"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:quasit",
+        "relationship": "example-familiar"
+      }
+    ]
+  },
+  {
+    "id": "rule:mm:player-characters-as-lycanthropes",
+    "name": "Player Characters as Lycanthropes",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 207,
+      "citations": [
+        {
+          "source": "CoS",
+          "page": 242
+        },
+        {
+          "source": "WDMM",
+          "page": 317
+        },
+        {
+          "source": "VRGR",
+          "page": 237
+        }
+      ]
+    },
+    "references": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:werebear",
+        "relationship": "lycanthrope-stat-block"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:wereboar",
+        "relationship": "lycanthrope-stat-block"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:wererat",
+        "relationship": "lycanthrope-stat-block"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:weretiger",
+        "relationship": "lycanthrope-stat-block"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:werewolf",
+        "relationship": "lycanthrope-stat-block"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:vrgr:wereraven",
+        "relationship": "lycanthrope-stat-block"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:wdmm:werebat",
+        "relationship": "lycanthrope-stat-block"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:vrgr:loup-garou",
+        "relationship": "lycanthrope-stat-block"
+      },
+      {
+        "targetType": "spell",
+        "id": "spell:phb:remove-curse",
+        "relationship": "removes-loup-garou-curse-under-source-conditions"
+      }
+    ]
+  },
+  {
+    "id": "rule:mm:player-characters-as-vampires",
+    "name": "Player Characters as Vampires",
+    "sourceMetadata": {
+      "source": "MM",
+      "page": 295,
+      "citations": [
+        {
+          "source": "VRGR",
+          "page": 236
+        }
+      ]
+    },
+    "references": [
+      {
+        "targetType": "creature",
+        "id": "creature:mm:vampire-spawn",
+        "relationship": "transformation-stat-block"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:vampire",
+        "relationship": "transformation-stat-block"
+      },
+      {
+        "targetType": "spell",
+        "id": "spell:phb:wish",
+        "relationship": "reverses-vampirism"
+      }
+    ]
+  },
+  {
+    "id": "rule:phb:customizing-ability-scores",
+    "name": "Customizing Ability Scores",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 13
+    },
+    "ruleType": "VARIANT"
+  },
+  {
+    "id": "rule:phb:downtime-activity-crafting",
+    "name": "Downtime Activity: Crafting",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 187
+    },
+    "mechanics": [
+      {
+        "componentId": "crafting-activity",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "craft",
+        "duration": {
+          "amount": 1,
+          "unit": "day"
+        },
+        "outcome": "item-created"
+      }
+    ]
+  },
+  {
+    "id": "rule:phb:downtime-activity-practicing-a-profession",
+    "name": "Downtime Activity: Practicing a Profession",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 187
+    },
+    "mechanics": [
+      {
+        "componentId": "profession-activity",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "work",
+        "minimumLifestyle": "MODEST"
+      }
+    ]
+  },
+  {
+    "id": "rule:phb:downtime-activity-recuperating",
+    "name": "Downtime Activity: Recuperating",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 187
+    },
+    "mechanics": [
+      {
+        "componentId": "recuperating-activity",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "recuperate",
+        "duration": {
+          "amount": 3,
+          "unit": "day"
+        },
+        "savingThrow": {
+          "componentId": "recuperating-save",
+          "kind": "D20_TEST",
+          "subtype": "SAVING_THROW",
+          "savingThrow": {
+            "kind": "SAVING_THROW",
+            "abilities": [
+              "constitution"
+            ],
+            "abilitySelection": "rule-specified",
+            "dc": {
+              "kind": "FIXED",
+              "value": 15
+            }
+          }
+        },
+        "recoveryOutcomes": [
+          {
+            "kind": "END_EFFECT",
+            "effect": "PREVENTS_HIT_POINT_RECOVERY"
+          },
+          {
+            "kind": "ADVANTAGE_ON_SAVES",
+            "effect": "DISEASE_OR_POISON_RECOVERY",
+            "durationHours": 24
+          }
+        ],
+        "recoverySelection": "CHOOSE_ONE_ON_SUCCESS"
+      }
+    ]
+  },
+  {
+    "id": "rule:phb:downtime-activity-researching",
+    "name": "Downtime Activity: Researching",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 187
+    },
+    "mechanics": [
+      {
+        "componentId": "research-activity",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "research",
+        "outcome": "information-gained"
+      }
+    ]
+  },
+  {
+    "id": "rule:phb:downtime-activity-training",
+    "name": "Downtime Activity: Training",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 187
+    },
+    "mechanics": [
+      {
+        "componentId": "training-activity",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "train",
+        "duration": {
+          "amount": 250,
+          "unit": "day"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:phb:encumbrance",
+    "name": "Encumbrance",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 176
+    },
+    "ruleType": "VARIANT",
+    "mechanics": [
+      {
+        "componentId": "optional-encumbrance-thresholds",
+        "kind": "CARRYING_CAPACITY_RULE",
+        "subtype": "OPTIONAL_ENCUMBRANCE",
+        "weightUnit": "POUND",
+        "strengthBasis": "STRENGTH_SCORE",
+        "encumbranceThresholds": [
+          {
+            "weightMultiplier": 5,
+            "state": "ENCUMBERED",
+            "speedReductionFeet": 10,
+            "abilityCheckDisadvantage": [],
+            "attackDisadvantage": [],
+            "savingThrowDisadvantage": []
+          },
+          {
+            "weightMultiplier": 10,
+            "state": "HEAVILY_ENCUMBERED",
+            "speedReductionFeet": 20,
+            "abilityCheckDisadvantage": [
+              "strength",
+              "dexterity",
+              "constitution"
+            ],
+            "attackDisadvantage": [
+              "strength",
+              "dexterity",
+              "constitution"
+            ],
+            "savingThrowDisadvantage": [
+              "strength",
+              "dexterity",
+              "constitution"
+            ]
+          }
+        ],
+        "heavyEncumbranceMaximum": "STANDARD_CARRYING_CAPACITY",
+        "thresholdComparison": "GREATER_THAN"
+      }
+    ]
+  },
+  {
+    "id": "rule:phb:equipment-sizes",
+    "name": "Equipment Sizes",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 145
+    },
+    "ruleType": "VARIANT"
+  },
+  {
+    "id": "rule:phb:feats",
+    "name": "Feats",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 165
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:phb:inspiration",
+    "name": "Inspiration",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 125
+    },
+    "mechanics": [
+      {
+        "componentId": "inspiration-benefit",
+        "kind": "D20_TEST",
+        "subtype": "TEST_MODIFIER",
+        "test": "d20-test",
+        "modifier": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "d20-test",
+          "direction": "advantage",
+          "diceCount": 2,
+          "select": "higher",
+          "cancelsOpposite": true,
+          "multipleInstancesStack": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:phb:multiclassing",
+    "name": "Multiclassing",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 163
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "multiclass-proficiency-level-basis",
+        "kind": "PROFICIENCY_RULE",
+        "subtype": "BONUS_LEVEL_BASIS",
+        "levelBasis": "TOTAL_CHARACTER_LEVEL"
+      }
+    ]
+  },
+  {
+    "id": "rule:phb:playing-on-a-grid",
+    "name": "Playing on a Grid",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 192
+    },
+    "ruleType": "VARIANT",
+    "mechanics": [
+      {
+        "componentId": "grid-movement-cost",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "GRID_MOVEMENT",
+        "procedure": "grid-movement-cost",
+        "details": {
+          "kind": "GRID_MOVEMENT_COST",
+          "gridUnitFeet": 5,
+          "movementUnitFeet": 5,
+          "minimumMovementRemaining": 1,
+          "extraCostRequiresFullPayment": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:phb:skills-with-different-abilities",
+    "name": "Skills with Different Abilities",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 175
+    },
+    "ruleType": "VARIANT",
+    "mechanics": [
+      {
+        "componentId": "ability-variation",
+        "kind": "SKILL_PROCEDURE",
+        "subtype": "ABILITY_VARIATION",
+        "decisionMaker": "DM",
+        "eligibleRequester": "DM_OR_PLAYER",
+        "decision": "DISCRETIONARY",
+        "pairings": [
+          {
+            "skill": {
+              "targetType": "skill",
+              "id": "skill:phb:athletics"
+            },
+            "usualAbility": "strength",
+            "alternativeAbility": "constitution",
+            "context": "SWIMMING_STAMINA",
+            "status": "SOURCE_EXAMPLE"
+          },
+          {
+            "skill": {
+              "targetType": "skill",
+              "id": "skill:phb:intimidation"
+            },
+            "usualAbility": "charisma",
+            "alternativeAbility": "strength",
+            "context": "DISPLAY_OF_RAW_STRENGTH",
+            "status": "SOURCE_EXAMPLE"
+          }
+        ]
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:ability-check"
+      }
+    ]
+  },
+  {
+    "id": "rule:psi:emrakul-s-madness",
+    "name": "Emrakul's Madness",
+    "sourceMetadata": {
+      "source": "PSI",
+      "page": 30
+    },
+    "ruleType": "VARIANT_OPTIONAL",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:dmg:new-ability-scores-honor-and-sanity",
+        "relationship": "uses-sanity-score-rules"
+      }
+    ]
+  },
+  {
+    "id": "rule:scag:human-languages",
+    "name": "Human Languages",
+    "sourceMetadata": {
+      "source": "SCAG",
+      "page": 112
+    },
+    "ruleType": "OPTIONAL",
+    "references": [
+      {
+        "targetType": "language",
+        "id": "language:phb:common",
+        "relationship": "language-assumed-known-with-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:dambrathan",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:midani",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:alzhedo",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:chondathan",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:damaran",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:waelan",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:guran",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:halruaan",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:illuskan",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:roushoum",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:chessentan",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:mulhorandi",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:rashemi",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:shaaran",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:shou",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:thayan",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:tuigan",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:turmic",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:uluik",
+        "relationship": "source-listed-human-ethnic-language"
+      },
+      {
+        "targetType": "language",
+        "id": "language:scag:untheric",
+        "relationship": "source-listed-human-ethnic-language"
+      }
+    ]
+  },
+  {
+    "id": "rule:tce:customizing-your-origin",
+    "name": "Customizing Your Origin",
+    "sourceMetadata": {
+      "source": "TCE",
+      "page": 8
+    },
+    "ruleType": "OPTIONAL",
+    "references": [
+      {
+        "targetType": "language",
+        "id": "language:phb:abyssal",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:celestial",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:common",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:deep-speech",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:draconic",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:dwarvish",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:elvish",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:giant",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:gnomish",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:goblin",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:halfling",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:infernal",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:orc",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:primordial",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:sylvan",
+        "relationship": "custom-origin-language-option"
+      },
+      {
+        "targetType": "language",
+        "id": "language:phb:undercommon",
+        "relationship": "custom-origin-language-option"
+      }
+    ]
+  },
+  {
+    "id": "rule:tce:optional-class-features",
+    "name": "Optional Class Features",
+    "sourceMetadata": {
+      "source": "TCE",
+      "page": 24
+    },
+    "ruleType": "OPTIONAL"
+  },
+  {
+    "id": "rule:tce:sidekicks",
+    "name": "Sidekicks",
+    "sourceMetadata": {
+      "source": "TCE",
+      "page": 142
+    }
+  },
+  {
+    "id": "rule:vgm:familiars",
+    "name": "Familiars",
+    "sourceMetadata": {
+      "source": "VGM",
+      "page": 213
+    },
+    "ruleType": "VARIANT",
+    "references": [
+      {
+        "targetType": "spell",
+        "id": "spell:phb:find-familiar",
+        "relationship": "defines-familiar-options"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:vgm:cranium-rat",
+        "relationship": "example-familiar"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:crawling-claw",
+        "relationship": "example-familiar"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:vgm:gazer",
+        "relationship": "example-familiar"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:imp",
+        "relationship": "example-familiar"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:pseudodragon",
+        "relationship": "example-familiar"
+      },
+      {
+        "targetType": "creature",
+        "id": "creature:mm:quasit",
+        "relationship": "example-familiar"
+      }
+    ]
+  },
+  {
+    "id": "rule:vrgr:fear-and-stress",
+    "name": "Fear and Stress",
+    "sourceMetadata": {
+      "source": "VRGR",
+      "page": 195
+    },
+    "mechanics": [
+      {
+        "componentId": "fear-resistance-save",
+        "kind": "D20_TEST",
+        "subtype": "SAVING_THROW",
+        "savingThrow": {
+          "kind": "SAVING_THROW",
+          "abilities": [
+            "wisdom"
+          ],
+          "abilitySelection": "rule-specified",
+          "dc": {
+            "kind": "FIXED",
+            "value": 15
+          }
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "condition",
+        "id": "condition:phb:frightened",
+        "relationship": "fear-save-failure-condition"
+      }
+    ]
+  },
+  {
+    "id": "rule:vrgr:haunted-traps",
+    "name": "Haunted Traps",
+    "sourceMetadata": {
+      "source": "VRGR",
+      "page": 196
+    }
+  },
+  {
+    "id": "rule:vrgr:survivors",
+    "name": "Survivors",
+    "sourceMetadata": {
+      "source": "VRGR",
+      "page": 198
+    },
+    "mechanics": [
+      {
+        "componentId": "desperate-scream-saving-throw",
+        "kind": "D20_TEST",
+        "subtype": "TEST_MODIFIER",
+        "test": "saving-throw",
+        "modifier": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "saving-throw",
+          "direction": "advantage",
+          "diceCount": 2,
+          "select": "higher",
+          "cancelsOpposite": true,
+          "multipleInstancesStack": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:adamantine-weapons",
+    "name": "Adamantine Weapons",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 78
+    },
+    "ruleType": "OPTIONAL",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:critical-hit",
+        "relationship": "critical-hit-definition"
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:downtime-activity-buying-a-magic-item",
+    "name": "Downtime Activity: Buying a Magic Item",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 126
+    },
+    "ruleType": "VARIANT_OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "buy-magic-item-activity",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "buy",
+        "duration": {
+          "amount": 1,
+          "unit": "week"
+        },
+        "check": {
+          "componentId": "find-magic-item-seller-check",
+          "kind": "D20_TEST",
+          "subtype": "ABILITY_CHECK",
+          "abilities": [
+            "charisma"
+          ],
+          "skill": {
+            "targetType": "skill",
+            "id": "skill:phb:persuasion"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:downtime-activity-carousing",
+    "name": "Downtime Activity: Carousing",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 127
+    },
+    "ruleType": "VARIANT_OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "carousing-activity",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "carouse",
+        "duration": {
+          "amount": 1,
+          "unit": "week"
+        },
+        "check": {
+          "componentId": "carousing-contact-check",
+          "kind": "D20_TEST",
+          "subtype": "ABILITY_CHECK",
+          "abilities": [
+            "charisma"
+          ],
+          "skill": {
+            "targetType": "skill",
+            "id": "skill:phb:persuasion"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:downtime-activity-crafting-an-item",
+    "name": "Downtime Activity: Crafting an Item",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 128
+    },
+    "ruleType": "VARIANT_OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "craft-item-activity",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "craft",
+        "outcome": "item-created"
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:downtime-activity-crime",
+    "name": "Downtime Activity: Crime",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 130
+    },
+    "ruleType": "VARIANT_OPTIONAL"
+  },
+  {
+    "id": "rule:xge:downtime-activity-gambling",
+    "name": "Downtime Activity: Gambling",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 130
+    },
+    "ruleType": "VARIANT_OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "gambling-activity",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "gamble",
+        "duration": {
+          "amount": 1,
+          "unit": "week"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:downtime-activity-pit-fighting",
+    "name": "Downtime Activity: Pit Fighting",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 131
+    },
+    "ruleType": "VARIANT_OPTIONAL"
+  },
+  {
+    "id": "rule:xge:downtime-activity-relaxation",
+    "name": "Downtime Activity: Relaxation",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 131
+    },
+    "ruleType": "VARIANT_OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "relaxation-activity",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "relaxation",
+        "duration": {
+          "amount": 1,
+          "unit": "week"
+        },
+        "minimumLifestyle": "MODEST",
+        "sourceDefinedRecoveryCadence": "ADVANTAGE_WHILE_ACTIVITY_CONTINUES",
+        "recoveryOutcomes": [
+          {
+            "kind": "RESTORE_ONE_REDUCED_ABILITY_SCORE",
+            "resource": "ABILITY_SCORE",
+            "effect": "REDUCED_SCORE"
+          }
+        ],
+        "excludeOngoingMagicalEffects": true,
+        "recoverySelection": "CHOOSE_ONE_AT_ACTIVITY_END",
+        "ongoingBenefits": [
+          {
+            "kind": "END_EFFECT",
+            "effect": "PREVENTS_HIT_POINT_RECOVERY"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:downtime-activity-religious-service",
+    "name": "Downtime Activity: Religious Service",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 131
+    },
+    "ruleType": "VARIANT_OPTIONAL"
+  },
+  {
+    "id": "rule:xge:downtime-activity-research",
+    "name": "Downtime Activity: Research",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 132
+    },
+    "ruleType": "VARIANT_OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "research-activity",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "research",
+        "duration": {
+          "amount": 1,
+          "unit": "week"
+        },
+        "check": {
+          "componentId": "research-lore-check",
+          "kind": "D20_TEST",
+          "subtype": "ABILITY_CHECK",
+          "abilities": [
+            "intelligence"
+          ]
+        },
+        "outcome": "information-gained"
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:downtime-activity-scribing-a-spell-scroll",
+    "name": "Downtime Activity: Scribing a Spell Scroll",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 133
+    },
+    "ruleType": "VARIANT_OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "scribe-spell-scroll-activity",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "craft",
+        "outcome": "item-created"
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:downtime-activity-selling-a-magic-item",
+    "name": "Downtime Activity: Selling a Magic Item",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 133
+    },
+    "ruleType": "VARIANT_OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "sell-magic-item-activity",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "sell",
+        "duration": {
+          "amount": 1,
+          "unit": "week"
+        },
+        "check": {
+          "componentId": "magic-item-sale-offer-check",
+          "kind": "D20_TEST",
+          "subtype": "ABILITY_CHECK",
+          "abilities": [
+            "charisma"
+          ],
+          "skill": {
+            "targetType": "skill",
+            "id": "skill:phb:persuasion"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:downtime-activity-training",
+    "name": "Downtime Activity: Training",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 134
+    },
+    "ruleType": "VARIANT_OPTIONAL"
+  },
+  {
+    "id": "rule:xge:downtime-activity-work",
+    "name": "Downtime Activity: Work",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 134
+    },
+    "ruleType": "VARIANT_OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "work-activity",
+        "kind": "DOWNTIME_PROCEDURE",
+        "subtype": "ACTIVITY",
+        "procedure": "work",
+        "duration": {
+          "amount": 1,
+          "unit": "week"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:downtime-revisited",
+    "name": "Downtime Revisited",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 123
+    },
+    "ruleType": "VARIANT_OPTIONAL",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xge:downtime-activity-buying-a-magic-item",
+        "relationship": "listed-as-example-downtime-activity"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xge:downtime-activity-carousing",
+        "relationship": "listed-as-example-downtime-activity"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xge:downtime-activity-crafting-an-item",
+        "relationship": "listed-as-example-downtime-activity"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xge:downtime-activity-crime",
+        "relationship": "listed-as-example-downtime-activity"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xge:downtime-activity-gambling",
+        "relationship": "listed-as-example-downtime-activity"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xge:downtime-activity-pit-fighting",
+        "relationship": "listed-as-example-downtime-activity"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xge:downtime-activity-relaxation",
+        "relationship": "listed-as-example-downtime-activity"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xge:downtime-activity-religious-service",
+        "relationship": "listed-as-example-downtime-activity"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xge:downtime-activity-research",
+        "relationship": "listed-as-example-downtime-activity"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xge:downtime-activity-scribing-a-spell-scroll",
+        "relationship": "listed-as-example-downtime-activity"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xge:downtime-activity-selling-a-magic-item",
+        "relationship": "listed-as-example-downtime-activity"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xge:downtime-activity-training",
+        "relationship": "listed-as-example-downtime-activity"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xge:downtime-activity-work",
+        "relationship": "listed-as-example-downtime-activity"
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:falling",
+    "name": "Falling",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 77
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "standard-fall-damage",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "FALLING",
+        "procedure": "fall-damage",
+        "details": {
+          "kind": "FALL_DAMAGE",
+          "distanceIncrementFeet": 10,
+          "dicePerIncrement": {
+            "diceCount": 1,
+            "dieSize": 6
+          },
+          "maximumDiceCount": 20,
+          "damageType": "bludgeoning",
+          "partialIncrementTreatment": "SOURCE_UNSPECIFIED",
+          "landingCondition": {
+            "kind": "APPLY_CONDITION",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:phb:prone"
+            },
+            "appliesWhen": "FALL_DAMAGE_NOT_AVOIDED"
+          }
+        }
+      },
+      {
+        "componentId": "optional-flying-fall-trigger",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "FALLING",
+        "procedure": "fall-trigger",
+        "details": {
+          "kind": "FLYING_FALL_RULE",
+          "ruleStatus": "OPTIONAL",
+          "fallingTriggers": [
+            "PRONE",
+            "FLY_SPEED_ZERO",
+            "OTHERWISE_UNABLE_TO_MOVE"
+          ],
+          "prevention": "HOVER_OR_MAGIC_HOLD_ALOFT"
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "condition",
+        "id": "condition:phb:prone"
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:shared-campaign-variant-rules",
+    "name": "Shared Campaign Variant Rules",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 173
+    },
+    "ruleType": "VARIANT"
+  },
+  {
+    "id": "rule:xge:simultaneous-effects",
+    "name": "Simultaneous Effects",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 77,
+      "reprintedAs": [
+        {
+          "targetType": "rule",
+          "id": "rule:xphb:simultaneous-effects"
+        }
+      ]
+    },
+    "ruleType": "OPTIONAL",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:simultaneous-effects",
+        "relationship": "reprinted-in"
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:sleep",
+    "name": "Sleep",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 77
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "sleeping-in-armor-rest-limit",
+        "kind": "REST_PROCEDURE",
+        "subtype": "LONG_REST",
+        "duration": 8,
+        "unit": "hours",
+        "recoveryLimitations": [
+          {
+            "appliesWhen": "SLEEPING_IN_MEDIUM_OR_HEAVY_ARMOR",
+            "limitedOutcome": {
+              "kind": "RESTORE_FRACTION",
+              "resource": "HIT_DICE",
+              "numerator": 1,
+              "denominator": 4,
+              "minimum": 1,
+              "rounding": "DOWN"
+            }
+          },
+          {
+            "appliesWhen": "SLEEPING_IN_MEDIUM_OR_HEAVY_ARMOR",
+            "limitedOutcome": {
+              "kind": "NO_CONDITION_LEVEL_REDUCTION",
+              "condition": {
+                "targetType": "condition",
+                "id": "condition:phb:exhaustion"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "componentId": "sleep-deprivation-procedure",
+        "kind": "REST_PROCEDURE",
+        "subtype": "LONG_REST",
+        "duration": 24,
+        "unit": "hours",
+        "deprivationProcedure": {
+          "intervalHours": 24,
+          "savingThrow": {
+            "ability": "constitution",
+            "baseDc": 10,
+            "increasePerConsecutiveInterval": 5
+          },
+          "failureOutcome": {
+            "kind": "INCREASE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:phb:exhaustion"
+            },
+            "levels": 1
+          },
+          "dcResetOnLongRest": true
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "condition",
+        "id": "condition:phb:exhaustion"
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:spellcasting",
+    "name": "Spellcasting",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 85
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "identify-spell-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "intelligence"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:phb:arcana"
+        },
+        "dc": {
+          "kind": "FIXED_PLUS_SPELL_LEVEL",
+          "base": 15,
+          "spellRole": "identified-spell"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:tool-proficiencies",
+    "name": "Tool Proficiencies",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 78
+    },
+    "ruleType": "OPTIONAL",
+    "mechanics": [
+      {
+        "componentId": "tool-skill-proficiency-synergy",
+        "kind": "PROFICIENCY_RULE",
+        "subtype": "TOOL_SKILL_SYNERGY",
+        "whenBothProficienciesApply": true,
+        "dmMayGrantAdvantage": true
+      }
+    ]
+  },
+  {
+    "id": "rule:xge:tying-knots",
+    "name": "Tying Knots",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 78
+    },
+    "ruleType": "OPTIONAL",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:phb:skills-with-different-abilities",
+        "relationship": "source-referenced-check-ability-variant"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:ability-check",
+    "name": "Ability Check",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 360,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "ability-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "strength",
+          "dexterity",
+          "constitution",
+          "intelligence",
+          "wisdom",
+          "charisma"
+        ]
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:d20-test"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:ability-score-and-modifier",
+    "name": "Ability Score and Modifier",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 360,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "ability-modifier-mapping",
+        "kind": "ABILITY_SCORE_RULE",
+        "subtype": "MODIFIER_MAPPING",
+        "minimumScore": 1,
+        "maximumScore": 30,
+        "abilities": [
+          "strength",
+          "dexterity",
+          "constitution",
+          "intelligence",
+          "wisdom",
+          "charisma"
+        ],
+        "scoreBands": [
+          {
+            "minimumScore": 1,
+            "maximumScore": 1,
+            "modifier": -5
+          },
+          {
+            "minimumScore": 2,
+            "maximumScore": 3,
+            "modifier": -4
+          },
+          {
+            "minimumScore": 4,
+            "maximumScore": 5,
+            "modifier": -3
+          },
+          {
+            "minimumScore": 6,
+            "maximumScore": 7,
+            "modifier": -2
+          },
+          {
+            "minimumScore": 8,
+            "maximumScore": 9,
+            "modifier": -1
+          },
+          {
+            "minimumScore": 10,
+            "maximumScore": 11,
+            "modifier": 0
+          },
+          {
+            "minimumScore": 12,
+            "maximumScore": 13,
+            "modifier": 1
+          },
+          {
+            "minimumScore": 14,
+            "maximumScore": 15,
+            "modifier": 2
+          },
+          {
+            "minimumScore": 16,
+            "maximumScore": 17,
+            "modifier": 3
+          },
+          {
+            "minimumScore": 18,
+            "maximumScore": 19,
+            "modifier": 4
+          },
+          {
+            "minimumScore": 20,
+            "maximumScore": 21,
+            "modifier": 5
+          },
+          {
+            "minimumScore": 22,
+            "maximumScore": 23,
+            "modifier": 6
+          },
+          {
+            "minimumScore": 24,
+            "maximumScore": 25,
+            "modifier": 7
+          },
+          {
+            "minimumScore": 26,
+            "maximumScore": 27,
+            "modifier": 8
+          },
+          {
+            "minimumScore": 28,
+            "maximumScore": 29,
+            "modifier": 9
+          },
+          {
+            "minimumScore": 30,
+            "maximumScore": 30,
+            "modifier": 10
+          }
+        ],
+        "appliesTo": "D20_TEST"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:d20-test",
+        "relationship": "provides-modifier-for"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:action",
+    "name": "Action",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 360,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:attack"
+      },
+      {
+        "targetType": "action",
+        "id": "action:xphb:dash"
+      },
+      {
+        "targetType": "action",
+        "id": "action:xphb:help"
+      },
+      {
+        "targetType": "action",
+        "id": "action:xphb:disengage"
+      },
+      {
+        "targetType": "action",
+        "id": "action:xphb:hide"
+      },
+      {
+        "targetType": "action",
+        "id": "action:xphb:influence"
+      },
+      {
+        "targetType": "action",
+        "id": "action:xphb:magic"
+      },
+      {
+        "targetType": "action",
+        "id": "action:xphb:ready"
+      },
+      {
+        "targetType": "action",
+        "id": "action:xphb:search"
+      },
+      {
+        "targetType": "action",
+        "id": "action:xphb:study"
+      },
+      {
+        "targetType": "action",
+        "id": "action:xphb:utilize"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:advantage",
+    "name": "Advantage",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 360,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "advantage",
+        "kind": "D20_TEST",
+        "subtype": "TEST_MODIFIER",
+        "modifier": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "d20-test",
+          "direction": "advantage",
+          "diceCount": 2,
+          "select": "higher",
+          "cancelsOpposite": true,
+          "multipleInstancesStack": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:d20-test",
+        "relationship": "modifies"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:disadvantage",
+        "relationship": "cancels-with"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:adventure",
+    "name": "Adventure",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 360,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:encounter"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:alignment",
+    "name": "Alignment",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 360,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:ally",
+    "name": "Ally",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 361,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:creature",
+        "relationship": "ally-is-a-creature"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:attitude",
+        "relationship": "alliance-is-distinct-from-starting-attitude"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:area-of-effect",
+    "name": "Area of Effect",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 361,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "area-of-effect-rules",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "AREA_OF_EFFECT",
+        "shapes": [
+          "cone",
+          "cube",
+          "cylinder",
+          "emanation",
+          "line",
+          "sphere"
+        ],
+        "originPlacement": "DEFINED_BY_SHAPE",
+        "lineOfEffect": {
+          "kind": "STRAIGHT_LINE_FROM_ORIGIN",
+          "locationIncludedWhen": "AT_LEAST_ONE_UNBLOCKED_LINE",
+          "blockedBy": {
+            "targetType": "rule",
+            "id": "rule:xphb:cover",
+            "coverLevel": "total"
+          }
+        },
+        "unseenOriginPlacement": "NEAR_SIDE_OF_INTERVENING_OBSTRUCTION"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:cover"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:cone-area-of-effect"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:cube-area-of-effect"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:cylinder-area-of-effect"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:emanation-area-of-effect"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:line-area-of-effect"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:sphere-area-of-effect"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:armor-class",
+    "name": "Armor Class",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 361,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:armor-training",
+    "name": "Armor Training",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 361,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:disadvantage",
+        "relationship": "untrained-armor-imposes-disadvantage"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:d20-test",
+        "relationship": "armor-penalty-applies-to-strength-or-dexterity-tests"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:attack-roll",
+    "name": "Attack Roll",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 361,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "attack-roll",
+        "kind": "D20_TEST",
+        "subtype": "ATTACK_ROLL",
+        "roll": {
+          "kind": "ATTACK_ROLL",
+          "forms": [
+            "weapon",
+            "unarmed",
+            "spell"
+          ]
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:d20-test"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:attitude",
+    "name": "Attitude",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 361,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "starting-friendly-attitude",
+        "kind": "SOCIAL_PROCEDURE",
+        "subtype": "ATTITUDE",
+        "attitude": "friendly"
+      },
+      {
+        "componentId": "starting-hostile-attitude",
+        "kind": "SOCIAL_PROCEDURE",
+        "subtype": "ATTITUDE",
+        "attitude": "hostile"
+      },
+      {
+        "componentId": "starting-indifferent-attitude",
+        "kind": "SOCIAL_PROCEDURE",
+        "subtype": "ATTITUDE",
+        "attitude": "indifferent"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:monster",
+        "relationship": "attitude-subject"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:player-character",
+        "relationship": "attitude-target"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:friendly-attitude",
+        "relationship": "starting-attitude-option"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:hostile-attitude",
+        "relationship": "starting-attitude-option"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:indifferent-attitude",
+        "relationship": "starting-attitude-option"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:attunement",
+    "name": "Attunement",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 361,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "attunement",
+        "kind": "SPELL_MAGIC",
+        "subtype": "ATTUNEMENT"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:bonus-action",
+    "name": "Bonus Action",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 362,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:action",
+        "relationship": "same-turn-action"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:breaking-objects",
+    "name": "Breaking Objects",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 362,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:ability-check",
+        "relationship": "no-ability-scores-prevent-checks"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:saving-throw",
+        "relationship": "no-ability-scores-fail-saves"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:armor-class",
+        "relationship": "material-armor-class-table-context"
+      },
+      {
+        "targetType": "action",
+        "id": "action:xphb:attack",
+        "relationship": "fragile-object-break-action"
+      },
+      {
+        "targetType": "action",
+        "id": "action:xphb:utilize",
+        "relationship": "fragile-object-break-action"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:bright-light",
+    "name": "Bright Light",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 362,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:burrow-speed",
+    "name": "Burrow Speed",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 362,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "burrowing-movement",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "BURROWING",
+        "procedure": "movement-mode",
+        "speedType": "burrow",
+        "details": {
+          "kind": "BURROWING_MOVEMENT",
+          "permittedMaterials": [
+            "sand",
+            "earth",
+            "mud",
+            "ice"
+          ],
+          "solidRock": {
+            "requiresSourceDefinedTrait": true
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:campaign",
+    "name": "Campaign",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 362,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:adventure"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:cantrip",
+    "name": "Cantrip",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 362,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:spell",
+        "relationship": "level-zero-spell-cast-without-spell-slot"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:carrying-capacity",
+    "name": "Carrying Capacity",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 362,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "strength-size-carry-limits",
+        "kind": "CARRYING_CAPACITY_RULE",
+        "subtype": "SIZE_STRENGTH_CAPACITY",
+        "weightUnit": "POUND",
+        "strengthBasis": "STRENGTH_SCORE",
+        "sizeMultipliers": [
+          {
+            "sizes": [
+              "TINY"
+            ],
+            "carryMultiplier": 7.5,
+            "dragLiftPushMultiplier": 15
+          },
+          {
+            "sizes": [
+              "SMALL",
+              "MEDIUM"
+            ],
+            "carryMultiplier": 15,
+            "dragLiftPushMultiplier": 30
+          },
+          {
+            "sizes": [
+              "LARGE"
+            ],
+            "carryMultiplier": 30,
+            "dragLiftPushMultiplier": 60
+          },
+          {
+            "sizes": [
+              "HUGE"
+            ],
+            "carryMultiplier": 60,
+            "dragLiftPushMultiplier": 120
+          },
+          {
+            "sizes": [
+              "GARGANTUAN"
+            ],
+            "carryMultiplier": 120,
+            "dragLiftPushMultiplier": 240
+          }
+        ],
+        "dragLiftPushSpeedCapFeet": 5,
+        "speedCapAppliesWhenAboveCarryCapacity": true
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:challenge-rating",
+    "name": "Challenge Rating",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 363,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:character-sheet",
+    "name": "Character Sheet",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 363,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:climb-speed",
+    "name": "Climb Speed",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 363,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "climb-speed-exception",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "CLIMBING",
+        "procedure": "speed-required",
+        "speedType": "climb",
+        "details": {
+          "kind": "CLIMB_SPEED_EXCEPTION",
+          "speedType": "climb",
+          "appliesTo": "VERTICAL_SURFACE",
+          "replacesSpeed": true,
+          "waivesClimbingExtraMovementCost": true
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:climbing"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:climbing",
+    "name": "Climbing",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 363,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "climbing-movement",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "CLIMBING",
+        "procedure": "movement-cost",
+        "speedType": "climb",
+        "details": {
+          "kind": "CLIMBING_MOVEMENT",
+          "mode": "climbing",
+          "additionalFeetPerFoot": 1,
+          "difficultTerrainAdditionalFeetPerFoot": 2,
+          "difficultTerrainCostRelationship": "DO_NOT_ADD",
+          "waivedWhenUsingSpeedType": "climb",
+          "optionalCheck": {
+            "trigger": "SLIPPERY_OR_FEW_HANDHOLDS",
+            "dmMayRequire": true,
+            "ability": "strength",
+            "skill": {
+              "targetType": "skill",
+              "id": "skill:xphb:athletics"
+            },
+            "dc": 15
+          }
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:athletics"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:condition",
+    "name": "Condition",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 363,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:blinded",
+        "relationship": "condition-defined-by-this-glossary"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:charmed",
+        "relationship": "condition-defined-by-this-glossary"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:deafened",
+        "relationship": "condition-defined-by-this-glossary"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:exhaustion",
+        "relationship": "condition-defined-by-this-glossary"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:frightened",
+        "relationship": "condition-defined-by-this-glossary"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled",
+        "relationship": "condition-defined-by-this-glossary"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:incapacitated",
+        "relationship": "condition-defined-by-this-glossary"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:invisible",
+        "relationship": "condition-defined-by-this-glossary"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:paralyzed",
+        "relationship": "condition-defined-by-this-glossary"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:petrified",
+        "relationship": "condition-defined-by-this-glossary"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:poisoned",
+        "relationship": "condition-defined-by-this-glossary"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:prone",
+        "relationship": "condition-defined-by-this-glossary"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:restrained",
+        "relationship": "condition-defined-by-this-glossary"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:stunned",
+        "relationship": "condition-defined-by-this-glossary"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:unconscious",
+        "relationship": "condition-defined-by-this-glossary"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:cone-area-of-effect",
+    "name": "Cone [Area of Effect]",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 364,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "cone-shape",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "AREA_OF_EFFECT",
+        "shape": "cone",
+        "origin": "point-in-space",
+        "originPlacement": "POINT_AND_DIRECTION",
+        "dimensionParameters": [
+          "MAXIMUM_LENGTH"
+        ],
+        "coneWidthRule": "WIDTH_EQUALS_DISTANCE_FROM_ORIGIN",
+        "originIncluded": "EXCLUDED_UNLESS_CREATOR_CHOOSES"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:cover",
+    "name": "Cover",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 364,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "half-cover",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "COVER",
+        "level": "half",
+        "armorClassBonus": 2,
+        "savingThrowBonus": 2,
+        "savingThrowAbility": "dexterity",
+        "blocksTargeting": false,
+        "degreeSelection": "MOST_PROTECTIVE_ONLY"
+      },
+      {
+        "componentId": "three-quarters-cover",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "COVER",
+        "level": "three-quarters",
+        "armorClassBonus": 5,
+        "savingThrowBonus": 5,
+        "savingThrowAbility": "dexterity",
+        "blocksTargeting": false,
+        "degreeSelection": "MOST_PROTECTIVE_ONLY"
+      },
+      {
+        "componentId": "total-cover",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "COVER",
+        "level": "total",
+        "blocksTargeting": true,
+        "degreeSelection": "MOST_PROTECTIVE_ONLY"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:crawling",
+    "name": "Crawling",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 364,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "crawling-movement-cost",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "CRAWLING",
+        "procedure": "movement-cost",
+        "details": {
+          "kind": "CRAWLING_MOVEMENT",
+          "additionalFeetPerFoot": 1,
+          "difficultTerrainAdditionalFeetPerFoot": 2,
+          "difficultTerrainCostRelationship": "DO_NOT_ADD"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:creature",
+    "name": "Creature",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 364,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:player-character"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:creature-type",
+    "name": "Creature Type",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 364,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:player-character"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:critical-hit",
+    "name": "Critical Hit",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 364,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "critical-attack",
+        "kind": "D20_TEST",
+        "subtype": "ATTACK_ROLL",
+        "roll": {
+          "kind": "ATTACK_ROLL",
+          "forms": [
+            "melee",
+            "ranged",
+            "spell",
+            "weapon",
+            "unarmed"
+          ],
+          "target": "armor-class",
+          "criticalOn": 20,
+          "criticalHitAutomaticallyHits": true
+        }
+      },
+      {
+        "componentId": "critical-damage",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "DAMAGE",
+        "damageModifier": {
+          "kind": "CRITICAL_HIT_DAMAGE_MODIFIER",
+          "diceMultiplier": 2,
+          "modifierApplications": 1,
+          "appliesWhen": {
+            "kind": "ON_CRITICAL_HIT",
+            "componentId": "critical-attack"
+          }
+        }
+      }
+    ],
+    "composition": {
+      "kind": "AND",
+      "members": [
+        {
+          "kind": "COMPONENT",
+          "componentId": "critical-attack"
+        },
+        {
+          "kind": "COMPONENT",
+          "componentId": "critical-damage"
+        }
+      ]
+    }
+  },
+  {
+    "id": "rule:xphb:cube-area-of-effect",
+    "name": "Cube [Area of Effect]",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 364,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "cube-shape",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "AREA_OF_EFFECT",
+        "shape": "cube",
+        "origin": "point-in-space",
+        "originPlacement": "ANY_CUBE_FACE",
+        "dimensionParameters": [
+          "SIDE_LENGTH"
+        ],
+        "originIncluded": "EXCLUDED_UNLESS_CREATOR_CHOOSES"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:curses",
+    "name": "Curses",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 364,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "spell",
+        "id": "spell:xphb:remove-curse",
+        "relationship": "removes-curse"
+      },
+      {
+        "targetType": "spell",
+        "id": "spell:xphb:greater-restoration",
+        "relationship": "removes-curse"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:cylinder-area-of-effect",
+    "name": "Cylinder [Area of Effect]",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 364,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "cylinder-shape",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "AREA_OF_EFFECT",
+        "shape": "cylinder",
+        "origin": "point-in-space",
+        "originPlacement": "CENTER_OF_TOP_OR_BOTTOM",
+        "dimensionParameters": [
+          "BASE_RADIUS",
+          "HEIGHT"
+        ],
+        "originIncluded": "INCLUDED"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:d20-test",
+    "name": "D20 Test",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 364,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "d20-test",
+        "kind": "D20_TEST",
+        "subtype": "TEST",
+        "includes": [
+          "ABILITY_CHECK",
+          "ATTACK_ROLL",
+          "SAVING_THROW"
+        ],
+        "dmDeterminesWhenWarranted": true
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:ability-check"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:attack-roll"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:saving-throw"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:damage",
+    "name": "Damage",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 364,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:hit-points",
+        "relationship": "damage-reduces-hit-points"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:damage-roll",
+    "name": "Damage Roll",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 364,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:damage",
+        "relationship": "damage-roll-deals-damage"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:damage-threshold",
+    "name": "Damage Threshold",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 364,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:damage-types",
+    "name": "Damage Types",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 365,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:resistance",
+        "relationship": "damage-types-used-by-resistance"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:vulnerability",
+        "relationship": "damage-types-used-by-vulnerability"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:darkness",
+    "name": "Darkness",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 365,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:heavily-obscured",
+        "relationship": "darkness-is-heavily-obscured"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:dead",
+    "name": "Dead",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 365,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:hit-points",
+        "relationship": "dead-state-hit-points"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:condition",
+        "relationship": "revival-condition-interactions"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:attunement",
+        "relationship": "revival-ends-attunement"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:exhaustion",
+        "relationship": "revival-reduces-exhaustion"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:death-saving-throw",
+    "name": "Death Saving Throw",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 365,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "death-saving-throw",
+        "kind": "D20_TEST",
+        "subtype": "DEATH_SAVING_THROW",
+        "trigger": "start-of-turn-at-zero-hit-points",
+        "appliesTo": "PLAYER_CHARACTER"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:difficult-terrain",
+    "name": "Difficult Terrain",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 366,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "difficult-terrain",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "DIFFICULT_TERRAIN",
+        "procedure": "movement-cost",
+        "extraFeetPerFoot": 1,
+        "cumulative": false,
+        "qualifyingSpaces": [
+          {
+            "kind": "CREATURE_PRESENCE",
+            "restriction": "not-tiny-and-not-ally"
+          },
+          {
+            "kind": "FURNITURE_SIZE",
+            "size": "same-or-larger-than-creature"
+          },
+          {
+            "kind": "SURFACE_MATERIAL",
+            "materials": [
+              "heavy-snow",
+              "ice",
+              "rubble",
+              "undergrowth"
+            ]
+          },
+          {
+            "kind": "LIQUID_DEPTH",
+            "depth": "shin-to-waist"
+          },
+          {
+            "kind": "NARROW_OPENING",
+            "size": "one-size-smaller-than-creature"
+          },
+          {
+            "kind": "SLOPE",
+            "minimumDegrees": 20
+          },
+          {
+            "kind": "DM_ADJUDICATED_SIMILAR"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:difficulty-class",
+    "name": "Difficulty Class",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 366,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "difficulty-class-target-number",
+        "kind": "D20_TEST",
+        "subtype": "DIFFICULTY_CLASS",
+        "targetNumberFor": [
+          "ABILITY_CHECK",
+          "SAVING_THROW"
+        ]
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:ability-check",
+        "relationship": "target-number-for"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:saving-throw",
+        "relationship": "target-number-for"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:dim-light",
+    "name": "Dim Light",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 366,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:lightly-obscured",
+        "relationship": "dim-light-is-lightly-obscured"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:disadvantage",
+    "name": "Disadvantage",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 366,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "disadvantage",
+        "kind": "D20_TEST",
+        "subtype": "TEST_MODIFIER",
+        "modifier": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "d20-test",
+          "direction": "disadvantage",
+          "diceCount": 2,
+          "select": "lower",
+          "cancelsOpposite": true,
+          "multipleInstancesStack": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:d20-test",
+        "relationship": "modifies"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:advantage",
+        "relationship": "cancels-with"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:emanation-area-of-effect",
+    "name": "Emanation [Area of Effect]",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 366,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "emanation-shape",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "AREA_OF_EFFECT",
+        "shape": "emanation",
+        "origin": "source",
+        "originPlacement": "CREATURE_OR_OBJECT",
+        "dimensionParameters": [
+          "EXTENT"
+        ],
+        "originIncluded": "EXCLUDED_UNLESS_CREATOR_CHOOSES",
+        "originBehavior": {
+          "kind": "EMANATION",
+          "followsOriginUnless": [
+            "INSTANTANEOUS",
+            "STATIONARY"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:encounter",
+    "name": "Encounter",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 366,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:enemy",
+    "name": "Enemy",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 366,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:creature",
+        "relationship": "enemy-is-a-creature"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:attitude",
+        "relationship": "enemy-is-distinct-from-starting-attitude"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:experience-points",
+    "name": "Experience Points",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 366,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:expertise",
+    "name": "Expertise",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 367,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "expertise-proficiency-scaling",
+        "kind": "PROFICIENCY_RULE",
+        "subtype": "BONUS_SCALING",
+        "checkType": "ABILITY_CHECK",
+        "requiresSkillProficiency": true,
+        "multiplier": 2,
+        "unlessAlreadyDoubledByAnotherFeature": true,
+        "assignment": "ONE_SKILL_IN_WHICH_PROFICIENT",
+        "maximumInstancesPerSkill": 1
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:proficiency",
+        "relationship": "scales"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:fly-speed",
+    "name": "Fly Speed",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 367,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "fly-speed-capability",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "FLYING",
+        "procedure": "movement-mode",
+        "speedType": "fly",
+        "details": {
+          "kind": "FLY_SPEED_CAPABILITY",
+          "travelMode": "AIR",
+          "staysAloftUntil": [
+            "LANDS",
+            "FALLS",
+            "DIES"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:flying",
+    "name": "Flying",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 367,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "flying-fall-rule",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "FLYING",
+        "procedure": "fall-trigger",
+        "details": {
+          "kind": "FLIGHT_FALLING",
+          "fallingTriggers": [
+            "INCAPACITATED",
+            "PRONE",
+            "FLY_SPEED_ZERO"
+          ],
+          "hoverPreventsFall": true
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:incapacitated"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:prone"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:friendly-attitude",
+    "name": "Friendly [Attitude]",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 367,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "friendly-attitude",
+        "kind": "SOCIAL_PROCEDURE",
+        "subtype": "ATTITUDE",
+        "attitude": "friendly"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:ability-check",
+        "relationship": "influence-check"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:advantage",
+        "relationship": "source-grants-on-influence-check"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:grappling",
+    "name": "Grappling",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 367,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:unarmed-strike",
+        "relationship": "character-grapple-initiation"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled",
+        "relationship": "successful-grapple-applies"
+      },
+      {
+        "targetType": "action",
+        "id": "action:xphb:escape-a-grapple",
+        "relationship": "escape-check-and-ending"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:athletics",
+        "relationship": "escape-check-option"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:acrobatics",
+        "relationship": "escape-check-option"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:incapacitated",
+        "relationship": "grapple-ending-condition"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:hazard",
+    "name": "Hazard",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 368,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:healing",
+    "name": "Healing",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 368,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "healing-definition",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "HEALING",
+        "method": "healing-effect"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:heavily-obscured",
+    "name": "Heavily Obscured",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 368,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "heavy-obscuration",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "OBSCURATION",
+        "level": "heavily-obscured",
+        "sightEffect": "blocks-vision"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:blinded",
+        "relationship": "condition-while-attempting-to-see"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:heroic-inspiration",
+    "name": "Heroic Inspiration",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 368,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:player-character",
+        "relationship": "inspiration-transfer-recipient"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:high-jump",
+    "name": "High Jump",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 368,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "high-jump-procedure",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "JUMPING",
+        "procedure": "jump-distance",
+        "details": {
+          "kind": "HIGH_JUMP",
+          "distanceFormula": {
+            "kind": "BASE_PLUS_ABILITY_MODIFIER",
+            "baseFeet": 3,
+            "ability": "strength",
+            "minimumFeet": 0
+          },
+          "runningStartFeet": 10,
+          "standingJumpMultiplier": 0.5,
+          "movementCostPerFoot": 1,
+          "reachFormula": {
+            "kind": "JUMP_HEIGHT_PLUS_CREATURE_HEIGHT",
+            "jumpHeightMultiplier": 1,
+            "creatureHeightMultiplier": 1.5
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:hit-point-dice",
+    "name": "Hit Point Dice",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 368,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "hit-dice-rest-healing",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "HEALING",
+        "method": "hit-dice"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:short-rest",
+        "relationship": "hit-dice-spent-during-rest"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:hit-points",
+        "relationship": "hit-dice-contribute-to-hit-points"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:hit-points",
+    "name": "Hit Points",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 368,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "current-hit-points",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "HIT_POINTS",
+        "rule": "current"
+      },
+      {
+        "componentId": "maximum-hit-points",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "HIT_POINTS",
+        "rule": "maximum"
+      },
+      {
+        "componentId": "zero-hit-points",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "HIT_POINTS",
+        "rule": "zero-hit-points"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:damage",
+        "relationship": "damage-reduces-hit-points"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:dmg:healing",
+        "relationship": "healing-restores-hit-points"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:hostile-attitude",
+    "name": "Hostile [Attitude]",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 368,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "hostile-attitude",
+        "kind": "SOCIAL_PROCEDURE",
+        "subtype": "ATTITUDE",
+        "attitude": "hostile"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:ability-check",
+        "relationship": "influence-check"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:disadvantage",
+        "relationship": "source-imposes-on-influence-check"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:hover",
+    "name": "Hover",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 368,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "hover-prevents-fall",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "HOVERING",
+        "procedure": "fall-prevention",
+        "details": {
+          "kind": "HOVER_PREVENTION",
+          "appliesWhile": "FLYING",
+          "appliesUnderRule": {
+            "targetType": "rule",
+            "id": "rule:xphb:flying"
+          }
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:flying"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:illusions",
+    "name": "Illusions",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 369,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:immunity",
+    "name": "Immunity",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 369,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:improvised-weapons",
+    "name": "Improvised Weapons",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 369,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:indifferent-attitude",
+    "name": "Indifferent [Attitude]",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 369,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "indifferent-attitude",
+        "kind": "SOCIAL_PROCEDURE",
+        "subtype": "ATTITUDE",
+        "attitude": "indifferent"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:monster",
+        "relationship": "default-monster-attitude"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:initiative",
+    "name": "Initiative",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 369,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "initiative-score",
+        "kind": "INITIATIVE_PROCEDURE",
+        "subtype": "INITIATIVE_SCORE",
+        "scoreConstruction": "DEXTERITY_CHECK_SCORE",
+        "base": 10,
+        "ability": "dexterity",
+        "advantageAdjustment": 5,
+        "disadvantageAdjustment": -5
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:advantage"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:disadvantage"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:jumping",
+    "name": "Jumping",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 370,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "jump-procedure-selection",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "JUMPING",
+        "procedure": "jump-distance",
+        "details": {
+          "kind": "JUMP_PROCEDURE_SELECTION",
+          "selection": "ONE",
+          "horizontal": {
+            "targetType": "rule",
+            "id": "rule:xphb:long-jump"
+          },
+          "vertical": {
+            "targetType": "rule",
+            "id": "rule:xphb:high-jump"
+          }
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:long-jump"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:high-jump"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:knocking-out-a-creature",
+    "name": "Knocking Out a Creature",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 370,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:hit-points",
+        "relationship": "zero-hit-point-alternative"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:unconscious",
+        "relationship": "knockout-condition"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:short-rest",
+        "relationship": "knockout-starts-short-rest"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:medicine",
+        "relationship": "first-aid-check"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:difficulty-class",
+        "relationship": "first-aid-dc"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:lightly-obscured",
+    "name": "Lightly Obscured",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 370,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "light-obscuration",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "OBSCURATION",
+        "level": "lightly-obscured",
+        "sightEffect": "disadvantage-on-sight-dependent-perception"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:line-area-of-effect",
+    "name": "Line [Area of Effect]",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 370,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "line-shape",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "AREA_OF_EFFECT",
+        "shape": "line",
+        "origin": "point-in-space",
+        "originPlacement": "POINT_AND_DIRECTION",
+        "dimensionParameters": [
+          "LENGTH",
+          "WIDTH"
+        ],
+        "originIncluded": "EXCLUDED_UNLESS_CREATOR_CHOOSES"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:long-jump",
+    "name": "Long Jump",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 370,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "long-jump-procedure",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "JUMPING",
+        "procedure": "jump-distance",
+        "details": {
+          "kind": "LONG_JUMP",
+          "distanceFormula": {
+            "kind": "UP_TO_SOURCE_VALUE",
+            "input": "STRENGTH_SCORE"
+          },
+          "runningStartFeet": 10,
+          "standingJumpMultiplier": 0.5,
+          "movementCostPerFoot": 1,
+          "landingCheck": {
+            "trigger": "LAND_IN_DIFFICULT_TERRAIN",
+            "ability": "dexterity",
+            "skill": {
+              "targetType": "skill",
+              "id": "skill:xphb:acrobatics"
+            },
+            "dc": 10,
+            "failureCondition": {
+              "targetType": "condition",
+              "id": "condition:xphb:prone"
+            }
+          },
+          "obstacleCheck": {
+            "dmMayRequire": true,
+            "maximumObstacleHeightFraction": 0.25,
+            "ability": "strength",
+            "skill": {
+              "targetType": "skill",
+              "id": "skill:xphb:athletics"
+            },
+            "dc": 10,
+            "failureOutcome": "HIT_OBSTACLE"
+          }
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:prone"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:acrobatics"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:athletics"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:long-rest",
+    "name": "Long Rest",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 370,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "long-rest-procedure",
+        "kind": "REST_PROCEDURE",
+        "subtype": "LONG_REST",
+        "duration": 8,
+        "unit": "hours",
+        "durationQualifier": "AT_LEAST",
+        "minimumHitPointsToStart": 1,
+        "minimumHoursBetweenStarts": 16,
+        "permittedActivities": [
+          "LIGHT_ACTIVITY"
+        ],
+        "activityLimits": [
+          {
+            "activity": "SLEEP",
+            "amount": 6,
+            "unit": "hours",
+            "limit": "MINIMUM"
+          },
+          {
+            "activity": "LIGHT_ACTIVITY",
+            "amount": 2,
+            "unit": "hours",
+            "limit": "MAXIMUM"
+          }
+        ],
+        "interruptions": [
+          "INITIATIVE",
+          "NON_CANTRIP_SPELL",
+          "DAMAGE",
+          "PHYSICAL_EXERTION"
+        ],
+        "physicalExertionInterruptionHours": 1,
+        "interruptionOutcome": "RESUME_WITH_ADDED_DURATION",
+        "shortRestBenefitThresholdHours": 1,
+        "addedDurationPerInterruption": {
+          "amount": 1,
+          "unit": "hour"
+        },
+        "recoveryOutcomes": [
+          {
+            "kind": "RESTORE_ALL",
+            "resource": "HIT_POINTS"
+          },
+          {
+            "kind": "RESTORE_ALL",
+            "resource": "HIT_DICE"
+          },
+          {
+            "kind": "RESTORE_ALL",
+            "resource": "REDUCED_HIT_POINT_MAXIMUM"
+          },
+          {
+            "kind": "RESTORE_ALL",
+            "resource": "REDUCED_ABILITY_SCORES"
+          },
+          {
+            "kind": "REDUCE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:xphb:exhaustion"
+            },
+            "levels": 1
+          },
+          {
+            "kind": "RECHARGE_AS_DEFINED_BY_FEATURE",
+            "resource": "CLASS_FEATURE",
+            "restType": "LONG_REST"
+          }
+        ],
+        "conditionDuringSleep": {
+          "targetType": "condition",
+          "id": "condition:xphb:unconscious"
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:unconscious"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:exhaustion"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:short-rest"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:initiative"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:magical-effect",
+    "name": "Magical Effect",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 371,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:monster",
+    "name": "Monster",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 371,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:creature"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:nonplayer-character",
+    "name": "Nonplayer Character",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 371,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:monster",
+        "relationship": "npc-is-a-monster"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:object",
+    "name": "Object",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 371,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:occupied-space",
+    "name": "Occupied Space",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 371,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:creature",
+        "relationship": "creature-occupies-space"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:object",
+        "relationship": "object-completely-fills-space"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:passive-perception",
+    "name": "Passive Perception",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 372,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "passive-perception-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "wisdom"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:perception"
+        },
+        "passiveScore": true,
+        "passiveScoreConstruction": {
+          "kind": "PASSIVE_SCORE_CONSTRUCTION",
+          "base": 10,
+          "addsCheckBonus": true,
+          "advantageAdjustment": 5,
+          "disadvantageAdjustment": -5
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:advantage"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:disadvantage"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:per-day",
+    "name": "Per Day",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 372,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:long-rest",
+        "relationship": "per-day-use-recharged-after-long-rest"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:player-character",
+    "name": "Player Character",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 372,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:possession",
+    "name": "Possession",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 372,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "spell",
+        "id": "spell:xphb:protection-from-evil-and-good",
+        "relationship": "prevents-possession"
+      },
+      {
+        "targetType": "spell",
+        "id": "spell:xphb:dispel-evil-and-good",
+        "relationship": "ends-possession"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:proficiency",
+    "name": "Proficiency",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 372,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "proficiency-bonus-application",
+        "kind": "PROFICIENCY_RULE",
+        "subtype": "BONUS_APPLICATION",
+        "appliesTo": [
+          "SKILL_ASSOCIATED_ABILITY_CHECK",
+          "SAVING_THROW",
+          "WEAPON_ATTACK",
+          "TOOL_CHECK"
+        ],
+        "adds": "PROFICIENCY_BONUS"
+      },
+      {
+        "componentId": "proficiency-bonus-progression",
+        "kind": "PROFICIENCY_RULE",
+        "subtype": "BONUS_PROGRESSION",
+        "progressionSource": "LEVEL_OR_CHALLENGE_RATING",
+        "levelBands": [
+          {
+            "minimumLevel": 1,
+            "maximumLevel": 4,
+            "bonus": 2
+          },
+          {
+            "minimumLevel": 5,
+            "maximumLevel": 8,
+            "bonus": 3
+          },
+          {
+            "minimumLevel": 9,
+            "maximumLevel": 12,
+            "bonus": 4
+          },
+          {
+            "minimumLevel": 13,
+            "maximumLevel": 16,
+            "bonus": 5
+          },
+          {
+            "minimumLevel": 17,
+            "maximumLevel": 20,
+            "bonus": 6
+          },
+          {
+            "minimumLevel": 21,
+            "maximumLevel": 24,
+            "bonus": 7
+          },
+          {
+            "minimumLevel": 25,
+            "maximumLevel": 28,
+            "bonus": 8
+          },
+          {
+            "minimumLevel": 29,
+            "maximumLevel": 30,
+            "bonus": 9
+          }
+        ],
+        "challengeRatingBands": [
+          {
+            "minimumChallengeRatingInclusive": 0,
+            "maximumChallengeRatingInclusive": 4,
+            "bonus": 2
+          },
+          {
+            "minimumChallengeRatingExclusive": 4,
+            "maximumChallengeRatingInclusive": 8,
+            "bonus": 3
+          },
+          {
+            "minimumChallengeRatingExclusive": 8,
+            "maximumChallengeRatingInclusive": 12,
+            "bonus": 4
+          },
+          {
+            "minimumChallengeRatingExclusive": 12,
+            "maximumChallengeRatingInclusive": 16,
+            "bonus": 5
+          },
+          {
+            "minimumChallengeRatingExclusive": 16,
+            "maximumChallengeRatingInclusive": 20,
+            "bonus": 6
+          },
+          {
+            "minimumChallengeRatingExclusive": 20,
+            "maximumChallengeRatingInclusive": 24,
+            "bonus": 7
+          },
+          {
+            "minimumChallengeRatingExclusive": 24,
+            "maximumChallengeRatingInclusive": 28,
+            "bonus": 8
+          },
+          {
+            "minimumChallengeRatingExclusive": 28,
+            "maximumChallengeRatingInclusive": 30,
+            "bonus": 9
+          }
+        ]
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:d20-test",
+        "relationship": "applies-to"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:reach",
+    "name": "Reach",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 372,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "default-melee-reach",
+        "kind": "D20_TEST",
+        "subtype": "ATTACK_ROLL",
+        "roll": {
+          "kind": "ATTACK_ROLL",
+          "forms": [
+            "melee"
+          ],
+          "reachFeet": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:reaction",
+    "name": "Reaction",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 372,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:opportunity-attack",
+        "relationship": "universally-available-reaction"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:action",
+        "relationship": "same-turn-action-coexistence"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:bonus-action",
+        "relationship": "same-turn-bonus-action-coexistence"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:resistance",
+    "name": "Resistance",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 373,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "damage-resistance",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "RESISTANCE",
+        "damageTypes": [
+          "acid",
+          "bludgeoning",
+          "cold",
+          "fire",
+          "force",
+          "lightning",
+          "necrotic",
+          "piercing",
+          "poison",
+          "psychic",
+          "radiant",
+          "slashing",
+          "thunder"
+        ],
+        "resolutionModifier": {
+          "operation": "HALVE",
+          "multiplier": 0.5,
+          "rounding": "DOWN",
+          "oncePerDamageInstance": true,
+          "sameOperationDoesNotStack": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:ritual",
+    "name": "Ritual",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 373,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:round-down",
+    "name": "Round Down",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 373,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:save",
+    "name": "Save",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 373,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:saving-throw",
+        "relationship": "alias-of"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:saving-throw",
+    "name": "Saving Throw",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 373,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "saving-throw",
+        "kind": "D20_TEST",
+        "subtype": "SAVING_THROW",
+        "savingThrow": {
+          "kind": "SAVING_THROW",
+          "abilities": [
+            "strength",
+            "dexterity",
+            "constitution",
+            "intelligence",
+            "wisdom",
+            "charisma"
+          ],
+          "abilitySelection": "effect",
+          "dc": {
+            "kind": "EFFECT_DEFINED"
+          },
+          "mayChooseToFail": true,
+          "automaticFailureWhenAbilityScoreAbsent": true
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:d20-test"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:shape-shifting",
+    "name": "Shape-Shifting",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 373,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:condition",
+        "relationship": "ongoing-conditions-carry-over-between-forms"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:dead",
+        "relationship": "death-causes-reversion-to-true-form"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:short-rest",
+    "name": "Short Rest",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 373,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "short-rest-procedure",
+        "kind": "REST_PROCEDURE",
+        "subtype": "SHORT_REST",
+        "duration": 1,
+        "unit": "hour",
+        "durationQualifier": "EXACT",
+        "minimumHitPointsToStart": 1,
+        "permittedActivities": [
+          "LIGHT_ACTIVITY"
+        ],
+        "interruptions": [
+          "INITIATIVE",
+          "NON_CANTRIP_SPELL",
+          "DAMAGE"
+        ],
+        "interruptionOutcome": "NO_BENEFITS",
+        "recoveryOutcomes": [
+          {
+            "kind": "SPEND_RESOURCE_TO_RECOVER",
+            "resource": "HIT_DICE",
+            "formula": "DIE_PLUS_CONSTITUTION_MODIFIER",
+            "minimumPerDie": 1,
+            "additionalChoiceAfterEachRoll": true
+          },
+          {
+            "kind": "RECHARGE_AS_DEFINED_BY_FEATURE",
+            "resource": "CLASS_FEATURE",
+            "restType": "SHORT_REST"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:simultaneous-effects",
+    "name": "Simultaneous Effects",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 374,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:size",
+    "name": "Size",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 374,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:occupied-space",
+        "relationship": "size-determines-creature-space"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:hit-points",
+        "relationship": "object-size-affects-hit-points"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:skill",
+    "name": "Skill",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 374,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "skill-proficiency-on-ability-check",
+        "kind": "PROFICIENCY_RULE",
+        "subtype": "SKILL_PROFICIENCY_APPLICATION",
+        "associatedWith": "ABILITY_CHECK",
+        "onProficiency": "ADD_PROFICIENCY_BONUS"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:proficiency",
+        "relationship": "specializes"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:ability-check",
+        "relationship": "associated-check"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:speed",
+    "name": "Speed",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 374,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "special-speed-selection",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "SPECIAL_SPEEDS",
+        "procedure": "speed-selection",
+        "details": {
+          "kind": "SPECIAL_SPEED_SELECTION",
+          "canSwitchDuringMove": true,
+          "subtractDistanceAlreadyMoved": true,
+          "switchProhibitedWhenRemainingDistanceAtMost": 0
+        }
+      },
+      {
+        "componentId": "special-speed-adjustment",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "SPECIAL_SPEEDS",
+        "procedure": "speed-adjustment",
+        "details": {
+          "kind": "SPECIAL_SPEED_ADJUSTMENT",
+          "affectedSpeedTypes": "ALL_SPECIAL_SPEEDS",
+          "changeAmountRelationship": "EQUAL_TO_SPEED_CHANGE",
+          "durationRelationship": "SAME_DURATION"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:spell",
+    "name": "Spell",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 374,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:magical-effect",
+        "relationship": "spell-is-a-magical-effect"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:spell-attack",
+    "name": "Spell Attack",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 374,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "spell-attack",
+        "kind": "SPELL_MAGIC",
+        "subtype": "SPELL_ATTACK",
+        "attackRoll": {
+          "kind": "ATTACK_ROLL",
+          "forms": [
+            "spell"
+          ]
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:attack-roll",
+        "relationship": "uses-attack-roll-procedure"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:spellcasting-focus",
+    "name": "Spellcasting Focus",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 374,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:sphere-area-of-effect",
+    "name": "Sphere [Area of Effect]",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 374,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "sphere-shape",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "AREA_OF_EFFECT",
+        "shape": "sphere",
+        "origin": "point-in-space",
+        "originPlacement": "POINT_IN_SPACE",
+        "dimensionParameters": [
+          "RADIUS"
+        ],
+        "originIncluded": "INCLUDED"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:stable",
+    "name": "Stable",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 374,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "stable-death-state",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "DEATH",
+        "procedure": "stabilized"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:hit-points",
+        "relationship": "stable-at-zero-hit-points"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:death-saving-throw",
+        "relationship": "stable-creature-not-required-to-make"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:stat-block",
+    "name": "Stat Block",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 374,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:monster",
+        "relationship": "stat-block-subject"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:size",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:creature-type",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:alignment",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:initiative",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:hit-points",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:hit-point-dice",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:speed",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:ability-score-and-modifier",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:saving-throw",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:skill",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:resistance",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:vulnerability",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:immunity",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:object",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:challenge-rating",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:proficiency",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:action",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:bonus-action",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:reaction",
+        "relationship": "stat-block-entry"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:attack-roll",
+        "relationship": "attack-notation"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:damage-roll",
+        "relationship": "damage-notation"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:swim-speed",
+    "name": "Swim Speed",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 376,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "swim-speed-cost-exception",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "SWIMMING",
+        "procedure": "speed-required",
+        "speedType": "swim",
+        "details": {
+          "kind": "SWIM_SPEED_EXCEPTION",
+          "mode": "swimming",
+          "avoidsNormalExtraMovementCost": true
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:swimming"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:swimming",
+    "name": "Swimming",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 376,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "swimming-movement",
+        "kind": "MOVEMENT_SPATIAL",
+        "subtype": "SWIMMING",
+        "procedure": "movement-cost",
+        "speedType": "swim",
+        "details": {
+          "kind": "SWIMMING_MOVEMENT",
+          "mode": "swimming",
+          "additionalFeetPerFoot": 1,
+          "difficultTerrainAdditionalFeetPerFoot": 2,
+          "difficultTerrainCostRelationship": "DO_NOT_ADD",
+          "waivedWhenUsingSpeedType": "swim",
+          "optionalCheck": {
+            "trigger": "ROUGH_WATER_ANY_DISTANCE",
+            "dmMayRequire": true,
+            "ability": "strength",
+            "skill": {
+              "targetType": "skill",
+              "id": "skill:xphb:athletics"
+            },
+            "dc": 15
+          }
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:athletics"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:swim-speed"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:target",
+    "name": "Target",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 376,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:attack-roll"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:saving-throw"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:telepathy",
+    "name": "Telepathy",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 376,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:incapacitated",
+        "relationship": "telepathic-contact-cannot-start-or-continues-when-incapacitated"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:teleportation",
+    "name": "Teleportation",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 376,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE"
+  },
+  {
+    "id": "rule:xphb:temporary-hit-points",
+    "name": "Temporary Hit Points",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 376,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "temporary-hit-points-buffer",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "HIT_POINTS",
+        "rule": "temporary-hit-points"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:hit-points",
+        "relationship": "buffer-against-real-hit-point-loss"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:unarmed-strike",
+    "name": "Unarmed Strike",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 377,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "unarmed-attack",
+        "kind": "D20_TEST",
+        "subtype": "ATTACK_ROLL",
+        "roll": {
+          "kind": "ATTACK_ROLL",
+          "forms": [
+            "melee",
+            "unarmed"
+          ],
+          "target": "armor-class",
+          "reachFeet": 5,
+          "bonus": {
+            "ability": "strength",
+            "proficiencyBonus": true
+          }
+        }
+      },
+      {
+        "componentId": "unarmed-damage",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "DAMAGE",
+        "damageRoll": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "bludgeoning"
+          ],
+          "base": {
+            "kind": "FIXED",
+            "amount": 1
+          },
+          "abilityModifier": "strength"
+        },
+        "appliesWhen": {
+          "kind": "ON_HIT",
+          "componentId": "unarmed-attack"
+        }
+      },
+      {
+        "componentId": "unarmed-grapple-save",
+        "kind": "D20_TEST",
+        "subtype": "SAVING_THROW",
+        "savingThrow": {
+          "kind": "SAVING_THROW",
+          "abilities": [
+            "strength",
+            "dexterity"
+          ],
+          "abilitySelection": "target-chooses",
+          "dc": {
+            "kind": "ABILITY_PLUS_PROFICIENCY",
+            "base": 8,
+            "ability": "strength",
+            "proficiencyBonus": true
+          }
+        }
+      },
+      {
+        "componentId": "unarmed-grapple-outcome",
+        "kind": "COMBAT_PROCEDURE",
+        "subtype": "UNARMED_STRIKE_OPTION",
+        "option": "GRAPPLE",
+        "onFailedSave": {
+          "kind": "APPLY_CONDITION",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:grappled"
+          }
+        },
+        "targetLimit": "no-more-than-one-size-larger",
+        "requiresFreeHand": true,
+        "appliesWhen": {
+          "kind": "ON_FAILED_SAVE",
+          "componentId": "unarmed-grapple-save"
+        },
+        "reachFeet": 5
+      },
+      {
+        "componentId": "unarmed-shove-outcome",
+        "kind": "COMBAT_PROCEDURE",
+        "subtype": "UNARMED_STRIKE_OPTION",
+        "option": "SHOVE",
+        "onFailedSave": {
+          "kind": "CHOOSE_ONE",
+          "outcomes": [
+            {
+              "kind": "FORCED_MOVEMENT",
+              "movement": "push",
+              "distance": 5,
+              "unit": "feet"
+            },
+            {
+              "kind": "APPLY_CONDITION",
+              "condition": {
+                "targetType": "condition",
+                "id": "condition:xphb:prone"
+              }
+            }
+          ]
+        },
+        "targetLimit": "no-more-than-one-size-larger",
+        "appliesWhen": {
+          "kind": "ON_FAILED_SAVE",
+          "componentId": "unarmed-grapple-save"
+        },
+        "reachFeet": 5
+      }
+    ],
+    "composition": {
+      "kind": "OR",
+      "members": [
+        {
+          "kind": "AND",
+          "members": [
+            {
+              "kind": "COMPONENT",
+              "componentId": "unarmed-attack"
+            },
+            {
+              "kind": "COMPONENT",
+              "componentId": "unarmed-damage"
+            }
+          ]
+        },
+        {
+          "kind": "AND",
+          "members": [
+            {
+              "kind": "COMPONENT",
+              "componentId": "unarmed-grapple-save"
+            },
+            {
+              "kind": "OR",
+              "members": [
+                {
+                  "kind": "COMPONENT",
+                  "componentId": "unarmed-grapple-outcome"
+                },
+                {
+                  "kind": "COMPONENT",
+                  "componentId": "unarmed-shove-outcome"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:saving-throw"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:proficiency"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled",
+        "relationship": "grapple-escape-attempts-use-this-dc"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:unoccupied-space",
+    "name": "Unoccupied Space",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 377,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:occupied-space",
+        "relationship": "inverse-creature-occupancy"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:object",
+        "relationship": "space-is-unoccupied-only-if-no-object-completely-fills-it"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:vulnerability",
+    "name": "Vulnerability",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 377,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "mechanics": [
+      {
+        "componentId": "damage-vulnerability",
+        "kind": "DAMAGE_HEALTH_STATE",
+        "subtype": "VULNERABILITY",
+        "damageTypes": [
+          "acid",
+          "bludgeoning",
+          "cold",
+          "fire",
+          "force",
+          "lightning",
+          "necrotic",
+          "piercing",
+          "poison",
+          "psychic",
+          "radiant",
+          "slashing",
+          "thunder"
+        ],
+        "resolutionModifier": {
+          "operation": "DOUBLE",
+          "multiplier": 2,
+          "oncePerDamageInstance": true,
+          "sameOperationDoesNotStack": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:weapon",
+    "name": "Weapon",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 377,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:object",
+        "relationship": "weapon-is-an-object"
+      }
+    ]
+  },
+  {
+    "id": "rule:xphb:weapon-attack",
+    "name": "Weapon Attack",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 377,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "ruleType": "CORE",
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:attack-roll",
+        "relationship": "alias-of"
+      }
+    ]
+  }
+]

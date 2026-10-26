@@ -1,0 +1,13 @@
+{
+  "id": "rule:xphb:teleportation",
+  "name": "Teleportation",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 376,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "rule:xge:downtime-activity-training",
+  "name": "Downtime Activity: Training",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 134
+  },
+  "ruleType": "VARIANT_OPTIONAL"
+}

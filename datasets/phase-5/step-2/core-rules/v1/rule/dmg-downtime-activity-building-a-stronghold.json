@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:downtime-activity-building-a-stronghold",
+  "name": "Downtime Activity: Building a Stronghold",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 128
+  },
+  "ruleType": "OPTIONAL"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "rule:tce:optional-class-features",
+  "name": "Optional Class Features",
+  "sourceMetadata": {
+    "source": "TCE",
+    "page": 24
+  },
+  "ruleType": "OPTIONAL"
+}

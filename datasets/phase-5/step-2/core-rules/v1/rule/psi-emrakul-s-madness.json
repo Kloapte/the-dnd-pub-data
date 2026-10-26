@@ -1,0 +1,16 @@
+{
+  "id": "rule:psi:emrakul-s-madness",
+  "name": "Emrakul's Madness",
+  "sourceMetadata": {
+    "source": "PSI",
+    "page": 30
+  },
+  "ruleType": "VARIANT_OPTIONAL",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:dmg:new-ability-scores-honor-and-sanity",
+      "relationship": "uses-sanity-score-rules"
+    }
+  ]
+}

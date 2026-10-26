@@ -1,0 +1,90 @@
+{
+  "id": "rule:xphb:condition",
+  "name": "Condition",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 363,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:blinded",
+      "relationship": "condition-defined-by-this-glossary"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:charmed",
+      "relationship": "condition-defined-by-this-glossary"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:deafened",
+      "relationship": "condition-defined-by-this-glossary"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:exhaustion",
+      "relationship": "condition-defined-by-this-glossary"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:frightened",
+      "relationship": "condition-defined-by-this-glossary"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:grappled",
+      "relationship": "condition-defined-by-this-glossary"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:incapacitated",
+      "relationship": "condition-defined-by-this-glossary"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:invisible",
+      "relationship": "condition-defined-by-this-glossary"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:paralyzed",
+      "relationship": "condition-defined-by-this-glossary"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:petrified",
+      "relationship": "condition-defined-by-this-glossary"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:poisoned",
+      "relationship": "condition-defined-by-this-glossary"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:prone",
+      "relationship": "condition-defined-by-this-glossary"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:restrained",
+      "relationship": "condition-defined-by-this-glossary"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:stunned",
+      "relationship": "condition-defined-by-this-glossary"
+    },
+    {
+      "targetType": "condition",
+      "id": "condition:xphb:unconscious",
+      "relationship": "condition-defined-by-this-glossary"
+    }
+  ]
+}

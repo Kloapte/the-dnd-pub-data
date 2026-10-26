@@ -1,0 +1,28 @@
+{
+  "id": "rule:xphb:indifferent-attitude",
+  "name": "Indifferent [Attitude]",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 369,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "indifferent-attitude",
+      "kind": "SOCIAL_PROCEDURE",
+      "subtype": "ATTITUDE",
+      "attitude": "indifferent"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:monster",
+      "relationship": "default-monster-attitude"
+    }
+  ]
+}

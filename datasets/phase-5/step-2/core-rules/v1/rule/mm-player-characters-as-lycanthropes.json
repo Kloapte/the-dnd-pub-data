@@ -18,5 +18,52 @@
         "page": 237
       }
     ]
-  }
+  },
+  "references": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:werebear",
+      "relationship": "lycanthrope-stat-block"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:wereboar",
+      "relationship": "lycanthrope-stat-block"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:wererat",
+      "relationship": "lycanthrope-stat-block"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:weretiger",
+      "relationship": "lycanthrope-stat-block"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:werewolf",
+      "relationship": "lycanthrope-stat-block"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:vrgr:wereraven",
+      "relationship": "lycanthrope-stat-block"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:wdmm:werebat",
+      "relationship": "lycanthrope-stat-block"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:vrgr:loup-garou",
+      "relationship": "lycanthrope-stat-block"
+    },
+    {
+      "targetType": "spell",
+      "id": "spell:phb:remove-curse",
+      "relationship": "removes-loup-garou-curse-under-source-conditions"
+    }
+  ]
 }

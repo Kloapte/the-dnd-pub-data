@@ -1,0 +1,13 @@
+{
+  "id": "rule:xphb:bright-light",
+  "name": "Bright Light",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 362,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE"
+}

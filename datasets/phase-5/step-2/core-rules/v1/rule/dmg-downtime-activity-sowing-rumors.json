@@ -1,0 +1,25 @@
+{
+  "id": "rule:dmg:downtime-activity-sowing-rumors",
+  "name": "Downtime Activity: Sowing Rumors",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 131
+  },
+  "ruleType": "OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "rumor-influence-check",
+      "kind": "SOCIAL_PROCEDURE",
+      "subtype": "INFLUENCE",
+      "check": {
+        "componentId": "rumor-charisma-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "charisma"
+        ],
+        "dc": 15
+      }
+    }
+  ]
+}

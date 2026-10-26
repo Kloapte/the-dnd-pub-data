@@ -1,0 +1,13 @@
+{
+  "id": "rule:xphb:illusions",
+  "name": "Illusions",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 369,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE"
+}

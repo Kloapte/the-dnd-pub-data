@@ -1,0 +1,20 @@
+{
+  "id": "rule:phb:downtime-activity-training",
+  "name": "Downtime Activity: Training",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 187
+  },
+  "mechanics": [
+    {
+      "componentId": "training-activity",
+      "kind": "DOWNTIME_PROCEDURE",
+      "subtype": "ACTIVITY",
+      "procedure": "train",
+      "duration": {
+        "amount": 250,
+        "unit": "day"
+      }
+    }
+  ]
+}

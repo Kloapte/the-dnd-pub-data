@@ -419,7 +419,7 @@ Continue the feedback loop until the representative conversion is accepted.
 
 ## Phase 5 — Dataset expansion
 
-**Status:** Step 2 Core Rules Foundation Phase 5 is authorized and in progress; 99 of 554 non-representative source records have been examined. Disease contracts and all 29 Disease records have been refined and are awaiting human review; expansion of the remaining domains has not resumed. Phase 5 is not approved. The previously completed Source Registry dataset remains a separate approved artifact.
+**Status:** Step 2 Core Rules Foundation Phase 5 is complete and approved. The final audited inventory contains 588 in-scope source identities (plus six explicitly excluded font-only LanguageScript records); 585 identities have canonical outputs and three have documented unsupported alternative dispositions. The 34 Phase 3 representative identities and 554 Phase 5 expansion identities are fully source-accounted. The final Phase 5 validation checkpoint is 9 schemas, 89 examples, 34 Phase 3 records, 551 Phase 5 records, and 838 permanent checks. See [the Phase 5 closure report](reports/step-2/CORE_RULES_FOUNDATION_PHASE_5_CLOSURE.md). The previously completed Source Registry dataset remains a separate artifact.
 
 ### Objective
 
@@ -454,13 +454,13 @@ Do not claim full completion when entries remain unaccounted for.
 - Provenance and versioning metadata.
 - Identified integration limitations.
 
-**Approval checkpoint:** Phase 5 is approved. Stop here; Phase 6 requires separate authorization.
+**Approval checkpoint:** Phase 5 closure is recorded. Step 2 Phase 6 integration requires an approved, sufficiently detailed implementation plan and remains a separate milestone.
 
 ---
 
 ## Phase 6 — Backend integration
 
-**Status:** Implementation completed; awaiting review. Phase 6 is not yet approved.
+**Status:** The earlier completed integration is the separate Step 1 Source Registry Phase 6 deliverable; see its integration report. Step 2 Core Rules Phase 6 integration has not started. A scoped implementation plan is recorded in [the Step 2 Phase 6 integration plan](reports/step-2/CORE_RULES_FOUNDATION_PHASE_6_BACKEND_INTEGRATION_PLAN.md); implementation is pending resolution of the plan decisions listed there.
 
 ### Objective
 
@@ -600,7 +600,13 @@ Evaluate source identity, publication metadata, aliases, and parent relationship
 
 **Phase 2 status:** Revised canonical model and JSON Schema design is completed and explicitly approved.
 
-**Phase 3 status:** Representative conversion is completed and awaiting review. Phase 4 has not begun.
+**Phase 3 status:** Representative conversion is complete; its outputs remain the 34-record Phase 3 baseline.
+
+**Phase 4 status:** Validation and approved contract refinements are complete and recorded in the Phase 4 reports.
+
+**Phase 5 status:** Dataset expansion and catalog reconciliation are complete and approved. See the linked closure report above.
+
+**Phase 6 status:** Implementation planning is complete for review; Step 2 backend integration has not begun pending the scope decisions in the Phase 6 plan.
 
 ### Objective
 

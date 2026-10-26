@@ -1,0 +1,91 @@
+{
+  "id": "rule:tce:customizing-your-origin",
+  "name": "Customizing Your Origin",
+  "sourceMetadata": {
+    "source": "TCE",
+    "page": 8
+  },
+  "ruleType": "OPTIONAL",
+  "references": [
+    {
+      "targetType": "language",
+      "id": "language:phb:abyssal",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:celestial",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:common",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:deep-speech",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:draconic",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:dwarvish",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:elvish",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:giant",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:gnomish",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:goblin",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:halfling",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:infernal",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:orc",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:primordial",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:sylvan",
+      "relationship": "custom-origin-language-option"
+    },
+    {
+      "targetType": "language",
+      "id": "language:phb:undercommon",
+      "relationship": "custom-origin-language-option"
+    }
+  ]
+}

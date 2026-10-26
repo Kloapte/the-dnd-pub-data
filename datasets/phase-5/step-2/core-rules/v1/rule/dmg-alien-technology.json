@@ -1,0 +1,19 @@
+{
+  "id": "rule:dmg:alien-technology",
+  "name": "Alien Technology",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 268
+  },
+  "ruleType": "OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "technology-understanding-check",
+      "kind": "D20_TEST",
+      "subtype": "ABILITY_CHECK",
+      "abilities": [
+        "intelligence"
+      ]
+    }
+  ]
+}

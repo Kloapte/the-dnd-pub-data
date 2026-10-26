@@ -1,0 +1,16 @@
+{
+  "id": "rule:xge:tying-knots",
+  "name": "Tying Knots",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 78
+  },
+  "ruleType": "OPTIONAL",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:phb:skills-with-different-abilities",
+      "relationship": "source-referenced-check-ability-variant"
+    }
+  ]
+}

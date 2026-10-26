@@ -1,0 +1,17 @@
+{
+  "id": "rule:dmg:loyalty",
+  "name": "Loyalty",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 93
+  },
+  "ruleType": "OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "high-loyalty-threshold",
+      "kind": "SOCIAL_PROCEDURE",
+      "subtype": "LOYALTY",
+      "scoreThreshold": 10
+    }
+  ]
+}

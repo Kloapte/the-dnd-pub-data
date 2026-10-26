@@ -1,0 +1,192 @@
+[
+  {
+    "id": "status:phb:concentration",
+    "name": "Concentration",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 203,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "status",
+          "id": "status:xphb:concentration"
+        }
+      ]
+    },
+    "mechanics": [
+      {
+        "kind": "MAINTENANCE_SAVE",
+        "ability": "constitution",
+        "trigger": "damage",
+        "separateEachTrigger": true,
+        "dc": {
+          "formula": "higher-of-base-or-damage-fraction",
+          "base": 10,
+          "damageFraction": 0.5
+        },
+        "failure": "status-ends"
+      },
+      {
+        "kind": "MAINTENANCE_SAVE",
+        "ability": "constitution",
+        "trigger": "environmental-phenomenon",
+        "dc": {
+          "formula": "fixed",
+          "base": 10
+        },
+        "failure": "status-ends",
+        "requirement": "dm-may-require"
+      },
+      {
+        "kind": "ENDING_CONDITION",
+        "when": "another-concentration-spell-starts",
+        "automatic": true
+      },
+      {
+        "kind": "ENDING_CONDITION",
+        "when": "incapacitated",
+        "automatic": true
+      },
+      {
+        "kind": "ENDING_CONDITION",
+        "when": "dies",
+        "automatic": true
+      },
+      {
+        "kind": "ENDING_CONDITION",
+        "when": "voluntarily",
+        "automatic": false,
+        "actionRequired": false
+      }
+    ]
+  },
+  {
+    "id": "status:phb:surprised",
+    "name": "Surprised",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 189,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "status",
+          "id": "status:xphb:surprised"
+        }
+      ]
+    },
+    "mechanics": [
+      {
+        "kind": "TURN_RESTRICTION",
+        "restriction": "cannot-move",
+        "appliesWhen": "first-turn-of-combat"
+      },
+      {
+        "kind": "TURN_RESTRICTION",
+        "restriction": "cannot-take-action",
+        "appliesWhen": "first-turn-of-combat"
+      },
+      {
+        "kind": "TURN_RESTRICTION",
+        "restriction": "cannot-take-reaction",
+        "appliesWhen": "until-first-turn-ends"
+      }
+    ]
+  },
+  {
+    "id": "status:xphb:bloodied",
+    "name": "Bloodied",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 362,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "mechanics": [
+      {
+        "kind": "HIT_POINT_THRESHOLD",
+        "fraction": 0.5,
+        "comparison": "at-or-below",
+        "reference": {
+          "targetType": "rule",
+          "id": "rule:xphb:hit-points"
+        }
+      }
+    ]
+  },
+  {
+    "id": "status:xphb:concentration",
+    "name": "Concentration",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 363,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "mechanics": [
+      {
+        "kind": "MAINTENANCE_SAVE",
+        "ability": "constitution",
+        "trigger": "damage",
+        "dc": {
+          "formula": "higher-of-base-or-damage-fraction",
+          "base": 10,
+          "damageFraction": 0.5,
+          "rounding": "down",
+          "maximum": 30
+        },
+        "failure": "status-ends"
+      },
+      {
+        "kind": "ENDING_CONDITION",
+        "when": "another-concentration-effect-starts",
+        "automatic": true
+      },
+      {
+        "kind": "ENDING_CONDITION",
+        "when": "incapacitated",
+        "automatic": true
+      },
+      {
+        "kind": "ENDING_CONDITION",
+        "when": "dies",
+        "automatic": true
+      },
+      {
+        "kind": "ENDING_CONDITION",
+        "when": "voluntarily",
+        "automatic": false,
+        "actionRequired": false
+      }
+    ]
+  },
+  {
+    "id": "status:xphb:surprised",
+    "name": "Surprised",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 376,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "mechanics": [
+      {
+        "kind": "ROLL_MODIFIER",
+        "roll": "initiative",
+        "direction": "disadvantage",
+        "actor": "affected-creature"
+      }
+    ]
+  }
+]

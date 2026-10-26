@@ -7025,7 +7025,7 @@ Complete original source entry:
 - Source object: `$.variantrule[170]`
 - Source entry path: `$.variantrule[170].entries[0]`
 - Canonical output: `rule/mm-player-characters-as-lycanthropes.json`
-- OMITTED: EXTERNAL_DEPENDENCY: Character transformation, lycanthrope statistics and traits, curse transmission/removal, and condition outcomes depend on Creature and Character domains not represented by Rule v1.
+- OMITTED: Player-character transformation, inherited traits, speeds, immunities, attack proficiency, speech restrictions, curse transmission, formulaic saves, alignment, and type-specific outcomes. Creature stat blocks and Remove Curse are referenced, but Character-state transitions require other domain contracts.
 
 Complete original source entry:
 
@@ -7040,7 +7040,7 @@ Complete original source entry:
 - Source object: `$.variantrule[170]`
 - Source entry path: `$.variantrule[170].entries[1]`
 - Canonical output: `rule/mm-player-characters-as-lycanthropes.json`
-- OMITTED: EXTERNAL_DEPENDENCY: Character transformation, lycanthrope statistics and traits, curse transmission/removal, and condition outcomes depend on Creature and Character domains not represented by Rule v1.
+- OMITTED: Curse transmission, its formulaic Constitution saving throw, alignment, and DM-control outcomes. Creature stat blocks and Remove Curse are referenced; the character-state and curse lifecycle require other domain contracts.
 
 Complete original source entry:
 
@@ -7070,7 +7070,7 @@ Complete original source entry:
 - Source object: `$.variantrule[170]`
 - Source entry path: `$.variantrule[170].entries[3]`
 - Canonical output: `rule/mm-player-characters-as-lycanthropes.json`
-- OMITTED: EXTERNAL_DEPENDENCY: Character transformation, lycanthrope statistics and traits, curse transmission/removal, and condition outcomes depend on Creature and Character domains not represented by Rule v1.
+- OMITTED: Curse transmission, its formulaic Constitution saving throw, alignment, and DM-control outcomes. Creature stat blocks and Remove Curse are referenced; the character-state and curse lifecycle require other domain contracts.
 
 Complete original source entry:
 
@@ -7244,30 +7244,6 @@ Complete original source entry:
 "Objects can be harmed by attacks and by some spells, using the rules below. If an object is exceedingly fragile, the DM may allow a creature to break it automatically with the {@action Attack|XPHB} or {@action Utilize|XPHB} action."
 ```
 
-### rule:xphb:breaking-objects entry 1
-
-- Source file: `src/main/resources/data/variantrules.json`
-- Source object: `$.variantrule[19]`
-- Source entry path: `$.variantrule[19].entries[1]`
-- Canonical output: `rule/xphb-breaking-objects.json`
-- OMITTED: REFERENCE_UNRESOLVED: The referenced Armor Class Rule has no canonical output in this batch.
-
-Complete original source entry:
-
-```json
-{
-  "type": "entries",
-  "entries": [
-    {
-      "type": "entries",
-      "name": "Armor Class",
-      "entries": [
-        "The Object {@variantrule Armor Class|XPHB} table suggests ACs for various substances."
-      ]
-    }
-  ]
-}
-```
 
 ### rule:xphb:breaking-objects entry 2
 
@@ -7705,7 +7681,7 @@ Complete original source entry:
 - Source object: `$.variantrule[162]`
 - Source entry path: `$.variantrule[162].entries[0]`
 - Canonical output: `rule/xphb-occupied-space.json`
-- OMITTED: REFERENCE_UNRESOLVED: The completely-filled-by-objects alternative has no canonical Object target.
+- OMITTED: SCHEMA_UNSUPPORTED: Creature and Object Rule references preserve the two occupancy predicates, but Rule v1 does not encode their source disjunction as one combined rule.
 
 Complete original source entry:
 
@@ -7753,4 +7729,14787 @@ Complete original source entry:
 
 ```json
 "A creature or an object belongs to a size category: Tiny, Small, Medium, Large, Huge, or Gargantuan. A creature's size determines how much space the creature occupies in combat. An object's size affects its {@variantrule Hit Points|XPHB}."
+```
+
+### rule:xphb:teleportation entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[220]`
+- Source entry path: `$.variantrule[220].entries[0]`
+- Canonical output: `rule/xphb-teleportation.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Teleportation side effects and spatial fallback are omitted under skipped R-GAP-21.
+
+Complete original source entry:
+
+```json
+"Teleportation is a special kind of magical transportation. If you teleport, you disappear and reappear elsewhere instantly, without moving through the intervening space. This transportation doesn't expend movement unless a rule tells you otherwise, and teleportation never provokes {@action Opportunity Attack|XPHB|Opportunity Attacks}."
+```
+
+### rule:xphb:unoccupied-space entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[226]`
+- Source entry path: `$.variantrule[226].entries[0]`
+- Canonical output: `rule/xphb-unoccupied-space.json`
+- OMITTED: SCHEMA_UNSUPPORTED: Occupied Space and Object Rule references preserve the source predicates, but Rule v1 does not encode their conjunction as one combined rule.
+
+Complete original source entry:
+
+```json
+"A space is unoccupied if no creatures are in it and it isn't completely filled by objects."
+```
+
+### rule:xphb:teleportation entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[220]`
+- Source entry path: `$.variantrule[220].entries[1]`
+- Canonical output: `rule/xphb-teleportation.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Omitted under skipped R-GAP-21; teleportation side effects and spatial fallback remain out of scope.
+
+Complete original source entry:
+
+```json
+"When you teleport, all the equipment you're wearing and carrying teleports with you. If you're touching another creature when you teleport, that creature doesn't teleport with you unless the teleportation effect says otherwise."
+```
+
+### rule:xphb:teleportation entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[220]`
+- Source entry path: `$.variantrule[220].entries[2]`
+- Canonical output: `rule/xphb-teleportation.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Omitted under skipped R-GAP-21; teleportation side effects and spatial fallback remain out of scope.
+
+Complete original source entry:
+
+```json
+"If the destination space of your teleportation is occupied by another creature or blocked by a solid obstacle, you instead appear in the nearest unoccupied space of your choice."
+```
+
+### rule:xphb:teleportation entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[220]`
+- Source entry path: `$.variantrule[220].entries[3]`
+- Canonical output: `rule/xphb-teleportation.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Omitted under skipped R-GAP-21; teleportation side effects and spatial fallback remain out of scope.
+
+Complete original source entry:
+
+```json
+"The description of a teleportation effect tells you if you must see the teleportation's destination."
+```
+
+### rule:ai:downtime-and-franchise-activity-explore-territory entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[84]`
+- Source entry path: `$.variantrule[84].entries[0]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-explore-territory.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Repeated exploration and the discovery-resolution procedure are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+"No matter how densely populated or remote and wild the territory in which a franchise is licensed to operate, that territory has secrets. Characters and franchise staff can explore their licensed territory in search of useful features, hidden lairs, resources, and creatures that can be engaged in beneficial service. (Or, you know, sold for parts. If you're okay with that). Exploration can be done any number of times in a franchise's territory, representing new areas being explored, new discoveries, or elements that have changed since the last exploration."
+```
+
+### rule:ai:downtime-and-franchise-activity-explore-territory entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[84]`
+- Source entry path: `$.variantrule[84].entries[1]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-explore-territory.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Expedition duration, expenses, checks, discovery bands, economic effects, and complications are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "entries": [
+    {
+      "type": "entries",
+      "name": "Resources",
+      "page": 37,
+      "entries": [
+        "Exploring a portion of a licensed territory requires at least one workweek of effort and incurs 200 gp per franchise rank in expenses. Spending more time and money increases the chance that the expedition finds something of use to the franchise."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Resolution",
+      "page": 37,
+      "entries": [
+        "A character or staff member directing the expedition makes a Wisdom ({@skill Survival}) check to determine the outcome. This check gains a +2 bonus if a character with the cartographer or occultant position is part of the expedition, a +1 bonus for each workweek beyond the first that is spent exploring, and a +1 bonus for every additional 200 gp spent over the baseline expenses. A maximum bonus of +10 can be applied to this check. The total of the check determines the outcome, as shown on the Exploration Discoveries table.",
+        {
+          "type": "table",
+          "caption": "Exploration Discoveries",
+          "colLabels": [
+            "Check Total",
+            "Discovery"
+          ],
+          "colStyles": [
+            "col-2 text-center",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1–5",
+              "Major threat*"
+            ],
+            [
+              "6–10",
+              "Minor threat*"
+            ],
+            [
+              "11–15",
+              "No discovery of note"
+            ],
+            [
+              "16–20",
+              "Natural feature"
+            ],
+            [
+              "21–25",
+              "New customers"
+            ],
+            [
+              "26–30",
+              "Ally or useful monster"
+            ],
+            [
+              "31+",
+              "Expanded benefit"
+            ]
+          ],
+          "footnotes": [
+            "*Might involve a rival"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Major Threat",
+      "page": 38,
+      "entries": [
+        "A result on the table indicating a major threat represents a discovery, event, or entity that might completely undo a franchise's ability to do business—or destroy it altogether. Such threats might include the discovery of a massing orc tribe, or a dragon entering the area to raid the franchise's trade routes. The franchise's monthly costs increase by 50 percent until the threat is resolved, as determined by the DM."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Minor Threat",
+      "page": 38,
+      "entries": [
+        "A minor threat to the franchise involves uncovering a danger that can disrupt the characters' ability to conduct business effectively. Such threats might arise from stumbling upon the lair of a monster, learning of the machinations of a noble, or discovering a rival's outpost. The franchise's monthly costs increase by 25 percent until the threat is resolved, as determined by the DM."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Natural Feature",
+      "page": 38,
+      "entries": [
+        "The expedition could locate timber, precious metals, or other valuable natural resources; a feature that serves as a lookout or offers defensive value; a location that can serve as a safe house; or the like. Valuable resources lower a franchise's monthly costs by 25 percent for {@dice 1d4 + 1} months. Other natural features can offer material benefits in future gaming sessions. For example, a tall spire of rock could serve as a watchtower, allowing the franchise to gain advance warning of any large-scale forces moving through their territory. A cave network acting as a safe house could allow the franchise to conceal goods or people in times of trouble."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "New Customers",
+      "page": 38,
+      "entries": [
+        "A new settlement is discovered in the territory, and the people there are eager to deal. These could be newcomers settling the area or a previously unnoticed village or group of farmsteads. The presence of new customers lowers franchise costs by 25 percent for {@dice 2d4} months before rivals catch wind of them."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Ally or Useful Monster",
+      "page": 38,
+      "entries": [
+        "The dwelling of a useful ally, such as a sage or a former franchise member, is discovered. This ally can become a source of lore, providing insights into one or more campaign secrets—for a low, low fee of 100 gp times the franchise tier for each secret. The party can also make one-time use of the ally to lower franchise costs by 50 percent for {@dice 1d4} months, after which the ally departs.",
+        "The expedition could instead locate a monster that is either willing to help the party or can be tamed. The challenge rating of the monster is typically equal to franchise rank, and providing for the monster's needs costs 100 gp per month. This monster could serve as a scout or spy, alerting the franchise to danger in its territory. Or it could serve as a mount or guardian and be based in the franchise headquarters. Such a monster remains with the franchise as long as its costs are covered and it is treated well."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Expanded Benefit",
+      "page": 38,
+      "entries": [
+        "The DM chooses whether the expedition turns up a natural feature, new customers, or an ally or useful monster, then increases the benefit or reduces the cost of that discovery. Natural resources might be found in greater abundance, an ally might provide secrets for half the normal fee, a monster might be of a higher challenge rating than normal, and so on."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Complications",
+      "page": 38,
+      "entries": [
+        "A result of 1–10 on the Exploration Discoveries table is its own complication, but the DM can add unexpected side effects to a successful result by choosing from or rolling on the Explore Territory Complications table.",
+        {
+          "type": "table",
+          "caption": "Explore Territory Complications",
+          "colLabels": [
+            "d6",
+            "Complication"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "Within 1 month, the characters find legal documents indicating the beneficial element is owned by or sworn to serve someone else.*"
+            ],
+            [
+              "2",
+              "One or more staff members go missing during the exploration activity. Their fate is a mystery the characters must resolve.*"
+            ],
+            [
+              "3",
+              "The beneficial element has a nefarious past, bears a curse, or comes with a dark secret."
+            ],
+            [
+              "4",
+              "The beneficial element is short-lived, ending with little notice. Allies might suddenly leave, or a natural feature could be destroyed by a storm."
+            ],
+            [
+              "5",
+              "Outsiders are drawn to the beneficial element, getting in the way of the franchise's operations.*"
+            ],
+            [
+              "6",
+              "Bad luck seems to follow anyone interacting with the beneficial element."
+            ]
+          ],
+          "footnotes": [
+            "*Might involve a rival"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:ai:downtime-and-franchise-activity-franchise-restructuring entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[85]`
+- Source entry path: `$.variantrule[85].entries[0]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-franchise-restructuring.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Activity requirements and availability conditions are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+"A growing franchise often needs fine-tuning to improve its operations and remain lean and capable. Efficiency measures, bold new paradigms, shiny business plans, internal audits, and inventory management can be key to new profits. The best plans often end up creating an auxiliary market for \"how-to\" books, such as {@i Can't-Miss Principles of Franchise Reinvisionary Strategery} and {@i What to Inquire about How to Acquire}. In some campaigns, Head Office might periodically require this task to ensure that a franchise grows effectively."
+```
+
+### rule:ai:downtime-and-franchise-activity-franchise-restructuring entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[85]`
+- Source entry path: `$.variantrule[85].entries[1]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-franchise-restructuring.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Duration, expenses, check sequence, bonuses, success outcomes, and complications are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "entries": [
+    {
+      "type": "entries",
+      "name": "Resources",
+      "page": 38,
+      "entries": [
+        "Boldly restructuring a franchise requires at least two workweeks of effort. The franchise must also spend 100 gp per franchise rank in expenses. Spending more time and money increases the characters' chance to effectively restructure their franchise."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Resolution",
+      "page": 38,
+      "entries": [
+        "Characters or staff members in charge of the restructuring make two ability checks with a DC of 13 + franchise rank. First, a character or staff member must succeed at either an Intelligence ({@skill History}) or Wisdom ({@skill Insight}) check to select the right vision or identify the right areas to innovate. This check gains a +1 bonus for every character with the loremonger or hoardsperson position in the franchise, and an additional +1 bonus if the character making the check has one of those positions.",
+        "A character or staff member must then make a Charisma ({@skill Deception}, {@skill Performance}, or {@skill Persuasion}) check to get all other characters and staff on board with the prescribed changes. This check gains a +1 bonus for each decisionist or secretarian in the franchise, and an additional +1 bonus if the character making the check has one of those positions.",
+        "All checks gain a +1 bonus for every two workweeks beyond the initial time that is spent undertaking this activity. Each check also gains a +1 bonus for every additional 100 gp spent over the baseline expenses. A maximum bonus of +10 can be applied to each check.",
+        "The total number of successes determines the outcome of the activity, as noted on the Franchise Restructuring table.",
+        {
+          "type": "table",
+          "caption": "Franchise Restructuring",
+          "colLabels": [
+            "Successes",
+            "Benefit"
+          ],
+          "colStyles": [
+            "col-2 text-center",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "0",
+              "The restructuring plan is a failure. The franchise's monthly costs increase by 20 percent for 1 month."
+            ],
+            [
+              "1",
+              "The restructuring plan provides minor benefits. The franchise's monthly costs decrease by 10 percent for {@dice 1d4} months."
+            ],
+            [
+              "2",
+              "The restructuring plan provides strong benefits. The franchise's monthly costs decrease by 20 percent for {@dice 1d4} months."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Complications",
+      "page": 39,
+      "entries": [
+        "A result of 0 successes typically indicates that the failed restructuring results in a complication. At the DM's discretion, even a successful outcome might have unexpected side effects. The DM can choose a complication or roll on the Franchise Restructuring Complications table.",
+        {
+          "type": "table",
+          "caption": "Franchise Restructuring Complications",
+          "colLabels": [
+            "d6",
+            "Complication"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "The restructuring plan has too many buzzwords and acronyms. The resulting confusion sees shipments or staff sent to dangerous locations. A side trek adventure is required to recover the lost goods or personnel."
+            ],
+            [
+              "2",
+              "The changes to the franchise alienate an important staff member, who takes one of the franchise's best practices or secrets to a rival.*"
+            ],
+            [
+              "3",
+              "The search for efficiency uncovers a previously unrecognized issue, such as corruption, problems with staff dynamics, or influence from a rival.*"
+            ],
+            [
+              "4",
+              "An audit reveals that one of the staff members was a spy, feeding secrets to a rival. The spy escapes, possibly inspiring a side trek adventure to catch them.*"
+            ],
+            [
+              "5",
+              "The restructuring efforts produce lingering chaos. The next two times a check is made for a downtime or franchise activity in the campaign, the check is made with disadvantage."
+            ],
+            [
+              "6",
+              "A staff member becomes outraged by the changes and secretly begins to undermine the franchise. The characters must uncover the culprit and decide how to deal with them.*"
+            ]
+          ],
+          "footnotes": [
+            "*Might involve a rival"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:ai:downtime-and-franchise-activity-headquarters-modification entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[86]`
+- Source entry path: `$.variantrule[86].entries[0]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-headquarters-modification.json`
+- OMITTED: NON_MECHANICAL: Context about how headquarters modifications relate to Franchise Advancement.
+
+Complete original source entry:
+
+```json
+"Major headquarters modifications are made as a regular part of franchise advancement (see \"{@book Franchise Advancement|AI|1|Franchise Advancement}\" earlier in this chapter). But it's sometimes desirable to update a previous modification in ways that don't provide any additional mechanical benefits."
+```
+
+### rule:ai:downtime-and-franchise-activity-headquarters-modification entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[86]`
+- Source entry path: `$.variantrule[86].entries[1]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-headquarters-modification.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Permission, restrictions, participants, and prerequisites for this activity are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+"Characters and franchise staff members can use this activity to modify an existing headquarters feature. This change is subject to DM approval, and is typically done within the same feature category, such as swapping one weapon option for another. In response to pressing need, the DM might allow a franchise to swap options between categories, such as losing a weapon option in favor of an arcane option. The DM can limit how often this activity is used."
+```
+
+### rule:ai:downtime-and-franchise-activity-headquarters-modification entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[86]`
+- Source entry path: `$.variantrule[86].entries[2]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-headquarters-modification.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Duration, costs, checks, success outcomes, cost overruns, and complications are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "entries": [
+    {
+      "type": "entries",
+      "name": "Resources",
+      "page": 39,
+      "entries": [
+        "Once a modification is approved, this activity requires the involvement of the franchise's majordomo and at least one other character or staff member. This team must dedicate at least three workweeks to this activity, and the franchise must spend 1,000 gp per franchise rank to cover expenses. The DM might also require a side trek to gather necessary materials or hire specialist labor before the activity can be commenced."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Resolution",
+      "page": 39,
+      "entries": [
+        "One character or the majordomo acts as the lead for this activity, making an Intelligence ({@skill Arcana} or {@skill History}) check to draft the modifications. A character or the majordomo must then make two ability checks to complete the modifications, using either Strength ({@skill Athletics}) or an Intelligence check using appropriate tools. With DM approval, a different ability and skill appropriate for the modification can be substituted for any of the checks.",
+        "Each check receives a +1 bonus for every two staff participating who are skilled hirelings, and a +1 bonus if any participant has the cartographer, loremonger, or hoardsperson position. The number of successes is compared to the Headquarters Modification table.",
+        {
+          "type": "table",
+          "caption": "Headquarters Modification",
+          "colLabels": [
+            "Successes",
+            "Benefit"
+          ],
+          "colStyles": [
+            "col-2 text-center",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "0",
+              "The modification fails, and the franchise incurs cost overruns of 1,000 gp per franchise rank."
+            ],
+            [
+              "1",
+              "The modification fails, and the franchise incurs cost overruns of 500 gp per franchise rank. However, the cause of the failure is apparent, granting advantage on any future checks to perform the same modification."
+            ],
+            [
+              "2",
+              "The modification succeeds but incurs a cost overrun of 100 gp per franchise rank. The modification also has a minor drawback, as determined by the DM."
+            ],
+            [
+              "3",
+              "The modification succeeds with no cost overruns or drawbacks."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Complications",
+      "page": 39,
+      "entries": [
+        "A result of 0 successes or 1 success automatically creates a complication. Other results might create a complication at the DM's determination. The DM can select a complication or roll on the Headquarters Modification Complications table.",
+        {
+          "type": "table",
+          "caption": "Headquarters Modification Complications",
+          "colLabels": [
+            "d6",
+            "Complication"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "An accident during the modification injures a franchise staff member. That NPC's family demands compensation equal to 100 gp per franchise rank. It might be possible to instead appease the family by performing a service."
+            ],
+            [
+              "2",
+              "A spy makes a copy of the plans for the modification, learning its function and taking that information back to a rival organization.*"
+            ],
+            [
+              "3",
+              "The modification was based on information originating with a rival. If the modification failed, the plans were intentionally faulty. If it succeeded, the characters detected the fault, but must decide how to respond to the attempted sabotage.*"
+            ],
+            [
+              "4",
+              "A local official insists that permits were needed for the modification, and demands payment or a favor to make the problem go away.*"
+            ],
+            [
+              "5",
+              "The work causes the franchise headquarters to develop a quirk, such as strange noises, unwelcome smells, weird vibrations while mobile, and the like. Resolving the problem might require consulting a sage or an expert in headquarters construction."
+            ],
+            [
+              "6",
+              "The modification work uncovers a previously unknown problem with the headquarters, such as a structural defect, a dormant monster, bodies interred in the foundations, a concealed cursed item, and so forth."
+            ]
+          ],
+          "footnotes": [
+            "*Might involve a rival"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:ai:downtime-and-franchise-activity-marketeering entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[87]`
+- Source entry path: `$.variantrule[87].entries[0]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-marketeering.json`
+- OMITTED: NON_MECHANICAL: Illustrative description of possible marketing plans and their narrative purpose.
+
+Complete original source entry:
+
+```json
+"Every successful franchise knows that brands require constant management. Developing new markets, shaping catchy slogans, and surveying and engaging customers can all create new sources of revenue. Should you write and sell exciting chapbook serials based on the exploits of Omin, Jim, {@creature Môrgæn|AI}, and {@creature Viari|AI}? Should you sell a complex investment scheme to a city's guild masters? Should you create a branded stage production based on your franchise's exciting adventures, with a line of clothing to match? All those things and more are encompassed by the fine art of marketeering."
+```
+
+### rule:ai:downtime-and-franchise-activity-marketeering entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[87]`
+- Source entry path: `$.variantrule[87].entries[1]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-marketeering.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Duration, expenses, multi-check resolution, random DCs, benefits, and complications are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "entries": [
+    {
+      "type": "entries",
+      "name": "Resources",
+      "page": 40,
+      "entries": [
+        "The players must first sketch out their marketeering plan and present it to the DM. A character or franchise staff member must spend at least one workweek to engage in marketeering, and must spend 100 gp per franchise rank in expenses. Spending more money increases the chance of the plan's success."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Resolution",
+      "page": 40,
+      "entries": [
+        "A marketeering effort requires three ability checks, representing drafting the campaign, launching the campaign, and managing its success. Any of the characters or staff members involved in the marketeering can make a check. The DM decides which abilities and skills are applicable, based on the marketeering plan. For example, a plan involving selling a new line of religious items might require an Intelligence ({@skill Religion}) check to draft the idea and develop the products, a Charisma ({@skill Deception}) check to convince local temples to promote the idea, and a Charisma ({@skill Persuasion}) check to ensure the plan receives continued support.",
+        "Each check gains a +1 bonus for each additional 100 gp per franchise rank spent above the baseline expenses. When additional gold is spent, the character making the checks determines which checks the bonuses apply to. Additional gold can be spent at any point in the process, allowing the franchise to put more effort into subsequent checks if earlier checks are less than successful. If the character making the check has the obviator or secretarian position, they receive an additional +1 bonus to each check. A maximum bonus of +5 can be applied to each check.",
+        "The DC of each check is determined randomly, reflecting the always-unpredictable conditions of the market. The DM rolls {@dice 2d10 + 5} for the DC, generating a separate result for each check. The total number of successes determines the outcome of the activity, as noted on the Marketeering table.",
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "book/AI/022-02-21.webp"
+          },
+          "width": 792,
+          "height": 1000,
+          "title": "The Magic Of Marketeering",
+          "credit": "Aviv Or"
+        },
+        {
+          "type": "table",
+          "caption": "Marketeering",
+          "colLabels": [
+            "Successes",
+            "Benefit"
+          ],
+          "colStyles": [
+            "col-2 text-center",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "0",
+              "The marketeering plan fails. The franchise's monthly costs increase by 20 percent for 1 month."
+            ],
+            [
+              "1",
+              "The marketeering plan provides no improvements or setbacks."
+            ],
+            [
+              "2",
+              "The marketeering plan provides moderate benefits. The franchise's monthly costs decrease by 25 percent for 1 month."
+            ],
+            [
+              "3",
+              "The marketeering plan is a complete success. The franchise's monthly costs decrease by 25 percent for 2 months."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Complications",
+      "page": 40,
+      "entries": [
+        "A result of 0 successes or 1 success typically indicates that the marketeering plan incurs a complication. However, even a successful result can trigger a complication at the DM's determination. The DM can choose a complication or roll on the Marketeering Complications table.",
+        {
+          "type": "table",
+          "caption": "Marketeering Complications",
+          "colLabels": [
+            "d8",
+            "Complication"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "The marketeering plan attracts the attention of Head Office, where someone absolutely hates it. A NPC is sent to oversee the franchise \"for a while,\" with an outcome determined by the DM.*"
+            ],
+            [
+              "2",
+              "Marketeering materials go missing right before launch, forcing the franchise to recreate them at the last minute. This might incur additional baseline costs or affect the reduction of franchise costs, as the DM determines.*"
+            ],
+            [
+              "3",
+              "Just as the marketeering plan is released to the public, the characters realize that a competing group released a surprisingly similar plan just a tenday previous. Customers now think the franchise is copying its rival.*"
+            ],
+            [
+              "4",
+              "The marketeering's message alienates or offends a crucial demographic. Protests spring up, and the affected group demands reparations."
+            ],
+            [
+              "5",
+              "A local official or noble begins to look into claims of deceptive advertising tactics or questionable hiring practices related to the marketeering plan.*"
+            ],
+            [
+              "6",
+              "The marketeering plan creates great interest—but unfortunately steers customers toward similar products or services offered by a competitor.*"
+            ],
+            [
+              "7",
+              "The catchphrase or theme song of the marketeering campaign is a surprise hit, and everyone repeats it endlessly! Until they tire of it and begin blaming the franchise for mental trauma."
+            ],
+            [
+              "8",
+              "The marketeering plan is undermined by rumors of a problem with the product or service, causing it to be dangerous to anyone using it.*"
+            ]
+          ],
+          "footnotes": [
+            "*Might involve a rival"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:ai:downtime-and-franchise-activity-philanthropic-enterprise entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[88]`
+- Source entry path: `$.variantrule[88].entries[0]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-philanthropic-enterprise.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Activity availability triggers and its selected-cause procedure are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+"It can feel great to give to charity and help those in need. Pretending to care about others can also be a great way to earn favor with governments and nobility, gain tax write-offs, or win over customers. Head Office might suggest (or even require) that a franchise undertake this activity if it has recently gained negative publicity or been discovered to engage in shady activities."
+```
+
+### rule:ai:downtime-and-franchise-activity-philanthropic-enterprise entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[88]`
+- Source entry path: `$.variantrule[88].entries[1]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-philanthropic-enterprise.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Duration, expenses, ability check, outcome bands, and complication resolution are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+"Franchise members should select a philanthropic cause related to a nearby area, settlement, or group of people. Example causes include such efforts as picking up trash from roads or forests, improving schools, and raising funds for victims of a recent disaster. (That last one is an especially good idea if the disaster was caused by the franchise). Success benefits the franchise by helping the selected cause—or at least giving the appearance of having done so. Failure might worsen both the underlying issue and the franchise's reputation."
+```
+
+### rule:ai:downtime-and-franchise-activity-philanthropic-enterprise entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[88]`
+- Source entry path: `$.variantrule[88].entries[2]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-philanthropic-enterprise.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Complication tables and branches are excluded under skipped R-GAP-13; the embedded quote is illustrative and adds no mechanic.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "entries": [
+    {
+      "type": "entries",
+      "name": "Resources",
+      "page": 41,
+      "entries": [
+        "The philanthropic exercise activity requires at least one workweek of effort, and incurs 50 gp per franchise rank in expenses."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Resolution",
+      "page": 41,
+      "entries": [
+        "One character or staff member involved in the philanthropic enterprise makes an ability check determined by the DM. A Charisma check using the character's choice of skill is often appropriate, but the DM might decide that a specific philanthropic approach requires a different ability and skill. A character with the documancer or occultant position gains a +1 bonus to the check. The total of the check determines the outcome, as shown on the Philanthropic Enterprise table.",
+        {
+          "type": "table",
+          "caption": "Philanthropic Enterprise",
+          "colLabels": [
+            "Check Total",
+            "Result"
+          ],
+          "colStyles": [
+            "col-2 text-center",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1–5",
+              "The philanthropic enterprise is a disaster. The cause is left severely worse off, and literally everyone blames the franchise."
+            ],
+            [
+              "6–10",
+              "The cause shows no real improvement, and people are slow to accept the franchise's claims of wanting to help."
+            ],
+            [
+              "11–15",
+              "The franchise is praised for its help in improving the chosen cause. Donations to the cause pour in, allowing the franchise to skim an honorarium of 200 gp."
+            ],
+            [
+              "16–20",
+              "The cause shows serious improvement, and the franchise is heralded for its actions. Donations to the cause pour in, allowing the franchise to skim a management fee of 500 gp."
+            ],
+            [
+              "21+",
+              "The cause shows remarkable improvement, and the franchise is credited for all but fully resolving the issue. Local officials provide a tax break, reducing the franchise's monthly costs by 20 percent for 2 months."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Complications",
+      "page": 41,
+      "entries": [
+        "A result of 1–5 on the Philanthropic Enterprise table automatically generates a complication. But the DM can decide that even success might have drawbacks, either choosing or rolling for a complication on the Philanthropic Enterprise Complications table.",
+        {
+          "type": "quote",
+          "entries": [
+            "People give away their money? For no reason? But how will they buy ale and arrows?"
+          ],
+          "by": "{@creature Môrgæn|AI}"
+        },
+        {
+          "type": "table",
+          "caption": "Philanthropic Enterprise Complications",
+          "colLabels": [
+            "d6",
+            "Complication"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "The selected cause is secretly the purview of a thieves' guild or other criminal organization. The organization resents the franchise's efforts and decides to undermine the characters' future endeavors.*"
+            ],
+            [
+              "2",
+              "A local reporter or official becomes convinced that the franchise's efforts are all about the characters' personal gain. The individual begins to monitor the franchise, and reports on any missteps.*"
+            ],
+            [
+              "3",
+              "A group of individuals objects to the franchise's efforts, believing that the problem underlying the selected cause is part of the natural order. The group actively tries to convince others of the terrible side effects (real or otherwise) of the franchise's philanthropy.*"
+            ],
+            [
+              "4",
+              "Another philanthropic group is already involved in the franchise's cause. That group tries to cast the franchise's efforts as ineffective and insincere.*"
+            ],
+            [
+              "5",
+              "Hearing of the franchise's good works, people who are affected by some other issue requiring philanthropic assistance show up at franchise headquarters in huge numbers."
+            ],
+            [
+              "6",
+              "Members of the franchise work with an established group to perform the philanthropic enterprise. But it soon becomes clear that the group is a sham—and that local officials are looking into their activities. The characters need to fix the situation, or risk being implicated in scandal by association.*"
+            ]
+          ],
+          "footnotes": [
+            "*Might involve a rival"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:ai:downtime-and-franchise-activity-running-a-franchise entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[89]`
+- Source entry path: `$.variantrule[89].entries[0]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-running-a-franchise.json`
+- OMITTED: NON_MECHANICAL: Introductory description and reference to the broader downtime activity.
+
+Complete original source entry:
+
+```json
+"Running a business is one of the {@book downtime activities|DMG|6|Downtime Activities} presented in the {@book Dungeon Master's Guide|DMG}, but an Acquisitions Incorporated franchise is no mere business. This new downtime and franchise activity covers the many and varied duties necessary to keep a franchise running smoothly, and determines how well the characters and their staff manage those duties."
+```
+
+### rule:ai:downtime-and-franchise-activity-running-a-franchise entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[89]`
+- Source entry path: `$.variantrule[89].entries[1]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-running-a-franchise.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Monthly cadence, participant/day allocation, percentile resolution, financial outcomes, payment penalties, and complications are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "entries": [
+    {
+      "type": "entries",
+      "name": "Resources",
+      "page": 42,
+      "entries": [
+        "Unless the DM decides otherwise, this franchise task must be run at the end of each month of game time. Unlike other activities, results are determined for running a franchise even if specific characters and staff members are not allocated to the activity. However, allocating characters or staff members to running the franchise greatly improves the chances for a favorable outcome.",
+        "During any given month, the players decide how many days their characters and the franchise staff can dedicate to this activity. Characters and staff members cannot perform other activities while focused on this activity (as normal), and any days spent adventuring or engaged in other activities cannot be used for this activity."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Resolution",
+      "page": 42,
+      "entries": [
+        "Percentile dice are rolled by a player nominated for this task by the group. The number of total days spent by all characters and staff members on this activity are added to the roll. That total is then compared to the Running a Franchise table to determine what happens for the month.",
+        {
+          "type": "table",
+          "caption": "Running a Franchise",
+          "colLabels": [
+            "d100 + Days",
+            "Result"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "01–10",
+              "The franchise has a ruinous month. Declining sales and rising expenditures increase the franchise's monthly cost by 150 percent."
+            ],
+            [
+              "11–20",
+              "The franchise suffers severe setbacks. Monthly cost increases by 125 percent."
+            ],
+            [
+              "21–30",
+              "The franchise struggles. Monthly cost increases by 100 percent."
+            ],
+            [
+              "31–40",
+              "The franchise performs poorly. Monthly cost increases by 50 percent."
+            ],
+            [
+              "41–50",
+              "The franchise operates normally. Monthly cost does not change."
+            ],
+            [
+              "51–60",
+              "The franchise sees strong sales and trims expenses. Monthly cost decreases by 50 percent."
+            ],
+            [
+              "61–70",
+              "The franchise improves operations and sales. Monthly cost decreases by 100 percent."
+            ],
+            [
+              "71–80",
+              "The franchise has an excellent month. Monthly cost decreases by 110 percent."
+            ],
+            [
+              "81–90",
+              "The franchise has a fantastic month. Monthly cost decreases by 125 percent."
+            ],
+            [
+              "91+",
+              "The franchise is a shining example to other Acquisitions Incorporated franchises. Monthly cost decreases by 150 percent."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Determining Monthly Cost",
+      "page": 42,
+      "entries": [
+        "A franchise's base monthly cost is a combination of the cost for the franchise's headquarters and a multiplier for franchise rank. The fancier the headquarters, the more the upkeep. And the bigger the franchise, the more overhead it has. The \"{@book Franchise Advancement|AI|1|Franchise Advancement}\" section earlier in this chapter has more information on determining a franchise's base monthly cost.",
+        "Whenever a downtime or franchise activity modifies a franchise's costs for a given month, that increase or decrease is totaled up with all other increases and decreases. For example, a successful marketeering campaign might decrease the franchise's monthly costs by 25 percent, but then a major threat as a result of exploring franchise territory increases monthly costs by 50 percent—a net increase of 25 percent.",
+        "Whenever the final result indicates that the franchise's monthly costs have decreased 100 percent, profits and expenses exactly balance each other out, so that the franchise has no payment to make for that month. Whenever the final total is a decrease in monthly costs of more than 100 percent, this means the franchise has paid its expenses and earned a profit to boot. Calculate the profit based on the amount of the decrease above 100 percent. For example, a franchise whose monthly costs come out at a decrease of 150 percent earns a profit equal to 50 percent of the franchise's base monthly cost."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Nonpayment Penalties",
+      "page": 42,
+      "entries": [
+        "At the end of this activity, the franchise makes a payment to Head Office to cover its monthly costs. If it does not do so, the franchise begins to fail. See the rules for defaulting in the \"Franchise Costs\" section, earlier in this chapter. Regardless of what action Head Office takes, a franchise's inability to pay its expenses should result in complications and story ramifications. Local folk and businesses start to demand that accounts be cleared. The general public might begin to reject the franchise's products and services, worried about dealing with dodgy businesspeople."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Complications",
+      "page": 43,
+      "entries": [
+        "A franchise automatically suffers a complication if the check for this activity was 30 or less. The DM might also impose a complication even when a franchise is doing well. The DM can choose a complication or roll on the Running a Franchise Complications table.",
+        {
+          "type": "table",
+          "caption": "Running a Franchise Complications",
+          "colLabels": [
+            "d6",
+            "Complication"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "The franchise's sales of products and services have attracted competition from a rival.*"
+            ],
+            [
+              "2",
+              "Regardless of its success month to month, the franchise's long-term planning is called into question. Head Office demands that the characters engage in either the franchise restructuring activity or the team building activity."
+            ],
+            [
+              "3",
+              "A person who insists they are in no way from Head Office suggests that the franchise should run the shady business practice activity. It really feels more like a demand than a suggestion."
+            ],
+            [
+              "4",
+              "Customers are turning away from the franchise. Until the characters can determine the cause, each subsequent check for the running a franchise activity takes a −5 penalty.*"
+            ],
+            [
+              "5",
+              "A staff member finds signs of sabotage impacting the franchise's operations.*"
+            ],
+            [
+              "6",
+              "Staff members start demanding higher pay and threaten to go on strike.*"
+            ]
+          ],
+          "footnotes": [
+            "*Might involve a rival"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:ai:downtime-and-franchise-activity-schmoozing entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[90]`
+- Source entry path: `$.variantrule[90].entries[0]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-schmoozing.json`
+- OMITTED: NON_MECHANICAL: Introductory description of the activity and its narrative purpose.
+
+Complete original source entry:
+
+```json
+"The schmoozing activity is more than just random carousing, chatting people up at society parties, or pumping strangers for information over copious drinks. (Full disclosure: copious drinks are often still a part of the bigger schmoozing picture.) For characters in an Acquisitions Incorporated campaign, schmoozing is a carefully focused engagement of bargaining and influence, designed to harvest contacts important to a franchise's interests."
+```
+
+### rule:ai:downtime-and-franchise-activity-schmoozing entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[90]`
+- Source entry path: `$.variantrule[90].entries[1]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-schmoozing.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Duration, expenses, check modifiers, contact outcome bands, and complications are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "entries": [
+    {
+      "type": "entries",
+      "name": "Resources",
+      "page": 45,
+      "entries": [
+        "Schmoozing covers at least one workweek of interactions. Characters or staff members undertaking this activity must look and play the part of the confident franchisee—dressing well, spending money, giving gifts to new friends, and so forth. Schmoozing with laborers and other working-class folk might incur expenses of 10 gp per franchise rank, with expenses escalating to 100 gp or more per franchise rank for schmoozing professionals and business rivals. Schmoozing at the highest level with nobles or ranking members of a faction might incur expenses of 250 gp or more per franchise rank as the character or staff member attempts to put on an impressive social display."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Resolution",
+      "page": 45,
+      "entries": [
+        "The character or staff member engaging in schmoozing determines whether they want to establish relations with specific NPCs or with any general representative of a group. The character makes a Charisma ({@skill Persuasion}) check to determine the effectiveness of their schmoozing, as noted on the Schmoozing table. A character with the obviator position gains a +1 bonus to the check. A character with a background related to those they attempt to schmooze gains a +1 bonus to the check (a criminal schmoozing other criminals, a guild artisan schmoozing a guild master, and so forth).",
+        {
+          "type": "table",
+          "caption": "Schmoozing",
+          "colLabels": [
+            "Check Total",
+            "Result"
+          ],
+          "colStyles": [
+            "col-2 text-center",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1–5",
+              "The character's failed schmoozing brings the franchise into disrepute. Any further checks made for the franchise to schmooze NPCs from the same group or organization are made with disadvantage."
+            ],
+            [
+              "6–10",
+              "The character becomes known to those they schmooze, but gains no immediate benefit. If the character undertakes this activity again within the same group or social circle, the next check to schmooze is made with advantage."
+            ],
+            [
+              "11–15",
+              "The character successfully establishes the desired contacts, and is treated as a confidante of those they schmoozed."
+            ],
+            [
+              "16–20",
+              "The character establishes the desired contacts and is treated as a trusted friend."
+            ],
+            [
+              "21+",
+              "The character establishes the desired contacts and gains a favor as a result of their schmoozing skill."
+            ]
+          ]
+        },
+        "If contacts are successfully made, the DM determines which NPCs the franchise is able to ingratiate itself with, how long those relationships last, and what kinds of benefits the franchise might gain. Some schmoozed NPCs might provide only a single minor benefit to the franchise before realizing the one-sided nature of the relationship. Others might hang around wanting to help the franchise for years—whether the characters want them to or not."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Complications",
+      "page": 45,
+      "entries": [
+        "A check of 5 or lower made to schmooze automatically triggers a complication. Because the stakes of schmoozing are often high, the DM might decide to have any successful schmooze attempt come with a potential downside. The DM can choose a complication or roll on the Schmoozing Complications table.",
+        {
+          "type": "table",
+          "caption": "Schmoozing Complications",
+          "colLabels": [
+            "d6",
+            "Complication"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "A different group notices the character's schmoozing attempts. Agents threaten to expose the franchise's ulterior motives unless the characters perform a favor or pay a bribe.*"
+            ],
+            [
+              "2",
+              "To win over a potential contact, the schmoozing character or staff member swore to participate in an initiation ritual from the contact's group... without first learning the nature of that ritual."
+            ],
+            [
+              "3",
+              "A contact becomes convinced that the schmoozing character or staff member intends to leave the franchise and join the contact's organization. It's clear that they'll become hurt or angry when they learn the truth."
+            ],
+            [
+              "4",
+              "In the attempt to win over a contact, it was necessary to reveal one of the franchise's secrets.*"
+            ],
+            [
+              "5",
+              "The character or staff member regrets giving a contact a personal item, a drop of blood, or a lock of hair. It seemed like a great idea at the time.*"
+            ],
+            [
+              "6",
+              "Shortly after schmoozing, the character or staff member receives a love letter from a contact—whether that interest is reciprocated or not.*"
+            ]
+          ],
+          "footnotes": [
+            "*Might involve a rival"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:ai:downtime-and-franchise-activity-scrutineering entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[91]`
+- Source entry path: `$.variantrule[91].entries[0]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-scrutineering.json`
+- OMITTED: NON_MECHANICAL: Introductory examples describe the broad activity but specify no independent procedure.
+
+Complete original source entry:
+
+```json
+"As a member of an Acquisitions Incorporated franchise, you scoff at those who limit their intelligence-gathering activities to mere research or sagery. The scrutineering activity covers basic research easily enough (finding a new profitable venture, learning what pleases Head Office, amassing lore about a site or monster, and so forth). But it can also expand across a much broader range of activities. You might engage (\"kidnap\" is such a harsh word) members of a rival group, learn the secrets of a stronghold known only to those who built it, assess an organization's business model to determine its weaknesses, or lay rightful claim to any information that might benefit your franchise in some way."
+```
+
+### rule:ai:downtime-and-franchise-activity-scrutineering entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[91]`
+- Source entry path: `$.variantrule[91].entries[1]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-scrutineering.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Goal resources, expenses, checks, outcome bands, and complications are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "entries": [
+    {
+      "type": "entries",
+      "name": "Resources",
+      "page": 43,
+      "entries": [
+        "The DM determines what resources are required for any particular scrutineering goal, including access to specific people or places. Once that access has been gained, this activity requires at least one workweek of effort and 100 gp per franchise rank spent on bribes, materials, and other expenses. Spending more money increases the chance for successful scrutineering."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Resolution",
+      "page": 43,
+      "entries": [
+        "The character or staff member overseeing the activity makes an Intelligence check, and can make use of a skill appropriate to the scrutineering activity at the DM's discretion. This check gains a +1 bonus per 100 gp spent beyond the baseline expenses. A character with the documancer position gains a +1 bonus to the check. A maximum bonus of +10 can be applied to this check. The total of the check determines the outcome, as shown on the Scrutineering table.",
+        {
+          "type": "table",
+          "caption": "Scrutineering",
+          "colLabels": [
+            "Check Total",
+            "Outcome"
+          ],
+          "colStyles": [
+            "col-2 text-center",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1–5",
+              "No effect."
+            ],
+            [
+              "6–10",
+              "You learn one piece of lore."
+            ],
+            [
+              "11–20",
+              "You learn two pieces of lore."
+            ],
+            [
+              "21+",
+              "You learn three pieces of lore."
+            ]
+          ]
+        },
+        "Each piece of lore you uncover through scrutineering might cover specific details about a creature or NPC, how to thwart the defenses of a stronghold or office, the rituals or magic items employed by a mystical order, and so forth. The DM makes the final decision regarding what information is revealed by scrutineering."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Complications",
+      "page": 43,
+      "entries": [
+        "Whenever this activity is undertaken, the DM determines whether a complication is warranted. Even if the information you uncover with scrutineering is accurate, additional things you didn't learn might complicate your understanding. Your attempts to uncover secret information might also be thwarted by those intent on keeping those secrets. The DM can choose a complication or roll on the Scrutineering Complications table.",
+        {
+          "type": "table",
+          "caption": "Scrutineering Complications",
+          "colLabels": [
+            "d6",
+            "Complication"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "One of the pieces of information is false and was planted by a rival.*"
+            ],
+            [
+              "2",
+              "A source of information decides to join a rival organization, becoming an asset for them.*"
+            ],
+            [
+              "3",
+              "A source was a greedy information broker, who decides to also sell information about the franchise or Head Office to a rival organization.*"
+            ],
+            [
+              "4",
+              "The target of the information becomes aware of the franchise's scrutineering efforts, and resents them.*"
+            ],
+            [
+              "5",
+              "Scrutineering attempts attract the attention of officials, nobles, or another faction or rival who were previously unaware of the franchise.*"
+            ],
+            [
+              "6",
+              "The character or staff member leading the activity comes into contact with a magical effect whose removal might require a side trek adventure."
+            ]
+          ],
+          "footnotes": [
+            "*Might involve a rival"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:ai:downtime-and-franchise-activity-shady-business-practice entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[92]`
+- Source entry path: `$.variantrule[92].entries[0]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-shady-business-practice.json`
+- OMITTED: NON_MECHANICAL: Introductory description of the activity and its narrative purpose.
+
+Complete original source entry:
+
+```json
+"The quickest path to success often runs straight through the thickets of questionable legality. Franchises that can overcome the morally dubious aspects of certain enterprises—and can deal with the risk of being caught engaging in those enterprises—might wish to consider such time-honored practices as back-of-the-wagon discount sales, fly-by-night gambling halls, highway robbery, racketeering, and pyramid schemes. Shady business practices can also include corporate espionage against rivals and other Acq Inc franchises, including stealing goods or sabotaging commercial efforts."
+```
+
+### rule:ai:downtime-and-franchise-activity-shady-business-practice entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[92]`
+- Source entry path: `$.variantrule[92].entries[1]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-shady-business-practice.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Activity resources, checks, risk outcomes, consequences, and complications are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "entries": [
+    {
+      "type": "image",
+      "href": {
+        "type": "internal",
+        "path": "book/AI/023-02-22.webp"
+      },
+      "width": 792,
+      "height": 1000,
+      "title": "A Suitably Shady Business Practice",
+      "credit": "Aviv Or"
+    },
+    {
+      "type": "entries",
+      "name": "Resources",
+      "page": 44,
+      "entries": [
+        "An intended shady business practice is detailed by the players and approved by the DM. Any shady business practice requires at least two workweeks of effort, plus 50 gp per franchise rank in expenses to set up the scheme."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Resolution",
+      "page": 44,
+      "entries": [
+        "A shady business practice requires three ability checks, reflecting the ongoing progress of the chosen scheme. Any of the characters or staff members involved in the shady business practice can make a check. The abilities and skills applicable for each check are determined by the DM, reflecting the selected scheme and the ongoing narrative. For example, an attempt to set up a fly-by-night casino might require an Intelligence ({@skill Investigation}) check to case a town for a suitable location, a Wisdom or Charisma check making use of gaming set proficiency to run the operation, and a Dexterity ({@skill Sleight of Hand}) check to get away with the profits. At the DM's determination, each check gains a +1 bonus if the character making the check has a background appropriate to the shady activity.",
+        "The DC of each check is determined randomly, reflecting the risky nature of criminal enterprises. The DM rolls {@dice 2d10 + 5} for the DC, generating a separate result for each check. The total number of successes determines the outcome of the activity, as noted on the Shady Business Practice table.",
+        "Some outcomes of shady business provide an additional benefit, chosen by the DM and relating to the characters' chosen enterprise. For example, a franchise engaged in corporate espionage might gain insight into a rival, while a franchise selling black-market goods might learn the name of a corrupt government official.",
+        {
+          "type": "quote",
+          "entries": [
+            "Why would I know anything about shady business practices? Why are you asking me? I'm sure I don't know what you mean. Plausible deniability certainly is not an important business tip I'd recommend."
+          ],
+          "by": "{@creature Rosie Beestinger|AI}"
+        },
+        {
+          "type": "table",
+          "caption": "Shady Business Practice",
+          "colLabels": [
+            "Successes",
+            "Benefit"
+          ],
+          "colStyles": [
+            "col-2 text-center",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "0",
+              "All participants in the shady business practice are arrested, and the franchise is fined 250 gp per franchise rank."
+            ],
+            [
+              "1",
+              "The shady business practice is a borderline success, providing 50 gp in profits per franchise rank."
+            ],
+            [
+              "2",
+              "The shady business practice is a moderate success, providing 100 gp in profits per franchise rank. Additionally, the franchise gains a minor benefit related to the enterprise."
+            ],
+            [
+              "3",
+              "The shady business practice is a full success, providing 150 gp in profits per franchise rank. Additionally, the franchise gains a major benefit related to the enterprise."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Complications",
+      "page": 44,
+      "entries": [
+        "Achieving 0 successes automatically generates a complication, but the DM might decide that any illicit enterprise runs the risk of unforeseen circumstances. The DM can choose a complication or roll on the Shady Business Practice Complications table.",
+        {
+          "type": "table",
+          "caption": "Shady Business Practice Complications",
+          "colLabels": [
+            "d6",
+            "Complication"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "One of the franchise's staff members is arrested in connection with the scheme—and is set to be interrogated about all the franchise's activities.*"
+            ],
+            [
+              "2",
+              "Characters or staff members meet a corrupt official or noble as a result of the scheme. This brash and flamboyant individual threatens to draw attention to any future shady enterprises."
+            ],
+            [
+              "3",
+              "A rival uncovers the shady scheme and threatens to expose it.*"
+            ],
+            [
+              "4",
+              "A citizens group hears rumors about the franchise's involvement in the shady scheme, and forms a watch organization to monitor the characters."
+            ],
+            [
+              "5",
+              "An NPC who participated in the scheme tries to blackmail the franchise, asking for payment or a favor to keep quiet."
+            ],
+            [
+              "6",
+              "A thieves' guild or other criminal organization takes an interest in the scheme. They order the franchise to run this activity every month, and demand a 10 percent cut. While the franchise does so, all checks for shady business practice activities are made with advantage.*"
+            ]
+          ],
+          "footnotes": [
+            "*Might involve a rival"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:ai:downtime-and-franchise-activity-team-building entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[93]`
+- Source entry path: `$.variantrule[93].entries[0]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-team-building.json`
+- OMITTED: NON_MECHANICAL: Introductory examples describe the activity and narrative purpose.
+
+Complete original source entry:
+
+```json
+"The frenetic pace of adventuring and running a franchise sometimes covers up underlying issues. Has the party's cleric accidentally started worshiping a dark god? Is the majordomo at odds with the occultant's habit of displaying entrails in the great hall? Is the fighter questioning their life choices? The team building activity can help characters work through problems, settle differences, and adjust the work-life balance. In the end, everyone ends up with a healthier working relationship. Or at least that's the plan."
+```
+
+### rule:ai:downtime-and-franchise-activity-team-building entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[93]`
+- Source entry path: `$.variantrule[93].entries[1]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-team-building.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Head Office triggers and campaign conditions for the activity are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+"At the DM's determination, characters might be directed by Head Office to run this activity each time a new franchise rank is gained, or during times of exceptional chaos or uncertainty."
+```
+
+### rule:ai:downtime-and-franchise-activity-team-building entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[93]`
+- Source entry path: `$.variantrule[93].entries[2]`
+- Canonical output: `rule/ai-downtime-and-franchise-activity-team-building.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Participants, duration, expenses, roleplay/check sequence, table outcomes, memories, and complications are excluded under skipped R-GAP-13.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "entries": [
+    {
+      "type": "entries",
+      "name": "Resources",
+      "page": 45,
+      "entries": [
+        "Team building requires the involvement of at least two characters, or a character and a staff member. Those individuals must dedicate at least one workweek to this activity, whose particulars are worked out by participating players and the DM. The team building exercise might be a trust-inspiring ropes course, an emotional \"resolve your issues\" workshop, a meeting with an NPC spiritual guide, or any other suitable endeavor. Setting up the exercise incurs expenses of from 50 gp to 250 gp per franchise rank, as determined by the DM."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Resolution",
+      "page": 46,
+      "entries": [
+        "Each character or staff member participating in team building chooses another participant, then creates a negative story connection to a bond, ideal, or similar element of that participant's backstory. The players come up with such connections for their own characters. The DM creates connections for franchise staff, either on their own or in consultation with the players. (Characters and staff members do not need to pair up. If everyone else in the franchise has a particular problem with one character, so be it.)",
+        "Each character and staff member then makes a Wisdom ({@skill Insight}) check. With the DM's approval, different ability checks and skills might be allowed if they relate to the specifics of the team building exercise. A participant has advantage on their check if the DM decides the story connection was particularly clever or well roleplayed. All checks gain a +1 bonus if one of the characters taking part in the activity is a decisionist.",
+        "Each check is compared to the Team Building table. The outcome of the check can help redefine the relationships between individual characters, and can establish the tone of roleplaying between characters and franchise staff. Some outcomes also involve a team building memory that provides a potent benefit (see below).",
+        {
+          "type": "table",
+          "caption": "Team Building",
+          "colLabels": [
+            "Check Total",
+            "Benefit"
+          ],
+          "colStyles": [
+            "col-2 text-center",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1–5",
+              "The participant uncovers deep-seated issues between themself and their chosen partner. If this is a character, they have disadvantage on ability checks made in the presence of the partner until the character undertakes this activity again. If this is a staff member, they are traumatized and leave the franchise unless the characters can convince them to stay."
+            ],
+            [
+              "6–10",
+              "The participant did not benefit from the team building exercise, but avoided serious trauma."
+            ],
+            [
+              "11–15",
+              "The participant was able to work through one or more issues. If this is a character, they have advantage on the next check they make during a franchise or downtime activity."
+            ],
+            [
+              "16–20",
+              "The participant sees themself and their connection to the other participant in a whole new way. If this is a character, they have advantage on the next check they make during a franchise or downtime activity, and they gain a team building memory (see below)."
+            ],
+            [
+              "21+",
+              "The participant has had an awakening, gaining a deep sense of who they can become and their connection to their partner. The character has advantage on the next check they make during a franchise or downtime activity, and gains two team building memories."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Team Building Memories",
+      "page": 46,
+      "entries": [
+        "The most potent personal changes inspired by team building can last a lifetime. Or at least an encounter. A character who earns a team building memory gains an extraordinary ability that can be used once. As a bonus action, the character gains one effect of the {@spell enhance ability} spell for 10 minutes (no {@status concentration} required).",
+        "A character can retain team building memories only from the most recent instance of this activity. If a character has unused team building memories and undertakes this activity again, those memories are lost.",
+        {
+          "type": "quote",
+          "entries": [
+            "Wait, we're a team? I thought we were independent entities with temporarily aligned goals."
+          ],
+          "by": "{@creature Môrgæn|AI}"
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Complications",
+      "page": 46,
+      "entries": [
+        "At the DM's determination, every team building exercise has a chance of creating a complication as things get real, yo. The DM can choose a complication or roll on the Team Building Complications table.",
+        {
+          "type": "table",
+          "caption": "Team Building Complications",
+          "colLabels": [
+            "d6",
+            "Complication"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "The team building activity is revealed to actually be a death trap, an island of doom, or a similar challenge. The DM determines whether this was an honest mix-up, the act of a disgruntled staff member, or the actions of a rival.*"
+            ],
+            [
+              "2",
+              "Upon hearing what took place during the team building exercise, uninvolved staff members decide that the franchise is subjecting them to too much trauma. Some staff members might threaten to quit, or decide they want more benefits."
+            ],
+            [
+              "3",
+              "It's revealed that the team building exercise was set up by a rival as an opportunity to ambush the participants, or to attack the franchise headquarters while the characters were away.*"
+            ],
+            [
+              "4",
+              "The participants learn way too much about each other. Each character participating in the activity must select a bond, ideal, or similar background aspect from their partner and come up with a story explaining how this becomes a conflict for them."
+            ],
+            [
+              "5",
+              "Staff members who did not participate in the team building exercise feel left out, and morale drops at the franchise. The characters must find a way to raise staff spirits that does not involve running this activity again."
+            ],
+            [
+              "6",
+              "A staff member involved in the activity is secretly a member of a rival organization, or has been duped into doing that organization's bidding. During the team building exercise, the rival organization plans to steal franchise secrets or destroy the participants' morale.*"
+            ]
+          ],
+          "footnotes": [
+            "*Might involve a rival"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:aag:crashing entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[33]`
+- Source entry path: `$.variantrule[33].entries[0]`
+- Canonical output: `rule/aag-crashing.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Crash attack, collision damage, movement continuation, gravity-plane effects, and linked falling procedure depend on deferred R-GAP-31 maritime vessel and spatial state.
+
+Complete original source entry:
+
+```json
+"A spelljammer can run their ship into another object or a creature by moving the ship into the target's space and making a special attack roll ({@dice 1d20} + the spelljammer's proficiency bonus) against the target's Armor Class. If the attack roll hits, a crash occurs; otherwise, the target moves out of the ship's path, avoiding the crash. If the DM decides that a crash is unavoidable, no attack roll is necessary, and the crash occurs automatically."
+```
+
+### rule:aag:crashing entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[33]`
+- Source entry path: `$.variantrule[33].entries[1]`
+- Canonical output: `rule/aag-crashing.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Collision damage application and movement consequences depend on deferred R-GAP-31 vessel and target state.
+
+Complete original source entry:
+
+```json
+"When a spelljamming ship crashes into something that could reasonably damage it, both the ship and the creature or object it struck take bludgeoning damage based on the size of the struck object, as shown in the Crash Damage table. If the ship runs into something that doesn't have hit points (such as a planet or a moon), apply the damage only to the ship. The ship stops after crashing into a Gargantuan or immovable creature or object; otherwise, the ship can continue moving if it has any movement left, and whatever it struck moves to the nearest unoccupied space that isn't in the ship's path."
+```
+
+### rule:aag:crashing entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[33]`
+- Source entry path: `$.variantrule[33].entries[2]`
+- Canonical output: `rule/aag-crashing.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Gravity-plane suppression and resulting fall direction depend on deferred R-GAP-31; the cited PHB Falling rule has no edition-matched canonical Rule output.
+
+Complete original source entry:
+
+```json
+"After resolving the effect of the crash, determine whether the ship's gravity plane is suppressed (see \"{@book Overlapping Gravity Planes|AAG|2|Overlapping Gravity Planes}\" earlier in the chapter). If the suppression of a ship's gravity plane would cause the creatures on or inside that ship to fall, they fall in whatever direction is appropriate for the sudden change in gravity. To determine the damage from a fall, see the {@book falling|PHB|8|Falling} rules in the {@book Player's Handbook|PHB}."
+```
+
+### rule:aag:crashing entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[33]`
+- Source entry path: `$.variantrule[33].entries[3]`
+- Canonical output: `rule/aag-crashing.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: The size-indexed crash-damage table belongs to the deferred R-GAP-31 collision procedure.
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Crash Damage",
+  "colLabels": [
+    "Size of Creature or Object Struck",
+    "Bludgeoning Damage"
+  ],
+  "colStyles": [
+    "col-8 text-center",
+    "col-4 text-center"
+  ],
+  "rows": [
+    [
+      "Large",
+      "{@damage 4d10}"
+    ],
+    [
+      "Huge",
+      "{@damage 8d10}"
+    ],
+    [
+      "Gargantuan",
+      "{@damage 16d10}"
+    ]
+  ]
+}
+```
+
+### rule:aag:crew entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[37]`
+- Source entry path: `$.variantrule[37].entries[0]`
+- Canonical output: `rule/aag-crew.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Crew roles, passenger counts, ship-air degradation, and their vessel-state relationship are deferred under R-GAP-31.
+
+Complete original source entry:
+
+```json
+"The standard crew complement for a spelljamming ship includes one captain to give orders, one spelljammer to pilot the ship, and one or more crew members to operate its weapons. Some ships carry extra crew (such as troops and back-up spelljammers) or passengers. A ship that has more than a standard crew complement will degrade the quality of its air supply more quickly."
+```
+
+### rule:aag:crew entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[37]`
+- Source entry path: `$.variantrule[37].entries[1]`
+- Canonical output: `rule/aag-crew.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: The paid spelljammer service depends on vessel operations and campaign cost state deferred under R-GAP-31.
+
+Complete original source entry:
+
+```json
+"A spellcaster typically charges at least 50 gp per day to operate a {@item spelljamming helm|AAG}."
+```
+
+### rule:aag:ship-repairs entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[191]`
+- Source entry path: `$.variantrule[191].entries[0]`
+- Canonical output: `rule/aag-ship-repairs.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Berth state, ship and weapon hit points, labor time, and material cost are vehicle and equipment state deferred under R-GAP-31.
+
+Complete original source entry:
+
+```json
+"Nonmagical repairs to a damaged ship can be made while the vessel is berthed. Repairing 1 hit point of damage to a berthed ship takes 1 day and costs 20 gp for materials and labor. Damage to shipboard weapons can be repaired just as quickly (1 hit point per day), but at half the cost (10 gp per hit point)."
+```
+
+### rule:aag:ship-repairs entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[191]`
+- Source entry path: `$.variantrule[191].entries[1]`
+- Canonical output: `rule/aag-ship-repairs.json`
+- OMITTED: REFERENCE_UNRESOLVED: The Mending spell is cited but has no canonical Spell output; ship/weapon targets and repair state are also deferred under R-GAP-31.
+
+Complete original source entry:
+
+```json
+"The {@spell mending} spell is a cheaper, less time-consuming way to make repairs. Casting {@spell mending} on a damaged ship or shipboard weapon restores a number of hit points to the target equal to {@dice 1d8} plus the spellcaster's spellcasting ability modifier. The target can regain hit points from that spell no more than once per hour."
+```
+
+### rule:aag:ship-to-ship-combat entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[193]`
+- Source entry path: `$.variantrule[193].entries[0]`
+- Canonical output: `rule/aag-ship-to-ship-combat.json`
+- OMITTED: NON_MECHANICAL: Introductory statement of the section purpose.
+
+Complete original source entry:
+
+```json
+"The following rules are designed to make ship-to-ship combat simple yet exciting."
+```
+
+### rule:aag:ship-to-ship-combat entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[193]`
+- Source entry path: `$.variantrule[193].entries[1]`
+- Canonical output: `rule/aag-ship-to-ship-combat.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Starting distance alternatives, weapon ranges, and preparation effects depend on deferred R-GAP-31 maritime encounter and equipment state.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Starting Distance",
+  "entries": [
+    "At the start of an engagement, the DM decides how far a ship is from its enemies. Three possibilities are provided in the Starting Encounter Distance table. The shorter the distance, the less time crews have to load weapons and make other preparations.",
+    {
+      "type": "table",
+      "caption": "Starting Encounter Distance",
+      "colLabels": [
+        "Distance",
+        "Notes"
+      ],
+      "colStyles": [
+        "col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "250 feet",
+          "Long range for ballistae, mangonels, shortbows, longbows, light crossbows, and heavy crossbows"
+        ],
+        [
+          "500 feet",
+          "Long range for longbows and mangonels; beyond the range of ballistae and crossbows"
+        ],
+        [
+          "1,000 feet",
+          "Beyond the range of most ranged weapons"
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:aag:ship-to-ship-combat entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[193]`
+- Source entry path: `$.variantrule[193].entries[2]`
+- Canonical output: `rule/aag-ship-to-ship-combat.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: The source-referenced Side Initiative Rule is preserved as a canonical reference; shipboard weapon guidance is descriptive. Other initiative and ship combat resolution depends on deferred R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Initiative",
+  "entries": [
+    "The {@book Dungeon Master's Guide|DMG} presents a variant rule called {@variantrule Initiative Variants||Side Initiative}, which is ideal for ship-to-ship engagements, since it saves you the trouble of tracking initiative for individual creatures aboard each ship.",
+    {
+      "type": "inset",
+      "name": "Shipboard Weapons",
+      "entries": [
+        "A spelljamming ship typically has one or more shipboard weapons, ballistae and mangonels being the most common. Such weapons are slow to load and fire. Player characters are almost always better off using their own weapons and spells in ship-to-ship combat, reserving shipboard weapons for targets that are too far away to be damaged by other means."
+      ]
+    }
+  ]
+}
+```
+
+### rule:aag:ship-to-ship-combat entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[193]`
+- Source entry path: `$.variantrule[193].entries[3]`
+- Canonical output: `rule/aag-ship-to-ship-combat.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Ship movement, steering, orientation, and target eligibility depend on deferred R-GAP-31 vessel and spatial state.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Moving and Steering a Ship",
+  "entries": [
+    "A spelljammer can use a ship's {@item spelljamming helm|AAG} to move and steer the ship without expending their own actions or movement. On their turn, the spelljammer determines how far the ship moves (up to its maximum speed) and decides whether to approach another ship or put more distance between the two.",
+    "On its turn, a ship can be turned and reoriented so that all its weapons can aim and fire at any target within range, regardless of where they're situated on the deck."
+  ]
+}
+```
+
+### rule:aag:ship-to-ship-combat entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[193]`
+- Source entry path: `$.variantrule[193].entries[4]`
+- Canonical output: `rule/aag-ship-to-ship-combat.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Alongside transfer, ship separation, boarding movement, and Readied-action timing depend on deferred R-GAP-31 vessel and spatial state. The Ready Action is preserved as a canonical reference.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Boarding",
+  "entries": [
+    "When one ship moves to within 5 feet of another ship, the spelljammer or pilot of the moving ship can maneuver it alongside the other ship, enabling creatures to move safely from one ship's deck to the other ship's deck until one of the ships pulls away from the other.",
+    "A ship that has enough movement can pull alongside another vessel, deploy a boarding party, and then move away, provided the members of the boarding party took the {@action Ready} action to position themselves so they can move onto the other vessel when it's close enough."
+  ]
+}
+```
+
+### rule:gos:officers-and-crew entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[164]`
+- Source entry path: `$.variantrule[164].entries[0]`
+- Canonical output: `rule/gos-officers-and-crew.json`
+- OMITTED: NON_MECHANICAL: Introductory explanation of officers and sailors.
+
+Complete original source entry:
+
+```json
+"Each vessel requires people to run it: the officers in charge and the sailors who follow their orders."
+```
+
+### rule:gos:officers-and-crew entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[164]`
+- Source entry path: `$.variantrule[164].entries[1]`
+- Canonical output: `rule/gos-officers-and-crew.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Officer roles, qualifications, and captain-required vessel staffing depend on deferred R-GAP-31; no role-assignment or proficiency-example structure is in the Rule contract.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Types of Officers",
+  "entries": [
+    "If you'd like to explore running a ship, it needs officers to oversee its operations—officers who fill six different roles. Some roles aboard a ship reflect the need for trained experts to direct a crew's efforts. Other roles focus on keeping the crew's health and morale in order. The roles are meant to provide a sense of the types of ability checks useful to managing a ship. Of these, though, captain is the only role that must be filled for the ship to function. A ship needs a single person to issue orders and respond to threats, otherwise a ship risks chaos and confusion during a crisis.",
+    "Each type of officer is described below, along with the abilities and proficiencies that help a character excel in that role:",
+    "{@b Captain}. The captain issues orders. The best captains have high Intelligence and Charisma scores, as well as proficiency with water vehicles and the {@skill Intimidation} and {@skill Persuasion} skills.",
+    "{@b First Mate}. This specialist keeps the crew's morale high by providing supervision, encouragement, and discipline. A first mate benefits from a high Charisma score, as well as proficiency with the {@skill Intimidation} and {@skill Persuasion} skills.",
+    "{@b Bosun}. The bosun (or boatswain) provides technical advice to the captain and crew and leads repair and maintenance efforts. A good bosun has a high Strength score, as well as proficiency with {@item carpenter's tools|PHB} and the {@skill Athletics} skill.",
+    "{@b Quartermaster}. The quartermaster plots the ship's course, relying on knowledge of nautical charts and a study of weather and sea conditions. A reliable quartermaster tends to have a high Wisdom score, as well as proficiency with {@item navigator's tools|PHB} and the {@skill Nature} skill.",
+    "{@b Surgeon}. The ship's surgeon tends to injuries, keeps illnesses from spreading throughout the ship, and oversees sanitation. A capable surgeon benefits from a high Intelligence score, as well as proficiency with {@item Herbalism Kit|PHB|herbalism kits} and the {@skill Medicine} skill.",
+    "{@b Cook}. A ship's cook works with the limited ingredients aboard a ship to make meals. A skilled cook keeps the crew's morale in top shape, while a poor one drags down the entire crew's performance. A talented cook has a high Constitution score, as well as proficiency with {@item brewer's supplies|PHB} and {@item cook's utensils|PHB}."
+  ]
+}
+```
+
+### rule:gos:officers-and-crew entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[164]`
+- Source entry path: `$.variantrule[164].entries[2]`
+- Canonical output: `rule/gos-officers-and-crew.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Crew size and quality, optional loyalty, mutiny checks and outcomes, and shore-leave quality changes depend on deferred R-GAP-31. Morale-triggered check and mutiny outcomes also intersect skipped R-GAP-44.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Crew Members",
+  "entries": [
+    "A ship requires a number of able-bodied sailors to crew it, as specified in its stat block. A crew's skill, experience, morale, and health are defined by its quality score. This score can affect a number of general ship activities, like the crew's ability to notice threats or contend with hazards. A crew starts with a quality score of +4, but that score varies over time, going as low as −10 and as high as +10. It decreases as a crew takes casualties, suffers hardship, or endures poor health. It increases if the crew enjoys high morale, has good health care, and receives fair leadership.",
+    "A typical crew member uses the {@creature commoner} stat block in the {@book Monster Manual|MM}.",
+    {
+      "type": "entries",
+      "name": "Optional Rule: Loyalty and Quality",
+      "entries": [
+        "When dealing with an individual member of the crew, you might find it useful to use the optional loyalty rule from {@book chapter 4|DMG|4|Optional Rule: Loyalty} of the {@book Dungeon Master's Guide|DMG}. To convert a quality score into an individual's loyalty score, add 10 to the crew's quality score."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Mutiny",
+      "entries": [
+        "A poorly led or mistreated crew might turn against its officers. Once per day, if a crew's quality score is lower than 0, the captain must make a Charisma ({@skill Intimidation} or {@skill Persuasion}) check modified by the crew's quality score.",
+        "If the check total is between 1 and 9, the crew's quality score decreases by 1.",
+        "If the check total is 0 or lower, the crew mutinies. They become hostile to the officers and might attempt to kill them, imprison them, or throw them overboard. The crew can be cowed into obedience through violence, combat, or offers of treasure or other rewards.",
+        "When the DM ends the mutiny, the crew's quality score increases by {@dice 1d4}."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Shore Leave",
+      "entries": [
+        "Life aboard a ship is a constant wear on the crew. Spending time in port allows the crew to relax and regain its composure.",
+        "If a crew's quality score is 3 or lower, the score increases by 1 for each day the crew spends in port or ashore."
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:ship-stat-blocks entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[192]`
+- Source entry path: `$.variantrule[192].entries[0]`
+- Canonical output: `rule/gos-ship-stat-blocks.json`
+- OMITTED: NON_MECHANICAL: Introductory description of the section and the contexts in which ships are used.
+
+Complete original source entry:
+
+```json
+"To aid in running adventures where ships engage in combat, undertake precise navigation, or face situations where their various capabilities become relevant, the following section presents new rules and stat blocks for a spectrum of vessels."
+```
+
+### rule:gos:ship-stat-blocks entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[192]`
+- Source entry path: `$.variantrule[192].entries[1]`
+- Canonical output: `rule/gos-ship-stat-blocks.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Ship size, space, capacity, travel, ability scores, zero-score checks, and damage/condition defenses require Vehicle entities and state deferred under R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Basic Statistics",
+  "entries": [
+    "A ship stat block has three main parts: basic statistics, components, and action options. Ships can't take any actions on their own. Without effort from its crew, a ship might drift on the water, come to a stop, or careen out of control.",
+    {
+      "type": "entries",
+      "name": "Size",
+      "entries": [
+        "Most ships are Large, Huge, or Gargantuan. A ship's size category is determined by its length or width, whichever is longer. For instance, a ship that is 10 feet long and 20 feet wide would use the size category that has a 20-foot width, which means the ship is Gargantuan."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Space",
+      "entries": [
+        "A ship doesn't have a square space unless its stat block specifies otherwise. For example, a ship that is 20 feet long and 10 feet wide occupies a 20-by-10-foot space.",
+        "A ship can't move into a space that is too small to accommodate it. If it tries to do so, it crashes, as described in the \"Crashing a Ship\" section."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Capacity",
+      "entries": [
+        "A ship's stat block indicates how many creatures and how much cargo it can carry. Creatures include both the crew of the vessel and any passengers who might ride along. Passengers don't generally engage in running a ship, but they also don't need to be mere bystanders. Seasick merchants and marines thoroughly capable of facing menaces from the deep both count as passengers.",
+        "Cargo capacity notes the maximum amount of cargo a ship can carry. A vessel can't move—or might even start taking on water—if its cargo exceeds this capacity."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Travel Pace",
+      "entries": [
+        "A ship's travel pace determines how far the vessel can move per hour and per day. A ship's movement-related components (described later in the stat block) determine how far the vessel can move each round."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Ability Scores",
+      "entries": [
+        "A ship has the six ability scores (Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma) and the corresponding modifiers.",
+        "The Strength of a ship expresses its size and weight. Dexterity represents a ship's ease of handling. A ship's Constitution covers its durability and the quality of its construction. Ships usually have a score of 0 in Intelligence, Wisdom, and Charisma.",
+        "If a ship has a 0 in a score, it automatically fails any ability check or saving throw that uses that score."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Vulnerabilities, Resistances, and Immunities",
+      "entries": [
+        "A ship's vulnerabilities, resistances, and immunities apply to all its components, unless otherwise noted in the stat block.",
+        "Ships are typically immune to poison and psychic damage. Ships are also usually immune to the following conditions: {@condition blinded}, {@condition charmed}, {@condition deafened}, {@condition exhaustion}, {@condition frightened}, {@condition incapacitated}, {@condition paralyzed}, {@condition petrified}, {@condition poisoned}, {@condition prone}, {@condition stunned}, and {@condition unconscious}."
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:ship-stat-blocks entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[192]`
+- Source entry path: `$.variantrule[192].entries[2]`
+- Canonical output: `rule/gos-ship-stat-blocks.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Ship actions, crew operation, and turn state depend on deferred R-GAP-31 vessel operations.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Actions",
+  "entries": [
+    "This part of the stat block specifies what the ship can do on its turn, using its special actions rather than the actions used by creatures. It even relies on its actions to move; it doesn't have a move otherwise. The ship's captain decides which actions to use. A given action can be chosen only once during a turn."
+  ]
+}
+```
+
+### rule:gos:ship-stat-blocks entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[192]`
+- Source entry path: `$.variantrule[192].entries[3]`
+- Canonical output: `rule/gos-ship-stat-blocks.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Ship components, component hit points, damage thresholds, and destruction effects depend on deferred R-GAP-31 Vehicle and component state.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Components",
+  "entries": [
+    "A ship is composed of different components, each of which comprises multiple objects:",
+    "{@b Hull}. A ship's hull is its basic frame, on which the other components are mounted.",
+    "{@b Control}. A control component is used to steer a ship.",
+    "{@b Movement}. A movement component is the element of the ship that enables it to move, such as a set of sails or oars, and has a specific speed.",
+    "{@b Weapon}. A ship capable of being used in combat has one or more weapon components, each of which is operated separately.",
+    "A ship's component might have special rules, as described in the stat block.",
+    {
+      "type": "entries",
+      "name": "Armor Class",
+      "entries": [
+        "A component has an Armor Class. Its AC reflects the materials used to construct it and any defensive plating used to augment its toughness."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Hit Points",
+      "entries": [
+        "A ship component is destroyed and becomes unusable when it drops to 0 hit points. A ship is wrecked if its hull is destroyed.",
+        "A ship doesn't have Hit Dice."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Damage Threshold",
+      "entries": [
+        "If a ship component has a damage threshold, that threshold appears after its hit points. A component has immunity to all damage unless it takes an amount of damage that equals or exceeds its threshold, in which case it takes damage as normal. Damage that fails to bypass the threshold is considered superficial and doesn't reduce the component's hit points."
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:ship-stat-blocks entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[192]`
+- Source entry path: `$.variantrule[192].entries[4]`
+- Canonical output: `rule/gos-ship-stat-blocks.json`
+- OMITTED: REFERENCE_UNRESOLVED: Sample ship and siege equipment references have no edition-matched canonical Vehicle or Equipment targets; these referenced stat blocks belong to external domains deferred under R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "section",
+  "name": "Sample Ships",
+  "entries": [
+    "See the {@5etools vehicles page|vehicles.html} for stat blocks, deck plans, and other details for some of the most common ships.",
+    {
+      "type": "list",
+      "columns": 2,
+      "items": [
+        "{@vehicle Galley}",
+        "{@vehicle Keelboat}",
+        "{@vehicle Longship}",
+        "{@vehicle Rowboat}",
+        "{@vehicle Sailing Ship}",
+        "{@vehicle Warship}"
+      ]
+    },
+    {
+      "type": "inset",
+      "name": "Siege Weapons",
+      "entries": [
+        "Some ships are armed with siege weapons, the descriptions of which are in the \"{@book Siege Equipment|DMG|8|Siege Equipment}\" section of chapter 8 in the {@book Dungeon Master's Guide|DMG}. In this appendix, the name of a piece of siege equipment appears in bold with a parenthetical note ({@book DMG, ch. 8|DMG|8|Siege Equipment}), reminding you where to find the object's description."
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:ships-in-combat entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[194]`
+- Source entry path: `$.variantrule[194].entries[0]`
+- Canonical output: `rule/gos-ships-in-combat.json`
+- OMITTED: NON_MECHANICAL: Introductory description of the section purpose.
+
+Complete original source entry:
+
+```json
+"Whether sailing to war or hunting notorious pirates, ships make deadly weapons and dramatic battlefields. This section provides guidance on using ships in combat."
+```
+
+### rule:gos:ships-in-combat entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[194]`
+- Source entry path: `$.variantrule[194].entries[1]`
+- Canonical output: `rule/gos-ships-in-combat.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Ship initiative modifiers and captain-selected ship actions depend on vessel and crew state deferred under R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Ships and Initiative",
+  "entries": [
+    "A ship rolls initiative using its Dexterity, and it uses its crew's quality score as a modifier to that roll.",
+    "On a ship's turn, the captain decides which of the ship's actions to use."
+  ]
+}
+```
+
+### rule:gos:ships-in-combat entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[194]`
+- Source entry path: `$.variantrule[194].entries[2]`
+- Canonical output: `rule/gos-ships-in-combat.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Take Aim and Full Speed Ahead modify mounted-weapon attacks and vessel speed, requiring deferred R-GAP-31 vehicle action, weapon, and speed state.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Special Officer Actions",
+  "entries": [
+    "During an encounter, the captain, first mate, and bosun each have access to two special action options: Take Aim and Full Speed Ahead, both detailed below.",
+    {
+      "type": "entries",
+      "name": "Take Aim",
+      "entries": [
+        "As an action, the captain, first mate, or bosun directs the crew's firing, aiding in aiming one of the ship's weapons. Select one of the ship's weapons that is within 10 feet of the officer. It gains advantage on the next attack roll it makes before the end of the ship's next turn."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Full Speed Ahead",
+      "entries": [
+        "As an action while on deck, the captain, first mate, or bosun can exhort the crew to work harder and drive the ship forward faster. Roll a {@dice d6} and multiply the result by 5. Apply the total as a bonus to the ship's speed until the end of the ship's next turn. If the ship is already benefiting from this action's bonus, don't add the bonuses together; the higher bonus applies."
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:ships-in-combat entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[194]`
+- Source entry path: `$.variantrule[194].entries[3]`
+- Canonical output: `rule/gos-ships-in-combat.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Crew positioning, casualties, crew-dependent ship actions, and area-spell targeting depend on deferred R-GAP-31 vessel and encounter state.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Crew in Combat",
+  "entries": [
+    "Managing a ship's entire crew in combat can prove cumbersome, especially as larger ships often host dozens of sailors. Typically the crew is too busy managing the ship to do anything else during combat. Don't worry about tracking their specific positions unless you want to add that complexity. You can assume that the crew is evenly divided among the upper two decks of a ship.",
+    {
+      "type": "entries",
+      "name": "Crew Casualties",
+      "entries": [
+        "Slaying a ship's crew reduces the number of actions most ships can take, making the crew a tempting target in combat. Resolve individual attacks as normal, using the guidelines for resolving many, identical attacks at once from the {@book Dungeon Master's Guide|DMG} as needed.",
+        "In the case of spells that cover an area, such as {@spell fireball} or {@spell lightning bolt}, you might track the exact location of the spell and crew to determine how many sailors it affects. Alternatively, you can roll {@dice 1d6} per level of the spell. The total of the dice is the number of crew members caught in the spell's area."
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:ships-in-combat entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[194]`
+- Source entry path: `$.variantrule[194].entries[4]`
+- Canonical output: `rule/gos-ships-in-combat.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Crash triggers, saving throws, damage outcomes, collision movement, and the size-indexed table depend on deferred R-GAP-31 vessel and spatial state.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Crashing a Ship",
+  "entries": [
+    "If a ship moves into the space occupied by a creature or an object, the ship might crash. A ship avoids crashing if the creature or object is at least two sizes smaller than it.",
+    "When a ship crashes, it must immediately make a {@dc 10} Constitution saving throw. On a failed save, it takes damage to its hull based on the size of the creature or object it crashed into, as shown on the Crash Damage table. It also stops moving if the object or creature is one size smaller than it or larger. Otherwise the ship continues moving and the creature or object collided with moves to the nearest unoccupied space that isn't in the ship's path. At the DM's discretion, an object that is forced to move but is fixed in place is instead destroyed.",
+    "A creature struck by a ship must make a Dexterity saving throw with a DC equal to 10 + the ship's Strength modifier, taking damage based on the ship's size (as shown on the Crash Damage table) on a failed save, or half as much damage on a successful one.",
+    {
+      "type": "table",
+      "caption": "Crash Damage",
+      "colLabels": [
+        "Size",
+        "Bludgeoning Damage"
+      ],
+      "colStyles": [
+        "col-6",
+        "col-6"
+      ],
+      "rows": [
+        [
+          "Small",
+          "{@damage 1d6}"
+        ],
+        [
+          "Medium",
+          "{@damage 1d10}"
+        ],
+        [
+          "Large",
+          "{@damage 4d10}"
+        ],
+        [
+          "Huge",
+          "{@damage 8d10}"
+        ],
+        [
+          "Gargantuan",
+          "{@damage 16d10}"
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:superior-ship-upgrades entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[214]`
+- Source entry path: `$.variantrule[214].entries[0]`
+- Canonical output: `rule/gos-superior-ship-upgrades.json`
+- OMITTED: NON_MECHANICAL: Introductory description of ship upgrades.
+
+Complete original source entry:
+
+```json
+"Some vessels possess extraordinary abilities, whether due to magic or superior artisanship. The upgrades below can replace a ship's existing components or provide a new element to augment a ship's abilities."
+```
+
+### rule:gos:superior-ship-upgrades entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[214]`
+- Source entry path: `$.variantrule[214].entries[1]`
+- Canonical output: `rule/gos-superior-ship-upgrades.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Upgrade cost, work duration, berth requirement, and interrupted-work state require deferred Vehicle and campaign state under R-GAP-31.
+
+Complete original source entry:
+
+```json
+"Adding an upgrade costs 15,000 gp and requires {@dice 1d4} weeks of work. During that time, the ship must remain in port. If the ship leaves, the work must start over, but you don't need to pay the gold piece cost a second time."
+```
+
+### rule:gos:superior-ship-upgrades entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[214]`
+- Source entry path: `$.variantrule[214].entries[2]`
+- Canonical output: `rule/gos-superior-ship-upgrades.json`
+- OMITTED: REFERENCE_UNRESOLVED: The named hull upgrades are vehicle-upgrade targets with no canonical outputs; their effects and hull replacement constraints depend on deferred R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Hull Upgrades",
+  "entries": [
+    "Any ship with a hull can gain one of the following upgrades. In some cases, an upgrade also provides a benefit to the ship's other components.",
+    {
+      "type": "list",
+      "columns": 2,
+      "items": [
+        "{@vehupgrade Churning Hull|GoS}",
+        "{@vehupgrade Death Vessel|GoS}",
+        "{@vehupgrade Frost-Locked Hull|GoS}",
+        "{@vehupgrade Living Vessel|GoS}",
+        "{@vehupgrade Reinforced Hull|GoS}",
+        "{@vehupgrade Vigilant Watch|GoS}"
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:superior-ship-upgrades entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[214]`
+- Source entry path: `$.variantrule[214].entries[3]`
+- Canonical output: `rule/gos-superior-ship-upgrades.json`
+- OMITTED: REFERENCE_UNRESOLVED: The named movement upgrades are vehicle-upgrade targets with no canonical outputs; their effects and component constraints depend on deferred R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Movement Upgrades",
+  "entries": [
+    "Each movement upgrade applies to a specific movement type. A component can gain the benefits of one upgrade.",
+    {
+      "type": "list",
+      "columns": 2,
+      "items": [
+        "{@vehupgrade Clockwork Oars|GoS}",
+        "{@vehupgrade Ever-Full Sails|GoS}",
+        "{@vehupgrade Defiant Sails|GoS}",
+        "{@vehupgrade Dragon Sails|GoS}",
+        "{@vehupgrade Screaming Sails|GoS}",
+        "{@vehupgrade Scything Oars|GoS}"
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:superior-ship-upgrades entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[214]`
+- Source entry path: `$.variantrule[214].entries[4]`
+- Canonical output: `rule/gos-superior-ship-upgrades.json`
+- OMITTED: REFERENCE_UNRESOLVED: The named weapon upgrades are vehicle-upgrade targets with no canonical outputs; their effects and mounting constraints depend on deferred R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Weapon Upgrades",
+  "entries": [
+    "The following upgrades can apply to any weapon mounted aboard a ship. A component can gain the benefits of one upgrade, or two upgrades if one of the upgrades is {@vehupgrade Arcane Artillery|GoS}.",
+    {
+      "type": "list",
+      "columns": 2,
+      "items": [
+        "{@vehupgrade Arcane Artillery|GoS}",
+        "{@vehupgrade Concussive Rounds|GoS}",
+        "{@vehupgrade Explosive Rounds|GoS}",
+        "{@vehupgrade Grasping Rounds|GoS}"
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:superior-ship-upgrades entry 5
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[214]`
+- Source entry path: `$.variantrule[214].entries[5]`
+- Canonical output: `rule/gos-superior-ship-upgrades.json`
+- OMITTED: REFERENCE_UNRESOLVED: The named figurehead upgrades are vehicle-upgrade targets with no canonical outputs; their effects and figurehead limits depend on deferred R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Figurehead Upgrades",
+  "entries": [
+    "While figureheads are usually purely decorative, they might be magically treated to produce extraordinary effects. A ship can receive one figurehead upgrade.",
+    {
+      "type": "list",
+      "columns": 2,
+      "items": [
+        "{@vehupgrade Guardian Figurehead|GoS}",
+        "{@vehupgrade Red Dragon Figurehead|GoS}",
+        "{@vehupgrade Storm Giant Figurehead|GoS}"
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:superior-ship-upgrades entry 6
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[214]`
+- Source entry path: `$.variantrule[214].entries[6]`
+- Canonical output: `rule/gos-superior-ship-upgrades.json`
+- OMITTED: REFERENCE_UNRESOLVED: The named miscellaneous upgrades are vehicle-upgrade targets with no canonical outputs; their effects and repeat limits depend on deferred R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Miscellaneous Upgrades",
+  "entries": [
+    "The following upgrades don't apply to a specific element of the ship. A ship can use any number of them, but it can gain a specific upgrade only once.",
+    {
+      "type": "list",
+      "columns": 2,
+      "items": [
+        "{@vehupgrade Bones of Endless Toil|GoS}",
+        "{@vehupgrade Smuggler's Banner|GoS}",
+        "{@vehupgrade Taskmaster's Drums|GoS}"
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:encounters-at-sea entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[98]`
+- Source entry path: `$.variantrule[98].entries[0]`
+- Canonical output: `rule/gos-encounters-at-sea.json`
+- OMITTED: NON_MECHANICAL: Introductory narrative describing the adventure opportunities and purpose of the random tables.
+
+Complete original source entry:
+
+```json
+"The open seas provide endless opportunities for adventure. This section supplies you with a variety of random tables, perfect for detailing the challenges awaiting your characters on and beneath the waves."
+```
+
+### rule:gos:encounters-at-sea entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[98]`
+- Source entry path: `$.variantrule[98].entries[1]`
+- Canonical output: `rule/gos-encounters-at-sea.json`
+- OMITTED: SCHEMA_UNSUPPORTED: The daily d20 encounter trigger and level-banded random tables are meaningful mechanics, but the approved Rule schema has no random encounter table or encounter-result model. Listed creature, ship, island, hazard, and Ocean Environs targets are not all canonically available.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Random Encounters",
+  "entries": [
+    "For each day of a voyage, in addition to checking for hazards, roll a {@dice d20}. On a 19 or 20, the ship has a random encounter. If you roll both a hazard and a random encounter, the ship experiences both. They might occur simultaneously or in an order of your choice.",
+    "The levels given on the following tables allow you to sculpt what dangers the characters face. The low-level table is useful for when a ship travels in safe waters, while the higher-level ones are suited for primeval waters, far from well-trafficked sea lanes. The tables also allow for encounters with other ships and the discovery of mysterious, uncharted islands. Additional tables for further detailing such encounters are included later in this appendix.",
+    {
+      "type": "table",
+      "caption": "Open Water Encounters (Levels 1–4)",
+      "colLabels": [
+        "d100",
+        "Encounter"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "01–03",
+          "{@dice 3d6} {@creature Quipper||quippers}"
+        ],
+        [
+          "04–08",
+          "1 {@creature swarm of quippers}"
+        ],
+        [
+          "09–12",
+          "{@dice 3d10} {@creature Dolphin|VGM|dolphins} (see {@adventure appendix C|GoS|11})"
+        ],
+        [
+          "13–14",
+          "1 {@creature giant octopus}"
+        ],
+        [
+          "15–16",
+          "{@dice 1d4} {@creature Killer Whale||killer whales}"
+        ],
+        [
+          "17–18",
+          "{@dice 1d6} {@creature merfolk}"
+        ],
+        [
+          "19–20",
+          "{@dice 1d6} {@creature Giant Sea Horse||giant sea horses}"
+        ],
+        [
+          "21–24",
+          "{@dice 1d8} {@creature Giant Crab||giant crabs}"
+        ],
+        [
+          "25–28",
+          "{@dice 1d4} {@creature Reef Shark||reef sharks}"
+        ],
+        [
+          "29",
+          "1 {@creature hunter shark}"
+        ],
+        [
+          "30–34",
+          "{@dice 1d4} {@creature sahuagin}"
+        ],
+        [
+          "35–37",
+          "{@dice 1d4} {@creature koalinth|GoS} (see {@adventure appendix C|GoS|11})"
+        ],
+        [
+          "38–40",
+          "A rank 1 whirlpool connected to the Elemental Plane of Water (see \"{@variantrule Ocean Environs|GoS|Whirlpools}\")"
+        ],
+        [
+          "41–45",
+          "{@dice 1d4} {@creature Locathah|GoS|locathahs} (see {@adventure appendix C|GoS|11})"
+        ],
+        [
+          "46–51",
+          "{@dice 1d3} {@creature Harpy||harpies}"
+        ],
+        [
+          "52–54",
+          "2 {@creature merrow}"
+        ],
+        [
+          "55–57",
+          "1 {@creature sahuagin priestess} and {@dice 1d4} {@creature sahuagin}"
+        ],
+        [
+          "58–59",
+          "1 {@creature koalinth sergeant|GoS} and {@dice 2d4} {@creature koalinth|GoS} (see {@adventure appendix C|GoS|11} for both)"
+        ],
+        [
+          "60–62",
+          "1 {@creature plesiosaurus}"
+        ],
+        [
+          "63–64",
+          "{@dice 1d3} {@creature Sea Hag||sea hags}"
+        ],
+        [
+          "65–67",
+          "{@dice 1d4} {@creature Blood Hawk||blood hawks}"
+        ],
+        [
+          "68–70",
+          "1 {@creature sahuagin champion|GoS} (see {@adventure appendix C|GoS|11})"
+        ],
+        [
+          "71–74",
+          "1 {@creature giant shark}"
+        ],
+        [
+          "75",
+          "1 {@creature young bronze dragon}"
+        ],
+        [
+          "76–00",
+          "A ship (generated at random)"
+        ]
+      ]
+    },
+    {
+      "type": "table",
+      "caption": "Open Water Encounters (Levels 5–10)",
+      "colLabels": [
+        "d100",
+        "Encounter"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "01–03",
+          "1 {@creature giant shark}"
+        ],
+        [
+          "04–07",
+          "{@dice 1d4} {@creature Swarm of Quippers||swarms of quippers}"
+        ],
+        [
+          "08–11",
+          "{@dice 1d10} {@creature Killer Whale||killer whales}"
+        ],
+        [
+          "12–17",
+          "{@dice 3d6} {@creature merfolk}"
+        ],
+        [
+          "18–25",
+          "1 {@creature sahuagin high priestess|GoS} and 1 {@creature sahuagin wave shaper|GoS} (see {@adventure appendix C|GoS|11} for both)"
+        ],
+        [
+          "26–30",
+          "{@dice 2d8} {@creature Giant Crab||giant crabs}"
+        ],
+        [
+          "31–35",
+          "{@dice 2d4} {@creature Reef Shark||reef sharks}"
+        ],
+        [
+          "36–38",
+          "{@dice 1d4} {@creature Hunter Shark||hunter sharks}"
+        ],
+        [
+          "39–40",
+          "{@dice 1d4} {@creature Water Elemental||water elementals}"
+        ],
+        [
+          "41",
+          "A rank 2 whirlpool connected to the Elemental Plane of Water (see \"{@variantrule Ocean Environs|GoS|Whirlpools}\")"
+        ],
+        [
+          "42–45",
+          "{@dice 2d4} {@creature Locathah|GoS|locathahs} (see {@adventure appendix C|GoS|11})"
+        ],
+        [
+          "46–47",
+          "1 {@creature harpy matriarch|GoS} (see {@adventure appendix C|GoS|11}) and {@dice 1d4} {@creature Harpy||harpies}"
+        ],
+        [
+          "48–49",
+          "{@dice 2d4} {@creature merrow}"
+        ],
+        [
+          "50–52",
+          "1 {@creature sahuagin baron} and {@dice 1d4} {@creature sahuagin}"
+        ],
+        [
+          "53–57",
+          "1 {@creature koalinth sergeant|GoS} and {@dice 2d4} {@creature koalinth|GoS} (see {@adventure appendix C|GoS|11} for both)"
+        ],
+        [
+          "58–59",
+          "{@dice 2d8} {@creature Giant Crab||giant crabs}"
+        ],
+        [
+          "60–61",
+          "{@dice 1d4} {@creature Plesiosaurus||plesiosauruses}"
+        ],
+        [
+          "62–63",
+          "A coven of 3 {@creature Sea Hag||sea hags}"
+        ],
+        [
+          "64–65",
+          "{@dice 1d4} {@creature Sahuagin Blademaster|GoS|sahuagin blademasters} (see {@adventure appendix C|GoS|11})"
+        ],
+        [
+          "66–69",
+          "1 {@creature hydra}"
+        ],
+        [
+          "70–71",
+          "1 {@creature marid}"
+        ],
+        [
+          "72",
+          "1 {@creature storm giant}"
+        ],
+        [
+          "73",
+          "1 {@creature adult bronze dragon}"
+        ],
+        [
+          "74",
+          "1 {@creature dragon turtle}"
+        ],
+        [
+          "75–90",
+          "A ship (generated at random)"
+        ],
+        [
+          "91–00",
+          "A mysterious island (generated at random)"
+        ]
+      ]
+    },
+    {
+      "type": "table",
+      "caption": "Open Water Encounters (Levels 11–20)",
+      "colLabels": [
+        "d100",
+        "Encounter"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "01–03",
+          "1 {@creature storm giant}"
+        ],
+        [
+          "04–07",
+          "{@dice 2d6} {@creature Giant Shark||giant sharks}"
+        ],
+        [
+          "08–11",
+          "1 {@creature marid}"
+        ],
+        [
+          "12–18",
+          "1 {@creature sahuagin high priestess|GoS} and {@dice 2d4} {@creature Sahuagin Champion|GoS|sahuagin champions} (see {@adventure appendix C|GoS|11} for both)"
+        ],
+        [
+          "19–25",
+          "1 {@creature sahuagin baron} and {@dice 1d4} {@creature Sahuagin Blademaster|GoS|sahuagin blademasters} (see {@adventure appendix C|GoS|11})"
+        ],
+        [
+          "26–28",
+          "{@dice 3d6} {@creature Reef Shark||reef sharks}"
+        ],
+        [
+          "29–32",
+          "{@dice 2d6} {@creature Hunter Shark||hunter sharks}"
+        ],
+        [
+          "33–39",
+          "A rank 3 whirlpool connected to the Elemental Plane of Water (see \"{@variantrule Ocean Environs|GoS|Whirlpools}\")"
+        ],
+        [
+          "40–43",
+          "A rank 4 whirlpool connected to the Elemental Plane of Water (see \"{@variantrule Ocean Environs|GoS|Whirlpools}\")"
+        ],
+        [
+          "44–45",
+          "{@dice 1d3} {@creature Hydra||hydras}"
+        ],
+        [
+          "46–48",
+          "{@dice 1d4} {@creature koalinth sergeant|GoS} (see {@adventure appendix C|GoS|11}) and {@dice 3d10} {@creature koalinth|GoS} (see {@adventure appendix C|GoS|11})"
+        ],
+        [
+          "49–50",
+          "{@dice 2d4} {@creature Plesiosaurus||plesiosauruses}"
+        ],
+        [
+          "51–53",
+          "{@dice 3d6} {@creature merrow}"
+        ],
+        [
+          "54–57",
+          "1 {@creature harpy matriarch|GoS} (see {@adventure appendix C|GoS|11}) and {@dice 2d8} {@creature Harpy||harpies}"
+        ],
+        [
+          "58–60",
+          "A coven of 3 {@creature Sea Hag||sea hags}"
+        ],
+        [
+          "61–63",
+          "1 {@creature dragon turtle}"
+        ],
+        [
+          "64",
+          "1 {@creature ancient bronze dragon}"
+        ],
+        [
+          "65–75",
+          "A ship (generated at random)"
+        ],
+        [
+          "76–00",
+          "A mysterious island (generated at random)"
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:mysterious-islands entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[158]`
+- Source entry path: `$.variantrule[158].entries[0]`
+- Canonical output: `rule/gos-mysterious-islands.json`
+- OMITTED: NON_MECHANICAL: Introductory description of island adventure possibilities.
+
+Complete original source entry:
+
+```json
+"Small islands dot most oceans, distant or unexplored locales that might host all manner of adventures. The following rules can be used to generate any islands the characters might encounter."
+```
+
+### rule:gos:mysterious-islands entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[158]`
+- Source entry path: `$.variantrule[158].entries[1]`
+- Canonical output: `rule/gos-mysterious-islands.json`
+- OMITTED: SCHEMA_UNSUPPORTED: The variable island dimensions and geometry are generation mechanics, but the approved Rule schema has no location-generation or random-range model; this belongs to the deferred R-GAP-28 world-building family.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Island Size",
+  "entries": [
+    "These rules are used to generate islands with areas roughly {@dice 1d6} miles long and {@dice 1d6} miles wide. Most islands aren't perfect rectangles, and most coastlines aren't perfectly straight, so feel free to make areas of the island shorter, longer, thinner, or wider as you see fit."
+  ]
+}
+```
+
+### rule:gos:mysterious-islands entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[158]`
+- Source entry path: `$.variantrule[158].entries[2]`
+- Canonical output: `rule/gos-mysterious-islands.json`
+- OMITTED: NON_MECHANICAL: Habitat examples and fictional island origins provide setting guidance without a deterministic procedure.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Island Habitat",
+  "entries": [
+    "An island can have any habitat that seems appropriate for the clime it occupies. For example, islands of floating ice are found in arctic seas, while islands with jungle habitats are found in tropical waters. Not all islands are created by nature, though. A powerful spellcaster or divine being could conjure an island made of crystal, iron, or any material you choose."
+  ]
+}
+```
+
+### rule:gos:mysterious-islands entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[158]`
+- Source entry path: `$.variantrule[158].entries[3]`
+- Canonical output: `rule/gos-mysterious-islands.json`
+- OMITTED: SCHEMA_UNSUPPORTED: The theme roll and linked leader, inhabitant, reaction, feature, curse, encounter, and story-hook tables require a random-table and outcome-selection model. Conditional curse and social effects cannot be detached from table selection without changing their triggers. Creature, Hazard, location, spell, and equipment targets also lack complete canonical resolution; R-GAP-28 remains deferred.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Island Theme",
+  "entries": [
+    "Each island encountered has a theme chosen or rolled on the Island Theme table. This theme defines the island's story in one broad stroke. Once you have a theme, consult its section after the table to determine related details and story hooks.",
+    {
+      "type": "table",
+      "caption": "Island Theme",
+      "colLabels": [
+        "d6",
+        "Theme"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "Alien"
+        ],
+        [
+          "2",
+          "Cursed"
+        ],
+        [
+          "3",
+          "Hostile"
+        ],
+        [
+          "4",
+          "Sanctum"
+        ],
+        [
+          "5",
+          "Welcoming"
+        ],
+        [
+          "6",
+          "Wild"
+        ]
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Alien",
+      "entries": [
+        "Alien islands are inhabited by isolated creatures with ways of life beyond most beings' comprehensions. Everything about the culture of the island, from architecture to food, is unfamiliar and unsettling to outsiders. At your discretion the inhabitants of the island might speak, read, and write a language all their own.",
+        {
+          "type": "table",
+          "caption": "Alien Island Leader",
+          "colLabels": [
+            "d4",
+            "Leader"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "{@creature Aboleth}"
+            ],
+            [
+              "2",
+              "{@creature Beholder}"
+            ],
+            [
+              "3",
+              "{@creature Death slaad}"
+            ],
+            [
+              "4",
+              "{@creature Kraken}"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Alien Island Inhabitants",
+          "colLabels": [
+            "d6",
+            "Inhabitants"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "{@dice 1d6} {@creature Berserker||berserkers} and {@dice 5d10} {@creature Tribal Warrior||tribal warriors}"
+            ],
+            [
+              "2–3",
+              "{@dice 1d6} {@creature Cult Fanatic||cult fanatics} and {@dice 5d10} {@creature Cultist||cultists}"
+            ],
+            [
+              "4",
+              "{@dice 1d6} {@creature Lizardfolk Shaman||lizardfolk shamans} and {@dice 5d10} {@creature lizardfolk}"
+            ],
+            [
+              "5",
+              "{@dice 1d6} {@creature Bullywug Croaker|GoS|bullywug croakers} (see {@adventure appendix C|GoS|11}) and {@dice 5d10} {@creature Bullywug||bullywugs}"
+            ],
+            [
+              "6",
+              "{@dice 1d8} {@creature Locathah Hunter|GoS|locathah hunters} (see {@adventure appendix C|GoS|11}) and {@dice 3d10} {@creature locathah|GoS} (see {@adventure appendix C|GoS|11})"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Alien Inhabitant Reactions",
+          "colLabels": [
+            "d6",
+            "Reaction"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "The inhabitants try to force the characters to serve their leader."
+            ],
+            [
+              "2",
+              "The inhabitants demand the characters give their leader an item worth {@dice 10d10 × 100} gp."
+            ],
+            [
+              "3",
+              "The inhabitants wish to devour the characters."
+            ],
+            [
+              "4",
+              "Some inhabitants are planning to rise up against their leader and ask the characters for help."
+            ],
+            [
+              "5",
+              "The inhabitants see the characters as no more than insects and refuse to interact with them unless forced."
+            ],
+            [
+              "6",
+              "The inhabitants see the characters as gods and can be convinced to worship them."
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Alien Island Story Hooks",
+          "colLabels": [
+            "d4",
+            "Story Hook"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "The leader has a {@item spell scroll} of {@spell true resurrection} among its belongings."
+            ],
+            [
+              "2",
+              "The island contains a piece of a tablet with instructions on how to open a portal to the Far Realm."
+            ],
+            [
+              "3",
+              "The island's leader knows how to end a planar disease infecting a humanoid settlement."
+            ],
+            [
+              "4",
+              "A {@creature mage} with information the characters need hides among the ranks of the inhabitants, learning their ways."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Cursed",
+      "entries": [
+        "Cursed islands are steeped in dark magic from a ritual cast by necromancers, hag covens, evil spellcasters, foul deities, or worse. The island might still hold some hint as to why it was cursed, or all trace of those who brought down the affliction might have been scoured away.",
+        {
+          "type": "table",
+          "caption": "Island Curses",
+          "colLabels": [
+            "d6",
+            "Curse"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "When a creature dies on the island, its spirit rises as a {@creature specter} {@dice 1d4} hours after death. The specter is obsessed with killing its former friends."
+            ],
+            [
+              "2",
+              "Creatures that aren't inhabitants of the island must succeed on a Constitution saving throw at the end of each hour they spend on the island. If they fail, they gain one level of {@condition exhaustion}. The DC for this check equals 10 + the number of hours spent on the island."
+            ],
+            [
+              "3",
+              "Each day at dawn, the island conjures {@dice 2d10} {@creature Magma Mephit||magma mephits}, which are hostile toward creatures that aren't inhabitants of the island."
+            ],
+            [
+              "4",
+              "When a creature that isn't an inhabitant of the island completes a long rest there, it must succeed on a {@dc 15} Wisdom saving throw or be {@condition blinded} for 8 hours."
+            ],
+            [
+              "5",
+              "Creatures must succeed on a {@dc 10} Constitution saving throw at the end of each hour they spend on the island. If they fail, they gain a 1-inch scar in a random place on their body. Only a {@spell remove curse} spell or similar magic removes the scar."
+            ],
+            [
+              "6",
+              "When a creature that isn't an inhabitant of the island completes a long rest there, it must succeed on a {@dc 15} Wisdom saving throw or gain a random form of long-term madness (see \"{@book Madness|DMG|8|Madness}\" in chapter 8, \"{@book Running the Game|DMG|8|Running the Game},\" of the {@book Dungeon Master's Guide|DMG})."
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Cursed Island Inhabitants",
+          "colLabels": [
+            "d6",
+            "Inhabitants"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "{@dice 5d10} {@creature Specter||specters}"
+            ],
+            [
+              "2",
+              "{@dice 10d10} {@creature Zombie||zombies}"
+            ],
+            [
+              "3",
+              "A coven of 3 {@creature Sea Hag||sea hags} and {@dice 1d4} {@creature Flameskull||flameskulls}"
+            ],
+            [
+              "4",
+              "1 {@creature medusa} and {@dice 3d10} {@creature Skeleton||skeletons}"
+            ],
+            [
+              "5",
+              "1 {@creature vampire} and {@dice 2d6} {@creature vampire spawn}"
+            ],
+            [
+              "6",
+              "1 {@creature demilich} and {@dice 2d10} {@creature Wraith||wraiths}"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Cursed Island Story Hooks",
+          "colLabels": [
+            "d4",
+            "Story Hook"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "The island contains rare spell components the characters need."
+            ],
+            [
+              "2",
+              "Pirates buried treasure worth {@dice 5d6 × 1,000} gp on the island."
+            ],
+            [
+              "3",
+              "A keelboat carrying {@dice 1d6} {@creature Commoner||commoners} crashed on the island. The commoners are struggling to survive."
+            ],
+            [
+              "4",
+              "The {@creature ghost} of a character's loved one is trapped on the island."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Hostile",
+      "entries": [
+        "Hostile islands contain creatures that want to harm the characters. These creatures fill their islands with traps and attack outsiders out of hunger, boredom, or fear.",
+        {
+          "type": "table",
+          "caption": "Hostile Island Leader",
+          "colLabels": [
+            "d6",
+            "Leader"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "{@creature Cloud giant}"
+            ],
+            [
+              "2",
+              "{@creature Hill giant}"
+            ],
+            [
+              "3",
+              "{@creature Oni}"
+            ],
+            [
+              "4",
+              "{@creature Spirit naga}"
+            ],
+            [
+              "5",
+              "{@creature Werewolf}"
+            ],
+            [
+              "6",
+              "A chromatic dragon of the DM's choice"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Hostile Island Leader Motivations",
+          "colLabels": [
+            "d4",
+            "Motivation"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "The leader wants to commandeer a boat to conquer other islands."
+            ],
+            [
+              "2",
+              "The leader takes all treasure gained by its followers, growing rich off their brutality."
+            ],
+            [
+              "3",
+              "The leader needs humanoid remains to perform a ritual with a dark purpose."
+            ],
+            [
+              "4",
+              "The leader never ages because it consumes the souls of creatures its followers kill."
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Hostile Inhabitants",
+          "colLabels": [
+            "d6",
+            "Inhabitants"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "{@dice 3d10} {@creature Winged Kobold||winged kobolds} and {@dice 10d10} {@creature Kobold||kobolds}"
+            ],
+            [
+              "2",
+              "1 {@creature goblin boss} and {@dice 8d10} {@creature Goblin||goblins}"
+            ],
+            [
+              "3",
+              "{@dice 1d6} {@creature Berserker||berserkers} and {@dice 5d10} {@creature Tribal Warrior||tribal warriors}"
+            ],
+            [
+              "4",
+              "1 {@creature Orc War Chief||orc chieftain}, {@dice 2d10} {@creature Orog||orogs}, and {@dice 5d10} {@creature Orc||orcs}"
+            ],
+            [
+              "5",
+              "{@dice 4d10} {@creature Ogre||ogres}"
+            ],
+            [
+              "6",
+              "{@dice 3d10} {@creature Troll||trolls}"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Hostile Island Story Hooks",
+          "colLabels": [
+            "d4",
+            "Story Hook"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "The island's leader killed an NPC the characters admired."
+            ],
+            [
+              "2",
+              "The island's leader has a {@item headband of intellect}."
+            ],
+            [
+              "3",
+              "The characters are challenged by rivals to survive a night on the island."
+            ],
+            [
+              "4",
+              "An eloquent invitation from the island's leader invites the characters for a hunt."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Sanctum",
+      "entries": [
+        "The inhabitants of sanctum islands use the seas to protect themselves and their property, or they simply enjoy the isolation a remote island affords. The creatures on sanctum islands usually live in permanent structures like abbeys, fortresses, libraries, or towers.",
+        {
+          "type": "table",
+          "caption": "Sanctum Island Leader",
+          "colLabels": [
+            "d6",
+            "Leader"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "{@creature Archmage}"
+            ],
+            [
+              "2",
+              "{@creature Lich}"
+            ],
+            [
+              "3",
+              "{@creature Night hag}"
+            ],
+            [
+              "4",
+              "{@creature Noble}"
+            ],
+            [
+              "5",
+              "{@creature Rakshasa}"
+            ],
+            [
+              "6",
+              "{@creature Werebear}"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Sanctum Island Inhabitants",
+          "colLabels": [
+            "d6",
+            "Inhabitants"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "{@dice 5d10} {@creature Guard||guards} and {@dice 10d10} {@creature Commoner||commoners}"
+            ],
+            [
+              "2",
+              "1 {@creature pirate captain|GoS} (see {@adventure appendix C|GoS|11}), 1 {@creature pirate bosun|GoS} (see {@adventure appendix C|GoS|11}), {@dice 2d4} {@creature Pirate Deck Wizard|GoS|pirate deck wizards} (see {@adventure appendix C|GoS|11}), and {@dice 8d10} {@creature Bandit||bandits}"
+            ],
+            [
+              "3",
+              "{@dice 1d6} {@creature Flesh Golem||flesh golems}, {@dice 1d4} {@creature Priest||priests}, and {@dice 2d10} {@creature Acolyte||acolytes}"
+            ],
+            [
+              "4",
+              "{@dice 2d4} {@creature Veteran||veterans}, {@dice 2d10} {@creature Scout||scouts}, {@dice 4d10} {@creature Guard||guards}"
+            ],
+            [
+              "5",
+              "{@dice 1d4} {@creature Stone Golem||stone golems}, {@dice 1d4} {@creature Mage||mages}, and {@dice 3d10} {@creature Guard||guards}"
+            ],
+            [
+              "6",
+              "1 {@creature shield guardian}, {@dice 2d4} {@creature Knight||knights}, {@dice 2d6} {@creature Priest||priests}, and {@dice 6d10} {@creature Commoner||commoners}"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Sanctum Island Reactions",
+          "colLabels": [
+            "d6",
+            "Reaction"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "The characters are allowed on the island, but the inhabitants don't allow the characters into any buildings."
+            ],
+            [
+              "2",
+              "The inhabitants like the characters and give them advice to help them impress the island's leader."
+            ],
+            [
+              "3",
+              "Some unhappy inhabitants believe the characters are their ticket off the island. They flirt, lie, bribe, and beg to be taken away."
+            ],
+            [
+              "4",
+              "The inhabitants attempt to convince the characters to use the island as a base of operations and contribute to the community."
+            ],
+            [
+              "5",
+              "The inhabitants hunger for information about the outside world and allow the characters to use news as currency."
+            ],
+            [
+              "6",
+              "The inhabitants don't trust the characters. All Charisma checks made to influence the inhabitants have disadvantage."
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Sanctum Island Story Hooks",
+          "colLabels": [
+            "d4",
+            "Story Hook"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "A {@creature spy} among the inhabitants needs extraction from the island."
+            ],
+            [
+              "2",
+              "The island's leader misses an item (such as a flower or a particular food) that can't be found on the island and offers a reward for the item."
+            ],
+            [
+              "3",
+              "The island asks for aid against an {@creature adult green dragon} that regularly raids it."
+            ],
+            [
+              "4",
+              "The island has an armory full of legendary adamantine and silvered weapons."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Welcoming",
+      "entries": [
+        "Welcoming islands host creatures that are friendly toward the characters. These creatures provide what aid they can and might even put themselves in harm's way for the characters if a friendship is established.",
+        {
+          "type": "table",
+          "caption": "Welcoming Island Leader",
+          "colLabels": [
+            "d6",
+            "Leader"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "{@creature Bard|VGM} (see {@adventure appendix C|GoS|11})"
+            ],
+            [
+              "2",
+              "{@creature Druid}"
+            ],
+            [
+              "3",
+              "{@creature Guardian naga}"
+            ],
+            [
+              "4",
+              "{@creature Treant}"
+            ],
+            [
+              "5",
+              "{@creature Unicorn}"
+            ],
+            [
+              "6",
+              "A metallic dragon of the DM's choice"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Welcoming Island Inhabitants",
+          "colLabels": [
+            "d6",
+            "Inhabitants"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "{@dice 5d10} {@creature aarakocra}"
+            ],
+            [
+              "2",
+              "{@dice 8d8} {@creature Pixie||pixies} and {@dice 8d8} {@creature Sprite||sprites}"
+            ],
+            [
+              "3",
+              "{@dice 1d6} {@creature Lizardfolk Shaman||lizardfolk shamans} and {@dice 5d10} {@creature lizardfolk}"
+            ],
+            [
+              "4",
+              "{@dice 1d6} {@creature Druid||druids} and {@dice 5d10} {@creature Tribal Warrior||tribal warriors}"
+            ],
+            [
+              "5",
+              "{@dice 3d10} {@creature Centaur||centaurs}"
+            ],
+            [
+              "6",
+              "{@dice 3d10} {@creature Scout||scouts} and {@dice 5d10} {@creature Commoner||commoners}"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Welcoming Island Story Hooks",
+          "colLabels": [
+            "d4",
+            "Story Hook"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "The island is a colony or outpost sponsored by a nation or wealthy noble the characters are associated with."
+            ],
+            [
+              "2",
+              "The island's residents swear a character looks like a beloved past leader. Melancholy, they treat the characters as they would their lost hero."
+            ],
+            [
+              "3",
+              "The island never gets visitors. The characters' arrival is cause for a peculiar but earnest celebration."
+            ],
+            [
+              "4",
+              "The island's leader is a long-lost relative or friend of a character's family."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Wild Island",
+      "entries": [
+        "Nature reigns on wild islands. The creatures on the island respond to the ebb and flow of the natural world rather than trying to tame the environment.",
+        {
+          "type": "table",
+          "caption": "Wild Island Features",
+          "colLabels": [
+            "d6",
+            "Feature"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "A waterfall flows up a mountainside."
+            ],
+            [
+              "2",
+              "The island slowly rotates clockwise."
+            ],
+            [
+              "3",
+              "Geysers shoot bright light into the sky at night."
+            ],
+            [
+              "4",
+              "{@hazard Razorvine} (see \"{@book Wilderness Hazards|DMG|5|Wilderness Hazards}\" in chapter 5, \"{@book Adventure Environments|DMG|5|Adventure Environments},\" of the {@book Dungeon Master's Guide|DMG}) grows in 10-foot-tall hedges shaped like animals."
+            ],
+            [
+              "5",
+              "Rain on the island creates a beautiful melody."
+            ],
+            [
+              "6",
+              "All beasts on the island have {@sense truesight} out to a range of 120 ft."
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Wild Island Encounters",
+          "colLabels": [
+            "d20",
+            "Encounter"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "{@dice 2d8} {@creature Baboon||baboons}"
+            ],
+            [
+              "2",
+              "{@dice 1d4} {@creature Brown Bear||brown bears}"
+            ],
+            [
+              "3",
+              "1 {@creature owlbear}"
+            ],
+            [
+              "4",
+              "{@dice 2d6} {@creature Giant Toad||giant toads}"
+            ],
+            [
+              "5",
+              "{@dice 2d10} {@creature Giant Wasp||giant wasps}"
+            ],
+            [
+              "6",
+              "{@dice 2d4} {@creature Giant Spider||giant spiders}"
+            ],
+            [
+              "7",
+              "{@dice 4d4} {@creature Pixie||pixies} or {@dice 4d4} {@creature Sprite||sprites}"
+            ],
+            [
+              "8",
+              "{@dice 1d4} {@creature Blink Dog||blink dogs}"
+            ],
+            [
+              "9",
+              "1 {@creature pirate captain|GoS} (see {@adventure appendix C|GoS|11}) and {@dice 3d10} {@creature Bandit||bandits} digging up buried treasure"
+            ],
+            [
+              "10",
+              "{@dice 3d6} {@creature Tribal Warrior||tribal warriors}"
+            ],
+            [
+              "11",
+              "{@dice 2d4} {@creature Druid||druids}"
+            ],
+            [
+              "12",
+              "{@dice 1d6} {@creature Dryad||dryads}"
+            ],
+            [
+              "13",
+              "{@dice 2d4} {@creature Centaur||centaurs}"
+            ],
+            [
+              "14",
+              "1 {@creature ankheg}"
+            ],
+            [
+              "15",
+              "{@dice 1d10} {@creature Giant Boar||giant boars}"
+            ],
+            [
+              "16",
+              "{@dice 2d6} {@creature Giant Eagle||giant eagles}"
+            ],
+            [
+              "17",
+              "{@dice 1d4} {@creature Giant Ape||giant apes}"
+            ],
+            [
+              "18",
+              "{@dice 1d4} {@creature Treant||treants}"
+            ],
+            [
+              "19",
+              "1 {@creature roc}"
+            ],
+            [
+              "20",
+              "{@dice 1d4} {@creature veteran} explorers"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Wild Island Story Hooks",
+          "colLabels": [
+            "d4",
+            "Story Hook"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "The island hides a spring that restores life to anyone washed in it, as per the {@spell raise dead} spell. A creature can only benefit from the spring once."
+            ],
+            [
+              "2",
+              "A {@creature djinni} recluse dwells on the island and grants favors."
+            ],
+            [
+              "3",
+              "{@creature Pixie||Pixies} beg the characters to help them oust a group of {@dice 3d10} trophy hunters ({@creature Scout||scouts}) from the island."
+            ],
+            [
+              "4",
+              "The island holds the tomb of an archdruid, which contains a portal to the Feywild."
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:ocean-environs entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[163]`
+- Source entry path: `$.variantrule[163].entries[0]`
+- Canonical output: `rule/gos-ocean-environs.json`
+- OMITTED: NON_MECHANICAL: Editorial description of sea hazards and treasures.
+
+Complete original source entry:
+
+```json
+"For those who dwell on land, the sea is an alien world filled with unpredictable hazards. Yet rare treasures hide in the depths, making such dangers well worth the risk for brave and brazen mariners. This section details a variety of environmental features one might encounter both on and beneath the waves."
+```
+
+### rule:gos:ocean-environs entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[163]`
+- Source entry path: `$.variantrule[163].entries[1]`
+- Canonical output: `rule/gos-ocean-environs.json`
+- OMITTED: SCHEMA_UNSUPPORTED: Random depth/diameter and creature/treasure table selection has no approved Rule table model; the location-generation dependency is deferred under R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Blue Holes",
+  "entries": [
+    "A blue hole is a circular sinkhole that forms on the bed of the sea in shallow water. The deep blue water of the hole creates a stark contrast with the lighter color of the shallow water that surrounds it. Blue holes have diameters of {@dice 1d10 × 100} feet and are {@dice 1d10 × 100} feet deep.",
+    "Blue holes are filled with secrets. Many blue holes hide monsters or treasure, as shown on the Hiding in Blue Holes table.",
+    {
+      "type": "table",
+      "caption": "Hiding in Blue Holes",
+      "colLabels": [
+        "d10",
+        "Creatures or Treasure"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "{@dice 2d10} {@creature sahuagin}"
+        ],
+        [
+          "2",
+          "1 {@creature giant octopus}"
+        ],
+        [
+          "3",
+          "{@dice 1d4 + 1} {@creature Chuul||chuuls}"
+        ],
+        [
+          "4",
+          "1 {@creature sea hag} and {@dice 2d4} {@creature merrow}"
+        ],
+        [
+          "5",
+          "1 {@creature plesiosaurus}"
+        ],
+        [
+          "6",
+          "{@dice 1d4} {@creature Swarm of Quippers||swarms of quippers}"
+        ],
+        [
+          "7",
+          "{@dice 2d4} {@creature Reef Shark||reef sharks}"
+        ],
+        [
+          "8",
+          "1 {@creature giant shark}"
+        ],
+        [
+          "9",
+          "{@dice 1d6} items from {@book Magic Item Table A|DMG|7|Random Magic Items} in chapter 7, \"{@book Treasure|DMG|7|Treasure},\" of the {@book Dungeon Master's Guide|DMG}"
+        ],
+        [
+          "10",
+          "Treasure rolled on the {@table Treasure Hoard: Challenge 0—4|DMG} table in chapter 7, \"{@book Treasure|DMG|7|Treasure},\" of the {@book Dungeon Master's Guide|DMG}"
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:ocean-environs entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[163]`
+- Source entry path: `$.variantrule[163].entries[2]`
+- Canonical output: `rule/gos-ocean-environs.json`
+- OMITTED: NON_MECHANICAL: The ecological description defines no distinct procedure.
+- OMITTED: SCHEMA_UNSUPPORTED: The approved damage pattern cannot express damage triggered by forced movement across this environment without inventing a spatial trigger.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Coral Reefs",
+  "entries": [
+    "Coral reefs grow all over the ocean floor, though most are found within depths of less than 150 feet near the shoreline. Reefs range from a few feet to over 1,000 miles in length and width. These colorful ecosystems house small fish, crustaceans, and mollusks. As a result, predators come to reefs looking for prey.",
+    "Uneven and sharp, coral reefs can harm those forced into them. A creature forcibly moved on the reef—without using the creature's action, bonus action, or reaction—takes 3 ({@damage 1d6}) slashing damage per 5 feet of reef that it is pushed over."
+  ]
+}
+```
+
+### rule:gos:ocean-environs entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[163]`
+- Source entry path: `$.variantrule[163].entries[3]`
+- Canonical output: `rule/gos-ocean-environs.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: The linked travel, current, crew, and submerged movement procedure depends on deferred R-GAP-31 maritime/environmental state.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Currents",
+  "entries": [
+    "Ocean water is moved by wind and tides to create constant river-like flows called currents. Tidal currents are typically the strongest. They're usually found within 50 miles of shore and at depths of less than 300 feet. These currents have a speed of {@dice 1d6} miles per hour that changes daily.",
+    "Currents become weaker farther out to sea and deeper in the ocean. These currents have a speed of {@dice 1d4}−1 miles per hour that changes daily.",
+    {
+      "type": "image",
+      "href": {
+        "type": "internal",
+        "path": "variantrules/GoS/096-za-06-ocean-environs-p203.webp"
+      },
+      "width": 708,
+      "height": 1000,
+      "credit": "Jim Nelson"
+    },
+    {
+      "type": "entries",
+      "name": "Currents and Travel",
+      "entries": [
+        "When a vessel or creature travels in the same direction as a current, that current's speed is added to the vessel or creature's travel pace. A creature or vessel traveling against a current has that current's speed subtracted from the vessel or creature's travel pace. If this results in a negative travel pace, the vessel or creature can let the current carry it. Alternatively, the crew of the vessel or the creature can fight against the current by rowing or swimming hard, moving at half the vessel or creature's normal pace. Vessels and creatures fighting against a current must make a Constitution saving throw at the end of every hour traveled, with a bonus equal to the crew's quality (if they have crew). Vessels that fail have their crew's quality score decreased by 1. Creatures that fail gain one level of {@condition exhaustion}. The DC for this saving throw is 10 + 1 for every consecutive hour spent fighting the current."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Submerged in Currents",
+      "entries": [
+        "When a creature without a swimming speed is submerged in a current, the creature must succeed on a Strength ({@skill Athletics}) check at the end of its turn or get pulled {@dice 1d4 × 5} feet in the direction of the current. The DC for this check equals 10 + the number of miles per hour the current is moving."
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:ocean-environs entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[163]`
+- Source entry path: `$.variantrule[163].entries[4]`
+- Canonical output: `rule/gos-ocean-environs.json`
+- OMITTED: SCHEMA_UNSUPPORTED: The Rule schema has no depth-layer illumination or pressure/material destruction model; cited DMG environmental procedures are not reproduced here.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Depth",
+  "entries": [
+    "The deeper a surface-dwelling creature travels into the sea, the more hostile the environment becomes. Those venturing into the depths must keep the following natural forces in mind.",
+    {
+      "type": "entries",
+      "name": "Illumination",
+      "entries": [
+        "When it comes to light, the sea is divided into three layers:",
+        "{@b Sunlight Zone}. The sunlight zone extends from the water's surface to a depth of 650 feet. This area of the sea has the same natural illumination conditions as above the water.",
+        "{@b Twilight Zone}. The twilight zone is between the depths of 650 and 1,000 feet. When the sunlight zone above is bathed in natural bright light, the twilight zone is filled with dim light. If the sunlight zone is filled with dim light or darkness, the twilight zone is dark.",
+        "{@b Midnight Zone}. Any depth below 1,000 feet is considered the midnight zone, since no natural light from the surface penetrates this deep."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Pressure and Temperature",
+      "entries": [
+        "Water pressure, or the weight of water on top of a creature or object, increases with depth. Conversely, temperature decreases as depth increases. The pressure and temperature's effects on creatures without a swimming speed at depths below 100 feet can be found in the \"{@book Unusual Environments|DMG|5|Unusual Environments}\" section in chapter 5 of the {@book Dungeon Master's Guide|DMG}."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Optional Rule: Pressure and Objects",
+      "entries": [
+        "With this optional rule, characters who dive deep in the ocean require specialized equipment that can withstand the ocean's pressure. Nonmagical objects not made to withstand the water pressure are destroyed at various depths, as determined by the material used to create them. This destructive depth is presented for various materials on the Objects and Water Pressure table. Objects made of other materials break at the DM's discretion.",
+        {
+          "type": "table",
+          "caption": "Objects and Water Pressure",
+          "colLabels": [
+            "Material",
+            "Destructive Depth"
+          ],
+          "colStyles": [
+            "col-6",
+            "col-6"
+          ],
+          "rows": [
+            [
+              "Glass, crystal, ice",
+              "100 ft."
+            ],
+            [
+              "Wood, bone",
+              "500 ft."
+            ],
+            [
+              "Stone",
+              "1,000 ft."
+            ],
+            [
+              "Iron, steel",
+              "1,500 ft."
+            ],
+            [
+              "Mithral",
+              "2,000 ft."
+            ],
+            [
+              "Adamantine",
+              "2,500 ft."
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:ocean-environs entry 5
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[163]`
+- Source entry path: `$.variantrule[163].entries[5]`
+- Canonical output: `rule/gos-ocean-environs.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: The mist procedures combine table selection, visibility distance, vessel/crew state, spell events, and hazard outcomes within deferred R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Eldritch Mist",
+  "entries": [
+    "While natural fog on the ocean can be a nuisance to ship crews, eldritch mist strikes fear into sailors everywhere. These rare, mysterious mists are almost indistinguishable from the naturally occurring variety until it's too late.",
+    "If a ship encounters eldritch mist, choose a type or roll for one on the Eldritch Mist Types table.",
+    {
+      "type": "table",
+      "caption": "Eldritch Mist Types",
+      "colLabels": [
+        "d6",
+        "Mist Type"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1–2",
+          "Ghost Fog"
+        ],
+        [
+          "3–4",
+          "Shadowfell Fog"
+        ],
+        [
+          "5–6",
+          "Wild Magic Fog"
+        ]
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Mist Thickness",
+      "entries": [
+        "Mist lightly obscures the area it fills. Depending on its density, it heavily obscures an area beyond a certain distance from creatures within. Use the Mist Thickness table to determine a mist's thickness at random. The Mist Obfuscation table notes how far a creature in mist can see before the area beyond is heavily obscured.",
+        {
+          "type": "table",
+          "caption": "Mist Thickness",
+          "colLabels": [
+            "d10",
+            "Thickness"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1–3",
+              "Light"
+            ],
+            [
+              "4–7",
+              "Moderate"
+            ],
+            [
+              "8–9",
+              "Heavy"
+            ],
+            [
+              "10",
+              "Very Heavy"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Mist Obfuscation",
+          "colLabels": [
+            "Thickness",
+            "Heavily Obscured Distance"
+          ],
+          "colStyles": [
+            "col-6",
+            "col-6"
+          ],
+          "rows": [
+            [
+              "Light",
+              "30 ft."
+            ],
+            [
+              "Moderate",
+              "20 ft."
+            ],
+            [
+              "Heavy",
+              "10 ft."
+            ],
+            [
+              "Very heavy",
+              "5 ft."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Ghost Fog",
+      "entries": [
+        "Ghost fog contains the souls of murder victims whose bodies were thrown into the sea. A {@dc 15} Intelligence ({@skill Arcana}) check reveals that this mist is ghost fog.",
+        "The souls of the dead want the living to join them. Every hour a ship is immersed in ghost fog, roll any die. On an even number, {@dice 2d4} hostile {@creature Specter||specters} appear and attack those on the ship. If a humanoid creature dies in ghost fog, its spirit rises as a specter that is hostile toward all creatures that aren't undead.",
+        "All non-undead creatures immersed in ghost fog are vulnerable to necrotic damage."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Shadowfell Fog",
+      "entries": [
+        "Shadowfell fog seeps into the Material Plane at thin points in the boundary between the two planes. A {@dc 15} Intelligence ({@skill Arcana}) check reveals that this mist is Shadowfell fog.",
+        "When a vessel travels through this oppressive, shadow-haunted miasma, its crew and passengers feel despair. Each hour a vessel is immersed in the fog, the crew must make a quality score check by rolling a {@dice d20} and adding their quality score to the number. The DC for this check is 10 + the number of hours the ship has been immersed in the Shadowfell fog. If the crew fails this check, their quality score decreases by 1 while within the Shadowfell fog and for 1 day afterward."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Wild Magic Fog",
+      "entries": [
+        "Few know the origins of wild magic fog, with some claiming it is the creation of capricious gods while others believe it is the result of magical experimentation gone wrong. A {@dc 15} Intelligence ({@skill Arcana}) check reveals that this mist is wild magic fog.",
+        "Whenever a creature in wild magic fog casts a spell of 1st level or higher, roll on the {@table Wild Magic Surge|PHB} table in chapter 3, \"{@book Classes|PHB|3},\" of the {@book Player's Handbook|PHB} to create a magical effect."
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:ocean-environs entry 6
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[163]`
+- Source entry path: `$.variantrule[163].entries[6]`
+- Canonical output: `rule/gos-ocean-environs.json`
+- OMITTED: NON_MECHANICAL: Descriptive dimensions, growth, and habitat context are not independent mechanics.
+- OMITTED: SCHEMA_UNSUPPORTED: The approved obscuration mechanic has no distance threshold, so encoding it would broaden the source effect.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Kelp Forests",
+  "entries": [
+    "Kelp grows in dense forests across the ocean floor. Most forests are found within depths of less than 100 feet near the shoreline, and range from 10 feet to over 100 miles in length and width. The kelp grows in vines up to 175 feet in length.",
+    "Kelp roots are shallow, and a whole forest can be uprooted by a strong storm. But it grows at a rapid pace, sometimes as much as 18 inches a day, meaning that a kelp forest can spring up quickly. Such forests can hide thousands of small fish and other prey animals, which attract predators. The forest is so dense that anything within it is heavily obscured to an observer more than 10 feet away, and the whole area is {@quickref difficult terrain||3}."
+  ]
+}
+```
+
+### rule:gos:ocean-environs entry 7
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[163]`
+- Source entry path: `$.variantrule[163].entries[7]`
+- Canonical output: `rule/gos-ocean-environs.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: The location hazard trigger and its attack/save sequence depend on deferred R-GAP-31 environmental state.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Kraken's Grave",
+  "entries": [
+    "When krakens die, their bodies often rot on the seafloor. In such cases, the ground absorbs the decaying kraken's supernatural energy, marking the area with a dark stain in the shape of the kraken's body. This stain is called a kraken's grave.",
+    "When a creature moves within 30 feet of a kraken's grave or starts its turn there, that creature must succeed on a {@dc 14} Dexterity ({@skill Stealth}) check or it disturbs the grave. If a creature disturbs the grave, a tendril made of lightning stretches from the ground and attacks the creature with a {@hit 7} bonus to hit. On a hit, the target takes 10 ({@damage 3d6}) lightning damage, and it must succeed on a {@dc 14} Constitution saving throw or become {@condition blinded} for the next {@dice 2d4} hours."
+  ]
+}
+```
+
+### rule:gos:ocean-environs entry 8
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[163]`
+- Source entry path: `$.variantrule[163].entries[8]`
+- Canonical output: `rule/gos-ocean-environs.json`
+- OMITTED: SCHEMA_UNSUPPORTED: The component has linked sight, location, time, destruction, and condition-state triggers that the approved contract cannot represent as one faithful procedure.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Lure Lights",
+  "entries": [
+    "When aboleths die, their souls sometimes gather in clusters called lure lights. These 100-foot-diameter collections of pale, yellow lights are found in the deep ocean below depths of 1,000 feet. They glow with bright light in a 100-foot radius and dim light for another 100 feet.",
+    "Any creature that can see the lure lights must succeed on a {@dc 14} Wisdom saving throw or be {@condition charmed} by the lights for 24 hours or until the lights are destroyed. A creature that succeeds on the saving throw is immune to the effect of the lure lights for 24 hours.",
+    "While {@condition charmed} by the lights, a creature can't willingly move out of line of sight of them and defends them to the death. If forcibly moved away from the lights, the creature tries to find its way back to them. The creature can't take a short or long rest while under this effect. After 24 hours, the {@condition charmed} creature gains one level of {@condition exhaustion} and must repeat the saving throw if it is within line of sight of the lights, ending the effect on itself on a success. If the lights aren't within line of sight at this time, the creature succeeds automatically.",
+    "Each cluster of lure lights has AC 17, 100 hit points, and immunity to necrotic and poison damage."
+  ]
+}
+```
+
+### rule:gos:ocean-environs entry 9
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[163]`
+- Source entry path: `$.variantrule[163].entries[9]`
+- Canonical output: `rule/gos-ocean-environs.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: The school table selects distinct ship, weather, creature, and crew procedures dependent on deferred R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Magical Storms",
+  "entries": [
+    "Even worse than the threat of storms is the menace of weather imbued with magic. When a ship enters a storm, roll a {@dice d20}. On a 20, the storm churns with magical energy. Pick or randomly determine the type of magical energy brimming within the storm, consulting the Magical Storm Type table.",
+    {
+      "type": "table",
+      "caption": "Magical Storm Type",
+      "colLabels": [
+        "d8",
+        "Magic"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "Abjuration"
+        ],
+        [
+          "2",
+          "Conjuration"
+        ],
+        [
+          "3",
+          "Divination"
+        ],
+        [
+          "4",
+          "Enchantment"
+        ],
+        [
+          "5",
+          "Evocation"
+        ],
+        [
+          "6",
+          "Illusion"
+        ],
+        [
+          "7",
+          "Necromancy"
+        ],
+        [
+          "8",
+          "Transmutation"
+        ]
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Abjuration",
+      "entries": [
+        "A storm infused with abjuration magic repels ships, as if protecting something in the sea. Right before the storm ends, a ship within it is teleported {@dice 5d20} miles in a random direction."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Conjuration",
+      "entries": [
+        "When conjuration magic churns within a storm's heart, creatures of wind and rain emerge from distant realms to attack anything they encounter. The ship encounters {@dice 1d3} hostile {@creature Air Elemental||air elementals}."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Divination",
+      "entries": [
+        "When divination magic seeps into a storm, howling winds and residual whispers temporarily scramble the knowledge of a ship's crew; for {@dice 1d3} days, the ship's crew suffers disadvantage on all quality checks."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Enchantment",
+      "entries": [
+        "Storms infused with enchantment magic disarm a creature's sense of danger, enthralling mariners and causing them to speed into danger. During the storm, any checks made to resolve hazards or manage the ship are made with disadvantage."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Evocation",
+      "entries": [
+        "These ferocious storms are wracked with thunderbolts, driving sheets of acid rain, exploding meteors, and other dangers. After each day of the storm, every component aboard the ship takes {@damage 1d10} fire, {@damage 1d10} acid, and {@damage 1d10} lightning damage. In addition, roll a {@damage d20} and add the crew's quality. On a 10 or less, the crew's quality decreases by 1, and {@dice 1d6} members of the crew are killed."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Illusion",
+      "entries": [
+        "A storm brimming with illusions poses little direct harm to a ship, but experienced navigators know it poses an insidious threat. During the storm, the ship travels in a random direction that isn't its intended course."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Necromancy",
+      "entries": [
+        "Ghosts howl and whirl in this storm's wind, while the remains of long-dead mariners stir in their watery graves. During the storm, {@dice 1d4} {@creature Specter||specters}, {@dice 2d4} {@creature Ghoul||ghouls}, and {@dice 4d6} {@creature Zombie||zombies} emerge from the waves to attack the ship."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Transmutation",
+      "entries": [
+        "These violently unpredictable storms cause the waves to warp and twist. The storm transforms the water around the ship into an amalgamation of ice, stone, and stranger materials, making travel difficult and damaging the ship. The ship's hull takes {@damage 4d10} bludgeoning damage, and the ship's speed decreases by half during the storm."
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:ocean-environs entry 10
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[163]`
+- Source entry path: `$.variantrule[163].entries[10]`
+- Canonical output: `rule/gos-ocean-environs.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: The navigation and grounding procedure depends on deferred R-GAP-31 vessel, environment, crew, and travel state.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Sandbars",
+  "entries": [
+    "Waves and currents deposit sand in shallow water near the shoreline. These sandbars form a line that can be between 10 feet and 3 miles in length and width. During high tide, sandbars are below the ocean's surface, while they peek above the water during low tide.",
+    {
+      "type": "entries",
+      "name": "Navigating Sandbars",
+      "entries": [
+        "Sandbars make dangerous obstacles for vessels, particularly at high tide when they are less noticeable. The crew of a ship moving toward a sandbar beneath the waves must have a passive Wisdom ({@skill Perception}) score of 12 or higher or fail to see the sandbar in the way (see \"{@variantrule Travel at Sea|GoS|Noticing Threats}\"). When a ship passes over a submerged sandbar, the sandbar counts as {@quickref difficult terrain||3}, and the ship must succeed on a Dexterity saving throw. The DC of this save corresponds with the depth of the sandbar, as listed on the Sandbar DCs table. If the ship fails this save, it gets stuck on the sandbar. A ship can become unstuck by using an action to make a Strength check, with a bonus equal to the crew's quality, against the sandbar's DC.",
+        {
+          "type": "table",
+          "caption": "Sandbar DCs",
+          "colLabels": [
+            "DC",
+            "Description"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "10",
+              "Deep sandbar"
+            ],
+            [
+              "15",
+              "Moderate sandbar"
+            ],
+            [
+              "20",
+              "Shallow sandbar"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:ocean-environs entry 11
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[163]`
+- Source entry path: `$.variantrule[163].entries[11]`
+- Canonical output: `rule/gos-ocean-environs.json`
+- OMITTED: SCHEMA_UNSUPPORTED: Contact triggering, hit point maximum changes and their recovery, and the terminal outcome are not expressible together in the approved Rule patterns.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Sapping Snow",
+  "entries": [
+    "Sapping snow—that's what aquatic explorers call the powdery remains of dead organisms that cover the ocean floor. When this substance is imbued with necromantic magic, it becomes a life-leeching detritus.",
+    "Whenever a creature starts its turn touching sapping snow, that creature must succeed on a {@dc 15} Constitution saving throw or take 10 ({@damage 3d6}) necrotic damage. The creature's hit point maximum decreases by an amount equal to the necrotic damage taken. This reduction lasts until the creature finishes a long rest. If this effect reduces the creature's hit point maximum to 0, the creature dies, and its body immediately crumbles into sapping snow."
+  ]
+}
+```
+
+### rule:gos:ocean-environs entry 12
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[163]`
+- Source entry path: `$.variantrule[163].entries[12]`
+- Canonical output: `rule/gos-ocean-environs.json`
+- OMITTED: SCHEMA_UNSUPPORTED: The approved Rule schema has no random result table, and the creature/treasure results depend on external canonical targets.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Shipwrecks",
+  "entries": [
+    "Shipwrecks at the bottom of the ocean make the perfect locations for monsters' lairs and lost treasures. The Shipwreck Contents table provides ideas for the creatures and treasure within these wrecks.",
+    {
+      "type": "table",
+      "caption": "Shipwreck Contents",
+      "colLabels": [
+        "d10",
+        "Creatures or Treasure"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "1 {@creature sahuagin priestess} and {@dice 2d10} {@creature sahuagin}"
+        ],
+        [
+          "2",
+          "1 {@creature young bronze dragon}"
+        ],
+        [
+          "3",
+          "{@dice 4d10} {@creature Giant Crab||giant crabs}"
+        ],
+        [
+          "4",
+          "{@dice 3d10} {@creature Giant Sea Horse||giant seahorses}"
+        ],
+        [
+          "5",
+          "{@dice 1d4} {@creature Hunter Shark||hunter sharks}"
+        ],
+        [
+          "6",
+          "1 {@creature giant octopus}"
+        ],
+        [
+          "7",
+          "{@dice 2d6} {@creature merrow}"
+        ],
+        [
+          "8",
+          "{@dice 2d10} {@creature merfolk}"
+        ],
+        [
+          "9",
+          "{@dice 1d6} items from {@table Magic Item Table B} in chapter 7, \"{@book Treasure|DMG|7|Treasure},\" of the {@book Dungeon Master's Guide|DMG}"
+        ],
+        [
+          "10",
+          "Treasure rolled on the {@table Treasure Hoard: Challenge 5—10|DMG} table in chapter 7, \"{@book Treasure|DMG|7|Treasure},\" of the {@book Dungeon Master's Guide|DMG}"
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:ocean-environs entry 13
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[163]`
+- Source entry path: `$.variantrule[163].entries[13]`
+- Canonical output: `rule/gos-ocean-environs.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: The linked spatial, vehicle, crew, and planar destination procedures depend on deferred R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Whirlpools",
+  "entries": [
+    "In areas where storms or opposed currents drive powerful waters together, violent maelstroms might form. Whirlpools are {@quickref difficult terrain||3}. Each whirlpool has a rank, which determines its size and strength, as shown on the Whirlpool Rank table. A whirlpool's depth equals half its diameter.",
+    {
+      "type": "table",
+      "caption": "Whirlpool Rank",
+      "colLabels": [
+        "Rank",
+        "Diameter",
+        "Velocity",
+        "DC"
+      ],
+      "colStyles": [
+        "text-center col-2-1",
+        "col-3-3",
+        "col-3-3",
+        "col-3-3 text-center"
+      ],
+      "rows": [
+        [
+          "1",
+          "22 ({@dice 4d10}) ft.",
+          "5 ft.",
+          "5"
+        ],
+        [
+          "2",
+          "55 ({@dice 10d10}) ft.",
+          "15 ft.",
+          "10"
+        ],
+        [
+          "3",
+          "110 ({@dice 20d10}) ft.",
+          "25 ft.",
+          "15"
+        ],
+        [
+          "4",
+          "165 ({@dice 30d10}) ft.",
+          "35 ft.",
+          "20"
+        ]
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Creatures in Whirlpools",
+      "entries": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "variantrules/GoS/097-za-07-p206.webp"
+          },
+          "width": 1000,
+          "height": 960,
+          "credit": "Slawomir Maniak"
+        },
+        "When a creature moves into a whirlpool or starts its turn there, it must make a Strength ({@skill Athletics}) check with a DC determined by the whirlpool's rank. On a success, the creature can move normally. On a failure, the creature is immediately moved toward the vortex's center at the whirlpool's velocity, and the creature is {@condition restrained} by the whirlpool until the start of its next turn. If the creature reaches the whirlpool's center, the creature is pulled under the surface and either appears at a special location (see \"Whirlpool Destinations\" below) or plunges a number of feet underwater equal to the whirlpool's velocity."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Vessels in Whirlpools",
+      "entries": [
+        "If a vessel starts its turn in a whirlpool with a diameter greater than the vessel's length, the ship's officers and crew must make a group check to escape. This group check works like the special ones made against hazards.",
+        "The group check represents 5 minutes of work. The check's DC is chosen or randomly determined by rolling a {@dice d4} on the Whirlpool Rank table. The captain, first mate, bosun, and quartermaster each make an ability check, as shown on the Whirlpool Checks table. If no one makes the check for a particular officer, a failure is contributed toward the group check. Also, roll a {@dice d20} for the crew, using its quality score as a modifier to the roll, and compare that check to the DC.",
+        "Determine how many of the group's checks succeeded—the officers' and the crew's—then consult the Whirlpool Check Results table.",
+        {
+          "type": "table",
+          "caption": "Whirlpool Checks",
+          "colLabels": [
+            "Officer",
+            "Check"
+          ],
+          "colStyles": [
+            "col-6",
+            "col-6"
+          ],
+          "rows": [
+            [
+              "Captain",
+              "Intelligence (water vehicles)"
+            ],
+            [
+              "First mate",
+              "Charisma ({@skill Intimidation})"
+            ],
+            [
+              "Bosun",
+              "Strength ({@item carpenter's tools|PHB})"
+            ],
+            [
+              "Quartermaster",
+              "Wisdom ({@skill Nature})"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Whirlpool Check Results",
+          "colLabels": [
+            "Result",
+            "Effect"
+          ],
+          "colStyles": [
+            "col-6",
+            "col-6"
+          ],
+          "rows": [
+            [
+              "Total Success",
+              "The vessel uses the whirlpool to its advantage and increases its speed by 20 ft. during its current turn."
+            ],
+            [
+              "Success",
+              "The vessel can move normally on its turn."
+            ],
+            [
+              "Failure",
+              "The vessel is immediately moved toward the vortex's center at the whirlpool's velocity, and the vessel is {@condition restrained} by the whirlpool until the start of its next turn."
+            ],
+            [
+              "Total Failure",
+              "As a failure. Additionally, if the vessel is in the whirlpool at the start of its next turn, all checks the vessel makes to determine the whirlpool's effects are made with disadvantage on that turn."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Whirlpool Destinations",
+      "entries": [
+        "While a whirlpool might be a short-lived hazard that drags things into the depths, they might also serve as a violent passage to another realm. In such cases, things dragged into a whirlpool are deposited elsewhere, be it through a crack in the seafloor leading to an Underdark ocean or a portal to a different plane of existence. Use the Whirlpool Destinations table to choose or randomly determine where a whirlpool leads, usually to a body of water in that destination. See {@book chapter 2|DMG|2} of the {@book Dungeon Master's Guide|DMG} for information about the destinations on other planes.",
+        {
+          "type": "table",
+          "caption": "Whirlpool Destinations",
+          "colLabels": [
+            "d10",
+            "Destination"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1–3",
+              "Underdark"
+            ],
+            [
+              "4",
+              "Elemental Plane of Water"
+            ],
+            [
+              "5",
+              "Elemental Plane of Earth"
+            ],
+            [
+              "6",
+              "Feywild"
+            ],
+            [
+              "7",
+              "Shadowfell"
+            ],
+            [
+              "8",
+              "Astral Plane"
+            ],
+            [
+              "9",
+              "Outlands"
+            ],
+            [
+              "10",
+              "Outer Plane of the DM's choice"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:random-ships entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[178]`
+- Source entry path: `$.variantrule[178].entries[0]`
+- Canonical output: `rule/gos-random-ships.json`
+- OMITTED: NON_MECHANICAL: Editorial introduction to ships encountered at sea.
+
+Complete original source entry:
+
+```json
+"The characters aren't the only sailors traveling the high seas. Each new vessel they encounter presents an opportunity for adventure. The following rules can be used to generate other ships met on the open seas."
+```
+
+### rule:gos:random-ships entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[178]`
+- Source entry path: `$.variantrule[178].entries[1]`
+- Canonical output: `rule/gos-random-ships.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Ship generation, vessel statistics, cargo, and passenger capacity depend on deferred R-GAP-31 and R-GAP-28; the named Vehicle targets have no canonical outputs.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Ship Type",
+  "entries": [
+    "The type of ship the characters meet determines the vessel's statistics, along with how many creatures and how much cargo it can carry.",
+    {
+      "type": "table",
+      "caption": "Ship Type",
+      "colLabels": [
+        "d100",
+        "Ship"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "01–09",
+          "{@vehicle Rowboat|GoS}"
+        ],
+        [
+          "10–25",
+          "{@vehicle Keelboat|GoS}"
+        ],
+        [
+          "26–38",
+          "{@vehicle Longship|GoS}"
+        ],
+        [
+          "39–60",
+          "{@vehicle Sailing ship|GoS}"
+        ],
+        [
+          "61–79",
+          "{@vehicle Galley|GoS}"
+        ],
+        [
+          "80–00",
+          "{@vehicle Warship|GoS}"
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:random-ships entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[178]`
+- Source entry path: `$.variantrule[178].entries[2]`
+- Canonical output: `rule/gos-random-ships.json`
+- OMITTED: NON_MECHANICAL: The table generates descriptive names and no gameplay mechanic.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Ship Name",
+  "entries": [
+    "Every ship has a name, which you can create yourself or randomly generate using the Ship Names table. Roll on the table—once for an adjective and once for a noun—to create a ship name.",
+    {
+      "type": "table",
+      "caption": "Ship Names",
+      "isNameGenerator": true,
+      "colLabels": [
+        "d20",
+        "Adjective",
+        "Noun"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-5",
+        "col-5"
+      ],
+      "rows": [
+        [
+          "1",
+          "Beautiful",
+          "Adventure"
+        ],
+        [
+          "2",
+          "Bilious",
+          "Barnacle"
+        ],
+        [
+          "3",
+          "Bold",
+          "Brawler"
+        ],
+        [
+          "4",
+          "Cold",
+          "Devil"
+        ],
+        [
+          "5",
+          "Dandy",
+          "Dragon"
+        ],
+        [
+          "6",
+          "Dawn",
+          "Gem"
+        ],
+        [
+          "7",
+          "Drunken",
+          "Flower"
+        ],
+        [
+          "8",
+          "Fiery",
+          "Jester"
+        ],
+        [
+          "9",
+          "Furious",
+          "Kraken"
+        ],
+        [
+          "10",
+          "Grinning",
+          "Leviathan"
+        ],
+        [
+          "11",
+          "Intrepid",
+          "Mermaid"
+        ],
+        [
+          "12",
+          "Jolly",
+          "Prince"
+        ],
+        [
+          "13",
+          "Misty",
+          "Princess"
+        ],
+        [
+          "14",
+          "Rambunctious",
+          "Revenge"
+        ],
+        [
+          "15",
+          "Red",
+          "Saber"
+        ],
+        [
+          "16",
+          "Royal",
+          "Shark"
+        ],
+        [
+          "17",
+          "Salty",
+          "Tide"
+        ],
+        [
+          "18",
+          "Sinful",
+          "Treasure"
+        ],
+        [
+          "19",
+          "Twilight",
+          "Victory"
+        ],
+        [
+          "20",
+          "Zealous",
+          "Wanderer"
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:random-ships entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[178]`
+- Source entry path: `$.variantrule[178].entries[3]`
+- Canonical output: `rule/gos-random-ships.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Crew, passenger, food, and vessel operation state depend on deferred R-GAP-31.
+- OMITTED: NON_MECHANICAL: The table generates descriptive names and no gameplay mechanic.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Crew",
+  "entries": [
+    "Unless you decide otherwise, each ship encountered on the sea has its full crew and enough food and water to sustain that crew and any passengers for the duration of the ship's journey. You can generate a crew using the suggestions in the \"Ship Purpose\" section below or by using the suggested crew for a ship's type.",
+    {
+      "type": "entries",
+      "name": "Crew Member Names",
+      "entries": [
+        "Should you need to quickly generate the name of a member of a ship's crew, the following table makes it easy to produce a two-part name that could apply to any member of a crew, regardless of gender or race.",
+        {
+          "type": "table",
+          "caption": "Crew Member Name",
+          "isNameGenerator": true,
+          "colLabels": [
+            "d20",
+            "First Half",
+            "Second Half"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-5",
+            "col-5"
+          ],
+          "rows": [
+            [
+              "1",
+              "Salty",
+              "Beard"
+            ],
+            [
+              "2",
+              "Ol'",
+              "Eye"
+            ],
+            [
+              "3",
+              "Silver",
+              "Copper"
+            ],
+            [
+              "4",
+              "Golden",
+              "Fish"
+            ],
+            [
+              "5",
+              "Black",
+              "Whale"
+            ],
+            [
+              "6",
+              "Blue",
+              "Dog"
+            ],
+            [
+              "7",
+              "Silky",
+              "Cur"
+            ],
+            [
+              "8",
+              "Heartless",
+              "Fingers"
+            ],
+            [
+              "9",
+              "Drizzly",
+              "Patches"
+            ],
+            [
+              "10",
+              "Thirsty",
+              "Hook"
+            ],
+            [
+              "11",
+              "Rum",
+              "Salt"
+            ],
+            [
+              "12",
+              "Gloomy",
+              "Rat"
+            ],
+            [
+              "13",
+              "Handsome",
+              "Charm"
+            ],
+            [
+              "14",
+              "Wee",
+              "Beast"
+            ],
+            [
+              "15",
+              "Clever",
+              "Devil"
+            ],
+            [
+              "16",
+              "Ugly",
+              "Liar"
+            ],
+            [
+              "17",
+              "Pretty",
+              "Angel"
+            ],
+            [
+              "18",
+              "Lost",
+              "Blood"
+            ],
+            [
+              "19",
+              "Mad",
+              "Maps"
+            ],
+            [
+              "20",
+              "Poor",
+              "Mast"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:random-ships entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[178]`
+- Source entry path: `$.variantrule[178].entries[4]`
+- Canonical output: `rule/gos-random-ships.json`
+- OMITTED: SCHEMA_UNSUPPORTED: The contract cannot express the nonmagical-attack qualifier, immunity, or end-turn-in-object trigger without changing the source meaning.
+- OMITTED: OUT_OF_APPROVED_SCOPE: The remaining purpose branches require deferred Vehicle, Creature, Equipment, and encounter state under R-GAP-31 and R-GAP-28.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Ship Purpose",
+  "entries": [
+    "Every ship has a reason for its voyages, which can be rolled or chosen on the Ship Purpose table. Each purpose is described after the table.",
+    {
+      "type": "table",
+      "caption": "Ship Purpose",
+      "colLabels": [
+        "d100",
+        "Purpose"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "01–17",
+          "Cargo"
+        ],
+        [
+          "18–34",
+          "Passenger"
+        ],
+        [
+          "35–51",
+          "Fishing"
+        ],
+        [
+          "52–68",
+          "Military"
+        ],
+        [
+          "69–85",
+          "Piracy"
+        ],
+        [
+          "86–95",
+          "Mercenary"
+        ],
+        [
+          "96–00",
+          "Ghost"
+        ]
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Cargo",
+      "entries": [
+        "Cargo ships haul mercantile goods, emergency relief supplies, traveling carnivals, and any other materials that need to move across the seas. Let the ship's alignment, racial makeup, and disposition guide what a ship might carry as cargo.",
+        "Most crew members and officers on cargo ships are {@creature Commoner||commoners}. Vessels with valuable cargo may carry {@dice 2d10} {@creature Guard||guards} with a {@creature veteran} guard captain. Cargo ships that transport livestock may have {@creature Goat||goats}, {@creature Camel||camels}, {@creature Draft Horse||draft horses}, {@creature Mule||mules}, and other beasts, in addition to their crews and passengers."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Passenger",
+      "entries": [
+        "Passenger ships carry travelers. Such vessels are chartered for journeys or pleasure cruises or carry refugees, religious missionaries, or some other peaceful group traveling to an important destination.",
+        "Most crew members and officers on passenger ships are {@creature Commoner||commoners}. Vessels carrying important people may carry {@dice 2d10} {@creature Guard||guards} with a {@creature veteran} guard captain. The passengers on a passenger ship generally consist of {@creature Commoner||commoners} and {@creature Noble||nobles}, though many creatures have the need to travel by ship."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Fishing",
+      "entries": [
+        "Fishing ships include commercial vessels that catch fish and crustaceans to sell at market, whaling boats, and trophy hunters stalking sharks, giant octopuses, and other sea monsters. Any vessel that hunts sea life for profit, survival, or sport has this purpose.",
+        "Most crew members and officers on commercial fishing ships are {@creature Commoner||commoners}, but whaling vessels and sport hunters often have {@creature Scout||scouts} among their ranks."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Military",
+      "entries": [
+        "Military vessels carry soldiers to war and are equipped for battle on the sea. These vessels hunt pirates, defend and invade territory, carry important government cargo, escort officials, transport prisoners, and do anything else their commanders require.",
+        "Most crew members on military ships are {@creature Guard||guards} or {@creature Scout||scouts}. Officers are {@creature Veteran||veterans}. Many military ships carry extra {@creature Guard||guards} as passengers for invasion, boarding, and operating siege weapons. A military ship may also carry {@dice 1d4} {@creature Bandit||bandits} or {@creature Guard||guards} as prisoners."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Piracy",
+      "entries": [
+        "Pirates smuggle contraband goods and rob other ships, seaside towns, and outposts. They engage in criminal operations, but not all are evil. Many have an ethical code. Some serve governments as privateers, harming only these masters' adversaries, while others rob only the corrupt and give their ill-gotten gains to the needy.",
+        "Most crew members on pirate ships are {@creature Bandit||bandits}. Officers are {@creature Bandit Captain||bandit captains} and could include a {@creature pirate captain|GoS} (see {@adventure appendix C|GoS|11}) and a {@creature pirate bosun|GoS} (see {@adventure appendix C|GoS|11}). Many pirate ships carry extra {@creature Bandit||bandits} and at least one {@creature pirate deck wizard|GoS} (see {@adventure appendix C|GoS|11}) as passengers."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Mercenary",
+      "entries": [
+        "Mercenary crews travel the world in search of adventure and pay. They explore uncharted territories, fight wars, slay monsters, transport special cargo or people, and undertake any quest for the right cost.",
+        "Mercenary ships have crews and passengers similar to military ships.",
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "variantrules/GoS/098-za-08-ghost-ship-p210.webp"
+          },
+          "width": 852,
+          "height": 1000,
+          "credit": "Wayne England"
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Ghost",
+      "entries": [
+        "Ghost ships are incorporeal vessels that carry undead crews. The crews often died in a grisly manner and have unfinished business that keeps them tethered to the Material Plane. They sometimes serve necromancers, but more often these crews are beholden to no master.",
+        "A ghost ship has the same statistics as a normal ship of its ship type with the following changes:",
+        {
+          "type": "list",
+          "items": [
+            "The ship has resistance to the following damage types: acid, fire, lightning, and thunder, as well as bludgeoning, piercing, and slashing from nonmagical attacks.",
+            "The ship is immune to cold, necrotic, poison, and psychic damage.",
+            "The ship can move through other creatures and objects as if they were {@quickref difficult terrain||3}. It takes 5 ({@damage 1d10}) force damage if it ends its turn inside an object."
+          ]
+        },
+        "Crew members and officers on good and neutral ghost ships are {@creature Ghost||ghosts}. On evil ghost ships, the crew members are 90 percent {@creature Skeleton||skeletons} and {@creature Zombie||zombies} (even mix of each), 10 percent are {@creature Specter||specters}, and the officers are {@creature Wraith||wraiths}."
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:random-ships entry 5
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[178]`
+- Source entry path: `$.variantrule[178].entries[5]`
+- Canonical output: `rule/gos-random-ships.json`
+- OMITTED: SCHEMA_UNSUPPORTED: The attitude/race/disease/encounter tables and their conditional branches do not fit an approved random-table model; mutiny intersects skipped R-GAP-44 and ship state is deferred under R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Attitude and Race",
+  "entries": [
+    "Each ship's crew and passengers have an attitude that guides how they interact with the characters. Friendly ships seek to trade or share news, neutral ones attack if they feel threatened and otherwise try to avoid contact, and hostile ones seek to attack and seize the characters' ship.",
+    "First, roll or choose an attitude on the Ship Attitude table, then roll on the appropriate table to determine the nature of the crew. The race chosen or rolled need not be the only one found on the ship, and you might use a table multiple times to make a ship's crew and passengers more diverse. Feel free to substitute suggested statistics for other statistics if you feel they make more sense with the ship's race (for example, substituting the {@creature bandit} statistics with {@creature orc} statistics on a pirate ship crewed by orcs).",
+    {
+      "type": "table",
+      "caption": "Ship Attitude",
+      "colLabels": [
+        "d6",
+        "Attitude"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1–2",
+          "Friendly"
+        ],
+        [
+          "3–4",
+          "Neutral"
+        ],
+        [
+          "5–6",
+          "Hostile"
+        ]
+      ]
+    },
+    {
+      "type": "table",
+      "caption": "Friendly Ship",
+      "colLabels": [
+        "d100",
+        "Race"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "01–05",
+          "Dragonborn"
+        ],
+        [
+          "06–10",
+          "Dwarves"
+        ],
+        [
+          "11–30",
+          "Elves"
+        ],
+        [
+          "31–40",
+          "Gnomes"
+        ],
+        [
+          "41–50",
+          "Tieflings"
+        ],
+        [
+          "51–60",
+          "Halflings"
+        ],
+        [
+          "61–00",
+          "Humans"
+        ]
+      ]
+    },
+    {
+      "type": "table",
+      "caption": "Neutral Ship",
+      "colLabels": [
+        "d100",
+        "Race"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "01–05",
+          "Dragonborn"
+        ],
+        [
+          "06–10",
+          "Dwarves"
+        ],
+        [
+          "11–30",
+          "Lizardfolk"
+        ],
+        [
+          "31–40",
+          "Hobgoblins"
+        ],
+        [
+          "41–50",
+          "Orcs"
+        ],
+        [
+          "51–60",
+          "Halflings"
+        ],
+        [
+          "61–00",
+          "Humans"
+        ]
+      ]
+    },
+    {
+      "type": "table",
+      "caption": "Hostile Ship",
+      "colLabels": [
+        "d100",
+        "Race"
+      ],
+      "colStyles": [
+        "text-center col-2",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "01–05",
+          "Frost giants"
+        ],
+        [
+          "06–10",
+          "Kobolds"
+        ],
+        [
+          "11–30",
+          "Orcs"
+        ],
+        [
+          "31–40",
+          "Hobgoblins"
+        ],
+        [
+          "41–50",
+          "Undead"
+        ],
+        [
+          "51–60",
+          "Gnolls"
+        ],
+        [
+          "61–00",
+          "Humans"
+        ]
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Ship Disposition",
+      "entries": [
+        "Each ship has a disposition that determines events happening aboard the ship when the characters encounter it. Choose or roll for a ship's disposition on the Ship Disposition table. Each disposition is described after the table. If you roll no special disposition, the ship is under no unusual stress and reacts based on its attitude.",
+        {
+          "type": "table",
+          "caption": "Ship Disposition",
+          "colLabels": [
+            "d10",
+            "Disposition"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "Diseased"
+            ],
+            [
+              "2",
+              "Emergency"
+            ],
+            [
+              "3",
+              "Help with purpose"
+            ],
+            [
+              "4",
+              "Mutiny"
+            ],
+            [
+              "5",
+              "Trading"
+            ],
+            [
+              "6–10",
+              "No special disposition"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Diseased",
+      "entries": [
+        "Roll percentile dice. The result reveals the percentage of the ship's crew and passengers infected with a disease of your choice from \"{@book Sample Diseases|DMG|8|Sample Diseases}\" in chapter 8, \"{@book Running the Game|DMG|8|Running the Game},\" of the {@book Dungeon Master's Guide|DMG}. This ship approaches the characters, begging for or demanding help with the infection.",
+        "Ghost ships can't be diseased; if you get this result for a ghost ship, ignore it and roll again."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Emergency",
+      "entries": [
+        "A ship experiencing an emergency is suffering some sort of crisis. The crew and passengers beg or demand the characters' help in getting out of the situation. Choose or roll for an emergency on the Ship Emergency table to determine the vessel's crisis.",
+        {
+          "type": "table",
+          "caption": "Ship Emergency",
+          "colLabels": [
+            "d4",
+            "Emergency"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "The ship's crew is lost."
+            ],
+            [
+              "2",
+              "The ship is damaged and can't be steered as it drifts with the current."
+            ],
+            [
+              "3",
+              "The ship is stuck on a sandbar."
+            ],
+            [
+              "4",
+              "The ship is sinking."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Help with Purpose",
+      "entries": [
+        "Ship crews looking for help with their purpose approach the characters asking for direct aid in a task. For instance, mercenaries ask for help mapping an unexplored area while a cargo ship's crew asks the characters to serve as guards. Most crews offer compensation in return for the characters' services, though some might threaten or beg for charity to get help."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Mutiny",
+      "entries": [
+        "The crew of ships ready to mutiny are unhappy with the leadership of their officers and plan to overthrow them. The officers approach the characters, asking for or demanding help quelling the uprising, or the crew approaches, requesting aid with their uprising or attempting to trick the characters into killing the officers."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Trading",
+      "entries": [
+        "Ship crews and passengers looking to trade offer their cargo or services to the characters in exchange for deeds, items, or coin. Use the ship's purpose to guide what they have to trade. For instance, commercial fishermen might offer a crate of valuable crabs in exchange for the head of a shark that keeps consuming their catches, while pirates might offer stolen potions in exchange for gems or gold. Most of the people offering trades are willing to haggle. If the characters refuse to trade, evil-aligned crews and passengers might attack to get what they want."
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:travel-at-sea entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[223]`
+- Source entry path: `$.variantrule[223].entries[0]`
+- Canonical output: `rule/gos-travel-at-sea.json`
+- OMITTED: NON_MECHANICAL: The introduction describes the hazards and tone of sea travel.
+- OMITTED: REFERENCE_UNRESOLVED: The PHB Travel Pace and DMG Exploration rules cited in this source entry have no edition-matched canonical Rule outputs.
+
+Complete original source entry:
+
+```json
+"It's not just pirates and sea monsters that make journeys on the sea so treacherous. Foul weather, nautical accidents, infested food, illness, and worse all conspire to send even the most capable crews to watery graves. The following rules help adjudicate travel at sea, specifically voyages of an hour or more. This material builds on the travel rules in the {@book Player's Handbook|PHB|8|Travel Pace} and the {@book Dungeon Master's Guide|DMG|8|Exploration}."
+```
+
+### rule:gos:travel-at-sea entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[223]`
+- Source entry path: `$.variantrule[223].entries[1]`
+- Canonical output: `rule/gos-travel-at-sea.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Ship speed, movement-component damage, and travel pace are vessel mechanics deferred under R-GAP-31.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Travel Pace",
+  "entries": [
+    "Ships travel at a speed given in their stat blocks. Unlike with land travel, ships can't choose to move at a faster pace, though they can choose to go slower.",
+    "If a ship's mode of movement takes damage, it might be slowed. For every decrease of 10 feet in speed, reduce the ship's travel pace by 1 mile per hour and 24 miles per day."
+  ]
+}
+```
+
+### rule:gos:travel-at-sea entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[223]`
+- Source entry path: `$.variantrule[223].entries[2]`
+- Canonical output: `rule/gos-travel-at-sea.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Role-limited travel activities, passive crew checks, quality state, repair, navigation, and stealth depend on deferred R-GAP-31 ship and crew state.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Activity While Traveling",
+  "entries": [
+    {
+      "type": "image",
+      "href": {
+        "type": "internal",
+        "path": "variantrules/GoS/095-za-05-travel-at-sea-p199.webp"
+      },
+      "width": 772,
+      "height": 1000,
+      "credit": "Wayne England"
+    },
+    "The activities available to a ship's crew and passengers are a bit different from the options available to a group traveling by land. Refer to \"{@book Activity While Traveling|PHB|8|Activity While Traveling}\" in chapter 8 of the {@book Player's Handbook|PHB} for more information on some of the topics discussed below.",
+    "A number of activities are restricted to certain officers, unless the DM rules otherwise. For example, a DM might allow a bard to engage in the Raise Morale activity by playing bawdy songs on deck to lift the crew's spirits.",
+    "The party's pace has no effect on the activities they can engage in while traveling by ship.",
+    {
+      "type": "entries",
+      "name": "Draw a Map",
+      "entries": [
+        "A ship's captain often undertakes this activity, producing a map of the ship's progress and helps the crew get back on course if they get lost. No ability check is required."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Forage",
+      "entries": [
+        "The character casts fishing lines, keeping an eye out for sources of food, making a Wisdom ({@skill Survival}) check when the DM calls for it."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Raise Morale (First Mate Only)",
+      "entries": [
+        "The first mate can manage the crew's time to grant extended breaks, provide instruction, and generally improve the quality of life on the ship. Once every 24 hours, if the crew's quality score is 3 or lower, the first mate can make a {@dc 15} Charisma ({@skill Persuasion}) check. On a successful check, the crew's quality score increases by 1."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Navigate (Quartermaster Only)",
+      "entries": [
+        "The quartermaster can try to prevent the ship from becoming lost, making a Wisdom ({@skill Survival}) check when the DM calls for it. (See \"{@book Becoming Lost|DMG|5|Becoming Lost}\" in chapter 5 of the {@book Dungeon Master's Guide|DMG} for more information.)"
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Noticing Threats",
+      "entries": [
+        "Use the passive Wisdom ({@skill Perception}) score of the player characters or the crew to determine whether anyone on the ship notices a hidden threat. The crew has a passive Wisdom ({@skill Perception}) score equal to 10 + the crew's quality score. The DM might decide that a threat can be noticed only by characters in a specific area of the ship. For example, only characters below deck might have a chance to hear or spot a creature hiding on board."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Repair (Bosun Only)",
+      "entries": [
+        "At the end of the day, the ship's bosun can make a Strength check using {@item carpenter's tools|PHB}. On a 15 or higher, each damaged component regains hit points equal to {@dice 1d6} + the crew's quality score (minimum of 1 hit point). A component other than the hull that had 0 hit points becomes functional again."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Stealth (Captain Only)",
+      "entries": [
+        "The ship's captain can engage in this activity only if the weather conditions restrict visibility, such as in heavy fog. The ship makes a Dexterity check with a bonus equal to the crew's quality score to determine if it can hide."
+      ]
+    }
+  ]
+}
+```
+
+### rule:gos:travel-at-sea entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[223]`
+- Source entry path: `$.variantrule[223].entries[3]`
+- Canonical output: `rule/gos-travel-at-sea.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Daily hazard selection, group checks, crew conflict, fire, fog, infestation, storm, damage, and outcome branches depend on deferred R-GAP-31/R-GAP-28. Crew-conflict mutiny outcomes remain under skipped R-GAP-44.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Hazards",
+  "entries": [
+    "Sea travel is an innately dangerous proposition. A storm on land might bog down a caravan, delaying its trip by a few days, while at sea a storm can split a ship in two and send everyone aboard to their doom. The close quarters of life aboard a ship leads to short tempers and brawls, while a few rats that sneak aboard can spread disease and spoil supplies. This section presents a variety of common hazards sailors might face on the sea.",
+    {
+      "type": "entries",
+      "name": "Group Checks",
+      "entries": [
+        "To determine how a ship fares against these hazards, each threat requires the ship's officers and crew to make a special group check (see {@book chapter 7|PHB|7|Group Checks} of the {@book Player's Handbook|PHB} for how group checks work). The description of a hazard specifies which officers can roll to contribute to the group check. That description also states what ability check an officer makes. Even if the officers make different ability checks, their successes and failures contribute to the one group check.",
+        "Additionally, all the non-officer members of the crew make a single check, a {@dice d20} roll modified by the crew's quality. The success or failure of all these checks—both the officers and the crew—determines the result of the group check.",
+        "While each hazard lists the officers assigned to participate in a group check, anyone can attempt an officer's check in a pinch, with two exceptions: First, only the captain can make checks associated with the captain's role; no one else can take the captain's place. Second, only one character can attempt an officer's check; they can't receive help.",
+        "Once all the checks related to the group check have been rolled, the ship's success or failure is determined. Hazards offer four levels of success or failure determined by the results of the ship's group check. A total success or a total failure occurs when every roll in the group check is a success or a failure, respectively."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Determining Hazards",
+      "entries": [
+        "Traveling by sea is an innately dangerous proposition. When running an ocean adventure, you can select hazards based on the needs of your campaign or generate them randomly.",
+        "To determine hazards at random, roll a {@dice d20} at the start of each day of an ocean voyage. On a 20, the ship faces a hazard that day. Use the following two tables to determine the nature of the hazard and the DC of the threat it presents. Specifics corresponding to each of these DC levels are detailed along with each of the following hazards.",
+        {
+          "type": "table",
+          "caption": "Hazard Type",
+          "colLabels": [
+            "d20",
+            "Hazard Type"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1–3",
+              "Crew conflict"
+            ],
+            [
+              "4–6",
+              "Fire"
+            ],
+            [
+              "7–9",
+              "Fog"
+            ],
+            [
+              "10–12",
+              "Infestation"
+            ],
+            [
+              "13–20",
+              "Storm"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Hazard DC",
+          "colLabels": [
+            "d20",
+            "Hazard DC"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1–9",
+              "10"
+            ],
+            [
+              "10–17",
+              "15"
+            ],
+            [
+              "18–19",
+              "20"
+            ],
+            [
+              "20",
+              "25"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Crew Conflict",
+      "entries": [
+        "Sailors can be a rough-and-tumble bunch, and cramming them into a ship's confined quarters leads to inevitable rivalries, feuds, and petty crimes. If resentments among the crew grow too strong, the officers must step in and set things right, lest they risk mutiny or worse.",
+        "Each day a ship spends dealing with a crew conflict requires those aboard to make a group check. The check's DC is randomly determined or chosen from the Crew Conflicts DCs table. The captain, first mate, and cook each make an ability check, as shown on the Crew Conflict Checks table. This check takes the place of any other activities that the officer might undertake that day, representing their contribution to placating the crew. If no one makes the check for a particular officer, a failure is contributed toward the group check.",
+        "Even though the crew is causing trouble, some members help the officers, and thus the crew still contributes a roll to the group check. Roll a {@dice d20} for the crew, using its quality score as a modifier to the roll, and compare that check to the DC.",
+        "Determine how many of the group's checks succeeded—the officers' and the crew's—then consult the Crew Conflict Check Results table.",
+        {
+          "type": "table",
+          "caption": "Crew Conflict DCs",
+          "colLabels": [
+            "DC",
+            "Description"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "10",
+              "Minor scuffle or petty theft"
+            ],
+            [
+              "15",
+              "Brawl involving several people, theft of a valuable"
+            ],
+            [
+              "20",
+              "Large brawl resulting in several injuries, theft of a prized item"
+            ],
+            [
+              "25",
+              "Murder, serious brawl involving most of the crew"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Crew Conflict Checks",
+          "colLabels": [
+            "Officer",
+            "Check"
+          ],
+          "colStyles": [
+            "col-6",
+            "col-6"
+          ],
+          "rows": [
+            [
+              "Captain",
+              "Charisma ({@skill Intimidation})"
+            ],
+            [
+              "First mate",
+              "Charisma ({@skill Intimidation})"
+            ],
+            [
+              "Cook",
+              "Intelligence ({@item brewer's supplies|PHB})"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Crew Conflict Check Results",
+          "colLabels": [
+            "Result",
+            "Effect"
+          ],
+          "colStyles": [
+            "col-6",
+            "col-6"
+          ],
+          "rows": [
+            [
+              "Total Success",
+              "The crew's quality score increases by 1 for {@dice 1d4} days and the hazard ends."
+            ],
+            [
+              "Success",
+              "The hazard ends."
+            ],
+            [
+              "Failure",
+              "The crew's quality score decreases by 1."
+            ],
+            [
+              "Total Failure",
+              "The crew's quality score decreases by 1, and the crew immediately mutinies."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Fire",
+      "entries": [
+        "A fire at sea can turn a ship into a burned-out hulk, its crew slain or forced overboard.",
+        "If a fire erupts aboard a ship, its officers and crew must make a group check to coordinate efforts to extinguish it. The check's DC is randomly determined or chosen from the Fire DCs table. The group check represents 5 minutes of work. The captain, first mate, bosun, and surgeon each make an ability check, as shown on the Fire Checks table. If no one makes the check for a particular officer, a failure is contributed toward the group check. Also, roll a {@dice d20} for the crew, using its quality score as a modifier to the roll, and compare that check to the DC.",
+        "Determine how many of the group's checks succeeded—the officers' and the crew's—then consult the Fire Check Results table.",
+        {
+          "type": "table",
+          "caption": "Fire DCs",
+          "colLabels": [
+            "DC",
+            "Description"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "10",
+              "Small, contained fire, equivalent to an oil lantern"
+            ],
+            [
+              "15",
+              "Dangerous flame, equivalent to a large campfire, or multiple, smaller fires ignited at once"
+            ],
+            [
+              "20",
+              "Intense fire with significant chance to spread, equivalent to a bonfire"
+            ],
+            [
+              "25",
+              "Sudden, pervasive flames, such as from igniting a hold filled with flammable cargo"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Fire Checks",
+          "colLabels": [
+            "Officer",
+            "Check"
+          ],
+          "colStyles": [
+            "col-6",
+            "col-6"
+          ],
+          "rows": [
+            [
+              "Captain",
+              "Intelligence (water vehicles)"
+            ],
+            [
+              "First mate",
+              "Charisma ({@skill Intimidation})"
+            ],
+            [
+              "Bosun",
+              "Strength ({@item carpenter's tools|PHB})"
+            ],
+            [
+              "Surgeon",
+              "Intelligence ({@skill Medicine})"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Fire Check Results",
+          "colLabels": [
+            "Result",
+            "Effect"
+          ],
+          "colStyles": [
+            "col-6",
+            "col-6"
+          ],
+          "rows": [
+            [
+              "Total Success",
+              "The fire is extinguished with nothing beyond cosmetic damage."
+            ],
+            [
+              "Success",
+              "The fire is extinguished, but the hull and {@dice 1d3} other random components take {@damage 6d6} fire damage."
+            ],
+            [
+              "Failure",
+              "The hull and {@dice 1d3} other random components take {@damage 6d6} fire damage, and the fire continues. Make another set of checks."
+            ],
+            [
+              "Total Failure",
+              "The crew's quality score decreases by 1 due to injuries, while the hull and {@dice 1d3} other random components take {@damage 6d6} fire damage. The fire continues. Make another set of checks."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Fog",
+      "entries": [
+        "Fog on land is usually an inconvenience, but at sea it can prove disastrous. Decreased visibility makes navigation more difficult and can cause a vessel to crash.",
+        "A group check determines how the officers and crew manage through one day of fog. The check's DC is randomly determined or chosen from the Fog DCs table. The captain and quartermaster each make an ability check, as shown on the Fog Checks table. If no one makes the check for a particular officer, a failure is contributed toward the group check. Also, roll a {@dice d20} for the crew, using its quality score as a modifier to the roll, and compare that check to the DC.",
+        "Determine how many of the group's checks succeeded—the officers' and the crew's—then consult the Fog Check Results table.",
+        {
+          "type": "table",
+          "caption": "Fog DCs",
+          "colLabels": [
+            "DC",
+            "Description"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "10",
+              "Light fog"
+            ],
+            [
+              "15",
+              "Moderate fog"
+            ],
+            [
+              "20",
+              "Heavy fog"
+            ],
+            [
+              "25",
+              "Very heavy fog"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Fog Checks",
+          "colLabels": [
+            "Officer",
+            "Check"
+          ],
+          "colStyles": [
+            "col-6",
+            "col-6"
+          ],
+          "rows": [
+            [
+              "Captain",
+              "Intelligence (water vehicles)"
+            ],
+            [
+              "Quartermaster",
+              "Wisdom ({@skill Nature})"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Fog Check Results",
+          "colLabels": [
+            "Result",
+            "Effect"
+          ],
+          "colStyles": [
+            "col-6",
+            "col-6"
+          ],
+          "rows": [
+            [
+              "Total Success",
+              "The fog has no effect on navigation, and the crew's quality increases by 1 for {@dice 1d3} days."
+            ],
+            [
+              "Success",
+              "The fog has no effect on navigation."
+            ],
+            [
+              "Failure",
+              "The fog slows the ship, reducing its travel pace and speed by half for the day."
+            ],
+            [
+              "Total Failure",
+              "The fog slows the ship and disorients the crew, reducing the vessel's travel pace and speed by half for the day and causing it to move in a random direction."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Infestation",
+      "entries": [
+        "Provisioning a sea journey is challenging, particularly when allocating what to pack for the voyage. A rat infestation or an outbreak of even a minor illness can spell disaster at sea. This type of hazard covers illnesses, infestations, spoiled supplies, and other troubles that wear away a crew's health.",
+        "Each day a ship spends dealing with an infestation requires those aboard to make a group check. The check's DC is randomly determined or chosen from the Infestation DCs table. The captain, first mate, surgeon, and cook each make an ability check, as shown on the Infestation Checks table. This check takes the place of any other activities that the officer might undertake that day. If no one makes the check for a particular officer, a failure is contributed toward the group check. Also, roll a {@dice d20} for the crew, using its quality score as a modifier to the roll, and compare that check to the DC.",
+        "Determine how many of the group's checks succeeded—the officers' and the crew's—then consult the Infestation Check Results table.",
+        {
+          "type": "table",
+          "caption": "Infestation DCs",
+          "colLabels": [
+            "DC",
+            "Description"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "10",
+              "Minor bug or rat infestation, common cold"
+            ],
+            [
+              "15",
+              "Persistent bug or rat infestation, stomach ailment or typical flu"
+            ],
+            [
+              "20",
+              "Serious bug or rat infestation, contagious flu or spoiled food"
+            ],
+            [
+              "25",
+              "Overwhelming bug or rat infestation, lethal plague"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Infestation Checks",
+          "colLabels": [
+            "Officer",
+            "Check"
+          ],
+          "colStyles": [
+            "col-6",
+            "col-6"
+          ],
+          "rows": [
+            [
+              "Captain",
+              "Intelligence (water vehicles)"
+            ],
+            [
+              "First mate",
+              "Charisma ({@skill Persuasion})"
+            ],
+            [
+              "Surgeon",
+              "Intelligence ({@skill Medicine})"
+            ],
+            [
+              "Cook",
+              "Constitution ({@item cook's utensils|PHB})"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Infestation Check Results",
+          "colLabels": [
+            "Result",
+            "Effect"
+          ],
+          "colStyles": [
+            "col-6",
+            "col-6"
+          ],
+          "rows": [
+            [
+              "Total Success",
+              "The crew's quality score increases by 1 for {@dice 1d4} days, and the hazard ends."
+            ],
+            [
+              "Success",
+              "The hazard ends."
+            ],
+            [
+              "Failure",
+              "The crew's quality score decreases by 1."
+            ],
+            [
+              "Total Failure",
+              "The crew's quality score decreases by 1, and the distraction caused by the crisis forces the ship to move at half speed that day."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Storm",
+      "entries": [
+        "Winds and towering waves toss ships like bath toys. Snowstorms batter vessels venturing too far north. Hurricanes consume whole armadas. More common and deadlier than most sea monsters, storms claim more ships than any other threat on the high seas.",
+        "Each day a ship spends involved in a storm requires those aboard to make a group check. The check's DC is randomly determined or chosen from the Storm DCs table. The captain, first mate, bosun, and quartermaster each make an ability check, as shown on the Storm Checks table. This check takes the place of any other activities that the officer might undertake that day, representing their contribution to keeping the ship afloat. If no one makes the check for a particular officer, a failure is contributed toward the group check. Also, roll a {@dice d20} for the crew, using its quality score as a modifier to the roll, and compare that check to the DC.",
+        "Determine how many of the group's checks succeeded—the officers' and the crew's—then consult the Storm Check Results table.",
+        {
+          "type": "table",
+          "caption": "Storm DCs",
+          "colLabels": [
+            "DC",
+            "Description"
+          ],
+          "colStyles": [
+            "text-center col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "10",
+              "Heavy gale"
+            ],
+            [
+              "15",
+              "Strong storm"
+            ],
+            [
+              "20",
+              "Typical hurricane"
+            ],
+            [
+              "25",
+              "Overwhelming hurricane"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Storm Checks",
+          "colLabels": [
+            "Officer",
+            "Check"
+          ],
+          "colStyles": [
+            "col-6",
+            "col-6"
+          ],
+          "rows": [
+            [
+              "Captain",
+              "Intelligence (water vehicles)"
+            ],
+            [
+              "First mate",
+              "Charisma ({@skill Intimidation})"
+            ],
+            [
+              "Bosun",
+              "Strength ({@item carpenter's tools|PHB})"
+            ],
+            [
+              "Quartermaster",
+              "Wisdom ({@skill Nature})"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Storm Check Results",
+          "colLabels": [
+            "Result",
+            "Effect"
+          ],
+          "colStyles": [
+            "col-6",
+            "col-6"
+          ],
+          "rows": [
+            [
+              "Total Success",
+              "The ship survives unscathed. The crew's quality score increases by 1 for {@dice 1d4} days."
+            ],
+            [
+              "Success",
+              "The ship survives unscathed."
+            ],
+            [
+              "Failure",
+              "The ship's components each take {@damage 4d10} bludgeoning damage. The crew's quality score decreases by 1. The ship struggles, moving at half speed that day."
+            ],
+            [
+              "Total Failure",
+              "The ship's components each take {@damage 10d10} bludgeoning damage. The crew's quality score decreases by 2, and 10 percent of the crew is washed overboard and lost. The ship is blown off course and struggles to recover its bearings, moving in a random direction."
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:esk:sidekicks entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[196]`
+- Source entry path: `$.variantrule[196].entries[0]`
+- Canonical output: `rule/esk-sidekicks.json`
+- OMITTED: NON_MECHANICAL: Introductory sidekick description and three archetype summaries.
+
+Complete original source entry:
+
+```json
+"On your adventures, the DM might reveal that you've befriended a special character called a sidekick, who joins your party. This appendix presents the game statistics for sidekicks, of which there are three types:"
+```
+
+### rule:esk:sidekicks entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[196]`
+- Source entry path: `$.variantrule[196].entries[1]`
+- Canonical output: `rule/esk-sidekicks.json`
+- OMITTED: NON_MECHANICAL: Expert archetype summary.
+
+Complete original source entry:
+
+```json
+"{@b Expert}, an agile and exceedingly helpful jack of all trades"
+```
+
+### rule:esk:sidekicks entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[196]`
+- Source entry path: `$.variantrule[196].entries[2]`
+- Canonical output: `rule/esk-sidekicks.json`
+- OMITTED: NON_MECHANICAL: Spellcaster archetype summary.
+
+Complete original source entry:
+
+```json
+"{@b Spellcaster}, a magic-user who can cast spells to harm your foes or heal you and your friends"
+```
+
+### rule:esk:sidekicks entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[196]`
+- Source entry path: `$.variantrule[196].entries[3]`
+- Canonical output: `rule/esk-sidekicks.json`
+- OMITTED: NON_MECHANICAL: Warrior archetype summary.
+
+Complete original source entry:
+
+```json
+"{@b Warrior}, a martial companion who specializes in striking your foes or defending you and your allies"
+```
+
+### rule:esk:sidekicks entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[196]`
+- Source entry path: `$.variantrule[196].entries[4]`
+- Canonical output: `rule/esk-sidekicks.json`
+- OMITTED: NON_MECHANICAL: DM/player choice and control guidance; it does not define a distinct character mechanic.
+
+Complete original source entry:
+
+```json
+"The DM will either tell you which type of sidekick to use or let you choose one. It's up to you and the DM to decide who controls the sidekick in play."
+```
+
+### rule:esk:sidekicks entry 5
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[196]`
+- Source entry path: `$.variantrule[196].entries[5]`
+- Canonical output: `rule/esk-sidekicks.json`
+- OMITTED: REFERENCE_UNRESOLVED: ESK stat block targets (Expert, Spellcaster, Warrior) have no canonical Creature outputs; their full stat and feature progression belongs to deferred R-GAP-34.
+
+Complete original source entry:
+
+```json
+{
+  "type": "section",
+  "name": "Sidekick Stat Blocks",
+  "entries": [
+    "A sidekick's game statistics are presented in a box called a stat block, which is essentially a mini character sheet. A stat block contains things like ability scores and hit points, as well as the actions a sidekick is most likely to take in combat. Like any character, a sidekick can use the action options in the combat section of chapter 2.",
+    "These stat blocks work with any character race. If you and the DM agree, you may enhance your sidekick with the appropriate racial traits from chapter 1.",
+    "For more information on stat blocks, see the \"Creatures\" section.",
+    {
+      "type": "list",
+      "items": [
+        "{@creature Spellcaster|ESK}",
+        "{@creature Expert|ESK}",
+        "{@creature Warrior|ESK}"
+      ]
+    }
+  ]
+}
+```
+
+### rule:esk:sidekicks entry 6
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[196]`
+- Source entry path: `$.variantrule[196].entries[6]`
+- Canonical output: `rule/esk-sidekicks.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Archetype proficiencies depend on the sidekick class/character progression system deferred under R-GAP-34 and Equipment.
+
+Complete original source entry:
+
+```json
+{
+  "type": "section",
+  "name": "Proficiencies",
+  "entries": [
+    "A sidekick is proficient with any armor, weapons, and tools included in its stat block. In addition, {@b experts} are proficient with simple weapons, rapiers, shortswords, and light armor; {@b spellcasters} are proficient with simple weapons and light armor; and {@b warriors} are proficient with simple and martial weapons, shields, and all armor."
+  ]
+}
+```
+
+### rule:esk:sidekicks entry 7
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[196]`
+- Source entry path: `$.variantrule[196].entries[7]`
+- Canonical output: `rule/esk-sidekicks.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Level-gated hit points, features, ability/proficiency changes, attacks, and spellcasting tables are the edition-specific progression procedure deferred under R-GAP-34.
+
+Complete original source entry:
+
+```json
+{
+  "type": "section",
+  "name": "Sidekick Level",
+  "entries": [
+    "Your sidekick starts as a 1st-level character. As you and your sidekick adventure together, your sidekick gains experience points and reaches new levels the same way a player character does, using the rules in chapter 1.",
+    "When a sidekick gains a level, look at the sidekick's table below, and consult the new level's row, which shows the sidekick's new hit point maximum and features.",
+    "The DM may start a sidekick at a level higher than 1st, using the hit point maximum for its level on the appropriate table below. Also, give the sidekick the features for its current level and any earlier levels on that table.",
+    {
+      "type": "table",
+      "caption": "Experts Beyond 1st Level",
+      "colLabels": [
+        "Level",
+        "Hit Points",
+        "New Features"
+      ],
+      "colStyles": [
+        "col-1 text-center",
+        "col-2 text-center",
+        "col-9"
+      ],
+      "rows": [
+        [
+          "2nd",
+          "16 ({@dice 3d8 + 3})",
+          {
+            "type": "entries",
+            "name": "Cunning Action",
+            "entries": [
+              "On the expert's turn in combat, it can take the {@action Dash}, Disengage, or {@action Hide} action as a bonus action."
+            ]
+          }
+        ],
+        [
+          "3rd",
+          "22 ({@dice 4d8 + 4})",
+          {
+            "type": "entries",
+            "name": "Expertise",
+            "entries": [
+              "Choose two of the expert's skill proficiencies. The proficiency bonus is doubled for any ability check the expert makes that uses either of the chosen proficiencies."
+            ]
+          }
+        ],
+        [
+          "4th",
+          "27 ({@dice 5d8 + 5})",
+          {
+            "type": "entries",
+            "name": "Ability Score Improvement",
+            "entries": [
+              "The expert's Dex. score increases by 2, raising the modifier by 1, so increase the following numbers by 1: the Dex. saving throw bonus; the {@skill Acrobatics}, {@skill Sleight of Hand}, and {@skill Stealth} bonuses; and the bonuses to hit and damage of the expert's weapon attacks."
+            ]
+          }
+        ],
+        [
+          "5th",
+          "33 ({@dice 6d8 + 6})",
+          {
+            "type": "entries",
+            "name": "Proficiency Bonus",
+            "entries": [
+              "The expert's proficiency bonus increases by 1, so make the following changes in the stat block: increase the bonuses in the Saving Throws and Skills entries by 1, and increase the bonuses to hit of the weapon attacks by 1."
+            ]
+          }
+        ],
+        [
+          "6th",
+          "38 ({@dice 7d8 + 7})",
+          {
+            "type": "entries",
+            "name": "Extra Attack",
+            "entries": [
+              "The expert can attack twice, instead of once, whenever it takes the {@action Attack} action on its turn."
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "type": "table",
+      "caption": "Spellcasters Beyond 1st Level",
+      "colLabels": [
+        "Level",
+        "Hit Points",
+        "New Features"
+      ],
+      "colStyles": [
+        "col-1 text-center",
+        "col-2 text-center",
+        "col-9"
+      ],
+      "rows": [
+        [
+          "2nd",
+          "13 ({@dice 3d8})",
+          {
+            "type": "entries",
+            "name": "Spellcasting",
+            "entries": [
+              "The spellcaster learns another 1st-level spell: {@spell bless} (healer) or {@spell burning hands} (mage)."
+            ]
+          }
+        ],
+        [
+          "3rd",
+          "18 ({@dice 4d8})",
+          {
+            "type": "entries",
+            "name": "Spellcasting",
+            "entries": [
+              "The spellcaster gains one 1st-level spell slot. The spellcaster also learns another 1st-level spell: {@spell shield of faith} (healer) or {@spell shield} (mage)."
+            ]
+          }
+        ],
+        [
+          "4th",
+          "22 ({@dice 5d8})",
+          {
+            "type": "entries",
+            "name": "Ability Score Improvement",
+            "entries": [
+              "The spellcaster's Int. (mage) or Wis. (healer) score increases by 2, raising the modifier by 1, so increase the following numbers by 1: the spellcaster's spell save DC and the bonus to hit of spell attacks, the bonuses in the Skills entry of the mage, the Wisdom saving throw bonus of the healer, and the passive {@skill Perception} of the healer. Spellcasting. The spellcaster learns another cantrip: {@spell resistance} (healer) or {@spell mage hand} (mage)."
+            ]
+          }
+        ],
+        [
+          "5th",
+          "27 ({@dice 6d8})",
+          {
+            "type": "entries",
+            "entries": [
+              {
+                "type": "entries",
+                "name": "Proficiency Bonus",
+                "entries": [
+                  "The spellcaster's proficiency bonus increases by 1, so make the following changes in the stat block: increase the bonuses in the Saving Throws and Skills entries by 1, and increase the bonuses to hit of its spell and weapon attacks by 1."
+                ]
+              },
+              {
+                "type": "entries",
+                "name": "Spellcasting",
+                "entries": [
+                  "The spellcaster gains one 1st-level spell slot and two 2nd-level spell slots. The spellcaster also learns one 2nd-level spell: {@spell aid} (healer) or {@spell invisibility} (mage)"
+                ]
+              }
+            ]
+          }
+        ],
+        [
+          "6th",
+          "31 ({@dice 7d8})",
+          {
+            "type": "entries",
+            "name": "Potent Cantrips",
+            "entries": [
+              "The spellcaster can add its spellcasting ability modifier to the damage it deals with any cantrip."
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "type": "table",
+      "caption": "Warriors Beyond 1st Level",
+      "colLabels": [
+        "Level",
+        "Hit Points",
+        "New Features"
+      ],
+      "colStyles": [
+        "col-1 text-center",
+        "col-2 text-center",
+        "col-9"
+      ],
+      "rows": [
+        [
+          "2nd",
+          "19 ({@dice 3d8 + 6})",
+          {
+            "type": "entries",
+            "name": "Second Wind",
+            "entries": [
+              "The warrior can use a bonus action on its turn to regain hit points equal to {@dice 1d10} + its level. If it does so, it can't use this feature again until it finishes a short or long rest."
+            ]
+          }
+        ],
+        [
+          "3rd",
+          "26 ({@dice 4d8 + 8})",
+          {
+            "type": "entries",
+            "name": "Improved Critical",
+            "entries": [
+              "The warrior's attack rolls now score a critical hit on a roll of 19 or 20 on the {@dice d20}."
+            ]
+          }
+        ],
+        [
+          "4th",
+          "32 ({@dice 5d8 + 10})",
+          {
+            "type": "entries",
+            "name": "Ability Score Improvement",
+            "entries": [
+              "The warrior's Str. score increases by 2, raising the modifier by 1, so increase the warrior's {@skill Athletics} bonus by 1, and increase the bonuses to hit and damage of the warrior's melee weapon attack by 1."
+            ]
+          }
+        ],
+        [
+          "5th",
+          "39 ({@dice 6d8 + 12})",
+          {
+            "type": "entries",
+            "name": "Proficiency Bonus",
+            "entries": [
+              "The warrior's proficiency bonus increases by 1, so make the following changes in the stat block: increase the bonuses in the Saving Throws and Skills entries by 1, increase the passive {@skill Perception} by 1, and increase the bonuses to hit of the weapon attacks by 1."
+            ]
+          }
+        ],
+        [
+          "6th",
+          "45 ({@dice 7d8 + 14})",
+          {
+            "type": "entries",
+            "name": "Extra Attack",
+            "entries": [
+              "The warrior can attack twice, instead of once, whenever it takes the {@action Attack} action on its turn."
+            ]
+          }
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:tce:sidekicks entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[197]`
+- Source entry path: `$.variantrule[197].entries[0]`
+- Canonical output: `rule/tce-sidekicks.json`
+- OMITTED: NON_MECHANICAL: Introductory description of sidekick customization.
+
+Complete original source entry:
+
+```json
+"This section provides a straightforward way to add a special NPC-called a sidekick-to the group of adventurers. These rules take a creature with a low challenge rating and give it levels in one of three simple classes: Expert, Spellcaster, or Warrior."
+```
+
+### rule:tce:sidekicks entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[197]`
+- Source entry path: `$.variantrule[197].entries[1]`
+- Canonical output: `rule/tce-sidekicks.json`
+- OMITTED: NON_MECHANICAL: Narrative example of how a sidekick may join the party.
+
+Complete original source entry:
+
+```json
+"A sidekick can be incorporated into a group at the party's inception, or a sidekick might join them during the campaign. For example, the characters might meet a villager, an animal, or another creature, forge a friendship, and invite the creature to join them on their adventures."
+```
+
+### rule:tce:sidekicks entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[197]`
+- Source entry path: `$.variantrule[197].entries[2]`
+- Canonical output: `rule/tce-sidekicks.json`
+- OMITTED: NON_MECHANICAL: Statement that a DM may customize a monster.
+
+Complete original source entry:
+
+```json
+"You can also use these rules to customize a monster for your own use as DM."
+```
+
+### rule:tce:sidekicks entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[197]`
+- Source entry path: `$.variantrule[197].entries[3]`
+- Canonical output: `rule/tce-sidekicks.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Creature challenge rating and friendship eligibility, player/DM control options, and encounter-count guidance depend on deferred Creature, Character, and encounter domains under R-GAP-34.
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Creating a Sidekick",
+  "entries": [
+    "A sidekick can be any type of creature with a stat block in the {@book Monster Manual|MM} or another D&D book, but the challenge rating in its stat block must be {@filter ½ or lower|bestiary|challenge rating=[&0;&1/2]|miscellaneous=!swarm}. You take that stat block and add to it, as explained in the \"Gaining a Sidekick Class\" section.",
+    "To join the adventurers, the sidekick must be the friend of at least one of them. This friendship might be connected to a character's backstory or to events that have transpired in play. For example, a sidekick could be a childhood friend or pet, or it might be a creature the adventurers saved. As DM, you determine whether there is sufficient trust established for the creature to join the group.",
+    "You decide who plays the sidekick. Here are some options:",
+    {
+      "type": "list",
+      "items": [
+        "A player plays the sidekick as their second character-ideal when you have only one or two players.",
+        "A player plays the sidekick as their only character-ideal for a player who wants a character who's simpler than a typical player character.",
+        "The players jointly play the sidekick.",
+        "You play the sidekick."
+      ]
+    },
+    "There's no limit on the number of sidekicks in a group, but having more than one per player character can noticeably slow down the game. And when estimating the difficulty of an upcoming encounter, count each sidekick as a character."
+  ]
+}
+```
+
+### rule:tce:sidekicks entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[197]`
+- Source entry path: `$.variantrule[197].entries[4]`
+- Canonical output: `rule/tce-sidekicks.json`
+- OMITTED: OUT_OF_APPROVED_SCOPE: Sidekick class choice, party-average level progression, hit point and proficiency advancement, ability score updates, and feature tables are deferred under R-GAP-34.
+
+Complete original source entry:
+
+```json
+{
+  "type": "section",
+  "name": "Gaining a Sidekick Class",
+  "entries": [
+    "When you create a sidekick, you choose the class it will have for the rest of its career: {@class expert sidekick|TCE|Expert}, {@class Spellcaster sidekick|TCE|Spellcaster}, or {@class Warrior sidekick|TCE|Warrior}. If a sidekick class contains a choice, you may make the choice or let the players make it.",
+    {
+      "type": "entries",
+      "name": "Starting Level",
+      "entries": [
+        "The starting level of a sidekick is the same as the average level of the group. For example, if a 1st-level group starts out with a sidekick, that sidekick is also 1st level, but if a 10th-level group invites a sidekick to join them, that sidekick starts at 10th level."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Leveling Up a Sidekick",
+      "entries": [
+        "Whenever a group's average level goes up, the sidekick gains a level. It doesn't matter how much of the group's recent adventures the sidekick experienced; the sidekick levels up because of a combination of the adventures it shared with the group and its own training."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Hit Points",
+      "entries": [
+        "Whenever the sidekick gains a level, it gains one Hit Die, and its hit point maximum increases. To determine the amount of the increase, roll the Hit Die (the type of die appears in the sidekick's stat block), and add its Constitution modifier. It gains a minimum of 1 hit point per level.",
+        "If the sidekick drops to 0 hit points and isn't killed outright, it falls {@condition unconscious} and subsequently makes death saving throws, just like a player character."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Proficiency Bonus",
+      "entries": [
+        "The sidekick's proficiency bonus is determined by its level in its class, as shown in the class's table.",
+        "Whenever the sidekick's proficiency bonus increases by 1, add 1 to the to-hit modifier of all the attacks in its stat block, and increase the DCs in its stat block by 1."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Ability Score Increases",
+      "entries": [
+        "Whenever the sidekick gains the Ability Score Improvement feature, adjust anything in its stat block that relies on an ability modifier that you increase. For example, if the sidekick has an attack that uses its Strength modifier, increase the attack's modifiers to hit and damage if the Strength modifier increases.",
+        "If it's unclear whether a melee attack in the stat block uses Strength or Dexterity, the attack can use either."
+      ]
+    }
+  ]
+}
+```
+
+### rule:xphb:bright-light — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[20]`
+- Source entry path: `$.variantrule[20].entries[0]`
+- Canonical output: `rule/xphb-bright-light.json`
+- OMITTED: Bright Light is normal illumination. The approved Rule contract has no illumination mechanic.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Bright Light is normal illumination."
+```
+
+### rule:xphb:heavily-obscured — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[122]`
+- Source entry path: `$.variantrule[122].entries[0]`
+- Canonical output: `rule/xphb-heavily-obscured.json`
+- OMITTED: Conditional application of the Blinded condition while attempting to see. The obscuration component cannot encode this condition trigger and scope faithfully.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"You have the {@condition Blinded|XPHB} condition while trying to see something in a Heavily Obscured space."
+```
+
+### rule:xphb:lightly-obscured — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[144]`
+- Source entry path: `$.variantrule[144].entries[0]`
+- Canonical output: `rule/xphb-lightly-obscured.json`
+- OMITTED: The affected check is specifically Wisdom (Perception) to see something in the space. The obscuration mechanic cannot encode the explicit ability, skill, and target condition together.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"You have {@variantrule Disadvantage|XPHB} on Wisdom ({@skill Perception|XPHB}) checks to see something in a Lightly Obscured space."
+```
+
+### rule:cos:prophet-s-gambit — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[177]`
+- Source entry path: `$.variantrule[177].entries[0]`
+- Canonical output: `rule/cos-prophet-s-gambit.json`
+- OMITTED: Introductory design note. Non-mechanical attribution.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"{@note Game Designed by Sean Goodison, for 3–5 players, using the {@deck Tarokka Deck|CoS}.}"
+```
+
+### rule:cos:prophet-s-gambit — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[177]`
+- Source entry path: `$.variantrule[177].entries[1]`
+- Canonical output: `rule/cos-prophet-s-gambit.json`
+- OMITTED: Setup, bidding, rounds, execution, and reveal procedures. Nested paths covered: $.variantrule[177].entries[1].type; $.variantrule[177].entries[1].name; $.variantrule[177].entries[1].entries[0].type; $.variantrule[177].entries[1].entries[0].name; $.variantrule[177].entries[1].entries[0].items[0]; $.variantrule[177].entries[1].entries[0].items[1]; $.variantrule[177].entries[1].entries[0].items[2]; $.variantrule[177].entries[1].entries[0].items[3]; $.variantrule[177].entries[1].entries[0].items[4]; $.variantrule[177].entries[1].entries[1].type; $.variantrule[177].entries[1].entries[1].name; $.variantrule[177].entries[1].entries[1].items[0]; $.variantrule[177].entries[1].entries[2].type; $.variantrule[177].entries[1].entries[2].name; $.variantrule[177].entries[1].entries[2].items[0]; $.variantrule[177].entries[1].entries[2].items[1]; $.variantrule[177].entries[1].entries[2].items[2].type; $.variantrule[177].entries[1].entries[2].items[2].name; $.variantrule[177].entries[1].entries[2].items[2].entries[0]; $.variantrule[177].entries[1].entries[2].items[3].type; $.variantrule[177].entries[1].entries[2].items[3].name; $.variantrule[177].entries[1].entries[2].items[3].entries[0]; $.variantrule[177].entries[1].entries[2].items[4]; $.variantrule[177].entries[1].entries[3]; $.variantrule[177].entries[1].entries[4].type; $.variantrule[177].entries[1].entries[4].name; $.variantrule[177].entries[1].entries[4].items[0]; $.variantrule[177].entries[1].entries[5].type; $.variantrule[177].entries[1].entries[5].name; $.variantrule[177].entries[1].entries[5].items[0]. The full card-game procedure is excluded by the approved skipped R-GAP-22 decision.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "How To Play",
+  "entries": [
+    {
+      "type": "list",
+      "name": "Set Up:",
+      "items": [
+        "Separate out the High Deck cards, marked with the Crown symbol. Shuffle them, and place this deck to one side.",
+        "Choose a Dealer to shuffle the remaining cards, called the Common Deck. The person to the Dealer's left then draws a card from this deck and places it face-up in the centre of the table. This is the Focus card.",
+        "The Dealer then places one card per player face-down around the Focus. These are the player's Fate cards. Players may look at their own Fate card at any time.",
+        "Each player is then dealt 6 cards and the Common Deck is placed within easy reach of all players. Discarded cards should be placed face-up, next to the Common Deck.",
+        "The goal of the game is to refine your hand down to 3 cards, which will be combined with the hidden Fate cards and shared Focus card to make the best hand possible."
+      ]
+    },
+    {
+      "type": "list",
+      "name": "The Bid:",
+      "items": [
+        "Each player selects one card from their hand, these are all played face-up simultaneously."
+      ]
+    },
+    {
+      "type": "list",
+      "name": "Round 1:",
+      "items": [
+        "The player with the highest numbered card in front of them may discard their Fate card and replace it with a new card from the deck. They then take the first turn this round.",
+        "Each player takes a turn (moving clockwise) to {@b Play} one card from their hand, covering their previously played card, or discard a card to {@b Risk} activating the top card of the High Deck.",
+        {
+          "type": "item",
+          "name": "Play:",
+          "entries": [
+            "If the card is a Master (an unnumbered Common Deck card) or has a number lower than that of the player to their right then the current player may draw a new card from the Common Deck before discarding one from their hand."
+          ]
+        },
+        {
+          "type": "item",
+          "name": "Risk:",
+          "entries": [
+            "Each card in the High Deck triggers a different special ability which is resolved immediately before being discarded. These abilities are detailed in the section titled 'High Deck Rules'."
+          ]
+        },
+        "Once each player has had one turn a new round begins."
+      ]
+    },
+    "Round 2 is the same as the first.",
+    {
+      "type": "list",
+      "name": "The Execution:",
+      "items": [
+        "After the second round the player who has the highest numbered card showing decides whether to 'kill' (discard) or 'save' (keep) the Focus card. If it is killed then the Focus card is out of play and players' final hands will now only be four-cards strong."
+      ]
+    },
+    {
+      "type": "list",
+      "name": "The Reveal:",
+      "items": [
+        "Finally, players reveal their hand of cards and Fate cards. The player with the best combination of cards using their hand, Fate, and possibly Focus cards is the winner."
+      ]
+    }
+  ]
+}
+```
+
+### rule:cos:prophet-s-gambit — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[177]`
+- Source entry path: `$.variantrule[177].entries[2]`
+- Canonical output: `rule/cos-prophet-s-gambit.json`
+- OMITTED: Dealer-relative tie resolution. Nested paths covered: $.variantrule[177].entries[2].type; $.variantrule[177].entries[2].name; $.variantrule[177].entries[2].entries[0]. The card-game resolution procedure is excluded by skipped R-GAP-22.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Ties",
+  "entries": [
+    "In the case of two players being tied for anything the player closest to the dealer clockwise wins."
+  ]
+}
+```
+
+### rule:cos:prophet-s-gambit — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[177]`
+- Source entry path: `$.variantrule[177].entries[3]`
+- Canonical output: `rule/cos-prophet-s-gambit.json`
+- OMITTED: Ordered card-combination hand rankings. Nested paths covered: $.variantrule[177].entries[3].type; $.variantrule[177].entries[3].name; $.variantrule[177].entries[3].entries[0].type; $.variantrule[177].entries[3].entries[0].items[0]; $.variantrule[177].entries[3].entries[0].items[1]; $.variantrule[177].entries[3].entries[0].items[2]; $.variantrule[177].entries[3].entries[0].items[3]; $.variantrule[177].entries[3].entries[0].items[4]; $.variantrule[177].entries[3].entries[0].items[5]; $.variantrule[177].entries[3].entries[0].items[6]; $.variantrule[177].entries[3].entries[0].items[7]; $.variantrule[177].entries[3].entries[0].items[8]. The card-game hand-ranking procedure is excluded by skipped R-GAP-22.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Order of Winning Hands (Strongest to Weakest)",
+  "entries": [
+    {
+      "type": "list",
+      "items": [
+        "Family (Five cards of the same suit, in numerical order)",
+        "Circle (four of a kind)",
+        "Fortune (a triple and a pair)",
+        "Village (five cards in numerical order)",
+        "Guild (five cards of one suit)",
+        "A triple",
+        "Two pairs",
+        "A pair",
+        "High card"
+      ]
+    }
+  ]
+}
+```
+
+### rule:cos:prophet-s-gambit — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[177]`
+- Source entry path: `$.variantrule[177].entries[4]`
+- Canonical output: `rule/cos-prophet-s-gambit.json`
+- OMITTED: High Deck card effects and immunity to future card effects. Nested paths covered: $.variantrule[177].entries[4].type; $.variantrule[177].entries[4].name; $.variantrule[177].entries[4].entries[0]; $.variantrule[177].entries[4].entries[1].type; $.variantrule[177].entries[4].entries[1].style; $.variantrule[177].entries[4].entries[1].items[0].type; $.variantrule[177].entries[4].entries[1].items[0].name; $.variantrule[177].entries[4].entries[1].items[0].entries[0]; $.variantrule[177].entries[4].entries[1].items[1].type; $.variantrule[177].entries[4].entries[1].items[1].name; $.variantrule[177].entries[4].entries[1].items[1].entries[0]; $.variantrule[177].entries[4].entries[1].items[2].type; $.variantrule[177].entries[4].entries[1].items[2].name; $.variantrule[177].entries[4].entries[1].items[2].entries[0]; $.variantrule[177].entries[4].entries[1].items[3].type; $.variantrule[177].entries[4].entries[1].items[3].name; $.variantrule[177].entries[4].entries[1].items[3].entries[0]; $.variantrule[177].entries[4].entries[1].items[4].type; $.variantrule[177].entries[4].entries[1].items[4].name; $.variantrule[177].entries[4].entries[1].items[4].entries[0]; $.variantrule[177].entries[4].entries[1].items[5].type; $.variantrule[177].entries[4].entries[1].items[5].name; $.variantrule[177].entries[4].entries[1].items[5].entries[0]; $.variantrule[177].entries[4].entries[1].items[6].type; $.variantrule[177].entries[4].entries[1].items[6].name; $.variantrule[177].entries[4].entries[1].items[6].entries[0]; $.variantrule[177].entries[4].entries[1].items[7].type; $.variantrule[177].entries[4].entries[1].items[7].name; $.variantrule[177].entries[4].entries[1].items[7].entries[0]; $.variantrule[177].entries[4].entries[1].items[8].type; $.variantrule[177].entries[4].entries[1].items[8].name; $.variantrule[177].entries[4].entries[1].items[8].entries[0]; $.variantrule[177].entries[4].entries[1].items[9].type; $.variantrule[177].entries[4].entries[1].items[9].name; $.variantrule[177].entries[4].entries[1].items[9].entries[0]; $.variantrule[177].entries[4].entries[1].items[10].type; $.variantrule[177].entries[4].entries[1].items[10].name; $.variantrule[177].entries[4].entries[1].items[10].entries[0]; $.variantrule[177].entries[4].entries[1].items[11].type; $.variantrule[177].entries[4].entries[1].items[11].name; $.variantrule[177].entries[4].entries[1].items[11].entries[0]; $.variantrule[177].entries[4].entries[1].items[12].type; $.variantrule[177].entries[4].entries[1].items[12].name; $.variantrule[177].entries[4].entries[1].items[12].entries[0]; $.variantrule[177].entries[4].entries[1].items[13].type; $.variantrule[177].entries[4].entries[1].items[13].name; $.variantrule[177].entries[4].entries[1].items[13].entries[0]. The card-game effect and turn-resolution procedure is excluded by skipped R-GAP-22.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "High Deck Rules",
+  "entries": [
+    "Revealing cards from the High Deck is risky as there's no telling what chaos you might unleash.",
+    {
+      "type": "list",
+      "style": "list-no-bullets",
+      "items": [
+        {
+          "type": "item",
+          "name": "{@card Artifact|Tarokka Deck|CoS}",
+          "entries": [
+            "Swap your Fate card with the Focus card."
+          ]
+        },
+        {
+          "type": "item",
+          "name": "{@card Beast|Tarokka Deck|CoS}",
+          "entries": [
+            "Each player discards a card, then draws a card from the Common Deck."
+          ]
+        },
+        {
+          "type": "item",
+          "name": "{@card Broken One|Tarokka Deck|CoS}",
+          "entries": [
+            "Discard all the remaining cards in your hand. Then draw a new card from the Common Deck for each one discarded."
+          ]
+        },
+        {
+          "type": "item",
+          "name": "{@card Darklord|Tarokka Deck|CoS}",
+          "entries": [
+            "Choose another player. Look at their hand of cards and choose one for them to discard. Then they draw a card from the Common Deck."
+          ]
+        },
+        {
+          "type": "item",
+          "name": "{@card Donjon|Tarokka Deck|CoS}",
+          "entries": [
+            "Each player must discard cards until they have three left in their hand. The game immediately advances to the Reveal."
+          ]
+        },
+        {
+          "type": "item",
+          "name": "{@card Executioner|Tarokka Deck|CoS}",
+          "entries": [
+            "Keep this card on the table in front of you. Regardless of who wins the execution you decide whether to kill or save the Focus card."
+          ]
+        },
+        {
+          "type": "item",
+          "name": "{@card Mists|Tarokka Deck|CoS}",
+          "entries": [
+            "Rotate the Fate cards one player clockwise."
+          ]
+        },
+        {
+          "type": "item",
+          "name": "{@card Ghost|Tarokka Deck|CoS}",
+          "entries": [
+            "Take a card from the discard pile, then discard a card."
+          ]
+        },
+        {
+          "type": "item",
+          "name": "{@card Horseman|Tarokka Deck|CoS}",
+          "entries": [
+            "Draw two cards from the Common Deck and then discard two cards."
+          ]
+        },
+        {
+          "type": "item",
+          "name": "{@card Innocent|Tarokka Deck|CoS}",
+          "entries": [
+            "Keep this card on the table in front of you. You and your cards can't be affected by any future High Deck cards."
+          ]
+        },
+        {
+          "type": "item",
+          "name": "{@card Marionette|Tarokka Deck|CoS}",
+          "entries": [
+            "Choose another player who hasn't had a turn this round. That player must either play their highest or lowest numbered card, as directed by you."
+          ]
+        },
+        {
+          "type": "item",
+          "name": "{@card Raven|Tarokka Deck|CoS}",
+          "entries": [
+            "Each player chooses a card from their hand and passes it to the player on their left."
+          ]
+        },
+        {
+          "type": "item",
+          "name": "{@card Seer|Tarokka Deck|CoS}",
+          "entries": [
+            "Look at all player's Fate cards once."
+          ]
+        },
+        {
+          "type": "item",
+          "name": "{@card Tempter|Tarokka Deck|CoS}",
+          "entries": [
+            "Choose a card from your hand and a random card from another player's hand to swap."
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:dmg:alien-technology — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[7]`
+- Source entry path: `$.variantrule[7].entries[0]`
+- Canonical output: `rule/dmg-alien-technology.json`
+- OMITTED: Context about characters' unfamiliarity with technology. Contextual introduction.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"When adventurers find a piece of technology that isn't from their world or time period, the players might understand what the object is, but the characters rarely will. To simulate a character's ignorance about the technology, have the character make a series of Intelligence checks to figure it out."
+```
+
+### rule:dmg:alien-technology — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[7]`
+- Source entry path: `$.variantrule[7].entries[1]`
+- Canonical output: `rule/dmg-alien-technology.json`
+- OMITTED: Repeated success/failure counters and item breakage before a Long Rest. The approved ability-check component cannot represent this multi-check procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"To determine how the technology works, a character must succeed on a number of Intelligence checks based on the complexity of the item: two successes for a simple item (such as a cigarette lighter, calculator, or revolver) and four successes for a complex item (such as a computer, chainsaw, or hovercraft). Then consult the Figuring Out Alien Technology table. Consider making the item break if a character fails four or more times before taking a long rest."
+```
+
+### rule:dmg:alien-technology — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[7]`
+- Source entry path: `$.variantrule[7].entries[2]`
+- Canonical output: `rule/dmg-alien-technology.json`
+- OMITTED: Prior observation or operation grants Advantage. The approved test modifier cannot encode this source-specific circumstance condition.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A character who has seen an item used or has operated a similar item has advantage on Intelligence checks made to figure out its use."
+```
+
+### rule:dmg:alien-technology — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[7]`
+- Source entry path: `$.variantrule[7].entries[3]`
+- Canonical output: `rule/dmg-alien-technology.json`
+- OMITTED: Check-total table outcomes, next-check modifiers, and wasted charges or uses. Nested paths covered: $.variantrule[7].entries[3].type; $.variantrule[7].entries[3].caption; $.variantrule[7].entries[3].colLabels[0]; $.variantrule[7].entries[3].colLabels[1]; $.variantrule[7].entries[3].colStyles[0]; $.variantrule[7].entries[3].colStyles[1]; $.variantrule[7].entries[3].rows[0][0]; $.variantrule[7].entries[3].rows[0][1]; $.variantrule[7].entries[3].rows[1][0]; $.variantrule[7].entries[3].rows[1][1]; $.variantrule[7].entries[3].rows[2][0]; $.variantrule[7].entries[3].rows[2][1]; $.variantrule[7].entries[3].rows[3][0]; $.variantrule[7].entries[3].rows[3][1]. The approved Rule contract has no result-table or iterative-check procedure for this mechanic.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Figuring Out Alien Technology",
+  "colLabels": [
+    "Int. Check Total",
+    "Result"
+  ],
+  "colStyles": [
+    "col-3 no-wrap",
+    "col-9"
+  ],
+  "rows": [
+    [
+      "9 or lower",
+      "One failure; one charge or use is wasted, if applicable; character has disadvantage on next check"
+    ],
+    [
+      "10-14",
+      "One failure"
+    ],
+    [
+      "15-19",
+      "One success"
+    ],
+    [
+      "20 or higher",
+      "One success; character has advantage on next check"
+    ]
+  ]
+}
+```
+
+### rule:dmg:fear-and-horror — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[109]`
+- Source entry path: `$.variantrule[109].entries[0]`
+- Canonical output: `rule/dmg-fear-and-horror.json`
+- OMITTED: Atmospheric introduction to optional fear and horror rules. Non-mechanical introduction.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"The rules for fear and horror can help you sustain an atmosphere of dread in a dark fantasy campaign."
+```
+
+### rule:dmg:fear-and-horror — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[109]`
+- Source entry path: `$.variantrule[109].entries[1]`
+- Canonical output: `rule/dmg-fear-and-horror.json`
+- OMITTED: Threat trigger, failed-save Frightened outcome for one minute, and repeat save at each turn end. Nested paths covered: $.variantrule[109].entries[1].type; $.variantrule[109].entries[1].name; $.variantrule[109].entries[1].entries[0]. The approved saving-throw component cannot encode the trigger and timed failure/repeat outcome.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Fear",
+  "entries": [
+    "When adventurers confront threats they have no hope of overcoming, you can call for them to make a Wisdom saving throw. Set the DC according to the circumstances. A character who fails the save becomes {@condition frightened} for 1 minute. The character can repeat the saving throw at the end of each of his or her turns, ending the effect on the character on a successful save."
+  ]
+}
+```
+
+### rule:dmg:fear-and-horror — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[109]`
+- Source entry path: `$.variantrule[109].entries[2]`
+- Canonical output: `rule/dmg-fear-and-horror.json`
+- OMITTED: Failed-save selection of short- or long-term madness by the DM or random determination. Nested paths covered: $.variantrule[109].entries[2].type; $.variantrule[109].entries[2].name; $.variantrule[109].entries[2].entries[0]; $.variantrule[109].entries[2].entries[1]. Madness outcome selection depends on tables and external effect state not represented by the approved Rule contract.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Horror",
+  "entries": [
+    "Horror involves more than simple fright. It entails revulsion and anguish. Often it arises when adventurer see something completely contrary to the common understanding of what can and should occur in the world, or upon the realization of a dreadful truth.",
+    "In such a situation, you can call on characters to make a Charisma saving throw to resist the horror. Set the DC based on the magnitude of the horrific circumstances. On a failed save, a character gains a {@table short-Term Madness||short-term} or {@table Long-Term Madness||long-term} form of madness that you choose or determine randomly, as detailed in chapter 8, \"Running the Game.\""
+  ]
+}
+```
+
+### rule:dmg:hero-points — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[123]`
+- Source entry path: `$.variantrule[123].entries[0]`
+- Canonical output: `rule/dmg-hero-points.json`
+- OMITTED: Campaign-tone introduction. Non-mechanical introduction.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Hero points work well in epic fantasy and mythic campaigns in which the characters are meant to be more like superheroes than the average adventurer is."
+```
+
+### rule:dmg:hero-points — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[123]`
+- Source entry path: `$.variantrule[123].entries[1]`
+- Canonical output: `rule/dmg-hero-points.json`
+- OMITTED: Level-based Hero Point gain, loss, and reset totals. Deferred hero-point resource and progression procedure R-GAP-46.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"With this option, a character starts with 5 hero points at 1st level. Each time the character gains a level, he or she loses any unspent hero points and gains a new total equal to 5 + half the character's level."
+```
+
+### rule:dmg:hero-points — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[123]`
+- Source entry path: `$.variantrule[123].entries[2]`
+- Canonical output: `rule/dmg-hero-points.json`
+- OMITTED: Spend a Hero Point to roll a d6 and add it to an attack, ability check, or saving throw. Deferred hero-point resource procedure R-GAP-46; the approved modifier cannot represent the variable d6 addition and expenditure limit.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"A player can spend a hero point whenever he or she makes an attack roll, an ability check, or a saving throw The player can spend the hero point after the roll is made but before any of its results are applied. Spending the hero point allows the player to roll a {@dice d6} and add it to the {@dice d20}, possibly turning a failure into a success. A player can spend only 1 hero point per roll."
+```
+
+### rule:dmg:hero-points — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[123]`
+- Source entry path: `$.variantrule[123].entries[3]`
+- Canonical output: `rule/dmg-hero-points.json`
+- OMITTED: Spend a Hero Point after a failed Death Saving Throw to turn failure into success. Deferred hero-point resource and outcome procedure R-GAP-46.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"In addition, whenever a character fails a death saving throw, the player can spend one hero point to turn the failure into a success."
+```
+
+### rule:phb:equipment-sizes — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[101]`
+- Source entry path: `$.variantrule[101].entries[0]`
+- Canonical output: `rule/phb-equipment-sizes.json`
+- OMITTED: Common-sense equipment fit examples. Narrative guidance rather than a deterministic mechanic.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"In most campaigns, you can use or wear any equipment that you find on your adventures, within the bounds of common sense. For example, a burly half-orc won't fit in a halfling's leather armor, and a gnome would be swallowed up in a cloud giant's elegant robe."
+```
+
+### rule:phb:equipment-sizes — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[101]`
+- Source entry path: `$.variantrule[101].entries[1]`
+- Canonical output: `rule/phb-equipment-sizes.json`
+- OMITTED: Item fit and ill-fitting disguise consequences. The Rule contract has no wearable fit or disguise visibility mechanic.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"The DM can impose more realism. For example, a suit of plate armor made for one human might not fit another one without significant alterations, and a guard's uniform might be visibly ill-fitting when an adventurer tries to wear it as a disguise."
+```
+
+### rule:phb:equipment-sizes — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[101]`
+- Source entry path: `$.variantrule[101].entries[2]`
+- Canonical output: `rule/phb-equipment-sizes.json`
+- OMITTED: Equipment alteration service and its price range/roll. Equipment alteration and price procedure belongs to Equipment and is not expressible in the approved Rule contract.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Using this variant, when adventurers find armor, clothing, and similar items that are made to be worn, they might need to visit an armorsmith, tailor, leatherworker, or similar expert to make the item wearable. The cost for such work varies from 10 to 40 percent of the market price of the item. The DM can either roll {@dice 1d4 × 10} or determine the increase in cost based on the extent of the alterations required."
+```
+
+### rule:scag:human-languages — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[131]`
+- Source entry path: `$.variantrule[131].entries[0]`
+- Canonical output: `rule/scag-human-languages.json`
+- OMITTED: Faerun language and script context. Introductory setting description.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Many human ethnicities and nations in Faerûn have their own language in addition to Common Most human languages are written in Thorass the alphabet of Old Common derived from the Chondathan language that traders used as their common tongue A few human languages use other alphabets including Draconic Dethek and Espruar The languages of the ethnicities described in the Players Handbook and this book are as follows:"
+```
+
+### rule:scag:human-languages — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[131]`
+- Source entry path: `$.variantrule[131].entries[1]`
+- Canonical output: `rule/scag-human-languages.json`
+- OMITTED: Ethnicity-to-language mapping, script details, and patois relationships. Nested paths covered: $.variantrule[131].entries[1].type; $.variantrule[131].entries[1].style; $.variantrule[131].entries[1].items[0].type; $.variantrule[131].entries[1].items[0].name; $.variantrule[131].entries[1].items[0].entry; $.variantrule[131].entries[1].items[1].type; $.variantrule[131].entries[1].items[1].name; $.variantrule[131].entries[1].items[1].entry; $.variantrule[131].entries[1].items[2].type; $.variantrule[131].entries[1].items[2].name; $.variantrule[131].entries[1].items[2].entry; $.variantrule[131].entries[1].items[3].type; $.variantrule[131].entries[1].items[3].name; $.variantrule[131].entries[1].items[3].entry; $.variantrule[131].entries[1].items[4].type; $.variantrule[131].entries[1].items[4].name; $.variantrule[131].entries[1].items[4].entry; $.variantrule[131].entries[1].items[5].type; $.variantrule[131].entries[1].items[5].name; $.variantrule[131].entries[1].items[5].entry; $.variantrule[131].entries[1].items[6].type; $.variantrule[131].entries[1].items[6].name; $.variantrule[131].entries[1].items[6].entry; $.variantrule[131].entries[1].items[7].type; $.variantrule[131].entries[1].items[7].name; $.variantrule[131].entries[1].items[7].entry; $.variantrule[131].entries[1].items[8].type; $.variantrule[131].entries[1].items[8].name; $.variantrule[131].entries[1].items[8].entry; $.variantrule[131].entries[1].items[9].type; $.variantrule[131].entries[1].items[9].name; $.variantrule[131].entries[1].items[9].entry; $.variantrule[131].entries[1].items[10].type; $.variantrule[131].entries[1].items[10].name; $.variantrule[131].entries[1].items[10].entry; $.variantrule[131].entries[1].items[11].type; $.variantrule[131].entries[1].items[11].name; $.variantrule[131].entries[1].items[11].entry; $.variantrule[131].entries[1].items[12].type; $.variantrule[131].entries[1].items[12].name; $.variantrule[131].entries[1].items[12].entry; $.variantrule[131].entries[1].items[13].type; $.variantrule[131].entries[1].items[13].name; $.variantrule[131].entries[1].items[13].entry; $.variantrule[131].entries[1].items[14].type; $.variantrule[131].entries[1].items[14].name; $.variantrule[131].entries[1].items[14].entry; $.variantrule[131].entries[1].items[15].type; $.variantrule[131].entries[1].items[15].name; $.variantrule[131].entries[1].items[15].entry; $.variantrule[131].entries[1].items[16].type; $.variantrule[131].entries[1].items[16].name; $.variantrule[131].entries[1].items[16].entry; $.variantrule[131].entries[1].items[17].type; $.variantrule[131].entries[1].items[17].name; $.variantrule[131].entries[1].items[17].entry; $.variantrule[131].entries[1].items[18].type; $.variantrule[131].entries[1].items[18].name; $.variantrule[131].entries[1].items[18].entry. The approved Rule reference contract cannot represent this full mapping without ethnicity entities.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "list",
+  "style": "list-hang-notitle",
+  "items": [
+    {
+      "type": "item",
+      "name": "Arkaiun:",
+      "entry": "Dambrathan (written in Espruar)"
+    },
+    {
+      "type": "item",
+      "name": "Bedine:",
+      "entry": "Midani"
+    },
+    {
+      "type": "item",
+      "name": "Calishite:",
+      "entry": "Alzhedo"
+    },
+    {
+      "type": "item",
+      "name": "Chondathan:",
+      "entry": "Chondathan"
+    },
+    {
+      "type": "item",
+      "name": "Damaran:",
+      "entry": "Damaran (written in Dethek)"
+    },
+    {
+      "type": "item",
+      "name": "Ffolk:",
+      "entry": "Waelan"
+    },
+    {
+      "type": "item",
+      "name": "Gur:",
+      "entry": "Guran (a patois of Roushoum and Rashemi)"
+    },
+    {
+      "type": "item",
+      "name": "Halruaan:",
+      "entry": "Halruaan (written in Draconic)"
+    },
+    {
+      "type": "item",
+      "name": "Illuskan:",
+      "entry": "Illuskan"
+    },
+    {
+      "type": "item",
+      "name": "Imaskari:",
+      "entry": "Roushoum"
+    },
+    {
+      "type": "item",
+      "name": "Mulan:",
+      "entry": "Chessentan, Mulhorandi, Untheric, or Thayan"
+    },
+    {
+      "type": "item",
+      "name": "Nar:",
+      "entry": "Damaran"
+    },
+    {
+      "type": "item",
+      "name": "Rashemi:",
+      "entry": "Rashemi"
+    },
+    {
+      "type": "item",
+      "name": "Shaaran:",
+      "entry": "Shaaran (written in Dethek)"
+    },
+    {
+      "type": "item",
+      "name": "Shou:",
+      "entry": "Shou"
+    },
+    {
+      "type": "item",
+      "name": "Tethyrian:",
+      "entry": "Chondathan"
+    },
+    {
+      "type": "item",
+      "name": "Tuigan:",
+      "entry": "Tuigan"
+    },
+    {
+      "type": "item",
+      "name": "Turami:",
+      "entry": "Turmic"
+    },
+    {
+      "type": "item",
+      "name": "Ulutiun:",
+      "entry": "Uluik"
+    }
+  ]
+}
+```
+
+### rule:scag:human-languages — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[131]`
+- Source entry path: `$.variantrule[131].entries[2]`
+- Canonical output: `rule/scag-human-languages.json`
+- OMITTED: An allowed human from an ethnicity with a language knows that language and Common as an additional language. The Rule contract cannot encode ethnicity eligibility or character language grants.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"If your Dungeon Master allows this option then any human from an ethnic group that has its own language is assumed to know that language as well as Common. This ethnic language is treated as a free additional language for such individuals."
+```
+
+### rule:vrgr:fear-and-stress — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[110]`
+- Source entry path: `$.variantrule[110].entries[0]`
+- Canonical output: `rule/vrgr-fear-and-stress.json`
+- OMITTED: Atmospheric and conceptual introduction. Non-mechanical introduction.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Terror takes a toll. The ramifications of frightful experiences might be an instant of instinct-triggering shock or a lasting, traumatic echo. The {@book Dungeon Master's Guide|DMG} presents options for {@book fear and horror|DMG|9|Fear and Horror} to help reinforce terrifying themes in play. This section presents an alternative system, exploring reactions personalized to individual characters and offering incentive for players to embrace roleplaying moments of fear. Options exploring fear provide guidance to create frightening moments for a character outside of spells or monster abilities, while rules for stress model the lingering toll such events can take. None of these options are required to create an enjoyable horror roleplaying experience, but they provide ways to measure the effects of characters facing and overcoming their fears."
+```
+
+### rule:vrgr:fear-and-stress — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[110]`
+- Source entry path: `$.variantrule[110].entries[1]`
+- Canonical output: `rule/vrgr-fear-and-stress.json`
+- OMITTED: Seeds of Fear, character-specific fear state, and roleplay-based Inspiration award procedure. Nested paths covered: $.variantrule[110].entries[1].type; $.variantrule[110].entries[1].name; $.variantrule[110].entries[1].entries[0]; $.variantrule[110].entries[1].entries[1]; $.variantrule[110].entries[1].entries[2].type; $.variantrule[110].entries[1].entries[2].caption; $.variantrule[110].entries[1].entries[2].colLabels[0]; $.variantrule[110].entries[1].entries[2].colLabels[1]; $.variantrule[110].entries[1].entries[2].colStyles[0]; $.variantrule[110].entries[1].entries[2].colStyles[1]; $.variantrule[110].entries[1].entries[2].rows[0][0]; $.variantrule[110].entries[1].entries[2].rows[0][1]; $.variantrule[110].entries[1].entries[2].rows[1][0]; $.variantrule[110].entries[1].entries[2].rows[1][1]; $.variantrule[110].entries[1].entries[2].rows[2][0]; $.variantrule[110].entries[1].entries[2].rows[2][1]; $.variantrule[110].entries[1].entries[2].rows[3][0]; $.variantrule[110].entries[1].entries[2].rows[3][1]; $.variantrule[110].entries[1].entries[2].rows[4][0]; $.variantrule[110].entries[1].entries[2].rows[4][1]; $.variantrule[110].entries[1].entries[2].rows[5][0]; $.variantrule[110].entries[1].entries[2].rows[5][1]; $.variantrule[110].entries[1].entries[2].rows[6][0]; $.variantrule[110].entries[1].entries[2].rows[6][1]; $.variantrule[110].entries[1].entries[2].rows[7][0]; $.variantrule[110].entries[1].entries[2].rows[7][1]; $.variantrule[110].entries[1].entries[2].rows[8][0]; $.variantrule[110].entries[1].entries[2].rows[8][1]; $.variantrule[110].entries[1].entries[2].rows[9][0]; $.variantrule[110].entries[1].entries[2].rows[9][1]; $.variantrule[110].entries[1].entries[2].rows[10][0]; $.variantrule[110].entries[1].entries[2].rows[10][1]; $.variantrule[110].entries[1].entries[2].rows[11][0]; $.variantrule[110].entries[1].entries[2].rows[11][1]; $.variantrule[110].entries[1].entries[3].type; $.variantrule[110].entries[1].entries[3].name; $.variantrule[110].entries[1].entries[3].entries[0]; $.variantrule[110].entries[1].entries[3].entries[1]. These character-state and inspiration procedures are excluded by skipped R-GAP-16.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Seeds of Fear",
+  "entries": [
+    "Aside from supernatural sources of dread and monsters who strike terror in their victims, fear is subjective and often quite personal. A battle-hardened warrior and a reclusive scholar might not deal with frightful circumstances in the same way. During character creation, a player can choose up to two Seeds of Fear to represent things their character finds truly frightening. The Seeds of Fear table offers some examples. These can change over time as characters grow, overcome old fears, and discover new uncertainties. Work with players to determine when their Seeds of Fear might change.",
+    "A character never has more than three Seeds of Fear; if you gain a new seed and already have three, choose which of your old fears is replaced by the new one.",
+    {
+      "type": "table",
+      "caption": "Seeds of Fear",
+      "colLabels": [
+        "d12",
+        "Seed"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "\"I can't stand dark places.\""
+        ],
+        [
+          "2",
+          "\"I'm terrified of a particular kind of animal.\""
+        ],
+        [
+          "3",
+          "\"Deep water will be the death of me.\""
+        ],
+        [
+          "4",
+          "\"I can't stand heights.\""
+        ],
+        [
+          "5",
+          "\"I hate being stuck in tight spaces.\""
+        ],
+        [
+          "6",
+          "\"Being around crowds unnerves me, for I always feel judged.\""
+        ],
+        [
+          "7",
+          "\"I hate feeling isolated or being alone.\""
+        ],
+        [
+          "8",
+          "\"Storms and extreme weather rattle me.\""
+        ],
+        [
+          "9",
+          "\"Being followed chills my blood.\""
+        ],
+        [
+          "10",
+          "\"Sudden noises or appearances fray my nerves.\""
+        ],
+        [
+          "11",
+          "\"I can't be comfortable around creatures larger than I am.\""
+        ],
+        [
+          "12",
+          "\"Reflections always seem like they're looking straight through me.\""
+        ]
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Using Seeds of Fear",
+      "entries": [
+        "When a character encounters one of their Seeds of Fear, and interacts with the situation in a way that reinforces the seed, such as screaming or stumbling back from a horrid event, consider giving the character inspiration for their fear-focused reaction (see \"Inspiration\" in the {@book Player's Handbook|PHB}). Once a character gains inspiration in this way, they shouldn't be able to do so again until they finish a long rest.",
+        "For example, imagine that a character has the Seed of Fear \"I hate being stuck in tight spaces\" and must squeeze through a narrow crack in a cave wall to continue an adventure. If the player portrays the character's response in a way that reinforces that fear, such as refusing and finding another way around, taking time and making noise to widen the crack, or portraying some other fearful response, these would be perfect opportunities to reward the player's consideration of a Seed of Fear by granting their character inspiration."
+      ]
+    }
+  ]
+}
+```
+
+### rule:vrgr:fear-and-stress — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[110]`
+- Source entry path: `$.variantrule[110].entries[2]`
+- Canonical output: `rule/vrgr-fear-and-stress.json`
+- OMITTED: The situational trigger list and Frightened-until-end-of-next-turn outcome. Nested paths covered: $.variantrule[110].entries[2].type; $.variantrule[110].entries[2].name; $.variantrule[110].entries[2].entries[0]; $.variantrule[110].entries[2].entries[1]; $.variantrule[110].entries[2].entries[2].type; $.variantrule[110].entries[2].entries[2].items[0]; $.variantrule[110].entries[2].entries[2].items[1]; $.variantrule[110].entries[2].entries[2].items[2]; $.variantrule[110].entries[2].entries[2].items[3]; $.variantrule[110].entries[2].entries[2].items[4]. The approved saving-throw component cannot encode trigger conditions or failure duration/outcome.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Fear",
+  "entries": [
+    "An overwhelming foe or horrid monster doesn't need magic or some supernatural ability to strike fear into the most stalwart adventurers. During any frightful encounter, you can call on a character to make a saving throw to resist being scared. The character must succeed on a {@dc 15} Wisdom saving throw or become {@condition frightened} until the end of their next turn.",
+    "Any of the following circumstances might be reasons to have one or more characters make saving throws to resist being {@condition frightened}:",
+    {
+      "type": "list",
+      "items": [
+        "The character experiences one of their Seeds of Fear.",
+        "An enemy is immune to the character's attacks or spells.",
+        "An enemy demonstrates it can deal enough damage to reduce a character to 0 hit points in one blow.",
+        "A creature is alien or monstrous in ways the character never could have imagined.",
+        "An object undermines a character's understanding of reality."
+      ]
+    }
+  ]
+}
+```
+
+### rule:vrgr:fear-and-stress — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[110]`
+- Source entry path: `$.variantrule[110].entries[3]`
+- Canonical output: `rule/vrgr-fear-and-stress.json`
+- OMITTED: Stress Score increase, roll penalty, suppression, and recovery procedures. Nested paths covered: $.variantrule[110].entries[3].type; $.variantrule[110].entries[3].name; $.variantrule[110].entries[3].entries[0]; $.variantrule[110].entries[3].entries[1]; $.variantrule[110].entries[3].entries[2].type; $.variantrule[110].entries[3].entries[2].items[0]; $.variantrule[110].entries[3].entries[2].items[1]; $.variantrule[110].entries[3].entries[2].items[2]; $.variantrule[110].entries[3].entries[2].items[3]; $.variantrule[110].entries[3].entries[2].items[4]; $.variantrule[110].entries[3].entries[2].items[5]; $.variantrule[110].entries[3].entries[3]; $.variantrule[110].entries[3].entries[4].type; $.variantrule[110].entries[3].entries[4].name; $.variantrule[110].entries[3].entries[4].entries[0]; $.variantrule[110].entries[3].entries[4].entries[1]; $.variantrule[110].entries[3].entries[4].entries[2]. The stress-state subsystem is excluded by skipped R-GAP-16.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Stress",
+  "entries": [
+    "Charging headlong into terrifying situations is the stock in trade for adventurers. Among the Domains of Dread, though, periods of respite between harrowing experiences can be rare. Even the hardiest adventurers find themselves worn down over time, their performance suffering as they struggle to cope with the dread and despair.",
+    "Various circumstances might cause a character stress. Stress can be tracked numerically as a Stress Score, increasing in trying situations and decreasing with care. At your discretion, a character's Stress Score might increase by 1 when one of the following situations occurs:",
+    {
+      "type": "list",
+      "items": [
+        "A tense, dramatic moment, especially one involving one of a character's Seeds of Fear",
+        "Every 24 hours the character goes without finishing a long rest",
+        "Witnessing the death of a loved one",
+        "A nightmare or darkest fear made real",
+        "Shattering the character's fundamental understanding of reality",
+        "Witnessing a person transform into a horrid or unnatural creature"
+      ]
+    },
+    "When a character makes an attack roll, an ability check, or a saving throw, they must apply their current Stress Score as a penalty to the roll.",
+    {
+      "type": "entries",
+      "name": "Reducing Stress",
+      "entries": [
+        "A character who spends an entire day relaxing or in otherwise calm circumstances reduces their Stress Score by 1 when they finish their next long rest.",
+        "The {@spell calm emotions} spell effect used to suppress the {@condition charmed} and {@condition frightened} conditions also suppresses the effects of one's Stress Score for the spell's duration.",
+        "A {@spell lesser restoration} spell reduces the target's Stress Score by 1, and a {@spell greater restoration} spell reduces a character's Stress Score to 0."
+      ]
+    }
+  ]
+}
+```
+
+### rule:xphb:attunement — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[16]`
+- Source entry path: `$.variantrule[16].entries[0]`
+- Canonical output: `rule/xphb-attunement.json`
+- OMITTED: A creature can have Attunement with no more than three magic items at a time. The approved magic ATTUNEMENT mechanic has no concurrent-attunement limit field.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Some magic items require a creature to form a bond—called Attunement—with them before the creature can use an item's magical properties. A creature can have Attunement with no more than three magic items at a time."
+```
+
+### rule:xphb:challenge-rating — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[25]`
+- Source entry path: `$.variantrule[25].entries[0]`
+- Canonical output: `rule/xphb-challenge-rating.json`
+- OMITTED: Challenge Rating comparison to party size/level as a threat and encounter-planning heuristic. The Rule schema has no encounter-threat estimation mechanic; no execution behavior is inferred from this planning guidance.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Challenge Rating (CR) summarizes the threat a {@variantrule Monster|XPHB|monster} poses to a group of four {@variantrule Player Character|XPHB|player characters}. Compare a {@variantrule Monster|XPHB|monster's} CR to the characters' level. If the CR is higher, the {@variantrule Monster|XPHB|monster} is likely a danger. If the CR is lower, the {@variantrule Monster|XPHB|monster} likely poses little threat. But circumstances and the number of {@variantrule Player Character|XPHB|player characters} can significantly alter how threatening a {@variantrule Monster|XPHB|monster} is in actual play. The {@book Dungeon Master's Guide|XDMG} provides guidance to the DM on using CR while planning potential combat {@variantrule Encounter|XPHB|encounters}."
+```
+
+### rule:xphb:condition — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[30]`
+- Source entry path: `$.variantrule[30].entries[2]`
+- Canonical output: `rule/xphb-condition.json`
+- OMITTED: A condition does not stack with itself, except Exhaustion. The Rule reference contract cannot impose a general stacking constraint on referenced Condition records.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A condition doesn't stack with itself; a recipient either has a condition or doesn't. The {@condition Exhaustion|XPHB} condition is an exception to that rule."
+```
+
+### rule:xphb:dead — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[50]`
+- Source entry path: `$.variantrule[50].entries[0]`
+- Canonical output: `rule/xphb-dead.json`
+- OMITTED: Dead-state and revival mechanics, spirit refusal, and Raise Dead/Revivify spell targets. The Rule schema has no revival procedure; the source-spelled targets lack canonical Spell outputs.; cause: `SCHEMA_UNSUPPORTED`
+- OMITTED: Raise Dead and Revivify source spell references. The source targets exist but no edition-matched canonical Spell outputs are available.; cause: `REFERENCE_UNRESOLVED`
+
+Complete original source entry:
+
+```json
+"A dead creature has no {@variantrule Hit Points|XPHB} and can't regain them unless it is first revived by magic such as the {@spell Raise Dead|XPHB} or {@spell Revivify|XPHB} spell. When such a spell is cast, the spirit knows who is casting it and can refuse. The spirit of a dead creature has left the body and departed for the Outer Planes, and reviving the creature requires calling the spirit back."
+```
+
+### rule:xphb:dead — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[50]`
+- Source entry path: `$.variantrule[50].entries[1]`
+- Canonical output: `rule/xphb-dead.json`
+- OMITTED: Restoration of ongoing conditions, contagions, curses, and Exhaustion/Attunement changes on revival. The approved reference contract cannot express revival-dependent state transitions.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"If the creature returns to life, the revival effect determines the creature's current {@variantrule Hit Points|XPHB}. Unless otherwise stated, the creature returns to life with any {@variantrule Condition|XPHB|conditions}, magical contagions, or curses that were affecting it at death if the durations of those effects are still ongoing. If the creature died with any {@condition Exhaustion|XPHB} levels, it returns with 1 fewer level. If the creature had {@variantrule Attunement|XPHB} to one or more magic items, it is no longer attuned to them."
+```
+
+### rule:xphb:hit-point-dice — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[126]`
+- Source entry path: `$.variantrule[126].entries[0]`
+- Canonical output: `rule/xphb-hit-point-dice.json`
+- OMITTED: Hit Dice help determine a Player Character's and most Monsters' Hit Point maximum. The Rule schema cannot encode the source-specific Hit Dice contribution formula within this glossary definition.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Hit Point Dice, or Hit Dice for short, help determine a {@variantrule Player Character|XPHB|player character's} Hit Point maximum, as explained in {@book chapter 2|XPHB|2}. Most {@variantrule Monster|XPHB|monsters} also have Hit Dice. A creature can spend Hit Dice during a {@variantrule Short Rest|XPHB} to regain {@variantrule Hit Points|XPHB}."
+```
+
+### rule:xphb:object — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[161]`
+- Source entry path: `$.variantrule[161].entries[0]`
+- Canonical output: `rule/xphb-object.json`
+- OMITTED: An object is a distinct nonliving thing; composite things consist of multiple objects. The approved Rule contract has no general object taxonomy or composition mechanic.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"An object is a nonliving, distinct thing. Composite things, like buildings, comprise more than one object."
+```
+
+### rule:xphb:round-down — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[185]`
+- Source entry path: `$.variantrule[185].entries[0]`
+- Canonical output: `rule/xphb-round-down.json`
+- OMITTED: Whenever division or multiplication yields a fraction, round down unless a rule says otherwise. Existing schema fields support specific mechanics' rounding values but cannot express this general arithmetic rule without a new pattern.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Whenever you divide or multiply a number in the game, round down if you end up with a fraction, even if the fraction is one-half or greater. Some rules make an exception and tell you to round up."
+```
+
+### rule:xphb:stat-block — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[213]`
+- Source entry path: `$.variantrule[213].entries[1]`
+- Canonical output: `rule/xphb-stat-block.json`
+- OMITTED: Full stat block field schema, statistics, abilities, traits, actions, equipment, senses, languages, and effect notation. Nested paths covered: $.variantrule[213].entries[1].type; $.variantrule[213].entries[1].entries[0].type; $.variantrule[213].entries[1].entries[0].name; $.variantrule[213].entries[1].entries[0].entries[0]; $.variantrule[213].entries[1].entries[1].type; $.variantrule[213].entries[1].entries[1].name; $.variantrule[213].entries[1].entries[1].entries[0]; $.variantrule[213].entries[1].entries[2].type; $.variantrule[213].entries[1].entries[2].name; $.variantrule[213].entries[1].entries[2].entries[0]; $.variantrule[213].entries[1].entries[3].type; $.variantrule[213].entries[1].entries[3].name; $.variantrule[213].entries[1].entries[3].entries[0]; $.variantrule[213].entries[1].entries[4].type; $.variantrule[213].entries[1].entries[4].name; $.variantrule[213].entries[1].entries[4].entries[0]; $.variantrule[213].entries[1].entries[5].type; $.variantrule[213].entries[1].entries[5].name; $.variantrule[213].entries[1].entries[5].entries[0]; $.variantrule[213].entries[1].entries[6].type; $.variantrule[213].entries[1].entries[6].name; $.variantrule[213].entries[1].entries[6].entries[0]; $.variantrule[213].entries[1].entries[7].type; $.variantrule[213].entries[1].entries[7].name; $.variantrule[213].entries[1].entries[7].entries[0]; $.variantrule[213].entries[1].entries[8].type; $.variantrule[213].entries[1].entries[8].name; $.variantrule[213].entries[1].entries[8].entries[0]; $.variantrule[213].entries[1].entries[9].type; $.variantrule[213].entries[1].entries[9].name; $.variantrule[213].entries[1].entries[9].entries[0]; $.variantrule[213].entries[1].entries[10].type; $.variantrule[213].entries[1].entries[10].name; $.variantrule[213].entries[1].entries[10].entries[0]; $.variantrule[213].entries[1].entries[11].type; $.variantrule[213].entries[1].entries[11].name; $.variantrule[213].entries[1].entries[11].entries[0]; $.variantrule[213].entries[1].entries[12].type; $.variantrule[213].entries[1].entries[12].name; $.variantrule[213].entries[1].entries[12].entries[0]; $.variantrule[213].entries[1].entries[13].type; $.variantrule[213].entries[1].entries[13].name; $.variantrule[213].entries[1].entries[13].entries[0]; $.variantrule[213].entries[1].entries[14].type; $.variantrule[213].entries[1].entries[14].name; $.variantrule[213].entries[1].entries[14].entries[0]; $.variantrule[213].entries[1].entries[15].type; $.variantrule[213].entries[1].entries[15].name; $.variantrule[213].entries[1].entries[15].entries[0]; $.variantrule[213].entries[1].entries[16].type; $.variantrule[213].entries[1].entries[16].name; $.variantrule[213].entries[1].entries[16].entries[0]; $.variantrule[213].entries[1].entries[17].type; $.variantrule[213].entries[1].entries[17].name; $.variantrule[213].entries[1].entries[17].entries[0]; $.variantrule[213].entries[1].entries[18].type; $.variantrule[213].entries[1].entries[18].name; $.variantrule[213].entries[1].entries[18].entries[0]; $.variantrule[213].entries[1].entries[19].type; $.variantrule[213].entries[1].entries[19].name; $.variantrule[213].entries[1].entries[19].entries[0]. The source describes Creature stat block structure, which is owned by the Creature domain and is not duplicated into the Rule model.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "entries": [
+    {
+      "type": "entries",
+      "name": "Size",
+      "entries": [
+        "A {@variantrule Monster|XPHB|monster} is Tiny, Small, Med ium, Large, Huge, or Gargantuan."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Creature Type",
+      "entries": [
+        "This entry notes the family of beings a {@variantrule Monster|XPHB|monster} belongs to, along with any descriptive tags."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Alignment",
+      "entries": [
+        "An alignment is suggested for the {@variantrule Monster|XPHB|monster}, with the DM determining its actual alignment."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "AC, Initiative, and HP",
+      "entries": [
+        "These entries give the {@variantrule Monster|XPHB|monster's} {@variantrule Armor Class|XPHB}, {@variantrule Initiative|XPHB}, and {@variantrule Hit Points|XPHB}, which are detailed in {@book chapter 1|XPHB|1}. In parentheses after the {@variantrule Hit Points|XPHB}, the {@variantrule Monster|XPHB|monster's} {@variantrule Hit Point Dice|XPHB} are provided, along with the contribution of its Constitution, if any, to its {@variantrule Hit Points|XPHB}. Following the {@variantrule Initiative|XPHB} modifier is an {@variantrule Initiative|XPHB} score. Some creatures that are created by magic lack Hit Dice and {@variantrule Initiative|XPHB} information."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Speed",
+      "entries": [
+        "Here the {@variantrule Monster|XPHB|monster's} Speed is provided, along with any special speeds."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Ability Scores",
+      "entries": [
+        "A table provides the {@variantrule Monster|XPHB|monster's} ability scores, modifiers, and {@variantrule Saving Throw|XPHB|saving throw} modifiers, all of which are detailed in {@book chapter 1|XPHB|1}."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Skills",
+      "entries": [
+        "This entry lists the {@variantrule Monster|XPHB|monster's} skill proficiencies, if any."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Resistances and Vulnerabilities",
+      "entries": [
+        "These entries list the {@variantrule Monster|XPHB|monster's} Resistances and Vulnerabilities, if any."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Immunities",
+      "entries": [
+        "This section lists the {@variantrule Monster|XPHB|monster's} damage and {@variantrule Condition|XPHB|condition} Immunities, if any."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Gear",
+      "entries": [
+        "If the {@variantrule Monster|XPHB|monster} has any equipment that can be given away or retrieved, it's listed in this entry."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Senses",
+      "entries": [
+        "This entry lists the {@variantrule Monster|XPHB|monster's} special senses, such as {@sense Darkvision|XPHB}, and its Passive {@skill Perception|XPHB}."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Languages",
+      "entries": [
+        "This entry lists any languages the {@variantrule Monster|XPHB|monster} knows."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "CR",
+      "entries": [
+        "Challenge Rating summarizes the threat a {@variantrule Monster|XPHB|monster} poses and is detailed in the {@book Monster Manual|XMM}. The Experience Points characters receive for defeating a {@variantrule Monster|XPHB|monster} and its {@variantrule Proficiency|XPHB|Proficiency Bonus} follow. Some creatures that are created by magic have no CR."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Traits",
+      "entries": [
+        "The {@variantrule Monster|XPHB|monster's} traits, if any, are features that are active at all times or in certain situations."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Actions",
+      "entries": [
+        "The {@variantrule Monster|XPHB|monster} can take these actions in addition to those detailed in this glossary."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Bonus Actions",
+      "entries": [
+        "If the {@variantrule Monster|XPHB|monster} has {@variantrule Bonus Action|XPHB} options, they are listed in this section."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Reactions",
+      "entries": [
+        "If the {@variantrule Monster|XPHB|monster} can take special {@variantrule Reaction|XPHB|Reactions}, those are listed in this section."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Attack Notation",
+      "entries": [
+        "The entry for a {@variantrule Monster|XPHB|monster's} attack starts by identifying whether the attack is a melee or a ranged attack and then provides the attack roll's bonus, its reach or range, and what happens on a hit. An attack is against one target unless its entry says otherwise."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Saving Throw Effect Notation",
+      "entries": [
+        "If an effect forces a {@variantrule Saving Throw|XPHB|saving throw}, the effect's entry starts by identifying the kind of {@variantrule Saving Throw|XPHB|saving throw} required and then provides the save's DC, a description of which creatures must make the save, and what happens on a failed or a successful save."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Damage Notation",
+      "entries": [
+        "A stat block usually provides both a static number and a die expression for each instance of damage. For example, an attack might deal 4 ({@damage 1d4 + 2}) damage on a hit. The DM determines whether you use the static number or the die expression in parentheses; you don't use both."
+      ]
+    }
+  ]
+}
+```
+
+### rule:xphb:weapon — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[229]`
+- Source entry path: `$.variantrule[229].entries[0]`
+- Canonical output: `rule/xphb-weapon.json`
+- OMITTED: Simple and Martial weapon category membership. Weapon category definitions are Equipment-owned and the source filter does not resolve to one canonical Equipment target.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"A weapon is an object that is in the {@filter Simple|items|category=basic|type=simple weapon} or {@filter Martial|items|category=basic|type=martial weapon} weapon category."
+```
+
+### rule:dmg:alternatives-to-epic-boons — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[10]`
+- Source entry path: `$.variantrule[10].entries[0]`
+- Canonical output: `rule/dmg-alternatives-to-epic-boons.json`
+- OMITTED: Optional reward replacement for Epic Boons at level 20. Introductory choice context; full eligibility is addressed with the reward entry.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"You might decide to grant one of the following rewards to a 20th-level character, instead of awarding an epic boon. These two options can be awarded to a character more than once."
+```
+
+### rule:dmg:alternatives-to-epic-boons — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[10]`
+- Source entry path: `$.variantrule[10].entries[1]`
+- Canonical output: `rule/dmg-alternatives-to-epic-boons.json`
+- OMITTED: Granting either reward at level 20, repeatable reward selection, score increases up to 30, and feat approval. Nested paths covered: $.variantrule[10].entries[1].type; $.variantrule[10].entries[1].entries[0].type; $.variantrule[10].entries[1].entries[0].name; $.variantrule[10].entries[1].entries[0].entries[0]; $.variantrule[10].entries[1].entries[1].type; $.variantrule[10].entries[1].entries[1].name; $.variantrule[10].entries[1].entries[1].entries[0]. The Rule schema has no character advancement or feat-grant procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "entries": [
+    {
+      "type": "entries",
+      "name": "Ability Score Improvement",
+      "entries": [
+        "The character can increase one ability score by 2 or increase two ability scores by 1 each. The ability score can now be increased above 20, up to a maximum of 30."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "New Feat",
+      "entries": [
+        "The character gains a new feat chosen by the player, but subject to your approval."
+      ]
+    }
+  ]
+}
+```
+
+### rule:dmg:level-advancement-without-xp — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[143]`
+- Source entry path: `$.variantrule[143].entries[0]`
+- Canonical output: `rule/dmg-level-advancement-without-xp.json`
+- OMITTED: The DM advances characters based on sessions or story goals and decides when they gain levels. The Rule contract has no character level progression or campaign milestone advancement mechanic.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"You can do away with experience points entirely and control the rate of character advancement. Advance characters based on how many sessions they play, or when they accomplish significant story goals in the campaign. In either case, you tell the players when their characters gain a level."
+```
+
+### rule:dmg:level-advancement-without-xp — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[143]`
+- Source entry path: `$.variantrule[143].entries[1]`
+- Canonical output: `rule/dmg-level-advancement-without-xp.json`
+- OMITTED: Narrative suitability commentary. Non-mechanical commentary.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"This method of level advancement can be particularly helpful if your campaign doesn't include much combat, or includes so much combat that tracking XP becomes tiresome."
+```
+
+### rule:dmg:level-advancement-without-xp — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[143]`
+- Source entry path: `$.variantrule[143].entries[2]`
+- Canonical output: `rule/dmg-level-advancement-without-xp.json`
+- OMITTED: Session-based advancement timing recommendations. Nested paths covered: $.variantrule[143].entries[2].type; $.variantrule[143].entries[2].name; $.variantrule[143].entries[2].entries[0]. The Rule schema cannot model session-count level advancement.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Session-Based Advancement",
+  "entries": [
+    "A good rate of session-based advancement is to have characters reach 2nd level after the first session of play, 3rd level after another session, and 4th level after two more sessions. Then spend two or three sessions for each subsequent level. This rate mirrors the standard rate of advancement, assuming sessions are about four hours long."
+  ]
+}
+```
+
+### rule:dmg:level-advancement-without-xp — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[143]`
+- Source entry path: `$.variantrule[143].entries[3]`
+- Canonical output: `rule/dmg-level-advancement-without-xp.json`
+- OMITTED: Story-goal-based level advancement. Nested paths covered: $.variantrule[143].entries[3].type; $.variantrule[143].entries[3].name; $.variantrule[143].entries[3].entries[0]. The Rule schema cannot model campaign story milestone level advancement.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Story-Based Advancement",
+  "entries": [
+    "When you let the story of the campaign drive advancement, you award levels when adventurers accomplish significant goals in the campaign."
+  ]
+}
+```
+
+### rule:dmg:milestones — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[152]`
+- Source entry path: `$.variantrule[152].entries[0]`
+- Canonical output: `rule/dmg-milestones.json`
+- OMITTED: DM-selected milestone events and XP award procedure. The Rule contract cannot model campaign event selection or XP award amounts.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"You can also award XP when characters complete significant milestones. When preparing your adventure, designate certain events or challenges as milestones, as with the following examples:"
+```
+
+### rule:dmg:milestones — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[152]`
+- Source entry path: `$.variantrule[152].entries[1]`
+- Canonical output: `rule/dmg-milestones.json`
+- OMITTED: Examples of events that may count as milestones. Nested paths covered: $.variantrule[152].entries[1].type; $.variantrule[152].entries[1].items[0]; $.variantrule[152].entries[1].items[1]; $.variantrule[152].entries[1].items[2]. Illustrative examples do not define additional resolution mechanics.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+{
+  "type": "list",
+  "items": [
+    "Accomplishing one in a series of goals necessary to complete the adventure.",
+    "Discovering a hidden location or piece of information relevant to the adventure.",
+    "Reaching an important destination."
+  ]
+}
+```
+
+### rule:dmg:milestones — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[152]`
+- Source entry path: `$.variantrule[152].entries[2]`
+- Canonical output: `rule/dmg-milestones.json`
+- OMITTED: Mapping a milestone to encounter difficulty and the resulting XP quantity. Encounter planning and XP equivalence resolution cannot be computed from this Rule contract.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"When awarding XP, treat a major milestone as a hard encounter and a minor milestone as an easy encounter. If you want to reward your players for their progress through an adventure with something more than XP and treasure, give them additional small rewards at milestone points. Here are some examples:"
+```
+
+### rule:dmg:milestones — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[152]`
+- Source entry path: `$.variantrule[152].entries[3]`
+- Canonical output: `rule/dmg-milestones.json`
+- OMITTED: Milestone grants of rest/recovery benefits and limited-use magic item recharge. Nested paths covered: $.variantrule[152].entries[3].type; $.variantrule[152].entries[3].items[0]; $.variantrule[152].entries[3].items[1]; $.variantrule[152].entries[3].items[2]. The Rule schema cannot model milestone-triggered recovery or item-use restoration.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "list",
+  "items": [
+    "The adventurers gain the benefit of a short rest.",
+    "Characters can recover a Hit Die or a low-level spell slot.",
+    "Characters can regain the use of magic items that have had their limited uses expended."
+  ]
+}
+```
+
+### rule:dmg:plot-points — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[173]`
+- Source entry path: `$.variantrule[173].entries[0]`
+- Canonical output: `rule/dmg-plot-points.json`
+- OMITTED: Purpose and suitability of optional Plot Points. Introductory framing.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Plot points allow players to change the course of the campaign, introduce plot complications, alter the world, and even assume the role of the DM. If your first reaction to reading this optional rule is to worry that your players might abuse it, it's probably not for you."
+```
+
+### rule:dmg:plot-points — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[173]`
+- Source entry path: `$.variantrule[173].entries[1]`
+- Canonical output: `rule/dmg-plot-points.json`
+- OMITTED: Plot Point starting, expenditure, per-session cap, and replenishment rules. Nested paths covered: $.variantrule[173].entries[1].type; $.variantrule[173].entries[1].name; $.variantrule[173].entries[1].entries[0]; $.variantrule[173].entries[1].entries[1]. The schema has no campaign narrative resource counter or session reset procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Using Plot Points",
+  "entries": [
+    "Each player starts with 1 plot point. During a session, a player can spend that point for one effect. The effect depends on your group's approach to this optional rule. Three options are presented below.",
+    "A player can spend no more than 1 plot point per session. You can increase this limit if you like, especially if you want the players to drive more of the story. Once every player at the table has spent a plot point, they each gain 1 plot point."
+  ]
+}
+```
+
+### rule:dmg:plot-points — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[173]`
+- Source entry path: `$.variantrule[173].entries[2]`
+- Canonical output: `rule/dmg-plot-points.json`
+- OMITTED: Player-spent points introduce approved setting facts after group discussion. Nested paths covered: $.variantrule[173].entries[2].type; $.variantrule[173].entries[2].name; $.variantrule[173].entries[2].entries[0]; $.variantrule[173].entries[2].entries[1]. The schema has no collaborative narrative authority procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Option 1: What a Twist!",
+  "entries": [
+    "A player who spends a plot point gets to add some element to the setting or situation that the group (including you) must accept as true. For example, a player can spend a plot point and state that his or her character has found a secret door, an NPC appears, or a monster turns out to be a long-lost ally polymorphed into a horrid beast.",
+    "A player who wants to spend a plot point in this way should take a minute to discuss his or her idea with everyone else at the table and get feedback before settling on a plot development."
+  ]
+}
+```
+
+### rule:dmg:plot-points — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[173]`
+- Source entry path: `$.variantrule[173].entries[3]`
+- Canonical output: `rule/dmg-plot-points.json`
+- OMITTED: The next player adds a complication when a Plot Point is spent. Nested paths covered: $.variantrule[173].entries[3].type; $.variantrule[173].entries[3].name; $.variantrule[173].entries[3].entries[0]. The schema has no plot-point-triggered scene complication procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Option 2: The Plot Thickens",
+  "entries": [
+    "Whenever a player spends a plot point, the player to his or her right must add a complication to the scene. For example, if the player who spends the plot point decides that her character has found a secret door, the player to the right might state that opening the door triggers a magical trap that teleports the party to another part of the dungeon."
+  ]
+}
+```
+
+### rule:dmg:plot-points — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[173]`
+- Source entry path: `$.variantrule[173].entries[4]`
+- Canonical output: `rule/dmg-plot-points.json`
+- OMITTED: Plot Point spending can transfer DM role and alter character/DM status. Nested paths covered: $.variantrule[173].entries[4].type; $.variantrule[173].entries[4].name; $.variantrule[173].entries[4].entries[0]; $.variantrule[173].entries[4].entries[1]; $.variantrule[173].entries[4].entries[2]; $.variantrule[173].entries[4].entries[3]; $.variantrule[173].entries[4].entries[4]. The schema has no campaign role or DM rotation mechanic.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Option 3: The Gods Must Be Crazy",
+  "entries": [
+    "With this approach, there is no permanent DM. Everyone makes a character, and one person starts as the DM and runs the game as normal. That person's character becomes an NPC who can tag along with the group or remain on the sidelines, as the group wishes.",
+    "At any time, a player can spend a plot point to become the DM. That player's character becomes an NPC, and play continues. It's probably not a good idea to swap roles in the middle of combat, but it can happen if your group allows time for the new DM to settle into his or her role and pick up where the previous DM left off.",
+    "Using plot points in this way can make for an exciting campaign as each new DM steers the game in unexpected directions. This approach is also a great way for would-be DMs to try running a game in small, controlled doses.",
+    "In a campaign that uses plot points this way, everyone should come to the table with a bit of material prepared or specific encounters in mind. A player who isn't prepared or who doesn't feel like DMing can choose to not spend a plot point that session.",
+    "For this approach to work, it's a good idea to establish some shared assumptions about the campaign so that DMs aren't duplicating efforts or trampling on each other's plans."
+  ]
+}
+```
+
+### rule:dmg:renown — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[181]`
+- Source entry path: `$.variantrule[181].entries[0]`
+- Canonical output: `rule/dmg-renown.json`
+- OMITTED: Renown is an optional per-organization reputation value with possible benefits. Introductory description of the optional social progression track.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Renown is an optional rule you can use to track an adventurer's standing within a particular faction or organization. Renown is a numerical value that starts at 0, then increases as a character earns favor and reputation within a particular organization. You can tie benefits to a character's renown, including ranks and titles within the organization and access to resources."
+```
+
+### rule:dmg:renown — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[181]`
+- Source entry path: `$.variantrule[181].entries[1]`
+- Canonical output: `rule/dmg-renown.json`
+- OMITTED: Renown is tracked separately for each organization. The Rule schema has no character-to-organization reputation state.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A player tracks renown separately for each organization his or her character is a member of. For example, an adventurer might have 5 renown within one faction and 20 renown within another, based on the character's interaction with each organization over the course of the campaign."
+```
+
+### rule:dmg:renown — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[181]`
+- Source entry path: `$.variantrule[181].entries[2]`
+- Canonical output: `rule/dmg-renown.json`
+- OMITTED: Discretionary renown awards, one/two-point increases, ranks, thresholds, perks, and example faction attitudes. Nested paths covered: $.variantrule[181].entries[2].type; $.variantrule[181].entries[2].name; $.variantrule[181].entries[2].entries[0]; $.variantrule[181].entries[2].entries[1]; $.variantrule[181].entries[2].entries[2]; $.variantrule[181].entries[2].entries[3]. The schema cannot model organization-specific progression and rewards.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Gaining Renown",
+  "entries": [
+    "A character earns renown by completing missions or quests that serve an organization's interests or involve the organization directly. You award renown at your discretion as characters complete these missions or quests, typically at the same time you award experience points.",
+    "Advancing an organization's interests increases a character's renown within that organization by 1. Completing a mission specifically assigned by that organization, or which directly benefits the organization, increases the character's renown by 2 instead.",
+    "For example, characters with connections to the noble Order of the Gauntlet complete a mission in which they free a town from the tyranny of a blue dragon. Because the order likes to punish evildoers, you might increase each character's renown within the order by 1. Conversely, if killing the dragon was a mission given to the adventurers by a senior member of the order, completing the task might instead increase each character's renown by 2, showing the adventurers as effective allies.",
+    "Meanwhile, the party's rogue might have looted a box of rare poisons from the dragon's hoard and sold it to a fence who is secretly a Zhentarim agent. You might increase the rogue's renown within the Zhentarim by 2 since this action directly increased that group's power and wealth, even though the task was not assigned by an agent of the Zhentarim."
+  ]
+}
+```
+
+### rule:dmg:renown — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[181]`
+- Source entry path: `$.variantrule[181].entries[3]`
+- Canonical output: `rule/dmg-renown.json`
+- OMITTED: Discretionary renown and rank loss with a zero minimum. Nested paths covered: $.variantrule[181].entries[3].type; $.variantrule[181].entries[3].name; $.variantrule[181].entries[3].entries[0]; $.variantrule[181].entries[3].entries[1].type; $.variantrule[181].entries[3].entries[1].name; $.variantrule[181].entries[3].entries[1].entries[0]; $.variantrule[181].entries[3].entries[1].entries[1]; $.variantrule[181].entries[3].entries[1].entries[2]; $.variantrule[181].entries[3].entries[1].entries[3].type; $.variantrule[181].entries[3].entries[1].entries[3].caption; $.variantrule[181].entries[3].entries[1].entries[3].colLabels[0]; $.variantrule[181].entries[3].entries[1].entries[3].colLabels[1]; $.variantrule[181].entries[3].entries[1].entries[3].colLabels[2]; $.variantrule[181].entries[3].entries[1].entries[3].colLabels[3]; $.variantrule[181].entries[3].entries[1].entries[3].colLabels[4]; $.variantrule[181].entries[3].entries[1].entries[3].colLabels[5]; $.variantrule[181].entries[3].entries[1].entries[3].colStyles[0]; $.variantrule[181].entries[3].entries[1].entries[3].colStyles[1]; $.variantrule[181].entries[3].entries[1].entries[3].colStyles[2]; $.variantrule[181].entries[3].entries[1].entries[3].colStyles[3]; $.variantrule[181].entries[3].entries[1].entries[3].colStyles[4]; $.variantrule[181].entries[3].entries[1].entries[3].colStyles[5]; $.variantrule[181].entries[3].entries[1].entries[3].rows[0][0]; $.variantrule[181].entries[3].entries[1].entries[3].rows[0][1]; $.variantrule[181].entries[3].entries[1].entries[3].rows[0][2]; $.variantrule[181].entries[3].entries[1].entries[3].rows[0][3]; $.variantrule[181].entries[3].entries[1].entries[3].rows[0][4]; $.variantrule[181].entries[3].entries[1].entries[3].rows[0][5]; $.variantrule[181].entries[3].entries[1].entries[3].rows[1][0]; $.variantrule[181].entries[3].entries[1].entries[3].rows[1][1]; $.variantrule[181].entries[3].entries[1].entries[3].rows[1][2]; $.variantrule[181].entries[3].entries[1].entries[3].rows[1][3]; $.variantrule[181].entries[3].entries[1].entries[3].rows[1][4]; $.variantrule[181].entries[3].entries[1].entries[3].rows[1][5]; $.variantrule[181].entries[3].entries[1].entries[3].rows[2][0]; $.variantrule[181].entries[3].entries[1].entries[3].rows[2][1]; $.variantrule[181].entries[3].entries[1].entries[3].rows[2][2]; $.variantrule[181].entries[3].entries[1].entries[3].rows[2][3]; $.variantrule[181].entries[3].entries[1].entries[3].rows[2][4]; $.variantrule[181].entries[3].entries[1].entries[3].rows[2][5]; $.variantrule[181].entries[3].entries[1].entries[3].rows[3][0]; $.variantrule[181].entries[3].entries[1].entries[3].rows[3][1]; $.variantrule[181].entries[3].entries[1].entries[3].rows[3][2]; $.variantrule[181].entries[3].entries[1].entries[3].rows[3][3]; $.variantrule[181].entries[3].entries[1].entries[3].rows[3][4]; $.variantrule[181].entries[3].entries[1].entries[3].rows[3][5]; $.variantrule[181].entries[3].entries[1].entries[3].rows[4][0]; $.variantrule[181].entries[3].entries[1].entries[3].rows[4][1]; $.variantrule[181].entries[3].entries[1].entries[3].rows[4][2]; $.variantrule[181].entries[3].entries[1].entries[3].rows[4][3]; $.variantrule[181].entries[3].entries[1].entries[3].rows[4][4]; $.variantrule[181].entries[3].entries[1].entries[3].rows[4][5]; $.variantrule[181].entries[3].entries[2].type; $.variantrule[181].entries[3].entries[2].name; $.variantrule[181].entries[3].entries[2].entries[0]; $.variantrule[181].entries[3].entries[3].type; $.variantrule[181].entries[3].entries[3].name; $.variantrule[181].entries[3].entries[3].entries[0]; $.variantrule[181].entries[3].entries[4].type; $.variantrule[181].entries[3].entries[4].name; $.variantrule[181].entries[3].entries[4].entries[0]. The schema has no renown score or rank reduction procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Benefits of Renown",
+  "entries": [
+    "The benefits of increasing renown within an organization can include rank and authority, friendly attitudes from members of the organization, and other perks.",
+    {
+      "type": "entries",
+      "name": "Rank",
+      "entries": [
+        "Characters can earn promotions as their renown increases. You can establish certain thresholds of renown that serve as prerequisites (though not necessarily the only prerequisites) for advancing in rank, as shown in the Examples of Faction Ranks table. For example, a character might join the Lords' Alliance after earning 1 renown within that organization, gaining the title of cloak. As the character's renown within the organization increases, he or she might be eligible for further increases in rank.",
+        "You can add rank prerequisites. For example, a character affiliated with the Lords' Alliance might have to be at least 5th level before becoming a stingblade, at least 10th level to be a warduke, and at least 15th level to be a lioncrown.",
+        "You can set these thresholds of renown to any numbers that work for your game, creating appropriate ranks and titles for the organizations in your campaign.",
+        {
+          "type": "table",
+          "caption": "Examples of Faction Ranks",
+          "colLabels": [
+            "Renown",
+            "Harpers",
+            "Order of the Gauntlet",
+            "Emerald Enclave",
+            "Lords' Alliance",
+            "Zhentarim"
+          ],
+          "colStyles": [
+            "col-2",
+            "col-2",
+            "col-2",
+            "col-2",
+            "col-2",
+            "col-2"
+          ],
+          "rows": [
+            [
+              "1",
+              "Watcher",
+              "Chevall",
+              "Springwarden",
+              "Cloak",
+              "Fang"
+            ],
+            [
+              "3",
+              "Harpshadow",
+              "Marcheon",
+              "Summerstrider",
+              "Redknife",
+              "Wolf"
+            ],
+            [
+              "10",
+              "Brightcandle",
+              "Whitehawk",
+              "Autumnreaver",
+              "Stingblade",
+              "Viper"
+            ],
+            [
+              "25",
+              "Wise Owl",
+              "Vindicator",
+              "Winterstalker",
+              "Warduke",
+              "Ardragon"
+            ],
+            [
+              "50",
+              "High Harper",
+              "Righteous Hand",
+              "Master of the Wild",
+              "Lioncrown",
+              "Dread Lord"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Attitudes of Organization Members",
+      "entries": [
+        "As a character's renown within an organization grows, members of that organization are increasingly likely to have heard of the character. You can set thresholds at which the default attitude of an organization's members toward the character becomes indifferent or friendly. For example, members of the Emerald Enclave—a faction dedicated to preserving the natural order—might be less friendly toward characters who have not cultivated at least 3 renown within that organization, becoming friendly by default only when a character has gained 10 renown within the Emerald Enclave. These thresholds apply only to the default attitude of most members of an organization, and such attitudes aren't automatic. NPC faction members might dislike an adventurer despite that character's renown—or perhaps because of it."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Perks",
+      "entries": [
+        "Earning a rank within an organization comes with certain benefits, as defined by you. A character of low rank might gain access to a reliable contact and adventure leads, a safe house, or a trader willing to offer a discount on adventuring gear. A middle-ranked character might gain a follower (see chapter 4, \"Creating Nonplayer Characters\"), access to potions and scrolls, the ability to call in a favor, or backup on dangerous missions. A high-ranking character might be able to call on a small army, take custody of a rare magic item, gain access to a helpful spellcaster, or assign special missions to members of lower rank."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Downtime Activities",
+      "entries": [
+        "You might allow characters to spend downtime between adventures building relationships and gaining renown within an organization. For more information on downtime activities, see chapter 6, \"Between Adventures.\""
+      ]
+    }
+  ]
+}
+```
+
+### rule:dmg:renown — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[181]`
+- Source entry path: `$.variantrule[181].entries[4]`
+- Canonical output: `rule/dmg-renown.json`
+- OMITTED: Piety as deity-specific renown, divine favor, and persistent benefits. Nested paths covered: $.variantrule[181].entries[4].type; $.variantrule[181].entries[4].name; $.variantrule[181].entries[4].entries[0]. The schema has no deity relationship, piety progression, or benefit-grant procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Losing Renown",
+  "entries": [
+    "Disagreements with members of an organization aren't enough to cause a loss of renown within that organization. However, serious offenses committed against the organization or its members can result in a loss of renown and rank within the organization. The extent of the loss depends on the infraction and is left to your discretion. A character's renown within an organization can never drop below 0."
+  ]
+}
+```
+
+### rule:phb:customizing-ability-scores — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[41]`
+- Source entry path: `$.variantrule[41].entries[0]`
+- Canonical output: `rule/phb-customizing-ability-scores.json`
+- OMITTED: Optional individually chosen ability score generation method. Introductory description.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"At your Dungeon Master's option, you can use this variant for determining your ability scores. The method described here allows you to build a character with a set of ability scores you choose individually."
+```
+
+### rule:phb:customizing-ability-scores — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[41]`
+- Source entry path: `$.variantrule[41].entries[1]`
+- Canonical output: `rule/phb-customizing-ability-scores.json`
+- OMITTED: Spend 27 points; scores 8 through 15; maximum 15 before ancestry increases. The Rule contract lacks an ability score generation budget and range procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"You have 27 points to spend on your ability scores. The cost of each score is shown on the Ability Score Point Cost table. For example, a score of 14 costs 7 points. Using this method, 15 is the highest ability score you can end up with, before applying racial increases. You can't have a score lower than 8."
+```
+
+### rule:phb:customizing-ability-scores — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[41]`
+- Source entry path: `$.variantrule[41].entries[2]`
+- Canonical output: `rule/phb-customizing-ability-scores.json`
+- OMITTED: Examples of high, balanced, and intermediate ability score arrays. Illustrative score arrays do not add a distinct mechanic beyond point-buy selection.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"This method of determining ability scores enables you to create a set of three high numbers and three low ones (15, 15, 15, 8, 8, 8), a set of numbers that are above average and nearly equal (13, 13, 13, 12, 12, 12), or any set of numbers between those extremes."
+```
+
+### rule:phb:customizing-ability-scores — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[41]`
+- Source entry path: `$.variantrule[41].entries[3]`
+- Canonical output: `rule/phb-customizing-ability-scores.json`
+- OMITTED: Ability Score Point Cost table. Nested paths covered: $.variantrule[41].entries[3].type; $.variantrule[41].entries[3].caption; $.variantrule[41].entries[3].colLabels[0]; $.variantrule[41].entries[3].colLabels[1]; $.variantrule[41].entries[3].colStyles[0]; $.variantrule[41].entries[3].colStyles[1]. The approved abilityScoreModifier structure maps scores to modifiers, not point-buy costs.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Ability Score Point Cost",
+  "colLabels": [
+    "Score",
+    "Cost"
+  ],
+  "colStyles": [
+    "col-6 text-center",
+    "col-6 text-center"
+  ],
+  "rows": [
+    [
+      8,
+      0
+    ],
+    [
+      9,
+      1
+    ],
+    [
+      10,
+      2
+    ],
+    [
+      11,
+      3
+    ],
+    [
+      12,
+      4
+    ],
+    [
+      13,
+      5
+    ],
+    [
+      14,
+      7
+    ],
+    [
+      15,
+      9
+    ]
+  ]
+}
+```
+
+### rule:phb:customizing-ability-scores — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[41]`
+- Source entry path: `$.variantrule[41].entries[4]`
+- Canonical output: `rule/phb-customizing-ability-scores.json`
+- OMITTED: External Point Buy Calculator link. Nested paths covered: $.variantrule[41].entries[4].type; $.variantrule[41].entries[4].entries[0]; $.variantrule[41].entries[4].entries[1].type; $.variantrule[41].entries[4].entries[1].href.type; $.variantrule[41].entries[4].entries[1].href.path; $.variantrule[41].entries[4].entries[1].href.hash; $.variantrule[41].entries[4].entries[1].entry. The calculator is an external dependency and not a canonical mechanic.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+{
+  "type": "inline",
+  "entries": [
+    "Alternatively, see the ",
+    {
+      "type": "link",
+      "href": {
+        "type": "internal",
+        "path": "statgen.html",
+        "hash": "pointbuy"
+      },
+      "entry": "Point Buy Calculator."
+    }
+  ]
+}
+```
+
+### rule:phb:feats — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[111]`
+- Source entry path: `$.variantrule[111].entries[0]`
+- Canonical output: `rule/phb-feats.json`
+- OMITTED: Definition of a feat as a talent or area of expertise granting capabilities. Character feature definition has no corresponding Rule mechanic.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A feat represents a talent or an area of expertise that gives a character special capabilities. It embodies training, experience, and abilities beyond what a class provides."
+```
+
+### rule:phb:feats — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[111]`
+- Source entry path: `$.variantrule[111].entries[1]`
+- Canonical output: `rule/phb-feats.json`
+- OMITTED: Optional feat selection in place of Ability Score Improvement at eligible class levels; each feat once unless noted. The schema has no class-level feature replacement or feat acquisition model.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"At certain levels, your class gives you the Ability Score Improvement feature. Using the optional feats rule, you can forgo taking that feature to take a feat of your choice instead. You can take each feat only once, unless the feat's description says otherwise."
+```
+
+### rule:phb:feats — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[111]`
+- Source entry path: `$.variantrule[111].entries[2]`
+- Canonical output: `rule/phb-feats.json`
+- OMITTED: Feat prerequisites and suspension of benefits when a prerequisite is lost. The schema has no feat prerequisite or character feature activation model.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"You must meet any prerequisite specified in a feat to take that feat. If you ever lose a feat's prerequisite, you can't use that feat until you regain the prerequisite. For example, the Grappler feat requires you to have a Strength of 13 or higher. If your Strength is reduced below 13 somehow—perhaps by a withering curse—you can't benefit from the Grappler feat until your Strength is restored."
+```
+
+### rule:phb:feats — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[111]`
+- Source entry path: `$.variantrule[111].entries[3]`
+- Canonical output: `rule/phb-feats.json`
+- OMITTED: Reference to the external Feats section. The source points to a separate feat catalog not available as a canonical Rule output in this batch.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+"See the {@5etools Feats section|feats.html} for more information."
+```
+
+### rule:tce:customizing-your-origin — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[42]`
+- Source entry path: `$.variantrule[42].entries[0]`
+- Canonical output: `rule/tce-customizing-your-origin.json`
+- OMITTED: Character origin customization context and rationale. Introductory character creation discussion.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"At 1st level, you choose various aspects of your character, including ability scores, race, class, and background. Together these elements help paint a picture of your character's origin and give you the ability to create many different types of characters. Despite that versatility, a D&D race that has the Ability Score Increase trait includes little or no choice—a lack that can make it difficult to realize certain character concepts. The following subsections address that lack by adding choice to your character's race if it includes the Ability Score Increase trait, allowing you to customize your ability scores, languages, and certain proficiencies to fit the origin you have in mind for your character. Character race in the game represents your character's fantasy species, combined with certain cultural assumptions. The following options step outside those assumptions to pave the way for truly unique characters."
+```
+
+### rule:tce:customizing-your-origin — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[42]`
+- Source entry path: `$.variantrule[42].entries[1]`
+- Canonical output: `rule/tce-customizing-your-origin.json`
+- OMITTED: Replacing ancestry-based ability score increases and the score cap. Nested paths covered: $.variantrule[42].entries[1].type; $.variantrule[42].entries[1].name; $.variantrule[42].entries[1].entries[0]; $.variantrule[42].entries[1].entries[1]; $.variantrule[42].entries[1].entries[2]. The schema has no character ancestry ability-score assignment procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Ability Score Increases",
+  "entries": [
+    "The Ability Score Increase trait in a race reflects an archetypal bit of excellence in the adventurers of this kind in D&D's past. For example, if you're a dwarf, your Constitution increases by 2, because dwarf heroes in D&D are often exceptionally tough. This increase doesn't apply to every dwarf, just to dwarf adventurers, and it exists to reinforce an archetype. That reinforcement is appropriate if you want to lean into the archetype, but it's unhelpful if your character doesn't conform to the archetype.",
+    "If you'd like your character to follow their own path, you may ignore your Ability Score Increase trait and assign ability score increases tailored to your character. Here's how to do it: take any ability score increase you gain in your race or subrace and apply it to an ability score of your choice. If you gain more than one increase, you can't apply those increases to the same ability score, and you can't increase a score above 20.",
+    "For example, if the Ability Score Increase trait of your race or subrace increases your Constitution by 2 and your Wisdom by 1, you could instead increase your Intelligence by 2 and your Charisma by 1."
+  ]
+}
+```
+
+### rule:tce:customizing-your-origin — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[42]`
+- Source entry path: `$.variantrule[42].entries[2]`
+- Canonical output: `rule/tce-customizing-your-origin.json`
+- OMITTED: Replacing inherited language choices and choosing languages appropriate to a campaign. Nested paths covered: $.variantrule[42].entries[2].type; $.variantrule[42].entries[2].name; $.variantrule[42].entries[2].entries[0]; $.variantrule[42].entries[2].entries[1]; $.variantrule[42].entries[2].entries[2]. The Rule reference contract cannot model character language selection or DM-dependent options.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Languages",
+  "entries": [
+    "If your character's race has the Languages trait, that trait includes languages that your character is assumed to know, usually Common and the language of your ancestors. For example, a halfling adventurer is assumed to know Common and Halfling. Here's the thing: D&D adventurers are extraordinary, and your character might have grown up speaking languages different from the ones in your Languages trait.",
+    "To customize the languages you know, you may replace each language in your Languages trait with a language from the following list: Abyssal, Celestial, Common, Deep Speech, Draconic, Dwarvish, Elvish, Giant, Gnomish, Goblin, Halfling, Infernal, Orc, Primordial, Sylvan, or Undercommon.",
+    "Your DM may add or remove languages from that list, depending on what languages are appropriate for your campaign."
+  ]
+}
+```
+
+### rule:tce:customizing-your-origin — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[42]`
+- Source entry path: `$.variantrule[42].entries[3]`
+- Canonical output: `rule/tce-customizing-your-origin.json`
+- OMITTED: Replacing ancestry proficiencies using the proficiency-swap table and examples. Nested paths covered: $.variantrule[42].entries[3].type; $.variantrule[42].entries[3].name; $.variantrule[42].entries[3].entries[0]; $.variantrule[42].entries[3].entries[1].type; $.variantrule[42].entries[3].entries[1].caption; $.variantrule[42].entries[3].entries[1].colLabels[0]; $.variantrule[42].entries[3].entries[1].colLabels[1]; $.variantrule[42].entries[3].entries[1].colStyles[0]; $.variantrule[42].entries[3].entries[1].colStyles[1]; $.variantrule[42].entries[3].entries[1].rows[0][0]; $.variantrule[42].entries[3].entries[1].rows[0][1]; $.variantrule[42].entries[3].entries[1].rows[1][0]; $.variantrule[42].entries[3].entries[1].rows[1][1]; $.variantrule[42].entries[3].entries[1].rows[2][0]; $.variantrule[42].entries[3].entries[1].rows[2][1]; $.variantrule[42].entries[3].entries[1].rows[3][0]; $.variantrule[42].entries[3].entries[1].rows[3][1]; $.variantrule[42].entries[3].entries[1].rows[4][0]; $.variantrule[42].entries[3].entries[1].rows[4][1]; $.variantrule[42].entries[3].entries[2]; $.variantrule[42].entries[3].entries[3]. The approved proficiency patterns do not model character-origin proficiency exchange categories.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Proficiencies",
+  "entries": [
+    "Some races that include the Ability Score Increase trait also grant proficiencies. These proficiencies are usually cultural, and your character might not have any connection with the culture in question or might have pursued different training. You can replace each of those proficiencies with a different one of your choice, following the restrictions on the Proficiency Swaps table.",
+    {
+      "type": "table",
+      "caption": "Proficiency Swaps",
+      "colLabels": [
+        "Proficiency",
+        "Replacement Proficiency"
+      ],
+      "colStyles": [
+        "col-6",
+        "col-6"
+      ],
+      "rows": [
+        [
+          "Skill",
+          "Skill"
+        ],
+        [
+          "Armor",
+          "Simple/martial weapon or tool"
+        ],
+        [
+          "Simple weapon",
+          "Simple weapon or tool"
+        ],
+        [
+          "Martial weapon",
+          "Simple/martial weapon or tool"
+        ],
+        [
+          "Tool",
+          "Tool or simple weapon"
+        ]
+      ]
+    },
+    "For example, high elf adventurers have proficiency with longswords, which are martial weapons. Consulting the Proficiency Swaps table, we see that your high elf can swap that proficiency for proficiency with another weapon or a tool. Your elf might be a musician, who chooses proficiency with a {@item musical instrument|PHB}—a type of tool—instead of with longswords. Similarly, elves start with proficiency in the {@skill Perception} skill. Your elf might not have the keen senses associated with your kin and could take proficiency in a different skill, such as {@skill Performance}.",
+    "The \"{@book Equipment|PHB|5}\" chapter of the {@book Player's Handbook|PHB} includes weapons and tools suitable for these swaps, and your DM might allow additional options."
+  ]
+}
+```
+
+### rule:tce:customizing-your-origin — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[42]`
+- Source entry path: `$.variantrule[42].entries[4]`
+- Canonical output: `rule/tce-customizing-your-origin.json`
+- OMITTED: Ignoring archetypal personality suggestions and selecting Custom Lineage trait options. Nested paths covered: $.variantrule[42].entries[4].type; $.variantrule[42].entries[4].name; $.variantrule[42].entries[4].entries[0]; $.variantrule[42].entries[4].entries[1].type; $.variantrule[42].entries[4].entries[1].name; $.variantrule[42].entries[4].entries[1].entries[0]; $.variantrule[42].entries[4].entries[1].entries[1].type; $.variantrule[42].entries[4].entries[1].entries[1].style; $.variantrule[42].entries[4].entries[1].entries[1].items[0].type; $.variantrule[42].entries[4].entries[1].entries[1].items[0].name; $.variantrule[42].entries[4].entries[1].entries[1].items[0].entry; $.variantrule[42].entries[4].entries[1].entries[1].items[1].type; $.variantrule[42].entries[4].entries[1].entries[1].items[1].name; $.variantrule[42].entries[4].entries[1].entries[1].items[1].entry; $.variantrule[42].entries[4].entries[1].entries[1].items[2].type; $.variantrule[42].entries[4].entries[1].entries[1].items[2].name; $.variantrule[42].entries[4].entries[1].entries[1].items[2].entry; $.variantrule[42].entries[4].entries[1].entries[1].items[3].type; $.variantrule[42].entries[4].entries[1].entries[1].items[3].name; $.variantrule[42].entries[4].entries[1].entries[1].items[3].entry; $.variantrule[42].entries[4].entries[1].entries[1].items[4].type; $.variantrule[42].entries[4].entries[1].entries[1].items[4].name; $.variantrule[42].entries[4].entries[1].entries[1].items[4].entry; $.variantrule[42].entries[4].entries[1].entries[1].items[5].type; $.variantrule[42].entries[4].entries[1].entries[1].items[5].name; $.variantrule[42].entries[4].entries[1].entries[1].items[5].entry; $.variantrule[42].entries[4].entries[1].entries[1].items[6].type; $.variantrule[42].entries[4].entries[1].entries[1].items[6].name; $.variantrule[42].entries[4].entries[1].entries[1].items[6].entry. The schema has no character lineage composition or trait-selection procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Personality",
+  "entries": [
+    "The description of a race might suggest various things about the behavior and personality of that people's archetypal adventurers. You may ignore those suggestions, whether they're about alignment, moods, interests, or any other personality trait. Your character's personality and behavior are entirely yours to determine.",
+    {
+      "type": "inset",
+      "name": "Custom Lineage",
+      "entries": [
+        "Instead of choosing one of the game's races for your character at 1st level, you can use the following traits to represent your character's lineage, giving you full control over how your character's origin shaped them:",
+        {
+          "type": "list",
+          "style": "list-hang-notitle",
+          "items": [
+            {
+              "type": "item",
+              "name": "Creature Type",
+              "entry": "You are a humanoid. You determine your appearance and whether you resemble any of your kin."
+            },
+            {
+              "type": "item",
+              "name": "Size",
+              "entry": "You are Small or Medium (your choice)."
+            },
+            {
+              "type": "item",
+              "name": "Speed",
+              "entry": "Your base walking speed is 30 feet."
+            },
+            {
+              "type": "item",
+              "name": "Ability Score Increase",
+              "entry": "One ability score of your choice increases by 2."
+            },
+            {
+              "type": "item",
+              "name": "Feat",
+              "entry": "You gain one feat of your choice for which you qualify."
+            },
+            {
+              "type": "item",
+              "name": "Variable Trait",
+              "entry": "You gain one of the following options of your choice: (a) {@sense darkvision} with a range of 60 feet or (b) proficiency in one skill of your choice."
+            },
+            {
+              "type": "item",
+              "name": "Languages",
+              "entry": "You can speak, read, and write Common and one other language that you and your DM agree is appropriate for your character."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:tce:optional-class-features — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[165]`
+- Source entry path: `$.variantrule[165].entries[0]`
+- Canonical output: `rule/tce-optional-class-features.json`
+- OMITTED: Optional class features add to features in the Player's Handbook. Introductory class feature description.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"You gain class features in the {@book Player's Handbook|PHB} when you reach certain levels in your class. An optional feature is an additional feature that you can gain beyond these."
+```
+
+### rule:tce:optional-class-features — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[165]`
+- Source entry path: `$.variantrule[165].entries[1]`
+- Canonical output: `rule/tce-optional-class-features.json`
+- OMITTED: Optional features require level eligibility and DM consultation; features are independently selected. The Rule schema has no class feature selection or level prerequisite model.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Unlike the features in the {@book Player's Handbook|PHB}, you don't gain an optional feature automatically. Consulting with your DM, you decide whether to gain an optional feature if you meet the level requirement noted in the feature's description. These features can be selected separately from one another; you can use some, all, or none of them."
+```
+
+### rule:tce:optional-class-features — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[165]`
+- Source entry path: `$.variantrule[165].entries[2]`
+- Canonical output: `rule/tce-optional-class-features.json`
+- OMITTED: A replacement feature removes the replaced benefit and its dependent qualifications. The schema has no class feature replacement and prerequisite dependency model.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"If you take an optional feature that replaces another feature, you gain no benefit from the replaced one and don't qualify for anything in the game that requires it."
+```
+
+### rule:xge:tying-knots — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[224]`
+- Source entry path: `$.variantrule[224].entries[0]`
+- Canonical output: `rule/xge-tying-knots.json`
+- OMITTED: Open-ended mundane-task framing. Introductory guidance.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"The rules are purposely open-ended concerning mundane tasks like tying knots, but sometimes knowing how well a knot was fashioned is important in a dramatic scene when someone is trying to untie a knot or slip out of one. Here's an optional rule for determining the effectiveness of a knot."
+```
+
+### rule:xge:tying-knots — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[224]`
+- Source entry path: `$.variantrule[224].entries[1]`
+- Canonical output: `rule/xge-tying-knots.json`
+- OMITTED: Tying, untying, and slipping out of a knot using check totals as DCs. This is the explicitly skipped R-GAP-19 procedure and is not implemented.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"The creature who ties the knot makes an Intelligence ({@skill Sleight of Hand}) check when doing so. The total of the check becomes the DC for an attempt to untie the knot with an Intelligence ({@skill Sleight of Hand}) check or to slip out of it with a Dexterity ({@skill Acrobatics}) check."
+```
+
+### rule:xge:tying-knots — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[224]`
+- Source entry path: `$.variantrule[224].entries[2]`
+- Canonical output: `rule/xge-tying-knots.json`
+- OMITTED: Application of the ability variation to knot checks. The knot procedure remains excluded by skipped R-GAP-19.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"This rule intentionally links {@skill Sleight of Hand} with Intelligence, rather than Dexterity. This is an example of how to apply the rule in the {@variantrule Skills with Different Abilities|phb|\"Variant: Skills with Different Abilities\"} section in chapter 7 of the player's handbook."
+```
+
+### rule:xphb:experience-points — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[102]`
+- Source entry path: `$.variantrule[102].entries[0]`
+- Canonical output: `rule/xphb-experience-points.json`
+- OMITTED: Characters earn DM-awarded XP for overcoming challenges/completing adventures and level up at XP thresholds. The Rule schema has no XP accumulation or character level threshold progression mechanic.; cause: `SCHEMA_UNSUPPORTED`
+- OMITTED: XDMG guidance on awarding XP. The source cites an external DMG procedure without identifying a specific Rule target.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+"As they overcome challenges and complete adventures, characters earn Experience Points (XP) which are awarded by the Dungeon Master. When a character's XP total crosses certain thresholds, the character's level increases. The {@book Dungeon Master's Guide|XDMG} provides guidance on awarding XP."
+```
+
+### rule:dmg:loyalty — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[148]`
+- Source entry path: `$.variantrule[148].entries[0]`
+- Canonical output: `rule/dmg-loyalty.json`
+- OMITTED: Optional loyalty roleplay/rule introduction. Introductory explanation.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Loyalty is an optional rule you can use to determine how far an NPC party member will go to protect or assist the other members of the party (even those she doesn't particularly like). An NPC party member who is abused or ignored is likely to abandon the party, whereas an NPC who owes a life characters or shares their goals might fight to the death for them. Loyalty can be roleplayed or represented by this rule."
+```
+
+### rule:dmg:loyalty — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[148]`
+- Source entry path: `$.variantrule[148].entries[1]`
+- Canonical output: `rule/dmg-loyalty.json`
+- OMITTED: Loyalty score from 0 to 20, maximum equal to highest party Charisma, and starting value at half maximum. Nested paths covered: $.variantrule[148].entries[1].type; $.variantrule[148].entries[1].name; $.variantrule[148].entries[1].entries[0]. The approved Social component has no score range, dynamic maximum, or initial-value fields.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Loyalty Score",
+  "entries": [
+    "An NPC's loyalty is measured on a numerical scale from 0 to 20. The NPC's maximum loyalty score is equal to the highest Charisma score among all adventurers in the party, and its starting loyalty score is half that number. If the highest Charisma score changes—perhaps a character dies or leaves the group-adjust the NPC's loyalty score accordingly."
+  ]
+}
+```
+
+### rule:dmg:loyalty — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[148]`
+- Source entry path: `$.variantrule[148].entries[2]`
+- Canonical output: `rule/dmg-loyalty.json`
+- OMITTED: Score increases/reductions, minimum/maximum behavior, disloyalty threshold outcomes, departure, and betrayal. Nested paths covered: $.variantrule[148].entries[2].type; $.variantrule[148].entries[2].name; $.variantrule[148].entries[2].entries[0]; $.variantrule[148].entries[2].entries[1]; $.variantrule[148].entries[2].entries[2]; $.variantrule[148].entries[2].entries[3]; $.variantrule[148].entries[2].entries[4]. The Social component cannot express score transitions, triggers, or NPC behavior outcomes.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Tracking Loyalty",
+  "entries": [
+    "Keep track of an NPC's loyalty score in secret so that the players won't know for sure whether an NPC party member is loyal or disloyal (even if the NPC is currently under a player's control).",
+    "An NPC's loyalty score increases by {@dice 1d4} if other party members help the NPC achieve a goal tied to its bond. Likewise, an NPC's loyalty score increases by {@dice 1d4} if the NPC is treated particularly well (for example, given a magic weapon as a gift) or rescued by another party member. An NPC's loyalty score can never be raised above its maximum.",
+    "When other party members act in a manner that runs counter to the NPC's alignment or bond, reduce the PC's loyalty score by {@dice 1d4}. Reduce the NPC's loyalty score by {@dice 2d4} if the character is abused, misled, or endangered by other party members for purely selfish reasons.",
+    "An NPC whose loyalty score drops to 0 is no longer loyal to the party and might part ways with them. A loyalty score can never drop below 0.",
+    "An NPC with a loyalty score of 10 or higher risks life and limb to help fellow party members. If the NPC's loyalty score is between 1 and 10, its loyalty is tenuous. An NPC whose loyalty drops to 0 no longer acts in the party's best interests. The disloyal NPC either leaves the party (attacking characters who attempt to intervene) or works in secret to bring about the party's downfall."
+  ]
+}
+```
+
+### rule:xphb:ally — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[9]`
+- Source entry path: `$.variantrule[9].entries[0]`
+- Canonical output: `rule/xphb-ally.json`
+- OMITTED: Ally status may come from party membership, friendship, acting on your side in combat, or rule/DM designation. The Rule contract has no ally relationship predicate or designation mechanic.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A creature is your ally if it is a member of your adventuring party, your friend, on your side in combat, or a creature that the rules or the DM designates as your ally."
+```
+
+### rule:xphb:enemy — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[100]`
+- Source entry path: `$.variantrule[100].entries[0]`
+- Canonical output: `rule/xphb-enemy.json`
+- OMITTED: Enemy status may be determined by fighting against you, actively working to harm you, or rule/DM designation. The Rule contract has no enemy relationship predicate or designation mechanic.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A creature is your enemy if it fights against you in combat, actively works to harm you, or is designated as your enemy by the rules or DM."
+```
+
+### rule:xphb:friendly-attitude — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[116]`
+- Source entry path: `$.variantrule[116].entries[0]`
+- Canonical output: `rule/xphb-friendly-attitude.json`
+- OMITTED: Conditional application of Advantage to the influence check. The approved Rule contract cannot bind this D20 modifier to the Friendly target attitude and influence purpose.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A Friendly creature views you favorably. You have {@variantrule Advantage|XPHB|advantage} on an ability check to influence a Friendly creature."
+```
+
+### rule:xphb:hostile-attitude — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[129]`
+- Source entry path: `$.variantrule[129].entries[0]`
+- Canonical output: `rule/xphb-hostile-attitude.json`
+- OMITTED: Conditional application of Disadvantage to the influence check. The approved Rule contract cannot bind this D20 modifier to the Hostile target attitude and influence purpose.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A Hostile creature views you unfavorably. You have {@variantrule Disadvantage|XPHB} on an ability check to influence a Hostile creature."
+```
+
+### rule:xphb:nonplayer-character — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[160]`
+- Source entry path: `$.variantrule[160].entries[0]`
+- Canonical output: `rule/xphb-nonplayer-character.json`
+- OMITTED: An NPC has a personal name and distinct personality. The Rule contract has no NPC identity or personality properties.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A nonplayer character (NPC) is a {@variantrule Monster|XPHB|monster} that has a personal name and a distinct personality."
+```
+
+### rule:dmg:inspiration — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[139]`
+- Source entry path: `$.variantrule[139].entries[0]`
+- Canonical output: `rule/dmg-inspiration.json`
+- OMITTED: Inspiration award, possession, limit, timing, transfer, tracking, and spending lifecycle. The Advantage benefit is referenced; R-GAP-25 defers the character-held resource lifecycle.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"Awarding inspiration is an effective way to encourage roleplaying and risk-taking. As explained in the {@book Player's Handbook|PHB}, having inspiration gives a character an obvious benefit: being able to gain advantage on one ability check, attack roll, or saving throw. Remember that a character can have no more than one inspiration at a time."
+```
+
+### rule:dmg:inspiration — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[139]`
+- Source entry path: `$.variantrule[139].entries[1]`
+- Canonical output: `rule/dmg-inspiration.json`
+- OMITTED: Award criteria, frequency guidance, and roleplaying, heroism, victory, genre, and player-award variants. Nested paths covered: $.variantrule[139].entries[1].type; $.variantrule[139].entries[1].name; $.variantrule[139].entries[1].entries[0]; $.variantrule[139].entries[1].entries[1]; $.variantrule[139].entries[1].entries[2]; $.variantrule[139].entries[1].entries[3].type; $.variantrule[139].entries[1].entries[3].name; $.variantrule[139].entries[1].entries[3].entries[0]; $.variantrule[139].entries[1].entries[3].entries[1]; $.variantrule[139].entries[1].entries[4].type; $.variantrule[139].entries[1].entries[4].name; $.variantrule[139].entries[1].entries[4].entries[0]; $.variantrule[139].entries[1].entries[4].entries[1]; $.variantrule[139].entries[1].entries[5].type; $.variantrule[139].entries[1].entries[5].name; $.variantrule[139].entries[1].entries[5].entries[0]; $.variantrule[139].entries[1].entries[5].entries[1]; $.variantrule[139].entries[1].entries[6].type; $.variantrule[139].entries[1].entries[6].name; $.variantrule[139].entries[1].entries[6].entries[0]; $.variantrule[139].entries[1].entries[6].entries[1]; $.variantrule[139].entries[1].entries[6].entries[2]; $.variantrule[139].entries[1].entries[7].type; $.variantrule[139].entries[1].entries[7].name; $.variantrule[139].entries[1].entries[7].entries[0]. These are optional award and resource procedures within deferred R-GAP-25; campaign guidance is not modeled separately.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Awarding Inspiration",
+  "entries": [
+    "Think of inspiration as a spice that you can use to enhance your campaign. Some DMs forgo using inspiration, while others embrace it as a key part of the game. If you take away anything from this section, remember this golden rule: inspiration should make the game more enjoyable for everyone. Award inspiration when players take actions that make the game more exciting, amusing, or memorable.",
+    "As a rule of thumb, aim to award inspiration to each character about once per session of play. Over time, you might want to award inspiration more or less often, at a rate that works best for your table. You might use the same rate for your entire DMing career, or you might change it with each campaign.",
+    "Offering inspiration as a reward encourages certain types of behavior in your players. Think of your style as a DM and your group's preferences. What helps make the game more fun for your group? What type of action fit in with your campaign's style or genre? Your answer to those questions help determine when you award inspiration.",
+    {
+      "type": "entries",
+      "name": "Roleplaying",
+      "entries": [
+        "Using inspiration to reward roleplaying is a good place to start for most groups. Reward a player with inspiration when that player causes his or her character to do something that is consistent with the character's personality trait, flaw, or bond. The character's action should be notable in some way. It might drive the story forward, push the adventurers into danger, or make everyone at the table laugh. In essence. you reward the player for roleplaying in a way that makes the game more enjoyable for everyone else.",
+        "Take into account each player's roleplaying style, and try not to favor one style over another. For example, Allison might be comfortable speaking in an accent and adopting her character's mannerisms, but Paul feels self-conscious when trying to act and prefers to describe his character's attitude and actions. Neither style is better than the other. Inspiration encourages players to take part and make a good effort, and awarding it fairly makes the game better for everyone."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Heroism",
+      "entries": [
+        "You can use inspiration to encourage player characters to take risks. A fighter might not normally hurl himself over a balcony to land in the mid of a pack of hungry ghouls, but you can reward the character's daring maneuver with inspiration. Such a reward tells the players that you want them to embrace swashbuckling action.",
+        "This approach is great for campaigns that emphasize action-packed heroics. For such campaigns, consider allowing inspiration to be spent after a {@dice d20} roll, rather than before. This approach turns inspiration into a cushion against failure—and a guarantee that it comes into play only when a player is faced directly by failure. Such an assurance makes risky tactics less daunting."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "A Reward for Victory",
+      "entries": [
+        "Some DMs prefer to play an impartial role in their campaigns. Inspiration normally requires a DM's judgment to award, which might run against your style if you like a campaign where you let dice determine most outcomes. If that's your style, consider using inspiration as a reward when the characters achieve an important goal or victory, representing a surge of confidence and energy.",
+        "Under this model, give everyone in the party inspiration if the characters manage to defeat a powerful foe, execute a cunning plan to achieve a goal, or otherwise overcome a daunting obstacle in the campaign."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Genre Emulation",
+      "entries": [
+        "Inspiration is a handy tool for reinforcing the conventions of a particular genre. Under this approach, think of the motifs of a genre as personality traits, flaws, and bonds that can apply to any of the adventurers. For example, in a campaign inspired by film noir, characters could have an additional flaw: \"I can't resist helping a person I find alluring despite warnings that he or she is nothing but trouble.\" If the characters agree to help a suspicious but seductive noble and thereby become entangled in a web of intrigue and betrayal, reward them with inspiration.",
+        "Similarly, characters in a horror story typically can't help but spend a night in a haunted house to learn its secrets. They probably also go off alone when they shouldn't. If the party splits up, consider giving each character inspiration.",
+        "A sensible person would avoid the noble's intrigues and the haunted house, but in film noir or horror, we're not dealing with sensible people; we're dealing with protagonists in a particular type of story. For this approach to work, create a list of your genre's main conventions and share it with your players. Before the campaign begins, talk about the list to make sure your group is on board for embracing those conventions."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Players and Inspiration",
+      "entries": [
+        "Remember that a player with inspiration can award it to another player. Some groups even like to treat inspiration as a group resource, deciding collectively when to spend it on a roll. It's best to let players award their inspiration as they see fit, but feel free to talk to them about following certain guidelines, particularly if you're trying to reinforce conventions of a certain genre."
+      ]
+    }
+  ]
+}
+```
+
+### rule:dmg:inspiration — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[139]`
+- Source entry path: `$.variantrule[139].entries[2]`
+- Canonical output: `rule/dmg-inspiration.json`
+- OMITTED: Award before or after actions and retroactive spending timing. Nested paths covered: $.variantrule[139].entries[2].type; $.variantrule[139].entries[2].name; $.variantrule[139].entries[2].entries[0]; $.variantrule[139].entries[2].entries[1]; $.variantrule[139].entries[2].entries[2]; $.variantrule[139].entries[2].entries[3]. Award timing and post-roll spend are expressly within deferred R-GAP-25.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "When Do You Award Inspiration",
+  "entries": [
+    "Consider the timing of your inspiration rewards. Some DMs like to award inspiration in response to an action. Other DMs like to encourage specific actions by offering inspiration while a player is considering options. Both approaches have their strengths and weaknesses.",
+    "Waiting until after an action preserves the flow of play, but it also means players don't know whether their decisions will earn them inspiration. It also means the player can't spend the inspiration on the act that earned it, unless you allow a player to retroactively spend it or are quick enough to award it before any rolls. This approach works best for groups that want to focus on immersion and player agency, where the DM steps back and gives the players more freedom to do what they want.",
+    "Telling a player that an action will earn inspiration provides clarity, but it can make it feel like you are manipulating the players or making choices for them. Offering inspiration before an action works great with groups that are comfortable with an emphasis on genre emulation and group storytelling, where character freedom isn't as important as weaving a compelling tale together.",
+    "Start with awarding inspiration after an action, especially for your first campaign or when playing with a new group. That approach is the least disruptive to the flow of play and avoids making the players feel as if you are being manipulative."
+  ]
+}
+```
+
+### rule:dmg:inspiration — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[139]`
+- Source entry path: `$.variantrule[139].entries[3]`
+- Canonical output: `rule/dmg-inspiration.json`
+- OMITTED: Character-sheet, token, or special-die tracking; spending and transfer of the token. Nested paths covered: $.variantrule[139].entries[3].type; $.variantrule[139].entries[3].name; $.variantrule[139].entries[3].entries[0]. These describe possession, spend, and transfer in deferred R-GAP-25.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Tracking Inspiration",
+  "entries": [
+    "A player typically notes on a character sheet whether he or she has inspiration, or you can use poker chips or some other token. Alternatively, you can hand out special d20s to represent inspiration. When a player spends inspiration, he or she rolls the die and then hands it back to you. If the player instead gives the inspiration to someone else, the {@dice d20} can go to that other person."
+  ]
+}
+```
+
+### rule:dmg:inspiration — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[139]`
+- Source entry path: `$.variantrule[139].entries[4]`
+- Canonical output: `rule/dmg-inspiration.json`
+- OMITTED: The option to disable Inspiration for a campaign. Nested paths covered: $.variantrule[139].entries[4].type; $.variantrule[139].entries[4].name; $.variantrule[139].entries[4].entries[0]; $.variantrule[139].entries[4].entries[1]. The schema has no campaign-level rule enablement property.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Ignoring Inspiration",
+  "entries": [
+    "Inspiration might not work for your campaign. Some DMs feel it adds a layer of metagame thinking, and others feel that heroism, roleplaying, and other parts of the game are their own rewards that don't need incentives like inspiration.",
+    "If you choose to ignore inspiration, you're telling the players that your campaign is one where you let the dice fall where they may. It's a good option for gritty campaigns or ones where the DM focuses on playing an impartial role as a rules arbiter."
+  ]
+}
+```
+
+### rule:dmg:inspiration — entry 5
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[139]`
+- Source entry path: `$.variantrule[139].entries[5]`
+- Canonical output: `rule/dmg-inspiration.json`
+- OMITTED: Player awards, per-session award limits, DM-held Inspiration, spending it to grant foes advantage, and carryover. Nested paths covered: $.variantrule[139].entries[5].type; $.variantrule[139].entries[5].name; $.variantrule[139].entries[5].entries[0]; $.variantrule[139].entries[5].entries[1]; $.variantrule[139].entries[5].entries[2]; $.variantrule[139].entries[5].entries[3]. This is the optional resource award/possession/spend variant in deferred R-GAP-25.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Variant: Only Players Award Inspiration",
+  "entries": [
+    "As a DM, you have a lot to track during the game. Sometimes you can lose track of inspiration and forget to award it. As a variant rule, you can allow the players to handle awarding inspiration entirely. During every session, each player can award inspiration to another player. A player follows whatever guidelines the group has agreed on for awarding inspiration.",
+    "This approach makes your life easier and also gives players the chance to recognize each other for good play. You still need to make sure that inspiration is being awarded fairly.",
+    "This approach works best with groups that are focused on the story. It falls flat if the players merely manipulate it to gain advantage in key situations, without earning inspiration by way of good roleplaying or whatever other criteria the group has established.",
+    "In this variant, you can allow each player to award inspiration more than once per session. If you do so, the first time that a player awards inspiration in a session is free. Whenever that player awards it later in the same session, you gain inspiration that you can spend to give advantage to any foe of the player characters. There's no limit to the number of inspirations you can gain in this way, and unspent inspiration carries over from one session to the next."
+  ]
+}
+```
+
+### rule:dmg:madness — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[149]`
+- Source entry path: `$.variantrule[149].entries[0]`
+- Canonical output: `rule/dmg-madness.json`
+- OMITTED: Introductory horror-theme context. This is campaign framing rather than a mechanical instruction.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"In a typical campaign, characters aren't driven mad by the horrors they face and the carnage they inflict day after day, but sometimes the stress of being an adventurer can be too much to bear. If your campaign has a strong horror theme, you might want to use madness as a way to reinforce that theme, emphasizing the extraordinarily horrific nature of the threats the adventurers face."
+```
+
+### rule:dmg:madness — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[149]`
+- Source entry path: `$.variantrule[149].entries[1]`
+- Canonical output: `rule/dmg-madness.json`
+- OMITTED: Madness-inducing effect sources and Wisdom/Charisma or optional Sanity saving throw resistance. Nested paths covered: $.variantrule[149].entries[1].type; $.variantrule[149].entries[1].name; $.variantrule[149].entries[1].entries[0]; $.variantrule[149].entries[1].entries[1]. The source ties the saving throw to a madness-inducing effect and table-selected severity outcome; R-GAP-24 explicitly defers that combined procedure, so the save is not meaningful as a standalone mechanic.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Going Mad",
+  "entries": [
+    "Various magical effects can inflict madness on an otherwise stable mind. Certain spells, such as {@spell contact other plane} and {@spell symbol}, can cause insanity, and you can use the madness rules here instead of the spell effects in the {@book Player's Handbook|PHB}. Diseases, poisons, and planar effects such as psychic wind or the howling winds of Pandemonium can all inflict madness. Some artifacts can also break the psyche of a character who uses or becomes attuned to them.",
+    "Resisting a madness-inducing effect usually requires a Wisdom or Charisma saving throw. If your game includes the {@variantrule New Ability Scores: Honor and Sanity||Sanity score} (see chapter 9, \"Dungeon Master's Workshop\"), a creature makes a Sanity saving throw instead."
+  ]
+}
+```
+
+### rule:dmg:madness — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[149]`
+- Source entry path: `$.variantrule[149].entries[2]`
+- Canonical output: `rule/dmg-madness.json`
+- OMITTED: Short-, long-, and indefinite-madness durations, effects, table ranges, conditions, behavioral restrictions, and flaws. Nested paths covered: $.variantrule[149].entries[2].type; $.variantrule[149].entries[2].name; $.variantrule[149].entries[2].entries[0]; $.variantrule[149].entries[2].entries[1]; $.variantrule[149].entries[2].entries[2]; $.variantrule[149].entries[2].entries[3]; $.variantrule[149].entries[2].entries[4].type; $.variantrule[149].entries[2].entries[4].caption; $.variantrule[149].entries[2].entries[4].colLabels[0]; $.variantrule[149].entries[2].entries[4].colLabels[1]; $.variantrule[149].entries[2].entries[4].colStyles[0]; $.variantrule[149].entries[2].entries[4].colStyles[1]; $.variantrule[149].entries[2].entries[4].rows[0][0]; $.variantrule[149].entries[2].entries[4].rows[0][1]; $.variantrule[149].entries[2].entries[4].rows[1][0]; $.variantrule[149].entries[2].entries[4].rows[1][1]; $.variantrule[149].entries[2].entries[4].rows[2][0]; $.variantrule[149].entries[2].entries[4].rows[2][1]; $.variantrule[149].entries[2].entries[4].rows[3][0]; $.variantrule[149].entries[2].entries[4].rows[3][1]; $.variantrule[149].entries[2].entries[4].rows[4][0]; $.variantrule[149].entries[2].entries[4].rows[4][1]; $.variantrule[149].entries[2].entries[4].rows[5][0]; $.variantrule[149].entries[2].entries[4].rows[5][1]; $.variantrule[149].entries[2].entries[4].rows[6][0]; $.variantrule[149].entries[2].entries[4].rows[6][1]; $.variantrule[149].entries[2].entries[4].rows[7][0]; $.variantrule[149].entries[2].entries[4].rows[7][1]; $.variantrule[149].entries[2].entries[4].rows[8][0]; $.variantrule[149].entries[2].entries[4].rows[8][1]; $.variantrule[149].entries[2].entries[4].rows[9][0]; $.variantrule[149].entries[2].entries[4].rows[9][1]; $.variantrule[149].entries[2].entries[5].type; $.variantrule[149].entries[2].entries[5].caption; $.variantrule[149].entries[2].entries[5].colLabels[0]; $.variantrule[149].entries[2].entries[5].colLabels[1]; $.variantrule[149].entries[2].entries[5].colStyles[0]; $.variantrule[149].entries[2].entries[5].colStyles[1]; $.variantrule[149].entries[2].entries[5].rows[0][0]; $.variantrule[149].entries[2].entries[5].rows[0][1]; $.variantrule[149].entries[2].entries[5].rows[1][0]; $.variantrule[149].entries[2].entries[5].rows[1][1]; $.variantrule[149].entries[2].entries[5].rows[2][0]; $.variantrule[149].entries[2].entries[5].rows[2][1]; $.variantrule[149].entries[2].entries[5].rows[3][0]; $.variantrule[149].entries[2].entries[5].rows[3][1]; $.variantrule[149].entries[2].entries[5].rows[4][0]; $.variantrule[149].entries[2].entries[5].rows[4][1]; $.variantrule[149].entries[2].entries[5].rows[5][0]; $.variantrule[149].entries[2].entries[5].rows[5][1]; $.variantrule[149].entries[2].entries[5].rows[6][0]; $.variantrule[149].entries[2].entries[5].rows[6][1]; $.variantrule[149].entries[2].entries[5].rows[7][0]; $.variantrule[149].entries[2].entries[5].rows[7][1]; $.variantrule[149].entries[2].entries[5].rows[8][0]; $.variantrule[149].entries[2].entries[5].rows[8][1]; $.variantrule[149].entries[2].entries[5].rows[9][0]; $.variantrule[149].entries[2].entries[5].rows[9][1]; $.variantrule[149].entries[2].entries[5].rows[10][0]; $.variantrule[149].entries[2].entries[5].rows[10][1]; $.variantrule[149].entries[2].entries[5].rows[11][0]; $.variantrule[149].entries[2].entries[5].rows[11][1]; $.variantrule[149].entries[2].entries[6].type; $.variantrule[149].entries[2].entries[6].caption; $.variantrule[149].entries[2].entries[6].colLabels[0]; $.variantrule[149].entries[2].entries[6].colLabels[1]; $.variantrule[149].entries[2].entries[6].colStyles[0]; $.variantrule[149].entries[2].entries[6].colStyles[1]; $.variantrule[149].entries[2].entries[6].rows[0][0]; $.variantrule[149].entries[2].entries[6].rows[0][1]; $.variantrule[149].entries[2].entries[6].rows[1][0]; $.variantrule[149].entries[2].entries[6].rows[1][1]; $.variantrule[149].entries[2].entries[6].rows[2][0]; $.variantrule[149].entries[2].entries[6].rows[2][1]; $.variantrule[149].entries[2].entries[6].rows[3][0]; $.variantrule[149].entries[2].entries[6].rows[3][1]; $.variantrule[149].entries[2].entries[6].rows[4][0]; $.variantrule[149].entries[2].entries[6].rows[4][1]; $.variantrule[149].entries[2].entries[6].rows[5][0]; $.variantrule[149].entries[2].entries[6].rows[5][1]; $.variantrule[149].entries[2].entries[6].rows[6][0]; $.variantrule[149].entries[2].entries[6].rows[6][1]; $.variantrule[149].entries[2].entries[6].rows[7][0]; $.variantrule[149].entries[2].entries[6].rows[7][1]; $.variantrule[149].entries[2].entries[6].rows[8][0]; $.variantrule[149].entries[2].entries[6].rows[8][1]; $.variantrule[149].entries[2].entries[6].rows[9][0]; $.variantrule[149].entries[2].entries[6].rows[9][1]; $.variantrule[149].entries[2].entries[6].rows[10][0]; $.variantrule[149].entries[2].entries[6].rows[10][1]; $.variantrule[149].entries[2].entries[6].rows[11][0]; $.variantrule[149].entries[2].entries[6].rows[11][1]. R-GAP-24 skips source-selected heterogeneous madness outcomes and their severity-dependent recovery.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Madness Effects",
+  "entries": [
+    "Madness can be short-term, long-term, or indefinite. Most relatively mundane effects impose short-term madness, which lasts for just a few minutes. More horrific effects or cumulative effects can result in long-term or indefinite madness.",
+    "A character afflicted with {@b short-term madness} is subjected to an effect from the Short-Term Madness table for {@dice 1d10} minutes.",
+    "A character afflicted with {@b long-term madness} is subjected to an effect from the Long-Term Madness table for {@dice 1d10 × 10} hours.",
+    "A character afflicted with {@b indefinite madness} gains a new character flaw from the Indefinite Madness table that lasts until cured.",
+    {
+      "type": "table",
+      "caption": "Short-Term Madness",
+      "colLabels": [
+        "d100",
+        "Effects (lasts {@dice 1d10} minutes)"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "01-20",
+          "The character retreats into his or her mind and becomes {@condition paralyzed}. The effect ends if the character takes any damage."
+        ],
+        [
+          "21-30",
+          "The character becomes {@condition incapacitated} and spends the duration screaming, laughing, or weeping."
+        ],
+        [
+          "31-40",
+          "The character becomes {@condition frightened} and must use his or her action and movement each round to flee from the source of the fear."
+        ],
+        [
+          "41-50",
+          "The character begins babbling and is incapable of normal speech or spellcasting."
+        ],
+        [
+          "51-60",
+          "The character must use his or her action each round to attack the nearest creature."
+        ],
+        [
+          "61-70",
+          "The character experiences vivid hallucinations and has disadvantage on ability checks."
+        ],
+        [
+          "71-75",
+          "The character does whatever anyone tells him or her to do that isn't obviously self-destructive."
+        ],
+        [
+          "76-80",
+          "The character experiences an overpowering urge to eat something strange such as dirt, slime, or offal."
+        ],
+        [
+          "81-90",
+          "The character is {@condition stunned}."
+        ],
+        [
+          "91-100",
+          "The character falls {@condition unconscious}."
+        ]
+      ]
+    },
+    {
+      "type": "table",
+      "caption": "Long-Term Madness",
+      "colLabels": [
+        "d100",
+        "Effects (lasts {@dice 1d10 × 10} hours)"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "01-10",
+          "The character feels compelled to repeat a specific activity over and over, such as washing hands, touching things, praying, or counting coins."
+        ],
+        [
+          "11-20",
+          "The character experiences vivid hallucinations and has disadvantage on ability checks."
+        ],
+        [
+          "21-30",
+          "The character suffers extreme paranoia. The character has disadvantage on Wisdom and Charisma checks."
+        ],
+        [
+          "31-40",
+          "The character regards something (usually the source of madness) with intense revulsion, as if affected by the antipathy effect of the {@spell antipathy/sympathy} spell."
+        ],
+        [
+          "41-45",
+          "The character experiences a powerful delusion. Choose a potion. The character imagines that he or she is under its effects."
+        ],
+        [
+          "46-55",
+          "The character becomes attached to a \"lucky charm,\" such as a person or an object, and has disadvantage on attack rolls, ability checks, and saving throws while more than 30 feet from it."
+        ],
+        [
+          "56-65",
+          "The character is {@condition blinded} (25%) or {@condition deafened} (75%)."
+        ],
+        [
+          "66-75",
+          "The character experiences uncontrollable tremors or tics, which impose disadvantage on attack rolls, ability checks, and saving throws that involve Strength or Dexterity."
+        ],
+        [
+          "76-85",
+          "The character suffers from partial amnesia. The character knows who he or she is and retains racial traits and class features, but doesn't recognize other people or remember anything that happened before the madness took effect."
+        ],
+        [
+          "86-90",
+          "Whenever the character takes damage, he or she must succeed on a {@dc 15} Wisdom saving throw or be affected as though he or she failed a saving throw against the {@spell confusion} spell. The confusion effect lasts for 1 minute."
+        ],
+        [
+          "91-95",
+          "The character loses the ability to speak."
+        ],
+        [
+          "96-100",
+          "The character falls {@condition unconscious}. No amount of jostling or damage can wake the character."
+        ]
+      ]
+    },
+    {
+      "type": "table",
+      "caption": "Indefinite Madness",
+      "colLabels": [
+        "d100",
+        "Flaw (lasts until cured)"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "01-15",
+          "\"Being drunk keeps me sane.\""
+        ],
+        [
+          "16-25",
+          "\"I keep whatever I find.\""
+        ],
+        [
+          "26-30",
+          "\"I try to become more like someone else I know—adopting his or her style of dress, mannerisms, and name.\""
+        ],
+        [
+          "31-35",
+          "\"I must bend the truth, exaggerate, or outright lie to be interesting to other people.\""
+        ],
+        [
+          "36-45",
+          "\"Achieving my goal is the only thing of interest to me, and I'll ignore everything else to pursue it.\""
+        ],
+        [
+          "46-50",
+          "\"I find it hard to care about anything that goes on around me.\""
+        ],
+        [
+          "51-55",
+          "\"I don't like the way people judge me all the time.\""
+        ],
+        [
+          "56-70",
+          "\"I am the smartest, wisest, strongest, fastest, and most beautiful person I know.\""
+        ],
+        [
+          "71-80",
+          "\"I am convinced that powerful enemies are hunting me, and their agents are everywhere I go. I am sure they're watching me all the time.\""
+        ],
+        [
+          "81-85",
+          "\"There's only one person I can trust. And only I can see this special friend.\""
+        ],
+        [
+          "86-95",
+          "\"I can't take anything seriously. The more serious the situation, the funnier I find it.\""
+        ],
+        [
+          "96-100",
+          "\"I've discovered that I really like killing people.\""
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:dmg:madness — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[149]`
+- Source entry path: `$.variantrule[149].entries[3]`
+- Canonical output: `rule/dmg-madness.json`
+- OMITTED: Spell-based suppression and recovery from short-, long-, and indefinite madness. Nested paths covered: $.variantrule[149].entries[3].type; $.variantrule[149].entries[3].name; $.variantrule[149].entries[3].entries[0]. This recovery procedure depends on the omitted madness severity and state model under R-GAP-24.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Curing Madness",
+  "entries": [
+    "A {@spell calm emotions} spell can suppress the effects of madness, while a {@spell lesser restoration} spell can rid a character of a short-term or long-term madness. Depending on the source of the madness, {@spell remove curse} or {@spell dispel evil and good||dispel evil} might also prove effective. A {@spell greater restoration} spell or more powerful magic is required to rid a character of indefinite madness."
+  ]
+}
+```
+
+### rule:dmg:new-ability-scores-honor-and-sanity — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[159]`
+- Source entry path: `$.variantrule[159].entries[0]`
+- Canonical output: `rule/dmg-new-ability-scores-honor-and-sanity.json`
+- OMITTED: Optional addition of Honor and Sanity scores to a campaign. The optional score model is deferred under R-GAP-26.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"If you're running a campaign shaped by a strict code of honor or the constant risk of insanity, consider adding one or both these new ability scores: Honor and Sanity."
+```
+
+### rule:dmg:new-ability-scores-honor-and-sanity — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[159]`
+- Source entry path: `$.variantrule[159].entries[1]`
+- Canonical output: `rule/dmg-new-ability-scores-honor-and-sanity.json`
+- OMITTED: Honor and Sanity as abilities with source-specific exceptions to the six standard abilities. The approved mechanics schema does not admit new ability identities; R-GAP-26 defers their character-domain model.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"These abilities function like the standard six abilities, with exceptions specified in each ability below."
+```
+
+### rule:dmg:new-ability-scores-honor-and-sanity — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[159]`
+- Source entry path: `$.variantrule[159].entries[2]`
+- Canonical output: `rule/dmg-new-ability-scores-honor-and-sanity.json`
+- OMITTED: Character creation for optional ability scores. Character score creation belongs to the deferred R-GAP-26 character-building model.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"Here's how to incorporate these optional abilities at character creation:"
+```
+
+### rule:dmg:new-ability-scores-honor-and-sanity — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[159]`
+- Source entry path: `$.variantrule[159].entries[3]`
+- Canonical output: `rule/dmg-new-ability-scores-honor-and-sanity.json`
+- OMITTED: Additional standard-array score, point-buy budget, or rolled score for each added ability. Nested paths covered: $.variantrule[159].entries[3].type; $.variantrule[159].entries[3].items[0]; $.variantrule[159].entries[3].items[1]; $.variantrule[159].entries[3].items[2]. These are character score-generation procedures under deferred R-GAP-26.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "list",
+  "items": [
+    "If your players use the standard array of ability scores, add one 11 to the array for each optional ability you add.",
+    "If your players use the optional point-buy system, add 3 points to the number of points for each optional ability you add.",
+    "If your players roll their ability scores, have them roll for the added ability scores."
+  ]
+}
+```
+
+### rule:dmg:new-ability-scores-honor-and-sanity — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[159]`
+- Source entry path: `$.variantrule[159].entries[4]`
+- Canonical output: `rule/dmg-new-ability-scores-honor-and-sanity.json`
+- OMITTED: Use Charisma or Wisdom as a fallback when a creature has no Honor or Sanity score. The fallback is specific to the deferred optional-score identities in R-GAP-26 and cannot be represented as a general ability mapping.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"If you ever need to make a check or saving throw for Honor or Sanity for a monster that lacks the score, you can use Charisma for Honor and Wisdom for Sanity."
+```
+
+### rule:dmg:new-ability-scores-honor-and-sanity — entry 5
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[159]`
+- Source entry path: `$.variantrule[159].entries[5]`
+- Canonical output: `rule/dmg-new-ability-scores-honor-and-sanity.json`
+- OMITTED: Honor definition, conduct-based increases or reductions, bounds, Honor checks, and Honor saving throws. Nested paths covered: $.variantrule[159].entries[5].type; $.variantrule[159].entries[5].name; $.variantrule[159].entries[5].entries[0]; $.variantrule[159].entries[5].entries[1]; $.variantrule[159].entries[5].entries[2]; $.variantrule[159].entries[5].entries[3].type; $.variantrule[159].entries[5].entries[3].name; $.variantrule[159].entries[5].entries[3].entries[0]; $.variantrule[159].entries[5].entries[3].entries[1].type; $.variantrule[159].entries[5].entries[3].entries[1].items[0]; $.variantrule[159].entries[5].entries[3].entries[1].items[1]; $.variantrule[159].entries[5].entries[3].entries[1].items[2]; $.variantrule[159].entries[5].entries[3].entries[1].items[3]; $.variantrule[159].entries[5].entries[3].entries[1].items[4]; $.variantrule[159].entries[5].entries[4].type; $.variantrule[159].entries[5].entries[4].name; $.variantrule[159].entries[5].entries[4].entries[0]; $.variantrule[159].entries[5].entries[4].entries[1].type; $.variantrule[159].entries[5].entries[4].entries[1].items[0]; $.variantrule[159].entries[5].entries[4].entries[1].items[1]; $.variantrule[159].entries[5].entries[4].entries[1].items[2]. Honor is outside the approved six-ability input contract and its score progression is deferred under R-GAP-26.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Honor Score",
+  "entries": [
+    "If your campaign involves cultures where a rigid code of honor is part of daily life, consider using the Honor score as a means of measuring a character's devotion to that code. This ability fits well in a setting inspired by Asian cultures, such as Kara-Tur in the Forgotten Realms. The Honor ability is also useful in any campaign that revolves around orders of knights.",
+    "Honor measures not only a character's devotion to a code but also the character's understanding of it. The Honor score can also reflect how others perceive a character's honor. A character with a high Honor usually has a reputation that others know about, especially those who have high Honor scores themselves.",
+    "Unlike other abilities, Honor can't be raised with normal ability score increases. Instead, you can award increases to Honor—or impose reductions—based on a character's actions. At the end of an adventure, if you think a character's actions in the adventure reflected well or poorly on his or her understanding of the code, you can increase or decrease the character's Honor by 1. As with other ability scores, a character's Honor can't exceed 20 or fall below 1.",
+    {
+      "type": "entries",
+      "name": "Honor Checks",
+      "entries": [
+        "Honor checks can be used in social situations, much as Charisma would, when a character's understanding of a code of conduct is the most defining factor in the way a social interaction will play out. You might also call for an Honor check when a character is in one of the following situations:",
+        {
+          "type": "list",
+          "items": [
+            "Being unsure how to act with honor",
+            "Surrendering while trying to save face",
+            "Trying to determine another character's Honor score",
+            "Trying to use the proper etiquette in a delicate social situation",
+            "Using his or her honorable or dishonorable reputation to influence someone else"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Honor Saving Throws",
+      "entries": [
+        "An Honor saving throw comes into play when you want to determine whether a character might inadvertently do something dishonorable. You might call for an Honor saving throw in the following situations:",
+        {
+          "type": "list",
+          "items": [
+            "Avoiding an accidental breach of honor or etiquette",
+            "Resisting the urge to respond to goading or insults from an enemy",
+            "Recognizing when an enemy attempts to trick a character into a breach of honor"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:dmg:new-ability-scores-honor-and-sanity — entry 6
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[159]`
+- Source entry path: `$.variantrule[159].entries[6]`
+- Canonical output: `rule/dmg-new-ability-scores-honor-and-sanity.json`
+- OMITTED: Sanity definition, Sanity checks and saves, madness outcomes, score reduction, restoration, and advancement. Nested paths covered: $.variantrule[159].entries[6].type; $.variantrule[159].entries[6].name; $.variantrule[159].entries[6].entries[0]; $.variantrule[159].entries[6].entries[1]; $.variantrule[159].entries[6].entries[2].type; $.variantrule[159].entries[6].entries[2].name; $.variantrule[159].entries[6].entries[2].entries[0]; $.variantrule[159].entries[6].entries[2].entries[1].type; $.variantrule[159].entries[6].entries[2].entries[1].items[0]; $.variantrule[159].entries[6].entries[2].entries[1].items[1]; $.variantrule[159].entries[6].entries[2].entries[1].items[2]; $.variantrule[159].entries[6].entries[3].type; $.variantrule[159].entries[6].entries[3].name; $.variantrule[159].entries[6].entries[3].entries[0]; $.variantrule[159].entries[6].entries[3].entries[1].type; $.variantrule[159].entries[6].entries[3].entries[1].items[0]; $.variantrule[159].entries[6].entries[3].entries[1].items[1]; $.variantrule[159].entries[6].entries[3].entries[1].items[2]; $.variantrule[159].entries[6].entries[3].entries[1].items[3]; $.variantrule[159].entries[6].entries[3].entries[1].items[4]; $.variantrule[159].entries[6].entries[3].entries[2]. Sanity score mechanics are deferred under R-GAP-26; madness outcomes and recovery are additionally skipped under R-GAP-24.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Sanity Score",
+  "entries": [
+    "Consider using the Sanity score if your campaign revolves around entities of an utterly alien and unspeakable nature, such as Great Cthulhu, whose powers and minions can shatter a character's mind.",
+    "A character with a high Sanity is level-headed even in the face of insane circumstances, while a character with low Sanity is unsteady, breaking easily when confronted by eldritch horrors that are beyond normal reason.",
+    {
+      "type": "entries",
+      "name": "Sanity Checks",
+      "entries": [
+        "You might ask characters to make a Sanity check in place of an Intelligence check to recall lore about the alien creatures of madness featured in your campaign, to decipher the writings of raving lunatics, or to learn spells from tomes of forbidden lore. You might also call for a Sanity check when a character tries one of the following activities:",
+        {
+          "type": "list",
+          "items": [
+            "Deciphering a piece of text written in a language so alien that it threatens to break a character's mind",
+            "Overcoming the lingering effects of madness",
+            "Comprehending a piece of alien magic foreign to all normal understanding of magic"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Sanity Saving Throws",
+      "entries": [
+        "You might call for a Sanity saving throw when a character runs the risk of succumbing to madness, such as in the following situations:",
+        {
+          "type": "list",
+          "items": [
+            "Seeing a creature from the Far Realm or other alien realms for the first time",
+            "Making direct contact with the mind of an alien creature",
+            "Being subjected to spells that affect mental stability, such as the insanity option of the {@spell symbol} spell",
+            "Passing through a demiplane built on alien physics",
+            "Resisting an effect conferred by an attack or spell that deals psychic damage"
+          ]
+        },
+        "A failed Sanity save might result in {@table short-term madness||short-term}, {@table long-term madness||long-term}, or {@table indefinite madness}, as described in chapter 8, \"Running the Game.\" Any time a character suffers from long-term or indefinite madness, the character's Sanity is reduced by 1. A {@spell greater restoration} spell can restore Sanity lost in this way, and a character can increase his or her Sanity through level advancement."
+      ]
+    }
+  ]
+}
+```
+
+### rule:dmg:morale — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[155]`
+- Source entry path: `$.variantrule[155].entries[0]`
+- Canonical output: `rule/dmg-morale.json`
+- OMITTED: Introductory campaign guidance for the optional morale procedure. This frames an optional procedure without prescribing a mechanical outcome.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Some combatants might run away when a fight turns against them. You can use this optional rule to help determine when monsters and NPCs flee."
+```
+
+### rule:dmg:morale — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[155]`
+- Source entry path: `$.variantrule[155].entries[1]`
+- Canonical output: `rule/dmg-morale.json`
+- OMITTED: Individual morale triggers: surprised, reduced to half hit points, or unable to harm the opposing side. The triggers are part of the skipped R-GAP-44 morale procedure.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"A creature might flee under any of the following circumstances:"
+```
+
+### rule:dmg:morale — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[155]`
+- Source entry path: `$.variantrule[155].entries[2]`
+- Canonical output: `rule/dmg-morale.json`
+- OMITTED: Individual creature trigger alternatives. Nested paths covered: $.variantrule[155].entries[2].type; $.variantrule[155].entries[2].items[0]; $.variantrule[155].entries[2].items[1]; $.variantrule[155].entries[2].items[2]. Skipped R-GAP-44; alternatives cannot be resolved independently of the morale check and outcome.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "list",
+  "items": [
+    "The creature is {@status surprised}.",
+    "The creature is reduced to half its hit points or fewer for the first time in the battle.",
+    "The creature has no way to harm the opposing side on its turn."
+  ]
+}
+```
+
+### rule:dmg:morale — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[155]`
+- Source entry path: `$.variantrule[155].entries[3]`
+- Canonical output: `rule/dmg-morale.json`
+- OMITTED: Group morale triggers: all surprised, leader incapacitated/captured/removed, or group reduced by half without opposition losses. These are trigger alternatives in skipped R-GAP-44.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"A group of creatures might flee under any of the following circumstances:"
+```
+
+### rule:dmg:morale — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[155]`
+- Source entry path: `$.variantrule[155].entries[4]`
+- Canonical output: `rule/dmg-morale.json`
+- OMITTED: Group trigger alternatives. Nested paths covered: $.variantrule[155].entries[4].type; $.variantrule[155].entries[4].items[0]; $.variantrule[155].entries[4].items[1]; $.variantrule[155].entries[4].items[2]. Skipped R-GAP-44; alternatives depend on group battle state and morale resolution.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "list",
+  "items": [
+    "All the creatures in the group are {@status surprised}.",
+    "The group's leader is reduced to 0 hit points, {@condition incapacitated}, taken prisoner, or removed from battle.",
+    "The group is reduced to half its original size with no losses on the opposing side."
+  ]
+}
+```
+
+### rule:dmg:morale — entry 5
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[155]`
+- Source entry path: `$.variantrule[155].entries[5]`
+- Canonical output: `rule/dmg-morale.json`
+- OMITTED: DC 10 Wisdom save, disadvantage or automatic failure against overwhelming opposition, and replacement leader selected by Charisma. The save and modifiers are inseparable from the skipped R-GAP-44 triggers and flee/surrender results.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"To determine whether a creature or group of creatures flees, make a {@dc 10} Wisdom saving throw for the creature or the group's leader. If the opposition is overwhelming, the saving throw is made with disadvantage, or you can decide that the save fails automatically. If a group's leader can't make the saving throw for whatever reason, have the creature in the group with the next highest Charisma score make the saving throw instead."
+```
+
+### rule:dmg:morale — entry 6
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[155]`
+- Source entry path: `$.variantrule[155].entries[6]`
+- Canonical output: `rule/dmg-morale.json`
+- OMITTED: Failed save causes flight by the fastest route or surrender when escape is impossible; battle may resume if surrendering creatures are attacked. These are the flee/surrender results explicitly skipped under R-GAP-44.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"On a failed save, the affected creature or group flees by the most expeditious route. If escape is impossible, the creature or group surrenders. If a creature or group that surrenders is attacked by its conquerors, the battle might resume, and it's unlikely that further attempts to flee or surrender will be made."
+```
+
+### rule:dmg:morale — entry 7
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[155]`
+- Source entry path: `$.variantrule[155].entries[7]`
+- Canonical output: `rule/dmg-morale.json`
+- OMITTED: Narrative examples of consequences when a creature flees. These examples describe possible story consequences rather than rules outcomes.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"A failed saving throw isn't always to the adventurers' benefit. For example, an ogre that flees from combat might put the rest of the dungeon on alert or run off with treasure that the characters had hoped to plunder."
+```
+
+### rule:phb:inspiration — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[140]`
+- Source entry path: `$.variantrule[140].entries[0]`
+- Canonical output: `rule/phb-inspiration.json`
+- OMITTED: Inspiration's roleplaying award context and illustrative uses. Award criteria are deferred under R-GAP-25; examples do not define additional independent mechanics.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"Inspiration is a rule the Dungeon Master can use to reward you for playing your character in a way that's true to his or her personality traits, ideal, bond, and flaw. By using inspiration, you can draw on your personality trait of compassion for the downtrodden to give you an edge in negotiating with the Beggar Prince. Or inspiration can let you call on your bond to the defense of your home village to push past the effect of a spell that has been laid on you."
+```
+
+### rule:phb:inspiration — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[140]`
+- Source entry path: `$.variantrule[140].entries[1]`
+- Canonical output: `rule/phb-inspiration.json`
+- OMITTED: DM award criteria and no-stockpiling limit. Nested paths covered: $.variantrule[140].entries[1].type; $.variantrule[140].entries[1].name; $.variantrule[140].entries[1].entries[0]; $.variantrule[140].entries[1].entries[1]. Award and possession lifecycle are deferred under R-GAP-25.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Gaining Inspiration",
+  "entries": [
+    "Your DM can choose to give you inspiration for a variety of reasons. Typically, DMs award it when you play out your personality traits, give in to the drawbacks presented by a flaw or bond, and otherwise portray your character in a compelling way. Your DM will tell you how you can earn inspiration in the game.",
+    "You either have inspiration or you don't—you can't stockpile multiple \"inspirations\" for later use."
+  ]
+}
+```
+
+### rule:phb:inspiration — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[140]`
+- Source entry path: `$.variantrule[140].entries[2]`
+- Canonical output: `rule/phb-inspiration.json`
+- OMITTED: Having/spending the Inspiration resource and transferring it to another player. Nested paths covered: $.variantrule[140].entries[2].type; $.variantrule[140].entries[2].name; $.variantrule[140].entries[2].entries[0]; $.variantrule[140].entries[2].entries[1]. Resource possession and transfer remain deferred under R-GAP-25.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Using Inspiration",
+  "entries": [
+    "If you have inspiration, you can expend it when you make an attack roll, saving throw, or ability check. Spending your inspiration gives you advantage on that roll.",
+    "Additionally, if you have inspiration, you can reward another player for good roleplaying, clever thinking, or simply doing something exciting in the game. When another player character does something that really contributes to the story in a fun and interesting way, you can give up your inspiration to give that character inspiration."
+  ]
+}
+```
+
+### rule:psi:emrakul-s-madness — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[96]`
+- Source entry path: `$.variantrule[96].entries[0]`
+- Canonical output: `rule/psi-emrakul-s-madness.json`
+- OMITTED: Sanity checks to interpret corruption and Sanity saves to resist spreading madness. Sanity mechanics are deferred under R-GAP-26; madness outcomes are skipped under R-GAP-24.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"If you do want to add elements of Emrakul's madness to your campaign, use the {@variantrule New Ability Scores: Honor and Sanity||Sanity} score rules in chapter 9 of the Dungeon Master's Guide. Allow characters to make Sanity checks to interpret the effects of Emrakul's corruption, and Sanity saving throws to resist the effects of the spreading madness."
+```
+
+### rule:psi:emrakul-s-madness — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[96]`
+- Source entry path: `$.variantrule[96].entries[1]`
+- Canonical output: `rule/psi-emrakul-s-madness.json`
+- OMITTED: Sanity-below-10 threshold and score-banded physical corruption stages. The threshold requires deferred Sanity score semantics and the score-banded corruption is skipped under R-GAP-27.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"A creature or character whose {@variantrule New Ability Scores: Honor and Sanity||Sanity score} is below 10 can begin to manifest signs of physical corruption, which progresses in stages."
+```
+
+### rule:psi:emrakul-s-madness — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[96]`
+- Source entry path: `$.variantrule[96].entries[2]`
+- Canonical output: `rule/psi-emrakul-s-madness.json`
+- OMITTED: Distorted stage appearance and unchanged creature statistics. Nested paths covered: $.variantrule[96].entries[2].type; $.variantrule[96].entries[2].name; $.variantrule[96].entries[2].entries[0]. Stage eligibility depends on the deferred/omitted Sanity corruption procedure; descriptions do not define an independent mechanic.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Distorted (Sanity 8–9)",
+  "entries": [
+    "Even before Emrakul's arrival, some cultists and those who pried too deep into dark secrets begin to change. In this early stage, physical proportions shift, with one or more of the creature's limbs or some part of the face growing larger, almost always asymmetrically. Noticeable skin blemishes can also appear, most often as boils or clumps of cauliflower-like growths (though these do not yet resemble the lattice of Emrakul's flesh). Creature statistics are unchanged."
+  ]
+}
+```
+
+### rule:psi:emrakul-s-madness — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[96]`
+- Source entry path: `$.variantrule[96].entries[3]`
+- Canonical output: `rule/psi-emrakul-s-madness.json`
+- OMITTED: Deformed stage appearance and unchanged creature statistics. Nested paths covered: $.variantrule[96].entries[3].type; $.variantrule[96].entries[3].name; $.variantrule[96].entries[3].entries[0]. Stage eligibility depends on R-GAP-27; no creature state is modeled.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Deformed (Sanity 6–7)",
+  "entries": [
+    "In the second stage, a creature can develop a dead or bulging eye, huge tumorous growths, curled hands or feet, violent palsy, oozing secretions from the skin or eyes, raw red patches on the skin, and similar deformities. Patches of lattice-like growths often appear on the skin. In some cases, particularly in Nephalia, cultists begin to manifest distinctly fishlike features—goggling eyes, scaled or slimy skin, webbing between the fingers or toes, or gill-like flaps on the face or neck. Creature statistics remain unchanged."
+  ]
+}
+```
+
+### rule:psi:emrakul-s-madness — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[96]`
+- Source entry path: `$.variantrule[96].entries[4]`
+- Canonical output: `rule/psi-emrakul-s-madness.json`
+- OMITTED: Disfigured stage and possible improved natural armor, weapons, or existing creature traits. Nested paths covered: $.variantrule[96].entries[4].type; $.variantrule[96].entries[4].name; $.variantrule[96].entries[4].entries[0]. This is a discretionary, score-banded creature transformation under skipped R-GAP-27 and depends on external creature traits/statistics.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Disfigured (Sanity 4–5)",
+  "entries": [
+    "In the third stage, the lips shrink away from the teeth, which can rot and fall out. Fingers and toes sometimes fuse together or start transforming into tentacles. Bleeding sores erupt on the skin, or bulbous growths can appear under the skin. Cultists in Nephalia often grow fin-like protrusions or pincer-like hands. At this stage, creatures might manifest improved natural armor or weapons, or simple benefits such as the Amphibious trait of a {@creature bullywug}, the Blind Senses of a {@creature grimlock}, Chameleon Skin like a {@creature troglodyte}, the Slippery trait of a {@creature kuo-toa}, or the Spider Climb trait of an {@creature ettercap}."
+  ]
+}
+```
+
+### rule:psi:emrakul-s-madness — entry 5
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[96]`
+- Source entry path: `$.variantrule[96].entries[5]`
+- Canonical output: `rule/psi-emrakul-s-madness.json`
+- OMITTED: Misshapen stage, additional limbs, and possible transformation into another creature. Nested paths covered: $.variantrule[96].entries[5].type; $.variantrule[96].entries[5].name; $.variantrule[96].entries[5].entries[0]. This setting-specific transformation is skipped under R-GAP-27 and depends on Creature-domain stat blocks.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Misshapen (Sanity 2–3)",
+  "entries": [
+    "In the fourth stage, a creature's flesh often rots away or grows out of control, either leaving muscle and bone visible beneath or concealing features beneath masses of fleshy lattice or bulbous growths. Bone structure can alter radically, creating additional limbs or turning existing limbs into bizarrely jointed tentacles. Extra eyes can appear in unexpected places, or the head can transform into something resembling a fish or octopus. At this stage, a corrupted creature might begin to transform into an entirely different creature. A human could effectively become any of the creatures mentioned above, or some other vaguely humanoid monster such as a {@creature kenku}, a {@creature lizardfolk}, a {@creature sahuagin}, or a yuan-ti."
+  ]
+}
+```
+
+### rule:psi:emrakul-s-madness — entry 6
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[96]`
+- Source entry path: `$.variantrule[96].entries[6]`
+- Canonical output: `rule/psi-emrakul-s-madness.json`
+- OMITTED: Monstrous stage, creature fusion, and transformation into an Eldrazi-like monster. Nested paths covered: $.variantrule[96].entries[6].type; $.variantrule[96].entries[6].name; $.variantrule[96].entries[6].entries[0]. This setting-specific transformation is skipped under R-GAP-27 and cannot be represented without Creature-domain state and stat blocks.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Monstrous (Sanity 1)",
+  "entries": [
+    "The most warped creatures are barely even recognizable. Some become little more than a mass of writhing tentacles, or lose their physical coherence entirely. Two or more creatures can fuse together, joined by fleshy lattice. The \"lucky\" ones retain a basically humanoid shape, but otherwise appear completely monstrous, with twisted faces, extra limbs, horny growths, jointed tentacle extrusions, and so on. Such a creature might effectively become an Eldrazi-like monster such as an {@creature aboleth}, a {@creature chuul}, a {@creature cloaker}, a {@creature gibbering mouther}, or a {@creature mind flayer}."
+  ]
+}
+```
+
+### rule:xge:shared-campaign-variant-rules — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[190]`
+- Source entry path: `$.variantrule[190].entries[0]`
+- Canonical output: `rule/xge-shared-campaign-variant-rules.json`
+- OMITTED: Introductory context for shared-campaign house rules. This explains the goal of a shared campaign without prescribing an independently usable mechanic.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"A shared campaign might use some variant rules to handle certain aspects of the game. The Adventurers League, for instance, has variant systems for gaining levels and acquiring treasure. These \"house rules,\" presented below, serve as a sort of common language, ensuring that the rewards all characters receive are equivalent no matter what kind of adventure a character experienced."
+```
+
+### rule:xge:shared-campaign-variant-rules — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[190]`
+- Source entry path: `$.variantrule[190].entries[1]`
+- Canonical output: `rule/xge-shared-campaign-variant-rules.json`
+- OMITTED: Projected-duration and tier-based experience checkpoints, level thresholds, and checkpoint spending/carryover. Nested paths covered: $.variantrule[190].entries[1].type; $.variantrule[190].entries[1].name; $.variantrule[190].entries[1].entries[0]; $.variantrule[190].entries[1].entries[1]; $.variantrule[190].entries[1].entries[2]; $.variantrule[190].entries[1].entries[3]; $.variantrule[190].entries[1].entries[4].type; $.variantrule[190].entries[1].entries[4].name; $.variantrule[190].entries[1].entries[4].entries[0]; $.variantrule[190].entries[1].entries[4].entries[1].type; $.variantrule[190].entries[1].entries[4].entries[1].items[0]; $.variantrule[190].entries[1].entries[4].entries[1].items[1]; $.variantrule[190].entries[1].entries[4].entries[2]. Shared-campaign character progression is deferred under R-GAP-33.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Character Advancement",
+  "entries": [
+    "In a shared campaign, characters gain levels not by accumulating experience points but by reaching experience checkpoints. This system rewards every character (and player) for taking part in a play session.",
+    "A character reaches 1 checkpoint for each hour an adventure is designed to last. Note that the award is based on the adventure's projected playing time, rather than the actual time spent at the table. The reward for completing an adventure designed for 2 hours of play is 2 checkpoints, even if a group spends more than 2 hours playing through it.",
+    "If a character completes an adventure designed for a tier higher than the character's current tier, the character is awarded 1 additional checkpoint. For example, if a 2nd-level character completes a 6th-level adventure designed to take 2 hours, the character reaches 3 checkpoints.",
+    "Playing time might seem like an odd way to measure experience awards, but the concept is in keeping with how a shared campaign is meant to work. A character played for 10 hours reaches the same number of checkpoints, whether the character went up against a dragon or spent all that time lurking in a pub. This approach ensures that a player's preferred style is neither penalized nor rewarded. Whether someone focuses on roleplaying and social interaction, defeating monsters in combat, or finding clever ways to avoid battles, this system gives credit where credit is due.",
+    {
+      "type": "entries",
+      "name": "Using Checkpoints",
+      "entries": [
+        "The number of checkpoints needed to gain the next level depends on a character's level:",
+        {
+          "type": "list",
+          "items": [
+            "At levels 1–4, reaching 4 checkpoints is sufficient to advance to the next level.",
+            "At level 5 or higher, reaching 8 checkpoints is needed to advance to the next level."
+          ]
+        },
+        "At the end of a play session, characters must level up if they have reached enough checkpoints to do so. The required number of checkpoints is expended, and any remaining checkpoints are applied toward the next opportunity for advancement."
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:shared-campaign-variant-rules — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[190]`
+- Source entry path: `$.variantrule[190].entries[2]`
+- Canonical output: `rule/xge-shared-campaign-variant-rules.json`
+- OMITTED: Level-based gold rewards, lifestyle benefits, and individual treasure table. Nested paths covered: $.variantrule[190].entries[2].type; $.variantrule[190].entries[2].name; $.variantrule[190].entries[2].entries[0]; $.variantrule[190].entries[2].entries[1]; $.variantrule[190].entries[2].entries[2]; $.variantrule[190].entries[2].entries[3].type; $.variantrule[190].entries[2].entries[3].caption; $.variantrule[190].entries[2].entries[3].colLabels[0]; $.variantrule[190].entries[2].entries[3].colLabels[1]; $.variantrule[190].entries[2].entries[3].colLabels[2]; $.variantrule[190].entries[2].entries[3].colStyles[0]; $.variantrule[190].entries[2].entries[3].colStyles[1]; $.variantrule[190].entries[2].entries[3].colStyles[2]; $.variantrule[190].entries[2].entries[3].rows[0][0]; $.variantrule[190].entries[2].entries[3].rows[0][1]; $.variantrule[190].entries[2].entries[3].rows[0][2]; $.variantrule[190].entries[2].entries[3].rows[1][0]; $.variantrule[190].entries[2].entries[3].rows[1][1]; $.variantrule[190].entries[2].entries[3].rows[1][2]; $.variantrule[190].entries[2].entries[3].rows[2][0]; $.variantrule[190].entries[2].entries[3].rows[2][1]; $.variantrule[190].entries[2].entries[3].rows[2][2]; $.variantrule[190].entries[2].entries[3].rows[3][0]; $.variantrule[190].entries[2].entries[3].rows[3][1]; $.variantrule[190].entries[2].entries[3].rows[3][2]. Level-linked campaign economy is deferred under R-GAP-33.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Individual Treasure",
+  "entries": [
+    "In a shared campaign, each character receives a fixed number of gold pieces upon gaining a new level. (This gain represents the treasure a character might find in a standard adventure.)",
+    "As an additional benefit, characters are not required to put out gold to maintain a lifestyle. Instead, each character begins with a modest lifestyle, which improves as the character attains higher levels.",
+    "These benefits are summarized on the Individual Treasure table. Ways for characters to spend their treasure are covered in the \"Buying and Selling\" section below.",
+    {
+      "type": "table",
+      "caption": "Individual Treasure",
+      "colLabels": [
+        "Level Gained",
+        "Lifestyle",
+        "Reward"
+      ],
+      "colStyles": [
+        "col-4 text-center",
+        "col-4",
+        "col-4 text-right"
+      ],
+      "rows": [
+        [
+          "2-4",
+          "Modest",
+          "75 gp"
+        ],
+        [
+          "5-10",
+          "Comfortable",
+          "150 gp"
+        ],
+        [
+          "11-16",
+          "Wealthy",
+          "550 gp"
+        ],
+        [
+          "17-20",
+          "Aristocratic",
+          "5,500 gp"
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:shared-campaign-variant-rules — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[190]`
+- Source entry path: `$.variantrule[190].entries[3]`
+- Canonical output: `rule/xge-shared-campaign-variant-rules.json`
+- OMITTED: Treasure-point awards, point-cost tables by item tier, shared item-list construction, purchase timing, and deposits. Nested paths covered: $.variantrule[190].entries[3].type; $.variantrule[190].entries[3].name; $.variantrule[190].entries[3].entries[0]; $.variantrule[190].entries[3].entries[1].type; $.variantrule[190].entries[3].entries[1].name; $.variantrule[190].entries[3].entries[1].entries[0]; $.variantrule[190].entries[3].entries[1].entries[1].type; $.variantrule[190].entries[3].entries[1].entries[1].items[0]; $.variantrule[190].entries[3].entries[1].entries[1].items[1]; $.variantrule[190].entries[3].entries[1].entries[2]; $.variantrule[190].entries[3].entries[1].entries[3]; $.variantrule[190].entries[3].entries[2].type; $.variantrule[190].entries[3].entries[2].name; $.variantrule[190].entries[3].entries[2].entries[0]; $.variantrule[190].entries[3].entries[2].entries[1]; $.variantrule[190].entries[3].entries[2].entries[2]; $.variantrule[190].entries[3].entries[2].entries[3].type; $.variantrule[190].entries[3].entries[2].entries[3].caption; $.variantrule[190].entries[3].entries[2].entries[3].colLabels[0]; $.variantrule[190].entries[3].entries[2].entries[3].colLabels[1]; $.variantrule[190].entries[3].entries[2].entries[3].colLabels[2]; $.variantrule[190].entries[3].entries[2].entries[3].colStyles[0]; $.variantrule[190].entries[3].entries[2].entries[3].colStyles[1]; $.variantrule[190].entries[3].entries[2].entries[3].colStyles[2]; $.variantrule[190].entries[3].entries[2].entries[3].rows[0][0]; $.variantrule[190].entries[3].entries[2].entries[3].rows[0][1]; $.variantrule[190].entries[3].entries[2].entries[3].rows[0][2]; $.variantrule[190].entries[3].entries[2].entries[3].rows[1][0]; $.variantrule[190].entries[3].entries[2].entries[3].rows[1][1]; $.variantrule[190].entries[3].entries[2].entries[3].rows[1][2]; $.variantrule[190].entries[3].entries[2].entries[3].rows[2][0]; $.variantrule[190].entries[3].entries[2].entries[3].rows[2][1]; $.variantrule[190].entries[3].entries[2].entries[3].rows[2][2]; $.variantrule[190].entries[3].entries[2].entries[3].rows[3][0]; $.variantrule[190].entries[3].entries[2].entries[3].rows[3][1]; $.variantrule[190].entries[3].entries[2].entries[3].rows[3][2]; $.variantrule[190].entries[3].entries[2].entries[3].rows[4][0]; $.variantrule[190].entries[3].entries[2].entries[3].rows[4][1]; $.variantrule[190].entries[3].entries[2].entries[3].rows[4][2]; $.variantrule[190].entries[3].entries[2].entries[3].rows[5][0]; $.variantrule[190].entries[3].entries[2].entries[3].rows[5][1]; $.variantrule[190].entries[3].entries[2].entries[3].rows[5][2]; $.variantrule[190].entries[3].entries[2].entries[3].rows[6][0]; $.variantrule[190].entries[3].entries[2].entries[3].rows[6][1]; $.variantrule[190].entries[3].entries[2].entries[3].rows[6][2]; $.variantrule[190].entries[3].entries[2].entries[3].rows[7][0]; $.variantrule[190].entries[3].entries[2].entries[3].rows[7][1]; $.variantrule[190].entries[3].entries[2].entries[3].rows[7][2]; $.variantrule[190].entries[3].entries[2].entries[3].rows[8][0]; $.variantrule[190].entries[3].entries[2].entries[3].rows[8][1]; $.variantrule[190].entries[3].entries[2].entries[3].rows[8][2]; $.variantrule[190].entries[3].entries[3].type; $.variantrule[190].entries[3].entries[3].name; $.variantrule[190].entries[3].entries[3].entries[0]; $.variantrule[190].entries[3].entries[3].entries[1]; $.variantrule[190].entries[3].entries[3].entries[2]. The coupled treasure-point economy and advancement-dependent item access are deferred under R-GAP-33.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Magic Items",
+  "entries": [
+    "Characters earn treasure points from adventures, then redeem those points in exchange for magic items. The list of available magic items is agreed to and compiled by the DMs running the campaign.",
+    {
+      "type": "entries",
+      "name": "Gaining Treasure Points",
+      "entries": [
+        "Each character earns treasure points based on an adventure's tier and its intended playing time:",
+        {
+          "type": "list",
+          "items": [
+            "1 treasure point is awarded for every 2 hours played in a tier 1 or tier 2 adventure.",
+            "1 treasure point is awarded for every 1 hour played in a tier 3 or tier 4 adventure."
+          ]
+        },
+        "As with the variant rules for gaining levels, this award is based on the adventure's projected playing time, rather than the actual time a group spent at the table.",
+        "If a character completes an adventure of a tier higher than that character's tier, the character receives 1 additional treasure point for that adventure."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Creating an Item List",
+      "entries": [
+        "The DMs of the shared campaign should work together to compile a list of magic items that players can purchase. The magic item tables in chapter 2 of this book and in chapter 7 of the Dungeon Master's Guide are the obvious starting point. Choosing which items to allow or ban is a matter of personal preference, just as it is for the DM in a standard campaign. Involving all the DMs helps to ensure that the list meets everyone's expectations. When in doubt, disallow an item; it's easier to add it to the available items at a later time than it would be to remove it from the game once it has been handed out.",
+        "Naturally, the list of available items is longer for adventures in the higher tiers, and the point cost of those higher-tier items likewise increases. The Magic Items by Tier table provides the details.",
+        "For instance, treasure points from a tier 1 adventure can be spent on items from tables A, B, C, and F. Any item on the first three tables costs 4 points, and an item from table F costs 8 points.",
+        {
+          "type": "table",
+          "caption": "Magic Items by Tier",
+          "colLabels": [
+            "Magic Item Table",
+            "Available at Tiers",
+            "Point Cost"
+          ],
+          "colStyles": [
+            "col-4 text-center",
+            "col-4 text-center",
+            "col-4 text-center"
+          ],
+          "rows": [
+            [
+              "A",
+              "1–4",
+              "4"
+            ],
+            [
+              "B",
+              "1–4",
+              "4"
+            ],
+            [
+              "C",
+              "1–4",
+              "4"
+            ],
+            [
+              "D",
+              "2–4",
+              "8"
+            ],
+            [
+              "E",
+              "3–4",
+              "8"
+            ],
+            [
+              "F",
+              "1–4",
+              "8"
+            ],
+            [
+              "G",
+              "2–4",
+              "10"
+            ],
+            [
+              "H",
+              "3–4",
+              "10"
+            ],
+            [
+              "I",
+              "3–4",
+              "12"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Spending Treasure Points",
+      "entries": [
+        "Players must spend treasure points at the end of a play session, immediately after determining whether their characters have gained a level. The order of these steps is important, since a character might enter a new tier because of the level gain.",
+        "Players are entitled to choose any approved item from one of the magic item tables available in the current tier. Treasure points can be spread across multiple items.",
+        "Many items cost more treasure points than a character can earn in a 2- or 4-hour adventure. To buy such an item, a character can make a deposit, spending treasure points on the item until it's paid off, at which time the character gains the item."
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:shared-campaign-variant-rules — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[190]`
+- Source entry path: `$.variantrule[190].entries[4]`
+- Canonical output: `rule/xge-shared-campaign-variant-rules.json`
+- OMITTED: Equipment, potion, and spell-scroll purchases and prices; scroll-caster eligibility; and restrictions on selling items. Nested paths covered: $.variantrule[190].entries[4].type; $.variantrule[190].entries[4].name; $.variantrule[190].entries[4].entries[0]; $.variantrule[190].entries[4].entries[1].type; $.variantrule[190].entries[4].entries[1].caption; $.variantrule[190].entries[4].entries[1].colLabels[0]; $.variantrule[190].entries[4].entries[1].colLabels[1]; $.variantrule[190].entries[4].entries[1].colStyles[0]; $.variantrule[190].entries[4].entries[1].colStyles[1]; $.variantrule[190].entries[4].entries[1].colStyles[2]; $.variantrule[190].entries[4].entries[1].rows[0][0]; $.variantrule[190].entries[4].entries[1].rows[0][1]; $.variantrule[190].entries[4].entries[1].rows[1][0]; $.variantrule[190].entries[4].entries[1].rows[1][1]; $.variantrule[190].entries[4].entries[1].rows[2][0]; $.variantrule[190].entries[4].entries[1].rows[2][1]; $.variantrule[190].entries[4].entries[1].rows[3][0]; $.variantrule[190].entries[4].entries[1].rows[3][1]; $.variantrule[190].entries[4].entries[1].rows[4][0]; $.variantrule[190].entries[4].entries[1].rows[4][1]; $.variantrule[190].entries[4].entries[1].rows[5][0]; $.variantrule[190].entries[4].entries[1].rows[5][1]; $.variantrule[190].entries[4].entries[1].rows[6][0]; $.variantrule[190].entries[4].entries[1].rows[6][1]; $.variantrule[190].entries[4].entries[1].rows[7][0]; $.variantrule[190].entries[4].entries[1].rows[7][1]; $.variantrule[190].entries[4].entries[2].type; $.variantrule[190].entries[4].entries[2].caption; $.variantrule[190].entries[4].entries[2].colLabels[0]; $.variantrule[190].entries[4].entries[2].colLabels[1]; $.variantrule[190].entries[4].entries[2].colStyles[0]; $.variantrule[190].entries[4].entries[2].colStyles[1]; $.variantrule[190].entries[4].entries[2].colStyles[2]; $.variantrule[190].entries[4].entries[2].rows[0][0]; $.variantrule[190].entries[4].entries[2].rows[0][1]; $.variantrule[190].entries[4].entries[2].rows[1][0]; $.variantrule[190].entries[4].entries[2].rows[1][1]; $.variantrule[190].entries[4].entries[2].rows[2][0]; $.variantrule[190].entries[4].entries[2].rows[2][1]; $.variantrule[190].entries[4].entries[2].rows[3][0]; $.variantrule[190].entries[4].entries[2].rows[3][1]; $.variantrule[190].entries[4].entries[2].rows[4][0]; $.variantrule[190].entries[4].entries[2].rows[4][1]; $.variantrule[190].entries[4].entries[2].rows[5][0]; $.variantrule[190].entries[4].entries[2].rows[5][1]; $.variantrule[190].entries[4].entries[3].type; $.variantrule[190].entries[4].entries[3].name; $.variantrule[190].entries[4].entries[3].entries[0]. These are shared-campaign purchase and sale rules within deferred R-GAP-33; the approved Rule contract does not model this campaign economy or item inventory.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Buying and Selling",
+  "entries": [
+    "Characters can use their monetary treasure to purchase anything from the equipment lists in chapter 5 of the {@book Player's Handbook|PHB|5}. In addition, the Adventurers League allows characters to purchase potions and spell scrolls, as detailed below. A {@item spell scroll} can be purchased only by a character who is capable of casting the spell in question.",
+    {
+      "type": "table",
+      "caption": "Potions for Sale",
+      "colLabels": [
+        "Potion of...",
+        "Cost"
+      ],
+      "colStyles": [
+        "col-4 text-center",
+        "col-4 text-center",
+        "col-4 text-center"
+      ],
+      "rows": [
+        [
+          "{@item potion of Healing||Healing}",
+          "50 gp"
+        ],
+        [
+          "{@item potion of Climbing||Climbing}",
+          "75 gp"
+        ],
+        [
+          "{@item potion of Animal friendship||Animal friendship}",
+          "100 gp"
+        ],
+        [
+          "{@item potion of Greater healing||Greater healing}",
+          "100 gp"
+        ],
+        [
+          "{@item potion of Water breathing||Water breathing}",
+          "100 gp"
+        ],
+        [
+          "{@item potion of Superior healing||Superior healing}",
+          "500 gp"
+        ],
+        [
+          "{@item potion of Supreme healing||Supreme healing}",
+          "5,000 gp"
+        ],
+        [
+          "{@item potion of Invisibility||Invisibility}",
+          "5,000 gp"
+        ]
+      ],
+      "data": {
+        "genTables": {
+          "tableInclude": true
+        }
+      }
+    },
+    {
+      "type": "table",
+      "caption": "Spell Scrolls for Sale",
+      "colLabels": [
+        "Spell Level",
+        "Cost"
+      ],
+      "colStyles": [
+        "col-4 text-center",
+        "col-4 text-center",
+        "col-4 text-center"
+      ],
+      "rows": [
+        [
+          "Cantrip",
+          "25 gp"
+        ],
+        [
+          "1st",
+          "75 gp"
+        ],
+        [
+          "2nd",
+          "150 gp"
+        ],
+        [
+          "3rd",
+          "300 gp"
+        ],
+        [
+          "4th",
+          "500 gp"
+        ],
+        [
+          "5th",
+          "1,000 gp"
+        ]
+      ],
+      "data": {
+        "genTables": {
+          "tableInclude": true
+        }
+      }
+    },
+    {
+      "type": "entries",
+      "name": "Selling Items",
+      "entries": [
+        "In a shared campaign, characters are not entitled to sell items they find on adventures or equipment they purchase with their personal funds. Weapons, armor, and other gear used by enemies are considered too damaged to have any monetary value."
+      ]
+    }
+  ]
+}
+```
+
+### rule:xphb:heroic-inspiration — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[124]`
+- Source entry path: `$.variantrule[124].entries[0]`
+- Canonical output: `rule/xphb-heroic-inspiration.json`
+- OMITTED: Reroll any die after rolling it, immediately, and use the new result. The schema has no arbitrary-die reroll or mandatory replacement result mechanic; the inspiration resource trigger is separately deferred under R-GAP-25.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"If you ({@variantrule Player Character|XPHB|a player character}) have Heroic Inspiration, you can expend it to reroll any die immediately after rolling it, and you must use the new roll."
+```
+
+### rule:xphb:heroic-inspiration — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[124]`
+- Source entry path: `$.variantrule[124].entries[1]`
+- Canonical output: `rule/xphb-heroic-inspiration.json`
+- OMITTED: Possession check, loss when already holding the resource, and transfer lifecycle. Resource possession and transfer remain deferred under R-GAP-25.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"If you gain Heroic Inspiration but already have it, it's lost unless you give it to a {@variantrule Player Character|XPHB|player character} who lacks it."
+```
+
+### rule:dmg:explosives — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[104]`
+- Source entry path: `$.variantrule[104].entries[0]`
+- Canonical output: `rule/dmg-explosives.json`
+- OMITTED: Optional explosives campaign framing and reference to the omitted Explosives equipment table. The source table's equipment definitions are outside this Rule conversion; the prose introduces rather than defines blast resolution.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+"A campaign might include explosives from the Renaissance or the modern world (the latter are priceless), as presented in the Explosives table."
+```
+
+### rule:dmg:explosives — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[104]`
+- Source entry path: `$.variantrule[104].entries[1]`
+- Canonical output: `rule/dmg-explosives.json`
+- OMITTED: Lighting and throwing the bomb as an action up to 60 feet. Nested paths covered: $.variantrule[104].entries[1].type; $.variantrule[104].entries[1].name; $.variantrule[104].entries[1].entries[0]. The action and item-use procedure belongs to Action/Equipment domains.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Bomb",
+  "entries": [
+    "As an action, a character can light this bomb and throw it at a point up to 60 feet away. Each creature within 5 feet of that point must succeed on a {@dc 12} Dexterity saving throw or take {@damage 3d6} fire damage."
+  ]
+}
+```
+
+### rule:dmg:explosives — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[104]`
+- Source entry path: `$.variantrule[104].entries[2]`
+- Canonical output: `rule/dmg-explosives.json`
+- OMITTED: Half damage on a successful save, ignition of an ounce for one round, bright/dim light radii, and container/object use. Nested paths covered: $.variantrule[104].entries[2].type; $.variantrule[104].entries[2].name; $.variantrule[104].entries[2].entries[0]; $.variantrule[104].entries[2].entries[1]. No approved save-success half-damage branch, emitted-light mechanic, or item-use state transition expresses these clauses faithfully.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Gunpowder",
+  "entries": [
+    "Gunpowder is chiefly used to propel a bullet out of the barrel of a pistol or rifle, or it is formed into a bomb. Gunpowder is sold in small wooden kegs and in water-resistant powder horns.",
+    "Setting fire to a container full of gunpowder can cause it to explode, dealing fire damage to creatures within 10 feet of it ({@dice 3d6} for a powder horn, {@dice 7d6} for a keg). A successful {@dc 12} Dexterity saving throw halves the damage. Setting fire to an ounce of gunpowder causes it to flare for 1 round, shedding bright light in a 30-foot radius and dim light for an additional 30 feet."
+  ]
+}
+```
+
+### rule:dmg:explosives — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[104]`
+- Source entry path: `$.variantrule[104].entries[3]`
+- Canonical output: `rule/dmg-explosives.json`
+- OMITTED: Half damage on a successful save, bundled-stick damage/radius scaling and caps, and delayed fuse/initiative procedure. Nested paths covered: $.variantrule[104].entries[3].type; $.variantrule[104].entries[3].name; $.variantrule[104].entries[3].entries[0]; $.variantrule[104].entries[3].entries[1]; $.variantrule[104].entries[3].entries[2]. The schema has no save-success half-damage branch, count-based scaling, fuse timing, or initiative-deferred detonation.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Dynamite",
+  "entries": [
+    "As an action, a creature can light a stick of dynamite and throw it at a point up to 60 feet away. Each creature within 5 feet of that point must make a {@dc 12} Dexterity saving throw, taking {@damage 3d6} bludgeoning damage on a failed save, or half as much damage on a successful one.",
+    "A character can bind sticks of dynamite together so they explode at the same time. Each additional stick increases the damage by {@damage 1d6} (to a maximum of {@damage 10d6}) and the burst radius by 5 feet (to a maximum of 20 feet).",
+    "Dynamite can be rigged with a longer fuse to explode after a set amount of time, usually 1 to 6 rounds. Roll initiative for the dynamite. After the set number of rounds goes by, the dynamite explodes on that initiative."
+  ]
+}
+```
+
+### rule:dmg:explosives — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[104]`
+- Source entry path: `$.variantrule[104].entries[4]`
+- Canonical output: `rule/dmg-explosives.json`
+- OMITTED: Throw ranges, half damage on a successful save, smoke's one-round delay and wind-dependent dispersal, and grenade item/launcher definitions. Nested paths covered: $.variantrule[104].entries[4].type; $.variantrule[104].entries[4].name; $.variantrule[104].entries[4].entries[0]; $.variantrule[104].entries[4].entries[1]; $.variantrule[104].entries[4].entries[2]. These timing, wind, item, and successful-save outcomes exceed the approved mechanics representation.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Grenades",
+  "entries": [
+    "As an action, a character can throw a grenade at a point up to 60 feet away. With a grenade launcher, the character can propel the grenade up to 120 feet away.",
+    "Each creature within 20 feet of an exploding fragmentation grenade must make a {@dc 15} Dexterity saving throw, taking {@damage 5d6} piercing damage on a failed save, or half as much damage on a successful one.",
+    "One round after a smoke grenade lands, it emits a cloud of smoke that creates a heavily obscured area in a 20-foot radius. A moderate wind (at least 10 miles per hour) disperses the smoke in 4 rounds; a strong wind (20 or more miles per hour) disperses it in 1 round."
+  ]
+}
+```
+
+### rule:dmg:mixing-potions — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[153]`
+- Source entry path: `$.variantrule[153].entries[0]`
+- Canonical output: `rule/dmg-mixing-potions.json`
+- OMITTED: Introductory explanation of unpredictable potion interactions. This describes why the variant exists.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"A character might drink one potion while still under the effects of another, or pour several potions into a single container. The strange ingredients used in creating potions can result in unpredictable interactions."
+```
+
+### rule:dmg:mixing-potions — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[153]`
+- Source entry path: `$.variantrule[153].entries[1]`
+- Canonical output: `rule/dmg-mixing-potions.json`
+- OMITTED: Roll once for two combined potions and again for each additional potion; reveal nonobvious effects when they become evident. The combination and sequential resolution are part of skipped R-GAP-43.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+"When a character mixes two potions together, you can roll on the Potion Miscibility table. If more than two are combined, roll again for each subsequent potion, combining the results. Unless the effects are immediately obvious, reveal them only when they become evident."
+```
+
+### rule:dmg:mixing-potions — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[153]`
+- Source entry path: `$.variantrule[153].entries[2]`
+- Canonical output: `rule/dmg-mixing-potions.json`
+- OMITTED: Potion Miscibility d100 table, including damage, poison, effect loss, halving/doubling, permanence, and cure adjudication. Nested paths covered: $.variantrule[153].entries[2].type; $.variantrule[153].entries[2].caption; $.variantrule[153].entries[2].colLabels[0]; $.variantrule[153].entries[2].colLabels[1]; $.variantrule[153].entries[2].colStyles[0]; $.variantrule[153].entries[2].colStyles[1]; $.variantrule[153].entries[2].rows[0][0]; $.variantrule[153].entries[2].rows[0][1]; $.variantrule[153].entries[2].rows[1][0]; $.variantrule[153].entries[2].rows[1][1]; $.variantrule[153].entries[2].rows[2][0]; $.variantrule[153].entries[2].rows[2][1]; $.variantrule[153].entries[2].rows[3][0]; $.variantrule[153].entries[2].rows[3][1]; $.variantrule[153].entries[2].rows[4][0]; $.variantrule[153].entries[2].rows[4][1]; $.variantrule[153].entries[2].rows[5][0]; $.variantrule[153].entries[2].rows[5][1]; $.variantrule[153].entries[2].rows[6][0]; $.variantrule[153].entries[2].rows[6][1]; $.variantrule[153].entries[2].rows[7][0]; $.variantrule[153].entries[2].rows[7][1]. Skipped R-GAP-43 explicitly defers this heterogeneous table-selected potion procedure.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Potion Miscibility",
+  "colLabels": [
+    "d100",
+    "Result"
+  ],
+  "colStyles": [
+    "col-2 text-center no-wrap",
+    "col-10"
+  ],
+  "rows": [
+    [
+      "01",
+      "The mixture creates a magical explosion, dealing {@damage 6d10} force damage to the mixer and {@damage 1d10} force damage to each creature within 5 feet of the mixer."
+    ],
+    [
+      "02-08",
+      "The mixture becomes an ingested poison of the DM's choice."
+    ],
+    [
+      "09-15",
+      "Both potions lose their effects."
+    ],
+    [
+      "16-25",
+      "One potion loses its effect."
+    ],
+    [
+      "26-35",
+      "Both potions work, but with their numerical effects and durations halved. A potion has no effect if it can't be halved in this way."
+    ],
+    [
+      "36-90",
+      "Both potions work normally."
+    ],
+    [
+      "91-99",
+      "The numerical effects and duration of one potion are doubled. If neither potion has anything to double in this way, they work normally."
+    ],
+    [
+      "00",
+      "Only one potion works, but its effect is permanent. Choose the simplest effect to make permanent, or the one that seems the most fun. For example, a {@item potion of healing} might increase the drinker's hit point maximum by 4, or {@item oil of etherealness} might permanently trap the user in the Ethereal Plane. At your discretion, an appropriate spell, such as {@spell dispel magic} or {@spell remove curse}, might end this lasting effect."
+    ]
+  ]
+}
+```
+
+### rule:dmg:more-difficult-identification — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[156]`
+- Source entry path: `$.variantrule[156].entries[0]`
+- Canonical output: `rule/dmg-more-difficult-identification.json`
+- OMITTED: Removing short-rest identification and allowing experimentation as an alternative to Identify. The Identify spell is referenced; Rule v1 has no magic-item identification procedure or experimentation resolution.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"If you prefer magic items to have a greater mystique, consider removing the ability to identify the properties of a magic item during a short rest, and require the {@spell identify} spell, experimentation, or both to reveal what a magic item does."
+```
+
+### rule:dmg:scroll-mishaps — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[188]`
+- Source entry path: `$.variantrule[188].entries[0]`
+- Canonical output: `rule/dmg-scroll-mishaps.json`
+- OMITTED: Failed Spell Scroll casting triggers DC 10 Intelligence save; failure selects the Scroll Mishap table. The save is only the trigger for unsupported table resolution and is not represented alone.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A creature who tries and fails to cast a spell from a {@item spell scroll} must make a {@dc 10} Intelligence saving throw. If the saving throw fails, roll on the Scroll Mishap table."
+```
+
+### rule:dmg:scroll-mishaps — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[188]`
+- Source entry path: `$.variantrule[188].entries[1]`
+- Canonical output: `rule/dmg-scroll-mishaps.json`
+- OMITTED: D6 Scroll Mishap outcomes, including spell damage, target/location changes, altered effects, duration, and delayed casting. Nested paths covered: $.variantrule[188].entries[1].type; $.variantrule[188].entries[1].caption; $.variantrule[188].entries[1].colLabels[0]; $.variantrule[188].entries[1].colLabels[1]; $.variantrule[188].entries[1].colStyles[0]; $.variantrule[188].entries[1].colStyles[1]; $.variantrule[188].entries[1].rows[0][0]; $.variantrule[188].entries[1].rows[0][1]; $.variantrule[188].entries[1].rows[1][0]; $.variantrule[188].entries[1].rows[1][1]; $.variantrule[188].entries[1].rows[2][0]; $.variantrule[188].entries[1].rows[2][1]; $.variantrule[188].entries[1].rows[3][0]; $.variantrule[188].entries[1].rows[3][1]; $.variantrule[188].entries[1].rows[4][0]; $.variantrule[188].entries[1].rows[4][1]; $.variantrule[188].entries[1].rows[5][0]; $.variantrule[188].entries[1].rows[5][1]. These outcomes depend on spell effects and heterogeneous table selection unavailable in the approved Rule contract.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Scroll Mishap",
+  "colLabels": [
+    "d6",
+    "Result"
+  ],
+  "colStyles": [
+    "col-2 text-center",
+    "col-10"
+  ],
+  "rows": [
+    [
+      "1",
+      "A surge of magical energy deals the caster {@damage 1d6} force damage per level of the spell."
+    ],
+    [
+      "2",
+      "The spell affects the caster or an ally (determined randomly) instead of the intended target, or it affects a random target nearby if the caster was the intended target. "
+    ],
+    [
+      "3",
+      "The spell affects a random location within the spell's range."
+    ],
+    [
+      "4",
+      "The spell's effect is contrary to its normal one, but neither harmful nor beneficial. For instance, a {@spell fireball} might produce an area of harmless cold."
+    ],
+    [
+      "5",
+      "The caster suffers a minor but bizarre effect related to the spell. Such effects last only as long as the original spell's duration, or {@dice 1d10} minutes for spells that take effect instantaneously. For example, a {@spell fireball} might cause smoke to billow from the caster's ears for {@dice 1d10} minutes. "
+    ],
+    [
+      "6",
+      "The spell activates after {@dice 1d12} hours. If the caster was the intended target, the spell takes effect normally. If the caster was not the intended target, the spell goes off in the general direction of the intended target, up to the spell's maximum range, if the target has moved away."
+    ]
+  ]
+}
+```
+
+### rule:dmg:spell-points — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[208]`
+- Source entry path: `$.variantrule[208].entries[0]`
+- Canonical output: `rule/dmg-spell-points.json`
+- OMITTED: Variant replacing spell slots with spell points for class spellcasters. A resource label without its pool, cost, and expenditure procedure would not represent this variant.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"One way to modify how a class feels is to change how it uses its spells. With this variant system, a character who has the Spellcasting feature uses spell points instead spell slots to fuel spells. Spell points give a caster more flexibility, at the cost of greater complexity."
+```
+
+### rule:dmg:spell-points — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[208]`
+- Source entry path: `$.variantrule[208].entries[1]`
+- Canonical output: `rule/dmg-spell-points.json`
+- OMITTED: Spell-point cost by spell level; cantrips cost no points. The schema has no source-level spell slot cost table.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"In this variant, each spell has a point cost based on its level. The Spell Point Cost table summarizes the cost in spell points of slots from 1st to 9th level. Cantrips don't require slots and therefore don't require spell points."
+```
+
+### rule:dmg:spell-points — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[208]`
+- Source entry path: `$.variantrule[208].entries[2]`
+- Canonical output: `rule/dmg-spell-points.json`
+- OMITTED: Point expenditure to create slots, minimum zero, and full recovery on long rest. Resource balance, slot conversion, and point recovery are not expressible as an isolated generic magic resource.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Instead of gaining a number of spell slots to cast your spells from the Spellcasting feature, you gain a pool of spell points instead. You expend a number of spell points to create a spell slot of a given level, and then use that slot to cast a spell. You can't reduce your spell points total to less than 0, and you regain all spent spell points when you finish a long rest."
+```
+
+### rule:dmg:spell-points — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[208]`
+- Source entry path: `$.variantrule[208].entries[3]`
+- Canonical output: `rule/dmg-spell-points.json`
+- OMITTED: One slot of each 6th-level-or-higher level per long rest. The per-level slot cap and reset lifecycle are unsupported.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Spells of 6th level and higher are particularly taxing to cast. You can use spell points to create one slot of each level of 6th or higher. You can't create another slot of the same level until you finish a long rest."
+```
+
+### rule:dmg:spell-points — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[208]`
+- Source entry path: `$.variantrule[208].entries[4]`
+- Canonical output: `rule/dmg-spell-points.json`
+- OMITTED: Class-level spell-point pool and maximum slot level. The progression table and character level dependency cannot be represented by the Rule schema.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"The number of spell points you have to spend is based on your level as a spellcaster, as shown in the Spell Points by Level table. Your level also determines the maximum-level spell slot you can create. Even though you might have enough points to create a slot above this maximum, you can't do so."
+```
+
+### rule:dmg:spell-points — entry 5
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[208]`
+- Source entry path: `$.variantrule[208].entries[5]`
+- Canonical output: `rule/dmg-spell-points.json`
+- OMITTED: Different spell-point scaling for named classes and multiclass-style level divisions. The formulas depend on Class identity and spellcasting progression not modeled here.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+"The Spell Points by Level table applies to {@class bard||bards}, {@class cleric||clerics}, {@class druid||druids}, {@class sorcerer||sorcerers}, and {@class wizard||wizards}. For a {@class paladin} or {@class ranger}, halve the character's level in that class and then consult the table. For a {@class fighter|phb|fighter (Eldritch Knight)|Eldritch Knight} or {@class rogue|phb|rogue (Arcane Trickster)|Arcane Trickster}, divide the character's level in that class by three."
+```
+
+### rule:dmg:spell-points — entry 6
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[208]`
+- Source entry path: `$.variantrule[208].entries[6]`
+- Canonical output: `rule/dmg-spell-points.json`
+- OMITTED: Optional application to monsters with spell slots. This extension depends on Creature spellcasting resources outside this Rule record.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+"This system can be applied to monsters that cast spells using spell slots, but it isn't recommended that you do so. Tracking spell point expenditures for a monster can be a hassle."
+```
+
+### rule:dmg:spell-points — entry 7
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[208]`
+- Source entry path: `$.variantrule[208].entries[7]`
+- Canonical output: `rule/dmg-spell-points.json`
+- OMITTED: Spell Point Cost table. Nested paths covered: $.variantrule[208].entries[7].type; $.variantrule[208].entries[7].caption; $.variantrule[208].entries[7].colLabels[0]; $.variantrule[208].entries[7].colLabels[1]; $.variantrule[208].entries[7].colStyles[0]; $.variantrule[208].entries[7].colStyles[1]; $.variantrule[208].entries[7].rows[0][0]; $.variantrule[208].entries[7].rows[1][0]; $.variantrule[208].entries[7].rows[2][0]; $.variantrule[208].entries[7].rows[3][0]; $.variantrule[208].entries[7].rows[4][0]; $.variantrule[208].entries[7].rows[5][0]; $.variantrule[208].entries[7].rows[6][0]; $.variantrule[208].entries[7].rows[7][0]; $.variantrule[208].entries[7].rows[8][0]. The approved schema has no level-indexed spell-point table.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Spell Point Cost",
+  "colLabels": [
+    "Spell Level",
+    "Point Cost"
+  ],
+  "colStyles": [
+    "col-6 text-center",
+    "col-6 text-center"
+  ],
+  "rows": [
+    [
+      "1st",
+      2
+    ],
+    [
+      "2nd",
+      3
+    ],
+    [
+      "3rd",
+      5
+    ],
+    [
+      "4th",
+      6
+    ],
+    [
+      "5th",
+      7
+    ],
+    [
+      "6th",
+      9
+    ],
+    [
+      "7th",
+      10
+    ],
+    [
+      "8th",
+      11
+    ],
+    [
+      "9th",
+      13
+    ]
+  ]
+}
+```
+
+### rule:dmg:spell-points — entry 8
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[208]`
+- Source entry path: `$.variantrule[208].entries[8]`
+- Canonical output: `rule/dmg-spell-points.json`
+- OMITTED: Spell Points by Level table. Nested paths covered: $.variantrule[208].entries[8].type; $.variantrule[208].entries[8].caption; $.variantrule[208].entries[8].colLabels[0]; $.variantrule[208].entries[8].colLabels[1]; $.variantrule[208].entries[8].colLabels[2]; $.variantrule[208].entries[8].colStyles[0]; $.variantrule[208].entries[8].colStyles[1]; $.variantrule[208].entries[8].colStyles[2]; $.variantrule[208].entries[8].rows[0][0]; $.variantrule[208].entries[8].rows[0][2]; $.variantrule[208].entries[8].rows[1][0]; $.variantrule[208].entries[8].rows[1][2]; $.variantrule[208].entries[8].rows[2][0]; $.variantrule[208].entries[8].rows[2][2]; $.variantrule[208].entries[8].rows[3][0]; $.variantrule[208].entries[8].rows[3][2]; $.variantrule[208].entries[8].rows[4][0]; $.variantrule[208].entries[8].rows[4][2]; $.variantrule[208].entries[8].rows[5][0]; $.variantrule[208].entries[8].rows[5][2]; $.variantrule[208].entries[8].rows[6][0]; $.variantrule[208].entries[8].rows[6][2]; $.variantrule[208].entries[8].rows[7][0]; $.variantrule[208].entries[8].rows[7][2]; $.variantrule[208].entries[8].rows[8][0]; $.variantrule[208].entries[8].rows[8][2]; $.variantrule[208].entries[8].rows[9][0]; $.variantrule[208].entries[8].rows[9][2]; $.variantrule[208].entries[8].rows[10][0]; $.variantrule[208].entries[8].rows[10][2]; $.variantrule[208].entries[8].rows[11][0]; $.variantrule[208].entries[8].rows[11][2]; $.variantrule[208].entries[8].rows[12][0]; $.variantrule[208].entries[8].rows[12][2]; $.variantrule[208].entries[8].rows[13][0]; $.variantrule[208].entries[8].rows[13][2]; $.variantrule[208].entries[8].rows[14][0]; $.variantrule[208].entries[8].rows[14][2]; $.variantrule[208].entries[8].rows[15][0]; $.variantrule[208].entries[8].rows[15][2]; $.variantrule[208].entries[8].rows[16][0]; $.variantrule[208].entries[8].rows[16][2]; $.variantrule[208].entries[8].rows[17][0]; $.variantrule[208].entries[8].rows[17][2]; $.variantrule[208].entries[8].rows[18][0]; $.variantrule[208].entries[8].rows[18][2]; $.variantrule[208].entries[8].rows[19][0]; $.variantrule[208].entries[8].rows[19][2]. The approved schema has no class-level resource and maximum-slot progression table.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Spell Points by Level",
+  "colLabels": [
+    "Class Level",
+    "Spell Points",
+    "Max Spell Level"
+  ],
+  "colStyles": [
+    "col-4 text-center",
+    "col-4 text-center",
+    "col-4 text-center"
+  ],
+  "rows": [
+    [
+      "1st",
+      4,
+      "1st"
+    ],
+    [
+      "2nd",
+      6,
+      "1st"
+    ],
+    [
+      "3rd",
+      14,
+      "2nd"
+    ],
+    [
+      "4th",
+      17,
+      "2nd"
+    ],
+    [
+      "5th",
+      27,
+      "3rd"
+    ],
+    [
+      "6th",
+      32,
+      "3rd"
+    ],
+    [
+      "7th",
+      38,
+      "4th"
+    ],
+    [
+      "8th",
+      44,
+      "4th"
+    ],
+    [
+      "9th",
+      57,
+      "5th"
+    ],
+    [
+      "10th",
+      64,
+      "5th"
+    ],
+    [
+      "11th",
+      73,
+      "6th"
+    ],
+    [
+      "12th",
+      73,
+      "6th"
+    ],
+    [
+      "13th",
+      83,
+      "7th"
+    ],
+    [
+      "14th",
+      83,
+      "7th"
+    ],
+    [
+      "15th",
+      94,
+      "8th"
+    ],
+    [
+      "16th",
+      94,
+      "8th"
+    ],
+    [
+      "17th",
+      107,
+      "9th"
+    ],
+    [
+      "18th",
+      114,
+      "9th"
+    ],
+    [
+      "19th",
+      123,
+      "9th"
+    ],
+    [
+      "20th",
+      133,
+      "9th"
+    ]
+  ]
+}
+```
+
+### rule:dmg:wands-that-don-t-recharge — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[228]`
+- Source entry path: `$.variantrule[228].entries[0]`
+- Canonical output: `rule/dmg-wands-that-don-t-recharge.json`
+- OMITTED: Optional non-recharging wand charges and suggested capacity increase up to 25. Charge maxima and permanent depletion are item-state rules not representable in the approved Rule contract.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A typical wand has expendable charges. If you'd like wands to be a limited resource, you can make some of them incapable of regaining charges. Consider increasing the base number of charges in such a wand, to a maximum of 25 charges. These charges are never regained once they're expended."
+```
+
+### rule:mm:familiars — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[107]`
+- Source entry path: `$.variantrule[107].entries[0]`
+- Canonical output: `rule/mm-familiars.json`
+- OMITTED: The NPC familiar likelihood procedure and open-ended selector for other Tiny monsters. Named spell and Creature references are represented; Rule v1 cannot encode the full source filter or assignment procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Any spellcaster that can cast the {@spell find familiar} spell (such as an apprentice, warlock, or wizard) is likely to have a familiar. The familiar can be one of the creatures described in the spell (see the {@book Player's Handbook|PHB}) or some other {@filter Tiny monster|bestiary|size=T|miscellaneous=!swarm}, such as a {@creature crawling claw}, an {@creature imp}, a {@creature pseudodragon}, or a {@creature quasit}."
+```
+
+### rule:mm:familiars — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[107]`
+- Source entry path: `$.variantrule[107].entries[1]`
+- Canonical output: `rule/mm-familiars.json`
+- OMITTED: Editorial note that the variant is intended for NPCs. This note records intended audience rather than a mechanical restriction.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"{@note This variant is {@link intended for NPCs.|https://twitter.com/JeremyECrawford/status/920714594334654465}}"
+```
+
+### rule:mm:player-characters-as-vampires — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[171]`
+- Source entry path: `$.variantrule[171].entries[0]`
+- Canonical output: `rule/mm-player-characters-as-vampires.json`
+- OMITTED: Character transformation effects on ability scores, resistances, senses, traits, actions, attack statistics, Charm DC, alignment, and control. The referenced Creature stat blocks and Wish spell do not encode these character-state changes.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+"The game statistics of a player character transformed into a {@creature vampire spawn} and then a {@creature vampire} don't change, except that the character's Strength, Dexterity, and Constitution scores become 18 if they aren't higher. In addition, the character gains the vampire's damage resistances, {@sense darkvision}, traits, and actions. Attack and damage rolls for the vampire's attacks are based on Strength. The save DC for Charm is 8 + the vampire's proficiency bonus + the vampire's Charisma modifier. The character's alignment becomes lawful evil, and the DM might take control of the character until the vampirism is reversed with a {@spell wish} spell or the character is killed and brought back to life."
+```
+
+### rule:mm:player-characters-as-vampires — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[171]`
+- Source entry path: `$.variantrule[171].entries[1]`
+- Canonical output: `rule/mm-player-characters-as-vampires.json`
+- OMITTED: Jiangshi creation by death and possible transformation after feeding. Nested paths covered: $.variantrule[171].entries[1].type; $.variantrule[171].entries[1].name; $.variantrule[171].entries[1].source; $.variantrule[171].entries[1].entries[0]. This describes a Creature-specific transformation and depends on the Jiangshi Creature record.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Jiangshi",
+  "source": "VRGR",
+  "page": 236,
+  "entries": [
+    "Humanoids killed by a {@creature jiangshi|VRGR} rise as life-hungry corpses and might turn into jiangshi themselves if they feed upon the living."
+  ]
+}
+```
+
+### rule:vgm:familiars — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[108]`
+- Source entry path: `$.variantrule[108].entries[0]`
+- Canonical output: `rule/vgm-familiars.json`
+- OMITTED: The NPC familiar likelihood procedure and open-ended selector for other Tiny monsters. Named spell and Creature references are represented; Rule v1 cannot encode the full source filter or assignment procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Any spellcaster that can cast the {@spell find familiar} spell (such as an apprentice, warlock, or wizard) is likely to have a familiar. The familiar can be one of the creatures described in the spell (see the {@book Player's Handbook|PHB}) or some other {@filter Tiny monster|bestiary|size=T|miscellaneous=!swarm}, such as a {@creature cranium rat|vgm}, a {@creature crawling claw}, a {@creature gazer|vgm}, an {@creature imp}, a {@creature pseudodragon}, or a {@creature quasit}."
+```
+
+### rule:vgm:familiars — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[108]`
+- Source entry path: `$.variantrule[108].entries[1]`
+- Canonical output: `rule/vgm-familiars.json`
+- OMITTED: Editorial note that the variant is intended for NPCs. This note records intended audience rather than a mechanical restriction.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"{@note This variant is {@link intended for NPCs.|https://twitter.com/JeremyECrawford/status/920714594334654465}}"
+```
+
+### rule:vrgr:haunted-traps — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[118]`
+- Source entry path: `$.variantrule[118].entries[0]`
+- Canonical output: `rule/vrgr-haunted-traps.json`
+- OMITTED: Narrative origins and design guidance for haunted traps. This is thematic context and advice rather than a prescribed mechanical resolution.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Like other traps, haunted traps represent threats leveled toward trespassers. They originate in an area spontaneously, often resulting from overwhelming negative emotions, tragedy, or evil. Just as some terrible fates might cause a tormented individual to rise as an undead creature, so might supernatural evil and violent emotions manifest more generally as one or more haunted traps. Such traps provide a way to theme the dangers and monsters of a haunted place to reveal a grim history or frightening tale. When creating haunted traps, consider what events brought them into being and how the trap's effects suggest those origins."
+```
+
+### rule:vrgr:haunted-traps — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[118]`
+- Source entry path: `$.variantrule[118].entries[1]`
+- Canonical output: `rule/vrgr-haunted-traps.json`
+- OMITTED: Emanation warning, passive Perception threshold 10 plus Haunt Bonus, reaction window, fleeing, disarming, and detection abilities. Nested paths covered: $.variantrule[118].entries[1].type; $.variantrule[118].entries[1].name; $.variantrule[118].entries[1].entries[0]. Detection and reaction timing are within deferred R-GAP-29 and depend on a Hazard identity and Haunt Bonus.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Detecting Haunted Traps",
+  "entries": [
+    "Every haunted trap has an emanation, which might be as subtle as a drop in temperature or as overt as an object moving of its own accord. A haunted trap's emanation occurs before the trap takes effect. A character notices the emanation if their passive Wisdom ({@skill Perception}) score equals or exceeds 10 + the trap's Haunt Bonus. A character who notices the haunted trap has until the start of their next turn to react, which might include fleeing to avoid the trap or attempting to disarm it (see the following section). Class features and spells, such as Divine Sense and {@spell detect evil and good}, that discern desecration also detect haunted traps."
+  ]
+}
+```
+
+### rule:vrgr:haunted-traps — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[118]`
+- Source entry path: `$.variantrule[118].entries[2]`
+- Canonical output: `rule/vrgr-haunted-traps.json`
+- OMITTED: Channel Divinity, Remove Curse, trap saving throw against caster DC plus Haunt Bonus, temporary/permanent disarm results, and origin-specific or nonmagical alternatives. Nested paths covered: $.variantrule[118].entries[2].type; $.variantrule[118].entries[2].name; $.variantrule[118].entries[2].entries[0]; $.variantrule[118].entries[2].entries[1]; $.variantrule[118].entries[2].entries[2]; $.variantrule[118].entries[2].entries[3]. The bounded disarm state and outcome are deferred under R-GAP-29.; cause: `OUT_OF_APPROVED_SCOPE`
+- OMITTED: Referenced class feature, spells, and thieves' tools. Nested paths covered: $.variantrule[118].entries[2].type; $.variantrule[118].entries[2].name; $.variantrule[118].entries[2].entries[0]; $.variantrule[118].entries[2].entries[1]; $.variantrule[118].entries[2].entries[2]; $.variantrule[118].entries[2].entries[3]. These cross-domain targets are not canonical outputs available for this Rule conversion.; cause: `REFERENCE_UNRESOLVED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Disarming Haunted Traps",
+  "entries": [
+    "Characters who notice a haunted trap before it activates can attempt to disarm it. Typical methods of disarming traps, such as {@item thieves' tools|PHB} and {@spell dispel magic}, don't affect haunted traps. However, the Channel Divinity class feature and the {@spell remove curse} spell can disarm a haunted trap.",
+    "To use Channel Divinity to disarm a haunted trap, a character uses an action to present their holy symbol and speak a prayer. To use {@spell remove curse} instead, a character must cast the spell and touch an object that is part of the trap. Whichever disarming method is used, the trap itself then makes a saving throw against the character's spell save DC, adding its Haunt Bonus to the save. On a failure, the trap is disarmed for 24 hours. If the trap fails the save by 10 or more, the trap is disarmed permanently.",
+    "Depending on the haunted trap's origins, certain spells might also affect the trap. For example, a haunted trap with a fiendish origin might be permanently disarmed by the spell {@spell dispel evil and good}.",
+    "Some haunted traps might also be disarmed in nonmagical ways related to the history of a haunted area. Such methods might be as simple as wearing the clothes of a haunted house's former owner or singing a lullaby that soothes a restless spirit. Haunted traps disarmed in such ways typically remain disarmed for 24 hours."
+  ]
+}
+```
+
+### rule:vrgr:haunted-traps — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[118]`
+- Source entry path: `$.variantrule[118].entries[3]`
+- Canonical output: `rule/vrgr-haunted-traps.json`
+- OMITTED: Named sample haunted traps. Nested paths covered: $.variantrule[118].entries[3].type; $.variantrule[118].entries[3].name; $.variantrule[118].entries[3].entries[0]; $.variantrule[118].entries[3].entries[1].type; $.variantrule[118].entries[3].entries[1].items[0]; $.variantrule[118].entries[3].entries[1].items[1]; $.variantrule[118].entries[3].entries[1].items[2]; $.variantrule[118].entries[3].entries[1].items[3]. The examples belong to the Hazard/trap catalog and are not normalized as Rule targets.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Sample Haunted Traps",
+  "entries": [
+    "Several haunted traps are presented here in alphabetical order. Customize them to create terrifying traps appropriate for your adventures.",
+    {
+      "type": "list",
+      "columns": 3,
+      "items": [
+        "{@trap Danse Macabre|VRGR}",
+        "{@trap Faceless Malice|VRGR}",
+        "{@trap Icon of the Lower Aerial Kingdoms|VRGR}",
+        "{@trap Morbid Memory|VRGR}"
+      ]
+    }
+  ]
+}
+```
+
+### rule:vrgr:survivors — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[215]`
+- Source entry path: `$.variantrule[215].entries[0]`
+- Canonical output: `rule/vrgr-survivors.json`
+- OMITTED: Horror-story framing for temporary survivor characters. This is narrative framing rather than a mechanical procedure.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Terror doesn't come just for the brave and prepared—often quite the opposite. Some of the most harrowing horror stories involve the least likely heroes, individuals who find their simple lives transformed into waking nightmares."
+```
+
+### rule:vrgr:survivors — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[215]`
+- Source entry path: `$.variantrule[215].entries[1]`
+- Canonical output: `rule/vrgr-survivors.json`
+- OMITTED: Suggested campaign contexts and duration for using survivor stand-in characters. This is optional campaign advice.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"In most horror adventures, your players will employ familiar, adventure-ready characters. That doesn't need to be the case, though. Instead, for short, low-power adventures, immersive retellings of tragic events, out-of-body experiences, or other unique tales, consider providing players with temporary, stand-in characters called survivors."
+```
+
+### rule:vrgr:survivors — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[215]`
+- Source entry path: `$.variantrule[215].entries[2]`
+- Canonical output: `rule/vrgr-survivors.json`
+- OMITTED: Narrative purposes and themes for survivor adventures. These examples do not define mechanics.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"This section provides guidance for using survivors, characters designed for one- to three-session adventures focused on survival rather than saving the day. Using survivors helps create horror experiences focused on the dread inherent to having limited resources and facing impending doom without forcing players to risk their favorite characters."
+```
+
+### rule:vrgr:survivors — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[215]`
+- Source entry path: `$.variantrule[215].entries[3]`
+- Canonical output: `rule/vrgr-survivors.json`
+- OMITTED: Survivor-use guidance and illustrative roles/scenarios. Nested paths covered: $.variantrule[215].entries[3].type; $.variantrule[215].entries[3].name; $.variantrule[215].entries[3].entries[0]; $.variantrule[215].entries[3].entries[1].type; $.variantrule[215].entries[3].entries[1].name; $.variantrule[215].entries[3].entries[1].entries[0]; $.variantrule[215].entries[3].entries[1].entries[1].type; $.variantrule[215].entries[3].entries[1].entries[1].items[0]; $.variantrule[215].entries[3].entries[1].entries[1].items[1]; $.variantrule[215].entries[3].entries[1].entries[1].items[2]; $.variantrule[215].entries[3].entries[2].type; $.variantrule[215].entries[3].entries[2].name; $.variantrule[215].entries[3].entries[2].entries[0]; $.variantrule[215].entries[3].entries[3].type; $.variantrule[215].entries[3].entries[3].name; $.variantrule[215].entries[3].entries[3].entries[0]; $.variantrule[215].entries[3].entries[4].type; $.variantrule[215].entries[3].entries[4].name; $.variantrule[215].entries[3].entries[4].entries[0].type; $.variantrule[215].entries[3].entries[4].entries[0].href.type; $.variantrule[215].entries[3].entries[4].entries[0].href.path; $.variantrule[215].entries[3].entries[4].entries[0].title; $.variantrule[215].entries[3].entries[4].entries[0].credit; $.variantrule[215].entries[3].entries[4].entries[1]; $.variantrule[215].entries[3].entries[5].type; $.variantrule[215].entries[3].entries[5].name; $.variantrule[215].entries[3].entries[5].entries[0]; $.variantrule[215].entries[3].entries[5].entries[1]; $.variantrule[215].entries[3].entries[5].entries[2]; $.variantrule[215].entries[3].entries[5].entries[3]; $.variantrule[215].entries[3].entries[5].entries[4]; $.variantrule[215].entries[3].entries[5].entries[5]. This is campaign guidance rather than a prescribed procedure.; cause: `NON_MECHANICAL`
+- OMITTED: Apprentice, Disciple, Sneak, and Squire stat blocks and creature role references. Nested paths covered: $.variantrule[215].entries[3].type; $.variantrule[215].entries[3].name; $.variantrule[215].entries[3].entries[0]; $.variantrule[215].entries[3].entries[1].type; $.variantrule[215].entries[3].entries[1].name; $.variantrule[215].entries[3].entries[1].entries[0]; $.variantrule[215].entries[3].entries[1].entries[1].type; $.variantrule[215].entries[3].entries[1].entries[1].items[0]; $.variantrule[215].entries[3].entries[1].entries[1].items[1]; $.variantrule[215].entries[3].entries[1].entries[1].items[2]; $.variantrule[215].entries[3].entries[2].type; $.variantrule[215].entries[3].entries[2].name; $.variantrule[215].entries[3].entries[2].entries[0]; $.variantrule[215].entries[3].entries[3].type; $.variantrule[215].entries[3].entries[3].name; $.variantrule[215].entries[3].entries[3].entries[0]; $.variantrule[215].entries[3].entries[4].type; $.variantrule[215].entries[3].entries[4].name; $.variantrule[215].entries[3].entries[4].entries[0].type; $.variantrule[215].entries[3].entries[4].entries[0].href.type; $.variantrule[215].entries[3].entries[4].entries[0].href.path; $.variantrule[215].entries[3].entries[4].entries[0].title; $.variantrule[215].entries[3].entries[4].entries[0].credit; $.variantrule[215].entries[3].entries[4].entries[1]; $.variantrule[215].entries[3].entries[5].type; $.variantrule[215].entries[3].entries[5].name; $.variantrule[215].entries[3].entries[5].entries[0]; $.variantrule[215].entries[3].entries[5].entries[1]; $.variantrule[215].entries[3].entries[5].entries[2]; $.variantrule[215].entries[3].entries[5].entries[3]; $.variantrule[215].entries[3].entries[5].entries[4]; $.variantrule[215].entries[3].entries[5].entries[5]. These source stat blocks require Creature-domain identities.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Using Survivors",
+  "entries": [
+    "Survivors are premade characters that are simple and easy for players to master, while being customizable enough to fill broad roles in your adventures—whether they be farmers or bored nobles, constables or babysitters. Adventures employing survivors are meant to be asides within broader campaigns or otherwise short experiences.",
+    {
+      "type": "entries",
+      "name": "Cut Scenes, Dreams, and Memories",
+      "entries": [
+        "Use survivors to provide information to players in the form of a self-contained adventure. Even if it doesn't make sense for a campaign's characters to be present for an event, survivors can provide players with perspectives they wouldn't otherwise have. For example, you might use survivors in the following ways:",
+        {
+          "type": "list",
+          "items": [
+            "Survivors serve as the first constables on the scene during a serial killer's crime. Afterward, when the players' other characters get involved in the investigations, the players know the details.",
+            "Survivors give every player a part to play in one character's ominous nightmares, such as those resulting from encounters with the mind flayers of Bluetspur (see {@book chapter 3|VRGR|3}).",
+            "Survivors provide players front row seats to important historic events. It's one thing to hear about the massacre at Castle Ravenloft following Strahd von Zarovich's transformation into a vampire, but it's another to play it."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Mindtaker Mists",
+      "entries": [
+        "The Mists frequently kidnap characters from across the multiverse, dragging them into the Domains of Dread. They don't always claim their victims bodily, though. Rather, the Mists might steal characters' minds, placing them into survivors involved in specific terrifying scenarios. Perhaps characters suddenly find themselves mentally recast into someone defending against a zombie siege in Falkovnia, attending a ball in Dementlieu, or exploring the tombs of Har'Akir (see {@book chapter 3|VRGR|3} for details on such adventures). Whether the characters survive or meet spectacular ends doesn't matter, as death might mean a return to the character's original body, a second chance to try again, or a stranger fate."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Terrible Freedom, Delightful Doom",
+      "entries": [
+        "Make sure your players know how long you plan to use survivors and that they'll be playing their usual characters again soon. Also let them know that survivors are designed to engage with terrifying circumstances, but their triumph over such threats is not assured. Players' decisions will certainly impact the survivors' fates, but if it seems like doom is in store, encourage the players to embrace it and make sure their survivors meet unforgettable ends."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "What's Old Is New",
+      "entries": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "variantrules/VRGR/111-04-007.for-survivors.webp"
+          },
+          "width": 850,
+          "height": 1560,
+          "title": "For survivors, any foe might become the focus of its own horror adventure",
+          "credit": "Dawn Carlos"
+        },
+        "Dwindling resources contribute to terrifying situations. When a group runs out of hit points, spells, food, or other vital reserves, tension and dread increase. High-level characters, though, have such resources in spades. By running an adventure using survivors, you can recapture some of the same tension adventurers experience early in their careers, encouraging players to use their wits and make desperate choices powerful characters can avoid."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Tools for Terror",
+      "entries": [
+        "Survivors allow you to control how players will engage with a horror adventure. The stat blocks in the following section are designed to be easy-to-use characters with a hint of talent but little that makes them remarkable:",
+        "{@b Apprentices} have a minor talent for magic and tend to be well-read.",
+        "{@b Disciples} faithfully adhere to the tenets of their chosen religions and receive spells from the deities they worship.",
+        "{@b Sneaks} survive by their wits and are often charlatans or petty thieves.",
+        "{@b Squires} possess a modicum of martial training and are stalwart companions.",
+        "Determine how you want to use survivors in your adventure. If it's important to the story, perhaps all the players use the same stat block, representing their shared experience—a group of Sneaks might all be detectives while a band of Disciples might face a terror unleashed upon a monastery. You can also allow players to choose their own survivors, as any survivor might fill a general role like noble, villager, or sailor with a touch of talent. Make use of these ready-made characters in whatever ways suit your adventure best."
+      ]
+    }
+  ]
+}
+```
+
+### rule:vrgr:survivors — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[215]`
+- Source entry path: `$.variantrule[215].entries[4]`
+- Canonical output: `rule/vrgr-survivors.json`
+- OMITTED: Survivor creation, levels, talents by level, Hit Die/HP progression, and death-saving-throw state. Nested paths covered: $.variantrule[215].entries[4].type; $.variantrule[215].entries[4].name; $.variantrule[215].entries[4].entries[0]; $.variantrule[215].entries[4].entries[1].type; $.variantrule[215].entries[4].entries[1].name; $.variantrule[215].entries[4].entries[1].entries[0]; $.variantrule[215].entries[4].entries[1].entries[1].type; $.variantrule[215].entries[4].entries[1].entries[1].caption; $.variantrule[215].entries[4].entries[1].entries[1].colLabels[0]; $.variantrule[215].entries[4].entries[1].entries[1].colLabels[1]; $.variantrule[215].entries[4].entries[1].entries[1].colStyles[0]; $.variantrule[215].entries[4].entries[1].entries[1].colStyles[1]; $.variantrule[215].entries[4].entries[1].entries[1].rows[0][0]; $.variantrule[215].entries[4].entries[1].entries[1].rows[0][1]; $.variantrule[215].entries[4].entries[1].entries[1].rows[1][0]; $.variantrule[215].entries[4].entries[1].entries[1].rows[1][1]; $.variantrule[215].entries[4].entries[1].entries[1].rows[2][0]; $.variantrule[215].entries[4].entries[1].entries[1].rows[2][1]; $.variantrule[215].entries[4].entries[2].type; $.variantrule[215].entries[4].entries[2].name; $.variantrule[215].entries[4].entries[2].entries[0]; $.variantrule[215].entries[4].entries[2].entries[1]. This temporary character progression depends on deferred R-GAP-37 and Character/Creature state.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Creating a Survivor",
+  "entries": [
+    "When you plan a session using survivors, determine how you'll use the {@b Apprentice}, {@b Disciple}, {@b Sneak}, and {@b Squire} stat blocks that appear in the following section. Once you've determined what survivors to use, take a few moments to individualize them. If the survivors have particular roles in your adventure, provide that information to players along with their survivors' statistics; otherwise, let them come up with their own details. Players can give their survivors names, personalities, and lineages, but these details don't affect the survivors' stat blocks.",
+    {
+      "type": "entries",
+      "name": "Levels",
+      "entries": [
+        "Survivors don't possess classes as detailed in the {@book Player's Handbook|PHB}. Despite this, you can make a survivor marginally more powerful by increasing its level. The stat blocks present the survivors as they are at 1st level. Rather than gaining experience points, a survivor increases in level whenever it makes sense for your adventure. When a survivor gains a level, it gains the benefits on the Survivor Progression table. A survivor that advances from 1st to 2nd level and from 2nd to 3rd level gains access to the player's choice of Survivor Talents (see the section below).",
+        {
+          "type": "table",
+          "caption": "Survivor Progression",
+          "colLabels": [
+            "Level",
+            "Feature"
+          ],
+          "colStyles": [
+            "col-2",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1st",
+              "See the appropriate stat block"
+            ],
+            [
+              "2nd",
+              "Survivor Talent"
+            ],
+            [
+              "3rd",
+              "Survivor Talent"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Hit Points",
+      "entries": [
+        "Whenever a survivor gains a level, it gains one Hit Die and its hit point maximum increases. To determine the amount of the increase, roll the Hit Die (the type that appears in the survivor's stat block), and add the survivor's Constitution modifier. It gains a minimum of 1 hit point per level.",
+        "If a survivor drops to 0 hit points, it falls {@condition unconscious} and subsequently makes death saving throws just like a normal player character."
+      ]
+    }
+  ]
+}
+```
+
+### rule:vrgr:survivors — entry 5
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[215]`
+- Source entry path: `$.variantrule[215].entries[5]`
+- Canonical output: `rule/vrgr-survivors.json`
+- OMITTED: Desperate Scream use limit/recovery, audible scream, and other survivor talents' movement, conditions, spell uses, proficiencies, reactions, resistance, and rest limits. Nested paths covered: $.variantrule[215].entries[5].type; $.variantrule[215].entries[5].name; $.variantrule[215].entries[5].entries[0]; $.variantrule[215].entries[5].entries[1].type; $.variantrule[215].entries[5].entries[1].name; $.variantrule[215].entries[5].entries[1].entries[0]; $.variantrule[215].entries[5].entries[2].type; $.variantrule[215].entries[5].entries[2].name; $.variantrule[215].entries[5].entries[2].entries[0]; $.variantrule[215].entries[5].entries[2].entries[1].type; $.variantrule[215].entries[5].entries[2].entries[1].href.type; $.variantrule[215].entries[5].entries[2].entries[1].href.path; $.variantrule[215].entries[5].entries[2].entries[1].title; $.variantrule[215].entries[5].entries[2].entries[1].credit; $.variantrule[215].entries[5].entries[3].type; $.variantrule[215].entries[5].entries[3].name; $.variantrule[215].entries[5].entries[3].entries[0]; $.variantrule[215].entries[5].entries[3].entries[1]; $.variantrule[215].entries[5].entries[3].entries[2]; $.variantrule[215].entries[5].entries[4].type; $.variantrule[215].entries[5].entries[4].name; $.variantrule[215].entries[5].entries[4].entries[0]; $.variantrule[215].entries[5].entries[4].entries[1]; $.variantrule[215].entries[5].entries[4].entries[2]; $.variantrule[215].entries[5].entries[5].type; $.variantrule[215].entries[5].entries[5].name; $.variantrule[215].entries[5].entries[5].entries[0]; $.variantrule[215].entries[5].entries[6].type; $.variantrule[215].entries[5].entries[6].name; $.variantrule[215].entries[5].entries[6].entries[0]; $.variantrule[215].entries[5].entries[6].entries[1]; $.variantrule[215].entries[5].entries[7].type; $.variantrule[215].entries[5].entries[7].name; $.variantrule[215].entries[5].entries[7].entries[0]; $.variantrule[215].entries[5].entries[8].type; $.variantrule[215].entries[5].entries[8].name; $.variantrule[215].entries[5].entries[8].entries[0]; $.variantrule[215].entries[5].entries[8].entries[1]. The remaining effects depend on resource/stateful action procedures not supported as an independent package by the Rule schema.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Survivor Talents",
+  "entries": [
+    "At 2nd level and again at 3rd level, a survivor gains their choice of one of the following talents. A survivor can't gain the same talent more than once, unless a talent's description says otherwise. If a talent has a prerequisite, the character must meet it to gain the talent.",
+    {
+      "type": "entries",
+      "name": "Adrenaline Surge",
+      "entries": [
+        "At the start of your turn, you can choose one creature you can see within 30 feet of you. Until the start of your next turn, you are {@condition frightened} of that creature and your walking speed is doubled."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Desperate Scream",
+      "entries": [
+        "Whenever you make a saving throw, you can summon your desire to live into a desperate scream. You gain advantage on the saving throw, and the scream is audible up to 100 feet away. You can scream in this way twice, and you regain all expended uses when you finish a long rest.",
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "variantrules/VRGR/112-04-008.survivors.webp"
+          },
+          "width": 850,
+          "height": 1324,
+          "title": "Survivors are everyday people thrown into terrifying situations",
+          "credit": "Nikki Dawes"
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Divine Guidance",
+      "entries": [
+        "{@i Prerequisite: Disciple survivor}",
+        "You learn one 1st-level spell of your choice from the cleric spell list. It must be a spell you don't already know. You can cast the spell once with this talent, and you regain the ability to do so when you finish a long rest.",
+        "You can select this talent more than once. Each time you do so, you must choose a different spell."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Magical Talent",
+      "entries": [
+        "{@i Prerequisite: Apprentice survivor}",
+        "You learn one 1st-level spell of your choice from the wizard spell list. It must be a spell you don't already know. You can cast the spell once with this talent, and you regain the ability to do so when you finish a long rest.",
+        "You can select this talent more than once. Each time you do so, you must choose a different spell."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Resilience",
+      "entries": [
+        "Choose one ability score. You gain proficiency in saving throws using the chosen ability."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Sacrificing Shield",
+      "entries": [
+        "{@i Prerequisite: Squire survivor}",
+        "When a creature you can see makes an attack against a target you can see within 5 feet of you, you can use your reaction to become the target of the attack instead. If you are wielding a shield, you can reduce the damage by {@dice 1d10}. Once you use this talent, you can't do so again until you finish a short or long rest."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Skillful",
+      "entries": [
+        "You gain proficiency in two skills of your choice."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Slip Away",
+      "entries": [
+        "{@i Prerequisite: Sneak survivor}",
+        "When a creature you can see within 5 feet of you hits you with an attack roll and deals damage to you with the attack, you can use your reaction to give yourself resistance against that damage. You can then move up to half your speed without provoking opportunity attacks. Once you use this talent, you can't do so again until you finish a short or long rest."
+      ]
+    }
+  ]
+}
+```
+
+### rule:vrgr:survivors — entry 6
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[215]`
+- Source entry path: `$.variantrule[215].entries[6]`
+- Canonical output: `rule/vrgr-survivors.json`
+- OMITTED: Apprentice, Sneak, Disciple, and Squire stat block identities. Nested paths covered: $.variantrule[215].entries[6].type; $.variantrule[215].entries[6].items[0]; $.variantrule[215].entries[6].items[1]; $.variantrule[215].entries[6].items[2]; $.variantrule[215].entries[6].items[3]. The referenced survivor stat blocks are Creature-domain outputs.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+{
+  "type": "list",
+  "columns": 3,
+  "items": [
+    "{@creature Apprentice|HoL}",
+    "{@creature Sneak|HoL}",
+    "{@creature Disciple|HoL}",
+    "{@creature Squire|HoL}"
+  ]
+}
+```
+
+### rule:xge:spellcasting — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[209]`
+- Source entry path: `$.variantrule[209].entries[0]`
+- Canonical output: `rule/xge-spellcasting.json`
+- OMITTED: Section introduction to spellcasting clarifications. This is editorial context.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"This section expands on the spellcasting rules presented in the {@book Player's Handbook|PHB|10} and the {@book Dungeon Master's Guide|DMG}, providing clarifications and new options."
+```
+
+### rule:xge:spellcasting — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[209]`
+- Source entry path: `$.variantrule[209].entries[1]`
+- Canonical output: `rule/xge-spellcasting.json`
+- OMITTED: Perceptible spell effects, verbal/somatic/material component observations, and imperceptible casting/source identification. Nested paths covered: $.variantrule[209].entries[1].type; $.variantrule[209].entries[1].name; $.variantrule[209].entries[1].entries[0]; $.variantrule[209].entries[1].entries[1]; $.variantrule[209].entries[1].entries[2]. Spell observability and sensory state are skipped under R-GAP-35.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Perceiving a Caster at Work",
+  "entries": [
+    "Many spells create obvious effects: explosions of fire, walls of ice, teleportation, and the like. Other spells, such as charm person, display no visible, audible, or otherwise perceptible sign of their effects, and could easily go unnoticed by someone unaffected by them. As noted in the {@book Player's Handbook|PHB}, you normally don't know that a spell has been cast unless the spell produces a noticeable effect.",
+    "But what about the act of casting a spell? Is it possible for someone to perceive that a spell is being cast in their presence? To be perceptible, the casting of a spell must involve a verbal, somatic, or material component. The form of a material component doesn't matter for the purposes of perception, whether it's an object specified in the spell's description, a component pouch, or a spellcasting focus.",
+    "If the need for a spell's components has been removed by a special ability, such as the sorcerer's Subtle Spell feature or the Innate Spellcasting trait possessed by many creatures, the casting of the spell is imperceptible. If an imperceptible casting produces a perceptible effect, it's normally impossible to determine who cast the spell in the absence of other evidence."
+  ]
+}
+```
+
+### rule:xge:spellcasting — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[209]`
+- Source entry path: `$.variantrule[209].entries[2]`
+- Canonical output: `rule/xge-spellcasting.json`
+- OMITTED: Choose a reaction while casting or an action after casting, and advantage when the spell is cast as a class spell by the character's own class. Nested paths covered: $.variantrule[209].entries[2].type; $.variantrule[209].entries[2].name; $.variantrule[209].entries[2].entries[0]; $.variantrule[209].entries[2].entries[1]; $.variantrule[209].entries[2].entries[2]. The schema cannot express action/reaction alternatives or the class identity match condition.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Identifying a Spell",
+  "entries": [
+    "Sometimes a character wants to identify a spell that someone else is casting or that was already cast. To do so, a character can use their reaction to identify a spell as it's being cast, or they can use an action on their turn to identify a spell by its effect after it is cast.",
+    "If the character perceived the casting, the spell's effect, or both, the character can make an Intelligence ({@skill Arcana}) check with their reaction or action. The DC equals 15 + the spell's level. If the spell is cast as a class spell and the character is a member of that class, the check is made with advantage. For example, if the spellcaster casts a spell as a cleric, another cleric has advantage on the check to identify the spell. Some spells aren't associated with any class when they're cast, such as when a monster uses its Innate Spellcasting trait.",
+    "This Intelligence ({@skill Arcana}) check represents the fact that identifying a spell requires a quick mind and familiarity with the theory and practice of casting. This is true even for a character whose spellcasting ability is Wisdom or Charisma. Being able to cast spells doesn't by itself make you adept at deducing exactly what others are doing when they cast their spells."
+  ]
+}
+```
+
+### rule:xge:spellcasting — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[209]`
+- Source entry path: `$.variantrule[209].entries[3]`
+- Canonical output: `rule/xge-spellcasting.json`
+- OMITTED: Invalid spell-target effects, slot expenditure, apparent successful save, and observable no-effect outcomes. Nested paths covered: $.variantrule[209].entries[3].type; $.variantrule[209].entries[3].name; $.variantrule[209].entries[3].entries[0]; $.variantrule[209].entries[3].entries[1]. Invalid target and spell-slot resolution are skipped under R-GAP-35.; cause: `OUT_OF_APPROVED_SCOPE`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Invalid Spell Targets",
+  "entries": [
+    "A spell specifies what a caster can target with it: any type of creature, a creature of a certain type (humanoid or beast, for instance), an object, an area, the caster, or something else. But what happens if a spell targets something that isn't a valid target? For example, someone might cast {@spell charm person} on a creature believed to be a humanoid, not knowing that the target is in fact a vampire. If this issue comes up, handle it using the following rule.",
+    "If you cast a spell on someone or something that can't be affected by the spell, nothing happens to that target, but if you used a spell slot to cast the spell, the slot is still expended. If the spell normally has no effect on a target that succeeds on a saving throw, the invalid target appears to have succeeded on its saving throw, even though it didn't attempt one (giving no hint that the creature is in fact an invalid target). Otherwise, you perceive that the spell did nothing to the target."
+  ]
+}
+```
+
+### rule:xge:spellcasting — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[209]`
+- Source entry path: `$.variantrule[209].entries[4]`
+- Canonical output: `rule/xge-spellcasting.json`
+- OMITTED: Grid origin intersections and the template/token procedures for covered squares, circles, cones, and lines. Nested paths covered: $.variantrule[209].entries[4].type; $.variantrule[209].entries[4].name; $.variantrule[209].entries[4].entries[0]; $.variantrule[209].entries[4].entries[1]; $.variantrule[209].entries[4].entries[2]; $.variantrule[209].entries[4].entries[3].type; $.variantrule[209].entries[4].entries[3].name; $.variantrule[209].entries[4].entries[3].entries[0]; $.variantrule[209].entries[4].entries[3].entries[1].type; $.variantrule[209].entries[4].entries[3].entries[1].name; $.variantrule[209].entries[4].entries[3].entries[1].entries[0]; $.variantrule[209].entries[4].entries[3].entries[2].type; $.variantrule[209].entries[4].entries[3].entries[2].name; $.variantrule[209].entries[4].entries[3].entries[2].entries[0]; $.variantrule[209].entries[4].entries[3].entries[2].entries[1]; $.variantrule[209].entries[4].entries[3].entries[2].entries[2]; $.variantrule[209].entries[4].entries[3].entries[2].entries[3]; $.variantrule[209].entries[4].entries[3].entries[2].entries[4].type; $.variantrule[209].entries[4].entries[3].entries[2].entries[4].href.type; $.variantrule[209].entries[4].entries[3].entries[2].entries[4].href.path; $.variantrule[209].entries[4].entries[4].type; $.variantrule[209].entries[4].entries[4].name; $.variantrule[209].entries[4].entries[4].entries[0]; $.variantrule[209].entries[4].entries[4].entries[1]; $.variantrule[209].entries[4].entries[4].entries[2].type; $.variantrule[209].entries[4].entries[4].entries[2].name; $.variantrule[209].entries[4].entries[4].entries[2].entries[0]; $.variantrule[209].entries[4].entries[4].entries[2].entries[1]; $.variantrule[209].entries[4].entries[4].entries[2].entries[2].type; $.variantrule[209].entries[4].entries[4].entries[2].entries[2].href.type; $.variantrule[209].entries[4].entries[4].entries[2].entries[2].href.path; $.variantrule[209].entries[4].entries[4].entries[2].entries[3].type; $.variantrule[209].entries[4].entries[4].entries[2].entries[3].href.type; $.variantrule[209].entries[4].entries[4].entries[2].entries[3].href.path; $.variantrule[209].entries[4].entries[4].entries[3].type; $.variantrule[209].entries[4].entries[4].entries[3].name; $.variantrule[209].entries[4].entries[4].entries[3].entries[0]; $.variantrule[209].entries[4].entries[4].entries[4].type; $.variantrule[209].entries[4].entries[4].entries[4].name; $.variantrule[209].entries[4].entries[4].entries[4].entries[0]; $.variantrule[209].entries[4].entries[4].entries[4].entries[1]; $.variantrule[209].entries[4].entries[4].entries[5].type; $.variantrule[209].entries[4].entries[4].entries[5].name; $.variantrule[209].entries[4].entries[4].entries[5].entries[0]. Approved area geometry structures do not model token/template placement or square inclusion resolution.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Areas of Effect on a Grid",
+  "entries": [
+    "The Dungeon Master's Guide includes the following short rule for using areas of effect on a grid.",
+    "Choose an intersection of squares as the point of origin of an area of effect, then follow the rules for that kind of area as normal (see the \"{@book Areas of Effect|PHB|10|Areas of Effect}\" section in chapter 10 of the {@book Player's Handbook|PHB}). If an area of effect is circular and covers at least half a square, it affects that square.",
+    "That rule works, but it can require a fair amount of on-the-spot adjudication. This section offers two alternatives for determining the exact location of an area: the template method and the token method. Both of these methods assume you're using a grid and miniatures of some sort. Because these methods can yield different results for the number of squares in a given area, it's not recommended that they be combined at the table—choose whichever method you and your players find easier or more intuitive.",
+    {
+      "type": "entries",
+      "name": "Template Method",
+      "entries": [
+        "The template method uses two-dimensional shapes that represent different areas of effect. The aim of the method is to accurately portray the length and width of each area on the grid and to leave little doubt about which creatures are affected by it. You'll need to make these templates or find premade ones.",
+        {
+          "type": "entries",
+          "name": "Making a Template",
+          "entries": [
+            "Making a template is simple. Get a piece of paper or card stock, and cut it in the shape of the area of effect you're using. Every 5 feet of the area equals 1 inch of the template's size. For example, the 20-foot-radius sphere of the {@spell fireball} spell, which has a 40-foot diameter, would translate into a circular template with an 8-inch diameter."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Using a Template",
+          "entries": [
+            "To use an area-of-effect template, apply it to the grid. If the terrain is flat, you can lay it on the surface; otherwise, hold the template above the surface and take note of which squares it covers or partially covers. If any part of a square is under the template, that square is included in the area of effect. If a creature's miniature is in an affected square, that creature is in the area. Being adjacent to the edge of the template isn't enough for a square to be included in the area of effect; the square must be entirely or partly covered by the template.",
+            "You can also use this method without a grid. If you do so, a creature is included in an area of effect if any part of the miniature's base is overlapped by the template.",
+            "When you place a template, follow all the rules in the {@book Player's Handbook|PHB} for placing the associated area of effect. If an area of effect, such as a cone or a line, originates from a spellcaster, the template should extend out from the caster and be positioned however the caster likes within the bounds of the rules.",
+            "Diagrams 2.1 and 2.2 show the template method in action.",
+            {
+              "type": "image",
+              "href": {
+                "type": "internal",
+                "path": "book/XGE/001.webp"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Token Method",
+      "entries": [
+        "The token method is meant to make areas of effect tactile and fun. To use this method, grab some dice or other tokens, which you're going to use to represent your areas of effect.",
+        "Rather than faithfully representing the shapes of the different areas of effect, this method gives you a way to create square-edged versions of them on a grid easily, as described in the following subsections.",
+        {
+          "type": "entries",
+          "name": "Using Tokens",
+          "entries": [
+            "Every 5-foot square of an area of effect becomes a die or other token that you place on the grid. Each token goes inside a square, not at an intersection of lines. If an area's token is in a square, that square is included in the area of effect. It's that simple.",
+            "Diagrams 2.3 through 2.6 show this method in action, using dice as the tokens.",
+            {
+              "type": "image",
+              "href": {
+                "type": "internal",
+                "path": "book/XGE/002.webp"
+              }
+            },
+            {
+              "type": "image",
+              "href": {
+                "type": "internal",
+                "path": "book/XGE/003.webp"
+              }
+            }
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Circles",
+          "entries": [
+            "This method depicts everything using squares, and a circular area of effect becomes square in it, whether the area is a sphere, cylinder, or radius. For instance, the 10-foot radius of flame strike, which has a diameter of 20 feet, is expressed as a square that is 20 feet on a side, as shown in diagram 2.3. Diagram 2.4 shows that area with {@quickref Cover||3||total cover} inside it."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Cones",
+          "entries": [
+            "A cone is represented by rows of tokens on the grid, extending from the cone's point of origin. In the rows, the squares are adjoining side by side or corner to corner, as shown in diagram 2.5. To determine the number of rows a cone contains, divide its length by 5. For example, a 30-foot cone contains six rows.",
+            "Here's how to create the rows. Starting with a square adjacent to the cone's point of origin, place one token. The square can be orthogonally or diagonally adjacent to the point of origin. In every row beyond that one, place as many tokens as you placed in the previous row, plus one more token. Place this row's tokens so that their squares each share a side with a square in the previous row. If the cone is orthogonally adjacent to the point of origin, you'll have one more token to place in the row; place it on one end or the other of the row you just created (you don't have to pick the side chosen in diagram 2.5). Keep placing tokens in this way until you've created all of the cone's rows."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Lines",
+          "entries": [
+            "A line can extend from its source orthogonally or diagonally, as shown in diagram 2.6."
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:xphb:armor-training — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[13]`
+- Source entry path: `$.variantrule[13].entries[0]`
+- Canonical output: `rule/xphb-armor-training.json`
+- OMITTED: Untrained armor and shield prerequisites and their spellcasting/AC consequences. The applicable equipment categories and character proficiency state have no canonical target in this Rule conversion.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+"Armor training allows you to use armor of a certain category without the following drawbacks. If you wear {@filter Light|items|type=Light Armor}, {@filter Medium|items|type=Medium Armor}, or {@filter Heavy|items|type=Heavy Armor} armor and lack training with it, you have {@variantrule Disadvantage|XPHB} on any {@variantrule D20 Test|XPHB} that involves Strength or Dexterity, and you can't cast spells. If you use a {@item Shield|XPHB} and lack training with it, you don't gain its AC bonus."
+```
+
+### rule:xphb:cantrip — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[23]`
+- Source entry path: `$.variantrule[23].entries[0]`
+- Canonical output: `rule/xphb-cantrip.json`
+- OMITTED: Structured level-zero and no-slot fields. No approved Rule property represents those Spell fields.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A cantrip is a level 0 spell, which is cast without a spell slot."
+```
+
+### rule:xphb:curses — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[40]`
+- Source entry path: `$.variantrule[40].entries[0]`
+- Canonical output: `rule/xphb-curses.json`
+- OMITTED: Effect-defined curse behavior and removal by other explicit magic beyond the two referenced XPHB spells. The Rule schema has no effect-defined curse state or generic magic-based termination mechanic.; cause: `SCHEMA_UNSUPPORTED`
+
+
+Complete original source entry:
+
+```json
+"Some game effects curse a creature or an object. The effect that confers a curse defines what the curse does. Curses can be removed by the {@spell Remove Curse|XPHB} and {@spell Greater Restoration|XPHB} spells or other magic that explicitly ends curses."
+```
+
+### rule:xphb:illusions — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[132]`
+- Source entry path: `$.variantrule[132].entries[0]`
+- Canonical output: `rule/xphb-illusions.json`
+- OMITTED: Illusions deceive effect-defined senses or mental faculties. No approved Rule mechanic models sensory deception or effect-specific illusion behavior.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Spells and other effects sometimes create magical illusions. Such an effect defines what the illusion does and which senses or mental faculties it deceives."
+```
+
+### rule:xphb:illusions — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[132]`
+- Source entry path: `$.variantrule[132].entries[1]`
+- Canonical output: `rule/xphb-illusions.json`
+- OMITTED: Illusions are insubstantial and weightless while appearing to respond to environmental effects. The schema has no illusion mass/physical-state or environment-response model.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"If an illusion manifests in space, the illusion is insubstantial and weightless, yet it seems to be affected by the environment as if the illusion were real unless the effect that created it specifies otherwise. For example, a visual illusion of a creature casts shadows and reflections, and wind appears to affect the illusory creature. Similarly, an audible illusion echoes in an echoey space."
+```
+
+### rule:xphb:magical-effect — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[150]`
+- Source entry path: `$.variantrule[150].entries[0]`
+- Canonical output: `rule/xphb-magical-effect.json`
+- OMITTED: Magical-effect source classification by spell, magic item, or rule label. A generic MAGIC component would not encode the three source predicates faithfully.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"An effect is magical if it is created by a spell, a magic item, or a phenomenon that a rule labels as magical."
+```
+
+### rule:xphb:possession — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[174]`
+- Source entry path: `$.variantrule[174].entries[0]`
+- Canonical output: `rule/xphb-possession.json`
+- OMITTED: Possession state and operation as defined by the possessing effect. The Rule schema has no effect-defined possession state or prevention/termination procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+
+Complete original source entry:
+
+```json
+"Some effects cause a creature to be possessed by another creature or entity. A possessing effect defines how the possession operates. Possession can be prevented by the {@spell Protection from Evil and Good|XPHB} spell and ended by the {@spell Dispel Evil and Good|XPHB} spell."
+```
+
+### rule:xphb:ritual — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[184]`
+- Source entry path: `$.variantrule[184].entries[0]`
+- Canonical output: `rule/xphb-ritual.json`
+- OMITTED: Cast a prepared ritual-tagged Spell as a Ritual: 10 extra minutes, no slot, and no higher-level casting. The casting-time and spell-resource contracts do not express this combined exception.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"If you have a spell prepared that has the Ritual tag, you can cast that spell as a Ritual. The Ritual version of a spell takes 10 minutes longer to cast than normal. It also doesn't expend a spell slot, which means the ritual version of a spell can't be cast at a higher level."
+```
+
+### rule:xphb:shape-shifting — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[189]`
+- Source entry path: `$.variantrule[189].entries[0]`
+- Canonical output: `rule/xphb-shape-shifting.json`
+- OMITTED: Carryover of spells/curses and default reversion to true form on death. No component models state carryover or transformation reversion.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"If an effect, such as Wild Shape or the {@spell Polymorph|XPHB} spell, lets you shape-shift, its description specifies what happens to you. Unless that description says otherwise, any ongoing effects on you—{@variantrule Condition|XPHB|conditions}, spells, curses, and the like—carry over from one form to the other. You revert to your true form if you die."
+```
+
+### rule:xphb:spellcasting-focus — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[210]`
+- Source entry path: `$.variantrule[210].entries[0]`
+- Canonical output: `rule/xphb-spellcasting-focus.json`
+- OMITTED: Focus object substitution for eligible Material components and class-specific focus types. The source depends on Equipment and Class identities and Spell component data unavailable in the Rule contract.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+"A Spellcasting Focus is an object that certain creatures can use in place of a spell's Material components if those materials aren't consumed by the spell and don't have a cost specified. Some classes allow its members to use certain types of Spellcasting Focuses."
+```
+
+### rule:xphb:telepathy — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[219]`
+- Source entry path: `$.variantrule[219].entries[0]`
+- Canonical output: `rule/xphb-telepathy.json`
+- OMITTED: Definition of mental communication and language understanding requirements. The schema has no telepathic communication or language-comprehension rule.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Telepathy is a magical ability that allows a creature to communicate mentally with another creature within a specified range. Unless a rule states otherwise, the contacted creature doesn't need to share a language with the telepath to understand this communication, but the contacted creature must be able to understand at least one language or be telepathic itself to understand."
+```
+
+### rule:xphb:telepathy — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[219]`
+- Source entry path: `$.variantrule[219].entries[1]`
+- Canonical output: `rule/xphb-telepathy.json`
+- OMITTED: Range and contact-state start/end, visibility independence, and range/other-target break conditions. The schema has no telepathic contact state or range resolution.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A telepath doesn't need to see a contacted creature, and the telepath can start or end the telepathic contact at any time (no action required). Telepathic contact can't be initiated and is immediately broken if either the telepath or the other creature has the {@condition Incapacitated|XPHB} condition. Telepathic contact is also broken if the contacted creature is no longer within the telepathy's range or if the telepath contacts a different creature within range."
+```
+
+### rule:xphb:telepathy — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[219]`
+- Source entry path: `$.variantrule[219].entries[2]`
+- Canonical output: `rule/xphb-telepathy.json`
+- OMITTED: Nontelepath recipients may receive but cannot initiate, then can respond during the established contact. No approved mechanic models asymmetric message initiation and reply.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A creature without telepathy can receive telepathic messages but can't initiate a telepathic conversation. Once a telepathic conversation starts, the non-telepath can communicate mentally to the telepath until the telepathic connection ends."
+```
+
+### rule:dmg:downtime-activity-building-a-stronghold — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[57]`
+- Source entry path: `$.variantrule[57].entries[0]`
+- Canonical output: `rule/dmg-downtime-activity-building-a-stronghold.json`
+- OMITTED: Narrative setup for between-adventure stronghold construction. Context only; the operative construction procedure is omitted under skipped R-GAP-13.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"A character can spend time between adventures building a stronghold. Before work can begin, the character must acquire a plot of land. If the estate lies within a kingdom or similar domain, the character will need a royal charter (a legal document granting permission to oversee the estate in the name of the crown), a land grant (a legal document bequeathing custody of the land to the character for as long as he or she remains loyal to the crown), or a deed (a legal document that serves as proof of ownership). Land can also be acquired by inheritance or other means."
+```
+
+### rule:dmg:downtime-activity-building-a-stronghold — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[57]`
+- Source entry path: `$.variantrule[57].entries[1]`
+- Canonical output: `rule/dmg-downtime-activity-building-a-stronghold.json`
+- OMITTED: Land acquisition requirements and price ranges. The Rule schema has no land ownership or purchase procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Royal charters and land grants are usually given by the crown as a reward for faithful service, although they can also be bought. Deeds can be bought or inherited. A small estate might sell for as little as 100 gp or as much as 1,000 gp. A large estate might cost 5,000 gp or more, if it can be bought at all."
+```
+
+### rule:dmg:downtime-activity-building-a-stronghold — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[57]`
+- Source entry path: `$.variantrule[57].entries[2]`
+- Canonical output: `rule/dmg-downtime-activity-building-a-stronghold.json`
+- OMITTED: Materials and labor, construction table, and three-for-one delay while absent. The cost/time alternatives and absence multiplier require a construction procedure and table model absent from the approved schema.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Once the estate is secured, a character needs access to building materials and laborers. The Building a Stronghold table shows the cost of building the stronghold (including materials and labor) and the amount of time it takes, provided that the character is using downtime to oversee construction. Work can continue while the character is away, but each day the character is away adds 3 days to the construction time."
+```
+
+### rule:dmg:downtime-activity-building-a-stronghold — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[57]`
+- Source entry path: `$.variantrule[57].entries[3]`
+- Canonical output: `rule/dmg-downtime-activity-building-a-stronghold.json`
+- OMITTED: Stronghold construction cost and duration alternatives table. Nested paths covered: $.variantrule[57].entries[3].type; $.variantrule[57].entries[3].caption; $.variantrule[57].entries[3].colLabels[0]; $.variantrule[57].entries[3].colLabels[1]; $.variantrule[57].entries[3].colLabels[2]; $.variantrule[57].entries[3].colStyles[0]; $.variantrule[57].entries[3].colStyles[1]; $.variantrule[57].entries[3].colStyles[2]; $.variantrule[57].entries[3].rows[0][0]; $.variantrule[57].entries[3].rows[0][1]; $.variantrule[57].entries[3].rows[0][2]; $.variantrule[57].entries[3].rows[1][0]; $.variantrule[57].entries[3].rows[1][1]; $.variantrule[57].entries[3].rows[1][2]; $.variantrule[57].entries[3].rows[2][0]; $.variantrule[57].entries[3].rows[2][1]; $.variantrule[57].entries[3].rows[2][2]; $.variantrule[57].entries[3].rows[3][0]; $.variantrule[57].entries[3].rows[3][1]; $.variantrule[57].entries[3].rows[3][2]; $.variantrule[57].entries[3].rows[4][0]; $.variantrule[57].entries[3].rows[4][1]; $.variantrule[57].entries[3].rows[4][2]; $.variantrule[57].entries[3].rows[5][0]; $.variantrule[57].entries[3].rows[5][1]; $.variantrule[57].entries[3].rows[5][2]; $.variantrule[57].entries[3].rows[6][0]; $.variantrule[57].entries[3].rows[6][1]; $.variantrule[57].entries[3].rows[6][2]; $.variantrule[57].entries[3].rows[7][0]; $.variantrule[57].entries[3].rows[7][1]; $.variantrule[57].entries[3].rows[7][2]; $.variantrule[57].entries[3].rows[8][0]; $.variantrule[57].entries[3].rows[8][1]; $.variantrule[57].entries[3].rows[8][2]. The approved Rule schema cannot express the table's correlated costs and durations.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Building a Stronghold",
+  "colLabels": [
+    "Stronghold",
+    "Construction Cost",
+    "Construction Time"
+  ],
+  "colStyles": [
+    "col-4",
+    "col-4 text-right",
+    "col-4 text-right"
+  ],
+  "rows": [
+    [
+      "Abbey",
+      "50,000 gp",
+      "400 days"
+    ],
+    [
+      "Guildhall, town or city",
+      "5,000 gp",
+      "60 days"
+    ],
+    [
+      "Keep or small castle",
+      "50,000 gp",
+      "400 days"
+    ],
+    [
+      "Noble estate with manor",
+      "25,000 gp",
+      "150 days"
+    ],
+    [
+      "Outpost or fort",
+      "15,000 gp",
+      "100 days"
+    ],
+    [
+      "Palace or large castle",
+      "500,000 gp",
+      "1,200 days"
+    ],
+    [
+      "Temple",
+      "50,000 gp",
+      "400 days"
+    ],
+    [
+      "Tower, fortified",
+      "15,000 gp",
+      "100 days"
+    ],
+    [
+      "Trading post",
+      "5,000 gp",
+      "60 days"
+    ]
+  ]
+}
+```
+
+### rule:dmg:downtime-activity-carousing — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[59]`
+- Source entry path: `$.variantrule[59].entries[0]`
+- Canonical output: `rule/dmg-downtime-activity-carousing.json`
+- OMITTED: Examples of carousing activities. This is illustrative context; the activity's cost and resolution procedure are omitted under R-GAP-13.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Characters can spend their downtime engaged in a variety of hedonistic activities such as attending parties, binge drinking, gambling, or anything else that helps them cope with the perils they face on their adventures."
+```
+
+### rule:dmg:downtime-activity-carousing — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[59]`
+- Source entry path: `$.variantrule[59].entries[1]`
+- Canonical output: `rule/dmg-downtime-activity-carousing.json`
+- OMITTED: Wealthy lifestyle cost and percentile roll plus character level used to select an outcome. The downtime schema has no lifestyle cost, percentile table, or level modifier representation.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A carousing character spends money as though maintaining a wealthy lifestyle (see chapter 5, \"{@book Equipment|PHB|5|Lifestyle Expenses},\" of the {@book Player's Handbook|PHB}). At the end of the period spent carousing, the player rolls percentile dice and adds the character's level, then compares the total to the Carousing table to determine what happens to the character, or you choose."
+```
+
+### rule:dmg:downtime-activity-carousing — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[59]`
+- Source entry path: `$.variantrule[59].entries[2]`
+- Canonical output: `rule/dmg-downtime-activity-carousing.json`
+- OMITTED: Carousing outcome table and its results. Nested paths covered: $.variantrule[59].entries[2].type; $.variantrule[59].entries[2].caption; $.variantrule[59].entries[2].colLabels[0]; $.variantrule[59].entries[2].colLabels[1]; $.variantrule[59].entries[2].colStyles[0]; $.variantrule[59].entries[2].colStyles[1]; $.variantrule[59].entries[2].rows[0][0]; $.variantrule[59].entries[2].rows[0][1]; $.variantrule[59].entries[2].rows[1][0]; $.variantrule[59].entries[2].rows[1][1]; $.variantrule[59].entries[2].rows[2][0]; $.variantrule[59].entries[2].rows[2][1]; $.variantrule[59].entries[2].rows[3][0]; $.variantrule[59].entries[2].rows[3][1]; $.variantrule[59].entries[2].rows[4][0]; $.variantrule[59].entries[2].rows[4][1]; $.variantrule[59].entries[2].rows[5][0]; $.variantrule[59].entries[2].rows[5][1]; $.variantrule[59].entries[2].rows[6][0]; $.variantrule[59].entries[2].rows[6][1]. The outcome table contains conditional consequences and resource changes unsupported by Rule v1.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Carousing",
+  "colLabels": [
+    "d100 + Level",
+    "Result"
+  ],
+  "colStyles": [
+    "col-2 text-center",
+    "col-10"
+  ],
+  "rows": [
+    [
+      "01-10",
+      "You are jailed for {@dice 1d4} days at the end of the downtime period on charges of disorderly conduct and disturbing the peace. You can pay a fine of 10 gp to avoid jail time, or you can try to resist arrest."
+    ],
+    [
+      "11-20",
+      "You regain consciousness in a strange place with no memory of how you got there, and you have been robbed of {@dice 3d6 × 5} gp."
+    ],
+    [
+      "21-30",
+      "You make an enemy. This person, business, or organization is now hostile to you. The DM determines the offended party. You decide how you offended them."
+    ],
+    [
+      "31-40",
+      "You are caught up in a whirlwind romance. Roll a {@dice d20}. On a 1–5, the romance ends badly. On a 6–10, the romance ends amicably. On an 11–20, the romance is ongoing. You determine the identity of the love interest, subject to your DM's approval. If the romance ends badly, you might gain a new flaw. If it ends well or is ongoing, your new love interest might represent a new bond."
+    ],
+    [
+      "41-80",
+      "You earn modest winnings from gambling and recuperate your lifestyle expenses for the time spent carousing."
+    ],
+    [
+      "81-90",
+      "You earn modest winnings from gambling. You recuperate your lifestyle expenses for the time spent carousing and gain {@dice 1d20 × 4} gp."
+    ],
+    [
+      "91-100",
+      "You make a small fortune gambling. You recuperate your lifestyle expenses for the time spent carousing and gain {@dice 4d6 × 10} gp. Your carousing becomes the stuff of local legend."
+    ]
+  ]
+}
+```
+
+### rule:dmg:downtime-activity-gaining-renown — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[65]`
+- Source entry path: `$.variantrule[65].entries[0]`
+- Canonical output: `rule/dmg-downtime-activity-gaining-renown.json`
+- OMITTED: Minor tasks, socializing, and the days-equal-current-Renown-times-ten progression formula. Rule v1 has no score-dependent downtime duration or score-increment procedure; detailed downtime mechanics remain skipped under R-GAP-13.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A character can spend downtime improving his or her renown within a particular organization (see \"Renown\" in chapter 1). Between adventures, a character undertakes minor tasks for the organization and socializes with its members. After pursuing these activities for a combined number of days equal to his or her current renown multiplied by 10, the character's renown increases by 1."
+```
+
+### rule:dmg:downtime-activity-performing-sacred-rites — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[67]`
+- Source entry path: `$.variantrule[67].entries[0]`
+- Canonical output: `rule/dmg-downtime-activity-performing-sacred-rites.json`
+- OMITTED: Character's religious activity in a temple and meditation between rites. Descriptive setup; the activity requirements are part of the deferred downtime procedure.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"A pious character can spend time between adventures performing sacred rites in a temple affiliated with a god he or she reveres. Between rites, the character spends time in meditation and prayer."
+```
+
+### rule:dmg:downtime-activity-performing-sacred-rites — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[67]`
+- Source entry path: `$.variantrule[67].entries[1]`
+- Canonical output: `rule/dmg-downtime-activity-performing-sacred-rites.json`
+- OMITTED: Priest-led rites and layperson assistance alternatives. Rule v1 has no role-based temple activity model.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A character who is a priest in the temple can lead these rites, which might include weddings, funerals, and ordinations. A layperson can offer sacrifices in a temple or assist a priest with a rite."
+```
+
+### rule:dmg:downtime-activity-performing-sacred-rites — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[67]`
+- Source entry path: `$.variantrule[67].entries[2]`
+- Canonical output: `rule/dmg-downtime-activity-performing-sacred-rites.json`
+- OMITTED: At least 10 days of rites and Inspiration at each day's start for 2d6 days. The Rule schema cannot express minimum downtime duration or a random, recurring reward cadence.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A character who spends at least 10 days performing sacred rites gains {@book inspiration|PHB|4|Inspiration} (described in chapter 4 of the {@book Player's Handbook|PHB}) at the start of each day for the next {@dice 2d6} days."
+```
+
+### rule:dmg:downtime-activity-running-a-business — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[75]`
+- Source entry path: `$.variantrule[75].entries[0]`
+- Canonical output: `rule/dmg-downtime-activity-running-a-business.json`
+- OMITTED: Examples and narrative context for owning a business. Context only; the business procedure is omitted under skipped R-GAP-13.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Adventurers can end up owning businesses that have nothing to do with delving into dungeons or saving the world. A character might inherit a smithy, or the party might be given a parcel of farmland or a tavern as a reward. If they hold on to the business, they might feel obliged to spend time between adventures maintaining the venture and making sure it runs smoothly."
+```
+
+### rule:dmg:downtime-activity-running-a-business — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[75]`
+- Source entry path: `$.variantrule[75].entries[1]`
+- Canonical output: `rule/dmg-downtime-activity-running-a-business.json`
+- OMITTED: Percentile roll plus days spent, capped at 30, used to select a business result. No business procedure or conditional percentile table exists in Rule v1.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A character rolls percentile dice and adds the number of days spent on this downtime activity (maximum 30), then compares the total to the Running a Business table to determine what happens."
+```
+
+### rule:dmg:downtime-activity-running-a-business — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[75]`
+- Source entry path: `$.variantrule[75].entries[2]`
+- Canonical output: `rule/dmg-downtime-activity-running-a-business.json`
+- OMITTED: Penalty to later rolls for each unpaid debt. The cumulative stateful penalty depends on the omitted business procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"If the character is required to pay a cost as a result of rolling on this table but fails to do so, the business begins to fail. For each unpaid debt incurred in this manner, the character takes a -10 penalty to subsequent rolls made on this table."
+```
+
+### rule:dmg:downtime-activity-running-a-business — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[75]`
+- Source entry path: `$.variantrule[75].entries[3]`
+- Canonical output: `rule/dmg-downtime-activity-running-a-business.json`
+- OMITTED: Business maintenance and profit outcome table. Nested paths covered: $.variantrule[75].entries[3].type; $.variantrule[75].entries[3].caption; $.variantrule[75].entries[3].colLabels[0]; $.variantrule[75].entries[3].colLabels[1]; $.variantrule[75].entries[3].colStyles[0]; $.variantrule[75].entries[3].colStyles[1]; $.variantrule[75].entries[3].rows[0][0]; $.variantrule[75].entries[3].rows[0][1]; $.variantrule[75].entries[3].rows[1][0]; $.variantrule[75].entries[3].rows[1][1]; $.variantrule[75].entries[3].rows[2][0]; $.variantrule[75].entries[3].rows[2][1]; $.variantrule[75].entries[3].rows[3][0]; $.variantrule[75].entries[3].rows[3][1]; $.variantrule[75].entries[3].rows[4][0]; $.variantrule[75].entries[3].rows[4][1]; $.variantrule[75].entries[3].rows[5][0]; $.variantrule[75].entries[3].rows[5][1]; $.variantrule[75].entries[3].rows[6][0]; $.variantrule[75].entries[3].rows[6][1]. The table's conditional costs and profits require an unsupported economy procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Running a Business",
+  "colLabels": [
+    "d100 + Days",
+    "Result"
+  ],
+  "colStyles": [
+    "col-2 text-center",
+    "col-10"
+  ],
+  "rows": [
+    [
+      "01-20",
+      "You must pay one and a half times the business's maintenance cost for each of the days."
+    ],
+    [
+      "21-30",
+      "You must pay the business's full maintenance cost for each of the days."
+    ],
+    [
+      "31-40",
+      "You must pay half the business's maintenance cost for each of the days. Profits cover the other half."
+    ],
+    [
+      "41-60",
+      "The business covers its own maintenance cost for each of the days."
+    ],
+    [
+      "61-80",
+      "The business covers its own maintenance cost for each of the days. It earns a profit of {@dice 1d6 × 5} gp."
+    ],
+    [
+      "81-90",
+      "The business covers its own maintenance cost for each of the days. It earns a profit of {@dice 2d8 × 5} gp."
+    ],
+    [
+      "91-100",
+      "The business covers its own maintenance cost for each of the days. It earns a profit of {@dice 3d10 × 5} gp."
+    ]
+  ]
+}
+```
+
+### rule:dmg:downtime-activity-selling-magic-items — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[78]`
+- Source entry path: `$.variantrule[78].entries[0]`
+- Canonical output: `rule/dmg-downtime-activity-selling-magic-items.json`
+- OMITTED: Context explaining why adventurers may sell magic items. Introductory context only.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Few people can afford to buy a magic item, and fewer still know how to find one. Adventurers are exceptional in this regard due to the nature of their profession."
+```
+
+### rule:dmg:downtime-activity-selling-magic-items — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[78]`
+- Source entry path: `$.variantrule[78].entries[1]`
+- Canonical output: `rule/dmg-downtime-activity-selling-magic-items.json`
+- OMITTED: Rarity and location eligibility, legendary/artifact exclusion, and adventure alternative. The Rule schema cannot express the item eligibility and location restrictions.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A character who comes into possession of a common, uncommon, rare, or very rare magic item that he or she wants to sell can spend downtime searching for a buyer. This downtime activity can be performed only in a city or another location where one can find wealthy individuals interested in buying magic items. Legendary magic items and priceless artifacts can't be sold during downtime. Finding someone to buy such an item can be the substance of an adventure or quest."
+```
+
+### rule:dmg:downtime-activity-selling-magic-items — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[78]`
+- Source entry path: `$.variantrule[78].entries[2]`
+- Canonical output: `rule/dmg-downtime-activity-selling-magic-items.json`
+- OMITTED: Assistance advantage, failure after 10 days, and success duration by rarity. The schema cannot connect the check to advantage, conditional results, or rarity-based search duration.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"For each salable item, the character makes a {@dc 20} Intelligence ({@skill Investigation}) check to find buyers. Another character can use his or her downtime to assist with the search, granting advantage on the checks. On a failed check, no buyer for the item is found after a search that lasts 10 days. On a successful check, a buyer for the item is found after a number of days based on the item's rarity, as shown in the Salable Magic Item table."
+```
+
+### rule:dmg:downtime-activity-selling-magic-items — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[78]`
+- Source entry path: `$.variantrule[78].entries[3]`
+- Canonical output: `rule/dmg-downtime-activity-selling-magic-items.json`
+- OMITTED: Simultaneous checks for multiple items and resolution of combined search durations. This multi-item procedure is outside the approved Rule contract.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"A character can attempt to find buyers for multiple magic items at once. Although this requires multiple Intelligence ({@skill Investigation}) checks, the searches are occurring simultaneously, and the results of multiple failures or successes aren't added together. For example, if the character finds a buyer for a common magic item in 2 days and a buyer for an uncommon item in 5 days, but fails to find a buyer for a rare item up for grabs, the entire search takes 10 days."
+```
+
+### rule:dmg:downtime-activity-selling-magic-items — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[78]`
+- Source entry path: `$.variantrule[78].entries[4]`
+- Canonical output: `rule/dmg-downtime-activity-selling-magic-items.json`
+- OMITTED: Percentile roll modified by rarity plus Charisma (Persuasion) check to determine the offer. The schema cannot represent the combined roll or its table outcome.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"For each item a character wishes to sell, the player rolls percentile dice and consults the Selling a Magic Item table, applying a modifier based on the item's rarity, as shown in the Salable Magic Items table. The character also makes a Charisma ({@skill Persuasion}) check and adds that check's total to the roll. The subsequent total determines what a buyer offers to pay for the item."
+```
+
+### rule:dmg:downtime-activity-selling-magic-items — entry 5
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[78]`
+- Source entry path: `$.variantrule[78].entries[5]`
+- Canonical output: `rule/dmg-downtime-activity-selling-magic-items.json`
+- OMITTED: Buyer identity and possible legal complications. The source leaves buyer identity and whether a shady sale creates complications to the DM.; cause: `SOURCE_AMBIGUOUS`
+
+Complete original source entry:
+
+```json
+"You determine a buyer's identity. Buyers sometimes procure rare and very rare items through proxies to ensure that their identities remain unknown. If the buyer is shady, it's up to you whether the sale creates legal complications for the party later."
+```
+
+### rule:dmg:downtime-activity-selling-magic-items — entry 6
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[78]`
+- Source entry path: `$.variantrule[78].entries[6]`
+- Canonical output: `rule/dmg-downtime-activity-selling-magic-items.json`
+- OMITTED: Rarity-based base price, search duration, and percentile modifier table. Nested paths covered: $.variantrule[78].entries[6].type; $.variantrule[78].entries[6].caption; $.variantrule[78].entries[6].colLabels[0]; $.variantrule[78].entries[6].colLabels[1]; $.variantrule[78].entries[6].colLabels[2]; $.variantrule[78].entries[6].colLabels[3]; $.variantrule[78].entries[6].colStyles[0]; $.variantrule[78].entries[6].colStyles[1]; $.variantrule[78].entries[6].colStyles[2]; $.variantrule[78].entries[6].colStyles[3]; $.variantrule[78].entries[6].rows[0][0]; $.variantrule[78].entries[6].rows[0][1]; $.variantrule[78].entries[6].rows[0][2]; $.variantrule[78].entries[6].rows[0][3]; $.variantrule[78].entries[6].rows[1][0]; $.variantrule[78].entries[6].rows[1][1]; $.variantrule[78].entries[6].rows[1][2]; $.variantrule[78].entries[6].rows[1][3]; $.variantrule[78].entries[6].rows[2][0]; $.variantrule[78].entries[6].rows[2][1]; $.variantrule[78].entries[6].rows[2][2]; $.variantrule[78].entries[6].rows[2][3]; $.variantrule[78].entries[6].rows[3][0]; $.variantrule[78].entries[6].rows[3][1]; $.variantrule[78].entries[6].rows[3][2]; $.variantrule[78].entries[6].rows[3][3]; $.variantrule[78].entries[6].footnotes[0]. Rule v1 has no rarity-indexed correlated value table.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Salable Magic Items",
+  "colLabels": [
+    "Rarity",
+    "Base Price",
+    "Days to Find Buyer",
+    "d100 Roll Modifier*"
+  ],
+  "colStyles": [
+    "col-3",
+    "col-3 text-right",
+    "col-3 text-center",
+    "col-3 text-center"
+  ],
+  "rows": [
+    [
+      "Common",
+      "100 gp",
+      "{@dice 1d4}",
+      "+10"
+    ],
+    [
+      "Uncommon",
+      "500 gp",
+      "{@dice 1d6}",
+      "+0"
+    ],
+    [
+      "Rare",
+      "5,000 gp",
+      "{@dice 1d8}",
+      "-10"
+    ],
+    [
+      "Very rare",
+      "50,000 gp",
+      "{@dice 1d10}",
+      "-20"
+    ]
+  ],
+  "footnotes": [
+    "*Apply this modifier to rolls on the Selling a Magic Item table."
+  ]
+}
+```
+
+### rule:dmg:downtime-activity-selling-magic-items — entry 7
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[78]`
+- Source entry path: `$.variantrule[78].entries[7]`
+- Canonical output: `rule/dmg-downtime-activity-selling-magic-items.json`
+- OMITTED: Offer results and shady-buyer alternatives table. Nested paths covered: $.variantrule[78].entries[7].type; $.variantrule[78].entries[7].caption; $.variantrule[78].entries[7].colLabels[0]; $.variantrule[78].entries[7].colLabels[1]; $.variantrule[78].entries[7].colStyles[0]; $.variantrule[78].entries[7].colStyles[1]; $.variantrule[78].entries[7].rows[0][0]; $.variantrule[78].entries[7].rows[0][1]; $.variantrule[78].entries[7].rows[1][0]; $.variantrule[78].entries[7].rows[1][1]; $.variantrule[78].entries[7].rows[2][0]; $.variantrule[78].entries[7].rows[2][1]; $.variantrule[78].entries[7].rows[3][0]; $.variantrule[78].entries[7].rows[3][1]; $.variantrule[78].entries[7].rows[4][0]; $.variantrule[78].entries[7].rows[4][1]. Rule v1 has no conditional percentile outcome table.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Selling a Magic Item",
+  "colLabels": [
+    "d100 + Mod",
+    "You Find..."
+  ],
+  "colStyles": [
+    "col-2 text-center",
+    "col-10"
+  ],
+  "rows": [
+    [
+      "20 or lower",
+      "A buyer offering a tenth of the base price"
+    ],
+    [
+      "21-40",
+      "A buyer offering a quarter of the base price, and a shady buyer offering half the base price"
+    ],
+    [
+      "41-80",
+      "A buyer offering half the base price, and a shady buyer offering the full base price"
+    ],
+    [
+      "81-90",
+      "A buyer offering the full base price"
+    ],
+    [
+      "91 or higher",
+      "A shady buyer offering one and a half times the base price, no questions asked"
+    ]
+  ]
+}
+```
+
+### rule:dmg:downtime-activity-sowing-rumors — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[79]`
+- Source entry path: `$.variantrule[79].entries[0]`
+- Canonical output: `rule/dmg-downtime-activity-sowing-rumors.json`
+- OMITTED: Guidance on the character and qualities of an effective rumor. Narrative guidance rather than a structured check or outcome.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Swaying public opinion can be an effective way to bring down a villain or elevate a friend. Spreading rumors is an efficient, if underhanded, way to accomplish that goal. Well-placed rumors can increase the subject's standing in a community or embroil someone in scandal. A rumor needs to be simple, concrete, and hard to disprove. An effective rumor also has to be believable, playing off what people want to believe about the person in question."
+```
+
+### rule:dmg:downtime-activity-sowing-rumors — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[79]`
+- Source entry path: `$.variantrule[79].entries[1]`
+- Canonical output: `rule/dmg-downtime-activity-sowing-rumors.json`
+- OMITTED: Settlement-size-dependent duration, continuous activity, and interruption consequence. The Rule schema cannot express the settlement table or continuity requirement.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Sowing a rumor about an individual or organization requires a number of days depending on the size of the community, as shown in the Sowing Rumors table. In a town or city, the time spent must be continuous. If the character spreads a rumor for ten days, disappears on an adventure for another few days and then returns, the rumor fades away without the benefit of constant repetition."
+```
+
+### rule:dmg:downtime-activity-sowing-rumors — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[79]`
+- Source entry path: `$.variantrule[79].entries[2]`
+- Canonical output: `rule/dmg-downtime-activity-sowing-rumors.json`
+- OMITTED: Sowing Rumors settlement-size duration table. Nested paths covered: $.variantrule[79].entries[2].type; $.variantrule[79].entries[2].caption; $.variantrule[79].entries[2].colLabels[0]; $.variantrule[79].entries[2].colLabels[1]; $.variantrule[79].entries[2].colStyles[0]; $.variantrule[79].entries[2].colStyles[1]; $.variantrule[79].entries[2].rows[0][0]; $.variantrule[79].entries[2].rows[0][1]; $.variantrule[79].entries[2].rows[1][0]; $.variantrule[79].entries[2].rows[1][1]; $.variantrule[79].entries[2].rows[2][0]; $.variantrule[79].entries[2].rows[2][1]. The duration table is not representable by the approved downtime schema.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Sowing Rumors",
+  "colLabels": [
+    "Settlement Size",
+    "Time Required"
+  ],
+  "colStyles": [
+    "col-6 text-center",
+    "col-6 text-center"
+  ],
+  "rows": [
+    [
+      "Village",
+      "{@dice 2d6} days"
+    ],
+    [
+      "Town",
+      "{@dice 4d6} days"
+    ],
+    [
+      "City",
+      "{@dice 6d6} days"
+    ]
+  ]
+}
+```
+
+### rule:dmg:downtime-activity-sowing-rumors — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[79]`
+- Source entry path: `$.variantrule[79].entries[3]`
+- Canonical output: `rule/dmg-downtime-activity-sowing-rumors.json`
+- OMITTED: Daily expense, optional Deception or Persuasion skill, success attitude shift, and failure/retry effects. The contract supports the check but not its conditional attitude change, alternative skills, repeated-attempt restriction, or cost.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"The character must spend 1 gp per day to cover the cost of drinks, social appearances, and the like. At the end of the time spent sowing the rumor, the character must make a {@dc 15} Charisma ({@skill Deception} or {@skill Persuasion}) check. If the check succeeds, the community's prevailing attitude toward the subject shifts one step toward friendly or hostile, as the character wishes. If the check fails, the rumor gains no traction, and further attempts to propagate it fail."
+```
+
+### rule:dmg:downtime-activity-sowing-rumors — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[79]`
+- Source entry path: `$.variantrule[79].entries[4]`
+- Canonical output: `rule/dmg-downtime-activity-sowing-rumors.json`
+- OMITTED: The attitude change does not affect every individual in the community. The Rule schema has no community-level targeting scope or exceptions.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Shifting a community's general attitude toward a person or organization doesn't affect everyone in the community. Individuals might hold to their own opinions, particularly if they have personal experience in dealing with the subject of the rumors."
+```
+
+### rule:dmg:downtime-activity-training-to-gain-levels — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[82]`
+- Source entry path: `$.variantrule[82].entries[0]`
+- Canonical output: `rule/dmg-downtime-activity-training-to-gain-levels.json`
+- OMITTED: Variant rule that requires training before a character gains new-level benefits after earning sufficient XP. The trigger and delayed level benefits depend on Character progression mechanics outside this Rule schema.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"As a variant rule, you can require characters to spend downtime training or studying before they gain the benefits of a new level. If you choose this option, once a character has earned enough experience points to attain a new level, he or she must train for a number of days before gaining any class features associated with the new level."
+```
+
+### rule:dmg:downtime-activity-training-to-gain-levels — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[82]`
+- Source entry path: `$.variantrule[82].entries[1]`
+- Canonical output: `rule/dmg-downtime-activity-training-to-gain-levels.json`
+- OMITTED: Level-dependent training time and total training cost description. Rule v1 cannot express level-indexed costs and durations.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"The training time required depends on the level to be gained, as shown on the Training to Gain Levels table. The training cost is for the total training time."
+```
+
+### rule:dmg:downtime-activity-training-to-gain-levels — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[82]`
+- Source entry path: `$.variantrule[82].entries[2]`
+- Canonical output: `rule/dmg-downtime-activity-training-to-gain-levels.json`
+- OMITTED: Training time and cost table by attained level. Nested paths covered: $.variantrule[82].entries[2].type; $.variantrule[82].entries[2].caption; $.variantrule[82].entries[2].colLabels[0]; $.variantrule[82].entries[2].colLabels[1]; $.variantrule[82].entries[2].colLabels[2]; $.variantrule[82].entries[2].colStyles[0]; $.variantrule[82].entries[2].colStyles[1]; $.variantrule[82].entries[2].colStyles[2]; $.variantrule[82].entries[2].rows[0][0]; $.variantrule[82].entries[2].rows[0][1]; $.variantrule[82].entries[2].rows[0][2]; $.variantrule[82].entries[2].rows[1][0]; $.variantrule[82].entries[2].rows[1][1]; $.variantrule[82].entries[2].rows[1][2]; $.variantrule[82].entries[2].rows[2][0]; $.variantrule[82].entries[2].rows[2][1]; $.variantrule[82].entries[2].rows[2][2]; $.variantrule[82].entries[2].rows[3][0]; $.variantrule[82].entries[2].rows[3][1]; $.variantrule[82].entries[2].rows[3][2]. The table couples level bands to distinct durations and costs, which the approved contract cannot represent.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Training to Gain Levels",
+  "colLabels": [
+    "Level Attained",
+    "Training Time",
+    "Training Cost"
+  ],
+  "colStyles": [
+    "col-4 text-center no-wrap",
+    "col-4 text-center",
+    "col-4 text-center"
+  ],
+  "rows": [
+    [
+      "2nd-4th",
+      "10 days",
+      "20 gp"
+    ],
+    [
+      "5th-10th",
+      "20 days",
+      "40 gp"
+    ],
+    [
+      "11th-16th",
+      "30 days",
+      "60 gp"
+    ],
+    [
+      "17th-20th",
+      "40 days",
+      "80 gp"
+    ]
+  ]
+}
+```
+
+### rule:phb:downtime-activity-crafting — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[61]`
+- Source entry path: `$.variantrule[61].entries[0]`
+- Canonical output: `rule/phb-downtime-activity-crafting.json`
+- OMITTED: Tool proficiency and possible special material/location prerequisites. The downtime schema has no prerequisite proficiency and facility/material requirement fields.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"You can craft nonmagical objects, including adventuring equipment and works of art. You must be proficient with tools related to the object you are trying to create (typically artisan's tools). You might also need access to special materials or locations necessary to create it. For example, someone proficient with {@item smith's tools|phb} needs a forge in order to craft a sword or suit of armor."
+```
+
+### rule:phb:downtime-activity-crafting — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[61]`
+- Source entry path: `$.variantrule[61].entries[1]`
+- Canonical output: `rule/phb-downtime-activity-crafting.json`
+- OMITTED: 5 gp of value per day, half-value raw material cost, and the incremental progress rule. The contract cannot express the activity's rate, cost, or partial progress.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"For every day of downtime you spend crafting, you can craft one or more items with a total market value not exceeding 5 gp, and you must expend raw materials worth half the total market value. If something you want to craft has a market value greater than 5 gp, you make progress every day in 5-gp increments until you reach the market value of the item. For example, a suit of plate armor (market value 1,500 gp) takes 300 days to craft by yourself."
+```
+
+### rule:phb:downtime-activity-crafting — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[61]`
+- Source entry path: `$.variantrule[61].entries[2]`
+- Canonical output: `rule/phb-downtime-activity-crafting.json`
+- OMITTED: Group crafting, shared location/proficiency requirements, and per-character contribution. The schema cannot model multiple cooperating characters or accumulated contributions.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Multiple characters can combine their efforts toward the crafting of a single item, provided that the characters all have proficiency with the requisite tools and are working together in the same place. Each character contributes 5 gp worth of effort for every day spent helping to craft the item. For example, three characters with the requisite tool proficiency and the proper facilities can craft a suit of plate armor in 100 days, at a total cost of 750 gp."
+```
+
+### rule:phb:downtime-activity-crafting — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[61]`
+- Source entry path: `$.variantrule[61].entries[3]`
+- Canonical output: `rule/phb-downtime-activity-crafting.json`
+- OMITTED: Modest and comfortable lifestyle cost relief while crafting. The downtime schema only expresses a minimum modest lifestyle, not lifestyle expense waivers or discounts.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"While crafting, you can maintain a modest lifestyle without having to pay 1 gp per day, or a comfortable lifestyle at half the normal cost (see chapter 5 for more information on lifestyle expenses)."
+```
+
+### rule:phb:downtime-activity-practicing-a-profession — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[69]`
+- Source entry path: `$.variantrule[69].entries[1]`
+- Canonical output: `rule/phb-downtime-activity-practicing-a-profession.json`
+- OMITTED: Organization-provided employment supports a comfortable lifestyle. The schema's lifestyle field only represents MODEST.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"If you are a member of an organization that can provide gainful employment, such as a temple or a thieves' guild, you earn enough to support a comfortable lifestyle instead."
+```
+
+### rule:phb:downtime-activity-practicing-a-profession — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[69]`
+- Source entry path: `$.variantrule[69].entries[2]`
+- Canonical output: `rule/phb-downtime-activity-practicing-a-profession.json`
+- OMITTED: Performance proficiency and use of the skill supports a wealthy lifestyle. The schema cannot express a skill-gated or wealthy lifestyle outcome.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"If you have proficiency in the {@skill Performance} skill and put your performance skill to use during your downtime, you earn enough to support a wealthy lifestyle instead."
+```
+
+### rule:phb:downtime-activity-researching — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[74]`
+- Source entry path: `$.variantrule[74].entries[0]`
+- Canonical output: `rule/phb-downtime-activity-researching.json`
+- OMITTED: Examples of research and information sources. Illustrative context rather than a fixed procedure.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"The time between adventures is a great chance to perform research, gaining insight into mysteries that have unfurled over the course of the campaign. Research can include poring over dusty tomes and crumbling scrolls in a library or buying drinks for the locals to pry rumors and gossip from their lips."
+```
+
+### rule:phb:downtime-activity-researching — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[74]`
+- Source entry path: `$.variantrule[74].entries[1]`
+- Canonical output: `rule/phb-downtime-activity-researching.json`
+- OMITTED: Availability, DM-set duration and restrictions, and optional one-or-more ability checks. The source leaves availability, time, restrictions, and whether/check types to the DM; the examples are nonexclusive and have no DCs.; cause: `SOURCE_AMBIGUOUS`
+
+Complete original source entry:
+
+```json
+"When you begin your research, the DM determines whether the information is available, how many days of downtime it will take to find it, and whether there are any restrictions on your research (such as needing to seek out a specific individual, tome, or location). The DM might also require you to make one or more ability checks, such as an Intelligence ({@skill Investigation}) check to find clues pointing toward the information you seek, or a Charisma ({@skill Persuasion}) check to secure someone's aid. Once those conditions are met, you learn the information if it is available."
+```
+
+### rule:phb:downtime-activity-researching — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[74]`
+- Source entry path: `$.variantrule[74].entries[2]`
+- Canonical output: `rule/phb-downtime-activity-researching.json`
+- OMITTED: One-gp-per-day research cost in addition to lifestyle expenses. Rule v1 has no downtime expense or lifestyle-cost model; detailed downtime accounting remains skipped under R-GAP-13.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"For each day of research, you must spend 1 gp to cover your expenses. This cost is in addition to your normal lifestyle expenses (as discussed in chapter 5)."
+```
+
+### rule:phb:downtime-activity-training — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[80]`
+- Source entry path: `$.variantrule[80].entries[0]`
+- Canonical output: `rule/phb-downtime-activity-training.json`
+- OMITTED: Between-adventure language or tool training options and additional options at DM discretion. The Rule schema cannot represent the alternative Language and tool-proficiency outcomes.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"You can spend time between adventures learning a new language or training with a set of tools. Your DM might allow additional training options."
+```
+
+### rule:phb:downtime-activity-training — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[80]`
+- Source entry path: `$.variantrule[80].entries[1]`
+- Canonical output: `rule/phb-downtime-activity-training.json`
+- OMITTED: Instructor requirement, DM-determined duration, and optional ability checks. The source leaves instructor availability, checks, and duration initially to the DM, without specifying check requirements or DCs.; cause: `SOURCE_AMBIGUOUS`
+
+Complete original source entry:
+
+```json
+"First, you must find an instructor willing to teach you. The DM determines how long it takes, and whether one or more ability checks are required."
+```
+
+### rule:phb:downtime-activity-training — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[80]`
+- Source entry path: `$.variantrule[80].entries[2]`
+- Canonical output: `rule/phb-downtime-activity-training.json`
+- OMITTED: One-gp-per-day cost and the alternative language/tool-proficiency outcomes. The contract cannot represent downtime expenses or grant either of the alternative domain-specific proficiencies.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"The training lasts for 250 days and costs 1 gp per day. After you spend the requisite amount of time and money, you learn the new language or gain proficiency with the new tool."
+```
+
+### rule:xge:downtime-activity-buying-a-magic-item — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[58]`
+- Source entry path: `$.variantrule[58].entries[0]`
+- Canonical output: `rule/xge-downtime-activity-buying-a-magic-item.json`
+- OMITTED: General note that purchase requires time/money and seller availability is not guaranteed. Introductory framing; the specific search procedure and limits are accounted for below.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Purchasing a magic item requires time and money to seek out and contact people willing to sell items. Even then, there is no guarantee a seller will have the items a character desires."
+```
+
+### rule:xge:downtime-activity-buying-a-magic-item — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[58]`
+- Source entry path: `$.variantrule[58].entries[1]`
+- Canonical output: `rule/xge-downtime-activity-buying-a-magic-item.json`
+- OMITTED: Minimum workweek and 100 gp expenses, with extra time/money improving item quality. Nested paths covered: $.variantrule[58].entries[1].type; $.variantrule[58].entries[1].name; $.variantrule[58].entries[1].entries[0]. The downtime schema cannot encode activity expense, a variable bonus, or its cap; detailed downtime economics remain skipped under R-GAP-13.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resources",
+  "entries": [
+    "Finding magic items to purchase requires at least one workweek of effort and 100 gp in expenses. Spending more time and money increases your chance of finding a high-quality item."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-buying-a-magic-item — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[58]`
+- Source entry path: `$.variantrule[58].entries[2]`
+- Canonical output: `rule/xge-downtime-activity-buying-a-magic-item.json`
+- OMITTED: Wealthy lifestyle included in cost, variable bonuses, item table selection, campaign modifiers, variable item costs, and DM control of final offers. Nested paths covered: $.variantrule[58].entries[2].type; $.variantrule[58].entries[2].name; $.variantrule[58].entries[2].entries[0]; $.variantrule[58].entries[2].entries[1]; $.variantrule[58].entries[2].entries[2]; $.variantrule[58].entries[2].entries[3]; $.variantrule[58].entries[2].entries[4]. The approved schema cannot represent these dependent checks, tables, costs, modifiers, and discretionary outcomes.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resolution",
+  "entries": [
+    "A character seeking to buy a magic item makes a Charisma ({@skill Persuasion}) check to determine the quality of the seller found. The character gains a +1 bonus on the check for every workweek beyond the first that is spent seeking a seller and a +1 bonus for every additional 100 gp spent on the search, up to a maximum bonus of +10. The monetary cost includes a wealthy lifestyle, for a buyer must impress potential business partners.",
+    "As shown on the Buying Magic Items table, the total of the check dictates which table in the Dungeon Master's Guide to roll on to determine which items are on the market. Or you can roll for items from any table associated with a lower total on the Buying Magic Items table. As a further option to reflect the availability of items in your campaign, you can apply a -10 penalty for low magic campaigns or a +10 bonus for high magic campaigns. Furthermore, you can double magic item costs in low magic campaigns.",
+    "Using the Magic Item Price table, you then assign prices to the available items, based on their rarity. Halve the price of any consumable item, such as a potion or a scroll, when using the table to determine an asking price.",
+    "You have final say in determining which items are for sale and their final price, no matter what the tables say.",
+    "If the characters seek a specific magic item, first decide if it's an item you want to allow in your game. If so, include the desired item among the items for sale on a check total of 10 or higher if the item is common, 15 or higher if it is uncommon, 20 or higher if it is rare, 25 or higher if it is very rare, and 30 or higher if it is legendary."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-buying-a-magic-item — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[58]`
+- Source entry path: `$.variantrule[58].entries[3]`
+- Canonical output: `rule/xge-downtime-activity-buying-a-magic-item.json`
+- OMITTED: Check-total bands selecting Magic Item Tables A through I and lower-table alternatives. Nested paths covered: $.variantrule[58].entries[3].type; $.variantrule[58].entries[3].caption; $.variantrule[58].entries[3].colLabels[0]; $.variantrule[58].entries[3].colLabels[1]; $.variantrule[58].entries[3].colStyles[0]; $.variantrule[58].entries[3].colStyles[1]; $.variantrule[58].entries[3].rows[0][0]; $.variantrule[58].entries[3].rows[0][1]; $.variantrule[58].entries[3].rows[1][0]; $.variantrule[58].entries[3].rows[1][1]; $.variantrule[58].entries[3].rows[2][0]; $.variantrule[58].entries[3].rows[2][1]; $.variantrule[58].entries[3].rows[3][0]; $.variantrule[58].entries[3].rows[3][1]; $.variantrule[58].entries[3].rows[4][0]; $.variantrule[58].entries[3].rows[4][1]; $.variantrule[58].entries[3].rows[5][0]; $.variantrule[58].entries[3].rows[5][1]; $.variantrule[58].entries[3].rows[6][0]; $.variantrule[58].entries[3].rows[6][1]; $.variantrule[58].entries[3].rows[7][0]; $.variantrule[58].entries[3].rows[7][1]; $.variantrule[58].entries[3].rows[8][0]; $.variantrule[58].entries[3].rows[8][1]. The referenced DMG magic-item tables have no canonical Rule targets; the selection procedure also requires unsupported table resolution.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Buying Magic Items",
+  "colLabels": [
+    "Check Total",
+    "Items Acquired"
+  ],
+  "colStyles": [
+    "col-2 text-center",
+    "col-10"
+  ],
+  "rows": [
+    [
+      "1–5",
+      "Roll {@dice 1d6} times on {@table Magic Item Table A}."
+    ],
+    [
+      "6–10",
+      "Roll {@dice 1d4} times on {@table Magic Item Table B}."
+    ],
+    [
+      "11–15",
+      "Roll {@dice 1d4} times on {@table Magic Item Table C}."
+    ],
+    [
+      "16–20",
+      "Roll {@dice 1d4} times on {@table Magic Item Table D}."
+    ],
+    [
+      "21–25",
+      "Roll {@dice 1d4} times on {@table Magic Item Table E}."
+    ],
+    [
+      "26–30",
+      "Roll {@dice 1d4} times on {@table Magic Item Table F}."
+    ],
+    [
+      "31–35",
+      "Roll {@dice 1d4} times on {@table Magic Item Table G}."
+    ],
+    [
+      "36–40",
+      "Roll {@dice 1d4} times on {@table Magic Item Table H}."
+    ],
+    [
+      "41+",
+      "Roll {@dice 1d4} times on {@table Magic Item Table I}."
+    ]
+  ]
+}
+```
+
+### rule:xge:downtime-activity-buying-a-magic-item — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[58]`
+- Source entry path: `$.variantrule[58].entries[4]`
+- Canonical output: `rule/xge-downtime-activity-buying-a-magic-item.json`
+- OMITTED: Rarity-based asking-price table and consumable price reduction. Nested paths covered: $.variantrule[58].entries[4].type; $.variantrule[58].entries[4].caption; $.variantrule[58].entries[4].colLabels[0]; $.variantrule[58].entries[4].colLabels[1]; $.variantrule[58].entries[4].colStyles[0]; $.variantrule[58].entries[4].colStyles[1]; $.variantrule[58].entries[4].rows[0][0]; $.variantrule[58].entries[4].rows[0][1]; $.variantrule[58].entries[4].rows[1][0]; $.variantrule[58].entries[4].rows[1][1]; $.variantrule[58].entries[4].rows[2][0]; $.variantrule[58].entries[4].rows[2][1]; $.variantrule[58].entries[4].rows[3][0]; $.variantrule[58].entries[4].rows[3][1]; $.variantrule[58].entries[4].rows[4][0]; $.variantrule[58].entries[4].rows[4][1]; $.variantrule[58].entries[4].footnotes[0]. Rule v1 has no rarity-indexed item-price table or price adjustment.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "table",
+  "caption": "Magic Item Price",
+  "colLabels": [
+    "Rarity",
+    "Asking Price*"
+  ],
+  "colStyles": [
+    "col-5",
+    "col-7 text-right"
+  ],
+  "rows": [
+    [
+      "Common",
+      "({@dice 1d6 + 1}) × 10 gp"
+    ],
+    [
+      "Uncommon",
+      "{@dice 1d6 × 100} gp"
+    ],
+    [
+      "Rare",
+      "{@dice 2d10 × 1,000} gp"
+    ],
+    [
+      "Very rare",
+      "({@dice 1d4 + 1}) × 10,000 gp"
+    ],
+    [
+      "Legendary",
+      "{@dice 2d6 × 25,000} gp"
+    ]
+  ],
+  "footnotes": [
+    "*Halved for a consumable item like a potion or scroll"
+  ]
+}
+```
+
+### rule:xge:downtime-activity-buying-a-magic-item — entry 5
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[58]`
+- Source entry path: `$.variantrule[58].entries[5]`
+- Canonical output: `rule/xge-downtime-activity-buying-a-magic-item.json`
+- OMITTED: Optional purchase complication chance and d12 consequence table. Nested paths covered: $.variantrule[58].entries[5].type; $.variantrule[58].entries[5].name; $.variantrule[58].entries[5].entries[0]; $.variantrule[58].entries[5].entries[1].type; $.variantrule[58].entries[5].entries[1].caption; $.variantrule[58].entries[5].entries[1].colLabels[0]; $.variantrule[58].entries[5].entries[1].colLabels[1]; $.variantrule[58].entries[5].entries[1].colStyles[0]; $.variantrule[58].entries[5].entries[1].colStyles[1]; $.variantrule[58].entries[5].entries[1].rows[0][0]; $.variantrule[58].entries[5].entries[1].rows[0][1]; $.variantrule[58].entries[5].entries[1].rows[1][0]; $.variantrule[58].entries[5].entries[1].rows[1][1]; $.variantrule[58].entries[5].entries[1].rows[2][0]; $.variantrule[58].entries[5].entries[1].rows[2][1]; $.variantrule[58].entries[5].entries[1].rows[3][0]; $.variantrule[58].entries[5].entries[1].rows[3][1]; $.variantrule[58].entries[5].entries[1].rows[4][0]; $.variantrule[58].entries[5].entries[1].rows[4][1]; $.variantrule[58].entries[5].entries[1].rows[5][0]; $.variantrule[58].entries[5].entries[1].rows[5][1]; $.variantrule[58].entries[5].entries[1].rows[6][0]; $.variantrule[58].entries[5].entries[1].rows[6][1]; $.variantrule[58].entries[5].entries[1].rows[7][0]; $.variantrule[58].entries[5].entries[1].rows[7][1]; $.variantrule[58].entries[5].entries[1].rows[8][0]; $.variantrule[58].entries[5].entries[1].rows[8][1]; $.variantrule[58].entries[5].entries[1].rows[9][0]; $.variantrule[58].entries[5].entries[1].rows[9][1]; $.variantrule[58].entries[5].entries[1].rows[10][0]; $.variantrule[58].entries[5].entries[1].rows[10][1]; $.variantrule[58].entries[5].entries[1].rows[11][0]; $.variantrule[58].entries[5].entries[1].rows[11][1]; $.variantrule[58].entries[5].entries[1].footnotes[0]. The probability trigger and conditional complication outcomes require an unsupported table procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Complications",
+  "entries": [
+    "The magic item trade is fraught with peril. The large sums of money involved and the power offered by magic items attract thieves, con artists, and other villains. If you want to make things more interesting for the characters, roll on the Magic Item Purchase Complications table or invent your own complication.",
+    {
+      "type": "table",
+      "caption": "Magic Item Purchase Complications",
+      "colLabels": [
+        "d12",
+        "Complication"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "The item is a fake, planted by an enemy.*"
+        ],
+        [
+          "2",
+          "The item is stolen by the party's enemies.*"
+        ],
+        [
+          "3",
+          "The item is cursed by a god."
+        ],
+        [
+          "4",
+          "The item's original owner will kill to reclaim it; the party's enemies spread news of its sale.*"
+        ],
+        [
+          "5",
+          "The item is at the center of a dark prophecy."
+        ],
+        [
+          "6",
+          "The seller is murdered before the sale.*"
+        ],
+        [
+          "7",
+          "The seller is a devil looking to make a bargain."
+        ],
+        [
+          "8",
+          "The item is the key to freeing an evil entity."
+        ],
+        [
+          "9",
+          "A third party bids on the item, doubling its price.*"
+        ],
+        [
+          "10",
+          "The item is an enslaved, intelligent entity."
+        ],
+        [
+          "11",
+          "The item is tied to a cult."
+        ],
+        [
+          "12",
+          "The party's enemies spread rumors that the item is an artifact of evil.*"
+        ]
+      ],
+      "footnotes": [
+        "*Might involve a rival"
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-carousing — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[60]`
+- Source entry path: `$.variantrule[60].entries[0]`
+- Canonical output: `rule/xge-downtime-activity-carousing.json`
+- OMITTED: Carousing as a common downtime option and descriptive setting. Introductory framing; the activity procedure is represented below.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Carousing is a default downtime activity for many characters. Between adventures, who doesn't want to relax with a few drinks and a group of friends at a tavern?"
+```
+
+### rule:xge:downtime-activity-carousing — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[60]`
+- Source entry path: `$.variantrule[60].entries[1]`
+- Canonical output: `rule/xge-downtime-activity-carousing.json`
+- OMITTED: Workweek, class-specific expenses, access and background requirements, and disguise/deception alternative. Nested paths covered: $.variantrule[60].entries[1].type; $.variantrule[60].entries[1].name; $.variantrule[60].entries[1].entries[0]; $.variantrule[60].entries[1].entries[1]. The downtime schema has no social-class prerequisite, lifestyle cost, disguise alternative, or expense model.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resources",
+  "entries": [
+    "Carousing covers a workweek of fine food, strong drink, and socializing. A character can attempt to carouse among lower-, middle-, or upper-class folk. A character can carouse with the lower class for 10 gp to cover expenses, or 50 gp for the middle class. Carousing with the upper class requires 250 gp for the workweek and access to the local nobility.",
+    "A character with the noble background can mingle with the upper class, but other characters can do so only if you judge that the character has made sufficient contacts. Alternatively, a character might use a {@item disguise kit|PHB} and the {@skill Deception} skill to pass as a noble visiting from a distant city."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-carousing — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[60]`
+- Source entry path: `$.variantrule[60].entries[2]`
+- Canonical output: `rule/xge-downtime-activity-carousing.json`
+- OMITTED: Check-total contact bands, allied/hostile contact counts, contact behavior, use limits, and contact lifecycle options. Nested paths covered: $.variantrule[60].entries[2].type; $.variantrule[60].entries[2].name; $.variantrule[60].entries[2].entries[0]; $.variantrule[60].entries[2].entries[1].type; $.variantrule[60].entries[2].entries[1].caption; $.variantrule[60].entries[2].entries[1].colLabels[0]; $.variantrule[60].entries[2].entries[1].colLabels[1]; $.variantrule[60].entries[2].entries[1].colStyles[0]; $.variantrule[60].entries[2].entries[1].colStyles[1]; $.variantrule[60].entries[2].entries[1].rows[0][0]; $.variantrule[60].entries[2].entries[1].rows[0][1]; $.variantrule[60].entries[2].entries[1].rows[1][0]; $.variantrule[60].entries[2].entries[1].rows[1][1]; $.variantrule[60].entries[2].entries[1].rows[2][0]; $.variantrule[60].entries[2].entries[1].rows[2][1]; $.variantrule[60].entries[2].entries[1].rows[3][0]; $.variantrule[60].entries[2].entries[1].rows[3][1]; $.variantrule[60].entries[2].entries[1].rows[4][0]; $.variantrule[60].entries[2].entries[1].rows[4][1]; $.variantrule[60].entries[2].entries[2]; $.variantrule[60].entries[2].entries[3]; $.variantrule[60].entries[2].entries[4]; $.variantrule[60].entries[2].entries[5]; $.variantrule[60].entries[2].entries[6]; $.variantrule[60].entries[2].entries[7]; $.variantrule[60].entries[2].entries[8]; $.variantrule[60].entries[2].entries[9]; $.variantrule[60].entries[2].entries[10]; $.variantrule[60].entries[2].entries[11]. Rule v1 cannot represent contact entities, relationship state, check-total outcome bands, or usage limits.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resolution",
+  "entries": [
+    "After a workweek of carousing, a character stands to make contacts within the selected social class. The character makes a Charisma ({@skill Persuasion}) check using the Carousing table.",
+    {
+      "type": "table",
+      "caption": "Carousing",
+      "colLabels": [
+        "Check Total",
+        "Result"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1–5",
+          "Character has made a hostile contact."
+        ],
+        [
+          "6–10",
+          "Character has made no new contacts."
+        ],
+        [
+          "11–15",
+          "Character has made an allied contact."
+        ],
+        [
+          "16–20",
+          "Character has made two allied contacts."
+        ],
+        [
+          "21+",
+          "Character has made three allied contacts."
+        ]
+      ]
+    },
+    "Contacts are NPCs who now share a bond with the character. Each one either owes the character a favor or has some reason to bear a grudge. A hostile contact works against the character, placing obstacles but stopping short of committing a crime or a violent act. Allied contacts are friends who will render aid to the character, but not at the risk of their lives.",
+    "Lower-class contacts include criminals, laborers, mercenaries, the town guard, and any other folk who normally frequent the cheapest taverns in town.",
+    "Middle-class contacts include guild members, spellcasters, town officials, and other folk who frequent well-kept establishments.",
+    "Upper-class contacts are nobles and their personal servants. Carousing with such folk covers formal banquets, state dinners, and the like.",
+    "Once a contact has helped or hindered a character, the character needs to carouse again to get back into the NPC's good graces. A contact provides help once, not help for life. The contact remains friendly, which can influence roleplaying and how the characters interact with them, but doesn't come with a guarantee of help.",
+    "You can assign specific NPCs as contacts. You might decide that the barkeep at the Wretched Gorgon and a guard stationed at the western gate are the character's allied contacts. Assigning specific NPCs gives the players concrete options. It brings the campaign to life and seeds the area with NPCs that the characters care about. On the other hand, it can prove difficult to track and might render a contact useless if that character doesn't come into play.",
+    "Alternatively, you can allow the player to make an NPC into a contact on the spot, after carousing. When the characters are in the area in which they caroused, a player can expend an allied contact and designate an NPC they meet as a contact, assuming the NPC is of the correct social class based on how the character caroused. The player should provide a reasonable explanation for this relationship and work it into the game.",
+    "Using a mix of the two approaches is a good idea, since it gives you the added depth of specific contacts while giving players the freedom to ensure that the contacts they accumulate are useful.",
+    "The same process can apply to hostile contacts. You can give the characters a specific NPC they should avoid, or you might introduce one at an inopportune or dramatic moment.",
+    "At any time, a character can have a maximum number of unspecified allied contacts equal to 1 + the character's Charisma modifier (minimum of 1). Specific, named contacts don't count toward this limit—only ones that can be used at any time to declare an NPC as a contact."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-carousing — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[60]`
+- Source entry path: `$.variantrule[60].entries[3]`
+- Canonical output: `rule/xge-downtime-activity-carousing.json`
+- OMITTED: Complication probability and lower-, middle-, and upper-class complication tables. Nested paths covered: $.variantrule[60].entries[3].type; $.variantrule[60].entries[3].name; $.variantrule[60].entries[3].entries[0]; $.variantrule[60].entries[3].entries[1].type; $.variantrule[60].entries[3].entries[1].caption; $.variantrule[60].entries[3].entries[1].colLabels[0]; $.variantrule[60].entries[3].entries[1].colLabels[1]; $.variantrule[60].entries[3].entries[1].colStyles[0]; $.variantrule[60].entries[3].entries[1].colStyles[1]; $.variantrule[60].entries[3].entries[1].rows[0][0]; $.variantrule[60].entries[3].entries[1].rows[0][1]; $.variantrule[60].entries[3].entries[1].rows[1][0]; $.variantrule[60].entries[3].entries[1].rows[1][1]; $.variantrule[60].entries[3].entries[1].rows[2][0]; $.variantrule[60].entries[3].entries[1].rows[2][1]; $.variantrule[60].entries[3].entries[1].rows[3][0]; $.variantrule[60].entries[3].entries[1].rows[3][1]; $.variantrule[60].entries[3].entries[1].rows[4][0]; $.variantrule[60].entries[3].entries[1].rows[4][1]; $.variantrule[60].entries[3].entries[1].rows[5][0]; $.variantrule[60].entries[3].entries[1].rows[5][1]; $.variantrule[60].entries[3].entries[1].rows[6][0]; $.variantrule[60].entries[3].entries[1].rows[6][1]; $.variantrule[60].entries[3].entries[1].rows[7][0]; $.variantrule[60].entries[3].entries[1].rows[7][1]; $.variantrule[60].entries[3].entries[1].footnotes[0]; $.variantrule[60].entries[3].entries[2].type; $.variantrule[60].entries[3].entries[2].caption; $.variantrule[60].entries[3].entries[2].colLabels[0]; $.variantrule[60].entries[3].entries[2].colLabels[1]; $.variantrule[60].entries[3].entries[2].colStyles[0]; $.variantrule[60].entries[3].entries[2].colStyles[1]; $.variantrule[60].entries[3].entries[2].rows[0][0]; $.variantrule[60].entries[3].entries[2].rows[0][1]; $.variantrule[60].entries[3].entries[2].rows[1][0]; $.variantrule[60].entries[3].entries[2].rows[1][1]; $.variantrule[60].entries[3].entries[2].rows[2][0]; $.variantrule[60].entries[3].entries[2].rows[2][1]; $.variantrule[60].entries[3].entries[2].rows[3][0]; $.variantrule[60].entries[3].entries[2].rows[3][1]; $.variantrule[60].entries[3].entries[2].rows[4][0]; $.variantrule[60].entries[3].entries[2].rows[4][1]; $.variantrule[60].entries[3].entries[2].rows[5][0]; $.variantrule[60].entries[3].entries[2].rows[5][1]; $.variantrule[60].entries[3].entries[2].rows[6][0]; $.variantrule[60].entries[3].entries[2].rows[6][1]; $.variantrule[60].entries[3].entries[2].rows[7][0]; $.variantrule[60].entries[3].entries[2].rows[7][1]; $.variantrule[60].entries[3].entries[2].footnotes[0]; $.variantrule[60].entries[3].entries[3].type; $.variantrule[60].entries[3].entries[3].caption; $.variantrule[60].entries[3].entries[3].colLabels[0]; $.variantrule[60].entries[3].entries[3].colLabels[1]; $.variantrule[60].entries[3].entries[3].colStyles[0]; $.variantrule[60].entries[3].entries[3].colStyles[1]; $.variantrule[60].entries[3].entries[3].rows[0][0]; $.variantrule[60].entries[3].entries[3].rows[0][1]; $.variantrule[60].entries[3].entries[3].rows[1][0]; $.variantrule[60].entries[3].entries[3].rows[1][1]; $.variantrule[60].entries[3].entries[3].rows[2][0]; $.variantrule[60].entries[3].entries[3].rows[2][1]; $.variantrule[60].entries[3].entries[3].rows[3][0]; $.variantrule[60].entries[3].entries[3].rows[3][1]; $.variantrule[60].entries[3].entries[3].rows[4][0]; $.variantrule[60].entries[3].entries[3].rows[4][1]; $.variantrule[60].entries[3].entries[3].rows[5][0]; $.variantrule[60].entries[3].entries[3].rows[5][1]; $.variantrule[60].entries[3].entries[3].rows[6][0]; $.variantrule[60].entries[3].entries[3].rows[6][1]; $.variantrule[60].entries[3].entries[3].rows[7][0]; $.variantrule[60].entries[3].entries[3].rows[7][1]; $.variantrule[60].entries[3].entries[3].footnotes[0]. The complication trigger and class-dependent tables cannot be represented by Rule v1.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Complications",
+  "entries": [
+    "Characters who carouse risk bar brawls, accumulating a cloud of nasty rumors, and building a bad reputation around town. As a rule of thumb, a character has a {@chance 10} chance of triggering a complication for each workweek of carousing.",
+    {
+      "type": "table",
+      "caption": "Lower-Class Carousing Complications",
+      "colLabels": [
+        "d8",
+        "Complication"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "A pickpocket lifts {@dice 1d10 × 5} gp from you.*"
+        ],
+        [
+          "2",
+          "A bar brawl leaves you with a scar.*"
+        ],
+        [
+          "3",
+          "You have fuzzy memories of doing something very, very illegal, but can't remember exactly what."
+        ],
+        [
+          "4",
+          "You are banned from a tavern after some obnoxious behavior.*"
+        ],
+        [
+          "5",
+          "After a few drinks, you swore in the town square to pursue a dangerous quest."
+        ],
+        [
+          "6",
+          "Surprise! You're married."
+        ],
+        [
+          "7",
+          "Streaking naked through the streets seemed like a great idea at the time."
+        ],
+        [
+          "8",
+          "Everyone is calling you by some weird, embarrassing nickname, like Puddle Drinker or Bench Slayer, and no one will say why.*"
+        ]
+      ],
+      "footnotes": [
+        "*Might involve a rival"
+      ]
+    },
+    {
+      "type": "table",
+      "caption": "Middle-Class Carousing Complications",
+      "colLabels": [
+        "d8",
+        "Complication"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "You accidentally insulted a guild master, and only a public apology will let you do business with the guild again.*"
+        ],
+        [
+          "2",
+          "You swore to complete some quest on behalf of a temple or a guild."
+        ],
+        [
+          "3",
+          "A social gaffe has made you the talk of the town.*"
+        ],
+        [
+          "4",
+          "A particularly obnoxious person has taken an intense romantic interest in you.*"
+        ],
+        [
+          "5",
+          "You have made a foe out of a local spellcaster.*"
+        ],
+        [
+          "6",
+          "You have been recruited to help run a local festival, play, or similar event."
+        ],
+        [
+          "7",
+          "You made a drunken toast that scandalized the locals."
+        ],
+        [
+          "8",
+          "You spent an additional 100 gp trying to impress people."
+        ]
+      ],
+      "footnotes": [
+        "*Might involve a rival"
+      ]
+    },
+    {
+      "type": "table",
+      "caption": "Upper-Class Carousing Complications",
+      "colLabels": [
+        "d8",
+        "Complication"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "A pushy noble family wants to marry off one of their scions to you.*"
+        ],
+        [
+          "2",
+          "You tripped and fell during a dance, and people can't stop talking about it."
+        ],
+        [
+          "3",
+          "You have agreed to take on a noble's debts."
+        ],
+        [
+          "4",
+          "You have been challenged to a joust by a knight.*"
+        ],
+        [
+          "5",
+          "You have made a foe out of a local noble.*"
+        ],
+        [
+          "6",
+          "A boring noble insists you visit each day and listen to long, tedious theories of magic."
+        ],
+        [
+          "7",
+          "You have become the target of a variety of embarrassing rumors.*"
+        ],
+        [
+          "8",
+          "You spent an additional 500 gp trying to impress people."
+        ]
+      ],
+      "footnotes": [
+        "*Might involve a rival"
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-crafting-an-item — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[63]`
+- Source entry path: `$.variantrule[63].entries[1]`
+- Canonical output: `rule/xge-downtime-activity-crafting-an-item.json`
+- OMITTED: Nonmagical material costs, weekly production rate, safe storage, multiple-item threshold, group time division, tool proficiency, equipment/facility requirements, examples, and sale price. Nested paths covered: $.variantrule[63].entries[1].type; $.variantrule[63].entries[1].name; $.variantrule[63].entries[1].entries[0]; $.variantrule[63].entries[1].entries[1]; $.variantrule[63].entries[1].entries[2]; $.variantrule[63].entries[1].entries[3].type; $.variantrule[63].entries[1].entries[3].colLabels[0]; $.variantrule[63].entries[1].entries[3].colLabels[1]; $.variantrule[63].entries[1].entries[3].colStyles[0]; $.variantrule[63].entries[1].entries[3].colStyles[1]; $.variantrule[63].entries[1].entries[3].rows[0][0]; $.variantrule[63].entries[1].entries[3].rows[0][1]; $.variantrule[63].entries[1].entries[3].rows[1][0]; $.variantrule[63].entries[1].entries[3].rows[1][1]; $.variantrule[63].entries[1].entries[3].rows[2][0]; $.variantrule[63].entries[1].entries[3].rows[2][1]; $.variantrule[63].entries[1].entries[3].rows[3][0]; $.variantrule[63].entries[1].entries[3].rows[3][1]; $.variantrule[63].entries[1].entries[4]. The contract cannot express these costs, time formulas, prerequisites, collaborative production, or item value.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resources and Resolution",
+  "entries": [
+    "In addition to the appropriate tools for the item to be crafted, a character needs raw materials worth half of the item's selling cost. To determine how many workweeks it takes to create an item, divide its gold piece cost by 50. A character can complete multiple items in a workweek if the items' combined cost is 50 gp or lower. Items that cost more than 50 gp can be completed over longer periods of time, as long as the work in progress is stored in a safe location.",
+    "Multiple characters can combine their efforts. Divide the time needed to create an item by the number of characters working on it. Use your judgment when determining how many characters can collaborate on an item. A particularly tiny item, like a ring, might allow only one or two workers, whereas a large, complex item might allow four or more workers.",
+    "A character needs to be proficient with the tools needed to craft an item and have access to the appropriate equipment. Everyone who collaborates needs to have the appropriate tool proficiency. You need to make any judgment calls regarding whether a character has the correct equipment. The following table provides some examples.",
+    {
+      "type": "table",
+      "colLabels": [
+        "Proficiency",
+        "Items"
+      ],
+      "colStyles": [
+        "col-6",
+        "col-6"
+      ],
+      "rows": [
+        [
+          "{@item Herbalism kit|phb}",
+          "Antitoxin, {@item potion of healing}"
+        ],
+        [
+          "{@item Leatherworker's tools|phb}",
+          "Leather armor, boots"
+        ],
+        [
+          "{@item Smith's tools|phb}",
+          "Armor, weapons"
+        ],
+        [
+          "{@item Weaver's tools|phb}",
+          "Cloaks, robes"
+        ]
+      ]
+    },
+    "If all the above requirements are met, the result of the process is an item of the desired sort. A character can sell an item crafted in this way at its listed price."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-crafting-an-item — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[63]`
+- Source entry path: `$.variantrule[63].entries[2]`
+- Canonical output: `rule/xge-downtime-activity-crafting-an-item.json`
+- OMITTED: Magic-item formula, exotic material/adventure requirements, rarity-to-creature challenge table, item-specific requirements, rarity-indexed time/cost table, and tool/Arcana alternatives. Nested paths covered: $.variantrule[63].entries[2].type; $.variantrule[63].entries[2].name; $.variantrule[63].entries[2].entries[0]; $.variantrule[63].entries[2].entries[1]; $.variantrule[63].entries[2].entries[2]; $.variantrule[63].entries[2].entries[3]; $.variantrule[63].entries[2].entries[4]; $.variantrule[63].entries[2].entries[5].type; $.variantrule[63].entries[2].entries[5].caption; $.variantrule[63].entries[2].entries[5].colLabels[0]; $.variantrule[63].entries[2].entries[5].colLabels[1]; $.variantrule[63].entries[2].entries[5].colStyles[0]; $.variantrule[63].entries[2].entries[5].colStyles[1]; $.variantrule[63].entries[2].entries[5].rows[0][0]; $.variantrule[63].entries[2].entries[5].rows[0][1]; $.variantrule[63].entries[2].entries[5].rows[1][0]; $.variantrule[63].entries[2].entries[5].rows[1][1]; $.variantrule[63].entries[2].entries[5].rows[2][0]; $.variantrule[63].entries[2].entries[5].rows[2][1]; $.variantrule[63].entries[2].entries[5].rows[3][0]; $.variantrule[63].entries[2].entries[5].rows[3][1]; $.variantrule[63].entries[2].entries[5].rows[4][0]; $.variantrule[63].entries[2].entries[5].rows[4][1]; $.variantrule[63].entries[2].entries[6]; $.variantrule[63].entries[2].entries[7]; $.variantrule[63].entries[2].entries[8].type; $.variantrule[63].entries[2].entries[8].caption; $.variantrule[63].entries[2].entries[8].colLabels[0]; $.variantrule[63].entries[2].entries[8].colLabels[1]; $.variantrule[63].entries[2].entries[8].colLabels[2]; $.variantrule[63].entries[2].entries[8].colStyles[0]; $.variantrule[63].entries[2].entries[8].colStyles[1]; $.variantrule[63].entries[2].entries[8].colStyles[2]; $.variantrule[63].entries[2].entries[8].rows[0][0]; $.variantrule[63].entries[2].entries[8].rows[0][1]; $.variantrule[63].entries[2].entries[8].rows[0][2]; $.variantrule[63].entries[2].entries[8].rows[1][0]; $.variantrule[63].entries[2].entries[8].rows[1][1]; $.variantrule[63].entries[2].entries[8].rows[1][2]; $.variantrule[63].entries[2].entries[8].rows[2][0]; $.variantrule[63].entries[2].entries[8].rows[2][1]; $.variantrule[63].entries[2].entries[8].rows[2][2]; $.variantrule[63].entries[2].entries[8].rows[3][0]; $.variantrule[63].entries[2].entries[8].rows[3][1]; $.variantrule[63].entries[2].entries[8].rows[3][2]; $.variantrule[63].entries[2].entries[8].rows[4][0]; $.variantrule[63].entries[2].entries[8].rows[4][1]; $.variantrule[63].entries[2].entries[8].rows[4][2]; $.variantrule[63].entries[2].entries[8].footnotes[0]; $.variantrule[63].entries[2].entries[9]; $.variantrule[63].entries[2].entries[10]. The procedure relies on Item, Creature, Spell Scroll, Potion of Healing, adventure, and tool/skill domains not represented by this Rule contract; its tables and prerequisites cannot be expressed here.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Crafting Magic Items",
+  "entries": [
+    "Creating a magic item requires more than just time, effort, and materials. It is a long-term process that involves one or more adventures to track down rare materials and the lore needed to create the item.",
+    "Potions of healing and spell scrolls are exceptions to the following rules. For more information, see \"Brewing Potions of Healing\" later in this section and the \"Scribing a {@item Spell Scroll}\" section, below.",
+    "To start with, a character needs a formula for a magic item in order to create it. The formula is like a recipe. It lists the materials needed and steps required to make the item.",
+    "An item invariably requires an exotic material to complete it. This material can range from the skin of a yeti to a vial of water taken from a whirlpool on the Elemental Plane of Water. Finding that material should take place as part of an adventure.",
+    "The Magic Item Ingredients table suggests the challenge rating of a creature that the characters need to face to acquire the materials for an item. Note that facing a creature does not necessarily mean that the characters must collect items from its corpse. Rather, the creature might guard a location or a resource that the characters need access to.",
+    {
+      "type": "table",
+      "caption": "Magic Item Ingredients",
+      "colLabels": [
+        "Item Rarity",
+        "CR Range"
+      ],
+      "colStyles": [
+        "col-6",
+        "col-6 text-center"
+      ],
+      "rows": [
+        [
+          "Common",
+          "1–3"
+        ],
+        [
+          "Uncommon",
+          "4–8"
+        ],
+        [
+          "Rare",
+          "9–12"
+        ],
+        [
+          "Very rare",
+          "13–18"
+        ],
+        [
+          "Legendary",
+          "19+"
+        ]
+      ]
+    },
+    "If appropriate, pick a monster or a location that is a thematic fit for the item to be crafted. For example, creating {@item mariner's armor} might require the essence of a water weird. Crafting a {@item staff of charming} might require the cooperation of a specific arcanaloth, who will help only if the characters complete a task for it. Making a {@item staff of power} might hinge on acquiring a piece of an ancient stone that was once touched by the god of magic—a stone now guarded by a suspicious androsphinx.",
+    "In addition to facing a specific creature, creating an item comes with a gold piece cost covering other materials, tools, and so on, based on the item's rarity. Those values, as well as the time a character needs to work in order to complete the item, are shown on the Magic Item Crafting Time and Cost table. Halve the listed price and creation time for any consumable items.",
+    {
+      "type": "table",
+      "caption": "Magic Item Crafting Time and Cost",
+      "colLabels": [
+        "Item Rarity",
+        "Workweeks*",
+        "Cost*"
+      ],
+      "colStyles": [
+        "col-4",
+        "col-4 text-center",
+        "col-4 text-right"
+      ],
+      "rows": [
+        [
+          "Common",
+          "1",
+          "50 gp"
+        ],
+        [
+          "Uncommon",
+          "2",
+          "200 gp"
+        ],
+        [
+          "Rare",
+          "10",
+          "2,000 gp"
+        ],
+        [
+          "Very rare",
+          "25",
+          "20,000 gp"
+        ],
+        [
+          "Legendary",
+          "50",
+          "100,000 gp"
+        ]
+      ],
+      "footnotes": [
+        "*Halved for a consumable item like a potion or scroll"
+      ]
+    },
+    "To complete a magic item, a character also needs whatever tool proficiency is appropriate, as for crafting a nonmagical object, or proficiency in the {@skill Arcana} skill.",
+    "If all the above requirements are met, the result of the process is a magic item of the desired sort."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-crafting-an-item — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[63]`
+- Source entry path: `$.variantrule[63].entries[3]`
+- Canonical output: `rule/xge-downtime-activity-crafting-an-item.json`
+- OMITTED: Optional complication chance per five workweeks and crafting complication examples. Nested paths covered: $.variantrule[63].entries[3].type; $.variantrule[63].entries[3].name; $.variantrule[63].entries[3].entries[0]; $.variantrule[63].entries[3].entries[1].type; $.variantrule[63].entries[3].entries[1].caption; $.variantrule[63].entries[3].entries[1].colLabels[0]; $.variantrule[63].entries[3].entries[1].colLabels[1]; $.variantrule[63].entries[3].entries[1].colStyles[0]; $.variantrule[63].entries[3].entries[1].colStyles[1]; $.variantrule[63].entries[3].entries[1].rows[0][0]; $.variantrule[63].entries[3].entries[1].rows[0][1]; $.variantrule[63].entries[3].entries[1].rows[1][0]; $.variantrule[63].entries[3].entries[1].rows[1][1]; $.variantrule[63].entries[3].entries[1].rows[2][0]; $.variantrule[63].entries[3].entries[1].rows[2][1]; $.variantrule[63].entries[3].entries[1].rows[3][0]; $.variantrule[63].entries[3].entries[1].rows[3][1]; $.variantrule[63].entries[3].entries[1].rows[4][0]; $.variantrule[63].entries[3].entries[1].rows[4][1]; $.variantrule[63].entries[3].entries[1].rows[5][0]; $.variantrule[63].entries[3].entries[1].rows[5][1]; $.variantrule[63].entries[3].entries[1].footnotes[0]. The source's probability trigger and complication table are unsupported.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Complications",
+  "entries": [
+    "Most of the complications involved in creating something, especially a magic item, are linked to the difficulty in finding rare ingredients or components needed to complete the work. The complications a character might face as byproducts of the creation process are most interesting when the characters are working on a magic item: there's a {@chance 10} chance for every five workweeks spent on crafting an item that a complication occurs. The Crafting Complications table provides examples of what might happen.",
+    {
+      "type": "table",
+      "caption": "Crafting Complications",
+      "colLabels": [
+        "d6",
+        "Complication"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "Rumors swirl that what you're working on is unstable and a threat to the community.*"
+        ],
+        [
+          "2",
+          "Your tools are stolen, forcing you to buy new ones.*"
+        ],
+        [
+          "3",
+          "A local wizard shows keen interest in your work and insists on observing you."
+        ],
+        [
+          "4",
+          "A powerful noble offers a hefty price for your work and is not interested in hearing no for an answer.*"
+        ],
+        [
+          "5",
+          "A dwarf clan accuses you of stealing its secret lore to fuel your work.*"
+        ],
+        [
+          "6",
+          "A competitor spreads rumors that your work is shoddy and prone to failure.*"
+        ]
+      ],
+      "footnotes": [
+        "*Might involve a rival"
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-crafting-an-item — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[63]`
+- Source entry path: `$.variantrule[63].entries[4]`
+- Canonical output: `rule/xge-downtime-activity-crafting-an-item.json`
+- OMITTED: Herbalism kit prerequisite and healing-potion time/cost alternatives table. Nested paths covered: $.variantrule[63].entries[4].type; $.variantrule[63].entries[4].name; $.variantrule[63].entries[4].entries[0]; $.variantrule[63].entries[4].entries[1].type; $.variantrule[63].entries[4].entries[1].caption; $.variantrule[63].entries[4].entries[1].colLabels[0]; $.variantrule[63].entries[4].entries[1].colLabels[1]; $.variantrule[63].entries[4].entries[1].colLabels[2]; $.variantrule[63].entries[4].entries[1].colStyles[0]; $.variantrule[63].entries[4].entries[1].colStyles[1]; $.variantrule[63].entries[4].entries[1].colStyles[2]; $.variantrule[63].entries[4].entries[1].rows[0][0]; $.variantrule[63].entries[4].entries[1].rows[0][1]; $.variantrule[63].entries[4].entries[1].rows[0][2]; $.variantrule[63].entries[4].entries[1].rows[1][0]; $.variantrule[63].entries[4].entries[1].rows[1][1]; $.variantrule[63].entries[4].entries[1].rows[1][2]; $.variantrule[63].entries[4].entries[1].rows[2][0]; $.variantrule[63].entries[4].entries[1].rows[2][1]; $.variantrule[63].entries[4].entries[1].rows[2][2]; $.variantrule[63].entries[4].entries[1].rows[3][0]; $.variantrule[63].entries[4].entries[1].rows[3][1]; $.variantrule[63].entries[4].entries[1].rows[3][2]. The item-specific potion procedure depends on the Item/Equipment domain and a correlated time/cost table absent from Rule v1.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Brewing Potions of Healing",
+  "entries": [
+    "Potions of healing fall into a special category for item crafting, separate from other magic items. A character who has proficiency with the {@item herbalism kit|PHB} can create these potions. The times and costs for doing so are summarized on the {@item Potion of Healing} Creation table.",
+    {
+      "type": "table",
+      "caption": "Potion of Healing Creation",
+      "colLabels": [
+        "Type",
+        "Time",
+        "Cost"
+      ],
+      "colStyles": [
+        "col-4",
+        "col-4",
+        "col-4 text-right"
+      ],
+      "rows": [
+        [
+          "Healing",
+          "1 day",
+          "25 gp"
+        ],
+        [
+          "Greater healing",
+          "1 workweek",
+          "100 gp"
+        ],
+        [
+          "Superior healing",
+          "3 workweeks",
+          "1,000 gp"
+        ],
+        [
+          "Supreme healing",
+          "4 workweeks",
+          "10,000 gp"
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-crime — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[64]`
+- Source entry path: `$.variantrule[64].entries[0]`
+- Canonical output: `rule/xge-downtime-activity-crime.json`
+- OMITTED: Crime activity framing and risk of arrest. Introductory framing; no standalone mechanic is provided here.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Sometimes it pays to be bad. This activity gives a character the chance to make some extra cash, at the risk of arrest."
+```
+
+### rule:xge:downtime-activity-crime — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[64]`
+- Source entry path: `$.variantrule[64].entries[1]`
+- Canonical output: `rule/xge-downtime-activity-crime.json`
+- OMITTED: One-week preparation and minimum 25 gp information-gathering cost. Nested paths covered: $.variantrule[64].entries[1].type; $.variantrule[64].entries[1].name; $.variantrule[64].entries[1].entries[0]. The schema cannot represent the procedure's monetary costs or preparation stage.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resources",
+  "entries": [
+    "A character must spend one week and at least 25 gp gathering information on potential targets before committing the intended crime."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-crime — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[64]`
+- Source entry path: `$.variantrule[64].entries[2]`
+- Canonical output: `rule/xge-downtime-activity-crime.json`
+- OMITTED: Three ability/tool checks, selectable DCs, success-count outcome bands, loot-value table, jail/fine outcome, and check alternatives. Nested paths covered: $.variantrule[64].entries[2].type; $.variantrule[64].entries[2].name; $.variantrule[64].entries[2].entries[0]; $.variantrule[64].entries[2].entries[1]; $.variantrule[64].entries[2].entries[2]; $.variantrule[64].entries[2].entries[3]; $.variantrule[64].entries[2].entries[4]; $.variantrule[64].entries[2].entries[5]; $.variantrule[64].entries[2].entries[6]; $.variantrule[64].entries[2].entries[7].type; $.variantrule[64].entries[2].entries[7].caption; $.variantrule[64].entries[2].entries[7].colLabels[0]; $.variantrule[64].entries[2].entries[7].colLabels[1]; $.variantrule[64].entries[2].entries[7].colStyles[0]; $.variantrule[64].entries[2].entries[7].colStyles[1]; $.variantrule[64].entries[2].entries[7].rows[0][0]; $.variantrule[64].entries[2].entries[7].rows[0][1]; $.variantrule[64].entries[2].entries[7].rows[1][0]; $.variantrule[64].entries[2].entries[7].rows[1][1]; $.variantrule[64].entries[2].entries[7].rows[2][0]; $.variantrule[64].entries[2].entries[7].rows[2][1]; $.variantrule[64].entries[2].entries[7].rows[3][0]; $.variantrule[64].entries[2].entries[7].rows[3][1]. The approved contract has no multi-check success-count procedure or its conditional outcome table.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resolution",
+  "entries": [
+    "The character must make a series of checks, with the DC for all the checks chosen by the character according to the amount of profit sought from the crime.",
+    "The chosen DC can be 10, 15, 20, or 25. Successful completion of the crime yields a number of gold pieces, as shown on the Loot Value table.",
+    "To attempt a crime, the character makes three checks: Dexterity ({@skill Stealth}), Dexterity using {@item thieves' tools|PHB}, and the player's choice of Intelligence ({@skill Investigation}), Wisdom ({@skill Perception}), or Charisma ({@skill Deception}).",
+    "If none of the checks are successful, the character is caught and jailed. The character must pay a fine equal to the profit the crime would have earned and must spend one week in jail for each 25 gp of the fine.",
+    "If only one check is successful, the heist fails but the character escapes.",
+    "If two checks are successful, the heist is a partial success, netting the character half the payout.",
+    "If all three checks are successful, the character earns the full value of the loot.",
+    {
+      "type": "table",
+      "caption": "Loot Value",
+      "colLabels": [
+        "DC",
+        "Value"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "10",
+          "50 gp, robbery of a struggling merchant"
+        ],
+        [
+          "15",
+          "100 gp, robbery of a prosperous merchant"
+        ],
+        [
+          "20",
+          "200 gp, robbery of a noble"
+        ],
+        [
+          "25",
+          "1,000 gp, robbery of one of the richest figures in town"
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-crime — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[64]`
+- Source entry path: `$.variantrule[64].entries[3]`
+- Canonical output: `rule/xge-downtime-activity-crime.json`
+- OMITTED: Complication trigger conditions and crime complication table. Nested paths covered: $.variantrule[64].entries[3].type; $.variantrule[64].entries[3].name; $.variantrule[64].entries[3].entries[0]; $.variantrule[64].entries[3].entries[1].type; $.variantrule[64].entries[3].entries[1].caption; $.variantrule[64].entries[3].entries[1].colLabels[0]; $.variantrule[64].entries[3].entries[1].colLabels[1]; $.variantrule[64].entries[3].entries[1].colStyles[0]; $.variantrule[64].entries[3].entries[1].colStyles[1]; $.variantrule[64].entries[3].entries[1].rows[0][0]; $.variantrule[64].entries[3].entries[1].rows[0][1]; $.variantrule[64].entries[3].entries[1].rows[1][0]; $.variantrule[64].entries[3].entries[1].rows[1][1]; $.variantrule[64].entries[3].entries[1].rows[2][0]; $.variantrule[64].entries[3].entries[1].rows[2][1]; $.variantrule[64].entries[3].entries[1].rows[3][0]; $.variantrule[64].entries[3].entries[1].rows[3][1]; $.variantrule[64].entries[3].entries[1].rows[4][0]; $.variantrule[64].entries[3].entries[1].rows[4][1]; $.variantrule[64].entries[3].entries[1].rows[5][0]; $.variantrule[64].entries[3].entries[1].rows[5][1]; $.variantrule[64].entries[3].entries[1].rows[6][0]; $.variantrule[64].entries[3].entries[1].rows[6][1]; $.variantrule[64].entries[3].entries[1].rows[7][0]; $.variantrule[64].entries[3].entries[1].rows[7][1]; $.variantrule[64].entries[3].entries[1].footnotes[0]. The conditional complication procedure and table require unsupported state and outcome resolution.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Complications",
+  "entries": [
+    "A life of crime is filled with complications. Roll on the Crime Complications table (or create a complication of your own) if the character succeeds on only one check. If the character's rival is involved in crime or law enforcement, a complication ensues if the character succeeds on only two checks.",
+    {
+      "type": "table",
+      "caption": "Crime Complications",
+      "colLabels": [
+        "d8",
+        "Complication"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "A bounty equal to your earnings is offered for information about your crime.*"
+        ],
+        [
+          "2",
+          "An unknown person contacts you, threatening to reveal your crime if you don't render a service.*"
+        ],
+        [
+          "3",
+          "Your victim is financially ruined by your crime."
+        ],
+        [
+          "4",
+          "Someone who knows of your crime has been arrested on an unrelated matter.*"
+        ],
+        [
+          "5",
+          "Your loot is a single, easily identified item that you can't fence in this region."
+        ],
+        [
+          "6",
+          "You robbed someone who was under a local crime lord's protection, and who now wants revenge."
+        ],
+        [
+          "7",
+          "Your victim calls in a favor from a guard, doubling the efforts to solve the case."
+        ],
+        [
+          "8",
+          "Your victim asks one of your adventuring companions to solve the crime."
+        ]
+      ],
+      "footnotes": [
+        "*Might involve a rival"
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-gambling — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[66]`
+- Source entry path: `$.variantrule[66].entries[0]`
+- Canonical output: `rule/xge-downtime-activity-gambling.json`
+- OMITTED: Narrative description of gambling risk. Introductory framing only.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Games of chance are a way to make a fortune—and perhaps a better way to lose one."
+```
+
+### rule:xge:downtime-activity-gambling — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[66]`
+- Source entry path: `$.variantrule[66].entries[1]`
+- Canonical output: `rule/xge-downtime-activity-gambling.json`
+- OMITTED: One workweek and stake amount/range. Nested paths covered: $.variantrule[66].entries[1].type; $.variantrule[66].entries[1].name; $.variantrule[66].entries[1].entries[0]. The downtime schema cannot represent the required or variable stake.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resources",
+  "entries": [
+    "This activity requires one workweek of effort plus a stake of at least 10 gp, to a maximum of 1,000 gp or more, as you see fit."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-gambling — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[66]`
+- Source entry path: `$.variantrule[66].entries[2]`
+- Canonical output: `rule/xge-downtime-activity-gambling.json`
+- OMITTED: Three checks with separate random DCs, tool proficiency substitutions, and success-count result table. Nested paths covered: $.variantrule[66].entries[2].type; $.variantrule[66].entries[2].name; $.variantrule[66].entries[2].entries[0]; $.variantrule[66].entries[2].entries[1]; $.variantrule[66].entries[2].entries[2].type; $.variantrule[66].entries[2].entries[2].caption; $.variantrule[66].entries[2].entries[2].colLabels[0]; $.variantrule[66].entries[2].entries[2].colLabels[1]; $.variantrule[66].entries[2].entries[2].colStyles[0]; $.variantrule[66].entries[2].entries[2].colStyles[1]; $.variantrule[66].entries[2].entries[2].rows[0][0]; $.variantrule[66].entries[2].entries[2].rows[0][1]; $.variantrule[66].entries[2].entries[2].rows[1][0]; $.variantrule[66].entries[2].entries[2].rows[1][1]; $.variantrule[66].entries[2].entries[2].rows[2][0]; $.variantrule[66].entries[2].entries[2].rows[2][1]; $.variantrule[66].entries[2].entries[2].rows[3][0]; $.variantrule[66].entries[2].entries[2].rows[3][1]. Rule v1 cannot express multiple random-DC checks, check substitutions, or success-count consequences.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resolution",
+  "entries": [
+    "The character must make a series of checks, with a DC determined at random based on the quality of the competition that the character runs into. Part of the risk of gambling is that one never knows who might end up sitting across the table.",
+    "The character makes three checks: Wisdom ({@skill Insight}), Charisma ({@skill Deception}), and Charisma ({@skill Intimidation}). If the character has proficiency with an appropriate {@item gaming set|PHB}, that tool proficiency can replace the relevant skill in any of the checks. The DC for each of the checks is {@dice 5 + 2d10}; generate a separate DC for each one. Consult the Gambling Results table to see how the character did.",
+    {
+      "type": "table",
+      "caption": "Gambling Results",
+      "colLabels": [
+        "Result",
+        "Value"
+      ],
+      "colStyles": [
+        "col-5",
+        "col-7"
+      ],
+      "rows": [
+        [
+          "0 successes",
+          "Lose all the money you bet, and accrue a debt equal to that amount."
+        ],
+        [
+          "1 success",
+          "Lose half the money you bet."
+        ],
+        [
+          "2 successes",
+          "Gain the amount you bet plus half again more."
+        ],
+        [
+          "3 successes",
+          "Gain double the amount you bet."
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-gambling — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[66]`
+- Source entry path: `$.variantrule[66].entries[3]`
+- Canonical output: `rule/xge-downtime-activity-gambling.json`
+- OMITTED: Complication chance and gambling complication table. Nested paths covered: $.variantrule[66].entries[3].type; $.variantrule[66].entries[3].name; $.variantrule[66].entries[3].entries[0]; $.variantrule[66].entries[3].entries[1].type; $.variantrule[66].entries[3].entries[1].caption; $.variantrule[66].entries[3].entries[1].colLabels[0]; $.variantrule[66].entries[3].entries[1].colLabels[1]; $.variantrule[66].entries[3].entries[1].colStyles[0]; $.variantrule[66].entries[3].entries[1].colStyles[1]; $.variantrule[66].entries[3].entries[1].rows[0][0]; $.variantrule[66].entries[3].entries[1].rows[0][1]; $.variantrule[66].entries[3].entries[1].rows[1][0]; $.variantrule[66].entries[3].entries[1].rows[1][1]; $.variantrule[66].entries[3].entries[1].rows[2][0]; $.variantrule[66].entries[3].entries[1].rows[2][1]; $.variantrule[66].entries[3].entries[1].rows[3][0]; $.variantrule[66].entries[3].entries[1].rows[3][1]; $.variantrule[66].entries[3].entries[1].rows[4][0]; $.variantrule[66].entries[3].entries[1].rows[4][1]; $.variantrule[66].entries[3].entries[1].rows[5][0]; $.variantrule[66].entries[3].entries[1].rows[5][1]; $.variantrule[66].entries[3].entries[1].footnotes[0]. The probability trigger and conditional complications require an unsupported outcome procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Complications",
+  "entries": [
+    "Gambling tends to attract unsavory individuals. The potential complications involved come from run-ins with the law and associations with various criminals tied to the activity. Every workweek spent gambling brings a {@chance 10} chance of a complication, examples of which are on the Gambling Complications table.",
+    {
+      "type": "table",
+      "caption": "Gambling Complications",
+      "colLabels": [
+        "d6",
+        "Complication"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "You are accused of cheating. You decide whether you actually did cheat or were framed.*"
+        ],
+        [
+          "2",
+          "The town guards raid the gambling hall and throw you in jail.*"
+        ],
+        [
+          "3",
+          "A noble in town loses badly to you and loudly vows to get revenge.*"
+        ],
+        [
+          "4",
+          "You won a sum from a low-ranking member of a thieves' guild, and the guild wants its money back."
+        ],
+        [
+          "5",
+          "A local crime boss insists you start frequenting the boss's gambling parlor and no others."
+        ],
+        [
+          "6",
+          "A high-stakes gambler comes to town and insists that you take part in a game."
+        ]
+      ],
+      "footnotes": [
+        "*Might involve a rival"
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-pit-fighting — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[68]`
+- Source entry path: `$.variantrule[68].entries[0]`
+- Canonical output: `rule/xge-downtime-activity-pit-fighting.json`
+- OMITTED: Nonlethal fighting format and the statement that deadly matches use standard combat rules. The source defines no new combat mechanics for this activity; its activity procedure is omitted under R-GAP-13.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Pit fighting includes boxing, wrestling, and other nonlethal forms of combat in an organized setting with predetermined matches. If you want to introduce competitive fighting in a battle-to-the-death situation, the standard combat rules apply to that sort of activity."
+```
+
+### rule:xge:downtime-activity-pit-fighting — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[68]`
+- Source entry path: `$.variantrule[68].entries[1]`
+- Canonical output: `rule/xge-downtime-activity-pit-fighting.json`
+- OMITTED: One-workweek activity duration. Nested paths covered: $.variantrule[68].entries[1].type; $.variantrule[68].entries[1].name; $.variantrule[68].entries[1].entries[0]. Rule v1 has no pit-fighting activity procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resources",
+  "entries": [
+    "Engaging in this activity requires one workweek of effort from a character."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-pit-fighting — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[68]`
+- Source entry path: `$.variantrule[68].entries[2]`
+- Canonical output: `rule/xge-downtime-activity-pit-fighting.json`
+- OMITTED: Three ability checks, random DCs, special Constitution/Hit Die bonus, attack-roll substitution, and success-count payout table. Nested paths covered: $.variantrule[68].entries[2].type; $.variantrule[68].entries[2].name; $.variantrule[68].entries[2].entries[0]; $.variantrule[68].entries[2].entries[1]; $.variantrule[68].entries[2].entries[2].type; $.variantrule[68].entries[2].entries[2].caption; $.variantrule[68].entries[2].entries[2].colLabels[0]; $.variantrule[68].entries[2].entries[2].colLabels[1]; $.variantrule[68].entries[2].entries[2].colStyles[0]; $.variantrule[68].entries[2].entries[2].colStyles[1]; $.variantrule[68].entries[2].entries[2].rows[0][0]; $.variantrule[68].entries[2].entries[2].rows[0][1]; $.variantrule[68].entries[2].entries[2].rows[1][0]; $.variantrule[68].entries[2].entries[2].rows[1][1]; $.variantrule[68].entries[2].entries[2].rows[2][0]; $.variantrule[68].entries[2].entries[2].rows[2][1]; $.variantrule[68].entries[2].entries[2].rows[3][0]; $.variantrule[68].entries[2].entries[2].rows[3][1]. The schema cannot express the alternatives, Hit Die-derived bonus, random DCs, or success-count outcomes.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resolution",
+  "entries": [
+    "The character must make a series of checks, with a DC determined at random based on the quality of the opposition that the character runs into. A big part of the challenge in pit fighting lies in the unknown nature of a character's opponents.",
+    "The character makes three checks: Strength ({@skill Athletics}), Dexterity ({@skill Acrobatics}), and a special Constitution check that has a bonus equal to a roll of the character's largest Hit Die (this roll doesn't spend that die). If desired, the character can replace one of these skill checks with an attack roll using one of the character's weapons. The DC for each of the checks is {@dice 5 + 2d10}; generate a separate DC for each one. Consult the Pit Fighting Results table to see how the character did.",
+    {
+      "type": "table",
+      "caption": "Pit Fighting Results",
+      "colLabels": [
+        "Result",
+        "Value"
+      ],
+      "colStyles": [
+        "col-5",
+        "col-7"
+      ],
+      "rows": [
+        [
+          "0 successes",
+          "Lose your bouts, earning nothing."
+        ],
+        [
+          "1 success",
+          "Win 50 gp."
+        ],
+        [
+          "2 successes",
+          "Win 100 gp."
+        ],
+        [
+          "3 successes",
+          "Win 200 gp."
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-pit-fighting — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[68]`
+- Source entry path: `$.variantrule[68].entries[3]`
+- Canonical output: `rule/xge-downtime-activity-pit-fighting.json`
+- OMITTED: Complication chance and pit-fighting complication table. Nested paths covered: $.variantrule[68].entries[3].type; $.variantrule[68].entries[3].name; $.variantrule[68].entries[3].entries[0]; $.variantrule[68].entries[3].entries[1].type; $.variantrule[68].entries[3].entries[1].caption; $.variantrule[68].entries[3].entries[1].colLabels[0]; $.variantrule[68].entries[3].entries[1].colLabels[1]; $.variantrule[68].entries[3].entries[1].colStyles[0]; $.variantrule[68].entries[3].entries[1].colStyles[1]; $.variantrule[68].entries[3].entries[1].rows[0][0]; $.variantrule[68].entries[3].entries[1].rows[0][1]; $.variantrule[68].entries[3].entries[1].rows[1][0]; $.variantrule[68].entries[3].entries[1].rows[1][1]; $.variantrule[68].entries[3].entries[1].rows[2][0]; $.variantrule[68].entries[3].entries[1].rows[2][1]; $.variantrule[68].entries[3].entries[1].rows[3][0]; $.variantrule[68].entries[3].entries[1].rows[3][1]; $.variantrule[68].entries[3].entries[1].rows[4][0]; $.variantrule[68].entries[3].entries[1].rows[4][1]; $.variantrule[68].entries[3].entries[1].rows[5][0]; $.variantrule[68].entries[3].entries[1].rows[5][1]; $.variantrule[68].entries[3].entries[1].footnotes[0]. The conditional complication trigger and table are unsupported.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Complications",
+  "entries": [
+    "Characters involved in pit fighting must deal with their opponents, the people who bet on matches, and the matches' promoters. Every workweek spent pit fighting brings a {@chance 10} chance of a complication, examples of which are on the Pit Fighting Complications table.",
+    {
+      "type": "table",
+      "caption": "Pit Fighting Complications",
+      "colLabels": [
+        "d6",
+        "Complication"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "An opponent swears to take revenge on you.*"
+        ],
+        [
+          "2",
+          "A crime boss approaches you and offers to pay you to intentionally lose a few matches.*"
+        ],
+        [
+          "3",
+          "You defeat a popular local champion, drawing the crowd's ire."
+        ],
+        [
+          "4",
+          "You defeat a noble's servant, drawing the wrath of the noble's house.*"
+        ],
+        [
+          "5",
+          "You are accused of cheating. Whether the allegation is true or not, your reputation is tarnished.*"
+        ],
+        [
+          "6",
+          "You accidentally deliver a near-fatal wound to a foe."
+        ]
+      ],
+      "footnotes": [
+        "*Might involve a rival"
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-religious-service — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[72]`
+- Source entry path: `$.variantrule[72].entries[0]`
+- Canonical output: `rule/xge-downtime-activity-religious-service.json`
+- OMITTED: Religious service as a way to gain temple-leader favor. The Rule schema has no temple favor or favor-storage mechanic.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Characters with a religious bent might want to spend downtime in service to a temple, either by attending rites or by proselytizing in the community. Someone who undertakes this activity has a chance of winning the favor of the temple's leaders."
+```
+
+### rule:xge:downtime-activity-religious-service — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[72]`
+- Source entry path: `$.variantrule[72].entries[1]`
+- Canonical output: `rule/xge-downtime-activity-religious-service.json`
+- OMITTED: Aligned temple access, one-workweek activity, and no-gold-cost requirement. Nested paths covered: $.variantrule[72].entries[1].type; $.variantrule[72].entries[1].name; $.variantrule[72].entries[1].entries[0]. No approved downtime procedure represents temple service with its access prerequisite and expense condition.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resources",
+  "entries": [
+    "Performing religious service requires access to, and often attendance at, a temple whose beliefs and ethos align with the character's. If such a place is available, the activity takes one workweek of time but involves no gold piece expenditure."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-religious-service — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[72]`
+- Source entry path: `$.variantrule[72].entries[2]`
+- Canonical output: `rule/xge-downtime-activity-religious-service.json`
+- OMITTED: Choice of Religion or Persuasion check, check-total favor table, favor effects and expenditure, and Charisma-based favor cap. Nested paths covered: $.variantrule[72].entries[2].type; $.variantrule[72].entries[2].name; $.variantrule[72].entries[2].entries[0]; $.variantrule[72].entries[2].entries[1].type; $.variantrule[72].entries[2].entries[1].caption; $.variantrule[72].entries[2].entries[1].colLabels[0]; $.variantrule[72].entries[2].entries[1].colLabels[1]; $.variantrule[72].entries[2].entries[1].colStyles[0]; $.variantrule[72].entries[2].entries[1].colStyles[1]; $.variantrule[72].entries[2].entries[1].rows[0][0]; $.variantrule[72].entries[2].entries[1].rows[0][1]; $.variantrule[72].entries[2].entries[1].rows[1][0]; $.variantrule[72].entries[2].entries[1].rows[1][1]; $.variantrule[72].entries[2].entries[1].rows[2][0]; $.variantrule[72].entries[2].entries[1].rows[2][1]; $.variantrule[72].entries[2].entries[2]; $.variantrule[72].entries[2].entries[3]. The schema cannot express the alternative check, favor outcome bands, discretionary assistance, or score-dependent favor limit.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resolution",
+  "entries": [
+    "At the end of the required time, the character chooses to make either an Intelligence ({@skill Religion}) check or a Charisma ({@skill Persuasion}) check. The total of the check determines the benefits of service, as shown on the Religious Service table.",
+    {
+      "type": "table",
+      "caption": "Religious Service",
+      "colLabels": [
+        "Check Total",
+        "Result"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1–10",
+          "No effect. Your efforts fail to make a lasting impression."
+        ],
+        [
+          "11–20",
+          "You earn one favor."
+        ],
+        [
+          "21+",
+          "You earn two favors."
+        ]
+      ]
+    },
+    "A favor, in broad terms, is a promise of future assistance from a representative of the temple. It can be expended to ask the temple for help in dealing with a specific problem, for general political or social support, or to reduce the cost of cleric spellcasting by 50 percent. A favor could also take the form of a deity's intervention, such as an omen, a vision, or a minor miracle provided at a key moment. This latter sort of favor is expended by the DM, who also determines its nature.",
+    "Favors earned need not be expended immediately, but only a certain number can be stored up. A character can have a maximum number of unused favors equal to 1 + the character's Charisma modifier (minimum of one unused favor)."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-religious-service — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[72]`
+- Source entry path: `$.variantrule[72].entries[3]`
+- Canonical output: `rule/xge-downtime-activity-religious-service.json`
+- OMITTED: Ten-percent weekly complication chance and religious-service complication table. Nested paths covered: $.variantrule[72].entries[3].type; $.variantrule[72].entries[3].name; $.variantrule[72].entries[3].entries[0]; $.variantrule[72].entries[3].entries[1].type; $.variantrule[72].entries[3].entries[1].caption; $.variantrule[72].entries[3].entries[1].colLabels[0]; $.variantrule[72].entries[3].entries[1].colLabels[1]; $.variantrule[72].entries[3].entries[1].colStyles[0]; $.variantrule[72].entries[3].entries[1].colStyles[1]; $.variantrule[72].entries[3].entries[1].rows[0][0]; $.variantrule[72].entries[3].entries[1].rows[0][1]; $.variantrule[72].entries[3].entries[1].rows[1][0]; $.variantrule[72].entries[3].entries[1].rows[1][1]; $.variantrule[72].entries[3].entries[1].rows[2][0]; $.variantrule[72].entries[3].entries[1].rows[2][1]; $.variantrule[72].entries[3].entries[1].rows[3][0]; $.variantrule[72].entries[3].entries[1].rows[3][1]; $.variantrule[72].entries[3].entries[1].rows[4][0]; $.variantrule[72].entries[3].entries[1].rows[4][1]; $.variantrule[72].entries[3].entries[1].rows[5][0]; $.variantrule[72].entries[3].entries[1].rows[5][1]; $.variantrule[72].entries[3].entries[1].footnotes[0]. The conditional complications require a probability and table-resolution procedure outside Rule v1.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Complications",
+  "entries": [
+    "Temples can be labyrinths of political and social scheming. Even the best-intentioned sect can fall prone to rivalries. A character who serves a temple risks becoming embroiled in such struggles. Every workweek spent in religious service brings a {@chance 10} chance of a complication, examples of which are on the Religious Service Complications table.",
+    {
+      "type": "table",
+      "caption": "Religious Service Complications",
+      "colLabels": [
+        "d6",
+        "Complication"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "You have offended a priest through your words or actions.*"
+        ],
+        [
+          "2",
+          "Blasphemy is still blasphemy, even if you did it by accident."
+        ],
+        [
+          "3",
+          "A secret sect in the temple offers you membership."
+        ],
+        [
+          "4",
+          "Another temple tries to recruit you as a spy.*"
+        ],
+        [
+          "5",
+          "The temple elders implore you to take up a holy quest."
+        ],
+        [
+          "6",
+          "You accidentally discover that an important person in the temple is a fiend worshiper."
+        ]
+      ],
+      "footnotes": [
+        "*Might involve a rival"
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-research — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[73]`
+- Source entry path: `$.variantrule[73].entries[1]`
+- Canonical output: `rule/xge-downtime-activity-research.json`
+- OMITTED: Library or sage access, one-workweek time, and 50 gp minimum expense. Nested paths covered: $.variantrule[73].entries[1].type; $.variantrule[73].entries[1].name; $.variantrule[73].entries[1].entries[0]. The downtime schema cannot represent the research prerequisite or expense.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resources",
+  "entries": [
+    "Typically, a character needs access to a library or a sage to conduct research. Assuming such access is available, conducting research requires one workweek of effort and at least 50 gp spent on materials, bribes, gifts, and other expenses."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-research — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[73]`
+- Source entry path: `$.variantrule[73].entries[2]`
+- Canonical output: `rule/xge-downtime-activity-research.json`
+- OMITTED: Spending-based bonus/cap, resource-based advantage, check-total quantity of lore, and DM-determined facts. Nested paths covered: $.variantrule[73].entries[2].type; $.variantrule[73].entries[2].name; $.variantrule[73].entries[2].entries[0]; $.variantrule[73].entries[2].entries[1].type; $.variantrule[73].entries[2].entries[1].caption; $.variantrule[73].entries[2].entries[1].colLabels[0]; $.variantrule[73].entries[2].entries[1].colLabels[1]; $.variantrule[73].entries[2].entries[1].colStyles[0]; $.variantrule[73].entries[2].entries[1].colStyles[1]; $.variantrule[73].entries[2].entries[1].rows[0][0]; $.variantrule[73].entries[2].entries[1].rows[0][1]; $.variantrule[73].entries[2].entries[1].rows[1][0]; $.variantrule[73].entries[2].entries[1].rows[1][1]; $.variantrule[73].entries[2].entries[1].rows[2][0]; $.variantrule[73].entries[2].entries[1].rows[2][1]; $.variantrule[73].entries[2].entries[1].rows[3][0]; $.variantrule[73].entries[2].entries[1].rows[3][1]; $.variantrule[73].entries[2].entries[2]; $.variantrule[73].entries[2].entries[3]. Rule v1 cannot express variable check modifiers, conditional advantage, or check-total outcome bands.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resolution",
+  "entries": [
+    "The character declares the focus of the research—a specific person, place, or thing. After one workweek, the character makes an Intelligence check with a +1 bonus per 50 gp spent beyond the initial 50 gp, to a maximum of +6. In addition, a character who has access to a particularly well-stocked library or knowledgeable sages gains advantage on this check. Determine how much lore a character learns using the Research Outcomes table.",
+    {
+      "type": "table",
+      "caption": "Research Outcomes",
+      "colLabels": [
+        "Check Total",
+        "Outcome"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1–5",
+          "No effect."
+        ],
+        [
+          "6–10",
+          "You learn one piece of lore."
+        ],
+        [
+          "11–20",
+          "You learn two pieces of lore."
+        ],
+        [
+          "21+",
+          "You learn three pieces of lore."
+        ]
+      ]
+    },
+    "Each piece of lore is the equivalent of one true statement about a person, place, or thing. Examples include knowledge of a creature's resistances, the password needed to enter a sealed dungeon level, the spells commonly prepared by an order of wizards, and so on.",
+    "As DM, you are the final arbiter concerning exactly what a character learns. For a monster or an NPC, you can reveal elements of statistics or personality. For a location, you can reveal secrets about it, such as a hidden entrance, the answer to a riddle, or the nature of a creature that guards the place."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-research — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[73]`
+- Source entry path: `$.variantrule[73].entries[3]`
+- Canonical output: `rule/xge-downtime-activity-research.json`
+- OMITTED: False-information risk, weekly complication chance, and research complication examples. Nested paths covered: $.variantrule[73].entries[3].type; $.variantrule[73].entries[3].name; $.variantrule[73].entries[3].entries[0]; $.variantrule[73].entries[3].entries[1]; $.variantrule[73].entries[3].entries[2].type; $.variantrule[73].entries[3].entries[2].caption; $.variantrule[73].entries[3].entries[2].colLabels[0]; $.variantrule[73].entries[3].entries[2].colLabels[1]; $.variantrule[73].entries[3].entries[2].colStyles[0]; $.variantrule[73].entries[3].entries[2].colStyles[1]; $.variantrule[73].entries[3].entries[2].rows[0][0]; $.variantrule[73].entries[3].entries[2].rows[0][1]; $.variantrule[73].entries[3].entries[2].rows[1][0]; $.variantrule[73].entries[3].entries[2].rows[1][1]; $.variantrule[73].entries[3].entries[2].rows[2][0]; $.variantrule[73].entries[3].entries[2].rows[2][1]; $.variantrule[73].entries[3].entries[2].rows[3][0]; $.variantrule[73].entries[3].entries[2].rows[3][1]; $.variantrule[73].entries[3].entries[2].rows[4][0]; $.variantrule[73].entries[3].entries[2].rows[4][1]; $.variantrule[73].entries[3].entries[2].rows[5][0]; $.variantrule[73].entries[3].entries[2].rows[5][1]; $.variantrule[73].entries[3].entries[2].footnotes[0]. The complication trigger and conditional table are not representable by the approved schema.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Complications",
+  "entries": [
+    "The greatest risk in research is uncovering false information. Not all lore is accurate or truthful, and a rival with a scholarly bent might try to lead the character astray, especially if the object of the research is known to the rival. The rival might plant false information, bribe sages to give bad advice, or steal key tomes needed to find the truth.",
+    "In addition, a character might run into other complications during research. Every workweek spent in research brings a {@chance 10} chance of a complication, examples of which are on the Research Complications table.",
+    {
+      "type": "table",
+      "caption": "Research Complications",
+      "colLabels": [
+        "d6",
+        "Complication"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "You accidentally damage a rare book."
+        ],
+        [
+          "2",
+          "You offend a sage, who demands an extravagant gift.*"
+        ],
+        [
+          "3",
+          "If you had known that book was cursed, you never would have opened it."
+        ],
+        [
+          "4",
+          "A sage becomes obsessed with convincing you of a number of strange theories about reality.*"
+        ],
+        [
+          "5",
+          "Your actions cause you to be banned from a library until you make reparations.*"
+        ],
+        [
+          "6",
+          "You uncovered useful lore, but only by promising to complete a dangerous task in return."
+        ]
+      ],
+      "footnotes": [
+        "*Might involve a rival"
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-scribing-a-spell-scroll — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[76]`
+- Source entry path: `$.variantrule[76].entries[1]`
+- Canonical output: `rule/xge-downtime-activity-scribing-a-spell-scroll.json`
+- OMITTED: Spell-level-dependent time and cost, Arcana proficiency, required material components, prepared/known-spell restriction, and 1st-level cantrip-scroll behavior. Nested paths covered: $.variantrule[76].entries[1].type; $.variantrule[76].entries[1].name; $.variantrule[76].entries[1].entries[0]; $.variantrule[76].entries[1].entries[1]; $.variantrule[76].entries[1].entries[2].type; $.variantrule[76].entries[1].entries[2].caption; $.variantrule[76].entries[1].entries[2].colLabels[0]; $.variantrule[76].entries[1].entries[2].colLabels[1]; $.variantrule[76].entries[1].entries[2].colLabels[2]; $.variantrule[76].entries[1].entries[2].colStyles[0]; $.variantrule[76].entries[1].entries[2].colStyles[1]; $.variantrule[76].entries[1].entries[2].colStyles[2]; $.variantrule[76].entries[1].entries[2].rows[0][0]; $.variantrule[76].entries[1].entries[2].rows[0][1]; $.variantrule[76].entries[1].entries[2].rows[0][2]; $.variantrule[76].entries[1].entries[2].rows[1][0]; $.variantrule[76].entries[1].entries[2].rows[1][1]; $.variantrule[76].entries[1].entries[2].rows[1][2]; $.variantrule[76].entries[1].entries[2].rows[2][0]; $.variantrule[76].entries[1].entries[2].rows[2][1]; $.variantrule[76].entries[1].entries[2].rows[2][2]; $.variantrule[76].entries[1].entries[2].rows[3][0]; $.variantrule[76].entries[1].entries[2].rows[3][1]; $.variantrule[76].entries[1].entries[2].rows[3][2]; $.variantrule[76].entries[1].entries[2].rows[4][0]; $.variantrule[76].entries[1].entries[2].rows[4][1]; $.variantrule[76].entries[1].entries[2].rows[4][2]; $.variantrule[76].entries[1].entries[2].rows[5][0]; $.variantrule[76].entries[1].entries[2].rows[5][1]; $.variantrule[76].entries[1].entries[2].rows[5][2]; $.variantrule[76].entries[1].entries[2].rows[6][0]; $.variantrule[76].entries[1].entries[2].rows[6][1]; $.variantrule[76].entries[1].entries[2].rows[6][2]; $.variantrule[76].entries[1].entries[2].rows[7][0]; $.variantrule[76].entries[1].entries[2].rows[7][1]; $.variantrule[76].entries[1].entries[2].rows[7][2]; $.variantrule[76].entries[1].entries[2].rows[8][0]; $.variantrule[76].entries[1].entries[2].rows[8][1]; $.variantrule[76].entries[1].entries[2].rows[8][2]; $.variantrule[76].entries[1].entries[2].rows[9][0]; $.variantrule[76].entries[1].entries[2].rows[9][1]; $.variantrule[76].entries[1].entries[2].rows[9][2]. The details depend on spell levels, spell/item identities, and component rules outside this Rule contract; the costs table is not expressible here.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resources",
+  "entries": [
+    "Scribing a {@item spell scroll} takes an amount of time and money related to the level of the spell the character wants to scribe, as shown in the {@item Spell Scroll} Costs table. In addition, the character must have proficiency in the {@skill Arcana} skill and must provide any material components required for the casting of the spell. Moreover, the character must have the spell prepared, or it must be among the character's known spells, in order to scribe a scroll of that spell.",
+    "If the scribed spell is a cantrip, the version on the scroll works as if the caster were 1st level.",
+    {
+      "type": "table",
+      "caption": "Spell Scroll Costs",
+      "colLabels": [
+        "Spell Level",
+        "Time",
+        "Cost"
+      ],
+      "colStyles": [
+        "col-4 text-center",
+        "col-4",
+        "col-4 text-right"
+      ],
+      "rows": [
+        [
+          "Cantrip",
+          "1 day",
+          "15 gp"
+        ],
+        [
+          "1st",
+          "1 day",
+          "25 gp"
+        ],
+        [
+          "2nd",
+          "3 days",
+          "250 gp"
+        ],
+        [
+          "3rd",
+          "1 workweek",
+          "500 gp"
+        ],
+        [
+          "4th",
+          "2 workweeks",
+          "2,500 gp"
+        ],
+        [
+          "5th",
+          "4 workweeks",
+          "5,000 gp"
+        ],
+        [
+          "6th",
+          "8 workweeks",
+          "15,000 gp"
+        ],
+        [
+          "7th",
+          "16 workweeks",
+          "25,000 gp"
+        ],
+        [
+          "8th",
+          "32 workweeks",
+          "50,000 gp"
+        ],
+        [
+          "9th",
+          "48 workweeks",
+          "250,000 gp"
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-scribing-a-spell-scroll — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[76]`
+- Source entry path: `$.variantrule[76].entries[2]`
+- Canonical output: `rule/xge-downtime-activity-scribing-a-spell-scroll.json`
+- OMITTED: Weekly complication chance and scribing complication table. Nested paths covered: $.variantrule[76].entries[2].type; $.variantrule[76].entries[2].name; $.variantrule[76].entries[2].entries[0]; $.variantrule[76].entries[2].entries[1].type; $.variantrule[76].entries[2].entries[1].caption; $.variantrule[76].entries[2].entries[1].colLabels[0]; $.variantrule[76].entries[2].entries[1].colLabels[1]; $.variantrule[76].entries[2].entries[1].colStyles[0]; $.variantrule[76].entries[2].entries[1].colStyles[1]; $.variantrule[76].entries[2].entries[1].rows[0][0]; $.variantrule[76].entries[2].entries[1].rows[0][1]; $.variantrule[76].entries[2].entries[1].rows[1][0]; $.variantrule[76].entries[2].entries[1].rows[1][1]; $.variantrule[76].entries[2].entries[1].rows[2][0]; $.variantrule[76].entries[2].entries[1].rows[2][1]; $.variantrule[76].entries[2].entries[1].rows[3][0]; $.variantrule[76].entries[2].entries[1].rows[3][1]; $.variantrule[76].entries[2].entries[1].rows[4][0]; $.variantrule[76].entries[2].entries[1].rows[4][1]; $.variantrule[76].entries[2].entries[1].rows[5][0]; $.variantrule[76].entries[2].entries[1].rows[5][1]; $.variantrule[76].entries[2].entries[1].footnotes[0]. The probability trigger and conditional complication outcomes are unsupported.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Complications",
+  "entries": [
+    "Crafting a {@item spell scroll} is a solitary task, unlikely to attract much attention. The complications that arise are more likely to involve the preparation needed for the activity. Every workweek spent scribing brings a {@chance 10} chance of a complication, examples of which are on the Scribe a Scroll Complications table.",
+    {
+      "type": "table",
+      "caption": "Scribe a Scroll Complications",
+      "colLabels": [
+        "d6",
+        "Complication"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "You bought up the last of the rare ink used to craft scrolls, angering a wizard in town."
+        ],
+        [
+          "2",
+          "The priest of a temple of good accuses you of trafficking in dark magic.*"
+        ],
+        [
+          "3",
+          "A wizard eager to collect one of your spells in a book presses you to sell the scroll."
+        ],
+        [
+          "4",
+          "Due to a strange error in creating the scroll, it is instead a random spell of the same level."
+        ],
+        [
+          "5",
+          "The rare parchment you bought for your scroll has a barely visible map on it."
+        ],
+        [
+          "6",
+          "A thief attempts to break into your workroom.*"
+        ]
+      ],
+      "footnotes": [
+        "*Might involve a rival"
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-selling-a-magic-item — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[77]`
+- Source entry path: `$.variantrule[77].entries[0]`
+- Canonical output: `rule/xge-downtime-activity-selling-a-magic-item.json`
+- OMITTED: Narrative risk of bad offers and dishonest buyers. Introductory framing; the specific sale procedure is accounted for below.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"Selling a magic item is by no means an easy task. Con artists and thieves are always looking out for an easy score, and there's no guarantee that a character will receive a good offer even if a legitimate buyer is found."
+```
+
+### rule:xge:downtime-activity-selling-a-magic-item — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[77]`
+- Source entry path: `$.variantrule[77].entries[1]`
+- Canonical output: `rule/xge-downtime-activity-selling-a-magic-item.json`
+- OMITTED: 25 gp expense and restriction to one item at a time. Nested paths covered: $.variantrule[77].entries[1].type; $.variantrule[77].entries[1].name; $.variantrule[77].entries[1].entries[0]. The approved downtime schema has no expense field or item-count constraint.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resources",
+  "entries": [
+    "A character can find a buyer for one magic item by spending one workweek and 25 gp, which is used to spread word of the desired sale. A character must pick one item at a time to sell."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-selling-a-magic-item — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[77]`
+- Source entry path: `$.variantrule[77].entries[2]`
+- Canonical output: `rule/xge-downtime-activity-selling-a-magic-item.json`
+- OMITTED: Declining an offer/retrying, rarity base prices, check-total offer multipliers, and consumable reduction. Nested paths covered: $.variantrule[77].entries[2].type; $.variantrule[77].entries[2].name; $.variantrule[77].entries[2].entries[0]; $.variantrule[77].entries[2].entries[1].type; $.variantrule[77].entries[2].entries[1].caption; $.variantrule[77].entries[2].entries[1].colLabels[0]; $.variantrule[77].entries[2].entries[1].colLabels[1]; $.variantrule[77].entries[2].entries[1].colStyles[0]; $.variantrule[77].entries[2].entries[1].colStyles[1]; $.variantrule[77].entries[2].entries[1].rows[0][0]; $.variantrule[77].entries[2].entries[1].rows[0][1]; $.variantrule[77].entries[2].entries[1].rows[1][0]; $.variantrule[77].entries[2].entries[1].rows[1][1]; $.variantrule[77].entries[2].entries[1].rows[2][0]; $.variantrule[77].entries[2].entries[1].rows[2][1]; $.variantrule[77].entries[2].entries[1].rows[3][0]; $.variantrule[77].entries[2].entries[1].rows[3][1]; $.variantrule[77].entries[2].entries[1].rows[4][0]; $.variantrule[77].entries[2].entries[1].rows[4][1]; $.variantrule[77].entries[2].entries[1].footnotes[0]; $.variantrule[77].entries[2].entries[2].type; $.variantrule[77].entries[2].entries[2].caption; $.variantrule[77].entries[2].entries[2].colLabels[0]; $.variantrule[77].entries[2].entries[2].colLabels[1]; $.variantrule[77].entries[2].entries[2].colStyles[0]; $.variantrule[77].entries[2].entries[2].colStyles[1]; $.variantrule[77].entries[2].entries[2].rows[0][0]; $.variantrule[77].entries[2].entries[2].rows[0][1]; $.variantrule[77].entries[2].entries[2].rows[1][0]; $.variantrule[77].entries[2].entries[2].rows[1][1]; $.variantrule[77].entries[2].entries[2].rows[2][0]; $.variantrule[77].entries[2].entries[2].rows[2][1]. The schema cannot express retry branches or the rarity-indexed and check-total price tables.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resolution",
+  "entries": [
+    "A character who wants to sell an item must make a Charisma ({@skill Persuasion}) check to determine what kind of offer comes in. The character can always opt not to sell, instead forfeiting the workweek of effort and trying again later. Use the Magic Item Base Prices and Magic Item Offer tables to determine the sale price.",
+    {
+      "type": "table",
+      "caption": "Magic Item Base Prices",
+      "colLabels": [
+        "Rarity",
+        "Base Price*"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "Common",
+          "100 gp"
+        ],
+        [
+          "Uncommon",
+          "400 gp"
+        ],
+        [
+          "Rare",
+          "4,000 gp"
+        ],
+        [
+          "Very rare",
+          "40,000 gp"
+        ],
+        [
+          "Legendary",
+          "200,000 gp"
+        ]
+      ],
+      "footnotes": [
+        "*Halved for a consumable item like a potion or scroll"
+      ]
+    },
+    {
+      "type": "table",
+      "caption": "Magic Item Offer",
+      "colLabels": [
+        "Check Total",
+        "Offer"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1–10",
+          "50% of base price"
+        ],
+        [
+          "11–20",
+          "100% of base price"
+        ],
+        [
+          "21+",
+          "150% of base price"
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-selling-a-magic-item — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[77]`
+- Source entry path: `$.variantrule[77].entries[3]`
+- Canonical output: `rule/xge-downtime-activity-selling-a-magic-item.json`
+- OMITTED: Weekly complication chance and sale complication table. Nested paths covered: $.variantrule[77].entries[3].type; $.variantrule[77].entries[3].name; $.variantrule[77].entries[3].entries[0]; $.variantrule[77].entries[3].entries[1].type; $.variantrule[77].entries[3].entries[1].caption; $.variantrule[77].entries[3].entries[1].colLabels[0]; $.variantrule[77].entries[3].entries[1].colLabels[1]; $.variantrule[77].entries[3].entries[1].colStyles[0]; $.variantrule[77].entries[3].entries[1].colStyles[1]; $.variantrule[77].entries[3].entries[1].rows[0][0]; $.variantrule[77].entries[3].entries[1].rows[0][1]; $.variantrule[77].entries[3].entries[1].rows[1][0]; $.variantrule[77].entries[3].entries[1].rows[1][1]; $.variantrule[77].entries[3].entries[1].rows[2][0]; $.variantrule[77].entries[3].entries[1].rows[2][1]; $.variantrule[77].entries[3].entries[1].rows[3][0]; $.variantrule[77].entries[3].entries[1].rows[3][1]; $.variantrule[77].entries[3].entries[1].rows[4][0]; $.variantrule[77].entries[3].entries[1].rows[4][1]; $.variantrule[77].entries[3].entries[1].rows[5][0]; $.variantrule[77].entries[3].entries[1].rows[5][1]; $.variantrule[77].entries[3].entries[1].footnotes[0]. The risk trigger and conditional complication outcomes are unsupported.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Complications",
+  "entries": [
+    "The main risk in selling a magic item lies in attracting thieves and anyone else who wants the item but doesn't want to pay for it. Other folk might try to undermine a deal in order to bolster their own business or seek to discredit the character as a legitimate seller. Every workweek spent trying to sell an item brings a {@chance 10} chance of a complication, examples of which are on the Magic Item Sale Complications table.",
+    {
+      "type": "table",
+      "caption": "Magic Item Sale Complications",
+      "colLabels": [
+        "d6",
+        "Complication"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "Your enemy secretly arranges to buy the item to use it against you.*"
+        ],
+        [
+          "2",
+          "A thieves' guild, alerted to the sale, attempts to steal your item.*"
+        ],
+        [
+          "3",
+          "A foe circulates rumors that your item is a fake.*"
+        ],
+        [
+          "4",
+          "A sorcerer claims your item as a birthright and demands you hand it over."
+        ],
+        [
+          "5",
+          "Your item's previous owner, or surviving allies of the owner, vow to retake the item by force."
+        ],
+        [
+          "6",
+          "The buyer is murdered before the sale is finalized.*"
+        ]
+      ],
+      "footnotes": [
+        "*Might involve a rival"
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-training — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[81]`
+- Source entry path: `$.variantrule[81].entries[0]`
+- Canonical output: `rule/xge-downtime-activity-training.json`
+- OMITTED: Learning a language or gaining tool proficiency with an instructor. The outcomes belong to Language and Equipment/proficiency domains and cannot be represented as a Rule-owned resource.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+"Given enough free time and the services of an instructor, a character can learn a language or pick up proficiency with a tool."
+```
+
+### rule:xge:downtime-activity-training — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[81]`
+- Source entry path: `$.variantrule[81].entries[1]`
+- Canonical output: `rule/xge-downtime-activity-training.json`
+- OMITTED: At-least-ten-week duration reduced by Intelligence modifier and 25 gp weekly cost. Nested paths covered: $.variantrule[81].entries[1].type; $.variantrule[81].entries[1].name; $.variantrule[81].entries[1].entries[0]. The downtime schema cannot express a character-score-dependent duration or recurring expense.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resources",
+  "entries": [
+    "Receiving training in a language or tool typically takes at least ten workweeks, but this time is reduced by a number of workweeks equal to the character's Intelligence modifier (an Intelligence penalty doesn't increase the time needed). Training costs 25 gp per workweek."
+  ]
+}
+```
+
+### rule:xge:downtime-activity-training — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[81]`
+- Source entry path: `$.variantrule[81].entries[2]`
+- Canonical output: `rule/xge-downtime-activity-training.json`
+- OMITTED: Ten-week complication probability and teacher-related complication table. Nested paths covered: $.variantrule[81].entries[2].type; $.variantrule[81].entries[2].name; $.variantrule[81].entries[2].entries[0]; $.variantrule[81].entries[2].entries[1].type; $.variantrule[81].entries[2].entries[1].caption; $.variantrule[81].entries[2].entries[1].colLabels[0]; $.variantrule[81].entries[2].entries[1].colLabels[1]; $.variantrule[81].entries[2].entries[1].colStyles[0]; $.variantrule[81].entries[2].entries[1].colStyles[1]; $.variantrule[81].entries[2].entries[1].rows[0][0]; $.variantrule[81].entries[2].entries[1].rows[0][1]; $.variantrule[81].entries[2].entries[1].rows[1][0]; $.variantrule[81].entries[2].entries[1].rows[1][1]; $.variantrule[81].entries[2].entries[1].rows[2][0]; $.variantrule[81].entries[2].entries[1].rows[2][1]; $.variantrule[81].entries[2].entries[1].rows[3][0]; $.variantrule[81].entries[2].entries[1].rows[3][1]; $.variantrule[81].entries[2].entries[1].rows[4][0]; $.variantrule[81].entries[2].entries[1].rows[4][1]; $.variantrule[81].entries[2].entries[1].rows[5][0]; $.variantrule[81].entries[2].entries[1].rows[5][1]; $.variantrule[81].entries[2].entries[1].footnotes[0]. The conditional complications require an unsupported probability and table procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Complications",
+  "entries": [
+    "Complications that arise while training typically involve the teacher. Every ten workweeks spent in training brings a {@chance 10} chance of a complication, examples of which are on the Training Complications table.",
+    {
+      "type": "table",
+      "caption": "Training Complications",
+      "colLabels": [
+        "d6",
+        "Complication"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "Your instructor disappears, forcing you to spend one workweek finding a new one.*"
+        ],
+        [
+          "2",
+          "Your teacher instructs you in rare, archaic methods, which draw comments from others."
+        ],
+        [
+          "3",
+          "Your teacher is a spy sent to learn your plans.*"
+        ],
+        [
+          "4",
+          "Your teacher is a wanted criminal."
+        ],
+        [
+          "5",
+          "Your teacher is a cruel taskmaster."
+        ],
+        [
+          "6",
+          "Your teacher asks for help dealing with a threat."
+        ]
+      ],
+      "footnotes": [
+        "*Might involve a rival"
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-work — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[83]`
+- Source entry path: `$.variantrule[83].entries[0]`
+- Canonical output: `rule/xge-downtime-activity-work.json`
+- OMITTED: Temporary work and variable earnings context. Introductory description; the duration and check procedure are accounted for below.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"When all else fails, an adventurer can turn to an honest trade to earn a living. This activity represents a character's attempt to find temporary work, the quality and wages of which are difficult to predict."
+```
+
+### rule:xge:downtime-activity-work — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[83]`
+- Source entry path: `$.variantrule[83].entries[2]`
+- Canonical output: `rule/xge-downtime-activity-work.json`
+- OMITTED: Choice among ability/tool checks and check-total wage/lifestyle outcome table. Nested paths covered: $.variantrule[83].entries[2].type; $.variantrule[83].entries[2].name; $.variantrule[83].entries[2].entries[0]; $.variantrule[83].entries[2].entries[1].type; $.variantrule[83].entries[2].entries[1].caption; $.variantrule[83].entries[2].entries[1].colLabels[0]; $.variantrule[83].entries[2].entries[1].colLabels[1]; $.variantrule[83].entries[2].entries[1].colStyles[0]; $.variantrule[83].entries[2].entries[1].colStyles[1]; $.variantrule[83].entries[2].entries[1].rows[0][0]; $.variantrule[83].entries[2].entries[1].rows[0][1]; $.variantrule[83].entries[2].entries[1].rows[1][0]; $.variantrule[83].entries[2].entries[1].rows[1][1]; $.variantrule[83].entries[2].entries[1].rows[2][0]; $.variantrule[83].entries[2].entries[1].rows[2][1]; $.variantrule[83].entries[2].entries[1].rows[3][0]; $.variantrule[83].entries[2].entries[1].rows[3][1]. Rule v1 cannot encode the five different check alternatives or the outcome bands that resolve their totals.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Resolution",
+  "entries": [
+    "To determine how much money a character earns, the character makes an ability check: Strength ({@skill Athletics}), Dexterity ({@skill Acrobatics}), Intelligence using a set of tools, Charisma ({@skill Performance}), or Charisma using a {@item musical instrument|PHB}. Consult the Wages table to see how much money is generated according to the total of the check.",
+    {
+      "type": "table",
+      "caption": "Wages",
+      "colLabels": [
+        "Check Total",
+        "Earnings"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "9 or lower",
+          "Poor lifestyle for the week"
+        ],
+        [
+          "10–14",
+          "Modest lifestyle for the week"
+        ],
+        [
+          "15–20",
+          "Comfortable lifestyle for the week"
+        ],
+        [
+          "21+",
+          "Comfortable lifestyle for the week + 25 gp"
+        ]
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-activity-work — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[83]`
+- Source entry path: `$.variantrule[83].entries[3]`
+- Canonical output: `rule/xge-downtime-activity-work.json`
+- OMITTED: Weekly complication chance and work-complication effects. Nested paths covered: $.variantrule[83].entries[3].type; $.variantrule[83].entries[3].name; $.variantrule[83].entries[3].entries[0]; $.variantrule[83].entries[3].entries[1].type; $.variantrule[83].entries[3].entries[1].caption; $.variantrule[83].entries[3].entries[1].colLabels[0]; $.variantrule[83].entries[3].entries[1].colLabels[1]; $.variantrule[83].entries[3].entries[1].colStyles[0]; $.variantrule[83].entries[3].entries[1].colStyles[1]; $.variantrule[83].entries[3].entries[1].rows[0][0]; $.variantrule[83].entries[3].entries[1].rows[0][1]; $.variantrule[83].entries[3].entries[1].rows[1][0]; $.variantrule[83].entries[3].entries[1].rows[1][1]; $.variantrule[83].entries[3].entries[1].rows[2][0]; $.variantrule[83].entries[3].entries[1].rows[2][1]; $.variantrule[83].entries[3].entries[1].rows[3][0]; $.variantrule[83].entries[3].entries[1].rows[3][1]; $.variantrule[83].entries[3].entries[1].rows[4][0]; $.variantrule[83].entries[3].entries[1].rows[4][1]; $.variantrule[83].entries[3].entries[1].rows[5][0]; $.variantrule[83].entries[3].entries[1].rows[5][1]; $.variantrule[83].entries[3].entries[1].footnotes[0]. The conditional complication procedure and consequences are unsupported.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Complications",
+  "entries": [
+    "Ordinary work is rarely filled with significant complications. Still, the Work Complications table can add some difficulties to a worker's life. Each workweek of activity brings a {@chance 10} chance that a character encounters a complication.",
+    {
+      "type": "table",
+      "caption": "Work Complications",
+      "colLabels": [
+        "d6",
+        "Complication"
+      ],
+      "colStyles": [
+        "col-2 text-center",
+        "col-10"
+      ],
+      "rows": [
+        [
+          "1",
+          "A difficult customer or a fight with a coworker reduces the wages you earn by one category.*"
+        ],
+        [
+          "2",
+          "Your employer's financial difficulties result in your not being paid.*"
+        ],
+        [
+          "3",
+          "A coworker with ties to an important family in town takes a dislike to you.*"
+        ],
+        [
+          "4",
+          "Your employer is involved with a dark cult or a criminal enterprise."
+        ],
+        [
+          "5",
+          "A crime ring targets your business for extortion.*"
+        ],
+        [
+          "6",
+          "You gain a reputation for laziness (unjustified or not, as you choose), giving you disadvantage on checks made for this downtime activity for the next six workweeks you devote to it.*"
+        ]
+      ],
+      "footnotes": [
+        "*Might involve a rival"
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-revisited — entry 0
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[94]`
+- Source entry path: `$.variantrule[94].entries[0]`
+- Canonical output: `rule/xge-downtime-revisited.json`
+- OMITTED: Campaign pacing context and references to PHB/DMG downtime section discussions. The PHB and DMG section-level references do not identify specific canonical Rule records; the XGE example activities are linked explicitly below.; cause: `EXTERNAL_DEPENDENCY`
+
+Complete original source entry:
+
+```json
+"It's possible for the characters to start a campaign at 1st level, dive into an epic story, and reach 10th level and beyond in a short amount of game time. Although that pace works fine for many campaigns, some DMs prefer a campaign story with pauses built into it—times when adventurers are not going on adventures. The downtime rules given in this section can be used as alternatives to the approach in the {@book Player's Handbook|PHB|8|Downtime Activities} and the {@book Dungeon Master's Guide|DMG|6|Downtime Activities}, or you can use the material here to inspire the creation of your own options."
+```
+
+### rule:xge:downtime-revisited — entry 1
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[94]`
+- Source entry path: `$.variantrule[94].entries[1]`
+- Canonical output: `rule/xge-downtime-revisited.json`
+- OMITTED: Narrative description of longer campaign timelines and world events. Campaign framing rather than a structured Rule mechanic.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"By engaging the characters in downtime activities that take weeks or even months to complete, you can give your campaign a longer time line—one in which events in the world play out over years. Wars begin and end, tyrants come and go, and royal lines rise and fall over the course of the story that you and the characters tell."
+```
+
+### rule:xge:downtime-revisited — entry 2
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[94]`
+- Source entry path: `$.variantrule[94].entries[2]`
+- Canonical output: `rule/xge-downtime-revisited.json`
+- OMITTED: General spending or relief of monetary treasure through downtime. Rule v1 has no generic monetary-resource procedure.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+"Downtime rules also provide ways for characters to spend—or be relieved of—the monetary treasure they amass on their adventures."
+```
+
+### rule:xge:downtime-revisited — entry 3
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[94]`
+- Source entry path: `$.variantrule[94].entries[3]`
+- Canonical output: `rule/xge-downtime-revisited.json`
+- OMITTED: Overview of rivals and downtime activities as the system's two elements. This summary has no independent mechanics beyond the specific subsections accounted for separately.; cause: `NON_MECHANICAL`
+
+Complete original source entry:
+
+```json
+"The system presented here consists of two elements. First, it introduces the concept of rivals. Second, it details a number of downtime activities that characters can undertake."
+```
+
+### rule:xge:downtime-revisited — entry 4
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[94]`
+- Source entry path: `$.variantrule[94].entries[4]`
+- Canonical output: `rule/xge-downtime-revisited.json`
+- OMITTED: Rivals, NPC creation, example rival table, goals, assets, agendas, and week-by-week plans. Nested paths covered: $.variantrule[94].entries[4].type; $.variantrule[94].entries[4].name; $.variantrule[94].entries[4].entries[0]; $.variantrule[94].entries[4].entries[1]; $.variantrule[94].entries[4].entries[2].type; $.variantrule[94].entries[4].entries[2].name; $.variantrule[94].entries[4].entries[2].entries[0]; $.variantrule[94].entries[4].entries[2].entries[1]; $.variantrule[94].entries[4].entries[2].entries[2]; $.variantrule[94].entries[4].entries[2].entries[3].type; $.variantrule[94].entries[4].entries[2].entries[3].caption; $.variantrule[94].entries[4].entries[2].entries[3].colLabels[0]; $.variantrule[94].entries[4].entries[2].entries[3].colLabels[1]; $.variantrule[94].entries[4].entries[2].entries[3].colStyles[0]; $.variantrule[94].entries[4].entries[2].entries[3].colStyles[1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[0][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[0][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[1][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[1][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[2][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[2][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[3][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[3][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[4][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[4][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[5][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[5][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[6][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[6][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[7][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[7][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[8][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[8][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[9][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[9][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[10][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[10][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[11][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[11][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[12][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[12][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[13][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[13][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[14][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[14][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[15][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[15][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[16][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[16][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[17][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[17][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[18][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[18][1]; $.variantrule[94].entries[4].entries[2].entries[3].rows[19][0]; $.variantrule[94].entries[4].entries[2].entries[3].rows[19][1]; $.variantrule[94].entries[4].entries[2].entries[4]; $.variantrule[94].entries[4].entries[2].entries[5].type; $.variantrule[94].entries[4].entries[2].entries[5].name; $.variantrule[94].entries[4].entries[2].entries[5].entries[0]; $.variantrule[94].entries[4].entries[2].entries[6].type; $.variantrule[94].entries[4].entries[2].entries[6].name; $.variantrule[94].entries[4].entries[2].entries[6].entries[0]; $.variantrule[94].entries[4].entries[2].entries[7].type; $.variantrule[94].entries[4].entries[2].entries[7].name; $.variantrule[94].entries[4].entries[2].entries[7].entries[0]; $.variantrule[94].entries[4].entries[2].entries[7].entries[1]; $.variantrule[94].entries[4].entries[2].entries[7].entries[2]; $.variantrule[94].entries[4].entries[2].entries[7].entries[3]. Rival state, NPC construction, campaign resources, and ongoing agendas are outside the Rule schema.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Rivals",
+  "entries": [
+    "Rivals are NPCs who oppose the characters and make their presence felt whenever the characters are engaging in downtime. A rival might be a villain you have featured in past adventures or plan to use in the future. Rivals can also include good or neutral folk who are at odds with the characters, whether because they have opposing goals or they simply dislike one another. The cultist of Orcus whose plans the characters have foiled, the ambitious merchant prince who wants to rule the city with an iron fist, and the nosy high priest of Helm who is convinced the characters are up to no good are all examples of rivals.",
+    "A rival's agenda changes over time. Though the characters engage in downtime only between adventures, their rivals rarely rest, continuing to spin plots and work against the characters even when the characters are off doing something else.",
+    {
+      "type": "entries",
+      "name": "Creating a Rival",
+      "entries": [
+        "In essence, a rival is a somewhat specialized NPC. You can use chapter 4 of the Dungeon Master's Guide to build a new NPC for this purpose, or pick one from your current cast of supporting characters and embellish that NPC as described below.",
+        "It's possible for the characters to have two or three rivals at a time, each with a separate agenda. At least one should be a villain, but the others might be neutral or good; conflicts with those rivals might be social or political, rather than manifesting as direct attacks.",
+        "The best rivals have a connection with their adversaries on a personal level. Find links in the characters' backstories or the events of recent adventures that explain what sparked the rival's actions. The best trouble to put the characters in is trouble they created for themselves.",
+        {
+          "type": "table",
+          "caption": "Rival",
+          "colLabels": [
+            "d20",
+            "Rival"
+          ],
+          "colStyles": [
+            "col-2 text-center",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "Tax collector who is convinced the characters are dodging fees"
+            ],
+            [
+              "2",
+              "Politician who is concerned that the characters are causing more trouble than they solve"
+            ],
+            [
+              "3",
+              "High priest who worries the characters are diminishing the temple's prestige"
+            ],
+            [
+              "4",
+              "Wizard who blames the characters for some recent troubles"
+            ],
+            [
+              "5",
+              "Rival adventuring party"
+            ],
+            [
+              "6",
+              "Bard who loves a scandal enough to spark one"
+            ],
+            [
+              "7",
+              "Childhood rival or member of a rival clan"
+            ],
+            [
+              "8",
+              "Scorned sibling or parent"
+            ],
+            [
+              "9",
+              "Merchant who blames the characters for any business woes"
+            ],
+            [
+              "10",
+              "Newcomer out to make a mark on the world"
+            ],
+            [
+              "11",
+              "Sibling or ally of defeated enemy"
+            ],
+            [
+              "12",
+              "Official seeking to restore a tarnished reputation"
+            ],
+            [
+              "13",
+              "Deadly foe disguised as a social rival"
+            ],
+            [
+              "14",
+              "Fiend seeking to tempt the characters to evil"
+            ],
+            [
+              "15",
+              "Spurned romantic interest"
+            ],
+            [
+              "16",
+              "Political opportunist seeking a scapegoat"
+            ],
+            [
+              "17",
+              "Traitorous noble looking to foment a revolution"
+            ],
+            [
+              "18",
+              "Would-be tyrant who brooks no opposition"
+            ],
+            [
+              "19",
+              "Exiled noble looking for revenge"
+            ],
+            [
+              "20",
+              "Corrupt official worried that recent misdeeds will be revealed"
+            ]
+          ]
+        },
+        "To add the right amount of detail to a rival you want to create, give some thought to what that NPC is trying to accomplish and what resources and methods the rival can bring to bear against the characters.",
+        {
+          "type": "entries",
+          "name": "Goals",
+          "entries": [
+            "An effective rival has a clear reason for interfering with the characters' lives. Think about what the rival wants, how and why the characters stand in the way, and how the conflict could be resolved. Ideally, a rival's goal directly involves the characters or something they care about."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Assets",
+          "entries": [
+            "Think about the resources the rival can marshal. Does the character have enough money to pay bribes or to hire a small gang of mercenaries? Does the rival hold sway over any guilds, temples, or other groups? Make a list of the rival's assets, and consider how they can be used."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Plans",
+          "entries": [
+            "The foundation of a rival's presence in the campaign is the actions the rival takes or the events that occur as a result of that character's goals. Each time you resolve one or more workweeks of downtime, pick one of the ways a rival's plans might be advanced and introduce it into play.",
+            "Think about how a rival might operate in order to bring specific plans to fruition, and jot down three or four kinds of actions the rival might undertake. Some of these might be versions of the downtime activities described later in this section, but these are more often efforts that are specific to the rival.",
+            "A rival's action might be a direct attack, such as an assassination attempt, that you play out during a session. Or it might be a background activity that you describe as altering the campaign in some way. For example, a rival who wants to increase the prestige of the temple of a war god might hold a festival with drink, food, and gladiatorial games. Even if the characters aren't directly involved, the event becomes the talk of the town.",
+            "Some elements of a rival's plans might involve events in the world that aren't under the rival's control. Whether such an event can be easily anticipated or not, the rival's plans might include contingencies for taking advantage of such happenings."
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-revisited — entry 5
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[94]`
+- Source entry path: `$.variantrule[94].entries[5]`
+- Canonical output: `rule/xge-downtime-revisited.json`
+- OMITTED: General downtime activity resolution, week/day/month durations, daily 8-hour requirement, nonconsecutive scheduling, maximum elapsed period, cost doubling, and complications. Nested paths covered: $.variantrule[94].entries[5].type; $.variantrule[94].entries[5].name; $.variantrule[94].entries[5].entries[0]; $.variantrule[94].entries[5].entries[1]; $.variantrule[94].entries[5].entries[2].type; $.variantrule[94].entries[5].entries[2].name; $.variantrule[94].entries[5].entries[2].entries[0]; $.variantrule[94].entries[5].entries[2].entries[1]; $.variantrule[94].entries[5].entries[2].entries[2]; $.variantrule[94].entries[5].entries[3].type; $.variantrule[94].entries[5].entries[3].name; $.variantrule[94].entries[5].entries[3].entries[0]; $.variantrule[94].entries[5].entries[3].entries[1]. Rule v1 represents specific activities but has no generic downtime framework or cross-activity timing/cost procedure; detailed downtime remains skipped under R-GAP-13.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Downtime Activities",
+  "entries": [
+    "Downtime activities are tasks that usually take a workweek (5 days) or longer to perform. These tasks can include buying or creating magic items, pulling off crimes, and working at a job. A character selects a downtime activity from among those available and pays the cost of that activity in time and money. You, as DM, then follow the rules for the activity to resolve it, informing the player of the results and any complications that ensue.",
+    "Consider handling downtime away from the game table. For example, you could have the players pick their downtime activities at the end of a session, and then communicate about them by email or text, until you next see them in person.",
+    {
+      "type": "entries",
+      "name": "Resolving Activities",
+      "entries": [
+        "The description of each activity tells you how to resolve it. Many activities require an ability check, so be sure to note the character's relevant ability modifiers. Follow the steps in the activity, and determine the results.",
+        "Most downtime activities require a workweek (5 days) to complete. Some activities require days, weeks (7 days), or months (30 days). A character must spend at least 8 hours of each day engaged in the downtime activity for that day to count toward the activity's completion.",
+        "The days of an activity don't need to be consecutive; you can spread them over a longer period of time than is required for the activity. But that period of time should be no more than twice as long as the required time; otherwise you should introduce extra complications (see below) and possibly double the activity's costs to represent the inefficiency of the character's progress."
+      ]
+    },
+    {
+      "type": "entries",
+      "name": "Complications",
+      "entries": [
+        "The description of each activity includes a discussion of complications you can throw at the characters. The consequences of a complication might spawn entire adventures, introduce NPCs to vex the party, or give the characters headaches or advantages in any number of other ways.",
+        "Each of these sections has a table that offers possible complications. You can roll to determine a complication randomly, pick one from the table, or devise one of your own, and then share it with the player."
+      ]
+    }
+  ]
+}
+```
+
+### rule:xge:downtime-revisited — entry 6
+
+- Source file: `src/main/resources/data/variantrules.json`
+- Source object: `$.variantrule[94]`
+- Source entry path: `$.variantrule[94].entries[6]`
+- Canonical output: `rule/xge-downtime-revisited.json`
+- OMITTED: DM control of activity availability and location/resource eligibility. Nested paths covered: $.variantrule[94].entries[6].type; $.variantrule[94].entries[6].name; $.variantrule[94].entries[6].entries[0]; $.variantrule[94].entries[6].entries[1]; $.variantrule[94].entries[6].entries[2].type; $.variantrule[94].entries[6].entries[2].items[0]; $.variantrule[94].entries[6].entries[2].items[1]; $.variantrule[94].entries[6].entries[2].items[2]; $.variantrule[94].entries[6].entries[2].items[3]; $.variantrule[94].entries[6].entries[2].items[4]; $.variantrule[94].entries[6].entries[2].items[5]; $.variantrule[94].entries[6].entries[2].items[6]; $.variantrule[94].entries[6].entries[2].items[7]; $.variantrule[94].entries[6].entries[2].items[8]; $.variantrule[94].entries[6].entries[2].items[9]; $.variantrule[94].entries[6].entries[2].items[10]; $.variantrule[94].entries[6].entries[2].items[11]; $.variantrule[94].entries[6].entries[2].items[12]. The references schema cannot attach activity-specific availability and campaign-location restrictions.; cause: `SCHEMA_UNSUPPORTED`
+
+Complete original source entry:
+
+```json
+{
+  "type": "entries",
+  "name": "Example Downtime Activities",
+  "entries": [
+    "The following activities are suitable for any character who can afford to pursue them. As DM, you have the final say on which activities are available to the characters. The activities you allow might depend on the nature of the area where the characters are located. For example, you might disallow the creation of magic items or decide that the characters are in a town that is too isolated from major markets for them to buy such items.",
+    "See the following entries for details:",
+    {
+      "type": "list",
+      "items": [
+        "{@variantrule Downtime Activity: Buying a Magic Item|XGE|Buying a Magic Item}",
+        "{@variantrule Downtime Activity: Carousing|XGE|Carousing}",
+        "{@variantrule Downtime Activity: Crafting an Item|XGE|Crafting an Item}",
+        "{@variantrule Downtime Activity: Crime|XGE|Crime}",
+        "{@variantrule Downtime Activity: Gambling|XGE|Gambling}",
+        "{@variantrule Downtime Activity: Pit Fighting|XGE|Pit Fighting}",
+        "{@variantrule Downtime Activity: Relaxation|XGE|Relaxation}",
+        "{@variantrule Downtime Activity: Religious Service|XGE|Religious Service}",
+        "{@variantrule Downtime Activity: Research|XGE|Research}",
+        "{@variantrule Downtime Activity: Scribing a Spell Scroll|XGE|Scribing a Spell Scroll}",
+        "{@variantrule Downtime Activity: Selling a Magic Item|XGE|Selling a Magic Item}",
+        "{@variantrule Downtime Activity: Training|XGE|Training}",
+        "{@variantrule Downtime Activity: Work|XGE|Work}"
+      ]
+    }
+  ]
+}
 ```

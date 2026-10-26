@@ -1,0 +1,9 @@
+{
+  "id": "rule:phb:equipment-sizes",
+  "name": "Equipment Sizes",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 145
+  },
+  "ruleType": "VARIANT"
+}

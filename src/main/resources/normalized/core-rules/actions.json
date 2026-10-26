@@ -1,0 +1,2806 @@
+[
+  {
+    "id": "action:dmg:activate-an-item",
+    "name": "Activate an Item",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 141,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "ACTIVATE_MAGIC_ITEM"
+    ],
+    "operations": [
+      {
+        "kind": "OBJECT_OPERATION",
+        "operation": "activate-magic-item",
+        "activation": "item-defined",
+        "timing": {
+          "kind": "action"
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:phb:use-an-object",
+        "relationship": "distinct-from-item-activation"
+      }
+    ]
+  },
+  {
+    "id": "action:dmg:climb-onto-a-bigger-creature",
+    "name": "Climb onto a Bigger Creature",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 271
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "ENTER_CREATURE_SPACE"
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "operationId": "climb-entry-contest",
+        "resolution": "contested-check",
+        "actor": "both",
+        "participants": [
+          {
+            "role": "acting-creature",
+            "selection": "PARTICIPANT_CHOOSES",
+            "options": [
+              {
+                "ability": "strength",
+                "skill": {
+                  "targetType": "skill",
+                  "id": "skill:phb:athletics"
+                }
+              },
+              {
+                "ability": "dexterity",
+                "skill": {
+                  "targetType": "skill",
+                  "id": "skill:phb:acrobatics"
+                }
+              }
+            ]
+          },
+          {
+            "role": "target",
+            "selection": "RULE_SPECIFIED",
+            "options": [
+              {
+                "ability": "dexterity",
+                "skill": {
+                  "targetType": "skill",
+                  "id": "skill:phb:acrobatics"
+                }
+              }
+            ]
+          }
+        ],
+        "requirement": "ALWAYS_REQUIRED"
+      },
+      {
+        "kind": "ENTER_CREATURE_SPACE",
+        "operationId": "enter-larger-creature-space",
+        "actor": "acting-creature",
+        "target": "larger-creature",
+        "positioning": "DM_ADJUDICATED",
+        "entryCheckId": "climb-entry-contest",
+        "movesWithTarget": true,
+        "movementCost": "TARGET_SPACE_IS_DIFFICULT_TERRAIN",
+        "movementWithinSpace": "PERMITTED_AS_DIFFICULT_TERRAIN",
+        "attackModifier": "ADVANTAGE_AGAINST_TARGET",
+        "counterattack": "DM_ADJUDICATED_BY_POSITION",
+        "appliesWhen": {
+          "kind": "CHECK_SUCCEEDED",
+          "operationId": "climb-entry-contest"
+        },
+        "dislodgingProcedure": {
+          "actionCost": "ACTION",
+          "initiator": "larger-creature",
+          "initiatorOptions": [
+            "STRENGTH_ATHLETICS"
+          ],
+          "opponentOptions": [
+            "STRENGTH_ATHLETICS",
+            "DEXTERITY_ACROBATICS"
+          ],
+          "opponentChoosesOption": true
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:phb:grapple",
+        "relationship": "alternative-way-to-climb-onto-creature"
+      }
+    ]
+  },
+  {
+    "id": "action:dmg:disarm",
+    "name": "Disarm",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 271
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "ATTACK_MELEE"
+    ],
+    "requirements": [
+      {
+        "kind": "target"
+      },
+      {
+        "kind": "weapon"
+      }
+    ],
+    "operations": [
+      {
+        "kind": "ATTACK_CONTESTED_BY_CHECK",
+        "operationId": "disarm-contest",
+        "attacker": "acting-creature",
+        "attack": {
+          "kind": "ATTACK_ROLL",
+          "forms": [
+            "melee",
+            "weapon"
+          ],
+          "target": "creature"
+        },
+        "target": "target",
+        "defenderOptions": [
+          {
+            "ability": "strength",
+            "skill": {
+              "targetType": "skill",
+              "id": "skill:phb:athletics"
+            }
+          },
+          {
+            "ability": "dexterity",
+            "skill": {
+              "targetType": "skill",
+              "id": "skill:phb:acrobatics"
+            }
+          }
+        ],
+        "defenderChooses": true,
+        "successOutcome": "TARGET_DROPS_HELD_ITEM",
+        "attackDamageOnSuccess": false,
+        "defenderCheckSizeModifier": "ADVANTAGE_IF_TARGET_LARGER_DISADVANTAGE_IF_SMALLER",
+        "attackDisadvantageWhenItemHeldWithAtLeastHands": 2
+      }
+    ],
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:phb:attack"
+      }
+    ]
+  },
+  {
+    "id": "action:dmg:mark",
+    "name": "Mark",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 271
+    },
+    "capabilities": [
+      "MARK_TARGET"
+    ],
+    "operations": [
+      {
+        "kind": "ROLL_MODIFIER",
+        "modifier": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "attack",
+          "direction": "advantage"
+        },
+        "actor": "attacker",
+        "target": "marked-target",
+        "establishedBy": {
+          "kind": "MELEE_ATTACK_MADE",
+          "actor": "attacker",
+          "target": "creature"
+        },
+        "appliesWhen": {
+          "kind": "OPPORTUNITY_ATTACK",
+          "actor": "attacker",
+          "target": "marked-target"
+        },
+        "duration": {
+          "endsAt": "end-of-next-turn"
+        },
+        "usageLimit": {
+          "maximum": 1,
+          "period": "per-turn"
+        },
+        "reaction": {
+          "availabilityRequired": true,
+          "consumed": false
+        },
+        "operationId": "marked-opportunity-attack"
+      }
+    ]
+  },
+  {
+    "id": "action:dmg:overrun",
+    "name": "Overrun",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 272
+    },
+    "timing": {
+      "kind": "alternatives",
+      "options": [
+        {
+          "kind": "action"
+        },
+        {
+          "kind": "bonus-action"
+        }
+      ]
+    },
+    "capabilities": [
+      "TRAVERSE_CREATURE_SPACE"
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "operationId": "overrun-contest",
+        "resolution": "contested-check",
+        "actor": "acting-creature",
+        "abilities": [
+          "strength"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:phb:athletics"
+        },
+        "opposingAbilities": [
+          "strength"
+        ],
+        "opposingSkills": [
+          {
+            "targetType": "skill",
+            "id": "skill:phb:athletics"
+          }
+        ],
+        "target": "target",
+        "relativeSizeModifier": "ADVANTAGE_IF_ACTOR_LARGER_DISADVANTAGE_IF_SMALLER"
+      },
+      {
+        "kind": "TRAVERSE_CREATURE_SPACE",
+        "operationId": "overrun-passage",
+        "actor": "acting-creature",
+        "target": "hostile-creature",
+        "permission": "PASS_THROUGH_SPACE",
+        "checkId": "overrun-contest",
+        "uses": "ONCE_THIS_TURN",
+        "appliesWhen": {
+          "kind": "CHECK_SUCCEEDED",
+          "operationId": "overrun-contest"
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:dmg:tumble",
+        "relationship": "see-also"
+      }
+    ]
+  },
+  {
+    "id": "action:dmg:shove-aside",
+    "name": "Shove Aside",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 272
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "SHOVE"
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "operationId": "shove-aside-check",
+        "resolution": "contested-check",
+        "actor": "acting-creature",
+        "abilities": [
+          "strength"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:phb:athletics"
+        },
+        "opposingAbilities": [
+          "strength",
+          "dexterity"
+        ],
+        "opposingAbilitySelection": "target-chooses",
+        "opposingSkills": [
+          {
+            "targetType": "skill",
+            "id": "skill:phb:athletics"
+          },
+          {
+            "targetType": "skill",
+            "id": "skill:phb:acrobatics"
+          }
+        ],
+        "target": "target",
+        "targetLimit": "no-more-than-one-size-larger",
+        "targetWithinReach": true,
+        "automaticSuccessWhen": {
+          "kind": "HAS_CONDITION",
+          "actor": "target",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:incapacitated"
+          }
+        }
+      },
+      {
+        "kind": "ROLL_MODIFIER",
+        "actor": "acting-creature",
+        "target": "acting-creature",
+        "modifier": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "ability-check",
+          "direction": "disadvantage"
+        },
+        "appliesWhen": {
+          "kind": "CHECK_RESOLUTION",
+          "operationId": "shove-aside-check"
+        }
+      },
+      {
+        "kind": "MOVE_TARGET_TO_SPACE_WITHIN_REACH",
+        "operationId": "shove-aside-lateral-movement",
+        "actor": "acting-creature",
+        "target": "other-creature",
+        "distance": 5,
+        "unit": "feet",
+        "destination": "VALID_SPACE_WITHIN_REACH_LATERALLY",
+        "appliesWhen": {
+          "kind": "CHECK_SUCCEEDED",
+          "operationId": "shove-aside-check"
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:phb:shove",
+        "relationship": "uses-special-shove-attack"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:phb:incapacitated"
+      }
+    ]
+  },
+  {
+    "id": "action:dmg:tumble",
+    "name": "Tumble",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 272
+    },
+    "timing": {
+      "kind": "alternatives",
+      "options": [
+        {
+          "kind": "action"
+        },
+        {
+          "kind": "bonus-action"
+        }
+      ]
+    },
+    "capabilities": [
+      "TRAVERSE_CREATURE_SPACE"
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "operationId": "tumble-contest",
+        "resolution": "contested-check",
+        "actor": "acting-creature",
+        "abilities": [
+          "dexterity"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:phb:acrobatics"
+        },
+        "opposingAbilities": [
+          "dexterity"
+        ],
+        "opposingSkills": [
+          {
+            "targetType": "skill",
+            "id": "skill:phb:acrobatics"
+          }
+        ],
+        "target": "target"
+      },
+      {
+        "kind": "TRAVERSE_CREATURE_SPACE",
+        "operationId": "tumble-passage",
+        "actor": "acting-creature",
+        "target": "hostile-creature",
+        "permission": "PASS_THROUGH_SPACE",
+        "checkId": "tumble-contest",
+        "uses": "ONCE_THIS_TURN",
+        "appliesWhen": {
+          "kind": "CHECK_SUCCEEDED",
+          "operationId": "tumble-contest"
+        }
+      }
+    ]
+  },
+  {
+    "id": "action:phb:attack",
+    "name": "Attack",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 192,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:attack"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "ATTACK_MELEE",
+      "ATTACK_RANGED",
+      "ATTACK_BAREHANDS"
+    ],
+    "operations": [
+      {
+        "kind": "ATTACK_RESOLUTION",
+        "attack": {
+          "kind": "ATTACK_ROLL",
+          "forms": [
+            "melee",
+            "ranged",
+            "unarmed"
+          ]
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:dmg:disarm"
+      },
+      {
+        "targetType": "action",
+        "id": "action:phb:grapple"
+      },
+      {
+        "targetType": "action",
+        "id": "action:dmg:mark"
+      },
+      {
+        "targetType": "action",
+        "id": "action:phb:shove"
+      },
+      {
+        "targetType": "action",
+        "id": "action:dmg:shove-aside"
+      },
+      {
+        "targetType": "action",
+        "id": "action:phb:two-weapon-fighting"
+      }
+    ]
+  },
+  {
+    "id": "action:phb:cast-a-spell",
+    "name": "Cast a Spell",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 192,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:magic"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "alternatives",
+      "options": [
+        {
+          "kind": "action"
+        },
+        {
+          "kind": "reaction",
+          "trigger": {
+            "kind": "SPELL_DEFINED_REACTION",
+            "actor": "spell-caster"
+          }
+        },
+        {
+          "kind": "varied_gametime"
+        }
+      ]
+    },
+    "capabilities": [
+      "CAST_SPELL"
+    ],
+    "operations": [
+      {
+        "kind": "SPELL_OPERATION",
+        "operation": "cast-spell"
+      }
+    ]
+  },
+  {
+    "id": "action:phb:dash",
+    "name": "Dash",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 192,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:dash"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "DASH"
+    ],
+    "operations": [
+      {
+        "kind": "MOVEMENT_INCREASE",
+        "movement": "current-turn-movement",
+        "amount": 1,
+        "unit": "current-speed",
+        "appliesWhen": {
+          "kind": "AFTER_SPEED_MODIFIERS"
+        },
+        "operationId": "dash"
+      }
+    ]
+  },
+  {
+    "id": "action:phb:disengage",
+    "name": "Disengage",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 192,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:disengage"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "DISENGAGE"
+    ],
+    "operations": [
+      {
+        "kind": "MOVEMENT_PERMISSION",
+        "permission": "no-opportunity-attack",
+        "duration": "current-turn"
+      }
+    ]
+  },
+  {
+    "id": "action:phb:dodge",
+    "name": "Dodge",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 192,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:dodge"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "DODGE"
+    ],
+    "operations": [
+      {
+        "kind": "ROLL_MODIFIER",
+        "modifier": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "attack",
+          "direction": "disadvantage"
+        },
+        "appliesWhen": {
+          "kind": "ATTACK_AGAINST_AFFECTED",
+          "actor": "attacker",
+          "target": "affected-creature"
+        },
+        "duration": {
+          "endsAt": "start-of-next-turn",
+          "endsIf": [
+            {
+              "kind": "HAS_CONDITION",
+              "actor": "affected-creature",
+              "condition": {
+                "targetType": "condition",
+                "id": "condition:phb:incapacitated"
+              }
+            },
+            {
+              "kind": "SPEED_IS_ZERO",
+              "actor": "affected-creature"
+            }
+          ]
+        },
+        "actor": "attacker",
+        "target": "affected-creature",
+        "operationId": "dodge-attack-disadvantage",
+        "when": {
+          "kind": "CAN_SEE",
+          "actor": "affected-creature",
+          "target": "attacker"
+        }
+      },
+      {
+        "kind": "ROLL_MODIFIER",
+        "modifier": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "saving-throw",
+          "direction": "advantage",
+          "ability": "dexterity"
+        },
+        "appliesWhen": {
+          "kind": "SAVING_THROW_BY_AFFECTED",
+          "actor": "affected-creature",
+          "target": "affected-creature"
+        },
+        "duration": {
+          "endsAt": "start-of-next-turn",
+          "endsIf": [
+            {
+              "kind": "HAS_CONDITION",
+              "actor": "affected-creature",
+              "condition": {
+                "targetType": "condition",
+                "id": "condition:phb:incapacitated"
+              }
+            },
+            {
+              "kind": "SPEED_IS_ZERO",
+              "actor": "affected-creature"
+            }
+          ]
+        },
+        "actor": "affected-creature",
+        "target": "affected-creature",
+        "operationId": "dodge-dexterity-save-advantage"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "condition",
+        "id": "condition:phb:incapacitated"
+      }
+    ]
+  },
+  {
+    "id": "action:phb:don-or-doff-a-shield",
+    "name": "Don or Doff a Shield",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 146,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:don-or-doff-a-shield"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "DON_SHIELD",
+      "DOFF_SHIELD"
+    ],
+    "operations": [
+      {
+        "kind": "OBJECT_OPERATION",
+        "operation": "don-shield"
+      },
+      {
+        "kind": "OBJECT_OPERATION",
+        "operation": "doff-shield"
+      }
+    ]
+  },
+  {
+    "id": "action:phb:end-concentration",
+    "name": "End Concentration",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 203,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:end-concentration"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "free"
+    },
+    "capabilities": [
+      "END_CONCENTRATION"
+    ]
+  },
+  {
+    "id": "action:phb:escape-a-grapple",
+    "name": "Escape a Grapple",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 195,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:escape-a-grapple"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "ESCAPE_GRAPPLE"
+    ],
+    "requirements": [
+      {
+        "kind": "condition",
+        "reference": {
+          "targetType": "condition",
+          "id": "condition:phb:grappled"
+        }
+      }
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "operationId": "escape-grapple-check",
+        "resolution": "contested-check",
+        "actor": "both",
+        "participants": [
+          {
+            "role": "acting-creature",
+            "selection": "PARTICIPANT_CHOOSES",
+            "options": [
+              {
+                "ability": "strength",
+                "skill": {
+                  "targetType": "skill",
+                  "id": "skill:phb:athletics"
+                }
+              },
+              {
+                "ability": "dexterity",
+                "skill": {
+                  "targetType": "skill",
+                  "id": "skill:phb:acrobatics"
+                }
+              }
+            ]
+          },
+          {
+            "role": "target",
+            "selection": "RULE_SPECIFIED",
+            "options": [
+              {
+                "ability": "strength",
+                "skill": {
+                  "targetType": "skill",
+                  "id": "skill:phb:athletics"
+                }
+              }
+            ]
+          }
+        ],
+        "target": "affected-creature"
+      },
+      {
+        "kind": "END_CONDITION",
+        "target": {
+          "targetType": "condition",
+          "id": "condition:phb:grappled"
+        },
+        "appliesWhen": {
+          "kind": "CHECK_SUCCEEDED",
+          "operationId": "escape-grapple-check"
+        },
+        "recipient": "acting-creature",
+        "actor": "acting-creature",
+        "operationId": "end-grappled-on-success"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:phb:grapple",
+        "relationship": "escape-procedure-for"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:phb:grappled"
+      }
+    ]
+  },
+  {
+    "id": "action:phb:grapple",
+    "name": "Grapple",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 195,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "rule",
+          "id": "rule:xphb:unarmed-strike"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "GRAPPLE"
+    ],
+    "requirements": [
+      {
+        "kind": "free-hand"
+      }
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "resolution": "contested-check",
+        "actor": "acting-creature",
+        "abilities": [
+          "strength"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:phb:athletics"
+        },
+        "opposingAbilities": [
+          "strength",
+          "dexterity"
+        ],
+        "opposingSkills": [
+          {
+            "targetType": "skill",
+            "id": "skill:phb:athletics"
+          },
+          {
+            "targetType": "skill",
+            "id": "skill:phb:acrobatics"
+          }
+        ],
+        "opposingAbilitySelection": "target-chooses",
+        "targetLimit": "no-more-than-one-size-larger",
+        "targetWithinReach": true,
+        "automaticSuccessWhen": {
+          "kind": "HAS_CONDITION",
+          "actor": "target",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:incapacitated"
+          }
+        },
+        "operationId": "grapple-check",
+        "replacesOneAttack": true,
+        "target": "target"
+      },
+      {
+        "kind": "APPLY_CONDITION",
+        "appliesWhen": {
+          "kind": "CHECK_SUCCEEDED",
+          "operationId": "grapple-check"
+        },
+        "target": {
+          "targetType": "condition",
+          "id": "condition:phb:grappled"
+        },
+        "recipient": "target",
+        "actor": "acting-creature",
+        "operationId": "apply-grappled"
+      },
+      {
+        "kind": "END_CONDITION",
+        "target": {
+          "targetType": "condition",
+          "id": "condition:phb:grappled"
+        },
+        "appliesWhen": {
+          "kind": "TRIGGER_OCCURRED",
+          "event": {
+            "kind": "GRAPPLER_RELEASES",
+            "actor": "grappler",
+            "target": "grappled-creature"
+          }
+        },
+        "recipient": "grappled-creature",
+        "actor": "grappler",
+        "operationId": "release-grappled"
+      },
+      {
+        "kind": "MOVE_WITH_GRAPPLED_TARGET",
+        "operationId": "move-grappled-target",
+        "actor": "acting-creature",
+        "target": "grappled-creature",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:grappled"
+        },
+        "modes": [
+          "drag",
+          "carry"
+        ],
+        "speedCost": {
+          "kind": "SPEED_MULTIPLIER",
+          "multiplier": 0.5,
+          "waivedWhenTargetAtLeastSizesSmaller": 2
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:phb:attack"
+      },
+      {
+        "targetType": "action",
+        "id": "action:phb:escape-a-grapple"
+      }
+    ]
+  },
+  {
+    "id": "action:phb:help",
+    "name": "Help",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 192,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:help"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "HELP"
+    ],
+    "operations": [
+      {
+        "kind": "HELP_ASSISTANCE",
+        "operationId": "help-task-check",
+        "mode": "ABILITY_CHECK",
+        "actor": "helper",
+        "beneficiary": "ally",
+        "task": "TASK_BEING_AIDED",
+        "range": "NO_DISTANCE_SPECIFIED",
+        "roll": "ABILITY_CHECK",
+        "modifier": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "ability-check",
+          "direction": "advantage"
+        },
+        "qualifyingRoll": "NEXT_ABILITY_CHECK_FOR_TASK",
+        "expiresAt": "START_OF_HELPER_NEXT_TURN",
+        "appliesWhen": {
+          "kind": "CHOICE_SELECTED",
+          "choiceGroupId": "help-mode"
+        }
+      },
+      {
+        "kind": "HELP_ASSISTANCE",
+        "operationId": "help-attack",
+        "mode": "ATTACK_ROLL",
+        "actor": "helper",
+        "beneficiary": "ally",
+        "opponent": "distracted-enemy",
+        "opponentWithinFeetOfHelper": 5,
+        "roll": "ATTACK_ROLL",
+        "modifier": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "attack",
+          "direction": "advantage"
+        },
+        "qualifyingRoll": "FIRST_ATTACK_ROLL_AGAINST_OPPONENT",
+        "expiresAt": "START_OF_HELPER_NEXT_TURN",
+        "appliesWhen": {
+          "kind": "CHOICE_SELECTED",
+          "choiceGroupId": "help-mode"
+        }
+      }
+    ],
+    "choiceGroups": [
+      {
+        "id": "help-mode",
+        "cardinality": {
+          "minimumSelected": 1,
+          "maximumSelected": 1
+        },
+        "trigger": {
+          "kind": "ACTION_TAKEN"
+        },
+        "members": [
+          {
+            "operationId": "help-task-check"
+          },
+          {
+            "operationId": "help-attack"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "action:phb:hide",
+    "name": "Hide",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 192,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:hide"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "HIDE"
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "operationId": "hide-check",
+        "resolution": "against-dc",
+        "actor": "acting-creature",
+        "abilities": [
+          "dexterity"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:phb:stealth"
+        },
+        "dc": {
+          "kind": "EFFECT_DEFINED"
+        },
+        "failure": "no-effect",
+        "target": "affected-creature"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "skill",
+        "id": "skill:phb:stealth"
+      }
+    ]
+  },
+  {
+    "id": "action:phb:improvising-an-action",
+    "name": "Improvising an Action",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 193,
+      "flags": {
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:improvising-an-action"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "varied_gametime"
+    },
+    "capabilities": [
+      "IMPROVISE"
+    ]
+  },
+  {
+    "id": "action:phb:opportunity-attack",
+    "name": "Opportunity Attack",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 195,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:opportunity-attack"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "reaction",
+      "trigger": {
+        "kind": "CREATURE_LEAVES_REACH",
+        "actor": "moving-creature",
+        "target": "opportunity-attacker",
+        "requiresVisibility": true,
+        "requiresHostility": true,
+        "excludedMovementSources": [
+          "disengage",
+          "teleportation",
+          "involuntary-movement"
+        ],
+        "resolutionTiming": "immediately-before-departure"
+      }
+    },
+    "capabilities": [
+      "ATTACK_MELEE"
+    ],
+    "operations": [
+      {
+        "kind": "ATTACK_RESOLUTION",
+        "attack": {
+          "kind": "ATTACK_ROLL",
+          "forms": [
+            "melee",
+            "weapon"
+          ],
+          "target": "creature"
+        }
+      }
+    ]
+  },
+  {
+    "id": "action:phb:other-activity",
+    "name": "Other Activity",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 190,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      }
+    },
+    "timing": {
+      "kind": "varied_gametime"
+    },
+    "capabilities": [
+      "USE_OBJECT"
+    ],
+    "operations": [
+      {
+        "kind": "OBJECT_OPERATION",
+        "operation": "ordinary-interaction",
+        "timing": {
+          "kind": "free"
+        },
+        "interactionAllowance": {
+          "kind": "ONE_FREE_INTERACTION_PER_TURN",
+          "placement": "DURING_MOVEMENT_OR_ACTION",
+          "additionalInteractionCost": "ACTION"
+        }
+      }
+    ]
+  },
+  {
+    "id": "action:phb:ready",
+    "name": "Ready",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 193,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:ready"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "READY"
+    ]
+  },
+  {
+    "id": "action:phb:search",
+    "name": "Search",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 193,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:search"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "SEARCH"
+    ],
+    "references": [
+      {
+        "targetType": "skill",
+        "id": "skill:phb:perception"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:phb:investigation"
+      }
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "operationId": "search-check",
+        "resolution": "against-dc",
+        "actor": "acting-creature",
+        "abilities": [
+          "wisdom",
+          "intelligence"
+        ],
+        "abilitySelection": "DM-DETERMINES",
+        "dc": {
+          "kind": "EFFECT_DEFINED"
+        },
+        "requirement": "DM_MAY_REQUIRE",
+        "target": "target"
+      }
+    ]
+  },
+  {
+    "id": "action:phb:shove",
+    "name": "Shove",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 195,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "rule",
+          "id": "rule:xphb:unarmed-strike"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "SHOVE"
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "resolution": "contested-check",
+        "actor": "acting-creature",
+        "abilities": [
+          "strength"
+        ],
+        "opposingAbilities": [
+          "strength",
+          "dexterity"
+        ],
+        "opposingSkills": [
+          {
+            "targetType": "skill",
+            "id": "skill:phb:athletics"
+          },
+          {
+            "targetType": "skill",
+            "id": "skill:phb:acrobatics"
+          }
+        ],
+        "opposingAbilitySelection": "target-chooses",
+        "targetLimit": "no-more-than-one-size-larger",
+        "targetWithinReach": true,
+        "operationId": "shove-check",
+        "replacesOneAttack": true,
+        "target": "target",
+        "automaticSuccessWhen": {
+          "kind": "HAS_CONDITION",
+          "actor": "target",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:incapacitated"
+          }
+        },
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:phb:athletics"
+        }
+      },
+      {
+        "kind": "FORCED_MOVEMENT",
+        "movement": "push",
+        "target": "other-creature",
+        "distance": 5,
+        "unit": "feet",
+        "appliesWhen": {
+          "kind": "CHOICE_SELECTED",
+          "choiceGroupId": "shove-outcome"
+        },
+        "operationId": "shove-push"
+      },
+      {
+        "kind": "APPLY_CONDITION",
+        "target": {
+          "targetType": "condition",
+          "id": "condition:phb:prone"
+        },
+        "appliesWhen": {
+          "kind": "CHOICE_SELECTED",
+          "choiceGroupId": "shove-outcome"
+        },
+        "recipient": "target",
+        "actor": "acting-creature",
+        "operationId": "shove-prone"
+      }
+    ],
+    "choiceGroups": [
+      {
+        "id": "shove-outcome",
+        "cardinality": {
+          "minimumSelected": 1,
+          "maximumSelected": 1
+        },
+        "trigger": {
+          "kind": "CHECK_SUCCEEDED",
+          "operationId": "shove-check"
+        },
+        "members": [
+          {
+            "operationId": "shove-push"
+          },
+          {
+            "operationId": "shove-prone"
+          }
+        ]
+      }
+    ],
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:phb:attack"
+      },
+      {
+        "targetType": "action",
+        "id": "action:dmg:shove-aside"
+      }
+    ]
+  },
+  {
+    "id": "action:phb:stabilize-a-creature",
+    "name": "Stabilize a Creature",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 197,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:help"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "STABILIZE"
+    ],
+    "requirements": [
+      {
+        "kind": "condition",
+        "reference": {
+          "targetType": "condition",
+          "id": "condition:phb:unconscious"
+        }
+      }
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "operationId": "medicine-check",
+        "resolution": "against-dc",
+        "actor": "acting-creature",
+        "abilities": [
+          "wisdom"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:phb:medicine"
+        },
+        "dc": 10,
+        "target": "target"
+      },
+      {
+        "kind": "RECOVERY_OPERATION",
+        "operation": "stabilize-creature",
+        "targetState": "stable",
+        "appliesWhen": {
+          "kind": "CHECK_SUCCEEDED",
+          "operationId": "medicine-check"
+        },
+        "operationId": "stabilize-on-success"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "condition",
+        "id": "condition:phb:unconscious"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:phb:medicine"
+      }
+    ]
+  },
+  {
+    "id": "action:phb:two-weapon-fighting",
+    "name": "Two-Weapon Fighting",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 195,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:two-weapon-fighting"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "bonus-action"
+    },
+    "capabilities": [
+      "ATTACK_MELEE",
+      "ATTACK_RANGED"
+    ],
+    "operations": [
+      {
+        "kind": "ATTACK_RESOLUTION",
+        "attack": {
+          "kind": "ATTACK_ROLL",
+          "forms": [
+            "melee",
+            "ranged",
+            "weapon"
+          ],
+          "target": "creature"
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:phb:attack"
+      }
+    ]
+  },
+  {
+    "id": "action:phb:use-an-object",
+    "name": "Use an Object",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 193,
+      "flags": {
+        "srd": true,
+        "basicRules": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "action",
+          "id": "action:xphb:utilize"
+        }
+      ]
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "USE_OBJECT"
+    ],
+    "operations": [
+      {
+        "kind": "OBJECT_USE",
+        "operationId": "use-object",
+        "activationRequirement": "ACTION_REQUIRED_BY_OBJECT",
+        "additionalObjectInteraction": "ACTION_AFTER_ONE_FREE_INTERACTION"
+      }
+    ]
+  },
+  {
+    "id": "action:xge:identify-a-spell",
+    "name": "Identify a Spell",
+    "sourceMetadata": {
+      "source": "XGE",
+      "page": 85
+    },
+    "timing": {
+      "kind": "alternatives",
+      "options": [
+        {
+          "kind": "action"
+        },
+        {
+          "kind": "reaction",
+          "trigger": {
+            "kind": "SPELL_CASTING_OBSERVED",
+            "actor": "observer",
+            "target": "spell-caster"
+          }
+        }
+      ]
+    },
+    "capabilities": [
+      "IDENTIFY_SPELL"
+    ],
+    "references": [
+      {
+        "targetType": "skill",
+        "id": "skill:phb:arcana"
+      }
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "operationId": "identify-spell-check",
+        "resolution": "against-dc",
+        "actor": "acting-creature",
+        "abilities": [
+          "intelligence"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:phb:arcana"
+        },
+        "dc": {
+          "kind": "FIXED_PLUS_SPELL_LEVEL",
+          "base": 15,
+          "spellRole": "identified-spell"
+        },
+        "failure": "no-effect",
+        "target": "target"
+      },
+      {
+        "kind": "SPELL_IDENTIFICATION",
+        "operationId": "identify-spell-procedure",
+        "checkId": "identify-spell-check",
+        "checkAbility": "intelligence",
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:phb:arcana"
+        },
+        "modes": [
+          {
+            "timing": "REACTION_WHILE_CASTING",
+            "observation": "CASTING_PERCEIVED"
+          },
+          {
+            "timing": "ACTION_AFTER_CASTING",
+            "observation": "SPELL_EFFECT_PERCEIVED"
+          }
+        ],
+        "advantageWhen": "SPELL_CAST_AS_CLASS_SPELL_AND_OBSERVER_IS_MEMBER_OF_CLASS"
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:attack",
+    "name": "Attack",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 361,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "ATTACK_MELEE",
+      "ATTACK_RANGED",
+      "ATTACK_BAREHANDS"
+    ],
+    "operations": [
+      {
+        "kind": "ATTACK_RESOLUTION",
+        "attack": {
+          "kind": "ATTACK_ROLL",
+          "forms": [
+            "melee",
+            "ranged",
+            "unarmed",
+            "weapon"
+          ]
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:two-weapon-fighting"
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:dash",
+    "name": "Dash",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 365,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "DASH"
+    ],
+    "operations": [
+      {
+        "kind": "MOVEMENT_INCREASE",
+        "movement": "current-turn-movement",
+        "amount": 1,
+        "unit": "current-speed",
+        "speedSelection": "CHOOSE_SPECIAL_SPEED_FOR_EACH_USE",
+        "appliesWhen": {
+          "kind": "AFTER_SPEED_MODIFIERS"
+        },
+        "operationId": "dash"
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:disengage",
+    "name": "Disengage",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 366,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "DISENGAGE"
+    ],
+    "operations": [
+      {
+        "kind": "MOVEMENT_PERMISSION",
+        "permission": "no-opportunity-attack",
+        "duration": "current-turn"
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:dodge",
+    "name": "Dodge",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 366,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "DODGE"
+    ],
+    "operations": [
+      {
+        "kind": "ROLL_MODIFIER",
+        "modifier": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "attack",
+          "direction": "disadvantage"
+        },
+        "appliesWhen": {
+          "kind": "ATTACK_AGAINST_AFFECTED",
+          "actor": "attacker",
+          "target": "affected-creature"
+        },
+        "duration": {
+          "endsAt": "start-of-next-turn",
+          "endsIf": [
+            {
+              "kind": "HAS_CONDITION",
+              "actor": "affected-creature",
+              "condition": {
+                "targetType": "condition",
+                "id": "condition:xphb:incapacitated"
+              }
+            },
+            {
+              "kind": "SPEED_IS_ZERO",
+              "actor": "affected-creature"
+            }
+          ]
+        },
+        "actor": "attacker",
+        "target": "affected-creature",
+        "operationId": "dodge-modifier-1",
+        "when": {
+          "kind": "CAN_SEE",
+          "actor": "affected-creature",
+          "target": "attacker"
+        }
+      },
+      {
+        "kind": "ROLL_MODIFIER",
+        "modifier": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "saving-throw",
+          "direction": "advantage",
+          "ability": "dexterity"
+        },
+        "appliesWhen": {
+          "kind": "SAVING_THROW_BY_AFFECTED",
+          "actor": "affected-creature",
+          "target": "affected-creature"
+        },
+        "duration": {
+          "endsAt": "start-of-next-turn",
+          "endsIf": [
+            {
+              "kind": "HAS_CONDITION",
+              "actor": "affected-creature",
+              "condition": {
+                "targetType": "condition",
+                "id": "condition:xphb:incapacitated"
+              }
+            },
+            {
+              "kind": "SPEED_IS_ZERO",
+              "actor": "affected-creature"
+            }
+          ]
+        },
+        "actor": "affected-creature",
+        "target": "affected-creature",
+        "operationId": "dodge-modifier-2"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:advantage"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:disadvantage"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:saving-throw"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:speed"
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:don-or-doff-a-shield",
+    "name": "Don or Doff a Shield",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 219,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "DON_SHIELD",
+      "DOFF_SHIELD"
+    ],
+    "operations": [
+      {
+        "kind": "OBJECT_OPERATION",
+        "operation": "don-shield"
+      },
+      {
+        "kind": "OBJECT_OPERATION",
+        "operation": "doff-shield"
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:end-concentration",
+    "name": "End Concentration",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 363,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "timing": {
+      "kind": "free"
+    },
+    "capabilities": [
+      "END_CONCENTRATION"
+    ]
+  },
+  {
+    "id": "action:xphb:escape-a-grapple",
+    "name": "Escape a Grapple",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 367,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "ESCAPE_GRAPPLE"
+    ],
+    "requirements": [
+      {
+        "kind": "condition",
+        "reference": {
+          "targetType": "condition",
+          "id": "condition:xphb:grappled"
+        }
+      }
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "operationId": "escape-grapple-check",
+        "resolution": "against-dc",
+        "actor": "acting-creature",
+        "participants": [
+          {
+            "role": "acting-creature",
+            "selection": "PARTICIPANT_CHOOSES",
+            "options": [
+              {
+                "ability": "strength",
+                "skill": {
+                  "targetType": "skill",
+                  "id": "skill:xphb:athletics"
+                }
+              },
+              {
+                "ability": "dexterity",
+                "skill": {
+                  "targetType": "skill",
+                  "id": "skill:xphb:acrobatics"
+                }
+              }
+            ]
+          }
+        ],
+        "dcSource": {
+          "targetType": "rule",
+          "id": "rule:xphb:unarmed-strike",
+          "relationship": "grapple-option-save-dc"
+        },
+        "failure": "no-effect",
+        "target": "affected-creature"
+      },
+      {
+        "kind": "END_CONDITION",
+        "target": {
+          "targetType": "condition",
+          "id": "condition:xphb:grappled"
+        },
+        "appliesWhen": {
+          "kind": "CHECK_SUCCEEDED",
+          "operationId": "escape-grapple-check"
+        },
+        "recipient": "acting-creature",
+        "actor": "acting-creature",
+        "operationId": "end-grappled-on-success"
+      },
+      {
+        "kind": "END_CONDITION",
+        "target": {
+          "targetType": "condition",
+          "id": "condition:xphb:grappled"
+        },
+        "appliesWhen": {
+          "kind": "CONDITION_MET",
+          "condition": {
+            "kind": "HAS_CONDITION",
+            "actor": "grappler",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:xphb:incapacitated"
+            }
+          }
+        },
+        "recipient": "acting-creature",
+        "actor": "grappler",
+        "operationId": "end-grappled-if-grappler-incapacitated"
+      },
+      {
+        "kind": "END_CONDITION",
+        "target": {
+          "targetType": "condition",
+          "id": "condition:xphb:grappled"
+        },
+        "appliesWhen": {
+          "kind": "CONDITION_MET",
+          "condition": {
+            "kind": "DISTANCE_EXCEEDS_RANGE",
+            "actor": "grappled-creature",
+            "target": "grappler",
+            "range": "grapple"
+          }
+        },
+        "recipient": "acting-creature",
+        "actor": "acting-creature",
+        "operationId": "end-grappled-if-out-of-range"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:incapacitated"
+      },
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:unarmed-strike"
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:help",
+    "name": "Help",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 368,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "HELP",
+      "STABILIZE"
+    ],
+    "operations": [
+      {
+        "kind": "HELP_ASSISTANCE",
+        "operationId": "help-task-check",
+        "mode": "ABILITY_CHECK",
+        "actor": "helper",
+        "beneficiary": "ally",
+        "task": "TASK_BEING_AIDED",
+        "selectedProficiency": "SKILL_OR_TOOL",
+        "feasibilityDecision": "DM_DETERMINED",
+        "range": "NEAR_ENOUGH_TO_ASSIST_VERBALLY_OR_PHYSICALLY",
+        "roll": "ABILITY_CHECK",
+        "modifier": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "ability-check",
+          "direction": "advantage"
+        },
+        "qualifyingRoll": "NEXT_ABILITY_CHECK_FOR_TASK",
+        "expiresAt": "START_OF_HELPER_NEXT_TURN",
+        "appliesWhen": {
+          "kind": "CHOICE_SELECTED",
+          "choiceGroupId": "help-mode"
+        }
+      },
+      {
+        "kind": "HELP_ASSISTANCE",
+        "operationId": "help-attack",
+        "mode": "ATTACK_ROLL",
+        "actor": "helper",
+        "beneficiary": "ally",
+        "opponent": "distracted-enemy",
+        "opponentWithinFeetOfHelper": 5,
+        "roll": "ATTACK_ROLL",
+        "modifier": {
+          "kind": "D20_ROLL_MODIFIER",
+          "roll": "attack",
+          "direction": "advantage"
+        },
+        "qualifyingRoll": "FIRST_ATTACK_ROLL_AGAINST_OPPONENT",
+        "expiresAt": "START_OF_HELPER_NEXT_TURN",
+        "appliesWhen": {
+          "kind": "CHOICE_SELECTED",
+          "choiceGroupId": "help-mode"
+        }
+      }
+    ],
+    "choiceGroups": [
+      {
+        "id": "help-mode",
+        "cardinality": {
+          "minimumSelected": 1,
+          "maximumSelected": 1
+        },
+        "trigger": {
+          "kind": "ACTION_TAKEN"
+        },
+        "members": [
+          {
+            "operationId": "help-task-check"
+          },
+          {
+            "operationId": "help-attack"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:hide",
+    "name": "Hide",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 368,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "HIDE"
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "operationId": "hide-check",
+        "resolution": "against-dc",
+        "actor": "acting-creature",
+        "abilities": [
+          "dexterity"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:stealth"
+        },
+        "dc": 15,
+        "failure": "no-effect",
+        "target": "affected-creature"
+      },
+      {
+        "kind": "HIDE_PROCEDURE",
+        "operationId": "hide-while-concealed",
+        "actor": "hidden-creature",
+        "checkId": "hide-check",
+        "concealmentOptions": [
+          "HEAVILY_OBSCURED",
+          "THREE_QUARTERS_COVER",
+          "TOTAL_COVER"
+        ],
+        "outOfEnemyLineOfSight": true,
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:invisible"
+        },
+        "appliesWhen": {
+          "kind": "CHECK_SUCCEEDED",
+          "operationId": "hide-check"
+        },
+        "discoveryDc": {
+          "kind": "HIDE_CHECK_TOTAL",
+          "checkId": "hide-check"
+        },
+        "endsWhen": [
+          {
+            "kind": "HIDDEN_CREATURE_MAKES_SOUND",
+            "actor": "hidden-creature",
+            "target": "observer",
+            "volume": "louder-than-whisper"
+          },
+          {
+            "kind": "ENEMY_FINDS_HIDDEN_CREATURE",
+            "actor": "enemy",
+            "target": "hidden-creature"
+          },
+          {
+            "kind": "HIDDEN_CREATURE_MAKES_ATTACK_ROLL",
+            "actor": "hidden-creature"
+          },
+          {
+            "kind": "HIDDEN_CREATURE_CASTS_VERBAL_SPELL",
+            "actor": "hidden-creature"
+          }
+        ]
+      }
+    ],
+    "references": [
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:stealth"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:invisible"
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:improvising-an-action",
+    "name": "Improvising an Action",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 15,
+      "flags": {
+        "basicRules2024": true
+      }
+    },
+    "timing": {
+      "kind": "varied_gametime"
+    },
+    "capabilities": [
+      "IMPROVISE"
+    ],
+    "references": [
+      {
+        "targetType": "rule",
+        "id": "rule:xphb:d20-test"
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:influence",
+    "name": "Influence",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 369,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "INFLUENCE"
+    ],
+    "references": [
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:deception"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:intimidation"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:performance"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:persuasion"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:animal-handling"
+      }
+    ],
+    "operations": [
+      {
+        "kind": "INFLUENCE_PROCEDURE",
+        "operationId": "influence-monster",
+        "target": "monster",
+        "willingnessInput": "DM_DETERMINED",
+        "branches": [
+          {
+            "willingness": "WILLING",
+            "checkRequired": false,
+            "outcome": "COMPLIES_IN_PREFERRED_WAY"
+          },
+          {
+            "willingness": "UNWILLING",
+            "checkRequired": false,
+            "outcome": "DOES_NOT_COMPLY"
+          },
+          {
+            "willingness": "HESITANT",
+            "checkRequired": true,
+            "attitudeInput": "DM_DETERMINED",
+            "checkOptions": [
+              {
+                "interaction": "DECEIVE",
+                "ability": "charisma",
+                "skill": {
+                  "targetType": "skill",
+                  "id": "skill:xphb:deception"
+                },
+                "requiresTargetUnderstands": true
+              },
+              {
+                "interaction": "INTIMIDATE",
+                "ability": "charisma",
+                "skill": {
+                  "targetType": "skill",
+                  "id": "skill:xphb:intimidation"
+                }
+              },
+              {
+                "interaction": "AMUSE",
+                "ability": "charisma",
+                "skill": {
+                  "targetType": "skill",
+                  "id": "skill:xphb:performance"
+                }
+              },
+              {
+                "interaction": "PERSUADE",
+                "ability": "charisma",
+                "skill": {
+                  "targetType": "skill",
+                  "id": "skill:xphb:persuasion"
+                },
+                "requiresTargetUnderstands": true
+              },
+              {
+                "interaction": "GENTLY_COAX",
+                "ability": "wisdom",
+                "skill": {
+                  "targetType": "skill",
+                  "id": "skill:xphb:animal-handling"
+                },
+                "targetCreatureTypes": [
+                  "BEAST",
+                  "MONSTROSITY"
+                ]
+              }
+            ],
+            "dc": {
+              "kind": "GREATER_OF_FIXED_AND_TARGET_ABILITY_SCORE",
+              "minimum": 15,
+              "targetRole": "target",
+              "ability": "intelligence"
+            },
+            "onSuccess": "COMPLIES",
+            "onFailure": "DOES_NOT_COMPLY",
+            "retryAfterHours": 24,
+            "retryAlternative": "DM_DETERMINED_DURATION"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:magic",
+    "name": "Magic",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 371,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "MAGIC_ACTION",
+      "CAST_SPELL",
+      "ACTIVATE_MAGIC_ITEM"
+    ],
+    "operations": [
+      {
+        "kind": "SPELL_OPERATION",
+        "operation": "magic-action",
+        "alternatives": [
+          "cast-spell",
+          "activate-feature",
+          "activate-magic-item"
+        ],
+        "longCasting": {
+          "when": {
+            "kind": "CASTING_TIME_AT_LEAST",
+            "amount": 1,
+            "unit": "minute"
+          },
+          "magicActionEachTurn": true,
+          "concentrationRequired": true,
+          "failureOnConcentrationLoss": true,
+          "spellSlotExpendedOnFailure": false
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "status",
+        "id": "status:xphb:concentration"
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:opportunity-attack",
+    "name": "Opportunity Attack",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 371,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "timing": {
+      "kind": "reaction",
+      "trigger": {
+        "kind": "CREATURE_LEAVES_REACH",
+        "actor": "moving-creature",
+        "target": "opportunity-attacker",
+        "requiresVisibility": true,
+        "movementOrigins": [
+          "action",
+          "bonus-action",
+          "reaction",
+          "speed"
+        ],
+        "resolutionTiming": "immediately-before-departure"
+      }
+    },
+    "capabilities": [
+      "ATTACK_MELEE"
+    ],
+    "operations": [
+      {
+        "kind": "ATTACK_RESOLUTION",
+        "attack": {
+          "kind": "ATTACK_ROLL",
+          "forms": [
+            "melee",
+            "weapon",
+            "unarmed"
+          ],
+          "target": "creature"
+        }
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:ready",
+    "name": "Ready",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 372,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "READY"
+    ]
+  },
+  {
+    "id": "action:xphb:search",
+    "name": "Search",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 373,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "SEARCH"
+    ],
+    "references": [
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:insight"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:medicine"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:perception"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:survival"
+      }
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "operationId": "search-check",
+        "resolution": "against-dc",
+        "actor": "acting-creature",
+        "abilities": [
+          "wisdom"
+        ],
+        "dc": {
+          "kind": "EFFECT_DEFINED"
+        },
+        "requirement": "ALWAYS_REQUIRED",
+        "target": "target"
+      }
+    ],
+    "skillTaskGuidance": [
+      {
+        "kind": "SKILL_TASK_GUIDANCE",
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:insight"
+        },
+        "tasks": [
+          "CREATURE_STATE_OF_MIND"
+        ]
+      },
+      {
+        "kind": "SKILL_TASK_GUIDANCE",
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:medicine"
+        },
+        "tasks": [
+          "AILMENT_OR_CAUSE_OF_DEATH"
+        ]
+      },
+      {
+        "kind": "SKILL_TASK_GUIDANCE",
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:perception"
+        },
+        "tasks": [
+          "CONCEALED_CREATURE_OR_OBJECT"
+        ]
+      },
+      {
+        "kind": "SKILL_TASK_GUIDANCE",
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:survival"
+        },
+        "tasks": [
+          "TRACKS_OR_FOOD"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:study",
+    "name": "Study",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 375,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "STUDY"
+    ],
+    "references": [
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:arcana"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:history"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:investigation"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:nature"
+      },
+      {
+        "targetType": "skill",
+        "id": "skill:xphb:religion"
+      }
+    ],
+    "operations": [
+      {
+        "kind": "CHECK_OR_CONTEST",
+        "operationId": "study-check",
+        "resolution": "against-dc",
+        "actor": "acting-creature",
+        "abilities": [
+          "intelligence"
+        ],
+        "dc": {
+          "kind": "EFFECT_DEFINED"
+        },
+        "requirement": "ALWAYS_REQUIRED",
+        "target": "target"
+      }
+    ],
+    "skillTaskGuidance": [
+      {
+        "kind": "SKILL_TASK_GUIDANCE",
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:arcana"
+        },
+        "tasks": [
+          "SPELLS",
+          "MAGIC_ITEMS",
+          "ELDRITCH_SYMBOLS",
+          "MAGICAL_TRADITIONS",
+          "PLANES_OF_EXISTENCE"
+        ],
+        "creatureGroups": [
+          "ABERRATIONS",
+          "CONSTRUCTS",
+          "ELEMENTALS",
+          "FEY",
+          "MONSTROSITIES"
+        ]
+      },
+      {
+        "kind": "SKILL_TASK_GUIDANCE",
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:history"
+        },
+        "tasks": [
+          "HISTORIC_EVENTS_AND_PEOPLE",
+          "ANCIENT_CIVILIZATIONS",
+          "WARS"
+        ],
+        "creatureGroups": [
+          "GIANTS",
+          "HUMANOIDS"
+        ]
+      },
+      {
+        "kind": "SKILL_TASK_GUIDANCE",
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:investigation"
+        },
+        "tasks": [
+          "TRAPS",
+          "CIPHERS",
+          "RIDDLES",
+          "GADGETRY"
+        ]
+      },
+      {
+        "kind": "SKILL_TASK_GUIDANCE",
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:nature"
+        },
+        "tasks": [
+          "TERRAIN",
+          "FLORA",
+          "WEATHER"
+        ],
+        "creatureGroups": [
+          "BEASTS",
+          "DRAGONS",
+          "OOZES",
+          "PLANTS"
+        ]
+      },
+      {
+        "kind": "SKILL_TASK_GUIDANCE",
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:religion"
+        },
+        "tasks": [
+          "DEITIES",
+          "RELIGIOUS_HIERARCHIES_AND_RITES",
+          "HOLY_SYMBOLS",
+          "CULTS"
+        ],
+        "creatureGroups": [
+          "CELESTIALS",
+          "FIENDS",
+          "UNDEAD"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:two-weapon-fighting",
+    "name": "Two-Weapon Fighting",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 213,
+      "flags": {
+        "srd52": true,
+        "basicRules2024": true
+      }
+    },
+    "timing": {
+      "kind": "bonus-action"
+    },
+    "capabilities": [
+      "ATTACK_MELEE"
+    ],
+    "operations": [
+      {
+        "kind": "ATTACK_RESOLUTION",
+        "attack": {
+          "kind": "ATTACK_ROLL",
+          "forms": [
+            "melee",
+            "weapon"
+          ],
+          "target": "creature"
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "action",
+        "id": "action:xphb:attack"
+      }
+    ]
+  },
+  {
+    "id": "action:xphb:utilize",
+    "name": "Utilize",
+    "sourceMetadata": {
+      "source": "XPHB",
+      "page": 377,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "timing": {
+      "kind": "action"
+    },
+    "capabilities": [
+      "UTILIZE"
+    ],
+    "operations": [
+      {
+        "kind": "OBJECT_USE",
+        "operationId": "use-object",
+        "activationRequirement": "ACTION_REQUIRED_BY_OBJECT"
+      }
+    ]
+  }
+]

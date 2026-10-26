@@ -1,0 +1,11 @@
+{
+  "id": "rule:dmg:madness",
+  "name": "Madness",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 258,
+    "flags": {
+      "srd": true
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "id": "rule:xphb:stat-block",
+  "name": "Stat Block",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 374,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:monster",
+      "relationship": "stat-block-subject"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:size",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:creature-type",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:alignment",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:initiative",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:hit-points",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:hit-point-dice",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:speed",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:ability-score-and-modifier",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:saving-throw",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:skill",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:resistance",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:vulnerability",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:immunity",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:object",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:challenge-rating",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:proficiency",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:action",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:bonus-action",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:reaction",
+      "relationship": "stat-block-entry"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:attack-roll",
+      "relationship": "attack-notation"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:damage-roll",
+      "relationship": "damage-notation"
+    }
+  ]
+}

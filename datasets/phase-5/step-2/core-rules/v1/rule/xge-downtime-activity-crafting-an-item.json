@@ -1,0 +1,18 @@
+{
+  "id": "rule:xge:downtime-activity-crafting-an-item",
+  "name": "Downtime Activity: Crafting an Item",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 128
+  },
+  "ruleType": "VARIANT_OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "craft-item-activity",
+      "kind": "DOWNTIME_PROCEDURE",
+      "subtype": "ACTIVITY",
+      "procedure": "craft",
+      "outcome": "item-created"
+    }
+  ]
+}

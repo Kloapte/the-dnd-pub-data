@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:wands-that-don-t-recharge",
+  "name": "Wands That Don't Recharge",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 141
+  },
+  "ruleType": "VARIANT"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "rule:xphb:hit-point-dice",
+  "name": "Hit Point Dice",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 368,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "hit-dice-rest-healing",
+      "kind": "DAMAGE_HEALTH_STATE",
+      "subtype": "HEALING",
+      "method": "hit-dice"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:short-rest",
+      "relationship": "hit-dice-spent-during-rest"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:hit-points",
+      "relationship": "hit-dice-contribute-to-hit-points"
+    }
+  ]
+}

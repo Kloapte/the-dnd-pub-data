@@ -1,0 +1,397 @@
+{
+  "id": "rule:dmg:explosives",
+  "name": "Explosives",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 267
+  },
+  "ruleType": "OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "bomb-area",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "AREA_OF_EFFECT",
+      "shape": "sphere",
+      "origin": "point-in-space",
+      "dimensions": [
+        5
+      ],
+      "unit": "feet",
+      "originPlacement": "POINT_IN_SPACE",
+      "dimensionParameters": [
+        "RADIUS"
+      ],
+      "originIncluded": "INCLUDED"
+    },
+    {
+      "componentId": "bomb-save",
+      "kind": "D20_TEST",
+      "subtype": "SAVING_THROW",
+      "savingThrow": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "dexterity"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "FIXED",
+          "value": 12
+        }
+      }
+    },
+    {
+      "componentId": "bomb-damage",
+      "kind": "DAMAGE_HEALTH_STATE",
+      "subtype": "DAMAGE",
+      "damageRoll": {
+        "kind": "DAMAGE_ROLL",
+        "damageTypes": [
+          "fire"
+        ],
+        "base": {
+          "kind": "DICE",
+          "count": 3,
+          "die": "d6"
+        }
+      },
+      "appliesWhen": {
+        "kind": "ON_FAILED_SAVE",
+        "componentId": "bomb-save"
+      }
+    },
+    {
+      "componentId": "powder-horn-area",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "AREA_OF_EFFECT",
+      "shape": "sphere",
+      "origin": "object",
+      "dimensions": [
+        10
+      ],
+      "unit": "feet",
+      "originPlacement": "POINT_IN_SPACE",
+      "dimensionParameters": [
+        "RADIUS"
+      ],
+      "originIncluded": "INCLUDED"
+    },
+    {
+      "componentId": "powder-horn-save",
+      "kind": "D20_TEST",
+      "subtype": "SAVING_THROW",
+      "savingThrow": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "dexterity"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "FIXED",
+          "value": 12
+        }
+      }
+    },
+    {
+      "componentId": "powder-horn-damage",
+      "kind": "DAMAGE_HEALTH_STATE",
+      "subtype": "DAMAGE",
+      "damageRoll": {
+        "kind": "DAMAGE_ROLL",
+        "damageTypes": [
+          "fire"
+        ],
+        "base": {
+          "kind": "DICE",
+          "count": 3,
+          "die": "d6"
+        }
+      },
+      "appliesWhen": {
+        "kind": "ON_FAILED_SAVE",
+        "componentId": "powder-horn-save"
+      }
+    },
+    {
+      "componentId": "powder-keg-area",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "AREA_OF_EFFECT",
+      "shape": "sphere",
+      "origin": "object",
+      "dimensions": [
+        10
+      ],
+      "unit": "feet",
+      "originPlacement": "POINT_IN_SPACE",
+      "dimensionParameters": [
+        "RADIUS"
+      ],
+      "originIncluded": "INCLUDED"
+    },
+    {
+      "componentId": "powder-keg-save",
+      "kind": "D20_TEST",
+      "subtype": "SAVING_THROW",
+      "savingThrow": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "dexterity"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "FIXED",
+          "value": 12
+        }
+      }
+    },
+    {
+      "componentId": "powder-keg-damage",
+      "kind": "DAMAGE_HEALTH_STATE",
+      "subtype": "DAMAGE",
+      "damageRoll": {
+        "kind": "DAMAGE_ROLL",
+        "damageTypes": [
+          "fire"
+        ],
+        "base": {
+          "kind": "DICE",
+          "count": 7,
+          "die": "d6"
+        }
+      },
+      "appliesWhen": {
+        "kind": "ON_FAILED_SAVE",
+        "componentId": "powder-keg-save"
+      }
+    },
+    {
+      "componentId": "dynamite-area",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "AREA_OF_EFFECT",
+      "shape": "sphere",
+      "origin": "point-in-space",
+      "dimensions": [
+        5
+      ],
+      "unit": "feet",
+      "originPlacement": "POINT_IN_SPACE",
+      "dimensionParameters": [
+        "RADIUS"
+      ],
+      "originIncluded": "INCLUDED"
+    },
+    {
+      "componentId": "dynamite-save",
+      "kind": "D20_TEST",
+      "subtype": "SAVING_THROW",
+      "savingThrow": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "dexterity"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "FIXED",
+          "value": 12
+        }
+      }
+    },
+    {
+      "componentId": "dynamite-damage",
+      "kind": "DAMAGE_HEALTH_STATE",
+      "subtype": "DAMAGE",
+      "damageRoll": {
+        "kind": "DAMAGE_ROLL",
+        "damageTypes": [
+          "bludgeoning"
+        ],
+        "base": {
+          "kind": "DICE",
+          "count": 3,
+          "die": "d6"
+        }
+      },
+      "appliesWhen": {
+        "kind": "ON_FAILED_SAVE",
+        "componentId": "dynamite-save"
+      }
+    },
+    {
+      "componentId": "fragmentation-grenade-area",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "AREA_OF_EFFECT",
+      "shape": "sphere",
+      "origin": "point-in-space",
+      "dimensions": [
+        20
+      ],
+      "unit": "feet",
+      "originPlacement": "POINT_IN_SPACE",
+      "dimensionParameters": [
+        "RADIUS"
+      ],
+      "originIncluded": "INCLUDED"
+    },
+    {
+      "componentId": "fragmentation-grenade-save",
+      "kind": "D20_TEST",
+      "subtype": "SAVING_THROW",
+      "savingThrow": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "dexterity"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "FIXED",
+          "value": 15
+        }
+      }
+    },
+    {
+      "componentId": "fragmentation-grenade-damage",
+      "kind": "DAMAGE_HEALTH_STATE",
+      "subtype": "DAMAGE",
+      "damageRoll": {
+        "kind": "DAMAGE_ROLL",
+        "damageTypes": [
+          "piercing"
+        ],
+        "base": {
+          "kind": "DICE",
+          "count": 5,
+          "die": "d6"
+        }
+      },
+      "appliesWhen": {
+        "kind": "ON_FAILED_SAVE",
+        "componentId": "fragmentation-grenade-save"
+      }
+    },
+    {
+      "componentId": "smoke-grenade-area",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "AREA_OF_EFFECT",
+      "shape": "sphere",
+      "origin": "point-in-space",
+      "dimensions": [
+        20
+      ],
+      "unit": "feet",
+      "originPlacement": "POINT_IN_SPACE",
+      "dimensionParameters": [
+        "RADIUS"
+      ],
+      "originIncluded": "INCLUDED"
+    },
+    {
+      "componentId": "smoke-grenade-obscuration",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "OBSCURATION",
+      "level": "heavily-obscured",
+      "sightEffect": "blocks-vision"
+    }
+  ],
+  "composition": {
+    "kind": "OR",
+    "members": [
+      {
+        "kind": "AND",
+        "members": [
+          {
+            "kind": "COMPONENT",
+            "componentId": "bomb-area"
+          },
+          {
+            "kind": "COMPONENT",
+            "componentId": "bomb-save"
+          },
+          {
+            "kind": "COMPONENT",
+            "componentId": "bomb-damage"
+          }
+        ]
+      },
+      {
+        "kind": "AND",
+        "members": [
+          {
+            "kind": "COMPONENT",
+            "componentId": "powder-horn-area"
+          },
+          {
+            "kind": "COMPONENT",
+            "componentId": "powder-horn-save"
+          },
+          {
+            "kind": "COMPONENT",
+            "componentId": "powder-horn-damage"
+          }
+        ]
+      },
+      {
+        "kind": "AND",
+        "members": [
+          {
+            "kind": "COMPONENT",
+            "componentId": "powder-keg-area"
+          },
+          {
+            "kind": "COMPONENT",
+            "componentId": "powder-keg-save"
+          },
+          {
+            "kind": "COMPONENT",
+            "componentId": "powder-keg-damage"
+          }
+        ]
+      },
+      {
+        "kind": "AND",
+        "members": [
+          {
+            "kind": "COMPONENT",
+            "componentId": "dynamite-area"
+          },
+          {
+            "kind": "COMPONENT",
+            "componentId": "dynamite-save"
+          },
+          {
+            "kind": "COMPONENT",
+            "componentId": "dynamite-damage"
+          }
+        ]
+      },
+      {
+        "kind": "AND",
+        "members": [
+          {
+            "kind": "COMPONENT",
+            "componentId": "fragmentation-grenade-area"
+          },
+          {
+            "kind": "COMPONENT",
+            "componentId": "fragmentation-grenade-save"
+          },
+          {
+            "kind": "COMPONENT",
+            "componentId": "fragmentation-grenade-damage"
+          }
+        ]
+      },
+      {
+        "kind": "AND",
+        "members": [
+          {
+            "kind": "COMPONENT",
+            "componentId": "smoke-grenade-area"
+          },
+          {
+            "kind": "COMPONENT",
+            "componentId": "smoke-grenade-obscuration"
+          }
+        ]
+      }
+    ]
+  }
+}

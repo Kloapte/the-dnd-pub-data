@@ -1,0 +1,28 @@
+{
+  "id": "rule:gos:random-ships",
+  "name": "Random Ships",
+  "sourceMetadata": {
+    "source": "GoS",
+    "page": 208
+  },
+  "mechanics": [
+    {
+      "componentId": "ghost-ship-energy-damage-resistance",
+      "kind": "DAMAGE_HEALTH_STATE",
+      "subtype": "RESISTANCE",
+      "damageTypes": [
+        "acid",
+        "fire",
+        "lightning",
+        "thunder"
+      ],
+      "resolutionModifier": {
+        "operation": "HALVE",
+        "multiplier": 0.5,
+        "rounding": "DOWN",
+        "oncePerDamageInstance": true,
+        "sameOperationDoesNotStack": true
+      }
+    }
+  ]
+}

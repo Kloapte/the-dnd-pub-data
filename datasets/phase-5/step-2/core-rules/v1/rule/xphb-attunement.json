@@ -1,0 +1,20 @@
+{
+  "id": "rule:xphb:attunement",
+  "name": "Attunement",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 361,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "attunement",
+      "kind": "SPELL_MAGIC",
+      "subtype": "ATTUNEMENT"
+    }
+  ]
+}

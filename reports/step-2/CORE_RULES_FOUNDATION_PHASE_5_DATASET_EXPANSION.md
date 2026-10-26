@@ -1,10 +1,14 @@
 # Core Rules Foundation Phase 5 Dataset Expansion
 
-## Status
+## Closure status
 
-**In progress; awaiting continuation and review. Phase 5 is not complete or approved. Phase 6 has not started.**
+**Phase 5 is complete and approved.** The initial status and intermediate checkpoint statements preserved below are historical snapshots and are superseded by the [Phase 5 closure report](CORE_RULES_FOUNDATION_PHASE_5_CLOSURE.md) and the final accounting manifest. The final checkpoint is 588 in-scope identities, 585 canonical outputs (551 Phase 5 plus 34 Phase 3 representatives), and three explicitly accepted unsupported alternatives without canonical shells. The six font-only LanguageScript records remain excluded by approved scope. Final validation passed 9 schemas, 89 examples, 34 Phase 3 records, 551 Phase 5 records, and 838 permanent checks.
 
-This report records the source inventory and completed conversion batches. It does not claim dataset-wide conversion. The approved Phase 3/4 representative baseline remains separate from the newly expanded records.
+The Phase 3/4 representative baseline remains separately identified from the 554 Phase 5 expansion identities. Phase 6 is not covered by this closure.
+
+## Historical expansion snapshots
+
+This section retains the source inventory and batch-level history. Intermediate totals and status statements below describe their original checkpoints and are superseded by the closure report.
 
 ## Source inventory reconciliation
 

@@ -1,0 +1,25 @@
+{
+  "id": "rule:xphb:ally",
+  "name": "Ally",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 361,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:creature",
+      "relationship": "ally-is-a-creature"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:attitude",
+      "relationship": "alliance-is-distinct-from-starting-attitude"
+    }
+  ]
+}

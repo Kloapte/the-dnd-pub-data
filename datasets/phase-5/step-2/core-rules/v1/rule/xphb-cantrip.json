@@ -1,0 +1,20 @@
+{
+  "id": "rule:xphb:cantrip",
+  "name": "Cantrip",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 362,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:spell",
+      "relationship": "level-zero-spell-cast-without-spell-slot"
+    }
+  ]
+}

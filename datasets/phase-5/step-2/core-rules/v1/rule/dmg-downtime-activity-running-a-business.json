@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:downtime-activity-running-a-business",
+  "name": "Downtime Activity: Running a Business",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 129
+  },
+  "ruleType": "OPTIONAL"
+}

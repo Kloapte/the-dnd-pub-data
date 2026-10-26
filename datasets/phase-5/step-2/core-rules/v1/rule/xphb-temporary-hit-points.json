@@ -1,0 +1,28 @@
+{
+  "id": "rule:xphb:temporary-hit-points",
+  "name": "Temporary Hit Points",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 376,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "temporary-hit-points-buffer",
+      "kind": "DAMAGE_HEALTH_STATE",
+      "subtype": "HIT_POINTS",
+      "rule": "temporary-hit-points"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:hit-points",
+      "relationship": "buffer-against-real-hit-point-loss"
+    }
+  ]
+}

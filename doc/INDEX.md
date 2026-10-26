@@ -5,6 +5,7 @@
 | [Terminology](TERMINOLOGY.md) | Shared vocabulary for source data, canonical contracts, normalization, validation, provenance, and incomplete interpretations. |
 | [Source Registry contract](SOURCE_REGISTRY.md) | Approved Source model and schema, full registry dataset, backend loading and API behavior, provenance, and unresolved identity cases. |
 | [Core Rules Foundation](CORE_RULES.md) | Canonical identities, source metadata, typed mechanics, domain responsibilities, references, and interpretation boundaries for actions, rules, skills, conditions, diseases, statuses, senses, and languages. |
+| [Core Rules Phase 6 backend integration progress](../reports/step-2/CORE_RULES_FOUNDATION_PHASE_6_BACKEND_INTEGRATION.md) | Validated classpath catalog and reference-resolution checkpoint, verification results, and remaining typed mechanics integration work. |
 | [Core Rules Phase 3 representative conversion report](../reports/step-2/CORE_RULES_FOUNDATION_PHASE_3_REPRESENTATIVE_CONVERSION.md) | Historical Phase 3 conversion and validation baseline, with a Phase 4 addendum linking revised results. |
 | [Core Rules Phase 4 implementation report](../reports/step-2/CORE_RULES_FOUNDATION_PHASE_4_IMPLEMENTATION.md) | Approved contract refinements, canonical record updates, source accounting, and structural and source-backed validation results. |
 | [Core Rules Phase 4 Cackle Fever audit](../reports/step-2/CORE_RULES_FOUNDATION_PHASE_4_CACKLE_FEVER_AUDIT.md) | Source-fidelity audit of Cackle Fever's saving-throw scopes, contagion, immunity, progression, and recovery. |

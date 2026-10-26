@@ -1,0 +1,9 @@
+{
+  "id": "rule:cos:prophet-s-gambit",
+  "name": "Prophet's Gambit",
+  "sourceMetadata": {
+    "source": "CoS",
+    "page": 243
+  },
+  "ruleType": "OPTIONAL"
+}

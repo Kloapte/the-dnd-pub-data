@@ -1,0 +1,8 @@
+{
+  "id": "rule:gos:encounters-at-sea",
+  "name": "Encounters at Sea",
+  "sourceMetadata": {
+    "source": "GoS",
+    "page": 207
+  }
+}

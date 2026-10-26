@@ -1,0 +1,19 @@
+{
+  "id": "rule:gos:ocean-environs",
+  "name": "Ocean Environs",
+  "sourceMetadata": {
+    "source": "GoS",
+    "page": 202
+  },
+  "mechanics": [
+    {
+      "componentId": "kelp-forest-difficult-terrain",
+      "kind": "MOVEMENT_SPATIAL",
+      "subtype": "DIFFICULT_TERRAIN",
+      "procedure": "movement-cost",
+      "unit": "feet",
+      "extraFeetPerFoot": 1,
+      "cumulative": true
+    }
+  ]
+}

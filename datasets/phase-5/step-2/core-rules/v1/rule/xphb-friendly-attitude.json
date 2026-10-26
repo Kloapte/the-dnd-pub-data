@@ -1,0 +1,33 @@
+{
+  "id": "rule:xphb:friendly-attitude",
+  "name": "Friendly [Attitude]",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 367,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "ruleType": "CORE",
+  "mechanics": [
+    {
+      "componentId": "friendly-attitude",
+      "kind": "SOCIAL_PROCEDURE",
+      "subtype": "ATTITUDE",
+      "attitude": "friendly"
+    }
+  ],
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:ability-check",
+      "relationship": "influence-check"
+    },
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:advantage",
+      "relationship": "source-grants-on-influence-check"
+    }
+  ]
+}

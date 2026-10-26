@@ -1,0 +1,30 @@
+{
+  "id": "rule:xge:downtime-activity-research",
+  "name": "Downtime Activity: Research",
+  "sourceMetadata": {
+    "source": "XGE",
+    "page": 132
+  },
+  "ruleType": "VARIANT_OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "research-activity",
+      "kind": "DOWNTIME_PROCEDURE",
+      "subtype": "ACTIVITY",
+      "procedure": "research",
+      "duration": {
+        "amount": 1,
+        "unit": "week"
+      },
+      "check": {
+        "componentId": "research-lore-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "intelligence"
+        ]
+      },
+      "outcome": "information-gained"
+    }
+  ]
+}

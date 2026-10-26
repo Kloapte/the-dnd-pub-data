@@ -1,0 +1,30 @@
+{
+  "id": "rule:dmg:downtime-activity-selling-magic-items",
+  "name": "Downtime Activity: Selling Magic Items",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 129
+  },
+  "ruleType": "OPTIONAL",
+  "mechanics": [
+    {
+      "componentId": "search-for-magic-item-buyer",
+      "kind": "DOWNTIME_PROCEDURE",
+      "subtype": "ACTIVITY",
+      "procedure": "sell",
+      "check": {
+        "componentId": "find-magic-item-buyer-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "intelligence"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:phb:investigation"
+        },
+        "dc": 20
+      }
+    }
+  ]
+}

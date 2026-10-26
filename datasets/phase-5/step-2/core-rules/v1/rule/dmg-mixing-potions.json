@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:mixing-potions",
+  "name": "Mixing Potions",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 140
+  },
+  "ruleType": "VARIANT"
+}

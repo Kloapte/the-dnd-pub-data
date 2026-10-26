@@ -1,0 +1,15 @@
+{
+  "id": "rule:dmg:inspiration",
+  "name": "Inspiration",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 240
+  },
+  "references": [
+    {
+      "targetType": "rule",
+      "id": "rule:xphb:advantage",
+      "relationship": "benefit-of-spending-inspiration"
+    }
+  ]
+}

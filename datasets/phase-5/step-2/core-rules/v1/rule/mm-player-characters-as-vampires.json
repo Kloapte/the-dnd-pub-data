@@ -1,0 +1,31 @@
+{
+  "id": "rule:mm:player-characters-as-vampires",
+  "name": "Player Characters as Vampires",
+  "sourceMetadata": {
+    "source": "MM",
+    "page": 295,
+    "citations": [
+      {
+        "source": "VRGR",
+        "page": 236
+      }
+    ]
+  },
+  "references": [
+    {
+      "targetType": "creature",
+      "id": "creature:mm:vampire-spawn",
+      "relationship": "transformation-stat-block"
+    },
+    {
+      "targetType": "creature",
+      "id": "creature:mm:vampire",
+      "relationship": "transformation-stat-block"
+    },
+    {
+      "targetType": "spell",
+      "id": "spell:phb:wish",
+      "relationship": "reverses-vampirism"
+    }
+  ]
+}

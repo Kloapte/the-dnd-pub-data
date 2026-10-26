@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:downtime-activity-training-to-gain-levels",
+  "name": "Downtime Activity: Training to Gain Levels",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 131
+  },
+  "ruleType": "VARIANT"
+}

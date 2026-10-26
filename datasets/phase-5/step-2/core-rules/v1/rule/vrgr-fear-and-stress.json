@@ -1,0 +1,33 @@
+{
+  "id": "rule:vrgr:fear-and-stress",
+  "name": "Fear and Stress",
+  "sourceMetadata": {
+    "source": "VRGR",
+    "page": 195
+  },
+  "mechanics": [
+    {
+      "componentId": "fear-resistance-save",
+      "kind": "D20_TEST",
+      "subtype": "SAVING_THROW",
+      "savingThrow": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "wisdom"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "FIXED",
+          "value": 15
+        }
+      }
+    }
+  ],
+  "references": [
+    {
+      "targetType": "condition",
+      "id": "condition:phb:frightened",
+      "relationship": "fear-save-failure-condition"
+    }
+  ]
+}

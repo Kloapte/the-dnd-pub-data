@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:spell-points",
+  "name": "Spell Points",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 288
+  },
+  "ruleType": "VARIANT"
+}

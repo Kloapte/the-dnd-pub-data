@@ -1,0 +1,9 @@
+{
+  "id": "rule:dmg:plot-points",
+  "name": "Plot Points",
+  "sourceMetadata": {
+    "source": "DMG",
+    "page": 269
+  },
+  "ruleType": "OPTIONAL"
+}

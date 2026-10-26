@@ -1,0 +1,8 @@
+{
+  "id": "rule:aag:ship-repairs",
+  "name": "Ship Repairs",
+  "sourceMetadata": {
+    "source": "AAG",
+    "page": 25
+  }
+}

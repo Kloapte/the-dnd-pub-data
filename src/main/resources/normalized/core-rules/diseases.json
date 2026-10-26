@@ -1,0 +1,2742 @@
+[
+  {
+    "id": "disease:cm:saprophytic-plague",
+    "name": "Saprophytic Plague",
+    "sourceMetadata": {
+      "source": "CM",
+      "page": 253
+    },
+    "infection": {
+      "exposures": [
+        {
+          "kind": "INFECTED_CREATURE_PROXIMITY",
+          "distanceFeet": 10,
+          "trigger": "ENTERS_AREA",
+          "sourceState": "INFECTED",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 20
+          },
+          "onFailure": "INFECTION",
+          "onSuccessImmunity": {
+            "kind": "DISEASE_IMMUNITY",
+            "scope": "DISEASE",
+            "duration": {
+              "amount": 24,
+              "unit": "hour"
+            }
+          },
+          "targetCreatureTypes": [
+            "beast",
+            "humanoid"
+          ]
+        },
+        {
+          "kind": "INGEST_CONTAMINATED_MATERIAL",
+          "material": "FOOD",
+          "onFailure": "INFECTION",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 20
+          },
+          "contaminationAfter": {
+            "kind": "DICE_ROLL",
+            "count": 2,
+            "die": 12,
+            "unit": "hour"
+          }
+        }
+      ]
+    },
+    "incubation": {
+      "kind": "DICE_ROLL",
+      "count": 1,
+      "die": 4,
+      "unit": "hour"
+    },
+    "symptoms": [
+      {
+        "kind": "CONDITION_LEVEL_CHANGE",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "amount": 1
+      }
+    ],
+    "applicability": {
+      "targetCreatureTypes": [
+        "beast",
+        "humanoid"
+      ],
+      "automaticSuccessForDiseaseImmuneTargets": true
+    },
+    "effects": [
+      {
+        "kind": "REPEATING_CONDITION_LEVEL_CHANGE",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "amount": 1,
+        "every": {
+          "amount": 24,
+          "unit": "hour"
+        },
+        "relativeTo": "SYMPTOM_ONSET"
+      },
+      {
+        "kind": "PHYSIOLOGICAL_CAPABILITY",
+        "capability": "AWARENESS_REDUCED",
+        "lifecycle": "AFTER_INFECTION_DURATION",
+        "beginsAfterInfection": {
+          "amount": 24,
+          "unit": "hour"
+        }
+      },
+      {
+        "kind": "PHYSIOLOGICAL_CAPABILITY",
+        "capability": "SPEAKS_WORD_UNINTENTIONALLY",
+        "lifecycle": "AFTER_INFECTION_DURATION",
+        "beginsAfterInfection": {
+          "amount": 24,
+          "unit": "hour"
+        }
+      },
+      {
+        "kind": "TRANSFORMATION_OUTCOME",
+        "target": {
+          "kind": "UNNORMALIZED_SOURCE_ENTITY",
+          "name": "lifeless magenta ooze"
+        },
+        "trigger": "DEATH_WHILE_INFECTED"
+      },
+      {
+        "kind": "FOOD_SPORE_CONTAMINATION",
+        "interval": {
+          "kind": "DICE_ROLL",
+          "count": 2,
+          "die": 12,
+          "unit": "hour"
+        },
+        "material": "FOOD"
+      },
+      {
+        "kind": "REFERENCED_PROCEDURE",
+        "reference": {
+          "targetType": "spell",
+          "id": "spell:phb:purify-food-and-drink"
+        },
+        "relation": "CURES_DISEASE",
+        "appliesWhen": "AFTER_SPORE_CONTAMINATION"
+      },
+      {
+        "kind": "BEHAVIORAL_DRIVE",
+        "drive": "SEEK_UNINFECTED_GROUPS_TO_SPREAD_DISEASE",
+        "lifecycle": "AFTER_INFECTION_DURATION",
+        "beginsAfterInfection": {
+          "amount": 24,
+          "unit": "hour"
+        }
+      }
+    ]
+  },
+  {
+    "id": "disease:dmg:cackle-fever",
+    "name": "Cackle Fever",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 257,
+      "flags": {
+        "srd": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "disease",
+          "id": "disease:xdmg:cackle-fever"
+        }
+      ]
+    },
+    "applicability": {
+      "targetCreatureTypes": [
+        "humanoid"
+      ],
+      "excludedTargets": [
+        {
+          "targetType": "race",
+          "id": "race:phb:gnome"
+        }
+      ]
+    },
+    "infection": {
+      "secondaryExposures": [
+        {
+          "exposureId": "mad-laughter-spread",
+          "kind": "NEARBY_SYMPTOMATIC_CREATURE",
+          "trigger": "target-starts-turn-within-distance",
+          "symptomId": "mad-laughter",
+          "distance": 10,
+          "unit": "feet",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 10
+          },
+          "onFailure": {
+            "kind": "INFECT_TARGET"
+          },
+          "onSuccess": {
+            "kind": "SOURCE_RELATIVE_IMMUNITY",
+            "symptomId": "mad-laughter",
+            "source": "exposing-creature",
+            "duration": {
+              "amount": 24,
+              "unit": "hour"
+            }
+          }
+        }
+      ]
+    },
+    "incubation": {
+      "kind": "DICE_ROLL",
+      "count": 1,
+      "die": 4,
+      "unit": "hour"
+    },
+    "symptoms": [
+      {
+        "kind": "CONDITION_LEVEL_CHANGE",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "amount": 1,
+        "cannotReduceUntilDiseaseEnds": true
+      },
+      {
+        "kind": "TEMPORARY_CONDITION",
+        "activation": "triggered-by-progression",
+        "symptomId": "mad-laughter",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:incapacitated"
+        },
+        "duration": {
+          "amount": 1,
+          "unit": "minute"
+        },
+        "repeatSaveToEnd": {
+          "ability": "constitution",
+          "dc": 13,
+          "trigger": "end-of-each-turn",
+          "dcTrackId": "cackle-fever-dc"
+        }
+      }
+    ],
+    "progression": [
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "great-stress-save",
+        "trigger": {
+          "kind": "GREAT_STRESS",
+          "examples": [
+            "entering-combat",
+            "taking-damage",
+            "fear",
+            "nightmare"
+          ]
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 13,
+          "dcTrackId": "cackle-fever-dc"
+        },
+        "onSuccess": [
+          {
+            "kind": "NO_EFFECT"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "DAMAGE",
+            "count": 1,
+            "die": 10,
+            "damageType": "psychic"
+          },
+          {
+            "kind": "START_SYMPTOM",
+            "symptomId": "mad-laughter"
+          }
+        ]
+      }
+    ],
+    "recovery": [
+      {
+        "id": "cackle-fever-recovery",
+        "method": "saving-throw",
+        "dcTrackId": "cackle-fever-dc",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 13,
+          "dcReduction": {
+            "dieCount": 1,
+            "dieSize": 6
+          },
+          "frequency": "each-long-rest",
+          "dcTrackId": "cackle-fever-dc"
+        },
+        "endsWhenDcAtOrBelow": 0,
+        "outcomeCounter": {
+          "branchId": "cackle-fever-recovery",
+          "countedOutcome": "FAILURE",
+          "threshold": 3,
+          "sequence": "UNSPECIFIED_BY_SOURCE",
+          "reset": "UNSPECIFIED_BY_SOURCE",
+          "onThreshold": {
+            "kind": "RULE_PROCEDURE_OUTCOME",
+            "reference": {
+              "targetType": "rule",
+              "id": "rule:dmg:madness",
+              "relationship": "indefinite-madness-options"
+            },
+            "procedure": "indefinite-madness"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "disease:dmg:sewer-plague",
+    "name": "Sewer Plague",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 257,
+      "flags": {
+        "srd": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "disease",
+          "id": "disease:xdmg:sewer-plague"
+        }
+      ]
+    },
+    "applicability": {
+      "targetCreatureTypes": [
+        "humanoid"
+      ]
+    },
+    "infection": {
+      "transmission": [
+        "wound",
+        "contact"
+      ],
+      "exposures": [
+        {
+          "kind": "WOUND_BY_CONTAGION_CARRIER"
+        },
+        {
+          "kind": "CONTACT_WITH_CONTAMINATED_MATERIAL",
+          "materials": [
+            "filth",
+            "offal"
+          ]
+        }
+      ],
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 11
+      }
+    },
+    "incubation": {
+      "kind": "DICE_ROLL",
+      "count": 1,
+      "die": 4,
+      "unit": "day"
+    },
+    "symptoms": [
+      {
+        "kind": "CONDITION_LEVEL_CHANGE",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "amount": 1
+      }
+    ],
+    "conditionGatedRestrictions": [
+      {
+        "kind": "HIT_DICE_RECOVERY_MULTIPLIER",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "minimumLevel": 1,
+        "multiplier": 0.5
+      },
+      {
+        "kind": "LONG_REST_PREVENTED_RECOVERY",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "minimumLevel": 1,
+        "preventedRecoveries": [
+          "hit-points"
+        ]
+      }
+    ],
+    "progression": [
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "long-rest-recovery",
+        "trigger": {
+          "kind": "LONG_REST_COMPLETED",
+          "phase": "AFTER_SYMPTOM_ONSET"
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 11
+        },
+        "onFailure": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:phb:exhaustion"
+            },
+            "amount": 1
+          }
+        ],
+        "onSuccess": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:phb:exhaustion"
+            },
+            "amount": -1
+          }
+        ],
+        "endsWhen": {
+          "kind": "CONDITION_LEVEL_AT_OR_BELOW",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:exhaustion"
+          },
+          "level": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "disease:dmg:sight-rot",
+    "name": "Sight Rot",
+    "sourceMetadata": {
+      "source": "DMG",
+      "page": 257,
+      "flags": {
+        "srd": true
+      },
+      "reprintedAs": [
+        {
+          "targetType": "disease",
+          "id": "disease:xdmg:sight-rot"
+        }
+      ]
+    },
+    "infection": {
+      "transmission": [
+        "ingestion"
+      ],
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 15
+      }
+    },
+    "incubation": {
+      "amount": 1,
+      "unit": "day"
+    },
+    "symptoms": [
+      {
+        "kind": "SENSE_IMPAIRMENT",
+        "sense": "sight"
+      }
+    ],
+    "effects": [
+      {
+        "kind": "ROLL_MODIFIER_TRACK",
+        "rolls": [
+          "ATTACK",
+          "ABILITY_CHECK"
+        ],
+        "amount": -1,
+        "requiresSense": "SIGHT",
+        "trigger": "LONG_REST_COMPLETED",
+        "step": -1,
+        "threshold": -5,
+        "appliesConditionAtThreshold": {
+          "targetType": "condition",
+          "id": "condition:phb:blinded"
+        },
+        "startsAfterSymptomOnset": true,
+        "conditionUntil": "SIGHT_RESTORED_BY_MAGIC"
+      }
+    ],
+    "recovery": [
+      {
+        "method": "treatment",
+        "treatment": {
+          "kind": "HERBALISM_KIT_OINTMENT",
+          "action": "apply-to-eyes-before-long-rest",
+          "outcome": "PREVENTS_NEXT_PROGRESSION",
+          "preventsNextLongRestProgression": true,
+          "usesRequired": 1,
+          "requiresProficiency": "HERBALISM_KIT",
+          "preparationTime": {
+            "amount": 1,
+            "unit": "hour"
+          },
+          "material": "EYEBRIGHT"
+        }
+      },
+      {
+        "method": "treatment",
+        "treatment": {
+          "kind": "HERBALISM_KIT_OINTMENT",
+          "action": "apply-to-eyes-before-long-rest",
+          "outcome": "ENDS_DISEASE",
+          "usesRequired": 3,
+          "requiresProficiency": "HERBALISM_KIT",
+          "preparationTime": {
+            "amount": 1,
+            "unit": "hour"
+          },
+          "material": "EYEBRIGHT"
+        }
+      }
+    ]
+  },
+  {
+    "id": "disease:egw:frigid-woe",
+    "name": "Frigid Woe",
+    "sourceMetadata": {
+      "source": "EGW",
+      "page": 125
+    },
+    "infection": {
+      "transmission": [
+        "magical-exposure"
+      ],
+      "exposures": [
+        {
+          "kind": "ENVIRONMENTAL_CONTACT",
+          "environment": "AIRBORNE_SPORES",
+          "trigger": "CONTACT",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 11
+          },
+          "onFailure": "INFECTION"
+        }
+      ]
+    },
+    "incubation": {
+      "kind": "DICE_ROLL",
+      "count": 1,
+      "die": 4,
+      "unit": "day"
+    },
+    "effects": [
+      {
+        "kind": "SPEED_CHANGE",
+        "amount": -5,
+        "unit": "feet",
+        "lifecycle": "WHILE_DISEASE_ACTIVE"
+      },
+      {
+        "kind": "TRANSFORMATION_OUTCOME",
+        "target": {
+          "kind": "UNNORMALIZED_SOURCE_ENTITY",
+          "name": "ice statue"
+        },
+        "trigger": "SPEED_REACHES_ZERO",
+        "deathOfSubject": true,
+        "outcomeAfter": "DEATH"
+      }
+    ],
+    "progression": [
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "ten-day-speed-progression",
+        "trigger": {
+          "kind": "REPEATING_ELAPSED_TIME",
+          "interval": {
+            "amount": 10,
+            "unit": "day"
+          },
+          "relativeTo": "SYMPTOM_ONSET"
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 11
+        },
+        "onSuccess": [
+          {
+            "kind": "NO_EFFECT"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "CHANGE_SPEED",
+            "amount": -5,
+            "unit": "feet"
+          }
+        ]
+      }
+    ],
+    "recovery": [
+      {
+        "method": "treatment",
+        "treatment": {
+          "kind": "MANUFACTURED_ANTIDOTE",
+          "action": "drink-as-action",
+          "outcome": "ENDS_DISEASE",
+          "onlyCureMethod": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "disease:fraif:lichen-plague",
+    "name": "Lichen Plague",
+    "sourceMetadata": {
+      "source": "FRAiF",
+      "page": 98
+    },
+    "applicability": {
+      "targetCreatureTypes": [
+        "beast",
+        "giant",
+        "humanoid",
+        "monstrosity"
+      ]
+    },
+    "infection": {
+      "transmission": [
+        "contact"
+      ],
+      "exposures": [
+        {
+          "kind": "ENVIRONMENTAL_CONTACT",
+          "environment": "AIRBORNE_SPORES",
+          "trigger": "CONTACT",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 14
+          },
+          "onFailure": "INFECTION"
+        }
+      ],
+      "exposureProcedures": [
+        {
+          "kind": "CONTACT_WITH_INFECTED_CREATURE",
+          "contact": "SKIN",
+          "sourceState": "INFECTED",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 14
+          },
+          "onFailure": "INFECTION",
+          "eligibleCreatureTypes": [
+            "beast",
+            "giant",
+            "humanoid",
+            "monstrosity"
+          ],
+          "onSuccessImmunity": {
+            "kind": "DISEASE_IMMUNITY",
+            "scope": "DISEASE",
+            "duration": {
+              "amount": 24,
+              "unit": "hour"
+            }
+          },
+          "site": "VISIBLE_LICHEN_PATCH"
+        }
+      ]
+    },
+    "incubation": {
+      "kind": "DICE_ROLL",
+      "count": 1,
+      "die": 4,
+      "unit": "day"
+    },
+    "symptoms": [
+      {
+        "kind": "CONDITION_LEVEL_CHANGE",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:exhaustion"
+        },
+        "amount": 1,
+        "cannotReduceUntilDiseaseEnds": true
+      }
+    ],
+    "progression": [
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "long-rest-exhaustion",
+        "trigger": {
+          "kind": "LONG_REST_COMPLETED",
+          "phase": "AFTER_SYMPTOM_ONSET"
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 14
+        },
+        "onSuccess": [
+          {
+            "kind": "NO_EFFECT"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:xphb:exhaustion"
+            },
+            "amount": 1
+          }
+        ],
+        "outcomeCounter": {
+          "branchId": "long-rest-exhaustion",
+          "countedOutcome": "SUCCESS",
+          "threshold": 3,
+          "sequence": "NOT_REQUIRED",
+          "reset": "NEVER",
+          "onThreshold": {
+            "kind": "END_DISEASE"
+          },
+          "immunityAfterRecovery": {
+            "kind": "DISEASE_IMMUNITY",
+            "scope": "DISEASE",
+            "permanent": true
+          }
+        }
+      }
+    ],
+    "effects": [
+      {
+        "kind": "TRANSFORMATION_OUTCOME",
+        "target": {
+          "kind": "UNNORMALIZED_SOURCE_ENTITY",
+          "name": "Zombie"
+        },
+        "trigger": "DEATH_WHILE_INFECTED",
+        "deathOfSubject": true,
+        "outcomeAfter": "BECOMES_TRANSFORMED_CREATURE"
+      }
+    ]
+  },
+  {
+    "id": "disease:fraif:mudpox",
+    "name": "Mudpox",
+    "sourceMetadata": {
+      "source": "FRAiF",
+      "page": 98
+    },
+    "infection": {
+      "transmission": [
+        "contact"
+      ],
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 12
+      },
+      "exposures": [
+        {
+          "kind": "CONTACT_WITH_CONTAMINATED_MATERIAL",
+          "materials": [
+            "contaminated-mud"
+          ]
+        },
+        {
+          "kind": "CONTACT_WITH_INFECTED_CREATURE",
+          "contact": "SKIN",
+          "sourceState": "INFECTED",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 12
+          },
+          "onFailure": "INFECTION",
+          "eligibleCreatureTypes": [
+            "humanoid"
+          ],
+          "onSuccessImmunity": {
+            "kind": "DISEASE_IMMUNITY",
+            "scope": "EXPOSING_CREATURE",
+            "duration": {
+              "amount": 24,
+              "unit": "hour"
+            }
+          }
+        }
+      ]
+    },
+    "recovery": [
+      {
+        "method": "spell",
+        "reference": {
+          "targetType": "spell",
+          "id": "spell:xphb:heal",
+          "relationship": "immediate-cure"
+        }
+      },
+      {
+        "method": "spell",
+        "reference": {
+          "targetType": "spell",
+          "id": "spell:xphb:lesser-restoration",
+          "relationship": "immediate-cure"
+        }
+      }
+    ],
+    "applicability": {
+      "targetCreatureTypes": [
+        "beast",
+        "humanoid"
+      ]
+    },
+    "progression": [
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "daily-dawn-recovery",
+        "trigger": {
+          "kind": "DAILY_AT",
+          "time": "DAWN"
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 12
+        },
+        "onSuccess": [
+          {
+            "kind": "NO_EFFECT"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:xphb:exhaustion"
+            },
+            "amount": 1
+          },
+          {
+            "kind": "VOMIT_PREVIOUS_DAY_FOOD"
+          }
+        ],
+        "outcomeCounter": {
+          "branchId": "daily-dawn-recovery",
+          "countedOutcome": "SUCCESS",
+          "threshold": 3,
+          "sequence": "CONSECUTIVE",
+          "reset": "ON_OPPOSITE_OUTCOME",
+          "onThreshold": {
+            "kind": "END_DISEASE"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "disease:fraif:shaking-plague",
+    "name": "Shaking Plague",
+    "sourceMetadata": {
+      "source": "FRAiF",
+      "page": 70
+    },
+    "applicability": {
+      "targetCreatureTypes": [
+        "humanoid"
+      ]
+    },
+    "infection": {
+      "transmission": [
+        "contact"
+      ],
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 11
+      },
+      "exposures": [
+        {
+          "kind": "CONTACT_WITH_INFECTED_CREATURE",
+          "contact": "SKIN",
+          "sourceState": "INFECTED",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 11
+          },
+          "onFailure": "INFECTION",
+          "eligibleCreatureTypes": [
+            "humanoid"
+          ],
+          "onSuccessImmunity": {
+            "kind": "DISEASE_IMMUNITY",
+            "scope": "EXPOSING_CREATURE",
+            "duration": {
+              "amount": 24,
+              "unit": "hour"
+            }
+          }
+        }
+      ]
+    },
+    "symptoms": [
+      {
+        "kind": "CONDITION_LEVEL_CHANGE",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:exhaustion"
+        },
+        "amount": 1
+      },
+      {
+        "kind": "ABILITY_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "disadvantage",
+        "ability": "dexterity"
+      },
+      {
+        "kind": "ABILITY_ROLL_MODIFIER",
+        "roll": "saving-throw",
+        "direction": "disadvantage",
+        "ability": "dexterity"
+      }
+    ],
+    "progression": [
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "daily-exhaustion",
+        "trigger": {
+          "kind": "DAILY_AT",
+          "time": "DAWN"
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 11
+        },
+        "onFailure": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:xphb:exhaustion"
+            },
+            "amount": 1
+          }
+        ],
+        "onSuccess": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:xphb:exhaustion"
+            },
+            "amount": -1
+          }
+        ],
+        "endsWhen": {
+          "kind": "CONDITION_LEVEL_AT_OR_BELOW",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:exhaustion"
+          },
+          "level": 0
+        }
+      }
+    ],
+    "conditionGatedRestrictions": [
+      {
+        "kind": "LONG_REST_PREVENTED_RECOVERY",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:exhaustion"
+        },
+        "minimumLevel": 1,
+        "preventedRecoveries": [
+          "condition-level-reduction"
+        ]
+      }
+    ],
+    "effects": [
+      {
+        "kind": "SPELL_CASTING_SAVE",
+        "component": "SOMATIC",
+        "ability": "constitution",
+        "dc": 11,
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:exhaustion"
+        },
+        "onFailure": [
+          "SPELL_DISSIPATES",
+          "ACTION_OR_BONUS_ACTION_OR_REACTION_WASTED"
+        ],
+        "spellSlotOutcome": "NOT_EXPENDED"
+      }
+    ]
+  },
+  {
+    "id": "disease:fraif:the-rusting",
+    "name": "The Rusting",
+    "sourceMetadata": {
+      "source": "FRAiF",
+      "page": 165
+    },
+    "infection": {
+      "transmission": [
+        "wound",
+        "magical-exposure"
+      ],
+      "exposures": [
+        {
+          "kind": "WOUND_BY_CONTAGION_CARRIER",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 10
+          },
+          "onFailure": "INFECTION",
+          "excludedCreatureTypes": [
+            "construct",
+            "undead"
+          ],
+          "automaticSuccessForExcludedTargets": true
+        },
+        {
+          "kind": "ENVIRONMENTAL_EXPOSURE",
+          "environment": "CONTAMINATED_AREA",
+          "duration": {
+            "amount": 1,
+            "unit": "hour"
+          },
+          "trigger": "TIME_IN_AREA",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 10
+          },
+          "onFailure": "INFECTION"
+        }
+      ]
+    },
+    "symptoms": [
+      {
+        "kind": "CONDITION_LEVEL_CHANGE",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:exhaustion"
+        },
+        "amount": 1
+      }
+    ],
+    "progression": [
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "daily-exhaustion",
+        "trigger": {
+          "kind": "DAILY_AT",
+          "time": "DAWN"
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 10
+        },
+        "onFailure": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:xphb:exhaustion"
+            },
+            "amount": 1
+          }
+        ],
+        "onSuccess": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:xphb:exhaustion"
+            },
+            "amount": -1
+          }
+        ],
+        "endsWhen": {
+          "kind": "CONDITION_LEVEL_AT_OR_BELOW",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:exhaustion"
+          },
+          "level": 0
+        }
+      }
+    ],
+    "recovery": [
+      {
+        "method": "spell",
+        "reference": {
+          "targetType": "spell",
+          "id": "spell:phb:remove-curse",
+          "relationship": "ends-curse"
+        }
+      }
+    ],
+    "conditionGatedRestrictions": [
+      {
+        "kind": "LONG_REST_PREVENTED_RECOVERY",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:exhaustion"
+        },
+        "minimumLevel": 1,
+        "preventedRecoveries": [
+          "condition-level-reduction"
+        ]
+      }
+    ],
+    "effects": [
+      {
+        "kind": "SPEED_CHANGE",
+        "amount": -5,
+        "unit": "feet",
+        "lifecycle": "WHILE_DISEASE_ACTIVE"
+      },
+      {
+        "kind": "TRANSFORMATION_OUTCOME",
+        "target": {
+          "kind": "UNNORMALIZED_SOURCE_ENTITY",
+          "name": "Rusted"
+        },
+        "trigger": "CONDITION_LEVEL_THRESHOLD",
+        "threshold": 6,
+        "exception": "DOES_NOT_DIE",
+        "creatureTypeAfter": "construct",
+        "immunities": [
+          {
+            "kind": "DAMAGE_TYPE",
+            "damageType": "poison"
+          },
+          {
+            "kind": "CONDITION",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:xphb:exhaustion"
+            }
+          },
+          {
+            "kind": "CONDITION",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:xphb:petrified"
+            }
+          },
+          {
+            "kind": "CONDITION",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:xphb:poisoned"
+            }
+          }
+        ],
+        "outcomeAfter": "BECOMES_TRANSFORMED_CREATURE"
+      }
+    ]
+  },
+  {
+    "id": "disease:gos:bluerot",
+    "name": "Bluerot",
+    "sourceMetadata": {
+      "source": "GoS",
+      "page": 234
+    },
+    "applicability": {
+      "targetCreatureTypes": [
+        "humanoid"
+      ]
+    },
+    "infection": {
+      "transmission": [
+        "wound"
+      ],
+      "exposures": [
+        {
+          "kind": "WOUND_BY_CONTAGION_CARRIER"
+        }
+      ]
+    },
+    "incubation": {
+      "kind": "DICE_ROLL",
+      "count": 1,
+      "die": 4,
+      "unit": "hour"
+    },
+    "effects": [
+      {
+        "kind": "ABILITY_SCORE_CHANGE",
+        "ability": "constitution",
+        "change": "LOSS",
+        "amount": {
+          "kind": "DICE_ROLL",
+          "count": 1,
+          "die": 4,
+          "unit": "points"
+        },
+        "minimum": 3,
+        "lifecycle": "WHILE_DISEASE_ACTIVE"
+      },
+      {
+        "kind": "ABILITY_SCORE_CHANGE",
+        "ability": "charisma",
+        "change": "LOSS",
+        "amount": {
+          "kind": "DICE_ROLL",
+          "count": 1,
+          "die": 4,
+          "unit": "points"
+        },
+        "minimum": 3,
+        "lifecycle": "WHILE_DISEASE_ACTIVE"
+      },
+      {
+        "kind": "DAMAGE_VULNERABILITY",
+        "damageTypes": [
+          "radiant"
+        ],
+        "lifecycle": "WHILE_DISEASE_ACTIVE"
+      },
+      {
+        "kind": "PHYSIOLOGICAL_CAPABILITY",
+        "capability": "BREATHE_UNDERWATER",
+        "lifecycle": "WHILE_DISEASE_ACTIVE"
+      },
+      {
+        "kind": "TRIGGERED_RECOVERY_RESTRICTION",
+        "trigger": "DISEASE_DAMAGE_REDUCES_HP_TO_ZERO",
+        "restriction": "CANNOT_REGAIN_HIT_POINTS_UNTIL_DISEASE_CURED",
+        "stabilizationAllowed": true
+      }
+    ],
+    "progression": [
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "long-rest-recovery",
+        "trigger": {
+          "kind": "LONG_REST_COMPLETED",
+          "phase": "AFTER_INFECTION"
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 12
+        },
+        "onSuccess": [
+          {
+            "kind": "CHANGE_ABILITY_SCORE",
+            "ability": "constitution",
+            "amount": 1,
+            "minimum": 3
+          },
+          {
+            "kind": "CHANGE_ABILITY_SCORE",
+            "ability": "charisma",
+            "amount": 1,
+            "minimum": 3
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "DAMAGE",
+            "count": 4,
+            "die": 8,
+            "damageType": "necrotic"
+          }
+        ]
+      }
+    ],
+    "termination": {
+      "kind": "ALL_LOST_ABILITY_SCORE_POINTS_RESTORED",
+      "abilities": [
+        "constitution",
+        "charisma"
+      ]
+    },
+    "references": [
+      {
+        "targetType": "spell",
+        "id": "spell:phb:contagion",
+        "relationship": "can-be-inflicted-by"
+      }
+    ]
+  },
+  {
+    "id": "disease:gos:redface",
+    "name": "Redface",
+    "sourceMetadata": {
+      "source": "GoS",
+      "page": 168
+    },
+    "infection": {
+      "transmission": [
+        "inhalation"
+      ]
+    },
+    "references": [
+      {
+        "targetType": "disease",
+        "id": "disease:dmg:sight-rot",
+        "relationship": "same-effects-as"
+      }
+    ],
+    "effectProfile": {
+      "kind": "REUSE_DISEASE_EFFECT_PROFILE",
+      "sourceDisease": {
+        "targetType": "disease",
+        "id": "disease:dmg:sight-rot"
+      },
+      "components": [
+        "symptoms",
+        "progression",
+        "recovery"
+      ]
+    }
+  },
+  {
+    "id": "disease:idrotf:arcane-blight",
+    "name": "Arcane Blight",
+    "sourceMetadata": {
+      "source": "IDRotF",
+      "page": 233
+    },
+    "applicability": {
+      "targetCreatureTypes": [
+        "humanoid"
+      ]
+    },
+    "infection": {
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 15
+      },
+      "exposures": [
+        {
+          "kind": "ENVIRONMENTAL_EXPOSURE",
+          "environment": "NECROPOLIS",
+          "duration": {
+            "amount": 12,
+            "unit": "hour"
+          },
+          "trigger": "TIME_IN_AREA",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 15
+          },
+          "onFailure": "INFECTION"
+        }
+      ]
+    },
+    "recovery": [
+      {
+        "id": "arcane-blight-recovery",
+        "method": "saving-throw",
+        "dcTrackId": "arcane-blight",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 15,
+          "dcReduction": {
+            "dieCount": 1,
+            "dieSize": 6
+          },
+          "frequency": "each-long-rest",
+          "dcTrackId": "arcane-blight"
+        },
+        "endsWhenDcAtOrBelow": 0,
+        "immunityAfterRecovery": true,
+        "outcomeCounter": {
+          "branchId": "arcane-blight-recovery",
+          "countedOutcome": "FAILURE",
+          "threshold": 3,
+          "sequence": "UNSPECIFIED_BY_SOURCE",
+          "reset": "UNSPECIFIED_BY_SOURCE",
+          "onThreshold": {
+            "kind": "TRANSFORM_CREATURE",
+            "target": {
+              "kind": "UNNORMALIZED_SOURCE_ENTITY",
+              "name": "nothic"
+            }
+          }
+        }
+      },
+      {
+        "method": "spell",
+        "reference": {
+          "targetType": "spell",
+          "id": "spell:phb:greater-restoration",
+          "relationship": "ends-infection"
+        }
+      }
+    ]
+  },
+  {
+    "id": "disease:oota:grackle-lung",
+    "name": "Grackle-Lung",
+    "sourceMetadata": {
+      "source": "OotA",
+      "page": 54
+    },
+    "targetTraits": [
+      "LIVING",
+      "BREATHING"
+    ],
+    "symptoms": [
+      {
+        "kind": "CONDITION_LEVEL_CHANGE",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "amount": 1
+      }
+    ],
+    "progression": [
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "long-rest-in-gracklstugh",
+        "trigger": {
+          "kind": "LONG_REST_COMPLETED",
+          "phase": "AFTER_INFECTION",
+          "area": "Gracklstugh"
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 11
+        },
+        "onSuccess": [
+          {
+            "kind": "NO_EFFECT"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:phb:exhaustion"
+            },
+            "amount": 1
+          }
+        ],
+        "endsWhen": {
+          "kind": "CONDITION_LEVEL_AT_OR_BELOW",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:exhaustion"
+          },
+          "level": 0
+        }
+      }
+    ],
+    "effects": [
+      {
+        "kind": "DEATH_AT_CONDITION_LEVEL",
+        "trigger": "CONDITION_LEVEL_REACHED",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "level": 6
+      },
+      {
+        "kind": "CONDITION_GATED_CHECK",
+        "roll": "ACTION",
+        "ability": "constitution",
+        "direction": "MUST_SUCCEED",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "dc": 10,
+        "dcFormula": "BASE_PLUS_CONDITION_LEVEL",
+        "outcome": "ACTION_UNAVAILABLE",
+        "minimumLevel": 1,
+        "creatureGroupsWithAdvantage": [
+          "DUERGAR",
+          "DERRO"
+        ]
+      },
+      {
+        "kind": "CONDITION_GATED_CHECK",
+        "roll": "SPELL_CAST",
+        "ability": "constitution",
+        "direction": "MUST_SUCCEED",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "dc": 10,
+        "dcFormula": "BASE_PLUS_CONDITION_LEVEL",
+        "outcome": "SPELL_FAILS_NO_EFFECT",
+        "minimumLevel": 1,
+        "creatureGroupsWithAdvantage": [
+          "DUERGAR",
+          "DERRO"
+        ]
+      },
+      {
+        "kind": "CONDITION_THRESHOLD_OUTCOME",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "comparison": "BELOW",
+        "level": 1,
+        "outcome": {
+          "kind": "GRANT_DISEASE_IMMUNITY",
+          "immunity": {
+            "kind": "DISEASE_IMMUNITY",
+            "scope": "DISEASE",
+            "duration": {
+              "amount": 1,
+              "unit": "week"
+            }
+          }
+        }
+      }
+    ],
+    "recovery": [
+      {
+        "method": "magic-that-cures-disease",
+        "endsDisease": true,
+        "removesConditionLevels": [
+          {
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:phb:exhaustion"
+            },
+            "scope": "LEVELS_ATTRIBUTABLE_TO_THIS_DISEASE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "disease:oow:ghoul-gut",
+    "name": "Ghoul Gut",
+    "sourceMetadata": {
+      "source": "OoW",
+      "page": 111
+    },
+    "infection": {
+      "transmission": [
+        "ingestion"
+      ],
+      "exposures": [
+        {
+          "kind": "INGEST_CONTAMINATED_MATERIAL",
+          "material": "WATER",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 12
+          },
+          "onFailure": "INFECTION"
+        }
+      ]
+    },
+    "recovery": [
+      {
+        "method": "skill-check",
+        "reference": {
+          "targetType": "skill",
+          "id": "skill:phb:medicine"
+        },
+        "ability": "wisdom",
+        "dc": 15,
+        "trigger": "LONG_REST_CARE",
+        "performedBy": "ANOTHER_CREATURE",
+        "outcome": "ENDS_DISEASE",
+        "caregiverLongRestOutcome": "NO_LONG_REST_BENEFIT"
+      }
+    ],
+    "effects": [
+      {
+        "kind": "DISEASE_RESTRICTION",
+        "restriction": "NO_NONMAGICAL_HP_OR_HIT_DICE_RECOVERY",
+        "lifecycle": "WHILE_DISEASE_ACTIVE"
+      }
+    ],
+    "progression": [
+      {
+        "kind": "TIMED_OUTCOME_BRANCH",
+        "branchId": "symptoms-begin",
+        "trigger": {
+          "kind": "LONG_REST_OR_EXCITEMENT"
+        },
+        "outcomes": [
+          {
+            "kind": "DAMAGE",
+            "count": 2,
+            "die": 4,
+            "damageType": "necrotic"
+          }
+        ]
+      },
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "long-rest-recovery",
+        "trigger": {
+          "kind": "LONG_REST_COMPLETED",
+          "phase": "AFTER_INFECTION"
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 12
+        },
+        "onSuccess": [
+          {
+            "kind": "END_DISEASE"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "DAMAGE",
+            "count": 2,
+            "die": 4,
+            "damageType": "necrotic"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "disease:phb:blinding-sickness",
+    "name": "Blinding Sickness",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 227
+    },
+    "symptoms": [
+      {
+        "kind": "ABILITY_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "disadvantage",
+        "ability": "wisdom"
+      },
+      {
+        "kind": "ABILITY_ROLL_MODIFIER",
+        "roll": "saving-throw",
+        "direction": "disadvantage",
+        "ability": "wisdom"
+      },
+      {
+        "kind": "CONDITION",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:blinded"
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "spell",
+        "id": "spell:phb:contagion",
+        "relationship": "can-be-inflicted-by"
+      }
+    ]
+  },
+  {
+    "id": "disease:phb:filth-fever",
+    "name": "Filth Fever",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 227
+    },
+    "symptoms": [
+      {
+        "kind": "ABILITY_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "disadvantage",
+        "ability": "strength"
+      },
+      {
+        "kind": "ABILITY_ROLL_MODIFIER",
+        "roll": "saving-throw",
+        "direction": "disadvantage",
+        "ability": "strength"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "actor": "affected-creature",
+        "direction": "DISADVANTAGE",
+        "roll": "ATTACK",
+        "ability": "strength",
+        "lifecycle": "WHILE_DISEASE_ACTIVE"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "spell",
+        "id": "spell:phb:contagion",
+        "relationship": "can-be-inflicted-by"
+      }
+    ]
+  },
+  {
+    "id": "disease:phb:flesh-rot",
+    "name": "Flesh Rot",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 227
+    },
+    "symptoms": [
+      {
+        "kind": "ABILITY_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "disadvantage",
+        "ability": "charisma"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "spell",
+        "id": "spell:phb:contagion",
+        "relationship": "can-be-inflicted-by"
+      }
+    ],
+    "effects": [
+      {
+        "kind": "DAMAGE_VULNERABILITY",
+        "damageTypes": [
+          "ALL"
+        ],
+        "lifecycle": "WHILE_DISEASE_ACTIVE"
+      }
+    ]
+  },
+  {
+    "id": "disease:phb:mindfire",
+    "name": "Mindfire",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 227
+    },
+    "symptoms": [
+      {
+        "kind": "ABILITY_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "disadvantage",
+        "ability": "intelligence"
+      },
+      {
+        "kind": "ABILITY_ROLL_MODIFIER",
+        "roll": "saving-throw",
+        "direction": "disadvantage",
+        "ability": "intelligence"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "spell",
+        "id": "spell:phb:contagion",
+        "relationship": "can-be-inflicted-by"
+      },
+      {
+        "targetType": "spell",
+        "id": "spell:phb:confusion",
+        "relationship": "combat-behavior"
+      }
+    ],
+    "effects": [
+      {
+        "kind": "REFERENCED_PROCEDURE",
+        "reference": {
+          "targetType": "spell",
+          "id": "spell:phb:confusion"
+        },
+        "relation": "BEHAVES_AS_EFFECT",
+        "appliesWhen": "DURING_COMBAT"
+      }
+    ]
+  },
+  {
+    "id": "disease:phb:seizure",
+    "name": "Seizure",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 227
+    },
+    "symptoms": [
+      {
+        "kind": "ABILITY_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "disadvantage",
+        "ability": "dexterity"
+      },
+      {
+        "kind": "ABILITY_ROLL_MODIFIER",
+        "roll": "saving-throw",
+        "direction": "disadvantage",
+        "ability": "dexterity"
+      },
+      {
+        "kind": "ATTACK_ROLL_MODIFIER",
+        "actor": "affected-creature",
+        "direction": "DISADVANTAGE",
+        "roll": "ATTACK",
+        "ability": "dexterity",
+        "lifecycle": "WHILE_DISEASE_ACTIVE"
+      }
+    ],
+    "references": [
+      {
+        "targetType": "spell",
+        "id": "spell:phb:contagion",
+        "relationship": "can-be-inflicted-by"
+      }
+    ]
+  },
+  {
+    "id": "disease:phb:slimy-doom",
+    "name": "Slimy Doom",
+    "sourceMetadata": {
+      "source": "PHB",
+      "page": 227
+    },
+    "symptoms": [
+      {
+        "kind": "ABILITY_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "disadvantage",
+        "ability": "constitution"
+      },
+      {
+        "kind": "ABILITY_ROLL_MODIFIER",
+        "roll": "saving-throw",
+        "direction": "disadvantage",
+        "ability": "constitution"
+      }
+    ],
+    "effects": [
+      {
+        "kind": "TRIGGERED_CONDITION",
+        "trigger": "ANY_DAMAGE",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:stunned"
+        },
+        "duration": {
+          "amount": 1,
+          "unit": "turn"
+        },
+        "endsAt": "END_OF_NEXT_TURN"
+      }
+    ]
+  },
+  {
+    "id": "disease:toa:blue-mist-fever",
+    "name": "Blue Mist Fever",
+    "sourceMetadata": {
+      "source": "ToA",
+      "page": 40
+    },
+    "applicability": {
+      "targetCreatureTypes": [
+        "giant",
+        "humanoid"
+      ]
+    },
+    "infection": {
+      "transmission": [
+        "magical-exposure"
+      ],
+      "exposures": [
+        {
+          "kind": "ENVIRONMENTAL_CONTACT",
+          "environment": "MAGICAL_MIST",
+          "trigger": "CONTACT",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 13
+          },
+          "onFailure": "INFECTION"
+        }
+      ]
+    },
+    "incubation": {
+      "kind": "DICE_ROLL",
+      "count": 1,
+      "die": 6,
+      "unit": "hour"
+    },
+    "effects": [
+      {
+        "kind": "PHYSIOLOGICAL_CAPABILITY",
+        "capability": "HALLUCINATIONS",
+        "symptomId": "blue-monkey-hallucinations",
+        "lifecycle": "WHILE_SYMPTOM_ACTIVE"
+      }
+    ],
+    "recovery": [
+      {
+        "method": "saving-throw",
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 13,
+          "frequency": "each-day"
+        },
+        "ends": "SYMPTOM",
+        "symptomId": "blue-monkey-hallucinations"
+      }
+    ]
+  },
+  {
+    "id": "disease:toa:shivering-sickness",
+    "name": "Shivering Sickness",
+    "sourceMetadata": {
+      "source": "ToA",
+      "page": 40
+    },
+    "applicability": {
+      "targetCreatureTypes": [
+        "giant",
+        "humanoid"
+      ]
+    },
+    "infection": {
+      "transmission": [
+        "contact"
+      ],
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 11
+      },
+      "exposures": [
+        {
+          "kind": "QUALIFYING_DAMAGE_AND_ENCOUNTER_END",
+          "sourceCreatures": [
+            "insect swarms",
+            "giant centipedes",
+            "giant scorpions",
+            "giant wasps"
+          ],
+          "encounterEndRequired": true,
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 11
+          },
+          "onFailure": "INFECTION"
+        },
+        {
+          "kind": "LONG_REST_IN_QUALIFYING_AREA",
+          "area": "Chult insect exposure",
+          "noRepellentSincePreviousLongRest": true,
+          "targetCreatureTypes": [
+            "giant",
+            "humanoid"
+          ],
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 11,
+            "advantageForNaturalArmor": true
+          },
+          "onFailure": "INFECTION"
+        }
+      ]
+    },
+    "incubation": {
+      "kind": "DICE_ROLL",
+      "count": 2,
+      "die": 6,
+      "unit": "hour"
+    },
+    "effects": [
+      {
+        "kind": "ABILITY_ROLL_MODIFIER",
+        "rolls": [
+          "ABILITY_CHECK",
+          "ATTACK"
+        ],
+        "direction": "DISADVANTAGE",
+        "lifecycle": "WHILE_DISEASE_ACTIVE"
+      },
+      {
+        "kind": "DISEASE_RESTRICTION",
+        "restriction": "HALF_HP_FROM_HIT_DICE",
+        "lifecycle": "AFTER_SYMPTOM_ONSET"
+      },
+      {
+        "kind": "DISEASE_RESTRICTION",
+        "restriction": "NO_HIT_POINTS_FROM_LONG_REST",
+        "lifecycle": "AFTER_SYMPTOM_ONSET"
+      }
+    ],
+    "progression": [
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "long-rest-recovery",
+        "trigger": {
+          "kind": "LONG_REST_COMPLETED",
+          "phase": "AFTER_SYMPTOM_ONSET"
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 11
+        },
+        "onSuccess": [
+          {
+            "kind": "END_DISEASE"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "NO_EFFECT"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "disease:toa:throat-leeches",
+    "name": "Throat Leeches",
+    "sourceMetadata": {
+      "source": "ToA",
+      "page": 40
+    },
+    "applicability": {
+      "targetCreatureTypes": [
+        "giant",
+        "humanoid"
+      ]
+    },
+    "infection": {
+      "transmission": [
+        "ingestion"
+      ],
+      "exposures": [
+        {
+          "kind": "INGEST_CONTAMINATED_MATERIAL",
+          "material": "WATER",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 12
+          },
+          "onFailure": "INFECTION",
+          "targetCreatureTypes": [
+            "giant",
+            "humanoid"
+          ],
+          "safeAlternatives": [
+            "RAINWATER",
+            "BOILED_WATER",
+            "MAGICALLY_PURIFIED_WATER"
+          ]
+        }
+      ]
+    },
+    "incubation": {
+      "kind": "DICE_ROLL",
+      "count": 1,
+      "die": 6,
+      "unit": "hour"
+    },
+    "symptoms": [
+      {
+        "kind": "CONDITION_LEVEL_CHANGE",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "amount": 1,
+        "onlyProgressionBranchCanReduce": true
+      }
+    ],
+    "progression": [
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "long-rest-recovery",
+        "trigger": {
+          "kind": "LONG_REST_COMPLETED",
+          "phase": "AFTER_SYMPTOM_ONSET"
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 12
+        },
+        "onSuccess": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:phb:exhaustion"
+            },
+            "amount": -1
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:phb:exhaustion"
+            },
+            "amount": 1
+          }
+        ],
+        "endsWhen": {
+          "kind": "CONDITION_LEVEL_AT_OR_BELOW",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:exhaustion"
+          },
+          "level": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "disease:vrgr:the-gnawing-plague",
+    "name": "The Gnawing Plague",
+    "sourceMetadata": {
+      "source": "VRGR",
+      "page": 153
+    },
+    "infection": {
+      "transmission": [
+        "wound",
+        "contact"
+      ],
+      "exposures": [
+        {
+          "kind": "WOUND_BY_CONTAGION_CARRIER",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 10,
+            "dcVariation": "REGIONAL_PLAGUE_SEVERITY"
+          },
+          "onFailure": "INFECTION",
+          "sourceCreatures": [
+            "RAT",
+            "GIANT_RAT",
+            "SWARM_OF_RATS",
+            "WERERAT"
+          ]
+        },
+        {
+          "kind": "CONTACT_WITH_INFECTED_CREATURE",
+          "contact": "PHYSICAL",
+          "sourceState": "INFECTED",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 10,
+            "dcVariation": "REGIONAL_PLAGUE_SEVERITY"
+          },
+          "onFailure": "INFECTION"
+        }
+      ]
+    },
+    "incubation": {
+      "kind": "DICE_ROLL",
+      "count": 1,
+      "die": 2,
+      "unit": "day"
+    },
+    "symptoms": [
+      {
+        "kind": "CONDITION_LEVEL_CHANGE",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "amount": 1
+      }
+    ],
+    "conditionGatedRestrictions": [
+      {
+        "kind": "HIT_DICE_RECOVERY_MULTIPLIER",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "minimumLevel": 1,
+        "multiplier": 0.5
+      },
+      {
+        "kind": "LONG_REST_PREVENTED_RECOVERY",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:exhaustion"
+        },
+        "minimumLevel": 1,
+        "preventedRecoveries": [
+          "hit-points"
+        ]
+      }
+    ],
+    "applicability": {
+      "excludedSourceGroups": [
+        {
+          "kind": "SOURCE_NAMED_CREATURE_GROUP",
+          "name": "RATS_AND_WERERATS"
+        }
+      ]
+    },
+    "progression": [
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "long-rest-recovery",
+        "trigger": {
+          "kind": "LONG_REST_COMPLETED",
+          "phase": "AFTER_SYMPTOM_ONSET"
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 10,
+          "dcVariation": "REGIONAL_PLAGUE_SEVERITY"
+        },
+        "onFailure": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:phb:exhaustion"
+            },
+            "amount": 1
+          }
+        ],
+        "onSuccess": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:phb:exhaustion"
+            },
+            "amount": -1
+          }
+        ],
+        "endsWhen": {
+          "kind": "CONDITION_LEVEL_AT_OR_BELOW",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:phb:exhaustion"
+          },
+          "level": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "disease:wdmm:spider-eggs",
+    "name": "Spider Eggs",
+    "sourceMetadata": {
+      "source": "WDMM",
+      "page": 47
+    },
+    "symptoms": [
+      {
+        "kind": "CONDITION",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:restrained"
+        }
+      }
+    ],
+    "references": [
+      {
+        "targetType": "spell",
+        "id": "spell:phb:lesser-restoration",
+        "relationship": "destroys-eggs"
+      }
+    ],
+    "effects": [
+      {
+        "kind": "CONDITION_GATED_CHECK",
+        "roll": "ABILITY_CHECK",
+        "ability": "strength",
+        "direction": "MUST_SUCCEED",
+        "dc": 15,
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:restrained"
+        },
+        "outcome": "ACTION_UNAVAILABLE"
+      },
+      {
+        "kind": "SUSPENDED_LOCATION",
+        "heightFeet": 10,
+        "lifecycle": "WHILE_RESTRAINED"
+      },
+      {
+        "kind": "ESCAPE_CHECK",
+        "actionRequired": true,
+        "ability": "strength",
+        "dc": 15,
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:phb:restrained"
+        },
+        "successOutcome": "END_CONDITION"
+      }
+    ],
+    "progression": [
+      {
+        "kind": "TIMED_OUTCOME_BRANCH",
+        "branchId": "awakening-after-stabilization",
+        "trigger": {
+          "kind": "PARTY_DEFEATED_AND_CREATURE_STABILIZED"
+        },
+        "interval": {
+          "kind": "DICE_ROLL",
+          "count": 1,
+          "die": 4,
+          "unit": "hour"
+        },
+        "outcomes": [
+          {
+            "kind": "APPLY_CONDITION",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:phb:restrained"
+            }
+          }
+        ]
+      },
+      {
+        "kind": "TIMED_OUTCOME_BRANCH",
+        "branchId": "egg-hatching",
+        "trigger": {
+          "kind": "ELAPSED_TIME",
+          "interval": {
+            "kind": "DICE_ROLL",
+            "count": 2,
+            "die": 12,
+            "unit": "hour"
+          },
+          "relativeTo": "INFECTION"
+        },
+        "outcomes": [
+          {
+            "kind": "KILL_HOST"
+          }
+        ]
+      }
+    ],
+    "recovery": [
+      {
+        "method": "spell",
+        "reference": {
+          "targetType": "spell",
+          "id": "spell:phb:lesser-restoration",
+          "relationship": "kills-implanted-eggs"
+        }
+      }
+    ]
+  },
+  {
+    "id": "disease:xdmg:cackle-fever",
+    "name": "Cackle Fever",
+    "sourceMetadata": {
+      "source": "XDMG",
+      "page": 61,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "applicability": {
+      "targetCreatureTypes": [
+        "humanoid"
+      ],
+      "excludedTargets": [
+        {
+          "targetType": "race",
+          "id": "race:phb:gnome"
+        }
+      ]
+    },
+    "infection": {
+      "exposures": [
+        {
+          "kind": "INGEST_TAINTED_MATERIAL",
+          "material": "POTION_OR_ELIXIR",
+          "event": "INGESTED",
+          "outcome": "INFECTION"
+        },
+        {
+          "kind": "INFECTED_CREATURE_PROXIMITY",
+          "distanceFeet": 10,
+          "trigger": "START_TURN_WITHIN_DISTANCE",
+          "sourceState": "INFECTED",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 10
+          },
+          "onFailure": "INFECTION",
+          "onSuccessImmunity": {
+            "kind": "DISEASE_IMMUNITY",
+            "scope": "EXPOSING_CREATURE",
+            "duration": {
+              "amount": 24,
+              "unit": "hour"
+            }
+          },
+          "targetCreatureTypes": [
+            "humanoid"
+          ],
+          "excludedTargets": [
+            {
+              "targetType": "race",
+              "id": "race:phb:gnome"
+            }
+          ]
+        }
+      ]
+    },
+    "incubation": {
+      "kind": "DICE_ROLL",
+      "count": 1,
+      "die": 4,
+      "unit": "day"
+    },
+    "symptoms": [
+      {
+        "kind": "CONDITION_LEVEL_CHANGE",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:exhaustion"
+        },
+        "amount": 1,
+        "cannotReduceUntilDiseaseEnds": true
+      },
+      {
+        "kind": "TEMPORARY_CONDITION",
+        "activation": "triggered-by-progression",
+        "symptomId": "mad-laughter",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:incapacitated"
+        },
+        "duration": {
+          "amount": 1,
+          "unit": "minute"
+        },
+        "repeatSaveToEnd": {
+          "ability": "constitution",
+          "dc": 13,
+          "trigger": "end-of-each-turn",
+          "dcTrackId": "cackle-fever-dc"
+        },
+        "automaticSuccessAfter": {
+          "amount": 1,
+          "unit": "minute"
+        }
+      }
+    ],
+    "progression": [
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "damage-triggered-laughter-save",
+        "trigger": {
+          "kind": "DAMAGE_WHILE_CONDITION_ACTIVE",
+          "damageType": "ANY_EXCEPT_PSYCHIC",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:exhaustion"
+          }
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 13,
+          "dcTrackId": "cackle-fever-dc"
+        },
+        "onSuccess": [
+          {
+            "kind": "NO_EFFECT"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "DAMAGE",
+            "count": 1,
+            "die": 10,
+            "damageType": "psychic"
+          },
+          {
+            "kind": "START_SYMPTOM",
+            "symptomId": "mad-laughter"
+          }
+        ]
+      },
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "long-rest-recovery",
+        "trigger": {
+          "kind": "LONG_REST_COMPLETED",
+          "phase": "AFTER_INFECTION"
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 13
+        },
+        "onSuccess": [
+          {
+            "kind": "NO_EFFECT"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "NO_EFFECT"
+          }
+        ],
+        "outcomeCounter": {
+          "branchId": "long-rest-recovery",
+          "countedOutcome": "SUCCESS",
+          "threshold": 3,
+          "sequence": "UNSPECIFIED_BY_SOURCE",
+          "reset": "UNSPECIFIED_BY_SOURCE",
+          "onThreshold": {
+            "kind": "END_DISEASE"
+          },
+          "immunityAfterRecovery": {
+            "kind": "DISEASE_IMMUNITY",
+            "scope": "DISEASE",
+            "duration": {
+              "amount": 1,
+              "unit": "year"
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "disease:xdmg:sewer-plague",
+    "name": "Sewer Plague",
+    "sourceMetadata": {
+      "source": "XDMG",
+      "page": 61,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "classification": "magical-contagion",
+    "applicability": {
+      "targetCreatureTypes": [
+        "humanoid"
+      ]
+    },
+    "infection": {
+      "exposures": [
+        {
+          "kind": "WOUND_BY_CONTAGION_CARRIER"
+        },
+        {
+          "kind": "CONTACT_WITH_CONTAMINATED_MATERIAL",
+          "materials": [
+            "filth",
+            "offal"
+          ]
+        }
+      ],
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 11
+      }
+    },
+    "incubation": {
+      "kind": "DICE_ROLL",
+      "count": 1,
+      "die": 4,
+      "unit": "day"
+    },
+    "symptoms": [
+      {
+        "kind": "CONDITION_LEVEL_CHANGE",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:exhaustion"
+        },
+        "amount": 1
+      }
+    ],
+    "conditionGatedRestrictions": [
+      {
+        "kind": "HIT_DICE_RECOVERY_MULTIPLIER",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:exhaustion"
+        },
+        "minimumLevel": 1,
+        "multiplier": 0.5
+      },
+      {
+        "kind": "LONG_REST_PREVENTED_RECOVERY",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:exhaustion"
+        },
+        "minimumLevel": 1,
+        "preventedRecoveries": [
+          "hit-points",
+          "condition-level-reduction"
+        ]
+      }
+    ],
+    "progression": [
+      {
+        "kind": "SAVING_THROW_BRANCH",
+        "branchId": "daily-dawn-save",
+        "trigger": {
+          "kind": "DAILY_AT",
+          "time": "DAWN"
+        },
+        "savingThrow": {
+          "ability": "constitution",
+          "dc": 11
+        },
+        "onFailure": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:xphb:exhaustion"
+            },
+            "amount": 1
+          }
+        ],
+        "onSuccess": [
+          {
+            "kind": "CHANGE_CONDITION_LEVEL",
+            "condition": {
+              "targetType": "condition",
+              "id": "condition:xphb:exhaustion"
+            },
+            "amount": -1
+          }
+        ],
+        "endsWhen": {
+          "kind": "CONDITION_LEVEL_AT_OR_BELOW",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:exhaustion"
+          },
+          "level": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "disease:xdmg:sight-rot",
+    "name": "Sight Rot",
+    "sourceMetadata": {
+      "source": "XDMG",
+      "page": 61,
+      "flags": {
+        "srd52": true
+      }
+    },
+    "infection": {
+      "transmission": [
+        "ingestion"
+      ],
+      "savingThrow": {
+        "ability": "constitution",
+        "dc": 15
+      },
+      "exposures": [
+        {
+          "kind": "INGEST_CONTAMINATED_MATERIAL",
+          "material": "WATER",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 15
+          },
+          "onFailure": "INFECTION",
+          "targetCreatureTypes": [
+            "beast",
+            "humanoid"
+          ]
+        },
+        {
+          "kind": "CONTACT_WITH_INFECTED_CREATURE",
+          "contact": "SKIN",
+          "sourceState": "INFECTED",
+          "savingThrow": {
+            "ability": "constitution",
+            "dc": 15
+          },
+          "onFailure": "INFECTION",
+          "eligibleCreatureTypes": [
+            "humanoid"
+          ],
+          "onSuccessImmunity": {
+            "kind": "DISEASE_IMMUNITY",
+            "scope": "EXPOSING_CREATURE",
+            "duration": {
+              "amount": 24,
+              "unit": "hour"
+            }
+          }
+        }
+      ]
+    },
+    "symptoms": [
+      {
+        "kind": "CONDITION",
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:blinded"
+        }
+      }
+    ],
+    "recovery": [
+      {
+        "method": "spell",
+        "reference": {
+          "targetType": "spell",
+          "id": "spell:xphb:heal",
+          "relationship": "cures-disease"
+        }
+      },
+      {
+        "method": "spell",
+        "reference": {
+          "targetType": "spell",
+          "id": "spell:xphb:lesser-restoration",
+          "relationship": "cures-disease"
+        }
+      },
+      {
+        "method": "treatment",
+        "treatment": {
+          "kind": "HERBALISM_KIT_OINTMENT",
+          "action": "apply-to-eyes",
+          "outcome": "SUPPRESSES_DISEASE",
+          "usesRequired": 3,
+          "duration": {
+            "amount": 24,
+            "unit": "hour"
+          },
+          "totalDurationRequired": {
+            "amount": 72,
+            "unit": "hour"
+          },
+          "requiresProficiency": "HERBALISM_KIT",
+          "preparationTime": {
+            "amount": 1,
+            "unit": "hour"
+          }
+        }
+      }
+    ]
+  }
+]
