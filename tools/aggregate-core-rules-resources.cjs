@@ -6,7 +6,7 @@ const inputs = [
     path.join(workspace, 'datasets/phase-3/step-2/core-rules/v1'),
     path.join(workspace, 'datasets/phase-5/step-2/core-rules/v1')
 ];
-const outputRoot = path.join(workspace, 'src/main/resources/data/core-rules');
+const outputRoot = path.join(workspace, 'src/main/resources/normalized/core-rules');
 const domains = new Map([
     ['action', 'actions.json'],
     ['condition', 'conditions.json'],

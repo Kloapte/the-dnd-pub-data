@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const workspace = path.resolve(__dirname, '..');
-const canonicalRoot = path.join(workspace, 'src/main/resources/data/core-rules');
+const canonicalRoot = path.join(workspace, 'src/main/resources/normalized/core-rules');
 const sourceRoot = path.join(workspace, 'src/main/resources/data');
 const outputFile = path.join(canonicalRoot, 'source-identities.json');
 

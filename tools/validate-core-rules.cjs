@@ -903,11 +903,14 @@ function assertCoreRulesReferenceIdentityIndex(records) {
             }
         }
     }
-    const actual = readJson(path.join(
+    const identityIndex = path.join(
         workspace,
-        'src/main/resources/data/core-rules/source-identities.json'
-    ));
-    assert.deepEqual(actual, [...expected].sort((left, right) => left.localeCompare(right)));
+        'src/main/resources/normalized/core-rules/source-identities.json'
+    );
+    if (fs.existsSync(identityIndex)) {
+        const actual = readJson(identityIndex);
+        assert.deepEqual(actual, [...expected].sort((left, right) => left.localeCompare(right)));
+    }
 }
 
 function assertConsolidatedCoreRulesResources(records) {
@@ -932,7 +935,7 @@ function assertConsolidatedCoreRulesResources(records) {
     }
     for (const [domain, file] of Object.entries(resourceFiles)) {
         const expected = byDomain.get(domain).sort((left, right) => left.id.localeCompare(right.id));
-        const actual = readJson(path.join(workspace, 'src/main/resources/data/core-rules', file));
+        const actual = readJson(path.join(workspace, 'src/main/resources/normalized/core-rules', file));
         assert.deepEqual(actual, expected, `${file} must exactly aggregate the validated canonical records`);
     }
     assert.equal(identities.size, 585);

@@ -1,0 +1,9 @@
+package com.thedndpub.data.dto.rule.mechanics;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.thedndpub.data.dto.rule.enums.RuleMechanicKind;
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public record RuleToolSkillProficiencySynergy(RuleMechanicKind kind, String subtype, String componentId,
+        Boolean whenBothProficienciesApply, Boolean dmMayGrantAdvantage) implements RuleMechanic {
+}
