@@ -2,6 +2,9 @@ package com.thedndpub.data;
 
 import com.thedndpub.data.dto.rule.RuleRecord;
 import com.thedndpub.data.dto.rule.mechanics.*;
+import com.thedndpub.data.dto.rule.mechanics.enums.RuleCoverLevel;
+import com.thedndpub.data.dto.rule.mechanics.enums.RuleDamageDie;
+import com.thedndpub.data.dto.rule.mechanics.enums.RuleMovementProcedure;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,6 +49,22 @@ class RuleMechanicDtoTests {
     }
 
     @Test
+    void schemaEnumsPreserveWireValuesAndRejectUnsupportedValues() throws Exception {
+        assertEquals("\"three-quarters\"", objectMapper.writeValueAsString(RuleCoverLevel.THREE_QUARTERS));
+        assertEquals(RuleCoverLevel.THREE_QUARTERS,
+                objectMapper.readValue("\"three-quarters\"", RuleCoverLevel.class));
+        assertEquals("\"fall-damage\"", objectMapper.writeValueAsString(RuleMovementProcedure.FALL_DAMAGE));
+        assertEquals(RuleMovementProcedure.FALL_DAMAGE,
+                objectMapper.readValue("\"fall-damage\"", RuleMovementProcedure.class));
+
+        // d20 is schema-supported for damage dice even though no canonical Rule currently uses it.
+        assertEquals("\"d20\"", objectMapper.writeValueAsString(RuleDamageDie.D20));
+        assertEquals(RuleDamageDie.D20, objectMapper.readValue("\"d20\"", RuleDamageDie.class));
+        assertThrows(Exception.class, () -> objectMapper.readValue("\"d100\"", RuleDamageDie.class));
+        assertThrows(Exception.class, () -> objectMapper.readValue("\"three_quarters\"", RuleCoverLevel.class));
+    }
+
+    @Test
     void usesConcreteDtosForEachCanonicalSubtypeGroup() throws Exception {
         RuleRecord[] rules;
         try (InputStream input = rulesDataset.getInputStream()) {
@@ -74,6 +93,8 @@ class RuleMechanicDtoTests {
         assertThrows(Exception.class, () -> objectMapper.readValue(
                 "{\"id\":\"rule:test:missing-source\",\"name\":\"Missing source\"}", RuleRecord.class));
         assertThrows(Exception.class, () -> readMechanic("SPELL_MAGIC", "UNKNOWN"));
+        assertThrows(Exception.class, () -> readMechanic(
+                "SPELL_MAGIC", "CASTING", "\"unexpectedField\":true"));
         assertThrows(Exception.class, () -> objectMapper.readValue(
                 "{\"id\":\"rule:test:missing-component\",\"name\":\"Missing component\","
                         + "\"sourceMetadata\":{\"source\":\"TEST\"},\"mechanics\":[{"
@@ -288,7 +309,7 @@ class RuleMechanicDtoTests {
     private static RuleMechanic mechanic(RuleRecord[] rules, String kind, String subtype) {
         return Arrays.stream(rules)
                 .flatMap(rule -> rule.mechanics().stream())
-                .filter(value -> value.kind().name().equals(kind) && value.subtype().equals(subtype))
+                .filter(value -> value.kind().name().equals(kind) && value.subtype().name().equals(subtype))
                 .findFirst()
                 .orElseThrow();
     }
@@ -305,7 +326,7 @@ class RuleMechanicDtoTests {
         return objectMapper.readValue(json, RuleRecord.class).mechanics().getFirst();
     }
 
-    private static String firstDifference(String path, JsonNode expected, JsonNode actual) {
+    static String firstDifference(String path, JsonNode expected, JsonNode actual) {
         if (expected.equals(actual)
                 || expected.isNumber() && actual.isNumber()
                 && expected.decimalValue().compareTo(actual.decimalValue()) == 0) {

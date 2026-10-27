@@ -4,6 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.thedndpub.data.dto.rule.enums.RuleMechanicKind;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public record RuleDeathSavingThrow(RuleMechanicKind kind, String subtype, String trigger, String appliesTo,
+public record RuleDeathSavingThrow(RuleMechanicKind kind, RuleMechanicSubtype subtype, String trigger, String appliesTo,
         String componentId, RuleComponentApplicability appliesWhen) implements RuleMechanic {
 }

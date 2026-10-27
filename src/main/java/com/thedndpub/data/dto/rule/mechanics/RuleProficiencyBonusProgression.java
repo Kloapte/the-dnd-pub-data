@@ -5,7 +5,7 @@ import com.thedndpub.data.dto.rule.enums.RuleMechanicKind;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public record RuleProficiencyBonusProgression(RuleMechanicKind kind, String subtype, String componentId,
+public record RuleProficiencyBonusProgression(RuleMechanicKind kind, RuleMechanicSubtype subtype, String componentId,
         String progressionSource, List<RuleProficiencyLevelBand> levelBands,
         List<RuleProficiencyChallengeRatingBand> challengeRatingBands) implements RuleMechanic {
     public RuleProficiencyBonusProgression {

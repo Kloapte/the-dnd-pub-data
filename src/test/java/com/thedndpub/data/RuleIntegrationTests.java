@@ -3,12 +3,19 @@ package com.thedndpub.data;
 import com.thedndpub.data.dto.rule.RuleRecord;
 import com.thedndpub.data.repositories.rule.RuleRepository;
 import com.thedndpub.data.services.rule.RuleService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.node.ArrayNode;
+
+import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -26,6 +33,12 @@ class RuleIntegrationTests {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Value("classpath:normalized/core-rules/rules.json")
+    private Resource rulesDataset;
 
     @Test
     void repositoryLoadsEveryRuleWithUniqueIdentifiers() {
@@ -63,5 +76,50 @@ class RuleIntegrationTests {
 
         mockMvc.perform(get("/api/rules/{id}", "rule:unknown:missing"))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void allEndpointPreservesCanonicalRuleJson() throws Exception {
+        JsonNode canonical;
+        try (InputStream input = rulesDataset.getInputStream()) {
+            canonical = objectMapper.readTree(input);
+        }
+
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        String response = mockMvc.perform(get("/api/rules"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        assertEquals(null, RuleMechanicDtoTests.firstDifference(
+                "$", canonical, objectMapper.readTree(response)));
+
+        JsonNode canonicalById = null;
+        ArrayNode canonicalByName = objectMapper.createArrayNode();
+        for (JsonNode rule : canonical) {
+            if ("rule:aag:crashing".equals(rule.path("id").asString())) {
+                canonicalById = rule;
+            }
+            if ("Healing".equals(rule.path("name").asString())) {
+                canonicalByName.add(rule);
+            }
+        }
+
+        String byIdResponse = mockMvc.perform(get("/api/rules/{id}", "rule:aag:crashing"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        assertEquals(null, RuleMechanicDtoTests.firstDifference(
+                "$/rule:aag:crashing", canonicalById, objectMapper.readTree(byIdResponse)));
+
+        String byNameResponse = mockMvc.perform(get("/api/rules/name/{name}", "Healing"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        assertEquals(null, RuleMechanicDtoTests.firstDifference(
+                "$/name/Healing", canonicalByName, objectMapper.readTree(byNameResponse)));
     }
 }

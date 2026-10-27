@@ -7,11 +7,8 @@ import tools.jackson.databind.DeserializationContext;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ValueDeserializer;
 
-import java.util.regex.Pattern;
 
 public final class RuleMechanicDeserializer extends ValueDeserializer<RuleMechanic> {
-    private static final Pattern COMPONENT_ID = Pattern.compile("^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$");
-
     @Override
     public RuleMechanic deserialize(JsonParser parser, DeserializationContext context) throws JacksonException {
         JsonNode node = context.readTree(parser);
@@ -22,9 +19,8 @@ public final class RuleMechanicDeserializer extends ValueDeserializer<RuleMechan
             throw new IllegalArgumentException("Rule mechanic requires string kind and subtype discriminators");
         }
         JsonNode componentIdNode = node.get("componentId");
-        if (componentIdNode == null || !componentIdNode.isString()
-                || !COMPONENT_ID.matcher(componentIdNode.asString()).matches()) {
-            throw new IllegalArgumentException("Rule mechanic requires a valid componentId");
+        if (componentIdNode == null || !componentIdNode.isString()) {
+            throw new IllegalArgumentException("Rule mechanic requires a string componentId");
         }
         String kind = kindNode.asString();
         String subtype = subtypeNode.asString();

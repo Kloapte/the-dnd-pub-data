@@ -1,0 +1,8 @@
+package com.thedndpub.data.dto.action.enums;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public enum ActionRollSelection {
+    @JsonProperty("higher") HIGHER,
+    @JsonProperty("lower") LOWER
+}

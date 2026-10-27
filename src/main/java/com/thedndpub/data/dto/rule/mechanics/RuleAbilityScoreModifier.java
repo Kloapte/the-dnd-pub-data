@@ -1,6 +1,7 @@
 package com.thedndpub.data.dto.rule.mechanics;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.thedndpub.data.dto.action.enums.ActionAbility;
 import com.thedndpub.data.dto.rule.enums.RuleMechanicKind;
 
 import java.util.List;
@@ -9,11 +10,11 @@ import java.util.List;
 public record RuleAbilityScoreModifier(
         String componentId,
         RuleMechanicKind kind,
-        String subtype,
+        RuleMechanicSubtype subtype,
         Integer minimumScore,
         Integer maximumScore,
         List<RuleAbilityScoreBand> scoreBands,
-        List<String> abilities,
+        List<ActionAbility> abilities,
         String appliesTo) implements RuleMechanic {
     public RuleAbilityScoreModifier {
         scoreBands = scoreBands == null ? List.of() : List.copyOf(scoreBands);

@@ -6,9 +6,9 @@ import java.util.List;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "kind", visible = true)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = RuleFailedSaveApplyCondition.class, name = "APPLY_CONDITION"),
+        @JsonSubTypes.Type(value = RuleFailedSaveConditionApplication.class, name = "APPLY_CONDITION"),
         @JsonSubTypes.Type(value = RuleFailedSaveChooseOne.class, name = "CHOOSE_ONE")
 })
-public sealed interface RuleFailedSave permits RuleFailedSaveApplyCondition, RuleFailedSaveChooseOne {
+public sealed interface RuleFailedSave permits RuleFailedSaveConditionApplication, RuleFailedSaveChooseOne {
     String kind();
 }

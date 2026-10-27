@@ -5,7 +5,7 @@ import com.thedndpub.data.dto.rule.enums.RuleMechanicKind;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public record RuleCarryingCapacity(String componentId, RuleMechanicKind kind, String subtype, String weightUnit,
+public record RuleCarryingCapacity(String componentId, RuleMechanicKind kind, RuleMechanicSubtype subtype, String weightUnit,
         String strengthBasis, List<RuleSizeCapacityMultiplier> sizeMultipliers,
         List<RuleEncumbranceThreshold> encumbranceThresholds, String heavyEncumbranceMaximum,
         Double dragLiftPushSpeedCapFeet, Boolean speedCapAppliesWhenAboveCarryCapacity,

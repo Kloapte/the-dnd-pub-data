@@ -5,5 +5,5 @@ import com.thedndpub.data.dto.rule.enums.RuleMechanicKind;
 public interface RuleMechanic {
     RuleMechanicKind kind();
 
-    String subtype();
+    RuleMechanicSubtype subtype();
 }
