@@ -4,8 +4,8 @@ The DnD Pub's Java data backend for the pinned 5eTools v2.37.0 corpus.
 
 ## Start here
 
-- **[Backend roadmap](docs/THE_DND_PUB_BACKEND_ROADMAP.md)** — authoritative progress and future scope.
-- [Current documentation](docs/README.md) — architecture, mechanics model, API and development workflow.
+- **[Backend roadmap](ROADMAP.md)** — authoritative progress and future scope.
+- [Current documentation](README.md) — architecture, mechanics model, API and development workflow.
 - [Agent instructions](AGENTS.md) — repository conventions and task boundaries.
 - [Analysis and historical evidence](analysis/README.md) — indexed reports and reproducibility assets.
 

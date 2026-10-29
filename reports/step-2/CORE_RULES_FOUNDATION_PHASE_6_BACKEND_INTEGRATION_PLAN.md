@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planning checkpoint only; implementation has not started.** Step 2 Phase 5 is complete and approved. The repository defines the general Phase 6 objective and activities, and contains the separate Step 1 Source Registry integration as an architectural precedent. It does not define enough Step 2-specific integration decisions to safely implement a Core Rules runtime surface without selecting architecture and API behavior that the contracts do not approve. This report records a concrete proposed sequence and the decisions required before implementation.
+**Historical planning checkpoint; superseded by implementation.** This report records the planning state before Step 2 Phase 6 work began. Its statements that implementation had not started and that decisions remained pending are no longer current. The current integration architecture, validation, and closure status are recorded in the [Phase 6 integration report](CORE_RULES_FOUNDATION_PHASE_6_BACKEND_INTEGRATION.md). Step 2 closure remains pending the coverage gap described there.
 
 ## Approved scope to carry forward
 

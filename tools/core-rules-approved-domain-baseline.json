@@ -13,76 +13,24 @@
       "sha256": "116863e97858ff402dfcbd5a094c0853f0230d7db8b32b7be22346d2ba2aa845"
     },
     {
-      "file": "examples/condition-blinded-xphb.json",
-      "sha256": "79e31a526d64ec10190fe4c32ba0b01f8098d3414d27981ef30d22f44896ecd6"
-    },
-    {
-      "file": "examples/condition-exhaustion-phb.json",
-      "sha256": "ef7838f317e086c39ef00f011a6f9087b936594056305436309628384df9858f"
-    },
-    {
-      "file": "examples/condition-exhaustion-xphb.json",
-      "sha256": "d434555dbd6cf80fffa2c46721ed92e91e1eef12cb38a8cc4ee0a338ea7f3f7a"
-    },
-    {
-      "file": "examples/condition.json",
-      "sha256": "bf2c82d030983fd24ed783c9340f0e5f65329f0948acbabf3639e8ba4d590a28"
-    },
-    {
       "file": "disease.schema.json",
       "sha256": "5dfe2e55668ffc95ee6bc36532f4f13986e0a400675af6847bb4f6461d219f3f"
-    },
-    {
-      "file": "examples/disease.json",
-      "sha256": "d98efebd317d36dd47e429c36216ac26802c5e8467d8d3123ee1e6c309e1e6c5"
     },
     {
       "file": "language.schema.json",
       "sha256": "92ee4fb8e964bd6b3c5c56321f9601b6c094df0cfd538b98156407e59ef8295b"
     },
     {
-      "file": "examples/language.json",
-      "sha256": "e11b88165f3fbcf92b7fc3ff40a876a3a1f3a3b2cdf8f65344aaa9eeaac613a5"
-    },
-    {
       "file": "sense.schema.json",
       "sha256": "5ca29a3c4a39cbf06e09f3d6406df2bb7efea1d23acfa8852738b4c2d66a2d6a"
-    },
-    {
-      "file": "examples/sense.json",
-      "sha256": "36088f69f6eef78767e5a2845ae9d22ff05c9d8cd4bf3016eec164475555c59d"
     },
     {
       "file": "skill.schema.json",
       "sha256": "a62c2052800e448317410d65cb7d316a4d893ae53939ba649535631562796772"
     },
     {
-      "file": "examples/skill.json",
-      "sha256": "4ed5bd359af52b2a0ea475f985b832d2195ae11e3b61cce748a9946035a8af79"
-    },
-    {
       "file": "status.schema.json",
       "sha256": "802f3854c039c9d4a8e506bad1a62fac1716cc9457de63676ea1f32c7f88031e"
-    },
-    {
-      "file": "examples/status-bloodied.json",
-      "sha256": "66e06106aea1b7b24580bf3fc433ba1d4da0384dc79a081d8879375f13489949"
-    },
-    {
-      "file": "examples/status-concentration-phb.json",
-      "sha256": "2bae1760a730b8fd6af9cda45b0d48b8d876b7f12386bdb3e5d60d12593196e2"
-    },
-    {
-      "file": "examples/status-concentration-xphb.json",
-      "sha256": "872e0337297d7cd6ba2b7385a916c760214e4b04815eb1ab8519937ad89e4827"
-    },
-    {
-      "file": "examples/status-surprised-phb.json",
-      "sha256": "226f3b0fb0bfda0544ab4254a114178dcd3d17482f4d09be4e79bc0a80168c78"
-    },
-    {
-      "file": "examples/status-surprised-xphb.json",
-      "sha256": "1e410f40eda737736bea1d3f1f5a122dccf06a8c486457ba22c7faffed39ac49"
     }
   ]
 }

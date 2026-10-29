@@ -56,7 +56,7 @@ for (const [file, input] of inputMap) {
 }
 
 const schema = JSON.parse(fs.readFileSync(
-    path.join(workspace, 'schemas/source/v1/source.schema.json'), 'utf8'));
+    path.join(workspace, 'src/main/resources/schemas/source/schema.json'), 'utf8'));
 const ajv = new Ajv2020({ allErrors: true, strict: true, validateSchema: true });
 addFormats(ajv);
 assert.equal(ajv.validateSchema(schema), true, 'Draft 2020-12 schema meta-validation failed');

@@ -8,6 +8,6 @@ The Rules API reads the normalized dataset at `normalized/core-rules/rules.json`
 | `GET` | `/api/rules/{id}` | Returns the Rule with the exact identifier, or `404` if it does not exist. |
 | `GET` | `/api/rules/name/{name}` | Returns all Rules with the exact name. An unmatched name returns an empty array; duplicate names can return multiple Rules. |
 
-The response DTO follows the approved [Rule schema](../../schemas/core-rules/v1/rule.schema.json). `id`, `name`, and `sourceMetadata` identify the Rule. Optional `ruleType`, `mechanics`, `references`, and `composition` fields are included when present. Mechanics preserve the schema's discriminators and typed nested structures.
+The response DTO follows the approved [Rule schema](../../src/main/resources/schemas/rule/schema.json). `id`, `name`, and `sourceMetadata` identify the Rule. Optional `ruleType`, `mechanics`, `references`, and `composition` fields are included when present. Mechanics preserve the schema's discriminators and typed nested structures.
 
 The API does not interpret source text or execute mechanics. It serves the approved normalized Rule facts and deterministic searches over those records.

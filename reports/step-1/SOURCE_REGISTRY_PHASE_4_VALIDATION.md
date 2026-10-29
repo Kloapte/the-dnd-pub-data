@@ -6,7 +6,7 @@
 
 The audit read `sources/registry.json`, `books.json`, and `adventures.json` from `src/main/resources/data/`. It used registry identity and publication identification metadata only. It did not interpret book contents, adventure storylines, level ranges, publication prose, or rules text.
 
-The audit verified that all three source files match the hashes recorded in the Phase 1 evidence. It projected every registry entry into the approved Source shape in memory, associating book and adventure metadata by exact `source` code, then validated each projected entity against `schemas/source/v1/source.schema.json`. The projection output was discarded. The approved representative dataset and schema were not changed.
+The audit verified that all three source files match the hashes recorded in the Phase 1 evidence. It projected every registry entry into the approved Source shape in memory, associating book and adventure metadata by exact `source` code, then validated each projected entity against `src/main/resources/schemas/source/schema.json`. The projection output was discarded. The approved representative dataset and schema were not changed.
 
 The executable audit is [analyze-source-registry-phase-4.cjs](../../discover/step-1/analyze-source-registry-phase-4.cjs). It uses Ajv 8.17.1 in Draft 2020-12 mode and `ajv-formats` 3.0.1. It verifies the schema meta-schema, strict compilation, source hashes, associations, identity keys, alias collisions, and the closed `group` enum.
 

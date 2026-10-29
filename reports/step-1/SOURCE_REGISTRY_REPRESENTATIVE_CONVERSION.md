@@ -73,7 +73,7 @@ The normalized batch is [representative-batch.json](../../normalized/source/v1/r
 
 ## Validation results
 
-The batch was validated against `schemas/source/v1/source.schema.json` using Ajv 8.17.1 in Draft 2020-12 mode and `ajv-formats` 3.0.1. The schema passed meta-validation and strict compilation. All 8 Source objects passed.
+The batch was validated against `src/main/resources/schemas/source/schema.json` using Ajv 8.17.1 in Draft 2020-12 mode and `ajv-formats` 3.0.1. The schema passed meta-validation and strict compilation. All 8 Source objects passed.
 
 Focused integrity checks passed:
 

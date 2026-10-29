@@ -113,11 +113,11 @@ Including the three Phase 3 representatives, the full 29-record Disease catalog 
 
 The overall Phase 5 accounting manifest reports 98 canonical records, 88 fully represented, 10 partial, 1 unsupported, 164 entry roots, and 126 interpreted / 18 duplicate / 123 omitted classification parts. The PHB Petrified entry accounting now classifies Disease suspension as interpreted.
 
-## Fixtures and documentation
+## Canonical records and documentation
 
-- Updated `schemas/core-rules/v1/examples/disease-cackle-fever.json` to match the approved DMG counter interpretation.
-- Added `disease-sewer-plague-dmg.json` to demonstrate the Long Rest procedure separately from XDMG dawn progression.
-- Added `condition-petrified-phb.json` to demonstrate active-Disease suspension.
+- Canonical Disease records encode the approved DMG Cackle Fever counter interpretation and distinguish the DMG Long Rest procedure from XDMG dawn progression.
+- The canonical PHB Petrified Condition record demonstrates the approved active-Disease suspension relationship.
+- Former schema example fixtures have been removed; the canonical records are now the validation inputs.
 - Updated `doc/CORE_RULES.md`, Disease omission/duplicate registers, `doc/INDEX.md`, and the Phase 5 roadmap status.
 - Updated the Phase 5 dataset expansion report and accounting manifest; the separate Disease contract review remains historical.
 
@@ -126,7 +126,7 @@ The overall Phase 5 accounting manifest reports 98 canonical records, 88 fully r
 `npm run validate:core-rules` result:
 
 - 9 Draft 2020-12 schemas compiled.
-- 39 schema examples validated.
+- Canonical records validated in Phase 3 and Phase 5 expansion datasets.
 - 34 Phase 3 canonical records validated.
 - 98 Phase 5 canonical records validated.
 - 231 permanent checks passed, including source-backed Disease assertions and a negative unspecified-counter-reset check.

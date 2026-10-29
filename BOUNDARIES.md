@@ -1,75 +1,93 @@
 # The DnD Pub — Canonical Data Boundaries
 
-This document is the authoritative policy for offline normalization and canonical compendium data. `AGENTS.md` defines execution conventions and approval gates; `ROADMAP.md` defines authorized milestones. Follow all three. If a requirement conflicts, stop and request a decision rather than silently choosing a different interpretation.
+This document defines what information belongs in the canonical compendium, what counts as a mechanic, and how incomplete interpretations are handled. `ROADMAP.md` owns the roadmap, phases, and approvals. `AGENTS.md` owns implementation architecture, tooling, file placement, and working conventions. If policies conflict, stop and request a decision.
 
-## 1. Purpose and scope
+## 1. Canonical data scope
 
-- The normalized backend dataset represents **interpreted, typed game mechanics and useful structured domain facts**, not a mirror of source JSON.
-- Interpret mechanics from source `entries` and other source fields, then **exclude the original entry text** from canonical JSON. No generic `entries`, rich-text tree, copied prose, or untyped mechanics blob as a fallback.
-- A domain may define narrowly scoped text or metadata only if a use case justifies it and its contract is explicitly approved. The approved metadata-only Source Registry is unaffected by this policy.
-- Use **domain-specific** models for actions, conditions, diseases, statuses, senses, rules, languages, etc. Share only cohesive cross-domain primitives such as identity, source attribution, and references. Do not build a universal mechanics engine by default.
-- Runtime Java consumes canonical contracts and performs deterministic operations; source-specific interpretation belongs offline.
-- **Codex itself performs offline semantic interpretation** by reading source records, understanding their mechanics, and authoring typed canonical JSON using the full approved domain research, schemas, and patterns. A deterministic source-text converter must not replace this reasoning.
-- Scripts may support exact source extraction, inventories, formatting, schema/integrity checks, reference verification, and coverage audits. They must not classify mechanics, select their meaning, or declare them unsupported based on a finite set of programmed extraction rules.
+The canonical compendium is a collection of identifiable, retrievable, strongly typed D&D domain records. It is not a copy of 5eTools JSON, a rendering format, or an executable rules engine.
 
-## 2. Entry-by-entry accountability
+- Preserve relevant structured game facts and source attribution in normalized fields.
+- Interpret mechanical meaning from `entries` and other descriptive source content into typed semantic structures where supported.
+- Exclude original `entries`, prose, rich-text trees, presentation markup, and generic untyped text/mechanics fallbacks from canonical JSON.
+- Keep each in-scope entity referenceable even when some or all descriptive mechanics cannot be interpreted. A Rule with no interpretable mechanic still has canonical identity and source metadata.
+- Preserve only narrowly justified text fields when an explicit domain contract authorizes them; do not use text fields to bypass interpretation.
+- Exclude purely presentational material (e.g., fluff images, fonts, navigation markup) unless a separately approved domain requires it.
+- The approved metadata-only Source Registry is not retroactively changed by these boundaries.
 
-Every source `entries` element, including nested content, must be inspected and accounted for; source records without `entries` are still inventoried. Classify each meaningful entry or subentry as:
+## 2. Schema completeness
 
-1. **Interpreted** — its supported facts/mechanics are represented in canonical typed fields.
-2. **Duplicate** — its complete content adds no mechanics beyond facts already represented in canonical fields or another explicitly identified interpretation.
-3. **Omitted** — it cannot be interpreted reliably, is purely descriptive/nonmechanical, is out of approved scope, or has no suitable approved canonical representation **after Codex has considered the complete relevant approved contract and patterns**.
+Schema completeness concerns **the original structured source fields**, not interpretation of prose.
 
-- A limitation of an automated conversion script, an unimplemented extraction pattern, or a record excluded from the representative selection is **not** evidence that a mechanic is unsupported by the canonical schema.
-- Before recording a mechanical omission, Codex must check the complete applicable schema, shared definitions, Phase 2 examples/research, and source evidence. In external reports distinguish `SCHEMA_UNSUPPORTED`, `SOURCE_AMBIGUOUS`, `REFERENCE_UNRESOLVED`, `EXTERNAL_DEPENDENCY`, `OUT_OF_SCOPE`, and `NON_MECHANICAL`; these are audit reasons, not canonical fields. If a mechanic is expressible but has not yet been interpreted, finish the interpretation rather than marking it omitted.
-- If a source portion is already represented in canonical fields, classify it as interpreted; classify redundant source wording as duplicate only when it adds no independent mechanic. Never label a represented mechanic omitted.
-- **Never silently discard an entry.** A source entry containing both interpretable and uninterpretable parts must have each part accounted for. Record the *complete original entry* in the relevant external report when any portion is omitted or treated as duplicate, and identify the affected portion(s).
-- For omitted content, write `/doc/<model>/omitted.md`; for duplicates, `/doc/<model>/duplicate.md`. Use stable model-specific directory names, and maintain `/doc/INDEX.md` links.
-- Each record must identify the source object (canonical ID when available, otherwise type + exact source code + name), original source file/locator, reason, and **complete original entry** (including nested text/structure). Also identify any related canonical field or dependency when useful.
-- Keep persistent, actionable omission/duplicate registers in `/doc`; put temporary counts, audits, review findings, and phase status under `/reports` or `/discover`.
-- These files are audit documentation, **not a license to republish** copyrighted material. Keep original excerpts in a private/restricted repository where required; do not automatically expose them through APIs, public sites, or generated distributions. If publication rights are unclear, obtain a licensing decision before publishing such records.
-- Maintain external coverage/provenance reports so the sum of interpreted, duplicate, and omitted source content can be verified. Unsupported or ambiguous content is not represented by invented canonical placeholders.
+- Inventory all fields and structural variations across the entire in-scope source domain before designing its schema.
+- First identify mechanics already encoded structurally by the source: for example source attribution, ability modifiers, AC, HP, speed, spell level, casting time, range, damage fields, and other domain-specific values.
+- Normalize and retain every relevant structured game fact in an appropriate typed canonical representation. Do not copy source-specific formatting or dynamic property shapes merely to claim coverage.
+- Distinguish mechanical/domain facts from source-only presentation, navigation, redundant fields, and out-of-scope material. Record intentional exclusions with reasons.
+- A relevant structured field without an adequate canonical representation is a **schema gap** requiring review, not a successful mechanical omission.
+- Source `entries` and their nested prose are excluded from schema completeness; their meaning is addressed by mechanical completeness.
+- Do not invent missing values or infer source metadata, edition equivalence, or mechanical defaults without evidence.
 
-## 3. Mechanical interpretation
+## 3. Mechanical completeness
 
-- The six-phase workflow distinguishes catalog-wide semantic discovery from canonical conversion: Phase 1 identifies and accounts for mechanics across every in-scope source record; Phase 2 designs contracts against that evidence; Phases 3 and 5 author canonical records only for their approved representative set or conversion batches. Discovery does not generate a full canonical dataset or weaken the complete-record interpretation and source-accounting requirements for records actually converted.
-- Codex must reason over the complete mechanics of each selected source record, including interactions and dependencies beyond the sample; selection size must not limit interpretation depth.
-- Prefer specific typed concepts within each model: action modes and timing, condition effects, disease incubation/progression/recovery, sense capabilities, status thresholds, rule procedures, etc.
-- Encode prerequisites, actors, targets, triggering events, scope, units, duration, exceptions, and source-edition distinctions when they affect behavior.
-- Use consistent enums/value objects only for genuinely shared semantics; do not collapse distinct mechanics merely because their source text looks similar.
-- No speculative effects, default values, edition equivalences, target identities, or execution behavior. When evidence is insufficient, omit that mechanic from canonical JSON and document it.
-- A field already expressed structurally in the source (e.g. skill-to-ability) should be retained as typed data. Descriptive text repeating it belongs in `duplicate.md` rather than canonical `entries`.
-- Model rules only when a useful typed mechanical contract can be supported. A rule may consist of several cohesive substructures; do not invent a generic catch-all `effects` map.
-- For source classification acronyms (such as `ruleType`), investigate authoritative source conventions and expand into descriptive canonical enum values only when verified. Never guess an expansion.
-- Analyze all source **Status** records during representative conversion because the set is small; do not mistake distinct status names for source-record count.
+Mechanical completeness concerns the **game meaning of entries and semantic prose**, including mechanical implications not already captured by structured fields.
 
-## 4. Shared identity and source metadata
+- Inspect all in-scope entries and nested content, not only representative examples. Account for each meaningful mechanical portion.
+- Interpret supported requirements, actions, triggers, actors, targets, checks, saves, modifiers, effects, conditions, durations, scaling, restrictions, exceptions, and relationships as applicable.
+- Prefer already-approved semantic structures and source-provided mechanics over inventing new specialized representations.
+- Do not claim a mechanic is unsupported until the full relevant schema, approved examples, interpretation conventions, and source evidence have been considered.
+- When an interpretation is uncertain, unsupported, nonmechanical, or out of scope, document the precise reason externally. Do not invent a canonical effect or retain original prose as a fallback.
+- Preserve the parent entity's canonical identity and referenceability even if no semantic mechanics can be represented. Do not insert fake or placeholder mechanics merely to make a record appear complete.
+- A partially interpreted entry may contain both represented and omitted portions; account for both.
+- Mechanical completeness is assessed as coverage and documented limitations, not a demand to encode every obscure mechanic at any complexity cost.
 
-- Reuse small, cohesive schema definitions for **identity** (`id`, `name`) and **source metadata** (exact Source Registry code, page when present, supplied SRD/basic-rules flags, and reprint associations). Preserve meaningful `false` and `0` values.
-- Canonical IDs use `<type>:<source>:<slug>`; normalize type and source components to lowercase and slugify names deterministically: Unicode normalize/transliterate where defined, lowercase, replace whitespace with `-`, remove or replace unsafe punctuation, collapse repeated hyphens, and trim separators. Never silently collide: validate uniqueness and report collisions for explicit adjudication.
-- Keep the original display `name` and exact Source Registry code in metadata. Do not alter registered source codes merely because canonical IDs are lowercase.
-- Preserve source/edition-specific identities and verified reprint relationships. Never automatically merge reprints or choose a latest edition.
-- Discard source-only presentation fields such as `hasFluff`, `hasFluffImages`, font assets, and LanguageScript font catalogs unless a later approved use case requires them. Removing an entire source model requires explicit scope approval.
+## 4. What qualifies as a mechanic
 
-## 5. References and dependencies
+A mechanic is a source-supported statement that defines or changes game behavior, choices, requirements, constraints, quantities, timing, relationships, or outcomes. Examples include attack bonuses, advantage or disadvantage, damage and healing, movement limits, concentration ending conditions, prerequisites, saving throws, status changes, and conditional effects.
 
-- Represent meaningful relationships as typed references, not embedded tags or source prose. Prefer a stable target `id`, a target entity `type`, and a distinct relationship/operation when needed (for example, target type `STATUS` with operation `END_STATUS`).
-- Distinguish references to game entities from book sections, navigation, filters, and other source constructs. Use a book-section reference only when its source and section identity are supported; do not fabricate a normalized book-content entity from Source Registry metadata.
-- Resolve targets from explicit source evidence; never infer identity from name similarity. Preserve unresolved references and original tokens **outside canonical data** when an approved canonical target cannot be established, unless a specific approved reference contract explicitly permits unresolved references.
-- References to future domains need not be executable yet. Do not embed complete target models.
-- Interpret action timing using typed options where source evidence supports them. `Free`, `Varies`, and missing timing are not permission to guess: for `Varies`, enumerate supported options only when actually evidenced by the entry.
-- Normalize source filters (such as language `typicalSpeakers`) into domain-appropriate typed predicates where possible; document uninterpretable parts rather than retaining raw tags.
+- Treat descriptive flavor, narrative background, stylistic presentation, and navigation as nonmechanical unless they contain a distinct actionable game rule.
+- Separate already structured mechanical facts from mechanics that require semantic interpretation.
+- Model meaning rather than simulating execution. A semantic effect may describe a conditional bonus without implementing an evaluator that calculates it during play.
+- Prefer compact, domain-appropriate typed structures. Reuse an existing semantic component across mechanics or domains when the underlying meaning genuinely matches and reuse reduces complexity.
+- Keep domain-specific structures when apparently similar concepts have materially different semantics. Avoid a universal mechanics object, catch-all effect map, speculative foundation, or one-off type for every source sentence.
+- Preserve distinct source/edition behaviors and meaningful exceptions. Do not merge concepts based only on similar names or phrasing.
+- If a mechanic is exceptionally complex or of limited practical value, document the tradeoff and propose omission or deferral rather than expanding the model without approval.
 
-## 6. Documentation, provenance, and licensing
+## 5. Entry accountability, omissions, and duplicates
 
-- `/doc` describes durable architecture, contracts, use cases, implemented behavior, and persistent omitted/duplicate registers. Do **not** put phase status, roadmap progress, open review checkpoints, or temporary validation summaries in `/doc`.
-- Place analysis in `/discover`, validation/coverage and outstanding review decisions in `/reports`, and approval state in `ROADMAP.md`.
-- Every canonical entity must be traceable to immutable source files, source version/hash where available, raw locators, schema version, and interpretation history through **external** provenance. Never put workflow flags (`needsReview`, `implementationStatus`, etc.) in canonical domain JSON.
-- Canonical IDs, mechanical facts, and omission of verbatim descriptions do not alone establish copyright clearance. Determine the applicable license and attribution obligations for each source. Do not reproduce protected expressive text in public outputs without appropriate rights; use legally reviewed source material where possible.
+Every meaningful in-scope entry portion must have one of these dispositions:
 
-## 7. Validation and approval
+- **Interpreted:** Its supported game meaning is represented in canonical fields.
+- **Duplicate:** It contributes no additional fact or mechanic beyond an identified existing canonical representation.
+- **Omitted:** It is nonmechanical, out of scope, ambiguous, unsupported by an approved contract, or otherwise deliberately excluded with a documented reason.
 
-- Schema validity is necessary but insufficient. Deterministic validation cannot substitute for Codex source interpretation or human mechanical review. Verify semantic correctness, source-record coverage, per-entry accounting, reference integrity, ID collisions, edition separation, and representative gameplay behavior.
-- Schema design and revisions must be approved before representative conversion. Stop at each authorized roadmap phase; do not proceed automatically.
-- A design that cannot encode a meaningful mechanic should report the gap and seek a contract decision, not silently preserve the original prose or generate an unsupported runtime interpreter.
-- These boundaries apply to future mechanics-bearing domains; do not retroactively rewrite approved datasets without authorization.
+Do not mark an expressible but unfinished interpretation as omitted merely to finish conversion. Do not mark a represented mechanic as omitted. A source entry may require multiple dispositions for different portions.
+
+Maintain persistent `/doc/<model>/omitted.md` and `/doc/<model>/duplicate.md` registers with an index in `/doc/INDEX.md`. Each record must identify the source entity (canonical ID where available, otherwise type, exact source code, and name), original source file and **precise locator** (including nested path/index where needed), affected portion or mechanic, reason, and relevant canonical field or dependency if applicable. **Do not copy complete original entries or long source excerpts into these registers.** The immutable source is the authoritative place to inspect the original wording.
+
+Use distinguishable reasons such as `SCHEMA_UNSUPPORTED`, `SOURCE_AMBIGUOUS`, `REFERENCE_UNRESOLVED`, `EXTERNAL_DEPENDENCY`, `OUT_OF_SCOPE`, and `NON_MECHANICAL`. Reasons belong in audit records, not canonical JSON. Track interpreted, duplicated, and omitted coverage without double-counting portions.
+
+## 6. Identity, references, and dependencies
+
+- Every in-scope canonical entity has stable identity and source attribution, regardless of mechanic interpretation coverage.
+- Use source-qualified IDs of the form `<type>:<source>:<slug>` with deterministic lowercase/slug conventions. Retain the original display name and exact registered source code; detect collisions rather than silently merging them.
+- Keep distinct edition/source identities and only verified reprint or alias relationships. Never assume equivalent mechanics from shared names.
+- Represent meaningful relationships with typed references rather than copied target records or source markup.
+- Resolve references only from adequate source evidence; name similarity alone is insufficient.
+- References to domains not yet normalized may remain unresolved until the designated later step. Preserve the source-supported reference intent in an approved typed contract where possible, and retain exact unresolved source locators/tokens externally for later resolution. Do not fabricate target IDs.
+- Distinguish canonical entity references from book sections, navigation links, filters, and display labels. Do not create fictional entities to satisfy references.
+- Later reference resolution should validate and complete relationships, not routinely reinterpret mechanics or redesign approved domain schemas.
+
+## 7. Provenance and licensing
+
+- Original source datasets remain immutable. Canonical records must be traceable to their original file and record locator, source identity, and approved interpretation decisions.
+- Maintain external provenance and coverage information, including source versions or hashes and schema versions where available. Do not put workflow or review-status flags in canonical domain records.
+- Omission/duplicate registers refer to source locations rather than reproducing original passages.
+- Normalizing game facts and omitting prose does not by itself establish permission to publish them. Check applicable licensing, attribution, and distribution rights before exposing content publicly. Do not treat private audit access as public redistribution authorization.
+
+## 8. Validation boundaries
+
+- Structural schema validity alone does not establish semantic correctness or completeness.
+- Verify structured-field coverage, interpreted mechanic meaning, entry accounting, identity uniqueness, source/edition distinctions, reference integrity, and documented exceptions.
+- Reproducibility means equivalent source evidence, approved schema, and interpretation conventions lead to consistent, reviewable canonical results. It does **not** require or permit an automatic source-to-canonical interpretation converter.
+- Scripts may inventory, extract exact source data for inspection, format, and validate outputs, but must not decide mechanical meaning or perform source-to-canonical semantic conversion.
+- The runtime backend retrieves and exposes canonical data; it does not execute D&D mechanics, interpret source prose, or implement a rules engine.
+- Apply new policies prospectively. Existing approved artifacts are not silently rewritten; material changes require the approvals defined by `ROADMAP.md`.

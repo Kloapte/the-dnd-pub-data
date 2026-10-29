@@ -77,7 +77,7 @@ The Source object contains domain identity and publication facts only. Record pr
 - Normalized Source code and publication ID where applicable.
 - Schema identifier/version and the manifest's own version.
 
-Do not put conversion, implementation, review, or completeness statuses in `Source` JSON. The schema uses a versioned path and ID (`schemas/source/v1/source.schema.json`, `urn:thedndpub:schemas:source:v1`). A future incompatible contract change must use a reviewed schema version and migration plan. Source updates should compare deterministic entry identities and hashes, preserving previously approved interpretations until changes are reviewed.
+Do not put conversion, implementation, review, or completeness statuses in `Source` JSON. The schema uses a model path and stable ID (`src/main/resources/schemas/source/schema.json`, `urn:thedndpub:schemas:source:v1`). A future incompatible contract change must use a reviewed schema version and migration plan. Source updates should compare deterministic entry identities and hashes, preserving previously approved interpretations until changes are reviewed.
 
 ## Incomplete identity tracking
 
@@ -91,17 +91,13 @@ Do not put conversion, implementation, review, or completeness statuses in `Sour
 
 See the [Phase 1 discovery report](../discover/step-1/SOURCE_REGISTRY_PHASE_1.md) for exact code lists, counts, source locations, and census evidence. Incomplete references are documented here and in discovery artifacts, not represented by workflow fields in canonical JSON.
 
-## Schema and examples
+## Schema and canonical data
 
-- [Draft 2020-12 Source schema](../schemas/source/v1/source.schema.json)
-- [Complete metadata example](../schemas/source/v1/examples/source-phb.json)
-- [Code-only example](../schemas/source/v1/examples/source-code-only-eepc.json)
-- [Multiple publications and distinct ID example](../schemas/source/v1/examples/source-mot.json)
-- [Code and publication aliases example](../schemas/source/v1/examples/source-psz-aliases.json)
-- [Unresolved parent example](../schemas/source/v1/examples/source-aag-unresolved-parent.json)
+- [Draft 2020-12 Source schema](../src/main/resources/schemas/source/schema.json)
+- [Canonical Source Registry data](../src/main/resources/normalized/sources/sources.json)
 - [Schema validation summary](../reports/step-1/SOURCE_REGISTRY_SCHEMA_VALIDATION.md)
 
-These artifacts were approved for representative conversion and retained after Phase 3 review. The closed ten-value `group` enum remains part of the approved contract. A new upstream value requires analysis and an approved schema change. Full dataset expansion and application DTO implementation require their own later approval checkpoints.
+The canonical Source Registry dataset is authoritative; duplicate example fixtures are not maintained. The schema validation summary records the earlier representative validation results. The closed ten-value `group` enum remains part of the approved contract. A new upstream value requires analysis and an approved schema change.
 
 ## Representative conversion checkpoint
 

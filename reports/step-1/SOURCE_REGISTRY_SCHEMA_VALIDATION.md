@@ -7,7 +7,7 @@
 - JSON Schema implementation: Ajv 8.17.1, Draft 2020-12 mode.
 - Format validation: `ajv-formats` 3.0.1.
 - Schema options: strict compilation, all errors collected, schema meta-validation enabled.
-- Schema: `schemas/source/v1/source.schema.json`.
+- Schema: `src/main/resources/schemas/source/schema.json`.
 
 ## Results
 

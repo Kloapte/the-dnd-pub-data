@@ -1,299 +1,118 @@
-# The DnD Pub — Compendium Backend
+# The DnD Pub — Compendium Backend — Agent Instructions
 
-## Project guidance
+## 1. Authority and scope
 
-- Documentation must always be placed under `/doc`.
-- Documentation under `/doc` must consist exclusively of Markdown files.
-- Maintain `/doc/INDEX.md` with hyperlinks to other documentation and a brief description of each document.
-- Documentation under `/doc` must describe the system, its architecture, contracts, and implemented functionality. Do not place temporary research, analysis, or execution reports there.
-- Place temporary discovery, research, and analysis artifacts under `/discover`.
-- Place execution reports, validation summaries, and coverage reports under `/reports`.
-- JSON Schema files, normalized datasets, and other machine-readable contracts are project artifacts, not Markdown documentation. Keep them in dedicated directories outside `/doc`.
-- Document implemented features when applicable, including:
-  - Use cases
-  - Process flows
-  - Technical flows
-  - Data mappings
-  - Test coverage
-- Keep documentation synchronized with implemented functionality and approved contracts.
-- Keep JSON schemas and its examples under `/schemas`, categorized by its model name
+- `ROADMAP.md` defines the domain sequence, six phases, deliverables, and approval gates.
+- `BOUNDARIES.md` defines what belongs in canonical data, schema and mechanical completeness, omissions, identities, references, provenance, and licensing.
+- This file defines Codex execution behavior, project architecture, artifact placement, Java conventions, and verification.
+- Read the relevant sections of all three before acting. If they conflict, stop and request a decision. Do not silently choose one.
+- Perform only the explicitly authorized step and phase. Never proceed to the next phase or domain without approval.
+- Previously approved Step 1 artifacts remain approved; do not retroactively redesign them without authorization.
 
-## Technology and code conventions
+## 2. Architecture
 
-- Use Java 21+, Spring Boot 4, Jackson, and JUnit 5. Follow the repository's actual build and formatting configuration.
-- Prefer readable, maintainable Java:
-  - Four-space indentation.
-  - Descriptive names.
-  - Braces for control flow.
-  - One statement per line.
-  - Split dense expressions and long declarations where useful.
-  - Aim for approximately 120 characters per line when practical.
-- Keep one public top-level class, record, interface, or enum per Java file.
-- Do not nest DTO types inside other DTOs.
-- Prefer Java records for immutable transfer and domain data.
-- Use sealed interfaces only when bounded domain polymorphism is genuinely necessary.
-- Use defensive copies for mutable collections.
-- Model known structures using explicit types.
-- Avoid `Object`, `JsonNode`, and generic maps in application-facing models.
-- Avoid custom Jackson deserializers unless a documented contract genuinely requires them.
-- Prefer extending an existing cohesive class over introducing another service, factory, registry, or wrapper unless the new abstraction has a demonstrably separate responsibility.
-- Keep classes tightly organized into packages. Aim for a maximum of five classes per package unless a larger cohesive package is more practical.
-- Use meaningful comments for non-obvious constraints. Do not restate what the code already expresses.
-- Keep changes focused and reviewable. Never compress code to save tokens.
-- Write valid, pretty-printed JSON using the JSON syntax standardized by ISO/IEC 21778:2017.
-- Annotate new public API DTO records with `@JsonInclude(JsonInclude.Include.NON_EMPTY)` unless the documented contract requires otherwise.
-- Omit absent or empty optional values without suppressing meaningful `false` or `0` values.
-- Avoid serializing empty nested objects.
-- Annotate controller methods with appropriate Swagger/OpenAPI annotations.
+- The application is a **read-only canonical compendium service**, not a D&D rules engine.
+- Codex interprets source data offline and authors canonical JSON. Runtime Java never interprets original source entries, executes D&D mechanics, or reconstructs missing rules.
+- Backend responsibilities are loading canonical datasets, deserializing typed records, retrieving/listing/filtering records, resolving supported references, returning API responses, and validating data integrity where appropriate.
+- Keep original source datasets immutable and separate from canonical data. Canonical JSON conforms to approved JSON Schema Draft 2020-12 contracts.
+- Prefer cohesive domain models. Reuse small semantic structures when actual repeated patterns justify reuse; do not create a universal mechanic object, framework, or speculative hierarchy.
+- References should connect records rather than recursively embedding complete related models. Preserve the distinction between unresolved references and invented targets as defined in `BOUNDARIES.md`.
+- Avoid unnecessary layers, factories, registries, generic repositories, adapters, and DTO transformations. Add an abstraction only for a demonstrable responsibility.
 
-## Architecture and canonical-data boundaries
+## 3. Repository locations
 
-- The backend consumes normalized, strongly typed compendium data; source interpretation happens offline, never in runtime services.
-- Java implements deterministic application behavior, validation, domain logic, and approved mechanics execution.
-- Original source datasets are immutable and remain separate from normalized application data.
-- **Read and follow [`BOUNDARIES.md`](BOUNDARIES.md) before any domain analysis, schema design, conversion, validation, or integration.** It is the authoritative policy for semantic interpretation, allowed canonical content, identity, references, omissions, duplication, licensing considerations, and provenance.
-- Prefer explicit domain-specific mechanics models, with small shared identity/source/reference components where justified. Do not introduce a universal mechanics model or source-specific runtime adapters by default.
-- JSON Schema Draft 2020-12 is authoritative for normalized structural contracts. Define and approve schemas before conversion; version them and validate generated data. Structural validation does not establish mechanical correctness.
-- Do not change an approved schema or normalized interpretation without review and approval. Do not modify original source data.
-- Treat the Source Registry as an approved, metadata-only domain. New semantic-normalization policies do not retroactively change approved Step 1 artifacts without separate authorization.
+Use the following paths consistently. Do not create alternative locations for the same artifact type.
 
-## Normalization workflow
+| Artifact | Location | Rule |
+| --- | --- | --- |
+| Immutable original source | `src/main/resources/data/` | Never modify source files |
+| Canonical JSON Schema | `src/main/resources/schemas/<model-type>/schema.json` | Model-specific contract; approved revisions only |
+| Schema support definitions | `src/main/resources/schemas/<model-type>/` | Keep near the owning schema; share only when justified |
+| Representative canonical examples | `datasets/<current-step>/` | Use during Phase 3; keep distinguishable from production datasets |
+| Approved runtime canonical datasets | `src/main/resources/normalized/` | Domain-specific subdirectories and consistent filenames |
+| Source/domain discovery | `discover/` | Inventories, structural and semantic research |
+| Validation and execution reports | `reports/` | Coverage, exceptions, checks, phase outcomes |
+| Durable documentation | `doc/` | Markdown only; maintain `doc/INDEX.md` |
+| Omitted source portions | `doc/<model>/omitted.md` | Exact source locator and reason; do not copy full entries |
+| Duplicate source portions | `doc/<model>/duplicate.md` | Exact source locator and represented equivalent |
+| Java implementation | `src/main/java/` | Follow existing root package and domain-oriented packages |
+| Java tests | `src/test/java/` | Mirror the tested production packages |
 
-Each roadmap domain follows six phases. Every phase is a separate milestone requiring approval before proceeding to the next.
+- Do not place schemas or JSON examples under `doc/` or create a second root-level `/schemas` directory.
+- Do not place phase progress or temporary research under `doc/`.
+- Keep file and directory naming consistent with existing approved artifacts. If the existing repository conflicts with these locations, report the discrepancy and request approval for a focused migration; do not silently move approved files.
+- Do not duplicate canonical datasets under multiple runtime paths.
 
-Semantic interpretation into domain-specific canonical mechanics is the intended strategy for mechanics-bearing domains. Metadata-only domains, such as the approved Source Registry, are exempt from mechanic extraction. If semantic interpretation is unreliable or inappropriate for a domain, document the evidence and seek approval for an alternative. Follow BOUNDARIES.md.
+## 4. Java package and class responsibilities
 
-### Phase 1 — Source and domain analysis
+Organize code by domain first, using the repository's established base package. Within a domain, separate responsibilities only when necessary:
 
-Inspect all relevant source files and determine how the source information should be represented in the canonical DnD Pub model.
+- **API/controller:** HTTP endpoints, request validation, response status, OpenAPI annotations; no source interpretation or mechanics execution.
+- **Service:** Read-only application operations, filtering, lookup, and reference coordination; no unnecessary business-rule engine.
+- **Model/DTO:** Strongly typed records matching canonical contracts and public response shapes. Keep separate API DTOs only when the public contract genuinely differs.
+- **Repository/loader:** Access to approved canonical datasets, loading and indexing as needed. Do not introduce a database or generic persistence framework without a use case and approval.
+- **Validation:** Structural and referential integrity checks, not semantic interpretation.
 
-- Inspect the entire in-scope catalog semantically, not only a representative sample. Separate deterministic structural enumeration from Codex's direct interpretation of mechanics.
-- Build a catalog-wide mechanic-pattern inventory with exact source records and paths, counts, semantic descriptions, variants, dependencies, ambiguities, candidate representations, and common/difficult examples. Account for every record; preserve unresolved classifications with source evidence.
-- Do not generate the complete canonical dataset during discovery. Phase 1 must cover the full catalog and pass its explicit review gate before Phase 2.
+Prefer an existing cohesive class/package over introducing new layers. Do not enforce arbitrary class-count limits where a larger cohesive package is clearer. Keep cross-domain shared code small and purposeful.
 
-Do not modify production code, approved schemas, or normalized datasets during this phase.
+## 5. Java and JSON conventions
 
-#### 1.1 Structural analysis
+- Use Java 21+, Spring Boot 4, the repository's configured Jackson version, and JUnit 5. Follow the actual build and formatting setup.
+- Use four-space indentation, descriptive names, braces for control flow, one statement per line, and readable line lengths (approximately 120 characters when practical).
+- Keep one public top-level type per Java file. Do not nest DTO types inside DTOs.
+- Prefer immutable records for data carriers and defensive copies for mutable inputs.
+- Use explicit types. Avoid `Object`, `JsonNode`, untyped maps, and custom deserializers in application-facing models unless a documented contract requires them.
+- Use polymorphism only for genuinely bounded domain variants; avoid source-format-driven inheritance.
+- For public API DTOs, use `@JsonInclude(JsonInclude.Include.NON_EMPTY)` where appropriate, but preserve meaningful `false` and `0` values and the approved contract.
+- Avoid serializing empty nested objects. Annotate controller endpoints with appropriate OpenAPI metadata.
+- Use concise comments for non-obvious decisions; do not narrate self-explanatory code.
+- Produce valid, pretty-printed JSON. Treat JSON Schema Draft 2020-12 as the structural authority.
+- Do not compress code or introduce unnecessary cleverness to save tokens.
+- Place model-specific enums under `/dto/<model-type>/enums`.
+- Organize model-type packages into responsibility-based subpackages when this improves cohesion and maintainability. Avoid unnecessary package fragmentation.
+- Prefer simple, readable, and maintainable Java code that is easy to follow.
 
-- Inventory relevant source files and entity counts.
-- Identify every observed property and its data types.
-- Determine required, optional, conditional, and mutually exclusive properties.
-- Identify nested structures, dynamic properties, polymorphism, and inconsistent representations.
-- Identify structural variations and their frequency.
-- Identify source-specific formatting, tags, and encoded references.
-- Identify duplicate, inherited, copied, or overridden source entries.
-- Identify structures that may require preprocessing or reference resolution.
-- Report unusual and unsupported source structures with representative examples.
+## 6. Offline interpretation and allowed automation
 
-#### 1.2 Semantic analysis
+- **Codex itself** must inspect source evidence and interpret mechanics using the full approved domain inventory, schemas, and researched conventions. Interpret every meaningful part of each selected record.
+- **Do not implement or use an automatic semantic source-to-canonical converter in any language** (including Java, JavaScript, Python, shell, regex pipelines, or rule-based extraction programs). A finite pattern matcher is not a substitute for Codex reasoning.
+- Reproducibility means that source evidence, schema version, interpretation decisions, and conventions are recorded well enough to review and repeat the result consistently. It does not require executable interpretation software.
+- Scripts and tools may inventory source files, extract exact source records for inspection, format JSON, validate schema/identities/references, calculate coverage, and perform other nonsemantic checks. They must not decide mechanical meaning or generate interpreted mechanics.
+- First recognize structured mechanics already present in source fields; do not reinterpret or discard them unnecessarily. Then interpret semantic mechanics embedded in entries according to `BOUNDARIES.md`.
+- Before declaring an omission, inspect the complete applicable schema and existing patterns. A missing scripted pattern, an unexamined example, or inconvenience is not a valid omission reason.
+- Keep source provenance and interpretation accounting outside canonical domain records; do not insert workflow fields such as `needsReview` or `implementationStatus`.
+- Keep canonical parent entities referenceable even when some or all prose-derived mechanics are not interpretable, as required by `BOUNDARIES.md`.
 
-- Determine the game meaning and intended behavior of each significant source structure.
-- Identify explicit and implied mechanics.
-- Identify activation requirements, conditions, prerequisites, restrictions, effects, durations, and exceptions where applicable.
-- Determine which mechanics are shared with other domains.
-- Distinguish source facts from interpretations and assumptions.
-- Identify mechanics that require external rules or other model types.
-- Identify ambiguous, contradictory, or incomplete source information.
-- Assess whether semantic enrichment is feasible without excessive complexity or unreliable assumptions.
+## 7. Working within the six phases
 
-#### 1.3 Dependency analysis
+Follow the exact phase definitions and deliverables in `ROADMAP.md`; do not maintain a second, competing phase specification here.
 
-- Identify references to other source entries, model types, and rules.
-- Inspect embedded references, including 5eTools `{@...}` tags.
-- Distinguish explicit references from inferred relationships.
-- Identify unresolved, ambiguous, and circular dependencies.
-- Determine which dependencies require prior normalization and which can remain as stable references.
-- Identify shared concepts that should be normalized independently.
-- Assess the impact of dependencies on the proposed roadmap order.
+- **Phase 1:** Inspect the complete in-scope domain catalog, including original structured mechanics, semantic patterns, outliers, and dependencies. Research only; do not modify canonical datasets or schemas.
+- **Phase 2:** Design the intended complete domain contracts from the inventory; place schemas in the prescribed location. Obtain approval before conversion.
+- **Phase 3:** Author small representative canonical batches under `datasets/<current-step>/`; assess mechanical relevance and report unsupported or unnecessary interpretations. Schema changes require review and approval.
+- **Phase 4:** Verify and refine interpretation conventions, schemas, examples, and validation. Conversion remains Codex-authored, never automatic. Schema changes require review and approval.
+- **Phase 5:** Interpret the remaining catalog in manageable batches, with coverage and omission accounting. Treat schema redesign as exceptional and request approval before changes.
+- **Phase 6:** Integrate approved datasets into read-only Java services, test APIs and references, and update durable documentation. Do not add D&D mechanics execution.
 
-#### 1.4 Domain model and submodel analysis
+For Step 6 (Spells Reference Resolution & Validation), apply the reference-focused scope in `ROADMAP.md`, not a second spell-mechanics discovery exercise.
 
-Evaluate whether each source model should become one canonical model or several related models.
+## 8. Verification and quality gates
 
-- Identify common properties shared across entries.
-- Identify meaningful groups of entities with different structures or behaviors.
-- Determine whether specialized submodels would simplify the canonical contracts.
-- Compare inheritance, composition, and independent model types.
-- Consider abstract parent models where shared domain identity or behavior justifies them.
-- Identify reusable value objects, effect models, and referenced entities.
-- Investigate entries that belong to multiple semantic categories.
-- Avoid artificial inheritance hierarchies based solely on source formatting.
-- Avoid excessively broad models containing many unrelated optional properties.
-- Avoid excessive fragmentation into models without meaningful independent responsibilities.
-- Evaluate the impact of proposed submodels on JSON Schema, Java DTOs, references, and future mechanics execution.
-- Recommend the simplest maintainable model structure that faithfully represents the domain.
+- Validate canonical JSON against its approved schema; check uniqueness, stable identities, source coverage, source locations, unresolved references, and cross-record integrity.
+- Verify semantic interpretations against original evidence. Schema validation alone cannot prove mechanical correctness.
+- Track interpreted, duplicated, omitted, ambiguous, and deferred portions as specified in `BOUNDARIES.md`; do not silently discard information.
+- Keep original entry text out of canonical JSON and omission/duplicate registers; use precise locators to the immutable source.
+- Test API retrieval, filters, unknown IDs, serialization/deserialization, and reference resolution where applicable. Do **not** add gameplay execution tests.
+- Use focused, self-contained tests and pinned fixtures where appropriate. Normal Java tests must not depend on temporary discovery reports.
+- Do not weaken schemas or tests just to make generated data pass.
+- Run relevant focused checks and the applicable full test suite after changes. Distinguish existing failures from regressions. Check formatting and `git diff --check`.
 
-For each significant modeling alternative, document its advantages, disadvantages, and expected impact.
+## 9. Codex execution and reporting
 
-#### 1.5 Coverage and outlier analysis
-
-Quantify the findings wherever possible.
-
-Report:
-
-- Total source entries inspected.
-- Number and percentage of entries matching common structural patterns.
-- Number and percentage of entries requiring specialized handling.
-- Observed property and structure frequencies.
-- Identified semantic categories and their occurrence counts.
-- Potential submodels and the number of entries associated with each.
-- Unsupported or ambiguous structures and their occurrence counts.
-- Representative examples for common cases, edge cases, and outliers.
-- Estimated coverage achievable with the proposed canonical model.
-
-Do not invent statistics or extrapolate exact counts from incomplete inspection. Clearly distinguish complete inventories from sampled findings.
-
-#### 1.6 Analysis deliverables
-
-Produce a discovery report under `/discover` containing:
-
-1. Source inventory and structural findings.
-2. Semantic and mechanics analysis.
-3. Dependency analysis.
-4. Proposed domain model and submodel alternatives.
-5. Coverage statistics and outliers.
-6. Normalization feasibility assessment.
-7. Recommended approach and unresolved decisions.
-
-Do not proceed to schema creation without approval.
-
-### Phase 2 — Canonical model and JSON Schema
-
-Using the approved analysis:
-
-- Design schemas against the complete approved Phase 1 pattern inventory. Maintain source-to-schema coverage for supported, deferred, ambiguous, unsupported, and out-of-scope mechanics; these are analysis classifications, not canonical fields.
-- Assess common and rare patterns, outliers, complex combinations, and affected record counts. Use examples to test schema expressiveness, not as a substitute for catalog coverage or conversion.
-
-- Design the canonical domain model.
-- Define shared components, specialized submodels, and references.
-- Create JSON Schema Draft 2020-12 contracts.
-- Use explicit and predictable structures.
-- Define required fields, optional fields, enumerations, and constraints.
-- Model supported mechanics explicitly and domain-specifically; never retain source `entries` or rich-text as a default fallback.
-- Keep provenance and omitted/duplicate source content outside canonical JSON as specified in `BOUNDARIES.md`.
-- Define how unsupported or ambiguous mechanics are accounted for outside canonical JSON.
-- Provide representative JSON examples.
-- Document source-to-canonical mappings.
-- Validate the schemas and examples.
-- Report any deviations from the approved domain model.
-
-Do not begin source conversion before the contracts are approved.
-
-### Phase 3 — Representative conversion
-
-- Select a small, reviewable set from the Phase 1 inventory and Phase 2 coverage matrix. Cover common and distinct families, interacting mechanics, edition variants, outliers, dependencies, and difficult cases so the sample tests contract breadth.
-- **Codex must directly inspect and semantically interpret each selected source record**, including its nested entries, using the full approved Phase 1 analysis, Phase 2 research, contracts, examples, and reusable interpretation patterns. Phase 2 examples demonstrate schema capabilities; verify their mechanics against the actual source before reuse.
-- Codex must author the canonical JSON from its source-backed interpretation. **Do not replace this reasoning with a hardcoded source-to-canonical converter, keyword matching, regex extraction, switch-based mechanic recognition, or a scripted subset of known records.** Deterministic scripts may inventory source data, extract exact source objects, format output, check references, validate schemas/integrity, and audit accounting; they must not decide the meaning of source mechanics.
-- The representative selection limits **how many records** are interpreted, never **how completely each selected record** is interpreted. Examine every meaningful mechanic, prerequisite, exception, reference, and interaction even if related records are outside the sample.
-- Reuse all applicable approved domain-specific structures and patterns, not merely those implemented in a previous example or script. Before declaring a mechanic unsupported, inspect the complete relevant schema and approved examples and demonstrate why existing typed structures cannot express it accurately.
-- Preserve typed source references and external traceability; do not invent missing target identities or guess mechanics when evidence is insufficient.
-- Account for every original entry and meaningful portion, documenting genuinely omitted and duplicate content under `/doc/<model>/` as specified in `BOUNDARIES.md`. Distinguish schema limitations from interpretation gaps, unresolved references, and intentionally excluded nonmechanical material in the external accounting report.
-- Do not silently modify approved schemas. Document source-backed contract gaps for human review rather than forcing a misleading mapping.
-- Produce a representative conversion report that traces each record to source evidence, canonical output, interpreted portions, and remaining gaps. Human review is required before Phase 4.
-
-### Phase 4 — Validation and feedback
-
-- Validate generated JSON against the approved JSON Schemas.
-- Verify source-entry accounting, mechanically correct interpretation, and documentation of omitted/duplicate content.
-- Verify identifiers, references, and provenance.
-- Review semantic interpretations against original source evidence.
-- Evaluate whether the chosen domain model remains appropriate.
-- Identify unnecessary complexity, duplication, or missing abstractions.
-- Evaluate whether submodel boundaries remain valid.
-- Identify recurring exceptions that suggest a contract problem.
-- Report schema changes or modeling refinements that would improve maintainability.
-- Repeat representative conversion and validation after approved changes.
-- Do not proceed to full dataset expansion until the representative results are approved.
-
-### Phase 5 — Dataset expansion
-
-- Have Codex semantically interpret the remaining source records using the approved contracts and source-backed patterns; the Phase 3 prohibition on scripted semantic conversion applies equally to dataset expansion.
-- Process data in manageable, reviewable batches.
-- Apply established interpretation conventions consistently.
-- Validate each batch against the approved schemas.
-- Track processed, successful, omitted, duplicate, unresolved, and unsupported entries; no silent loss.
-- Detect missing entities, duplicate identifiers, and broken references.
-- Preserve provenance and previously approved interpretations.
-- Report unexpected source variations before introducing significant contract changes.
-- Treat unexpected contract gaps as exceptions: document source evidence and request approval for targeted refinement. Do not silently expand approved contracts or restart earlier phases automatically.
-- Produce a final coverage and exception report.
-- Do not claim complete normalization while entries remain unaccounted for.
-
-### Phase 6 — Backend integration
-
-- Integrate approved normalized datasets into the backend.
-- Create or update strongly typed Java DTOs matching the canonical contracts.
-- Prefer straightforward Jackson serialization and deserialization.
-- Keep source-specific interpretation outside the application runtime.
-- Implement deterministic mechanics execution where supported by the approved models.
-- Add tests for deserialization, validation, references, and relevant domain behavior.
-- Verify compatibility with existing application functionality.
-- Remove obsolete extraction code only when explicitly authorized.
-- Update applicable system documentation under `/doc`.
-- Report integration results, test coverage, and remaining limitations.
-
-Stop after the authorized milestone. Do not automatically proceed to the next roadmap phase or domain.
-
-## Semantic interpretation versus automation
-
-- Codex is the offline semantic interpreter for mechanics-bearing source records. Its reasoning must consider the entire approved domain contract and source evidence, not only previously hardcoded cases.
-- Automate **deterministic verification and bookkeeping**, not semantic decisions. Validation scripts can reject malformed or inconsistent canonical data but cannot establish that a mechanic was correctly understood or that an omission was necessary.
-- Existing source-conversion scripts, if any, are not authoritative semantic interpreters. Do not use them to generate or overwrite canonical mechanics. Review their role before retaining, replacing, or removing them; preserve useful nonsemantic utilities.
-- A mechanically meaningful omission requires a source-backed explanation of why the **approved schema itself** cannot express it, or why the source is genuinely ambiguous. Missing implementation in a script, absence from the representative sample, or absence of a matching Phase 2 example is not an acceptable omission reason.
-- Treat canonical outputs as Codex-authored proposals until source-based human review and approval. Keep provenance, review evidence, and uncertainty outside canonical JSON.
-
-## Validation and testing
-
-- Use automated JSON Schema validation for normalized datasets.
-- Verify cross-document references separately from schema validation.
-- Verify uniqueness and stability of normalized identifiers.
-- Verify every source entry has been accounted for under the canonical mechanics and external omission/duplication policy.
-- Track normalization coverage, unsupported constructs, and unresolved references.
-- Use representative fixtures for known structural variations and edge cases.
-- For semantic mechanics, test meaningful gameplay behavior rather than only JSON structure.
-- Prefer focused, maintainable tests over exhaustive duplication of source data.
-- The normal Java test suite must not depend on temporary discovery or generated analysis artifacts.
-- Tests should use self-contained fixtures or actual pinned source data where appropriate.
-- Do not treat successful schema validation as proof of semantic correctness.
-- Do not weaken validation or tests merely to make generated data pass.
-
-## Codex execution workflow
-
-- Read this `AGENTS.md`, `BOUNDARIES.md`, and the relevant `ROADMAP.md` section before starting work.
-- Inspect only the code, schemas, source data, and documentation necessary for the authorized task.
-- Prefer targeted searches and focused inspection.
-- Consult historical discovery or analysis artifacts only when answering a concrete question.
-- Respect the current roadmap milestone and normalization stage.
-- Do not begin a subsequent phase, domain, or milestone without explicit authorization.
-- Treat inspection, contract design, conversion, validation, and integration as separate approval checkpoints when specified by the roadmap.
-- Implement the authorized scope directly once sufficient inspection and required approvals are complete.
-- Reuse existing cohesive abstractions.
-- Avoid speculative frameworks, unrelated refactors, and unsolicited follow-up work.
-- Do not modify source datasets.
-- Do not silently change approved JSON Schemas or normalized datasets.
-- Run focused tests during implementation.
-- Run the full applicable test suite once after implementation, repeating it only if later changes invalidate the result.
-- Distinguish pre-existing failures from regressions.
-- Check formatting and `git diff --check`.
-- Ensure the final diff contains no unrelated changes.
-- Keep completion reports concise:
-  - Changes made.
-  - Observable results and coverage.
-  - Verification performed.
-  - Remaining limitations and unresolved issues.
-- Write detailed reports only when required by the roadmap or explicitly requested.
-- Stop after the requested milestone and its verification.
-- Do not automatically begin the next roadmap step.
-
-## Quality principles
-
-- Favor correctness, maintainability, and traceability over maximum normalization coverage.
-- Favor explicit contracts over implicit conventions.
-- Favor simple domain models over generalized interpretation frameworks.
-- Avoid overengineering for hypothetical future source formats.
-- Do not hide uncertainty behind default values or guessed interpretations.
-- Do not silently lose meaningful source mechanics; document source content excluded from canonical JSON according to `BOUNDARIES.md`.
-- Keep generated data understandable and reviewable by humans.
-- Treat Codex-generated interpretations as proposals until validated and approved.
-- Preserve the distinction between structurally valid data and mechanically correct data.
-- Prefer incremental, verifiable progress over large unreviewed transformations.
+- Inspect only the files needed for the authorized milestone; use targeted searches and avoid unrelated refactors.
+- Preserve approved schemas, canonical data, and source files unless a change has been explicitly authorized.
+- Keep changes small, reviewable, and consistent with established conventions.
+- Store durable design/implementation documentation under `doc/`, research under `discover/`, and verification outcomes under `reports/`.
+- Maintain `doc/INDEX.md` when durable documents are added or changed.
+- In the final response summarize: changes made, paths affected, checks performed and results, coverage/omissions where relevant, and unresolved decisions.
+- Stop at the approved milestone. Do not plan or execute the next phase without explicit user approval.

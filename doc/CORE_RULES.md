@@ -1,6 +1,6 @@
 # Core Rules Foundation
 
-The Core Rules Foundation provides canonical identities and interpreted mechanics for actions, rules, skills, conditions, diseases, statuses, senses, and languages. Contracts use JSON Schema Draft 2020-12 and are stored under [`schemas/core-rules/v1`](../schemas/core-rules/v1/).
+The Core Rules Foundation provides canonical identities and interpreted mechanics for actions, rules, skills, conditions, diseases, statuses, senses, and languages. Contracts use JSON Schema Draft 2020-12 and are stored under `src/main/resources/schemas/<model>/schema.json`.
 
 ## Canonical entity shape
 
@@ -55,7 +55,7 @@ The Action, Condition, Disease, Rule, Sense, and Status schemas are intentionall
 
 ## Schemas and examples
 
-Each model schema and its representative examples are categorized under `schemas/core-rules/v1/`. The shared schema defines identity, source metadata, references, ability names, actor roles, typed Action triggers and conditions, timing, and reusable mechanical values. The examples demonstrate Action modifiers, linked check results, state predicates, typed outcomes, triggered events, and choice groups; Rule component composition and reusable roll procedures; edition-qualified Condition and Status mechanics; a Disease with typed symptoms; and Skill, Sense, and Language facts. Run `npm run validate:core-rules` to compile the Draft 2020-12 schemas, validate examples, check cross-component integrity, and execute positive and negative validation cases. There is no source-prose example schema or LanguageScript example.
+Each model schema is stored at `src/main/resources/schemas/<model>/schema.json`; the shared schema is at `src/main/resources/schemas/common/schema.json` and defines identity, source metadata, references, ability names, actor roles, typed Action triggers and conditions, timing, and reusable mechanical values. `npm run validate:core-rules` compiles the Draft 2020-12 schemas, validates all canonical Core Rules records, checks cross-component integrity, and runs positive and negative contract checks. Separate schema example files are not maintained; the canonical records are the validation data.
 
 The Phase 2 design feedback and validation history are maintained in the [Core Rules Phase 2 report](../reports/step-2/CORE_RULES_FOUNDATION_PHASE_2_SCHEMA_VALIDATION.md); execution findings belong in reports rather than this system contract document.
 

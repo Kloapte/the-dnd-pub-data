@@ -95,9 +95,9 @@ Implementation, conversion, review, and completeness statuses describe project w
 | Artifact | What it answers | Source example |
 | --- | --- | --- |
 | Canonical model | What does a Source mean, and what information belongs to it? | A source-code identity with optional source-derived publication metadata. |
-| JSON Schema | Does this JSON have the approved Source structure? | `schemas/source/v1/source.schema.json` |
+| JSON Schema | Does this JSON have the approved Source structure? | `src/main/resources/schemas/source/schema.json` |
 | Normalized JSON | What Source identities and metadata were derived from this source revision? | One JSON object per source code. |
 | Java DTO | How does the backend represent an approved Source instance in typed Java? | To be designed only after the contract is approved. |
 | Provenance manifest | Which original source entries and revision support each normalized identity? | Registry entry and optional book/adventure metadata locations with hashes. |
 
-The current Source schema and examples are a Phase 2 proposal. Their presence does not authorize full dataset conversion or Java integration; those are later milestones with separate approval checkpoints.
+The Source schema is stored as a runtime resource, and canonical Source records are validated against it. Separate schema example files are not maintained.

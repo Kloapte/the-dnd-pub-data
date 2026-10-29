@@ -31,7 +31,7 @@ Source
     parentSource?: string              raw supplied token; target not implied
 ```
 
-The exact Draft 2020-12 contract is [source.schema.json](../../schemas/source/v1/source.schema.json). It requires only `code` at the Source level. Code-only identities such as `EEPC` need no fabricated name or publication record. Optional empty arrays are omitted. Unknown properties are rejected.
+The exact Draft 2020-12 contract is [source.schema.json](../../src/main/resources/schemas/source/schema.json). It requires only `code` at the Source level. Code-only identities such as `EEPC` need no fabricated name or publication record. Optional empty arrays are omitted. Unknown properties are rejected.
 
 ### Alternatives considered
 
@@ -81,26 +81,18 @@ The schema excludes `contents`, adventure `storyline`, adventure `level`, author
 
 Provenance remains outside the Source JSON so the same typed Source object can be used by the application without workflow metadata. The normalization manifest should link each Source code to its registry entry and each embedded publication reference to the corresponding book/adventure record. It should record original file and JSON location, source revision/version when available, content hash, canonical Source code, publication ID where applicable, and the schema ID/version. The exact record pointers must be captured during conversion; no unavailable pointer or hash is fabricated in this proposal.
 
-The schema path and identifier are versioned (`schemas/source/v1/source.schema.json`, `urn:thedndpub:schemas:source:v1`). A future incompatible change requires a new reviewed schema version and migration review. Deterministic source comparisons should preserve previously approved identities and flag changes to code, aliases, IDs, dates, names, grouping, and parent tokens for review.
+The schema path and identifier are versioned (`src/main/resources/schemas/source/schema.json`, `urn:thedndpub:schemas:source:v1`). A future incompatible change requires a new reviewed schema version and migration review. Deterministic source comparisons should preserve previously approved identities and flag changes to code, aliases, IDs, dates, names, grouping, and parent tokens for review.
 
-## 6. Representative examples
+## 6. Representative contract coverage
 
-The five canonical JSON examples are stored beside the schema:
-
-| Example | Coverage |
-| --- | --- |
-| [source-phb.json](../../schemas/source/v1/examples/source-phb.json) | Supplied book name, publication date, and group. |
-| [source-code-only-eepc.json](../../schemas/source/v1/examples/source-code-only-eepc.json) | Source identity without publication metadata. |
-| [source-mot.json](../../schemas/source/v1/examples/source-mot.json) | Two metadata records under one Source code and distinct adventure ID `MOT-NSS`. |
-| [source-psz-aliases.json](../../schemas/source/v1/examples/source-psz-aliases.json) | Separate source-code alias and publication ID roles. |
-| [source-aag-unresolved-parent.json](../../schemas/source/v1/examples/source-aag-unresolved-parent.json) | Human title alias and unresolved `SAiS` parent token. |
+The original representative JSON example files have been removed after canonical Source data became available. The canonical registry at `src/main/resources/normalized/sources/sources.json` is authoritative and contains the code-only, multi-publication, alias, and parent-reference cases covered during contract review.
 
 ## 7. Validation
 
 Validation used Ajv 8.17.1's Draft 2020-12 implementation and `ajv-formats` 3.0.1. Detailed outcomes and limits are in the [schema validation summary](../../reports/step-1/SOURCE_REGISTRY_SCHEMA_VALIDATION.md). Results:
 
 - The schema passed Draft 2020-12 meta-schema validation and strict schema compilation.
-- All five representative examples passed schema validation, including the two-publication `MOT` Source and code-only Source.
+- The representative conversion records passed schema validation, including the two-publication `MOT` Source and code-only Source.
 - Five negative checks were rejected as expected: unknown workflow property, invalid calendar date, unsupported kind, empty optional array, and missing required code.
 - JSON files were parsed as valid JSON during the validator run.
 

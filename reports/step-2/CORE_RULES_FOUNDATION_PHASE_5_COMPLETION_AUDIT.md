@@ -65,7 +65,7 @@ Mechanical limitations in PARTIAL and UNSUPPORTED records are generally document
 
 ## Contract and scope stability
 
-There are nine schema files in `schemas/core-rules/v1`: eight entity contracts (Action, Condition, Disease, Language, Rule, Sense, Skill, Status) and the shared contract. No Language Script schema is expected. The Phase 4/5 reports identify bounded refinements to Action, Condition, Disease, Language, Rule, Status, and Sense; no ninth entity model, generic effects engine, or source-prose fallback was introduced. The current validator compiles all nine schemas. Immutable source catalogs were read but not modified by this audit. No Phase 6 integration was started.
+There are nine Core Rules schema files under `src/main/resources/schemas`: eight entity contracts (Action, Condition, Disease, Language, Rule, Sense, Skill, Status) and the shared contract. No Language Script schema is expected. The Phase 4/5 reports identify bounded refinements to Action, Condition, Disease, Language, Rule, Status, and Sense; no ninth entity model, generic effects engine, or source-prose fallback was introduced. The current validator compiles all nine schemas. Immutable source catalogs were read but not modified by this audit. No Phase 6 integration was started.
 
 ### Governance status conflict
 

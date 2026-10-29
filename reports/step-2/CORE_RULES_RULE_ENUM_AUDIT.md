@@ -1,6 +1,6 @@
 # Step 2 Rule Schema Enum and Const Audit
 
-**Scope:** Read-only comparison of `schemas/core-rules/v1/rule.schema.json`, Rule-referenced definitions in `common.schema.json`, and Java DTOs under `src/main/java/com/thedndpub/data/dto/rule/` (including the shared Action DTOs used by Rule fields). Canonical usage was checked against all 231 records in `src/main/resources/normalized/core-rules/rules.json`. No code, tests, schemas, or canonical records were changed.
+**Scope:** Read-only comparison of `src/main/resources/schemas/rule/schema.json`, Rule-referenced definitions in `common.schema.json`, and Java DTOs under `src/main/java/com/thedndpub/data/dto/rule/` (including the shared Action DTOs used by Rule fields). Canonical usage was checked against all 231 records in `src/main/resources/normalized/core-rules/rules.json`. No code, tests, schemas, or canonical records were changed.
 
 ## Summary
 

@@ -1,6 +1,6 @@
 # Step 2 Core Rules Rule Model Complexity Assessment
 
-**Scope:** Read-only architectural assessment of `schemas/core-rules/v1/rule.schema.json`, its shared definitions, Rule DTOs, and all 231 canonical Rule records in `src/main/resources/normalized/core-rules/rules.json`. No schema, dataset, Java, test, roadmap, or governance changes were made. This report is an architectural review artifact, not approval to implement a redesign or proceed to Step 3.
+**Scope:** Read-only architectural assessment of `src/main/resources/schemas/rule/schema.json`, its shared definitions, Rule DTOs, and all 231 canonical Rule records in `src/main/resources/normalized/core-rules/rules.json`. No schema, dataset, Java, test, roadmap, or governance changes were made. This report is an architectural review artifact, not approval to implement a redesign or proceed to Step 3.
 
 ## Executive assessment
 

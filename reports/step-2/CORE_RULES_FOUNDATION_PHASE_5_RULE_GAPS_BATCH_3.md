@@ -1,4 +1,4 @@
-﻿# Core Rules Foundation Phase 5 — Rule Gaps Batch 3
+# Core Rules Foundation Phase 5 — Rule Gaps Batch 3
 
 **Status:** Implemented for human review. Step 2 Phase 5 remains open and unapproved.
 
@@ -32,7 +32,7 @@ The DMG Planar Effects source metadata points to an XDMG Hazard reprint. The app
 
 ## Schema and canonical changes
 
-Only `schemas/core-rules/v1/rule.schema.json` changed. It now adds `INITIATIVE_PROCEDURE` and `CARRYING_CAPACITY_RULE`; extends the existing `REST_PROCEDURE` and `DOWNTIME_PROCEDURE` with bounded duration, activity, interruption, recovery, and limitation fields; adds finite recovery outcome variants; and extends the existing damage component with Resistance/Vulnerability modifiers. No common/other domain schema or Java file changed.
+Only `src/main/resources/schemas/rule/schema.json` changed. It now adds `INITIATIVE_PROCEDURE` and `CARRYING_CAPACITY_RULE`; extends the existing `REST_PROCEDURE` and `DOWNTIME_PROCEDURE` with bounded duration, activity, interruption, recovery, and limitation fields; adds finite recovery outcome variants; and extends the existing damage component with Resistance/Vulnerability modifiers. No common/other domain schema or Java file changed.
 
 Fourteen Phase 5 Rule files are now present for the affected identities: thirteen new source records and the previously unsupported XPHB Initiative record. The thirteen newly created outputs are:
 

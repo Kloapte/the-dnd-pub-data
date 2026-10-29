@@ -20,6 +20,9 @@
 | [Rule omissions](rule/omitted.md) | Complete selected Rule source entries omitted or partially represented after the Phase 4 contract refinement; restricted internal source excerpts. |
 | [Rule duplicates](rule/duplicate.md) | Complete selected Rule entries whose mechanics repeat represented canonical values; restricted internal source excerpts. |
 | [Rules API](rule/API.md) | Typed Rule dataset loading, mechanics deserialization, and exact ID/name read endpoints. |
+| [Senses API](sense/API.md) | Typed Sense capability and location-precision data, canonical loading, and exact ID/name read endpoints. |
+| [Skills API](skill/API.md) | Typed Skill ability and check references, canonical loading, and exact ID/name read endpoints. |
+| [Statuses API](status/API.md) | Typed Status mechanics and maintenance-save DCs, canonical loading, and exact ID/name read endpoints. |
 | [Skill omissions](skill/omitted.md) | Complete selected Skill descriptions omitted as examples or task contexts during Phase 3 conversion; restricted internal source excerpts. |
 | [Skill duplicates](skill/duplicate.md) | Complete selected Skill descriptions that repeat the source ability association represented canonically; restricted internal source excerpts. |
 | [Condition omissions](condition/omitted.md) | Complete Condition source entries with remaining omitted descriptive or unsupported portions; PHB Petrified Disease suspension is now represented canonically. |

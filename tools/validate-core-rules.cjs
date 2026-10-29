@@ -5,8 +5,189 @@ const path = require('node:path');
 const Ajv2020 = require('ajv/dist/2020').default;
 
 const workspace = path.resolve(__dirname, '..');
-const contractRoot = path.join(workspace, 'schemas/core-rules/v1');
-const exampleRoot = path.join(contractRoot, 'examples');
+const schemaRoot = path.join(workspace, 'src/main/resources/schemas');
+const coreRulesSchemaFiles = [
+    'action.schema.json',
+    'common.schema.json',
+    'condition.schema.json',
+    'disease.schema.json',
+    'language.schema.json',
+    'rule.schema.json',
+    'sense.schema.json',
+    'skill.schema.json',
+    'status.schema.json'
+];
+
+function schemaPath(file) {
+    const model = file.replace(/\.schema\.json$/, '');
+    return path.join(schemaRoot, model, 'schema.json');
+}
+
+const canonicalFixtureIds = {
+    'action-climb-onto-a-bigger-creature.json': 'action:dmg:climb-onto-a-bigger-creature',
+    'action-dodge.json': 'action:phb:dodge',
+    'action-escape-grapple.json': 'action:xphb:escape-a-grapple',
+    'action-grapple.json': 'action:phb:grapple',
+    'action-help-xphb.json': 'action:xphb:help',
+    'action-other-activity.json': 'action:phb:other-activity',
+    'action-overrun.json': 'action:dmg:overrun',
+    'action-shove.json': 'action:phb:shove',
+    'condition.json': 'condition:phb:blinded',
+    'disease-cackle-fever.json': 'disease:dmg:cackle-fever',
+    'rule-ability-check.json': 'rule:xphb:ability-check',
+    'rule-ability-score-and-modifier.json': 'rule:xphb:ability-score-and-modifier',
+    'rule-area-of-effect.json': 'rule:xphb:area-of-effect',
+    'rule-carrying-capacity.json': 'rule:xphb:carrying-capacity',
+    'rule-cover.json': 'rule:xphb:cover',
+    'rule-crawling-movement.json': 'rule:xphb:crawling',
+    'rule-death-saving-throw.json': 'rule:xphb:death-saving-throw',
+    'rule-emanation-area-of-effect.json': 'rule:xphb:emanation-area-of-effect',
+    'rule-expertise.json': 'rule:xphb:expertise',
+    'rule-falling.json': 'rule:xge:falling',
+    'rule-flanking.json': 'rule:dmg:flanking',
+    'rule-grid-movement-cost.json': 'rule:dmg:diagonals',
+    'rule-initiative-score.json': 'rule:xphb:initiative',
+    'rule-jump-choice.json': 'rule:xphb:jumping',
+    'rule-long-rest.json': 'rule:xphb:long-rest',
+    'rule-movement-cost-procedure.json': 'rule:xphb:swimming',
+    'rule-passive-perception.json': 'rule:xphb:passive-perception',
+    'rule-proficiency-dice.json': 'rule:dmg:proficiency-dice',
+    'rule-proficiency.json': 'rule:xphb:proficiency',
+    'rule-reference-only.json': 'rule:xphb:action',
+    'rule-resistance.json': 'rule:xphb:resistance',
+    'rule-rest-recovery.json': 'rule:dmg:healing',
+    'rule-skill-variants.json': 'rule:dmg:skill-variants',
+    'rule-skills-with-different-abilities.json': 'rule:phb:skills-with-different-abilities',
+    'rule-unarmed-strike.json': 'rule:xphb:unarmed-strike',
+    'rule.json': 'rule:xphb:critical-hit',
+    'skill.json': 'skill:phb:acrobatics',
+    'status-concentration-phb.json': 'status:phb:concentration'
+};
+const canonicalRegressionIds = new Set([
+    'action:dmg:activate-an-item',
+    'action:dmg:climb-onto-a-bigger-creature',
+    'action:dmg:disarm',
+    'action:dmg:mark',
+    'action:dmg:overrun',
+    'action:dmg:tumble',
+    'action:phb:attack',
+    'action:phb:cast-a-spell',
+    'action:phb:dodge',
+    'action:phb:grapple',
+    'action:phb:improvising-an-action',
+    'action:phb:opportunity-attack',
+    'action:phb:other-activity',
+    'action:phb:shove',
+    'action:phb:stabilize-a-creature',
+    'action:phb:use-an-object',
+    'action:xge:identify-a-spell',
+    'action:xphb:end-concentration',
+    'action:xphb:escape-a-grapple',
+    'action:xphb:help',
+    'action:xphb:hide',
+    'action:xphb:influence',
+    'action:xphb:magic',
+    'action:xphb:opportunity-attack',
+    'action:xphb:search',
+    'action:xphb:study',
+    'action:xphb:utilize',
+    'condition:phb:blinded',
+    'condition:phb:exhaustion',
+    'condition:phb:petrified',
+    'condition:xphb:blinded',
+    'condition:xphb:exhaustion',
+    'condition:xphb:unconscious',
+    'disease:dmg:cackle-fever',
+    'disease:dmg:sewer-plague',
+    'disease:phb:blinding-sickness',
+    'disease:xdmg:sewer-plague',
+    'language:ggr:abyssal',
+    'language:idrotf:loross',
+    'language:phb:common',
+    'language:phb:druidic',
+    'language:phb:thieves-cant',
+    'rule:dmg:diagonals',
+    'rule:dmg:flanking',
+    'rule:dmg:healing',
+    'rule:dmg:hitting-cover',
+    'rule:dmg:proficiency-dice',
+    'rule:dmg:skill-variants',
+    'rule:phb:multiclassing',
+    'rule:phb:skills-with-different-abilities',
+    'rule:xge:falling',
+    'rule:xge:tool-proficiencies',
+    'rule:xphb:ability-check',
+    'rule:xphb:ability-score-and-modifier',
+    'rule:xphb:advantage',
+    'rule:xphb:area-of-effect',
+    'rule:xphb:carrying-capacity',
+    'rule:xphb:climb-speed',
+    'rule:xphb:cover',
+    'rule:xphb:crawling',
+    'rule:xphb:critical-hit',
+    'rule:xphb:d20-test',
+    'rule:xphb:death-saving-throw',
+    'rule:xphb:difficult-terrain',
+    'rule:xphb:difficulty-class',
+    'rule:xphb:emanation-area-of-effect',
+    'rule:xphb:expertise',
+    'rule:xphb:fly-speed',
+    'rule:xphb:initiative',
+    'rule:xphb:jumping',
+    'rule:xphb:long-jump',
+    'rule:xphb:long-rest',
+    'rule:xphb:passive-perception',
+    'rule:xphb:proficiency',
+    'rule:xphb:resistance',
+    'rule:xphb:saving-throw',
+    'rule:xphb:skill',
+    'rule:xphb:speed',
+    'rule:xphb:spell-attack',
+    'rule:xphb:swimming',
+    'rule:xphb:unarmed-strike',
+    'rule:xphb:vulnerability',
+    'sense:phb:darkvision',
+    'skill:phb:acrobatics',
+    'status:phb:concentration',
+    'status:phb:surprised',
+    'status:xphb:bloodied',
+    'status:xphb:concentration',
+    'status:xphb:surprised'
+]);
+
+const canonicalResourceFiles = {
+    action: 'actions.json',
+    condition: 'conditions.json',
+    disease: 'diseases.json',
+    language: 'languages.json',
+    rule: 'rules.json',
+    sense: 'senses.json',
+    skill: 'skills.json',
+    status: 'statuses.json'
+};
+const canonicalResources = new Map();
+
+function canonicalRecord(id) {
+    const model = id.split(':')[0];
+    const filename = canonicalResourceFiles[model];
+    assert.ok(filename, `canonical resource not configured for ${model}`);
+    if (!canonicalResources.has(model)) {
+        canonicalResources.set(model, readJson(path.join(
+            workspace,
+            'src/main/resources/normalized/core-rules',
+            filename
+        )));
+    }
+    const record = canonicalResources.get(model).find(candidate => candidate.id === id);
+    assert.ok(record, `canonical record not found: ${id}`);
+    return record;
+}
+
+function canonicalFixture(name) {
+    const id = canonicalFixtureIds[name];
+    assert.ok(id, `canonical record alias not configured: ${name}`);
+    return structuredClone(canonicalRecord(id));
+}
 const phase3Root = path.join(workspace, 'datasets/phase-3/step-2/core-rules/v1');
 const phase5Root = path.join(workspace, 'datasets/phase-5/step-2/core-rules/v1');
 const commonSchemaId = 'urn:thedndpub:schemas:core-rules:common:v1';
@@ -791,7 +972,7 @@ function assertPhase5LanguageReferences(entity) {
 function assertApprovedDomainBaseline() {
     const baseline = readJson(path.join(__dirname, 'core-rules-approved-domain-baseline.json'));
     for (const { file, sha256 } of baseline.entries) {
-        const value = readJson(path.join(contractRoot, file));
+        const value = readJson(schemaPath(file));
         const actual = crypto.createHash('sha256')
             .update(JSON.stringify(canonicalize(value)))
             .digest('hex');
@@ -800,10 +981,10 @@ function assertApprovedDomainBaseline() {
 }
 
 function loadSchemas() {
-    const files = fs.readdirSync(contractRoot).filter(file => file.endsWith('.schema.json')).sort();
+    const files = [...coreRulesSchemaFiles].sort();
     const schemas = [];
     for (const file of files) {
-        const schema = readJson(path.join(contractRoot, file));
+        const schema = readJson(schemaPath(file));
         if (ajv.validateSchema(schema) !== true) fail(`${file}: invalid Draft 2020-12 schema`);
         ajv.addSchema(schema);
         schemas.push([file, schema]);
@@ -814,11 +995,6 @@ function loadSchemas() {
         });
     }
     return files;
-}
-
-function loadExamples() {
-    return fs.readdirSync(exampleRoot).filter(file => file.endsWith('.json')).sort()
-        .map(file => [file, readJson(path.join(exampleRoot, file))]);
 }
 
 function expectedSourceMetadata(model, sourceRecord) {
@@ -1307,12 +1483,12 @@ function validatePhase3Records(schemaFiles) {
         assert.equal(outputById.get('action:phb:grapple').operations.find(operation =>
             operation.kind === 'MOVE_WITH_GRAPPLED_TARGET').speedCost.waivedWhenTargetAtLeastSizesSmaller, 2);
         assert.equal(outputById.get('skill:phb:acrobatics').sourceMetadata.page, 176);
-        const phbUnarmedExample = readJson(path.join(exampleRoot, 'rule-unarmed-strike.json'));
-        assert.ok(phbUnarmedExample.mechanics.filter(mechanic =>
+        const phbUnarmed = canonicalFixture('rule-unarmed-strike.json');
+        assert.ok(phbUnarmed.mechanics.filter(mechanic =>
             mechanic.componentId === 'unarmed-grapple-outcome'
             || mechanic.componentId === 'unarmed-shove-outcome').every(mechanic => mechanic.reachFeet === 5));
-        const criticalExample = readJson(path.join(exampleRoot, 'rule.json'));
-        assert.ok(criticalExample.mechanics[0].roll.forms.includes('unarmed'));
+        const critical = canonicalFixture('rule.json');
+        assert.ok(critical.mechanics[0].roll.forms.includes('unarmed'));
         const phbSource = readJson(path.join(workspace, 'src/main/resources/data/conditionsdiseases.json'));
         assert.ok(phbSource.disease.find(disease => disease.name === 'Cackle Fever'
             && disease.source === 'DMG').entries[0].includes('gnomes are strangely immune'));
@@ -1823,7 +1999,7 @@ function validatePhase5Expansion() {
             assert.ok(sourceRule.entries[0].includes('target number'));
             assert.deepEqual(entity.mechanics[0].targetNumberFor, ['ABILITY_CHECK', 'SAVING_THROW']);
             const validateRule = ajv.getSchema('urn:thedndpub:schemas:core-rules:rule:v1');
-            const abilityCheck = readJson(path.join(exampleRoot, 'rule-ability-check.json'));
+            const abilityCheck = canonicalFixture('rule-ability-check.json');
             const values = [
                 { kind: 'FIXED', value: 15 },
                 { kind: 'ABILITY_PLUS_PROFICIENCY', base: 8, ability: 'strength', proficiencyBonus: true },
@@ -4837,8 +5013,8 @@ function validatePhase5Expansion() {
     return { files: files.length, entities };
 }
 
-function testNegativeCases(examples) {
-    const get = name => structuredClone(examples.find(([file]) => file === name)[1]);
+function testNegativeCases(canonicalFixture, allCanonicalRecords) {
+    const get = name => canonicalFixture(name);
     const actionValidator = ajv.getSchema('urn:thedndpub:schemas:core-rules:action:v1');
     const ruleValidator = ajv.getSchema('urn:thedndpub:schemas:core-rules:rule:v1');
     const diseaseValidator = ajv.getSchema('urn:thedndpub:schemas:core-rules:disease:v1');
@@ -4856,15 +5032,15 @@ function testNegativeCases(examples) {
         assertRuleIntegrity(referenceOnlyRule);
         assertCanonicalReferences(referenceOnlyRule);
 
-        const dodge = readJson(path.join(phase3Root, 'action', 'xphb-dodge.json'));
         const containsReference = value => {
             if (Array.isArray(value)) return value.some(containsReference);
             if (!value || typeof value !== 'object') return false;
             if (value.targetType === 'rule' && value.id === referenceOnlyRule.id) return true;
             return Object.values(value).some(containsReference);
         };
-        assert.ok(containsReference(dodge));
-        assertCanonicalReferences(dodge);
+        const referringRecord = allCanonicalRecords.find(containsReference);
+        assert.ok(referringRecord);
+        assertCanonicalReferences(referringRecord);
     });
 
     const referenceOnlyWithoutId = get('rule-reference-only.json');
@@ -5289,27 +5465,31 @@ function run() {
     check('runtime source identity index exactly covers referenced pinned source catalogs', () => {
         assertCoreRulesReferenceIdentityIndex(allCanonicalRecords);
     });
-    const examples = loadExamples();
-    const validators = new Map();
-    for (const [file, example] of examples) {
-        const model = example.id.split(':')[0];
+    const canonicalRecords = allCanonicalRecords.map(record => [record.id, record]);
+    const canonicalRecordIds = new Set(canonicalRecords.map(([id]) => id));
+    check('all former schema-example identities exist in the canonical datasets', () => {
+        for (const id of canonicalRegressionIds) assert.ok(canonicalRecordIds.has(id), id);
+    });
+    for (const [id, record] of canonicalRecords) {
+        const model = record.id.split(':')[0];
         const validator = ajv.getSchema(`urn:thedndpub:schemas:core-rules:${model}:v1`);
-        if (!validator) fail(`${file}: no schema registered for ${model}`);
-        check(`schema example ${file}`, () => assert.equal(validator(example), true,
+        if (!validator) fail(`${id}: no schema registered for ${model}`);
+        check(`canonical schema record ${id}`, () => assert.equal(validator(record), true,
             JSON.stringify(validator.errors)));
-        validators.set(file, validator);
     }
 
-    const actionExamples = examples.filter(([, example]) => example.id.startsWith('action:'));
-    const ruleExamples = examples.filter(([, example]) => example.id.startsWith('rule:'));
+    const actionRecords = canonicalRecords.filter(([id]) => id.startsWith('action:')
+        && canonicalRegressionIds.has(id));
+    const ruleRecords = canonicalRecords.filter(([id]) => id.startsWith('rule:')
+        && canonicalRegressionIds.has(id));
     check('Action operation IDs, triggers, conditions, and choice groups', () => {
-        for (const [, action] of actionExamples) {
+        for (const [, action] of actionRecords) {
             assertCanonicalReferences(action);
             assertActionIntegrity(action);
         }
     });
     check('Rule component composition and applicability', () => {
-        for (const [, rule] of ruleExamples) {
+        for (const [, rule] of ruleRecords) {
             assertCanonicalReferences(rule);
             assertRuleIntegrity(rule);
         }
@@ -5317,36 +5497,36 @@ function run() {
 
     const conditionValidator = ajv.compile({ $ref: `${commonSchemaId}#/$defs/conditionPredicate` });
     const triggerValidator = ajv.compile({ $ref: `${commonSchemaId}#/$defs/actionTrigger` });
-    check('typed Action state and event examples', () => {
-        const grapple = readJson(path.join(exampleRoot, 'action-grapple.json'));
-        const dodge = readJson(path.join(exampleRoot, 'action-dodge.json'));
-        const escape = readJson(path.join(exampleRoot, 'action-escape-grapple.json'));
+    check('typed Action state and event canonical records', () => {
+        const grapple = canonicalFixture('action-grapple.json');
+        const dodge = canonicalFixture('action-dodge.json');
+        const escape = canonicalFixture('action-escape-grapple.json');
         assert.equal(conditionValidator(grapple.operations[0].automaticSuccessWhen), true);
         assert.equal(conditionValidator(dodge.operations[0].when), true);
         assert.equal(conditionValidator(escape.operations[2].appliesWhen.condition), true);
         assert.equal(triggerValidator(grapple.operations[2].appliesWhen.event), true);
-        const phbDodge = readJson(path.join(exampleRoot, 'action-dodge.json'));
+        const phbDodge = dodge;
         assert.deepEqual(phbDodge.operations[0].appliesWhen, {
             kind: 'ATTACK_AGAINST_AFFECTED', actor: 'attacker', target: 'affected-creature'
         });
     });
     check('Shove has exactly one post-check outcome', () => {
-        const shove = readJson(path.join(exampleRoot, 'action-shove.json'));
+        const shove = canonicalFixture('action-shove.json');
         assert.deepEqual(shove.choiceGroups[0].cardinality, { minimumSelected: 1, maximumSelected: 1 });
         assert.equal(shove.choiceGroups[0].trigger.operationId, 'shove-check');
     });
     check('nested Rule compositions preserve source-supported groups', () => {
-        assert.equal(readJson(path.join(exampleRoot, 'rule.json')).composition.kind, 'AND');
-        assert.equal(readJson(path.join(exampleRoot, 'rule-unarmed-strike.json')).composition.kind, 'OR');
+        assert.equal(canonicalFixture('rule.json').composition.kind, 'AND');
+        assert.equal(canonicalFixture('rule-unarmed-strike.json').composition.kind, 'OR');
     });
     check('canonical identity and typed reference integrity', () => {
-        const ids = examples.map(([, example]) => example.id);
+        const ids = canonicalRecords.map(([, record]) => record.id);
         assert.equal(new Set(ids).size, ids.length);
-        for (const [, example] of examples) assertCanonicalReferences(example);
+        for (const [, record] of canonicalRecords) assertCanonicalReferences(record);
     });
     check('six approved domain contracts match the semantic baseline', assertApprovedDomainBaseline);
-    check('approved PHB Blinded citation fixture includes HftT page 48', () => {
-        const blinded = readJson(path.join(exampleRoot, 'condition.json'));
+    check('approved PHB Blinded canonical record includes HftT page 48 citation', () => {
+        const blinded = canonicalFixture('condition.json');
         assert.ok(blinded.sourceMetadata.citations.some(citation =>
             citation.source === 'HftT' && citation.page === 48));
     });
@@ -5363,17 +5543,17 @@ function run() {
         assert.ok(JSON.stringify(shoveSource.entries).includes('incapacitated'));
         const unarmedSource = sourceRecord(variables, 'Unarmed Strike', 'XPHB');
         assert.ok(JSON.stringify(unarmedSource.entries).includes('any escape attempts equals'));
-        assert.ok(readJson(path.join(exampleRoot, 'rule-unarmed-strike.json')).references.some(reference =>
+        assert.ok(canonicalFixture('rule-unarmed-strike.json').references.some(reference =>
             reference.relationship === 'grapple-escape-attempts-use-this-dc'));
         const criticalSource = sourceRecord(variables, 'Critical Hit', 'XPHB');
         assert.ok(JSON.stringify(criticalSource.entries).includes('attack'));
-        assert.ok(readJson(path.join(exampleRoot, 'rule.json')).mechanics[0].roll.forms.includes('unarmed'));
+        assert.ok(canonicalFixture('rule.json').mechanics[0].roll.forms.includes('unarmed'));
         const acrobatics = sourceRecord(skills, 'Acrobatics', 'PHB');
         assert.equal(acrobatics.page, 176);
-        assert.equal(readJson(path.join(exampleRoot, 'skill.json')).sourceMetadata.page, 176);
+        assert.equal(canonicalFixture('skill.json').sourceMetadata.page, 176);
         const blinded = sourceRecord(conditions.condition, 'Blinded', 'PHB');
         assert.ok(blinded.otherSources.some(citation => citation.source === 'HftT' && citation.page === 48));
-        assert.ok(readJson(path.join(exampleRoot, 'condition.json')).sourceMetadata.citations.some(citation =>
+        assert.ok(canonicalFixture('condition.json').sourceMetadata.citations.some(citation =>
             citation.source === 'HftT' && citation.page === 48));
     });
     check('C1-C8 mechanics remain grounded in the selected source wording', () => {
@@ -5407,24 +5587,22 @@ function run() {
         assert.ok(xphbTruesight.includes('appear transparent'));
         assert.ok(xphbTruesight.includes('automatically succeed'));
     });
-    check('schema and example JSON uses two-space formatting', () => {
-        const files = [...schemaFiles.map(file => path.join(contractRoot, file)),
-            ...examples.map(([file]) => path.join(exampleRoot, file))];
-        for (const file of files) {
+    check('schema JSON uses two-space formatting', () => {
+        for (const file of schemaFiles.map(schemaPath)) {
             const raw = fs.readFileSync(file, 'utf8');
             assert.equal(raw, `${JSON.stringify(readJson(file), null, 2)}\n`, file);
         }
     });
-    testNegativeCases(examples);
+    testNegativeCases(canonicalFixture, allCanonicalRecords);
 
     console.log(JSON.stringify({
         draft202012SchemasCompiled: schemaFiles.length,
-        examplesValidated: examples.length,
+        canonicalRecordsSchemaValidated: canonicalRecords.length,
         phase3CanonicalRecordsValidated: phase3Result.files,
         phase5CanonicalRecordsValidated: phase5Result.files,
         permanentChecksPassed: testResults.length,
-        ruleComponentsChecked: ruleExamples.reduce((sum, [, rule]) => sum + (rule.mechanics?.length ?? 0), 0),
-        actionRecordsChecked: actionExamples.length
+        ruleComponentsChecked: ruleRecords.reduce((sum, [, rule]) => sum + (rule.mechanics?.length ?? 0), 0),
+        actionRecordsChecked: actionRecords.length
     }, null, 2));
 }
 

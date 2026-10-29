@@ -6,7 +6,7 @@ LANG-1, LANG-3, and LANG-4 are implemented and validated for human review. Step 
 
 ## Implemented contract changes
 
-Only `schemas/core-rules/v1/language.schema.json` changed. The shared schema and all non-Language schemas remain unchanged. The Language schema ID remains v1; changes are additive to existing Language identities and fields.
+Only `src/main/resources/schemas/language/schema.json` changed. The shared schema and all non-Language schemas remain unchanged. The Language schema ID remains v1; changes are additive to existing Language identities and fields.
 
 ### LANG-1 — Exact-tag speaker selectors
 

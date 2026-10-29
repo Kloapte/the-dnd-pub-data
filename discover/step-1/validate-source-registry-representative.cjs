@@ -71,7 +71,7 @@ for (const entry of registry) {
     }
 }
 
-const schemaPath = path.join(workspace, 'schemas/source/v1/source.schema.json');
+const schemaPath = path.join(workspace, 'src/main/resources/schemas/source/schema.json');
 const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
 const ajv = new Ajv2020({ allErrors: true, strict: true, validateSchema: true });
 addFormats(ajv);
