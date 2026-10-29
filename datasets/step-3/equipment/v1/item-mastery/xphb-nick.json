@@ -1,0 +1,19 @@
+{
+  "id": "item-mastery:xphb:nick",
+  "name": "Nick",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 214,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "mechanic": {
+    "kind": "NICK",
+    "trigger": "LIGHT_PROPERTY_EXTRA_ATTACK",
+    "extraAttackPartOf": "attack-action",
+    "replaces": "bonus-action",
+    "oncePerTurn": true
+  }
+}

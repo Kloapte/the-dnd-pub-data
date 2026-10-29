@@ -1,0 +1,30 @@
+{
+  "id": "item:phb:arrow",
+  "name": "Arrow",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 150,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:arrow"
+      }
+    ]
+  },
+  "category": "AMMUNITION",
+  "sourceTypeCode": "A",
+  "edition": "classic",
+  "rarity": "none",
+  "price": {
+    "amount": 5,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 0.05,
+    "unit": "pound"
+  }
+}

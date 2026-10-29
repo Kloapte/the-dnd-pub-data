@@ -1,0 +1,61 @@
+{
+  "id": "item:phb:longsword",
+  "name": "Longsword",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 149,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:longsword"
+      }
+    ]
+  },
+  "category": "WEAPON",
+  "sourceTypeCode": "M",
+  "edition": "classic",
+  "rarity": "none",
+  "price": {
+    "amount": 1500,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 3,
+    "unit": "pound"
+  },
+  "weapon": {
+    "category": "martial",
+    "damage": {
+      "kind": "DAMAGE_ROLL",
+      "damageTypes": [
+        "slashing"
+      ],
+      "base": {
+        "kind": "DICE",
+        "count": 1,
+        "die": "d8"
+      }
+    },
+    "versatileDamage": {
+      "kind": "DAMAGE_ROLL",
+      "damageTypes": [
+        "slashing"
+      ],
+      "base": {
+        "kind": "DICE",
+        "count": 1,
+        "die": "d10"
+      }
+    },
+    "properties": [
+      {
+        "targetType": "item-property",
+        "id": "item-property:phb:versatile"
+      }
+    ]
+  }
+}

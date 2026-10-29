@@ -1,0 +1,15 @@
+{
+  "id": "item-property:xphb:two-handed",
+  "name": "Two-Handed",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 214,
+    "flags": {
+      "basicRules2024": true
+    }
+  },
+  "mechanic": {
+    "kind": "TWO_HANDED",
+    "handsRequired": 2
+  }
+}

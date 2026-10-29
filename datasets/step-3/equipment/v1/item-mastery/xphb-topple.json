@@ -1,0 +1,28 @@
+{
+  "id": "item-mastery:xphb:topple",
+  "name": "Topple",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 214,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "mechanic": {
+    "kind": "TOPPLE",
+    "trigger": "hit",
+    "savingThrow": {
+      "ability": "constitution",
+      "dc": {
+        "base": 8,
+        "abilityModifier": "attack-ability",
+        "proficiencyBonus": true
+      }
+    },
+    "failureCondition": {
+      "targetType": "condition",
+      "id": "condition:phb:prone"
+    }
+  }
+}

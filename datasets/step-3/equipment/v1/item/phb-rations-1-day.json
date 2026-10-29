@@ -1,0 +1,29 @@
+{
+  "id": "item:phb:rations-1-day",
+  "name": "Rations (1 day)",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 153,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:rations"
+      }
+    ]
+  },
+  "category": "FOOD_AND_DRINK",
+  "sourceTypeCode": "G",
+  "rarity": "none",
+  "price": {
+    "amount": 50,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 2,
+    "unit": "pound"
+  }
+}

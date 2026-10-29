@@ -89,13 +89,13 @@ Do not put conversion, implementation, review, or completeness statuses in `Sour
 | `WGE` appears in one nested alternate-art `source` field | Outside Source Registry ownership; keep the source value traceable and unresolved. | Revisit during the relevant monster and alternate-art domain analysis. |
 | Publication content/catalogs may be absent for later mechanics | Outside this Source contract. | Where required for an in-scope rule, record as unsupported using the roadmap's interpretation coverage rules. |
 
-See the [Phase 1 discovery report](../discover/step-1/SOURCE_REGISTRY_PHASE_1.md) for exact code lists, counts, source locations, and census evidence. Incomplete references are documented here and in discovery artifacts, not represented by workflow fields in canonical JSON.
+See the [Phase 1 discovery report](../reports/step-1/phase-1/SOURCE_REGISTRY_PHASE_1.md) for exact code lists, counts, source locations, and census evidence. Incomplete references are documented here and in discovery artifacts, not represented by workflow fields in canonical JSON.
 
 ## Schema and canonical data
 
 - [Draft 2020-12 Source schema](../src/main/resources/schemas/source/schema.json)
 - [Canonical Source Registry data](../src/main/resources/normalized/sources/sources.json)
-- [Schema validation summary](../reports/step-1/SOURCE_REGISTRY_SCHEMA_VALIDATION.md)
+- [Schema validation summary](../reports/step-1/phase-2/SOURCE_REGISTRY_SCHEMA_VALIDATION.md)
 
 The canonical Source Registry dataset is authoritative; duplicate example fixtures are not maintained. The schema validation summary records the earlier representative validation results. The closed ten-value `group` enum remains part of the approved contract. A new upstream value requires analysis and an approved schema change.
 
@@ -103,17 +103,17 @@ The canonical Source Registry dataset is authoritative; duplicate example fixtur
 
 The approved focused batch contains Source codes `PHB`, `EEPC`, `MOT`, `PSZ`, `AAG`, `EFR`, `ERLW`, and `SAC`, with all six matching book records and both matching adventure records. It covers a code-only entry, a shared Source code with multiple publications, distinct publication IDs, both alias roles, a resolvable parent token, an unresolved parent token, and the supplied revision-date field.
 
-The generated data is under [`normalized/source/v1`](../normalized/source/v1/representative-batch.json), with provenance and parent-reference tracking in sibling files. The [Phase 3 conversion report](../reports/step-1/SOURCE_REGISTRY_REPRESENTATIVE_CONVERSION.md) records mappings and validation results. The batch is approved as a representative conversion, not as a complete dataset. `SAiS` remains unresolved, and `MOT-NSS`'s `MOT` parent token still has source-versus-publication target ambiguity.
+The generated data is under [`datasets/step-1/v1`](../datasets/step-1/v1/representative-batch.json), with provenance and parent-reference tracking in sibling files. The [Phase 3 conversion report](../reports/step-1/phase-3/SOURCE_REGISTRY_REPRESENTATIVE_CONVERSION.md) records mappings and validation results. The batch is approved as a representative conversion, not as a complete dataset. `SAiS` remains unresolved, and `MOT-NSS`'s `MOT` parent token still has source-versus-publication target ambiguity.
 
 ## Phase 4 validation and feedback
 
-The approved schema and mapping were checked in memory against all 181 registry entries, 66 book metadata records, and 101 adventure metadata records. All 181 projected Source objects passed the schema. All 167 publication metadata records mapped to a registered source code, and no full normalized dataset was written. The [Phase 4 validation report](../reports/step-1/SOURCE_REGISTRY_PHASE_4_VALIDATION.md) documents coverage, identity checks, maintainability, intentional omissions, and limitations.
+The approved schema and mapping were checked in memory against all 181 registry entries, 66 book metadata records, and 101 adventure metadata records. All 181 projected Source objects passed the schema. All 167 publication metadata records mapped to a registered source code, and no full normalized dataset was written. The [Phase 4 validation report](../reports/step-1/phase-4/SOURCE_REGISTRY_PHASE_4_VALIDATION.md) documents coverage, identity checks, maintainability, intentional omissions, and limitations.
 
 The review found no blocking contract defect. The current composition remains small and maintainable for source identification. Global uniqueness, conditional publication-ID rules, parent-target integrity, and provenance completeness require a dataset-level checker or manifest because the item schema cannot enforce them. Raw parent tokens remain unresolved where their target identity is unclear. These checks are required for expansion, but no schema change was proposed by Phase 4.
 
 ## Phase 5 dataset expansion
 
-The complete dataset contains 181 Sources and 167 embedded publication references. Every Source passed the approved schema; all book and adventure `source` associations and provenance pointers were verified. The [Phase 5 expansion report](../reports/step-1/SOURCE_REGISTRY_PHASE_5_EXPANSION.md) records full coverage, validation, identity outcomes, tracked parent references, and update safeguards. The [representative dataset](../normalized/source/v1/representative-batch.json) remains as the approved sample. The canonical full dataset is the runtime resource [`src/main/resources/normalized/sources/sources.json`](../src/main/resources/normalized/sources/sources.json); provenance and parent-reference tracking remain under `normalized/source/v1/`.
+The complete dataset contains 181 Sources and 167 embedded publication references. Every Source passed the approved schema; all book and adventure `source` associations and provenance pointers were verified. The [Phase 5 expansion report](../reports/step-1/phase-5/SOURCE_REGISTRY_PHASE_5_EXPANSION.md) records full coverage, validation, identity outcomes, tracked parent references, and update safeguards. The [representative dataset](../datasets/step-1/v1/representative-batch.json) remains as the approved sample. The canonical full dataset is the runtime resource [`src/main/resources/normalized/sources/sources.json`](../src/main/resources/normalized/sources/sources.json); provenance and parent-reference tracking remain under `datasets/step-1/v1/`.
 
 ## Phase 6 backend integration
 
@@ -125,7 +125,7 @@ The Source records map the approved `Source` and publication-reference shapes, i
 
 For a future approved normalized Source update, replace the runtime resource only after checking its schema version, preserving the external provenance and incomplete-reference reports, and updating the integration tests and documentation. A schema change requires its own approved contract version and integration review; the runtime service must continue to consume canonical data without normalizing it.
 
-The data retains 18 unresolved and 2 ambiguous parent references, described in the [Phase 5 expansion report](../reports/step-1/SOURCE_REGISTRY_PHASE_5_EXPANSION.md). The API returns their raw values and does not resolve them. Phase 6 implementation details and test results are recorded in the [backend integration report](../reports/step-1/SOURCE_REGISTRY_PHASE_6_BACKEND_INTEGRATION.md).
+The data retains 18 unresolved and 2 ambiguous parent references, described in the [Phase 5 expansion report](../reports/step-1/phase-5/SOURCE_REGISTRY_PHASE_5_EXPANSION.md). The API returns their raw values and does not resolve them. Phase 6 implementation details and test results are recorded in the [backend integration report](../reports/step-1/phase-6/SOURCE_REGISTRY_PHASE_6_BACKEND_INTEGRATION.md).
 
 ## Phase 6 backend integration
 
@@ -137,4 +137,4 @@ The Source records map the approved `Source` and publication-reference shapes, i
 
 For a future approved normalized Source update, replace the runtime resource only after checking its schema version, preserving the external provenance and incomplete-reference reports, and updating the integration tests and documentation. A schema change requires its own approved contract version and integration review; the runtime service must continue to consume canonical data without normalizing it.
 
-The data retains 18 unresolved and 2 ambiguous parent references, described in the [Phase 5 expansion report](../reports/step-1/SOURCE_REGISTRY_PHASE_5_EXPANSION.md). The API returns their raw values and does not resolve them. Phase 6 implementation details and test results are recorded in the [backend integration report](../reports/step-1/SOURCE_REGISTRY_PHASE_6_BACKEND_INTEGRATION.md).
+The data retains 18 unresolved and 2 ambiguous parent references, described in the [Phase 5 expansion report](../reports/step-1/phase-5/SOURCE_REGISTRY_PHASE_5_EXPANSION.md). The API returns their raw values and does not resolve them. Phase 6 implementation details and test results are recorded in the [backend integration report](../reports/step-1/phase-6/SOURCE_REGISTRY_PHASE_6_BACKEND_INTEGRATION.md).

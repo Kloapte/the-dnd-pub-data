@@ -1,0 +1,17 @@
+{
+  "id": "item-property:xphb:light",
+  "name": "Light",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 213,
+    "flags": {
+      "basicRules2024": true
+    }
+  },
+  "mechanic": {
+    "kind": "LIGHT_EXTRA_ATTACK",
+    "extraAttackTiming": "bonus-action",
+    "requiresDifferentLightWeapon": true,
+    "abilityModifierUnlessNegative": true
+  }
+}

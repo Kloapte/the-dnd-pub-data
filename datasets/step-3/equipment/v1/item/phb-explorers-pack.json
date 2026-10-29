@@ -1,0 +1,87 @@
+{
+  "id": "item:phb:explorers-pack",
+  "name": "Explorer's Pack",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 151,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:explorers-pack"
+      }
+    ]
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "rarity": "none",
+  "price": {
+    "amount": 1000,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 59,
+    "unit": "pound"
+  },
+  "contents": [
+    {
+      "item": {
+        "targetType": "item",
+        "id": "item:phb:backpack"
+      },
+      "quantity": 1
+    },
+    {
+      "item": {
+        "targetType": "item",
+        "id": "item:phb:bedroll"
+      },
+      "quantity": 1
+    },
+    {
+      "item": {
+        "targetType": "item",
+        "id": "item:phb:mess-kit"
+      },
+      "quantity": 1
+    },
+    {
+      "item": {
+        "targetType": "item",
+        "id": "item:phb:tinderbox"
+      },
+      "quantity": 1
+    },
+    {
+      "item": {
+        "targetType": "item",
+        "id": "item:phb:torch"
+      },
+      "quantity": 10
+    },
+    {
+      "item": {
+        "targetType": "item",
+        "id": "item:phb:rations-1-day"
+      },
+      "quantity": 10
+    },
+    {
+      "item": {
+        "targetType": "item",
+        "id": "item:phb:waterskin"
+      },
+      "quantity": 1
+    },
+    {
+      "item": {
+        "targetType": "item",
+        "id": "item:phb:hempen-rope-50-feet"
+      },
+      "quantity": 1
+    }
+  ]
+}

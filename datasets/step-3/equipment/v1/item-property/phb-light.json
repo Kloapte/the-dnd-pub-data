@@ -1,0 +1,21 @@
+{
+  "id": "item-property:phb:light",
+  "name": "Light",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 147
+  },
+  "reprintedAsProperties": [
+    {
+      "targetType": "item-property",
+      "id": "item-property:xphb:light"
+    }
+  ],
+  "mechanic": {
+    "kind": "LIGHT_PROPERTY_RULE",
+    "ruleReference": {
+      "targetType": "action",
+      "id": "action:phb:two-weapon-fighting"
+    }
+  }
+}

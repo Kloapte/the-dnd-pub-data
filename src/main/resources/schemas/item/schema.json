@@ -1,0 +1,1000 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:thedndpub:schemas:item:v1",
+  "title": "Equipment Item",
+  "$ref": "#/$defs/itemRecord",
+  "$defs": {
+    "price": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "amount",
+        "unit"
+      ],
+      "properties": {
+        "amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "const": "copper-piece"
+        }
+      }
+    },
+    "weight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "amount",
+        "unit"
+      ],
+      "properties": {
+        "amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "const": "pound"
+        },
+        "condition": {
+          "enum": [
+            "full"
+          ]
+        }
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "length",
+        "width",
+        "height",
+        "unit"
+      ],
+      "properties": {
+        "length": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "height": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "unit": {
+          "enum": [
+            "inch",
+            "foot"
+          ]
+        }
+      }
+    },
+    "weaponRange": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "normalFeet",
+            "longFeet"
+          ],
+          "properties": {
+            "kind": {
+              "const": "NORMAL_AND_LONG"
+            },
+            "normalFeet": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "longFeet": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "distanceFeet"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SINGLE_DISTANCE"
+            },
+            "distanceFeet": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        }
+      ]
+    },
+    "weapon": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "category"
+      ],
+      "properties": {
+        "category": {
+          "enum": [
+            "simple",
+            "martial"
+          ]
+        },
+        "damage": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+        },
+        "versatileDamage": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+        },
+        "range": {
+          "$ref": "#/$defs/weaponRange"
+        },
+        "properties": {
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/propertyReference"
+          },
+          "type": "array"
+        },
+        "masteries": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/masteryReference"
+          }
+        },
+        "ammunition": {
+          "$ref": "#/$defs/itemReference"
+        },
+        "shotsBeforeReload": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "specialMechanics": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "trigger",
+                  "timing",
+                  "cost",
+                  "damage"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "BONUS_ACTION_FOLLOW_UP"
+                  },
+                  "trigger": {
+                    "const": "Attack action with this weapon"
+                  },
+                  "timing": {
+                    "const": "immediately-after"
+                  },
+                  "cost": {
+                    "const": "bonus-action"
+                  },
+                  "damage": {
+                    "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "mode",
+                  "weaponCategory",
+                  "usesAmmunition",
+                  "ammunition",
+                  "damage"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "ALTERNATE_RANGED_MODE"
+                  },
+                  "mode": {
+                    "const": "ranged"
+                  },
+                  "weaponCategory": {
+                    "const": "martial"
+                  },
+                  "usesAmmunition": {
+                    "const": true
+                  },
+                  "ammunition": {
+                    "$ref": "#/$defs/itemReference"
+                  },
+                  "damage": {
+                    "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "meleeIgnoresAmmunition"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "MELEE_MODE_EXCEPTION"
+                  },
+                  "meleeIgnoresAmmunition": {
+                    "const": true
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "closeTargetDistanceFeet",
+                  "attackDisadvantage",
+                  "unmountedHandsRequired"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "LANCE_RESTRICTIONS"
+                  },
+                  "closeTargetDistanceFeet": {
+                    "const": 5
+                  },
+                  "attackDisadvantage": {
+                    "const": true
+                  },
+                  "unmountedHandsRequired": {
+                    "const": 2
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "restrainedTarget",
+                  "escape",
+                  "netDurability",
+                  "attackLimit",
+                  "noEffectTargets",
+                  "targetCanFreeOtherWithinReach"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "NET_RESTRAINT"
+                  },
+                  "restrainedTarget": {
+                    "const": "large-or-smaller"
+                  },
+                  "escape": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "ability",
+                      "dc",
+                      "action"
+                    ],
+                    "properties": {
+                      "ability": {
+                        "const": "strength"
+                      },
+                      "dc": {
+                        "const": 10
+                      },
+                      "action": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "netDurability": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "slashingDamage",
+                      "armorClass",
+                      "freesTarget",
+                      "destroysNet"
+                    ],
+                    "properties": {
+                      "slashingDamage": {
+                        "const": 5
+                      },
+                      "armorClass": {
+                        "const": 10
+                      },
+                      "freesTarget": {
+                        "const": true
+                      },
+                      "destroysNet": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "attackLimit": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "actions",
+                      "maximumAttacks"
+                    ],
+                    "properties": {
+                      "actions": {
+                        "const": [
+                          "action",
+                          "bonus-action",
+                          "reaction"
+                        ]
+                      },
+                      "maximumAttacks": {
+                        "const": "one-regardless-of-attacks"
+                      }
+                    }
+                  },
+                  "noEffectTargets": {
+                    "const": [
+                      "formless",
+                      "huge-or-larger"
+                    ]
+                  },
+                  "targetCanFreeOtherWithinReach": {
+                    "const": true
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "not": {
+              "required": [
+                "damage"
+              ],
+              "properties": {
+                "damage": {}
+              },
+              "type": "object"
+            }
+          },
+          "then": {
+            "required": [
+              "specialMechanics"
+            ],
+            "properties": {
+              "specialMechanics": {
+                "contains": {
+                  "properties": {
+                    "kind": {
+                      "const": "NET_RESTRAINT"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          }
+        }
+      ]
+    },
+    "armor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "category",
+        "armorClass"
+      ],
+      "properties": {
+        "category": {
+          "enum": [
+            "light",
+            "medium",
+            "heavy",
+            "shield"
+          ]
+        },
+        "armorClass": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimumStrength": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "stealthDisadvantage": {
+          "type": "boolean"
+        }
+      }
+    },
+    "contents": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "item",
+          "quantity"
+        ],
+        "properties": {
+          "item": {
+            "$ref": "#/$defs/itemReference"
+          },
+          "quantity": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
+        }
+      }
+    },
+    "capacity": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "weightPounds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "volumeCubicFeet": {
+          "type": "number",
+          "minimum": 0
+        },
+        "weightlessContents": {
+          "type": "boolean"
+        },
+        "itemLimits": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "item",
+              "quantity"
+            ],
+            "properties": {
+              "item": {
+                "$ref": "#/$defs/itemReference"
+              },
+              "quantity": {
+                "type": "number",
+                "minimum": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "lightEmission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "brightFeet",
+        "dimFeet"
+      ],
+      "properties": {
+        "brightFeet": {
+          "type": "number",
+          "minimum": 0
+        },
+        "dimFeet": {
+          "type": "number",
+          "minimum": 0
+        },
+        "durationMinutes": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "itemRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "sourceMetadata",
+        "category"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^item:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceMetadata": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceMetadata"
+        },
+        "category": {
+          "enum": [
+            "WEAPON",
+            "ARMOR",
+            "SHIELD",
+            "AMMUNITION",
+            "ADVENTURING_GEAR",
+            "ARTISAN_TOOL",
+            "TOOL",
+            "INSTRUMENT",
+            "GAMING_SET",
+            "FOOD_AND_DRINK",
+            "TRADE_GOOD",
+            "COINAGE",
+            "GEMSTONE",
+            "MOUNT",
+            "LAND_TRANSPORT",
+            "OTHER_EQUIPMENT"
+          ]
+        },
+        "sourceTypeCode": {
+          "enum": [
+            "$A",
+            "$C",
+            "$G",
+            "A",
+            "AF",
+            "AIR",
+            "AT",
+            "EXP",
+            "FD",
+            "G",
+            "GS",
+            "HA",
+            "INS",
+            "LA",
+            "M",
+            "MA",
+            "MNT",
+            "OTH",
+            "P",
+            "R",
+            "RD",
+            "RG",
+            "S",
+            "SC",
+            "SCF",
+            "SHP",
+            "SPC",
+            "T",
+            "TAH",
+            "TB",
+            "TG",
+            "VEH",
+            "WD"
+          ]
+        },
+        "edition": {
+          "enum": [
+            "classic",
+            "one"
+          ]
+        },
+        "rarity": {
+          "enum": [
+            "none",
+            "unknown"
+          ]
+        },
+        "marketValueRarity": {
+          "enum": [
+            "common",
+            "uncommon",
+            "rare",
+            "very rare",
+            "legendary",
+            "artifact",
+            "unknown",
+            "unknown (magic)",
+            "varies"
+          ]
+        },
+        "aliases": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "price": {
+          "$ref": "#/$defs/price"
+        },
+        "weight": {
+          "$ref": "#/$defs/weight"
+        },
+        "dimensions": {
+          "$ref": "#/$defs/dimensions"
+        },
+        "weapon": {
+          "$ref": "#/$defs/weapon"
+        },
+        "armor": {
+          "$ref": "#/$defs/armor"
+        },
+        "baseItem": {
+          "$ref": "#/$defs/itemReference"
+        },
+        "contents": {
+          "$ref": "#/$defs/contents"
+        },
+        "contentsAtomic": {
+          "type": "boolean"
+        },
+        "capacity": {
+          "$ref": "#/$defs/capacity"
+        },
+        "lightEmissions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/lightEmission"
+          }
+        },
+        "mount": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "speedFeet": {
+              "type": "number",
+              "minimum": 0
+            },
+            "carryingCapacityPounds": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "minProperties": 1
+        },
+        "weaponEra": {
+          "enum": [
+            "renaissance",
+            "modern",
+            "futuristic"
+          ]
+        },
+        "focusType": {
+          "enum": [
+            "arcane",
+            "druidic",
+            "holy"
+          ]
+        },
+        "poison": {
+          "type": "boolean"
+        },
+        "poisonAdministration": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "ingested",
+              "inhaled",
+              "injury",
+              "contact"
+            ]
+          }
+        },
+        "specialRuleReferences": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "WEAPON"
+              }
+            },
+            "required": [
+              "category"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "required": [
+              "weapon"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "armor"
+                  ],
+                  "properties": {
+                    "armor": {}
+                  },
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "mount"
+                  ],
+                  "properties": {
+                    "mount": {}
+                  },
+                  "type": "object"
+                }
+              ]
+            },
+            "properties": {
+              "weapon": {
+                "$ref": "#/$defs/weapon"
+              }
+            },
+            "type": "object"
+          },
+          "else": {
+            "not": {
+              "required": [
+                "weapon"
+              ],
+              "properties": {
+                "weapon": {}
+              },
+              "type": "object"
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "enum": [
+                  "ARMOR",
+                  "SHIELD"
+                ]
+              }
+            },
+            "required": [
+              "category"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "required": [
+              "armor"
+            ],
+            "properties": {
+              "armor": {
+                "$ref": "#/$defs/armor"
+              }
+            },
+            "type": "object"
+          },
+          "else": {
+            "not": {
+              "required": [
+                "armor"
+              ],
+              "properties": {
+                "armor": {}
+              },
+              "type": "object"
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "MOUNT"
+              }
+            },
+            "required": [
+              "category"
+            ],
+            "type": "object"
+          },
+          "then": {
+            "required": [
+              "mount"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "weapon"
+                  ],
+                  "properties": {
+                    "weapon": {}
+                  },
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "armor"
+                  ],
+                  "properties": {
+                    "armor": {}
+                  },
+                  "type": "object"
+                }
+              ]
+            },
+            "type": "object"
+          },
+          "else": {
+            "not": {
+              "required": [
+                "mount"
+              ],
+              "properties": {
+                "mount": {}
+              },
+              "type": "object"
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "required": [
+              "category"
+            ],
+            "properties": {
+              "category": {
+                "const": "SHIELD"
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "required": [
+              "armor"
+            ],
+            "properties": {
+              "armor": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/armor"
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "category"
+                    ],
+                    "properties": {
+                      "category": {
+                        "const": "shield"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "required": [
+              "category"
+            ],
+            "properties": {
+              "category": {
+                "const": "ARMOR"
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "armor": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/armor"
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "category"
+                    ],
+                    "properties": {
+                      "category": {
+                        "enum": [
+                          "light",
+                          "medium",
+                          "heavy"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "itemReference": {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference",
+      "allOf": [
+        {
+          "properties": {
+            "targetType": {
+              "const": "item"
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^item:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+            }
+          },
+          "required": [
+            "targetType",
+            "id"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "propertyReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetType",
+        "id"
+      ],
+      "properties": {
+        "targetType": {
+          "const": "item-property"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^item-property:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+        }
+      }
+    },
+    "masteryReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetType",
+        "id"
+      ],
+      "properties": {
+        "targetType": {
+          "const": "item-mastery"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^item-mastery:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+        }
+      }
+    }
+  }
+}

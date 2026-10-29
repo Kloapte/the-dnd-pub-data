@@ -1,0 +1,30 @@
+{
+  "id": "item:phb:amulet",
+  "name": "Amulet",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 151,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:amulet"
+      }
+    ]
+  },
+  "category": "OTHER_EQUIPMENT",
+  "sourceTypeCode": "SCF",
+  "rarity": "none",
+  "price": {
+    "amount": 500,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 1,
+    "unit": "pound"
+  },
+  "focusType": "holy"
+}

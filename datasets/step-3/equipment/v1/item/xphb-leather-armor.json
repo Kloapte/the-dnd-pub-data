@@ -1,0 +1,28 @@
+{
+  "id": "item:xphb:leather-armor",
+  "name": "Leather Armor",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 219,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ARMOR",
+  "sourceTypeCode": "LA",
+  "edition": "one",
+  "rarity": "none",
+  "price": {
+    "amount": 1000,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 10,
+    "unit": "pound"
+  },
+  "armor": {
+    "category": "light",
+    "armorClass": 11
+  }
+}

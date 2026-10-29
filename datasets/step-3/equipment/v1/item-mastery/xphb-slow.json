@@ -1,0 +1,19 @@
+{
+  "id": "item-mastery:xphb:slow",
+  "name": "Slow",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 214,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "mechanic": {
+    "kind": "SLOW",
+    "trigger": "hit-and-deal-damage",
+    "speedReductionFeet": 10,
+    "duration": "before-start-of-wielder-next-turn",
+    "maximumCumulativeReductionFeet": 10
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "id": "item:dsotdq:hoopak",
+  "name": "Hoopak",
+  "sourceMetadata": {
+    "source": "DSotDQ",
+    "page": 188
+  },
+  "category": "WEAPON",
+  "sourceTypeCode": "M",
+  "rarity": "none",
+  "price": {
+    "amount": 10,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 2,
+    "unit": "pound"
+  },
+  "weapon": {
+    "category": "martial",
+    "damage": {
+      "kind": "DAMAGE_ROLL",
+      "damageTypes": [
+        "piercing"
+      ],
+      "base": {
+        "kind": "DICE",
+        "count": 1,
+        "die": "d6"
+      }
+    },
+    "range": {
+      "kind": "NORMAL_AND_LONG",
+      "normalFeet": 40,
+      "longFeet": 160
+    },
+    "properties": [
+      {
+        "targetType": "item-property",
+        "id": "item-property:phb:ammunition"
+      },
+      {
+        "targetType": "item-property",
+        "id": "item-property:phb:finesse"
+      },
+      {
+        "targetType": "item-property",
+        "id": "item-property:phb:special"
+      },
+      {
+        "targetType": "item-property",
+        "id": "item-property:phb:two-handed"
+      }
+    ],
+    "ammunition": {
+      "targetType": "item",
+      "id": "item:phb:sling-bullet"
+    },
+    "specialMechanics": [
+      {
+        "kind": "ALTERNATE_RANGED_MODE",
+        "mode": "ranged",
+        "weaponCategory": "martial",
+        "usesAmmunition": true,
+        "ammunition": {
+          "targetType": "item",
+          "id": "item:phb:sling-bullet"
+        },
+        "damage": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "bludgeoning"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 1,
+            "die": "d4"
+          }
+        }
+      },
+      {
+        "kind": "MELEE_MODE_EXCEPTION",
+        "meleeIgnoresAmmunition": true
+      }
+    ]
+  }
+}

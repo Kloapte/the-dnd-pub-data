@@ -1,0 +1,23 @@
+{
+  "id": "item:phb:mess-kit",
+  "name": "Mess Kit",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 152,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "rarity": "none",
+  "price": {
+    "amount": 20,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 1,
+    "unit": "pound"
+  }
+}

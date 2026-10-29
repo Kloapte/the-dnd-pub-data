@@ -1,0 +1,19 @@
+{
+  "id": "item-mastery:xphb:push",
+  "name": "Push",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 214,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "mechanic": {
+    "kind": "PUSH",
+    "trigger": "hit",
+    "maximumDistanceFeet": 10,
+    "maximumTargetSize": "large",
+    "direction": "straight-away-from-wielder"
+  }
+}

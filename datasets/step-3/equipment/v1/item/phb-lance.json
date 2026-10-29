@@ -1,0 +1,62 @@
+{
+  "id": "item:phb:lance",
+  "name": "Lance",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 149,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:lance"
+      }
+    ]
+  },
+  "category": "WEAPON",
+  "sourceTypeCode": "M",
+  "edition": "classic",
+  "rarity": "none",
+  "price": {
+    "amount": 1000,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 6,
+    "unit": "pound"
+  },
+  "weapon": {
+    "category": "martial",
+    "damage": {
+      "kind": "DAMAGE_ROLL",
+      "damageTypes": [
+        "piercing"
+      ],
+      "base": {
+        "kind": "DICE",
+        "count": 1,
+        "die": "d12"
+      }
+    },
+    "properties": [
+      {
+        "targetType": "item-property",
+        "id": "item-property:phb:reach"
+      },
+      {
+        "targetType": "item-property",
+        "id": "item-property:phb:special"
+      }
+    ],
+    "specialMechanics": [
+      {
+        "kind": "LANCE_RESTRICTIONS",
+        "closeTargetDistanceFeet": 5,
+        "attackDisadvantage": true,
+        "unmountedHandsRequired": 2
+      }
+    ]
+  }
+}

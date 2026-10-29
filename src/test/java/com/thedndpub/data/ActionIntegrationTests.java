@@ -6,10 +6,13 @@ import com.thedndpub.data.repositories.action.ActionRepository;
 import com.thedndpub.data.services.action.ActionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.Resource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import tools.jackson.databind.ObjectMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -28,6 +31,18 @@ class ActionIntegrationTests {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Value("classpath:normalized/core-rules/actions.json")
+    private Resource actionsDataset;
+
+    @Test
+    void deserializesAndSerializesEveryActionWithoutChangingJsonMeaning() throws Exception {
+        CoreRulesCanonicalAssertions.assertAllRecordsRoundTrip(
+                objectMapper, actionsDataset, ActionRecord[].class, 46);
+    }
 
     @Test
     void repositoryLoadsEveryAction() {
@@ -70,5 +85,13 @@ class ActionIntegrationTests {
 
         mockMvc.perform(get("/api/actions/{id}", "unknown"))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void everyApiLookupMatchesCanonicalActions() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        CoreRulesCanonicalAssertions.assertAllApiLookupsMatchCanonicalDataset(
+                mockMvc, objectMapper, actionsDataset,
+                "/api/actions", "/api/actions/{id}", "/api/actions/name/{name}", 46);
     }
 }

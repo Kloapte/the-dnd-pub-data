@@ -1,0 +1,16 @@
+{
+  "id": "item-property:xphb:thrown",
+  "name": "Thrown",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 214,
+    "flags": {
+      "basicRules2024": true
+    }
+  },
+  "mechanic": {
+    "kind": "THROWN",
+    "drawAsPartOfAttack": true,
+    "meleeWeaponUsesMeleeAbility": true
+  }
+}

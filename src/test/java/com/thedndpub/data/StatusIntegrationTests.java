@@ -145,4 +145,12 @@ class StatusIntegrationTests {
         mockMvc.perform(get("/api/statuses/{id}", "status:missing:missing"))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    void everyApiLookupMatchesCanonicalStatuses() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        CoreRulesCanonicalAssertions.assertAllApiLookupsMatchCanonicalDataset(
+                mockMvc, objectMapper, statusesDataset,
+                "/api/statuses", "/api/statuses/{id}", "/api/statuses/name/{name}", 5);
+    }
 }

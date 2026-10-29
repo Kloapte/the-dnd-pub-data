@@ -1,0 +1,23 @@
+{
+  "id": "item:phb:thieves-tools",
+  "name": "Thieves' Tools",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 154,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    }
+  },
+  "category": "TOOL",
+  "sourceTypeCode": "T",
+  "rarity": "none",
+  "price": {
+    "amount": 2500,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 1,
+    "unit": "pound"
+  }
+}

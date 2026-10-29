@@ -1,0 +1,36 @@
+{
+  "id": "item:phb:chain-mail",
+  "name": "Chain Mail",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 145,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:chain-mail"
+      }
+    ]
+  },
+  "category": "ARMOR",
+  "sourceTypeCode": "HA",
+  "edition": "classic",
+  "rarity": "none",
+  "price": {
+    "amount": 7500,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 55,
+    "unit": "pound"
+  },
+  "armor": {
+    "category": "heavy",
+    "armorClass": 16,
+    "minimumStrength": 13,
+    "stealthDisadvantage": true
+  }
+}

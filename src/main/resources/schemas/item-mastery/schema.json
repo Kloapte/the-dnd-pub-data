@@ -1,0 +1,302 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:thedndpub:schemas:item-mastery:v1",
+  "title": "Weapon Mastery",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "sourceMetadata",
+    "mechanic"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^item-mastery:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceMetadata": {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceMetadata"
+    },
+    "mechanic": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/cleave"
+        },
+        {
+          "$ref": "#/$defs/graze"
+        },
+        {
+          "$ref": "#/$defs/nick"
+        },
+        {
+          "$ref": "#/$defs/push"
+        },
+        {
+          "$ref": "#/$defs/sap"
+        },
+        {
+          "$ref": "#/$defs/slow"
+        },
+        {
+          "$ref": "#/$defs/topple"
+        },
+        {
+          "$ref": "#/$defs/vex"
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "cleave": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "secondaryTargetRangeFeet",
+        "oncePerTurn",
+        "abilityModifierUnlessNegative",
+        "secondaryTargetMustBeWithinReachOfFirst"
+      ],
+      "properties": {
+        "kind": {
+          "const": "CLEAVE"
+        },
+        "secondaryTargetRangeFeet": {
+          "const": 5
+        },
+        "oncePerTurn": {
+          "const": true
+        },
+        "abilityModifierUnlessNegative": {
+          "const": true
+        },
+        "secondaryTargetMustBeWithinReachOfFirst": {
+          "const": true
+        }
+      }
+    },
+    "graze": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "trigger",
+        "damage",
+        "damageTypeMatchesWeapon",
+        "onlyAbilityModifierCanIncrease"
+      ],
+      "properties": {
+        "kind": {
+          "const": "GRAZE"
+        },
+        "trigger": {
+          "const": "attack-roll-misses"
+        },
+        "damage": {
+          "const": "used-ability-modifier"
+        },
+        "damageTypeMatchesWeapon": {
+          "const": true
+        },
+        "onlyAbilityModifierCanIncrease": {
+          "const": true
+        }
+      }
+    },
+    "nick": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "extraAttackPartOf",
+        "replaces",
+        "oncePerTurn",
+        "trigger"
+      ],
+      "properties": {
+        "kind": {
+          "const": "NICK"
+        },
+        "extraAttackPartOf": {
+          "const": "attack-action"
+        },
+        "replaces": {
+          "const": "bonus-action"
+        },
+        "oncePerTurn": {
+          "const": true
+        },
+        "trigger": {
+          "const": "LIGHT_PROPERTY_EXTRA_ATTACK"
+        }
+      }
+    },
+    "push": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "trigger",
+        "maximumDistanceFeet",
+        "maximumTargetSize",
+        "direction"
+      ],
+      "properties": {
+        "kind": {
+          "const": "PUSH"
+        },
+        "trigger": {
+          "const": "hit"
+        },
+        "maximumDistanceFeet": {
+          "const": 10
+        },
+        "maximumTargetSize": {
+          "const": "large"
+        },
+        "direction": {
+          "const": "straight-away-from-wielder"
+        }
+      }
+    },
+    "sap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "trigger",
+        "affectedRoll",
+        "direction",
+        "duration"
+      ],
+      "properties": {
+        "kind": {
+          "const": "SAP"
+        },
+        "trigger": {
+          "const": "hit"
+        },
+        "affectedRoll": {
+          "const": "next-attack-roll"
+        },
+        "direction": {
+          "const": "disadvantage"
+        },
+        "duration": {
+          "const": "before-start-of-wielder-next-turn"
+        }
+      }
+    },
+    "slow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "trigger",
+        "speedReductionFeet",
+        "duration",
+        "maximumCumulativeReductionFeet"
+      ],
+      "properties": {
+        "kind": {
+          "const": "SLOW"
+        },
+        "trigger": {
+          "const": "hit-and-deal-damage"
+        },
+        "speedReductionFeet": {
+          "const": 10
+        },
+        "duration": {
+          "const": "before-start-of-wielder-next-turn"
+        },
+        "maximumCumulativeReductionFeet": {
+          "const": 10
+        }
+      }
+    },
+    "topple": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "trigger",
+        "savingThrow",
+        "failureCondition"
+      ],
+      "properties": {
+        "kind": {
+          "const": "TOPPLE"
+        },
+        "trigger": {
+          "const": "hit"
+        },
+        "savingThrow": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ability",
+            "dc"
+          ],
+          "properties": {
+            "ability": {
+              "const": "constitution"
+            },
+            "dc": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "base",
+                "abilityModifier",
+                "proficiencyBonus"
+              ],
+              "properties": {
+                "base": {
+                  "const": 8
+                },
+                "abilityModifier": {
+                  "const": "attack-ability"
+                },
+                "proficiencyBonus": {
+                  "const": true
+                }
+              }
+            }
+          }
+        },
+        "failureCondition": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        }
+      }
+    },
+    "vex": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "trigger",
+        "affectedTarget",
+        "duration"
+      ],
+      "properties": {
+        "kind": {
+          "const": "VEX"
+        },
+        "trigger": {
+          "const": "hit-and-deal-damage"
+        },
+        "affectedTarget": {
+          "const": "same-target"
+        },
+        "duration": {
+          "const": "before-end-of-wielder-next-turn"
+        }
+      }
+    }
+  }
+}

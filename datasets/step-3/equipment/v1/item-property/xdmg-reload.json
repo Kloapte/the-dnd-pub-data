@@ -1,0 +1,12 @@
+{
+  "id": "item-property:xdmg:reload",
+  "name": "Reload",
+  "sourceMetadata": {
+    "source": "XDMG",
+    "page": 72
+  },
+  "mechanic": {
+    "kind": "RELOAD",
+    "reloadAction": "choice"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "item-property:phb:ammunition",
+  "name": "Ammunition",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 146
+  },
+  "reprintedAsProperties": [
+    {
+      "targetType": "item-property",
+      "id": "item-property:xphb:ammunition"
+    }
+  ],
+  "mechanic": {
+    "kind": "AMMUNITION",
+    "expendedPerAttack": 1,
+    "drawingIsPartOfAttack": true,
+    "oneHandedWeaponRequiresFreeHand": true,
+    "recoveryFraction": 0.5
+  }
+}

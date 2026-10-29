@@ -1,0 +1,29 @@
+{
+  "id": "item:phb:bedroll",
+  "name": "Bedroll",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 150,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:bedroll"
+      }
+    ]
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "rarity": "none",
+  "price": {
+    "amount": 100,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 7,
+    "unit": "pound"
+  }
+}

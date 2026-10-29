@@ -1,0 +1,29 @@
+{
+  "id": "item:phb:tinderbox",
+  "name": "Tinderbox",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 153,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:tinderbox"
+      }
+    ]
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "rarity": "none",
+  "price": {
+    "amount": 50,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 1,
+    "unit": "pound"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "item:phb:sling-bullet",
+  "name": "Sling Bullet",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 150,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:sling-bullet"
+      }
+    ]
+  },
+  "category": "AMMUNITION",
+  "sourceTypeCode": "A",
+  "edition": "classic",
+  "rarity": "none",
+  "price": {
+    "amount": 0.2,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 0.075,
+    "unit": "pound"
+  }
+}

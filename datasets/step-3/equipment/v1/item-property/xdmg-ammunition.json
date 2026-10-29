@@ -1,0 +1,15 @@
+{
+  "id": "item-property:xdmg:ammunition",
+  "name": "Ammunition",
+  "sourceMetadata": {
+    "source": "XDMG",
+    "page": 72
+  },
+  "mechanic": {
+    "kind": "AMMUNITION",
+    "expendedPerAttack": 1,
+    "drawingIsPartOfAttack": true,
+    "oneHandedWeaponRequiresFreeHand": true,
+    "destroyedOnUse": true
+  }
+}

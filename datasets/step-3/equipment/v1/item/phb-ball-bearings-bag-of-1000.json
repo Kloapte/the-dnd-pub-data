@@ -1,0 +1,39 @@
+{
+  "id": "item:phb:ball-bearings-bag-of-1000",
+  "name": "Ball Bearings (bag of 1,000)",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 151,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:ball-bearings"
+      }
+    ]
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "rarity": "none",
+  "price": {
+    "amount": 100,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 2,
+    "unit": "pound"
+  },
+  "contents": [
+    {
+      "item": {
+        "targetType": "item",
+        "id": "item:phb:ball-bearing"
+      },
+      "quantity": 1000
+    }
+  ],
+  "contentsAtomic": true
+}

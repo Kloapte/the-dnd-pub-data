@@ -1,0 +1,18 @@
+{
+  "id": "item-property:xdmg:burst-fire",
+  "name": "Burst Fire",
+  "sourceMetadata": {
+    "source": "XDMG",
+    "page": 72
+  },
+  "mechanic": {
+    "kind": "BURST_FIRE",
+    "ammunitionPerUse": 10,
+    "areaFeet": 10,
+    "savingThrow": {
+      "ability": "dexterity",
+      "dc": 15
+    },
+    "damagePerFailedSave": "one-roll-applied-to-each-failed-save"
+  }
+}

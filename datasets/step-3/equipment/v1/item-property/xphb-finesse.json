@@ -1,0 +1,19 @@
+{
+  "id": "item-property:xphb:finesse",
+  "name": "Finesse",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 213,
+    "flags": {
+      "basicRules2024": true
+    }
+  },
+  "mechanic": {
+    "kind": "FINESSE",
+    "abilityChoice": [
+      "strength",
+      "dexterity"
+    ],
+    "sameAbilityForAttackAndDamage": true
+  }
+}

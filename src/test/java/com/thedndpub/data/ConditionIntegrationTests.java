@@ -8,10 +8,13 @@ import com.thedndpub.data.repositories.condition.ConditionRepository;
 import com.thedndpub.data.services.condition.ConditionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.Resource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import tools.jackson.databind.ObjectMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -30,6 +33,18 @@ class ConditionIntegrationTests {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Value("classpath:normalized/core-rules/conditions.json")
+    private Resource conditionsDataset;
+
+    @Test
+    void deserializesAndSerializesEveryConditionWithoutChangingJsonMeaning() throws Exception {
+        CoreRulesCanonicalAssertions.assertAllRecordsRoundTrip(
+                objectMapper, conditionsDataset, ConditionRecord[].class, 30);
+    }
 
     @Test
     void repositoryLoadsEveryCondition() {
@@ -79,5 +94,13 @@ class ConditionIntegrationTests {
 
         mockMvc.perform(get("/api/conditions/{id}", "unknown"))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void everyApiLookupMatchesCanonicalConditions() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        CoreRulesCanonicalAssertions.assertAllApiLookupsMatchCanonicalDataset(
+                mockMvc, objectMapper, conditionsDataset,
+                "/api/conditions", "/api/conditions/{id}", "/api/conditions/name/{name}", 30);
     }
 }

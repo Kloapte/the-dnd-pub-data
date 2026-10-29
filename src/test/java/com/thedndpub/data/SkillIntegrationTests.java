@@ -111,4 +111,12 @@ class SkillIntegrationTests {
         mockMvc.perform(get("/api/skills/{id}", "skill:missing:missing"))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    void everyApiLookupMatchesCanonicalSkills() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        CoreRulesCanonicalAssertions.assertAllApiLookupsMatchCanonicalDataset(
+                mockMvc, objectMapper, skillsDataset,
+                "/api/skills", "/api/skills/{id}", "/api/skills/name/{name}", 36);
+    }
 }

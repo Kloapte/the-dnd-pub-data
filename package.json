@@ -1,11 +1,11 @@
-﻿{
+{
   "name": "dnd-pub-core-rules-contracts",
   "private": true,
   "scripts": {
-    "sync:core-rules:phase3-registers": "node tools/sync-phase-3-source-registers.cjs",
-    "aggregate:core-rules": "node tools/aggregate-core-rules-resources.cjs",
-    "generate:core-rules-reference-index": "node tools/generate-core-rules-reference-identities.cjs",
-    "validate:core-rules": "node tools/validate-core-rules.cjs"
+    "sync:core-rules:phase3-registers": "node tools/scripts/step-2/sync-phase-3-source-registers.cjs",
+    "aggregate:core-rules": "node tools/scripts/step-2/aggregate-core-rules-resources.cjs",
+    "generate:core-rules-reference-index": "node tools/scripts/step-2/generate-core-rules-reference-identities.cjs",
+    "validate:core-rules": "node tools/scripts/step-2/validate-core-rules.cjs"
   },
   "devDependencies": {
     "ajv": "8.17.1"

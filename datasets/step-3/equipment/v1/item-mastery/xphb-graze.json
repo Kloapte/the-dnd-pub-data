@@ -1,0 +1,19 @@
+{
+  "id": "item-mastery:xphb:graze",
+  "name": "Graze",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 214,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "mechanic": {
+    "kind": "GRAZE",
+    "trigger": "attack-roll-misses",
+    "damage": "used-ability-modifier",
+    "damageTypeMatchesWeapon": true,
+    "onlyAbilityModifierCanIncrease": true
+  }
+}

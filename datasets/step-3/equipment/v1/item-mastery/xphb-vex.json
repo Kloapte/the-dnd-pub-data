@@ -1,0 +1,18 @@
+{
+  "id": "item-mastery:xphb:vex",
+  "name": "Vex",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 214,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "mechanic": {
+    "kind": "VEX",
+    "trigger": "hit-and-deal-damage",
+    "affectedTarget": "same-target",
+    "duration": "before-end-of-wielder-next-turn"
+  }
+}

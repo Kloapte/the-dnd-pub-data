@@ -1,0 +1,74 @@
+{
+  "id": "item:phb:net",
+  "name": "Net",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 149,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:net"
+      }
+    ]
+  },
+  "category": "WEAPON",
+  "sourceTypeCode": "R",
+  "edition": "classic",
+  "rarity": "none",
+  "price": {
+    "amount": 100,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 3,
+    "unit": "pound"
+  },
+  "weapon": {
+    "category": "martial",
+    "range": {
+      "kind": "NORMAL_AND_LONG",
+      "normalFeet": 5,
+      "longFeet": 15
+    },
+    "properties": [
+      {
+        "targetType": "item-property",
+        "id": "item-property:phb:special"
+      }
+    ],
+    "specialMechanics": [
+      {
+        "kind": "NET_RESTRAINT",
+        "restrainedTarget": "large-or-smaller",
+        "escape": {
+          "ability": "strength",
+          "dc": 10,
+          "action": true
+        },
+        "netDurability": {
+          "slashingDamage": 5,
+          "armorClass": 10,
+          "freesTarget": true,
+          "destroysNet": true
+        },
+        "attackLimit": {
+          "actions": [
+            "action",
+            "bonus-action",
+            "reaction"
+          ],
+          "maximumAttacks": "one-regardless-of-attacks"
+        },
+        "noEffectTargets": [
+          "formless",
+          "huge-or-larger"
+        ],
+        "targetCanFreeOtherWithinReach": true
+      }
+    ]
+  }
+}

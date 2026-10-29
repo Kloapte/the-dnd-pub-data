@@ -1,0 +1,33 @@
+{
+  "id": "item:phb:backpack",
+  "name": "Backpack",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 153,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:backpack"
+      }
+    ]
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "rarity": "none",
+  "price": {
+    "amount": 200,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 5,
+    "unit": "pound"
+  },
+  "capacity": {
+    "weightPounds": 30,
+    "volumeCubicFeet": 1
+  }
+}

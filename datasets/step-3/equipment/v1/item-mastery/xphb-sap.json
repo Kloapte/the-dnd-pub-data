@@ -1,0 +1,19 @@
+{
+  "id": "item-mastery:xphb:sap",
+  "name": "Sap",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 214,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "mechanic": {
+    "kind": "SAP",
+    "trigger": "hit",
+    "affectedRoll": "next-attack-roll",
+    "direction": "disadvantage",
+    "duration": "before-start-of-wielder-next-turn"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "item:xphb:firearm-bullet",
+  "name": "Firearm Bullet",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 222,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "category": "AMMUNITION",
+  "sourceTypeCode": "A",
+  "edition": "one",
+  "rarity": "none",
+  "price": {
+    "amount": 30,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 0.2,
+    "unit": "pound"
+  }
+}

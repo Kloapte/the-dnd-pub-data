@@ -1,0 +1,29 @@
+{
+  "id": "item:phb:hempen-rope-50-feet",
+  "name": "Hempen Rope (50 feet)",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 153,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:rope"
+      }
+    ]
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "rarity": "none",
+  "price": {
+    "amount": 100,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 10,
+    "unit": "pound"
+  }
+}

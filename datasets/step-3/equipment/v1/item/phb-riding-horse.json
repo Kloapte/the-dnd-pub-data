@@ -1,0 +1,29 @@
+{
+  "id": "item:phb:riding-horse",
+  "name": "Riding Horse",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 157,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:riding-horse"
+      }
+    ]
+  },
+  "category": "MOUNT",
+  "sourceTypeCode": "MNT",
+  "rarity": "none",
+  "price": {
+    "amount": 7500,
+    "unit": "copper-piece"
+  },
+  "mount": {
+    "speedFeet": 60,
+    "carryingCapacityPounds": 480
+  }
+}

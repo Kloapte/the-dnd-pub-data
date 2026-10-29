@@ -151,13 +151,15 @@ The step sequence reflects the previously approved dependency analysis. This rev
 
 **Focus:** Actions and timing; checks, saves, contests, attacks, modifiers, damage and healing; movement and spatial rules; conditions, concentration, statuses and diseases; skill/ability relationships; senses and languages; rules applicability, prerequisites, and exceptions. Reuse semantic structures where they genuinely fit. Avoid proliferating specialized procedure families for each source paragraph.
 
-**Status:** In progress. Existing approvals and artifacts remain historical evidence. Adoption of the revised methodology does not silently invalidate or restart approved Phase 1/2 work or subsequent completed work; any targeted re-review or schema simplification requires an explicit scoped decision. Confirm the current phase from the repository before continuing.
+**Status: Completed and approved (Phases 1–6; 2026-10-29).** The user explicitly approved the remaining Phase 2, Phase 3, Phase 4, and Phase 6 gates and final Step 2 closure. Documented partial representations, omissions, duplicates, unresolved references, ambiguities, authorized deferrals, and validation limitations remain in force as recorded in the phase reports. Step 3 Phases 1 and 2 are approved; Phase 3 is authorized and awaiting its approval gate.
 
 ### Step 3 — Equipment Foundation
 
 **Scope:** Foundational item content from `items-base.json`, `items.json`, and required templates or source structures; record dependencies on advanced items and `magicvariants.json` for later steps.
 
 **Focus:** Base-item identity, item types/properties, weapons and weapon masteries, armor/shields, damage, range, weight, requirements, item relationships, and offline template expansion. Do not expand advanced magical equipment merely to complete foundational references. Document the assignment of deferred equipment to the later step.
+
+**Current status:** Phases 1 and 2 approved. Phase 3 representative conversion is completed and awaiting explicit approval; do not proceed to Phase 4 before that gate is approved.
 
 ### Step 4 — Spells
 

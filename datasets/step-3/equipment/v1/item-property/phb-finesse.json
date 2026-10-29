@@ -1,0 +1,22 @@
+{
+  "id": "item-property:phb:finesse",
+  "name": "Finesse",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 147
+  },
+  "reprintedAsProperties": [
+    {
+      "targetType": "item-property",
+      "id": "item-property:xphb:finesse"
+    }
+  ],
+  "mechanic": {
+    "kind": "FINESSE",
+    "abilityChoice": [
+      "strength",
+      "dexterity"
+    ],
+    "sameAbilityForAttackAndDamage": true
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "item:xphb:basic-poison",
+  "name": "Basic Poison",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 227,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "price": {
+    "amount": 10000,
+    "unit": "copper-piece"
+  },
+  "poison": true
+}

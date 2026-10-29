@@ -1,0 +1,66 @@
+{
+  "id": "item:xdmg:automatic-rifle",
+  "name": "Automatic Rifle",
+  "sourceMetadata": {
+    "source": "XDMG",
+    "page": 73
+  },
+  "category": "WEAPON",
+  "sourceTypeCode": "R",
+  "edition": "one",
+  "rarity": "none",
+  "marketValueRarity": "rare",
+  "weight": {
+    "amount": 8,
+    "unit": "pound"
+  },
+  "weaponEra": "modern",
+  "weapon": {
+    "category": "martial",
+    "damage": {
+      "kind": "DAMAGE_ROLL",
+      "damageTypes": [
+        "piercing"
+      ],
+      "base": {
+        "kind": "DICE",
+        "count": 2,
+        "die": "d8"
+      }
+    },
+    "range": {
+      "kind": "NORMAL_AND_LONG",
+      "normalFeet": 80,
+      "longFeet": 240
+    },
+    "properties": [
+      {
+        "targetType": "item-property",
+        "id": "item-property:xdmg:ammunition"
+      },
+      {
+        "targetType": "item-property",
+        "id": "item-property:xdmg:burst-fire"
+      },
+      {
+        "targetType": "item-property",
+        "id": "item-property:xdmg:reload"
+      },
+      {
+        "targetType": "item-property",
+        "id": "item-property:xphb:two-handed"
+      }
+    ],
+    "masteries": [
+      {
+        "targetType": "item-mastery",
+        "id": "item-mastery:xphb:slow"
+      }
+    ],
+    "ammunition": {
+      "targetType": "item",
+      "id": "item:xphb:firearm-bullet"
+    },
+    "shotsBeforeReload": 30
+  }
+}

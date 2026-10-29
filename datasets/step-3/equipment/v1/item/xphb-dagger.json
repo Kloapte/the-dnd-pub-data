@@ -1,0 +1,63 @@
+{
+  "id": "item:xphb:dagger",
+  "name": "Dagger",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 215,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "WEAPON",
+  "sourceTypeCode": "M",
+  "edition": "one",
+  "rarity": "none",
+  "price": {
+    "amount": 200,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 1,
+    "unit": "pound"
+  },
+  "weapon": {
+    "category": "simple",
+    "damage": {
+      "kind": "DAMAGE_ROLL",
+      "damageTypes": [
+        "piercing"
+      ],
+      "base": {
+        "kind": "DICE",
+        "count": 1,
+        "die": "d4"
+      }
+    },
+    "range": {
+      "kind": "NORMAL_AND_LONG",
+      "normalFeet": 20,
+      "longFeet": 60
+    },
+    "properties": [
+      {
+        "targetType": "item-property",
+        "id": "item-property:xphb:finesse"
+      },
+      {
+        "targetType": "item-property",
+        "id": "item-property:xphb:light"
+      },
+      {
+        "targetType": "item-property",
+        "id": "item-property:xphb:thrown"
+      }
+    ],
+    "masteries": [
+      {
+        "targetType": "item-mastery",
+        "id": "item-mastery:xphb:nick"
+      }
+    ]
+  }
+}

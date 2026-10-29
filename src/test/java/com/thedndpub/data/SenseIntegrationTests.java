@@ -136,4 +136,12 @@ class SenseIntegrationTests {
         mockMvc.perform(get("/api/senses/{id}", "sense:missing:missing"))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    void everyApiLookupMatchesCanonicalSenses() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        CoreRulesCanonicalAssertions.assertAllApiLookupsMatchCanonicalDataset(
+                mockMvc, objectMapper, sensesDataset,
+                "/api/senses", "/api/senses/{id}", "/api/senses/name/{name}", 8);
+    }
 }

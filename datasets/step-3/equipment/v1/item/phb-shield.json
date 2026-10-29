@@ -1,0 +1,34 @@
+{
+  "id": "item:phb:shield",
+  "name": "Shield",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 144,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:shield"
+      }
+    ]
+  },
+  "category": "SHIELD",
+  "sourceTypeCode": "S",
+  "edition": "classic",
+  "rarity": "none",
+  "price": {
+    "amount": 1000,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 6,
+    "unit": "pound"
+  },
+  "armor": {
+    "category": "shield",
+    "armorClass": 2
+  }
+}

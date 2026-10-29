@@ -1,0 +1,402 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:thedndpub:schemas:item-property:v1",
+  "title": "Weapon Property",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "sourceMetadata",
+    "mechanic"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^item-property:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceMetadata": {
+      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/sourceMetadata"
+    },
+    "mechanic": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/twoHanded"
+        },
+        {
+          "$ref": "#/$defs/ammunition"
+        },
+        {
+          "$ref": "#/$defs/burstFire"
+        },
+        {
+          "$ref": "#/$defs/finesse"
+        },
+        {
+          "$ref": "#/$defs/heavy"
+        },
+        {
+          "$ref": "#/$defs/light"
+        },
+        {
+          "$ref": "#/$defs/loading"
+        },
+        {
+          "$ref": "#/$defs/reach"
+        },
+        {
+          "$ref": "#/$defs/reload"
+        },
+        {
+          "$ref": "#/$defs/special"
+        },
+        {
+          "$ref": "#/$defs/thrown"
+        },
+        {
+          "$ref": "#/$defs/versatile"
+        }
+      ]
+    },
+    "reprintedAsProperties": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "targetType",
+          "id"
+        ],
+        "properties": {
+          "targetType": {
+            "const": "item-property"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^item-property:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "twoHanded": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "handsRequired"
+      ],
+      "properties": {
+        "kind": {
+          "const": "TWO_HANDED"
+        },
+        "handsRequired": {
+          "const": 2
+        }
+      }
+    },
+    "ammunition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "expendedPerAttack",
+        "drawingIsPartOfAttack"
+      ],
+      "properties": {
+        "kind": {
+          "const": "AMMUNITION"
+        },
+        "expendedPerAttack": {
+          "const": 1
+        },
+        "drawingIsPartOfAttack": {
+          "type": "boolean"
+        },
+        "oneHandedWeaponRequiresFreeHand": {
+          "type": "boolean"
+        },
+        "recoveryFraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "destroyedOnUse": {
+          "type": "boolean"
+        }
+      }
+    },
+    "burstFire": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "ammunitionPerUse",
+        "areaFeet",
+        "savingThrow",
+        "damagePerFailedSave"
+      ],
+      "properties": {
+        "kind": {
+          "const": "BURST_FIRE"
+        },
+        "ammunitionPerUse": {
+          "const": 10
+        },
+        "areaFeet": {
+          "const": 10
+        },
+        "savingThrow": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ability",
+            "dc"
+          ],
+          "properties": {
+            "ability": {
+              "const": "dexterity"
+            },
+            "dc": {
+              "const": 15
+            }
+          }
+        },
+        "damagePerFailedSave": {
+          "enum": [
+            "weapon-damage",
+            "one-roll-applied-to-each-failed-save"
+          ]
+        }
+      }
+    },
+    "finesse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "abilityChoice",
+        "sameAbilityForAttackAndDamage"
+      ],
+      "properties": {
+        "kind": {
+          "const": "FINESSE"
+        },
+        "abilityChoice": {
+          "const": [
+            "strength",
+            "dexterity"
+          ]
+        },
+        "sameAbilityForAttackAndDamage": {
+          "const": true
+        }
+      }
+    },
+    "heavy": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "affectedSizes",
+            "attackDisadvantage"
+          ],
+          "properties": {
+            "kind": {
+              "const": "HEAVY_SIZE_LIMIT"
+            },
+            "affectedSizes": {
+              "const": [
+                "small",
+                "tiny"
+              ]
+            },
+            "attackDisadvantage": {
+              "const": true
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "meleeStrengthMinimum",
+            "rangedDexterityMinimum"
+          ],
+          "properties": {
+            "kind": {
+              "const": "HEAVY_ABILITY_THRESHOLD"
+            },
+            "meleeStrengthMinimum": {
+              "const": 13
+            },
+            "rangedDexterityMinimum": {
+              "const": 13
+            }
+          }
+        }
+      ]
+    },
+    "light": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "ruleReference"
+          ],
+          "properties": {
+            "kind": {
+              "const": "LIGHT_PROPERTY_RULE"
+            },
+            "ruleReference": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "extraAttackTiming",
+            "requiresDifferentLightWeapon",
+            "abilityModifierUnlessNegative"
+          ],
+          "properties": {
+            "kind": {
+              "const": "LIGHT_EXTRA_ATTACK"
+            },
+            "extraAttackTiming": {
+              "const": "bonus-action"
+            },
+            "requiresDifferentLightWeapon": {
+              "const": true
+            },
+            "abilityModifierUnlessNegative": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "loading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "shotsPerAction"
+      ],
+      "properties": {
+        "kind": {
+          "const": "LOADING"
+        },
+        "shotsPerAction": {
+          "const": 1
+        }
+      }
+    },
+    "reach": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "extraReachFeet",
+        "appliesToOpportunityAttacks"
+      ],
+      "properties": {
+        "kind": {
+          "const": "REACH"
+        },
+        "extraReachFeet": {
+          "const": 5
+        },
+        "appliesToOpportunityAttacks": {
+          "type": "boolean"
+        }
+      }
+    },
+    "reload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "reloadAction"
+      ],
+      "properties": {
+        "kind": {
+          "const": "RELOAD"
+        },
+        "reloadAction": {
+          "enum": [
+            "action",
+            "bonus-action",
+            "choice"
+          ]
+        }
+      }
+    },
+    "special": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "itemSpecificProcedure"
+      ],
+      "properties": {
+        "kind": {
+          "const": "SPECIAL"
+        },
+        "itemSpecificProcedure": {
+          "const": true
+        }
+      }
+    },
+    "thrown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "drawAsPartOfAttack",
+        "meleeWeaponUsesMeleeAbility"
+      ],
+      "properties": {
+        "kind": {
+          "const": "THROWN"
+        },
+        "drawAsPartOfAttack": {
+          "type": "boolean"
+        },
+        "meleeWeaponUsesMeleeAbility": {
+          "const": true
+        }
+      }
+    },
+    "versatile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "twoHandedDamage"
+      ],
+      "properties": {
+        "kind": {
+          "const": "VERSATILE"
+        },
+        "twoHandedDamage": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+        }
+      }
+    }
+  }
+}

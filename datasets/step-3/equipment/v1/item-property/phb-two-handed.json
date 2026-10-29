@@ -1,0 +1,18 @@
+{
+  "id": "item-property:phb:two-handed",
+  "name": "Two-Handed",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 147
+  },
+  "reprintedAsProperties": [
+    {
+      "targetType": "item-property",
+      "id": "item-property:xphb:two-handed"
+    }
+  ],
+  "mechanic": {
+    "kind": "TWO_HANDED",
+    "handsRequired": 2
+  }
+}

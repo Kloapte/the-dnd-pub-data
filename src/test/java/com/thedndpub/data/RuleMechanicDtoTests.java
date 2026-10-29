@@ -43,9 +43,9 @@ class RuleMechanicDtoTests {
 
         assertEquals(231, rules.length);
         JsonNode serialized = objectMapper.readTree(objectMapper.writeValueAsString(rules));
-        assertEquals(null, firstDifference("$", source, serialized),
+        assertEquals(null, CoreRulesCanonicalAssertions.firstDifference("$", source, serialized),
                 () -> "Canonical Rules JSON changed during DTO round-trip: "
-                        + firstDifference("$", source, serialized));
+                        + CoreRulesCanonicalAssertions.firstDifference("$", source, serialized));
     }
 
     @Test
@@ -284,7 +284,7 @@ class RuleMechanicDtoTests {
     private void assertTurnTiming(String json, Class<? extends RuleTurnTiming> expectedType) throws Exception {
         RuleTurnTiming timing = objectMapper.readValue(json, RuleTurnTiming.class);
         assertInstanceOf(expectedType, timing);
-        assertEquals(null, firstDifference("$", objectMapper.readTree(json),
+        assertEquals(null, CoreRulesCanonicalAssertions.firstDifference("$", objectMapper.readTree(json),
                 objectMapper.readTree(objectMapper.writeValueAsString(timing))));
     }
 
@@ -294,7 +294,7 @@ class RuleMechanicDtoTests {
                 + (extras == null ? "" : extras) + "}";
         com.thedndpub.data.dto.action.ActionTrigger trigger = objectMapper.readValue(
                 json, com.thedndpub.data.dto.action.ActionTrigger.class);
-        assertEquals(null, firstDifference("$", objectMapper.readTree(json),
+        assertEquals(null, CoreRulesCanonicalAssertions.firstDifference("$", objectMapper.readTree(json),
                 objectMapper.readTree(objectMapper.writeValueAsString(trigger))));
     }
 
@@ -302,7 +302,7 @@ class RuleMechanicDtoTests {
             throws Exception {
         RuleQualifyingSpace space = objectMapper.readValue(json, RuleQualifyingSpace.class);
         assertInstanceOf(expectedType, space);
-        assertEquals(null, firstDifference("$", objectMapper.readTree(json),
+        assertEquals(null, CoreRulesCanonicalAssertions.firstDifference("$", objectMapper.readTree(json),
                 objectMapper.readTree(objectMapper.writeValueAsString(space))));
     }
 
@@ -326,50 +326,4 @@ class RuleMechanicDtoTests {
         return objectMapper.readValue(json, RuleRecord.class).mechanics().getFirst();
     }
 
-    static String firstDifference(String path, JsonNode expected, JsonNode actual) {
-        if (expected.equals(actual)
-                || expected.isNumber() && actual.isNumber()
-                && expected.decimalValue().compareTo(actual.decimalValue()) == 0) {
-            return null;
-        }
-        if (expected.isArray() && actual.isArray()) {
-            if (expected.size() != actual.size()) {
-                return path + " array length expected " + expected.size() + " but was " + actual.size();
-            }
-            for (int index = 0; index < expected.size(); index++) {
-                String difference = firstDifference(path + "[" + index + "]", expected.get(index), actual.get(index));
-                if (difference != null) {
-                    return difference;
-                }
-            }
-            return null;
-        }
-        if (expected.isObject() && actual.isObject()) {
-            for (String name : expected.propertyNames()) {
-                if (!actual.has(name)) {
-                    return path + "." + name + " missing after round-trip";
-                }
-                String difference = firstDifference(path + "." + name, expected.get(name), actual.get(name));
-                if (difference != null) {
-                    return difference;
-                }
-            }
-            for (String name : actual.propertyNames()) {
-                if (!expected.has(name)) {
-                    return path + "." + name + " was added by round-trip";
-                }
-            }
-            return null;
-        } else if (expected.isContainer() || actual.isContainer()) {
-            if (!expected.isContainer() || !actual.isContainer()) {
-                return path + " expected " + expected + " but was " + actual;
-            }
-            return path + " has incompatible container node types";
-        }
-        return path + " expected " + expected + " but was " + actual
-                + " (expected node=" + expected.getClass().getSimpleName()
-                + ", container=" + expected.isContainer() + ", array=" + expected.isArray()
-                + "; actual node=" + actual.getClass().getSimpleName()
-                + ", container=" + actual.isContainer() + ", array=" + actual.isArray() + ")";
-    }
 }

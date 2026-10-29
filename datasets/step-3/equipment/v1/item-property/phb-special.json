@@ -1,0 +1,12 @@
+{
+  "id": "item-property:phb:special",
+  "name": "Special",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 147
+  },
+  "mechanic": {
+    "kind": "SPECIAL",
+    "itemSpecificProcedure": true
+  }
+}

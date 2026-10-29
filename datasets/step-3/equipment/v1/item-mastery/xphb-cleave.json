@@ -1,0 +1,19 @@
+{
+  "id": "item-mastery:xphb:cleave",
+  "name": "Cleave",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 214,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "mechanic": {
+    "kind": "CLEAVE",
+    "secondaryTargetRangeFeet": 5,
+    "secondaryTargetMustBeWithinReachOfFirst": true,
+    "oncePerTurn": true,
+    "abilityModifierUnlessNegative": true
+  }
+}
