@@ -1,0 +1,84 @@
+{
+  "id": "item:scc:alchemists-doom",
+  "name": "Alchemist's Doom",
+  "sourceMetadata": {
+    "source": "SCC",
+    "page": 179
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "rarity": "unknown",
+  "useMechanics": [
+    {
+      "kind": "CONSUMABLE_ATTACK",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:phb:use-an-object"
+        },
+        "consumesItemOnUse": true
+      },
+      "resolution": {
+        "kind": "ATTACK_ROLL",
+        "attackRoll": {
+          "kind": "ATTACK_ROLL",
+          "forms": [
+            "ranged",
+            "weapon"
+          ]
+        }
+      },
+      "delivery": [
+        {
+          "kind": "THROW",
+          "rangeFeet": 20,
+          "target": "CREATURE_OR_OBJECT"
+        }
+      ],
+      "outcomes": [
+        {
+          "kind": "ONGOING_DAMAGE",
+          "trigger": "ON_HIT",
+          "damage": {
+            "kind": "DAMAGE_ROLL",
+            "damageTypes": [
+              "fire"
+            ],
+            "base": {
+              "kind": "DICE",
+              "count": 2,
+              "die": "d6"
+            }
+          },
+          "startsAt": "NEXT_START_OF_TARGET_TURN",
+          "repeats": {
+            "cadence": "EACH_TARGET_TURN",
+            "resolution": {
+              "kind": "AUTOMATIC"
+            }
+          },
+          "endsWhen": [
+            {
+              "kind": "ABILITY_CHECK",
+              "timing": {
+                "kind": "action"
+              },
+              "check": {
+                "componentId": "ongoing-damage-ending-check",
+                "kind": "D20_TEST",
+                "subtype": "ABILITY_CHECK",
+                "abilities": [
+                  "dexterity"
+                ],
+                "dc": 10
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

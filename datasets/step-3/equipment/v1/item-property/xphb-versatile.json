@@ -1,0 +1,15 @@
+{
+  "id": "item-property:xphb:versatile",
+  "name": "Versatile",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 214,
+    "flags": {
+      "basicRules2024": true
+    }
+  },
+  "mechanic": {
+    "kind": "VERSATILE",
+    "twoHandedDamageAppliesTo": "MELEE_ATTACK"
+  }
+}

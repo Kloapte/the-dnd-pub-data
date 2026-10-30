@@ -1,0 +1,69 @@
+{
+  "id": "item:phb:acid-vial",
+  "name": "Acid (vial)",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 148,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "rarity": "none",
+  "useMechanics": [
+    {
+      "kind": "CONSUMABLE_ATTACK",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:phb:use-an-object"
+        },
+        "consumesItemOnUse": true
+      },
+      "resolution": {
+        "kind": "ATTACK_ROLL",
+        "attackRoll": {
+          "kind": "ATTACK_ROLL",
+          "forms": [
+            "ranged",
+            "weapon"
+          ]
+        }
+      },
+      "delivery": [
+        {
+          "kind": "SPLASH",
+          "rangeFeet": 5,
+          "target": "CREATURE"
+        },
+        {
+          "kind": "THROW",
+          "rangeFeet": 20,
+          "target": "CREATURE_OR_OBJECT"
+        }
+      ],
+      "outcomes": [
+        {
+          "kind": "DAMAGE",
+          "when": "ON_HIT",
+          "damage": {
+            "kind": "DAMAGE_ROLL",
+            "damageTypes": [
+              "acid"
+            ],
+            "base": {
+              "kind": "DICE",
+              "count": 2,
+              "die": "d6"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

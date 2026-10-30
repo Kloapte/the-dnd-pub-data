@@ -1,0 +1,73 @@
+{
+  "id": "item:phb:caltrops",
+  "name": "Caltrops (bag of 20)",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 151,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "rarity": "none",
+  "useMechanics": [
+    {
+      "kind": "AREA_HAZARD",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:phb:use-an-object"
+        }
+      },
+      "area": {
+        "shape": "SQUARE",
+        "sideFeet": 5
+      },
+      "trigger": "ENTERS_AREA",
+      "savingThrow": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "dexterity"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "FIXED",
+          "value": 15
+        }
+      },
+      "outcomes": [
+        {
+          "kind": "STOP_MOVEMENT",
+          "when": "ON_FAILED_SAVE"
+        },
+        {
+          "kind": "DAMAGE",
+          "when": "ON_FAILED_SAVE",
+          "damage": {
+            "kind": "DAMAGE_ROLL",
+            "damageTypes": [
+              "piercing"
+            ],
+            "base": {
+              "kind": "FIXED",
+              "amount": 1
+            }
+          }
+        },
+        {
+          "kind": "SPEED_CHANGE",
+          "when": "ON_FAILED_SAVE",
+          "operation": "REDUCE_BY",
+          "feet": 10,
+          "duration": "UNTIL_REGAINS_HIT_POINTS"
+        }
+      ],
+      "avoidByMovingAtHalfSpeed": true
+    }
+  ]
+}

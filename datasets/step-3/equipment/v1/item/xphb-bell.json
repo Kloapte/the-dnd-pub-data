@@ -1,0 +1,31 @@
+{
+  "id": "item:xphb:bell",
+  "name": "Bell",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 224,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "signals": [
+    {
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:xphb:utilize"
+        }
+      },
+      "output": "AUDIBLE_SOUND",
+      "audibleRangeFeet": 60
+    }
+  ]
+}

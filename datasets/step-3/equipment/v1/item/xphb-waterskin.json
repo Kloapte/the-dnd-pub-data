@@ -1,0 +1,32 @@
+{
+  "id": "item:xphb:waterskin",
+  "name": "Waterskin",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 229,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "price": {
+    "amount": 20,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 5,
+    "unit": "pound",
+    "condition": "full"
+  },
+  "capacity": {
+    "volumeCubicFeet": 0.08,
+    "liquidVolume": {
+      "amount": 4,
+      "unit": "pint"
+    }
+  }
+}

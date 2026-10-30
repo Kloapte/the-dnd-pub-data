@@ -1,0 +1,48 @@
+{
+  "id": "item:xphb:tinderbox",
+  "name": "Tinderbox",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 229,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "price": {
+    "amount": 50,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 1,
+    "unit": "pound"
+  },
+  "useMechanics": [
+    {
+      "kind": "IGNITION",
+      "activation": {
+        "timing": {
+          "kind": "bonus-action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:xphb:utilize"
+        }
+      },
+      "targets": [
+        "CANDLE",
+        "LAMP",
+        "LANTERN",
+        "TORCH",
+        "ABUNDANT_EXPOSED_FUEL"
+      ],
+      "requiresSunlight": true,
+      "requiresTinder": true,
+      "timeToLightOtherFireMinutes": 1
+    }
+  ]
+}

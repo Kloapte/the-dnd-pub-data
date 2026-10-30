@@ -1,0 +1,118 @@
+{
+  "id": "item:xphb:alchemists-fire",
+  "name": "Alchemist's Fire",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 222,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "useMechanics": [
+    {
+      "kind": "CONSUMABLE_ATTACK",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:xphb:attack"
+        },
+        "replacesOneAttack": true,
+        "consumesItemOnUse": true
+      },
+      "resolution": {
+        "kind": "SAVING_THROW",
+        "savingThrow": {
+          "kind": "SAVING_THROW",
+          "abilities": [
+            "dexterity"
+          ],
+          "abilitySelection": "rule-specified",
+          "dc": {
+            "kind": "ABILITY_PLUS_PROFICIENCY",
+            "base": 8,
+            "ability": "dexterity",
+            "proficiencyBonus": true
+          }
+        }
+      },
+      "delivery": [
+        {
+          "kind": "THROW",
+          "rangeFeet": 20,
+          "target": "CREATURE_OR_OBJECT"
+        }
+      ],
+      "outcomes": [
+        {
+          "kind": "DAMAGE",
+          "when": "ON_FAILED_SAVE",
+          "damage": {
+            "kind": "DAMAGE_ROLL",
+            "damageTypes": [
+              "fire"
+            ],
+            "base": {
+              "kind": "DICE",
+              "count": 1,
+              "die": "d4"
+            }
+          }
+        },
+        {
+          "kind": "ONGOING_DAMAGE",
+          "trigger": "ON_FAILED_SAVE",
+          "damage": {
+            "kind": "DAMAGE_ROLL",
+            "damageTypes": [
+              "fire"
+            ],
+            "base": {
+              "kind": "DICE",
+              "count": 1,
+              "die": "d4"
+            }
+          },
+          "startsAt": "NEXT_START_OF_TARGET_TURN",
+          "repeats": {
+            "cadence": "EACH_TARGET_TURN",
+            "resolution": {
+              "kind": "AUTOMATIC"
+            }
+          },
+          "endsWhen": [
+            {
+              "kind": "ACTION_WITH_CONDITION",
+              "timing": {
+                "kind": "action"
+              },
+              "condition": {
+                "targetType": "condition",
+                "id": "condition:xphb:prone"
+              }
+            },
+            {
+              "kind": "ENVIRONMENTAL",
+              "state": "DOUSED"
+            },
+            {
+              "kind": "ENVIRONMENTAL",
+              "state": "SUBMERGED"
+            },
+            {
+              "kind": "ENVIRONMENTAL",
+              "state": "SUFFOCATED"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

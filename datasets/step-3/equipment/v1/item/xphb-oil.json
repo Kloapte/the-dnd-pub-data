@@ -1,0 +1,111 @@
+{
+  "id": "item:xphb:oil",
+  "name": "Oil (flask)",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 226,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "useMechanics": [
+    {
+      "kind": "CONSUMABLE_ATTACK",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:xphb:attack"
+        },
+        "replacesOneAttack": true,
+        "consumesItemOnUse": true
+      },
+      "resolution": {
+        "kind": "SAVING_THROW",
+        "savingThrow": {
+          "kind": "SAVING_THROW",
+          "abilities": [
+            "dexterity"
+          ],
+          "abilitySelection": "rule-specified",
+          "dc": {
+            "kind": "ABILITY_PLUS_PROFICIENCY",
+            "base": 8,
+            "ability": "dexterity",
+            "proficiencyBonus": true
+          }
+        }
+      },
+      "delivery": [
+        {
+          "kind": "THROW",
+          "rangeFeet": 20,
+          "target": "CREATURE_OR_OBJECT"
+        }
+      ],
+      "outcomes": [
+        {
+          "kind": "COATING",
+          "trigger": "TARGET_TAKES_FIRE_DAMAGE",
+          "damage": {
+            "kind": "DAMAGE_ROLL",
+            "damageTypes": [
+              "fire"
+            ],
+            "base": {
+              "kind": "FIXED",
+              "amount": 5
+            }
+          },
+          "durationMinutes": 1,
+          "when": "ON_FAILED_SAVE"
+        }
+      ]
+    },
+    {
+      "kind": "AREA_HAZARD",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:xphb:utilize"
+        },
+        "consumesItemOnUse": true
+      },
+      "area": {
+        "shape": "SQUARE",
+        "sideFeet": 5,
+        "withinFeet": 5
+      },
+      "trigger": "ENTERS_OR_ENDS_TURN_IN_AREA",
+      "durationRounds": 2,
+      "oncePerTurn": true,
+      "outcomes": [
+        {
+          "kind": "DAMAGE",
+          "when": "ALWAYS",
+          "damage": {
+            "kind": "DAMAGE_ROLL",
+            "damageTypes": [
+              "fire"
+            ],
+            "base": {
+              "kind": "FIXED",
+              "amount": 5
+            }
+          }
+        }
+      ],
+      "requiresIgnition": true
+    }
+  ]
+}

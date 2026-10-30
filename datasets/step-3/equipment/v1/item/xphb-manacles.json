@@ -1,0 +1,143 @@
+{
+  "id": "item:xphb:manacles",
+  "name": "Manacles",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 226,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "bindingProcedure": {
+    "kind": "BINDING_PROCEDURE",
+    "trigger": "BIND_INCAPACITATED_CREATURE",
+    "activation": {
+      "timing": {
+        "kind": "action"
+      },
+      "action": {
+        "targetType": "action",
+        "id": "action:xphb:utilize"
+      }
+    },
+    "rangeFeet": 5,
+    "resolution": {
+      "componentId": "equipment-check",
+      "kind": "D20_TEST",
+      "subtype": "ABILITY_CHECK",
+      "abilities": [
+        "dexterity"
+      ],
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:xphb:sleight-of-hand"
+      },
+      "dc": 13
+    },
+    "appliesConditionOn": "SUCCESSFUL_CHECK",
+    "targetRequirements": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:incapacitated"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:restrained"
+      }
+    ],
+    "restrainedCondition": {
+      "targetType": "condition",
+      "id": "condition:xphb:restrained"
+    },
+    "conditionWhenFixed": true,
+    "weaponAttackModifier": {
+      "kind": "D20_ROLL_MODIFIER",
+      "roll": "attack",
+      "direction": "disadvantage",
+      "diceCount": 2,
+      "select": "lower"
+    },
+    "escape": {
+      "actionTiming": "ACTION",
+      "check": {
+        "componentId": "equipment-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "dexterity"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:sleight-of-hand"
+        },
+        "dc": 20
+      },
+      "burstCheck": {
+        "componentId": "equipment-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "strength"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:athletics"
+        },
+        "dc": 25
+      },
+      "lockPickCheck": {
+        "componentId": "equipment-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "dexterity"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:sleight-of-hand"
+        },
+        "dc": 15
+      }
+    },
+    "targetSizes": [
+      "small",
+      "medium"
+    ]
+  },
+  "equipmentActivities": [
+    {
+      "kind": "ABILITY_CHECK_ACTIVITY",
+      "activity": "PICK_LOCK",
+      "action": {
+        "targetType": "action",
+        "id": "action:xphb:utilize"
+      },
+      "check": {
+        "componentId": "equipment-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "dexterity"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:sleight-of-hand"
+        },
+        "dc": 15
+      },
+      "toolReference": {
+        "targetType": "item",
+        "id": "item:xphb:thieves-tools"
+      }
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "id": "item:xphb:thieves-tools",
+  "name": "Thieves' Tools",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 221,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "TOOL",
+  "sourceTypeCode": "T",
+  "edition": "one",
+  "rarity": "none",
+  "price": {
+    "amount": 2500,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 1,
+    "unit": "pound"
+  },
+  "equipmentActivities": [
+    {
+      "kind": "ABILITY_CHECK_ACTIVITY",
+      "activity": "PICK_LOCK",
+      "action": {
+        "targetType": "action",
+        "id": "action:xphb:utilize"
+      },
+      "check": {
+        "componentId": "equipment-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "dexterity"
+        ],
+        "dc": 15
+      },
+      "proficiencyRule": {
+        "targetType": "rule",
+        "id": "rule:xphb:proficiency"
+      },
+      "proficiencyBonusApplied": true
+    },
+    {
+      "kind": "ABILITY_CHECK_ACTIVITY",
+      "activity": "DISARM_TRAP",
+      "action": {
+        "targetType": "action",
+        "id": "action:xphb:utilize"
+      },
+      "check": {
+        "componentId": "equipment-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "dexterity"
+        ],
+        "dc": 15
+      },
+      "proficiencyRule": {
+        "targetType": "rule",
+        "id": "rule:xphb:proficiency"
+      },
+      "proficiencyBonusApplied": true
+    }
+  ]
+}

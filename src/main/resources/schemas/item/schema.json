@@ -129,11 +129,32 @@
             "martial"
           ]
         },
-        "damage": {
-          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
-        },
-        "versatileDamage": {
-          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+        "damageEntries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "usage",
+              "damage"
+            ],
+            "properties": {
+              "usage": {
+                "enum": [
+                  "MELEE",
+                  "RANGED",
+                  "ONE_HANDED",
+                  "TWO_HANDED",
+                  "THROWN",
+                  "BONUS_ACTION_FOLLOW_UP"
+                ]
+              },
+              "damage": {
+                "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+              }
+            }
+          }
         },
         "range": {
           "$ref": "#/$defs/weaponRange"
@@ -173,8 +194,7 @@
                   "kind",
                   "trigger",
                   "timing",
-                  "cost",
-                  "damage"
+                  "cost"
                 ],
                 "properties": {
                   "kind": {
@@ -188,9 +208,6 @@
                   },
                   "cost": {
                     "const": "bonus-action"
-                  },
-                  "damage": {
-                    "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
                   }
                 }
               },
@@ -202,8 +219,7 @@
                   "mode",
                   "weaponCategory",
                   "usesAmmunition",
-                  "ammunition",
-                  "damage"
+                  "ammunition"
                 ],
                 "properties": {
                   "kind": {
@@ -220,9 +236,6 @@
                   },
                   "ammunition": {
                     "$ref": "#/$defs/itemReference"
-                  },
-                  "damage": {
-                    "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
                   }
                 }
               },
@@ -369,10 +382,10 @@
           "if": {
             "not": {
               "required": [
-                "damage"
+                "damageEntries"
               ],
               "properties": {
-                "damage": {}
+                "damageEntries": {}
               },
               "type": "object"
             }
@@ -465,6 +478,27 @@
           "type": "number",
           "minimum": 0
         },
+        "liquidVolume": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "properties": {
+            "amount": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "unit": {
+              "enum": [
+                "ounce",
+                "pint",
+                "gallon"
+              ]
+            }
+          }
+        },
         "weightlessContents": {
           "type": "boolean"
         },
@@ -510,6 +544,18 @@
         "durationMinutes": {
           "type": "number",
           "exclusiveMinimum": 0
+        },
+        "shape": {
+          "enum": [
+            "RADIUS",
+            "CONE"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "OPEN",
+            "LOWERED"
+          ]
         }
       }
     },
@@ -710,6 +756,74 @@
           "items": {
             "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
           }
+        },
+        "useMechanics": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/poisonApplication"
+              },
+              {
+                "$ref": "#/$defs/consumableAttack"
+              },
+              {
+                "$ref": "#/$defs/areaHazard"
+              },
+              {
+                "$ref": "#/$defs/trapProcedure"
+              },
+              {
+                "$ref": "#/$defs/bindingProcedure"
+              },
+              {
+                "$ref": "#/$defs/ignition"
+              },
+              {
+                "$ref": "#/$defs/itemAttackDamage"
+              },
+              {
+                "$ref": "#/$defs/stabilizeUse"
+              },
+              {
+                "$ref": "#/$defs/ongoingDamage"
+              }
+            ]
+          }
+        },
+        "equipmentActivities": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/equipmentActivity"
+          }
+        },
+        "durability": {
+          "$ref": "#/$defs/objectDurability"
+        },
+        "lightSource": {
+          "$ref": "#/$defs/lightSource"
+        },
+        "checkModifiers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/checkModifier"
+          }
+        },
+        "limitedUses": {
+          "$ref": "#/$defs/limitedUses"
+        },
+        "signals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/signal"
+          }
+        },
+        "bindingProcedure": {
+          "$ref": "#/$defs/bindingProcedure"
         }
       },
       "allOf": [
@@ -993,6 +1107,1458 @@
         "id": {
           "type": "string",
           "pattern": "^item-mastery:[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+        }
+      }
+    },
+    "poisonApplication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "activation",
+        "application",
+        "eligibleDamageTypes",
+        "resolution",
+        "outcomes",
+        "duration"
+      ],
+      "properties": {
+        "kind": {
+          "const": "POISON_APPLICATION"
+        },
+        "activation": {
+          "$ref": "#/$defs/activation"
+        },
+        "application": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "weaponCount",
+            "ammunitionCount"
+          ],
+          "properties": {
+            "weaponCount": {
+              "const": 1
+            },
+            "ammunitionCount": {
+              "const": 3
+            }
+          }
+        },
+        "eligibleDamageTypes": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "PIERCING",
+              "SLASHING"
+            ]
+          }
+        },
+        "resolution": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "ON_QUALIFYING_DAMAGE"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "savingThrow"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "SAVING_THROW"
+                },
+                "savingThrow": {
+                  "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/savingThrow"
+                }
+              }
+            }
+          ]
+        },
+        "outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/consumableOutcome"
+          }
+        },
+        "duration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minutes"
+          ],
+          "properties": {
+            "minutes": {
+              "const": 1
+            },
+            "expiresOnFirstDamage": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "areaHazard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "activation",
+        "area",
+        "trigger",
+        "outcomes"
+      ],
+      "properties": {
+        "kind": {
+          "const": "AREA_HAZARD"
+        },
+        "activation": {
+          "$ref": "#/$defs/activation"
+        },
+        "area": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "shape",
+            "sideFeet"
+          ],
+          "properties": {
+            "shape": {
+              "const": "SQUARE"
+            },
+            "sideFeet": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "withinFeet": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "trigger": {
+          "enum": [
+            "ENTERS_AREA",
+            "CROSSES_AREA",
+            "ENTERS_OR_ENDS_TURN_IN_AREA",
+            "IGNITED"
+          ]
+        },
+        "savingThrow": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/savingThrow"
+        },
+        "outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/areaOutcome"
+          }
+        },
+        "avoidByMovingAtHalfSpeed": {
+          "type": "boolean"
+        },
+        "oncePerTurn": {
+          "type": "boolean"
+        },
+        "recoveryMinutes": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "durationRounds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "activationTiming": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/turnTiming"
+        },
+        "requiresIgnition": {
+          "type": "boolean"
+        },
+        "firstEntryPerTurn": {
+          "type": "boolean"
+        }
+      }
+    },
+    "objectDurability": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "hitPoints": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "armorClass": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "damageImmunities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "bludgeoning",
+              "piercing",
+              "slashing",
+              "acid",
+              "cold",
+              "fire",
+              "force",
+              "lightning",
+              "necrotic",
+              "poison",
+              "psychic",
+              "radiant",
+              "thunder"
+            ]
+          }
+        },
+        "burstCheck": {
+          "$ref": "urn:thedndpub:schemas:core-rules:rule:v1#/$defs/abilityCheck"
+        }
+      }
+    },
+    "ignition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "activation",
+        "targets"
+      ],
+      "properties": {
+        "kind": {
+          "const": "IGNITION"
+        },
+        "activation": {
+          "$ref": "#/$defs/activation"
+        },
+        "targets": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "TORCH",
+              "ABUNDANT_EXPOSED_FUEL",
+              "CANDLE",
+              "LAMP",
+              "LANTERN",
+              "TINDER",
+              "OTHER_FIRE"
+            ]
+          }
+        },
+        "requiresSunlight": {
+          "type": "boolean"
+        },
+        "requiresTinder": {
+          "type": "boolean"
+        },
+        "timeToLightOtherFireMinutes": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "itemAttackDamage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "trigger",
+        "damage"
+      ],
+      "properties": {
+        "kind": {
+          "const": "ITEM_ATTACK_DAMAGE"
+        },
+        "trigger": {
+          "enum": [
+            "MELEE_HIT_WHILE_BURNING",
+            "ATTACK_HIT"
+          ]
+        },
+        "damage": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+        },
+        "attackKind": {
+          "enum": [
+            "SIMPLE_MELEE",
+            "IMPROVISED_WEAPON"
+          ]
+        }
+      }
+    },
+    "actionReference": {
+      "allOf": [
+        {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        },
+        {
+          "type": "object",
+          "required": [
+            "targetType"
+          ],
+          "properties": {
+            "targetType": {
+              "const": "action"
+            }
+          }
+        }
+      ]
+    },
+    "ruleReference": {
+      "allOf": [
+        {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/reference"
+        },
+        {
+          "type": "object",
+          "required": [
+            "targetType"
+          ],
+          "properties": {
+            "targetType": {
+              "const": "rule"
+            }
+          }
+        }
+      ]
+    },
+    "activation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "timing"
+      ],
+      "properties": {
+        "timing": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/turnTiming"
+        },
+        "action": {
+          "$ref": "#/$defs/actionReference"
+        },
+        "replacesOneAttack": {
+          "const": true
+        },
+        "consumesItemOnUse": {
+          "type": "boolean"
+        }
+      }
+    },
+    "target": {
+      "enum": [
+        "CREATURE",
+        "OBJECT",
+        "CREATURE_OR_OBJECT",
+        "AREA"
+      ]
+    },
+    "delivery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "rangeFeet",
+        "target"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "THROW",
+            "SPLASH",
+            "DOUSE"
+          ]
+        },
+        "rangeFeet": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1000
+        },
+        "target": {
+          "$ref": "#/$defs/target"
+        }
+      }
+    },
+    "attackResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "attackRoll"
+      ],
+      "properties": {
+        "kind": {
+          "const": "ATTACK_ROLL"
+        },
+        "attackRoll": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/attackRoll"
+        },
+        "deliveries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/delivery"
+          }
+        }
+      }
+    },
+    "saveResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "savingThrow"
+      ],
+      "properties": {
+        "kind": {
+          "const": "SAVING_THROW"
+        },
+        "savingThrow": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/savingThrow"
+        },
+        "deliveries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/delivery"
+          }
+        }
+      }
+    },
+    "consumableOutcome": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "when",
+            "damage"
+          ],
+          "properties": {
+            "kind": {
+              "const": "DAMAGE"
+            },
+            "when": {
+              "enum": [
+                "ON_HIT",
+                "ON_FAILED_SAVE"
+              ]
+            },
+            "damage": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+            },
+            "targetKinds": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "fiend",
+                  "undead"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/$defs/ongoingDamage"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "trigger",
+            "damage",
+            "durationMinutes",
+            "when"
+          ],
+          "properties": {
+            "kind": {
+              "const": "COATING"
+            },
+            "trigger": {
+              "enum": [
+                "TARGET_TAKES_FIRE_DAMAGE",
+                "TARGET_TAKES_DAMAGE_FROM_COATED_ITEM"
+              ]
+            },
+            "damage": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+            },
+            "durationMinutes": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "when": {
+              "enum": [
+                "ON_HIT",
+                "ON_FAILED_SAVE"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "consumableAttack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "activation",
+        "resolution",
+        "outcomes",
+        "delivery"
+      ],
+      "properties": {
+        "kind": {
+          "const": "CONSUMABLE_ATTACK"
+        },
+        "activation": {
+          "$ref": "#/$defs/activation"
+        },
+        "resolution": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/attackResolution"
+            },
+            {
+              "$ref": "#/$defs/saveResolution"
+            }
+          ]
+        },
+        "outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/consumableOutcome"
+          }
+        },
+        "delivery": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/delivery"
+          }
+        }
+      }
+    },
+    "areaOutcome": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "condition",
+            "when"
+          ],
+          "properties": {
+            "kind": {
+              "const": "CONDITION"
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/conditionReference"
+            },
+            "when": {
+              "enum": [
+                "ALWAYS",
+                "ON_FAILED_SAVE",
+                "ON_SUCCESSFUL_SAVE"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "damage",
+            "when"
+          ],
+          "properties": {
+            "kind": {
+              "const": "DAMAGE"
+            },
+            "damage": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+            },
+            "when": {
+              "enum": [
+                "ALWAYS",
+                "ON_FAILED_SAVE",
+                "ON_SUCCESSFUL_SAVE"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "operation",
+            "feet",
+            "duration",
+            "when"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SPEED_CHANGE"
+            },
+            "operation": {
+              "enum": [
+                "SET_TO",
+                "REDUCE_BY"
+              ]
+            },
+            "feet": {
+              "type": "number",
+              "minimum": 0
+            },
+            "duration": {
+              "enum": [
+                "UNTIL_START_OF_NEXT_TURN",
+                "UNTIL_REGAINS_HIT_POINTS",
+                "UNTIL_BREAKS_FREE"
+              ]
+            },
+            "when": {
+              "enum": [
+                "ALWAYS",
+                "ON_FAILED_SAVE",
+                "ON_SUCCESSFUL_SAVE"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "when"
+          ],
+          "properties": {
+            "kind": {
+              "const": "STOP_MOVEMENT"
+            },
+            "when": {
+              "enum": [
+                "ON_FAILED_SAVE"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "trapProcedure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "activation",
+        "trigger",
+        "savingThrow",
+        "outcomes",
+        "escape"
+      ],
+      "properties": {
+        "kind": {
+          "const": "TRAP_PROCEDURE"
+        },
+        "activation": {
+          "$ref": "#/$defs/activation"
+        },
+        "trigger": {
+          "const": "PRESSURE_PLATE"
+        },
+        "fixedToImmobileObject": {
+          "type": "boolean"
+        },
+        "tetherLengthFeet": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "savingThrow": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/savingThrow"
+        },
+        "outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/areaOutcome"
+          }
+        },
+        "escape": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "actionTiming",
+            "check",
+            "mayFreeAnotherWithinReach",
+            "failedCheckDamage"
+          ],
+          "properties": {
+            "actionTiming": {
+              "enum": [
+                "ACTION",
+                "UTILIZE"
+              ]
+            },
+            "check": {
+              "$ref": "urn:thedndpub:schemas:core-rules:rule:v1#/$defs/abilityCheck"
+            },
+            "mayFreeAnotherWithinReach": {
+              "type": "boolean"
+            },
+            "failedCheckDamage": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+            }
+          }
+        },
+        "assistWithinReach": {
+          "type": "boolean"
+        },
+        "repeatedEscapeAttemptsAllowed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "equipmentActivity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "activity"
+      ],
+      "properties": {
+        "kind": {
+          "const": "ABILITY_CHECK_ACTIVITY"
+        },
+        "activity": {
+          "enum": [
+            "DISARM_TRAP",
+            "OPEN_LOCK",
+            "PICK_LOCK",
+            "TIE_KNOT",
+            "ANCHOR_CLIMBING_KIT",
+            "CATCH_GRAPPLING_HOOK",
+            "DETECT_POISONED_OBJECT",
+            "APPLY_MAKEUP",
+            "EXTINGUISH_FLAMES"
+          ]
+        },
+        "action": {
+          "$ref": "#/$defs/actionReference"
+        },
+        "check": {
+          "$ref": "urn:thedndpub:schemas:core-rules:rule:v1#/$defs/abilityCheck"
+        },
+        "checkRule": {
+          "$ref": "#/$defs/ruleReference"
+        },
+        "proficiencyRule": {
+          "$ref": "#/$defs/ruleReference"
+        },
+        "proficiencyBonusApplied": {
+          "type": "boolean"
+        },
+        "taskDescription": {
+          "type": "string",
+          "minLength": 1
+        },
+        "toolReference": {
+          "$ref": "#/$defs/itemReference"
+        }
+      }
+    },
+    "bindingProcedure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "escape",
+        "trigger"
+      ],
+      "properties": {
+        "kind": {
+          "const": "BINDING_PROCEDURE"
+        },
+        "activation": {
+          "$ref": "#/$defs/activation"
+        },
+        "rangeFeet": {
+          "type": "number",
+          "minimum": 0
+        },
+        "resultConditions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/conditionReference"
+          }
+        },
+        "escape": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "actionTiming",
+            "check"
+          ],
+          "properties": {
+            "actionTiming": {
+              "enum": [
+                "ACTION",
+                "UTILIZE"
+              ]
+            },
+            "check": {
+              "$ref": "urn:thedndpub:schemas:core-rules:rule:v1#/$defs/abilityCheck"
+            },
+            "canBeAttemptedByAnotherWithinFeet": {
+              "type": "number",
+              "minimum": 0
+            },
+            "requiresTools": {
+              "type": "boolean"
+            },
+            "burstCheck": {
+              "$ref": "urn:thedndpub:schemas:core-rules:rule:v1#/$defs/abilityCheck"
+            },
+            "lockPickCheck": {
+              "$ref": "urn:thedndpub:schemas:core-rules:rule:v1#/$defs/abilityCheck"
+            },
+            "lockPickToolReference": {
+              "$ref": "#/$defs/itemReference"
+            }
+          }
+        },
+        "fixedAttachmentRequired": {
+          "type": "boolean"
+        },
+        "resolution": {
+          "oneOf": [
+            {
+              "$ref": "urn:thedndpub:schemas:core-rules:rule:v1#/$defs/abilityCheck"
+            },
+            {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/savingThrow"
+            },
+            {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/attackRoll"
+            }
+          ]
+        },
+        "targetRequirements": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/conditionReference"
+          }
+        },
+        "restrainedCondition": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/conditionReference"
+        },
+        "restrainedWhenFixedAttachment": {
+          "type": "boolean"
+        },
+        "attackModifierWhileBound": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/d20RollModifier"
+        },
+        "noEffectTargetSizes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "small",
+              "medium",
+              "large",
+              "huge",
+              "gargantuan"
+            ]
+          }
+        },
+        "trigger": {
+          "enum": [
+            "BIND_INCAPACITATED_CREATURE",
+            "ATTACK_HIT",
+            "FAILED_SAVING_THROW",
+            "BIND_CREATURE"
+          ]
+        },
+        "appliesConditionOn": {
+          "enum": [
+            "SUCCESSFUL_CHECK",
+            "ATTACK_HIT",
+            "FAILED_SAVE"
+          ]
+        },
+        "conditionWhenFixed": {
+          "type": "boolean"
+        },
+        "maxTargetSize": {
+          "enum": [
+            "tiny",
+            "small",
+            "medium",
+            "large",
+            "huge",
+            "gargantuan"
+          ]
+        },
+        "automaticallyEscapesTargetSize": {
+          "enum": [
+            "huge",
+            "gargantuan"
+          ]
+        },
+        "targetSize": {
+          "enum": [
+            "tiny",
+            "small",
+            "medium",
+            "large",
+            "huge",
+            "gargantuan"
+          ]
+        },
+        "weaponAttackModifier": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/d20RollModifier"
+        },
+        "destroyedBy": {
+          "$ref": "#/$defs/objectDurability"
+        },
+        "targetSizes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "tiny",
+              "small",
+              "medium",
+              "large",
+              "huge",
+              "gargantuan"
+            ]
+          }
+        },
+        "restrainedWhenLegsBound": {
+          "type": "boolean"
+        }
+      }
+    },
+    "lightProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "brightFeet",
+        "dimFeet",
+        "shape"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "OPEN",
+            "HOODED",
+            "LOWERED",
+            "TORCH",
+            "CANDLE",
+            "LAMP"
+          ]
+        },
+        "brightFeet": {
+          "type": "number",
+          "minimum": 0
+        },
+        "dimFeet": {
+          "type": "number",
+          "minimum": 0
+        },
+        "shape": {
+          "enum": [
+            "RADIUS",
+            "CONE"
+          ]
+        },
+        "durationMinutes": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "lightFuel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item"
+      ],
+      "properties": {
+        "item": {
+          "$ref": "#/$defs/itemReference"
+        },
+        "liquidVolume": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "properties": {
+            "amount": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "unit": {
+              "enum": [
+                "ounce",
+                "pint",
+                "gallon"
+              ]
+            }
+          }
+        },
+        "burnDurationHours": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "cumulativeFuelUse": {
+          "type": "boolean"
+        }
+      }
+    },
+    "lightControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation",
+        "action",
+        "timing"
+      ],
+      "properties": {
+        "operation": {
+          "enum": [
+            "LOWER_HOOD",
+            "RAISE_HOOD",
+            "EXTINGUISH",
+            "RELIGHT"
+          ]
+        },
+        "action": {
+          "$ref": "#/$defs/actionReference"
+        },
+        "timing": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/turnTiming"
+        }
+      }
+    },
+    "lightSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fuel": {
+          "$ref": "#/$defs/lightFuel"
+        },
+        "controls": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/lightControl"
+          }
+        }
+      },
+      "minProperties": 1
+    },
+    "checkModifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modifier",
+        "scope"
+      ],
+      "properties": {
+        "modifier": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/d20RollModifier"
+        },
+        "scope": {
+          "enum": [
+            "STRENGTH_CHECK_WHERE_LEVERAGE_APPLIES",
+            "CHECK_TO_IMPERSONATE_REPRESENTED_TYPE",
+            "CHECK_TO_INSPECT_HIGHLY_DETAILED_ITEM",
+            "SAVE_AGAINST_POISON",
+            "CHECK_TO_APPRAISE_OR_INSPECT_SMALL_OR_HIGHLY_DETAILED_ITEM",
+            "CHECK_TO_APPRAISE_OR_INSPECT_HIGHLY_DETAILED_ITEM"
+          ]
+        },
+        "excludesCreatureTypes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "undead",
+              "construct"
+            ]
+          }
+        },
+        "condition": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/conditionReference"
+        },
+        "appliesTo": {
+          "$ref": "#/$defs/ruleReference"
+        },
+        "activation": {
+          "$ref": "#/$defs/activation"
+        },
+        "durationMinutes": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "limitedUses": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maximumUses",
+        "consumedPerUse",
+        "recovery"
+      ],
+      "properties": {
+        "maximumUses": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "consumedPerUse": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "recovery": {
+          "enum": [
+            "NONE",
+            "SHORT_REST",
+            "LONG_REST",
+            "DAILY"
+          ]
+        },
+        "recoveryTiming": {
+          "enum": [
+            "SHORT_REST",
+            "LONG_REST",
+            "DAILY"
+          ]
+        }
+      }
+    },
+    "signal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "activation",
+        "output",
+        "audibleRangeFeet"
+      ],
+      "properties": {
+        "activation": {
+          "$ref": "#/$defs/activation"
+        },
+        "output": {
+          "const": "AUDIBLE_SOUND"
+        },
+        "audibleRangeFeet": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "stabilizeUse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "activation",
+        "target",
+        "usesConsumed"
+      ],
+      "properties": {
+        "kind": {
+          "const": "STABILIZE_USE"
+        },
+        "activation": {
+          "$ref": "#/$defs/activation"
+        },
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "hitPoints"
+          ],
+          "properties": {
+            "hitPoints": {
+              "const": 0
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/conditionReference"
+            }
+          }
+        },
+        "usesConsumed": {
+          "const": 1
+        },
+        "withoutMedicineCheck": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ongoingDamageTermination": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "timing",
+            "check"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ABILITY_CHECK"
+            },
+            "timing": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/turnTiming"
+            },
+            "check": {
+              "$ref": "urn:thedndpub:schemas:core-rules:rule:v1#/$defs/abilityCheck"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "timing",
+            "condition"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ACTION_WITH_CONDITION"
+            },
+            "timing": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/turnTiming"
+            },
+            "condition": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/conditionReference"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "state"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ENVIRONMENTAL"
+            },
+            "state": {
+              "enum": [
+                "DOUSED",
+                "SUBMERGED",
+                "SUFFOCATED"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "successfulSaves"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SUCCESSFUL_SAVES"
+            },
+            "successfulSaves": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "timing",
+            "method",
+            "damageReduction",
+            "usesToEnd"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SUPPRESSION_ACTIONS"
+            },
+            "timing": {
+              "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/turnTiming"
+            },
+            "method": {
+              "enum": [
+                "SMOTHER_WITH_BLANKET_OR_CARPET"
+              ]
+            },
+            "damageReduction": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "count",
+                "die"
+              ],
+              "properties": {
+                "count": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "die": {
+                  "enum": [
+                    "d4",
+                    "d6",
+                    "d8",
+                    "d10",
+                    "d12"
+                  ]
+                }
+              }
+            },
+            "usesToEnd": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      ]
+    },
+    "ongoingDamage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "trigger",
+        "damage",
+        "startsAt",
+        "repeats",
+        "endsWhen"
+      ],
+      "properties": {
+        "kind": {
+          "const": "ONGOING_DAMAGE"
+        },
+        "trigger": {
+          "enum": [
+            "ON_HIT",
+            "ON_FAILED_SAVE",
+            "ON_APPLICATION"
+          ]
+        },
+        "applicationResolution": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/savingThrow"
+        },
+        "initialDamage": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+        },
+        "damage": {
+          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+        },
+        "startsAt": {
+          "enum": [
+            "IMMEDIATELY",
+            "NEXT_START_OF_TARGET_TURN",
+            "NEXT_END_OF_TARGET_TURN",
+            "NEXT_ROUND",
+            "AFTER_24_HOURS"
+          ]
+        },
+        "repeats": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "cadence",
+            "resolution"
+          ],
+          "properties": {
+            "cadence": {
+              "enum": [
+                "EACH_TARGET_TURN",
+                "EACH_ROUND",
+                "EVERY_24_HOURS"
+              ]
+            },
+            "resolution": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "kind"
+                  ],
+                  "properties": {
+                    "kind": {
+                      "const": "AUTOMATIC"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "kind",
+                    "savingThrow"
+                  ],
+                  "properties": {
+                    "kind": {
+                      "const": "SAVING_THROW"
+                    },
+                    "savingThrow": {
+                      "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/savingThrow"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "endsWhen": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ongoingDamageTermination"
+          }
         }
       }
     }

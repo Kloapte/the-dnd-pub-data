@@ -363,40 +363,165 @@
       }
     },
     "thrown": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "kind",
-        "drawAsPartOfAttack",
-        "meleeWeaponUsesMeleeAbility"
-      ],
-      "properties": {
-        "kind": {
-          "const": "THROWN"
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "meleeWeaponUsesMeleeAbility"
+          ],
+          "properties": {
+            "kind": {
+              "const": "THROWN"
+            },
+            "meleeWeaponUsesMeleeAbility": {
+              "const": true
+            }
+          }
         },
-        "drawAsPartOfAttack": {
-          "type": "boolean"
-        },
-        "meleeWeaponUsesMeleeAbility": {
-          "const": true
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "drawAsPartOfAttack",
+            "meleeWeaponUsesMeleeAbility"
+          ],
+          "properties": {
+            "kind": {
+              "const": "THROWN"
+            },
+            "drawAsPartOfAttack": {
+              "const": true
+            },
+            "meleeWeaponUsesMeleeAbility": {
+              "const": true
+            }
+          }
         }
-      }
+      ]
     },
     "versatile": {
       "type": "object",
       "additionalProperties": false,
       "required": [
         "kind",
-        "twoHandedDamage"
+        "twoHandedDamageAppliesTo"
       ],
       "properties": {
         "kind": {
           "const": "VERSATILE"
         },
-        "twoHandedDamage": {
-          "$ref": "urn:thedndpub:schemas:core-rules:common:v1#/$defs/damageRoll"
+        "twoHandedDamageAppliesTo": {
+          "const": "MELEE_ATTACK"
         }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "sourceMetadata",
+          "mechanic"
+        ],
+        "properties": {
+          "sourceMetadata": {
+            "required": [
+              "source"
+            ],
+            "properties": {
+              "source": {
+                "const": "PHB",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "mechanic": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "const": "THROWN",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "then": {
+        "properties": {
+          "mechanic": {
+            "not": {
+              "type": "object",
+              "required": [
+                "drawAsPartOfAttack"
+              ],
+              "properties": {
+                "drawAsPartOfAttack": {}
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "sourceMetadata",
+          "mechanic"
+        ],
+        "properties": {
+          "sourceMetadata": {
+            "required": [
+              "source"
+            ],
+            "properties": {
+              "source": {
+                "const": "XPHB",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "mechanic": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "const": "THROWN",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "then": {
+        "properties": {
+          "mechanic": {
+            "required": [
+              "drawAsPartOfAttack"
+            ],
+            "properties": {
+              "drawAsPartOfAttack": {
+                "const": true
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      }
+    }
+  ]
 }

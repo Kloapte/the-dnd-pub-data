@@ -1,0 +1,79 @@
+{
+  "id": "item:xdmg:pale-tincture",
+  "name": "Pale Tincture",
+  "sourceMetadata": {
+    "source": "XDMG",
+    "page": 91,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "poison": true,
+  "useMechanics": [
+    {
+      "kind": "ONGOING_DAMAGE",
+      "trigger": "ON_FAILED_SAVE",
+      "applicationResolution": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "constitution"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "FIXED",
+          "value": 16
+        }
+      },
+      "initialDamage": {
+        "kind": "DAMAGE_ROLL",
+        "damageTypes": [
+          "poison"
+        ],
+        "base": {
+          "kind": "DICE",
+          "count": 1,
+          "die": "d6"
+        }
+      },
+      "damage": {
+        "kind": "DAMAGE_ROLL",
+        "damageTypes": [
+          "poison"
+        ],
+        "base": {
+          "kind": "DICE",
+          "count": 1,
+          "die": "d6"
+        }
+      },
+      "startsAt": "AFTER_24_HOURS",
+      "repeats": {
+        "cadence": "EVERY_24_HOURS",
+        "resolution": {
+          "kind": "SAVING_THROW",
+          "savingThrow": {
+            "kind": "SAVING_THROW",
+            "abilities": [
+              "constitution"
+            ],
+            "abilitySelection": "rule-specified",
+            "dc": {
+              "kind": "FIXED",
+              "value": 16
+            }
+          }
+        }
+      },
+      "endsWhen": [
+        {
+          "kind": "SUCCESSFUL_SAVES",
+          "successfulSaves": 7
+        }
+      ]
+    }
+  ]
+}

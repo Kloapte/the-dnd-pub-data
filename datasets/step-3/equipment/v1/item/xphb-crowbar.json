@@ -1,0 +1,28 @@
+{
+  "id": "item:xphb:crowbar",
+  "name": "Crowbar",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 225,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "checkModifiers": [
+    {
+      "modifier": {
+        "kind": "D20_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "advantage",
+        "diceCount": 2,
+        "select": "higher"
+      },
+      "scope": "STRENGTH_CHECK_WHERE_LEVERAGE_APPLIES"
+    }
+  ]
+}

@@ -23,17 +23,6 @@
   },
   "weapon": {
     "category": "simple",
-    "damage": {
-      "kind": "DAMAGE_ROLL",
-      "damageTypes": [
-        "piercing"
-      ],
-      "base": {
-        "kind": "DICE",
-        "count": 1,
-        "die": "d4"
-      }
-    },
     "range": {
       "kind": "NORMAL_AND_LONG",
       "normalFeet": 20,
@@ -57,6 +46,36 @@
       {
         "targetType": "item-mastery",
         "id": "item-mastery:xphb:nick"
+      }
+    ],
+    "damageEntries": [
+      {
+        "usage": "MELEE",
+        "damage": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "piercing"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 1,
+            "die": "d4"
+          }
+        }
+      },
+      {
+        "usage": "THROWN",
+        "damage": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "piercing"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 1,
+            "die": "d4"
+          }
+        }
       }
     ]
   }

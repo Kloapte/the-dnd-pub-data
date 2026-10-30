@@ -18,17 +18,6 @@
   },
   "weapon": {
     "category": "martial",
-    "damage": {
-      "kind": "DAMAGE_ROLL",
-      "damageTypes": [
-        "slashing"
-      ],
-      "base": {
-        "kind": "DICE",
-        "count": 2,
-        "die": "d4"
-      }
-    },
     "properties": [
       {
         "targetType": "item-property",
@@ -44,7 +33,26 @@
         "kind": "BONUS_ACTION_FOLLOW_UP",
         "trigger": "Attack action with this weapon",
         "timing": "immediately-after",
-        "cost": "bonus-action",
+        "cost": "bonus-action"
+      }
+    ],
+    "damageEntries": [
+      {
+        "usage": "MELEE",
+        "damage": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "slashing"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 2,
+            "die": "d4"
+          }
+        }
+      },
+      {
+        "usage": "BONUS_ACTION_FOLLOW_UP",
         "damage": {
           "kind": "DAMAGE_ROLL",
           "damageTypes": [

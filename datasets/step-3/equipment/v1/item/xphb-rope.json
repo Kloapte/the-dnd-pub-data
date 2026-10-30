@@ -1,0 +1,103 @@
+{
+  "id": "item:xphb:rope",
+  "name": "Rope",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 228,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "price": {
+    "amount": 100,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 5,
+    "unit": "pound"
+  },
+  "durability": {
+    "burstCheck": {
+      "componentId": "equipment-check",
+      "kind": "D20_TEST",
+      "subtype": "ABILITY_CHECK",
+      "abilities": [
+        "strength"
+      ],
+      "skill": {
+        "targetType": "skill",
+        "id": "skill:xphb:athletics"
+      },
+      "dc": 20
+    }
+  },
+  "equipmentActivities": [
+    {
+      "kind": "ABILITY_CHECK_ACTIVITY",
+      "activity": "TIE_KNOT",
+      "action": {
+        "targetType": "action",
+        "id": "action:xphb:utilize"
+      },
+      "check": {
+        "componentId": "equipment-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "dexterity"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:sleight-of-hand"
+        },
+        "dc": 10
+      }
+    }
+  ],
+  "bindingProcedure": {
+    "kind": "BINDING_PROCEDURE",
+    "trigger": "BIND_CREATURE",
+    "targetRequirements": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:grappled"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:incapacitated"
+      },
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:restrained"
+      }
+    ],
+    "resultConditions": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:restrained"
+      }
+    ],
+    "restrainedWhenLegsBound": true,
+    "escape": {
+      "actionTiming": "ACTION",
+      "check": {
+        "componentId": "equipment-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "dexterity"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:acrobatics"
+        },
+        "dc": 15
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "item-property:phb:versatile",
+  "name": "Versatile",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 147
+  },
+  "mechanic": {
+    "kind": "VERSATILE",
+    "twoHandedDamageAppliesTo": "MELEE_ATTACK"
+  },
+  "reprintedAsProperties": [
+    {
+      "targetType": "item-property",
+      "id": "item-property:xphb:versatile"
+    }
+  ]
+}

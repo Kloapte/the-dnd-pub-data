@@ -1,0 +1,60 @@
+{
+  "id": "item:lox:keg-of-alchemists-fire",
+  "name": "Keg of Alchemist's Fire",
+  "sourceMetadata": {
+    "source": "LoX",
+    "page": 35
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "rarity": "none",
+  "useMechanics": [
+    {
+      "kind": "ONGOING_DAMAGE",
+      "trigger": "ON_HIT",
+      "initialDamage": {
+        "kind": "DAMAGE_ROLL",
+        "damageTypes": [
+          "fire"
+        ],
+        "base": {
+          "kind": "DICE",
+          "count": 6,
+          "die": "d6"
+        }
+      },
+      "damage": {
+        "kind": "DAMAGE_ROLL",
+        "damageTypes": [
+          "fire"
+        ],
+        "base": {
+          "kind": "DICE",
+          "count": 6,
+          "die": "d6"
+        }
+      },
+      "startsAt": "NEXT_ROUND",
+      "repeats": {
+        "cadence": "EACH_ROUND",
+        "resolution": {
+          "kind": "AUTOMATIC"
+        }
+      },
+      "endsWhen": [
+        {
+          "kind": "SUPPRESSION_ACTIONS",
+          "timing": {
+            "kind": "action"
+          },
+          "method": "SMOTHER_WITH_BLANKET_OR_CARPET",
+          "damageReduction": {
+            "count": 2,
+            "die": "d6"
+          },
+          "usesToEnd": 3
+        }
+      ]
+    }
+  ]
+}

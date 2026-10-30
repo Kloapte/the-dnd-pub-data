@@ -1,0 +1,42 @@
+{
+  "id": "item:xphb:torch",
+  "name": "Torch",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 229,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "lightEmissions": [
+    {
+      "brightFeet": 20,
+      "dimFeet": 40,
+      "durationMinutes": 60,
+      "shape": "RADIUS",
+      "mode": "OPEN"
+    }
+  ],
+  "useMechanics": [
+    {
+      "kind": "ITEM_ATTACK_DAMAGE",
+      "trigger": "ATTACK_HIT",
+      "attackKind": "SIMPLE_MELEE",
+      "damage": {
+        "kind": "DAMAGE_ROLL",
+        "damageTypes": [
+          "fire"
+        ],
+        "base": {
+          "kind": "FIXED",
+          "amount": 1
+        }
+      }
+    }
+  ]
+}

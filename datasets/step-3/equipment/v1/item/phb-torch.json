@@ -30,7 +30,41 @@
     {
       "brightFeet": 20,
       "dimFeet": 40,
-      "durationMinutes": 60
+      "durationMinutes": 60,
+      "shape": "RADIUS",
+      "mode": "OPEN"
+    }
+  ],
+  "useMechanics": [
+    {
+      "kind": "ITEM_ATTACK_DAMAGE",
+      "trigger": "MELEE_HIT_WHILE_BURNING",
+      "damage": {
+        "kind": "DAMAGE_ROLL",
+        "damageTypes": [
+          "fire"
+        ],
+        "base": {
+          "kind": "FIXED",
+          "amount": 1
+        }
+      }
+    },
+    {
+      "kind": "IGNITION",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:phb:use-an-object"
+        }
+      },
+      "targets": [
+        "TORCH"
+      ],
+      "requiresTinder": true
     }
   ]
 }

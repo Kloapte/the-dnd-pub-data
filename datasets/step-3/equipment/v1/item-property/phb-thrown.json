@@ -1,0 +1,18 @@
+{
+  "id": "item-property:phb:thrown",
+  "name": "Thrown",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 147
+  },
+  "mechanic": {
+    "kind": "THROWN",
+    "meleeWeaponUsesMeleeAbility": true
+  },
+  "reprintedAsProperties": [
+    {
+      "targetType": "item-property",
+      "id": "item-property:xphb:thrown"
+    }
+  ]
+}

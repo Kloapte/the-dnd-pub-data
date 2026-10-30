@@ -1,0 +1,62 @@
+{
+  "id": "item:xphb:hooded-lantern",
+  "name": "Lantern, Hooded",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 226,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "lightEmissions": [
+    {
+      "brightFeet": 30,
+      "dimFeet": 60,
+      "shape": "RADIUS",
+      "mode": "OPEN"
+    },
+    {
+      "brightFeet": 0,
+      "dimFeet": 5,
+      "shape": "RADIUS",
+      "mode": "LOWERED"
+    }
+  ],
+  "lightSource": {
+    "fuel": {
+      "item": {
+        "targetType": "item",
+        "id": "item:xphb:oil"
+      },
+      "burnDurationHours": 6,
+      "cumulativeFuelUse": true
+    },
+    "controls": [
+      {
+        "operation": "LOWER_HOOD",
+        "action": {
+          "targetType": "action",
+          "id": "action:xphb:utilize"
+        },
+        "timing": {
+          "kind": "bonus-action"
+        }
+      },
+      {
+        "operation": "RAISE_HOOD",
+        "action": {
+          "targetType": "action",
+          "id": "action:xphb:utilize"
+        },
+        "timing": {
+          "kind": "bonus-action"
+        }
+      }
+    ]
+  }
+}

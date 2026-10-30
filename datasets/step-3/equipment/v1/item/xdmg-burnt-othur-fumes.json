@@ -1,0 +1,79 @@
+{
+  "id": "item:xdmg:burnt-othur-fumes",
+  "name": "Burnt Othur Fumes",
+  "sourceMetadata": {
+    "source": "XDMG",
+    "page": 90,
+    "flags": {
+      "srd52": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "poison": true,
+  "useMechanics": [
+    {
+      "kind": "ONGOING_DAMAGE",
+      "trigger": "ON_FAILED_SAVE",
+      "applicationResolution": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "constitution"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "FIXED",
+          "value": 13
+        }
+      },
+      "initialDamage": {
+        "kind": "DAMAGE_ROLL",
+        "damageTypes": [
+          "poison"
+        ],
+        "base": {
+          "kind": "DICE",
+          "count": 3,
+          "die": "d6"
+        }
+      },
+      "damage": {
+        "kind": "DAMAGE_ROLL",
+        "damageTypes": [
+          "poison"
+        ],
+        "base": {
+          "kind": "DICE",
+          "count": 1,
+          "die": "d6"
+        }
+      },
+      "startsAt": "NEXT_START_OF_TARGET_TURN",
+      "repeats": {
+        "cadence": "EACH_TARGET_TURN",
+        "resolution": {
+          "kind": "SAVING_THROW",
+          "savingThrow": {
+            "kind": "SAVING_THROW",
+            "abilities": [
+              "constitution"
+            ],
+            "abilitySelection": "rule-specified",
+            "dc": {
+              "kind": "FIXED",
+              "value": 13
+            }
+          }
+        }
+      },
+      "endsWhen": [
+        {
+          "kind": "SUCCESSFUL_SAVES",
+          "successfulSaves": 3
+        }
+      ]
+    }
+  ]
+}

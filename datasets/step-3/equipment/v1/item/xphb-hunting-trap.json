@@ -1,0 +1,96 @@
+{
+  "id": "item:xphb:hunting-trap",
+  "name": "Hunting Trap",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 224,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "useMechanics": [
+    {
+      "kind": "TRAP_PROCEDURE",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:xphb:utilize"
+        }
+      },
+      "trigger": "PRESSURE_PLATE",
+      "fixedToImmobileObject": true,
+      "savingThrow": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "dexterity"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "FIXED",
+          "value": 13
+        }
+      },
+      "outcomes": [
+        {
+          "kind": "DAMAGE",
+          "when": "ON_FAILED_SAVE",
+          "damage": {
+            "kind": "DAMAGE_ROLL",
+            "damageTypes": [
+              "piercing"
+            ],
+            "base": {
+              "kind": "DICE",
+              "count": 1,
+              "die": "d4"
+            }
+          }
+        },
+        {
+          "kind": "SPEED_CHANGE",
+          "when": "ON_FAILED_SAVE",
+          "operation": "SET_TO",
+          "feet": 0,
+          "duration": "UNTIL_START_OF_NEXT_TURN"
+        }
+      ],
+      "escape": {
+        "actionTiming": "UTILIZE",
+        "check": {
+          "componentId": "equipment-check",
+          "kind": "D20_TEST",
+          "subtype": "ABILITY_CHECK",
+          "abilities": [
+            "strength"
+          ],
+          "skill": {
+            "targetType": "skill",
+            "id": "skill:xphb:athletics"
+          },
+          "dc": 13
+        },
+        "mayFreeAnotherWithinReach": true,
+        "failedCheckDamage": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "piercing"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 1,
+            "die": "d4"
+          }
+        }
+      },
+      "tetherLengthFeet": 3
+    }
+  ]
+}

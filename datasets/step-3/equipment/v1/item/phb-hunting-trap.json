@@ -1,0 +1,90 @@
+{
+  "id": "item:phb:hunting-trap",
+  "name": "Hunting Trap",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 152,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "rarity": "none",
+  "useMechanics": [
+    {
+      "kind": "TRAP_PROCEDURE",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:phb:use-an-object"
+        }
+      },
+      "trigger": "PRESSURE_PLATE",
+      "fixedToImmobileObject": true,
+      "tetherLengthFeet": 3,
+      "savingThrow": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "dexterity"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "FIXED",
+          "value": 13
+        }
+      },
+      "outcomes": [
+        {
+          "kind": "DAMAGE",
+          "when": "ON_FAILED_SAVE",
+          "damage": {
+            "kind": "DAMAGE_ROLL",
+            "damageTypes": [
+              "piercing"
+            ],
+            "base": {
+              "kind": "DICE",
+              "count": 1,
+              "die": "d4"
+            }
+          }
+        },
+        {
+          "kind": "SPEED_CHANGE",
+          "when": "ON_FAILED_SAVE",
+          "operation": "SET_TO",
+          "feet": 0,
+          "duration": "UNTIL_BREAKS_FREE"
+        }
+      ],
+      "escape": {
+        "actionTiming": "ACTION",
+        "check": {
+          "componentId": "equipment-check",
+          "kind": "D20_TEST",
+          "subtype": "ABILITY_CHECK",
+          "abilities": [
+            "strength"
+          ],
+          "dc": 13
+        },
+        "mayFreeAnotherWithinReach": true,
+        "failedCheckDamage": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "piercing"
+          ],
+          "base": {
+            "kind": "FIXED",
+            "amount": 1
+          }
+        }
+      }
+    }
+  ]
+}

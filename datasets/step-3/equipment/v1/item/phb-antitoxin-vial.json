@@ -1,0 +1,33 @@
+{
+  "id": "item:phb:antitoxin-vial",
+  "name": "Antitoxin (vial)",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 151,
+    "flags": {
+      "srd": true,
+      "basicRules": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "classic",
+  "rarity": "none",
+  "checkModifiers": [
+    {
+      "modifier": {
+        "kind": "D20_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "advantage",
+        "diceCount": 2,
+        "select": "higher"
+      },
+      "scope": "SAVE_AGAINST_POISON",
+      "excludesCreatureTypes": [
+        "undead",
+        "construct"
+      ],
+      "durationMinutes": 60
+    }
+  ]
+}

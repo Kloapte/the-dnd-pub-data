@@ -1,0 +1,34 @@
+{
+  "id": "item:xphb:bullseye-lantern",
+  "name": "Bullseye Lantern",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 226,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "lightEmissions": [
+    {
+      "brightFeet": 60,
+      "dimFeet": 120,
+      "shape": "CONE",
+      "mode": "OPEN"
+    }
+  ],
+  "lightSource": {
+    "fuel": {
+      "item": {
+        "targetType": "item",
+        "id": "item:xphb:oil"
+      },
+      "burnDurationHours": 6,
+      "cumulativeFuelUse": true
+    }
+  }
+}

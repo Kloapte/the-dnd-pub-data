@@ -1,0 +1,76 @@
+{
+  "id": "item:phb:basic-poison-vial",
+  "name": "Basic Poison (vial)",
+  "sourceMetadata": {
+    "source": "PHB",
+    "page": 153
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "rarity": "none",
+  "price": {
+    "amount": 10000,
+    "unit": "copper-piece"
+  },
+  "poison": true,
+  "poisonAdministration": [
+    "injury"
+  ],
+  "useMechanics": [
+    {
+      "kind": "POISON_APPLICATION",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:phb:use-an-object"
+        },
+        "consumesItemOnUse": true
+      },
+      "application": {
+        "weaponCount": 1,
+        "ammunitionCount": 3
+      },
+      "eligibleDamageTypes": [
+        "PIERCING",
+        "SLASHING"
+      ],
+      "resolution": {
+        "kind": "SAVING_THROW",
+        "savingThrow": {
+          "kind": "SAVING_THROW",
+          "abilities": [
+            "constitution"
+          ],
+          "abilitySelection": "rule-specified",
+          "dc": {
+            "kind": "FIXED",
+            "value": 10
+          }
+        }
+      },
+      "outcomes": [
+        {
+          "kind": "DAMAGE",
+          "when": "ON_FAILED_SAVE",
+          "damage": {
+            "kind": "DAMAGE_ROLL",
+            "damageTypes": [
+              "poison"
+            ],
+            "base": {
+              "kind": "DICE",
+              "count": 1,
+              "die": "d4"
+            }
+          }
+        }
+      ],
+      "duration": {
+        "minutes": 1
+      }
+    }
+  ]
+}

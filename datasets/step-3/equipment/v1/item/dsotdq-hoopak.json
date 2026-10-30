@@ -18,17 +18,6 @@
   },
   "weapon": {
     "category": "martial",
-    "damage": {
-      "kind": "DAMAGE_ROLL",
-      "damageTypes": [
-        "piercing"
-      ],
-      "base": {
-        "kind": "DICE",
-        "count": 1,
-        "die": "d6"
-      }
-    },
     "range": {
       "kind": "NORMAL_AND_LONG",
       "normalFeet": 40,
@@ -65,7 +54,30 @@
         "ammunition": {
           "targetType": "item",
           "id": "item:phb:sling-bullet"
-        },
+        }
+      },
+      {
+        "kind": "MELEE_MODE_EXCEPTION",
+        "meleeIgnoresAmmunition": true
+      }
+    ],
+    "damageEntries": [
+      {
+        "usage": "MELEE",
+        "damage": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "piercing"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 1,
+            "die": "d6"
+          }
+        }
+      },
+      {
+        "usage": "RANGED",
         "damage": {
           "kind": "DAMAGE_ROLL",
           "damageTypes": [
@@ -77,10 +89,6 @@
             "die": "d4"
           }
         }
-      },
-      {
-        "kind": "MELEE_MODE_EXCEPTION",
-        "meleeIgnoresAmmunition": true
       }
     ]
   }

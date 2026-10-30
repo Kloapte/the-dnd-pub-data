@@ -1,0 +1,89 @@
+{
+  "id": "item:xphb:net",
+  "name": "Net",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 227,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "price": {
+    "amount": 100,
+    "unit": "copper-piece"
+  },
+  "weight": {
+    "amount": 3,
+    "unit": "pound"
+  },
+  "bindingProcedure": {
+    "kind": "BINDING_PROCEDURE",
+    "trigger": "FAILED_SAVING_THROW",
+    "activation": {
+      "timing": {
+        "kind": "action"
+      },
+      "action": {
+        "targetType": "action",
+        "id": "action:xphb:attack"
+      },
+      "replacesOneAttack": true
+    },
+    "rangeFeet": 15,
+    "resolution": {
+      "kind": "SAVING_THROW",
+      "abilities": [
+        "dexterity"
+      ],
+      "abilitySelection": "rule-specified",
+      "dc": {
+        "kind": "ABILITY_PLUS_PROFICIENCY",
+        "base": 8,
+        "ability": "dexterity",
+        "proficiencyBonus": true
+      }
+    },
+    "appliesConditionOn": "FAILED_SAVE",
+    "resultConditions": [
+      {
+        "targetType": "condition",
+        "id": "condition:xphb:restrained"
+      }
+    ],
+    "escape": {
+      "actionTiming": "ACTION",
+      "check": {
+        "componentId": "equipment-check",
+        "kind": "D20_TEST",
+        "subtype": "ABILITY_CHECK",
+        "abilities": [
+          "strength"
+        ],
+        "skill": {
+          "targetType": "skill",
+          "id": "skill:xphb:athletics"
+        },
+        "dc": 10
+      },
+      "canBeAttemptedByAnotherWithinFeet": 5
+    },
+    "destroyedBy": {
+      "armorClass": 10,
+      "hitPoints": 5,
+      "damageImmunities": [
+        "bludgeoning",
+        "poison",
+        "psychic"
+      ]
+    },
+    "noEffectTargetSizes": [
+      "huge",
+      "gargantuan"
+    ]
+  }
+}

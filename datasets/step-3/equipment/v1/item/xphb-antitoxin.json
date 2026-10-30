@@ -1,0 +1,39 @@
+{
+  "id": "item:xphb:antitoxin",
+  "name": "Antitoxin",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 222,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "checkModifiers": [
+    {
+      "modifier": {
+        "kind": "D20_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "advantage",
+        "diceCount": 2,
+        "select": "higher"
+      },
+      "scope": "SAVE_AGAINST_POISON",
+      "condition": {
+        "targetType": "condition",
+        "id": "condition:xphb:poisoned"
+      },
+      "durationMinutes": 60,
+      "activation": {
+        "timing": {
+          "kind": "bonus-action"
+        },
+        "consumesItemOnUse": true
+      }
+    }
+  ]
+}

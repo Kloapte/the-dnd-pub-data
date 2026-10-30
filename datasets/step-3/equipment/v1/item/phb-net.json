@@ -38,6 +38,10 @@
       {
         "targetType": "item-property",
         "id": "item-property:phb:special"
+      },
+      {
+        "targetType": "item-property",
+        "id": "item-property:phb:thrown"
       }
     ],
     "specialMechanics": [

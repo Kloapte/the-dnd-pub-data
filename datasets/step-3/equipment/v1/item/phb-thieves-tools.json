@@ -7,7 +7,13 @@
     "flags": {
       "srd": true,
       "basicRules": true
-    }
+    },
+    "reprintedAs": [
+      {
+        "targetType": "item",
+        "id": "item:xphb:thieves-tools"
+      }
+    ]
   },
   "category": "TOOL",
   "sourceTypeCode": "T",
@@ -19,5 +25,17 @@
   "weight": {
     "amount": 1,
     "unit": "pound"
-  }
+  },
+  "equipmentActivities": [
+    {
+      "kind": "ABILITY_CHECK_ACTIVITY",
+      "activity": "DISARM_TRAP",
+      "proficiencyBonusApplied": true
+    },
+    {
+      "kind": "ABILITY_CHECK_ACTIVITY",
+      "activity": "OPEN_LOCK",
+      "proficiencyBonusApplied": true
+    }
+  ]
 }

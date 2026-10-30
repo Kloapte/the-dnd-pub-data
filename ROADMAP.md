@@ -151,7 +151,7 @@ The step sequence reflects the previously approved dependency analysis. This rev
 
 **Focus:** Actions and timing; checks, saves, contests, attacks, modifiers, damage and healing; movement and spatial rules; conditions, concentration, statuses and diseases; skill/ability relationships; senses and languages; rules applicability, prerequisites, and exceptions. Reuse semantic structures where they genuinely fit. Avoid proliferating specialized procedure families for each source paragraph.
 
-**Status: Completed and approved (Phases 1–6; 2026-10-29).** The user explicitly approved the remaining Phase 2, Phase 3, Phase 4, and Phase 6 gates and final Step 2 closure. Documented partial representations, omissions, duplicates, unresolved references, ambiguities, authorized deferrals, and validation limitations remain in force as recorded in the phase reports. Step 3 Phases 1 and 2 are approved; Phase 3 is authorized and awaiting its approval gate.
+**Status: Completed and approved (Phases 1–6; 2026-10-29).** The user explicitly approved the remaining Phase 2, Phase 3, Phase 4, and Phase 6 gates and final Step 2 closure. Documented partial representations, omissions, duplicates, unresolved references, ambiguities, authorized deferrals, and validation limitations remain in force as recorded in the phase reports. Step 3 Phases 1–3 are approved; Phase 4 is authorized and at its approval gate.
 
 ### Step 3 — Equipment Foundation
 
@@ -159,7 +159,7 @@ The step sequence reflects the previously approved dependency analysis. This rev
 
 **Focus:** Base-item identity, item types/properties, weapons and weapon masteries, armor/shields, damage, range, weight, requirements, item relationships, and offline template expansion. Do not expand advanced magical equipment merely to complete foundational references. Document the assignment of deferred equipment to the later step.
 
-**Current status:** Phases 1 and 2 approved. Phase 3 representative conversion is completed and awaiting explicit approval; do not proceed to Phase 4 before that gate is approved.
+**Current status:** Phases 1–3 approved. The user explicitly approved and closed Phase 3 and authorized Phase 4 on 2026-10-30. Phase 4 is at its approval gate; do not proceed to Phase 5 without explicit approval.
 
 ### Step 4 — Spells
 

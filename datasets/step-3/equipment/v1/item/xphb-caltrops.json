@@ -1,0 +1,72 @@
+{
+  "id": "item:xphb:caltrops",
+  "name": "Caltrops",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 224,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "useMechanics": [
+    {
+      "kind": "AREA_HAZARD",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:xphb:utilize"
+        }
+      },
+      "area": {
+        "shape": "SQUARE",
+        "sideFeet": 5,
+        "withinFeet": 5
+      },
+      "trigger": "ENTERS_AREA",
+      "savingThrow": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "dexterity"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "FIXED",
+          "value": 15
+        }
+      },
+      "outcomes": [
+        {
+          "kind": "DAMAGE",
+          "when": "ON_FAILED_SAVE",
+          "damage": {
+            "kind": "DAMAGE_ROLL",
+            "damageTypes": [
+              "piercing"
+            ],
+            "base": {
+              "kind": "FIXED",
+              "amount": 1
+            }
+          }
+        },
+        {
+          "kind": "SPEED_CHANGE",
+          "when": "ON_FAILED_SAVE",
+          "operation": "SET_TO",
+          "feet": 0,
+          "duration": "UNTIL_START_OF_NEXT_TURN"
+        }
+      ],
+      "recoveryMinutes": 10,
+      "firstEntryPerTurn": true
+    }
+  ]
+}

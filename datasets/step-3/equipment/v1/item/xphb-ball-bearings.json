@@ -1,0 +1,59 @@
+{
+  "id": "item:xphb:ball-bearings",
+  "name": "Ball Bearings",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 224,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "useMechanics": [
+    {
+      "kind": "AREA_HAZARD",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:xphb:utilize"
+        }
+      },
+      "area": {
+        "shape": "SQUARE",
+        "sideFeet": 10,
+        "withinFeet": 10
+      },
+      "trigger": "ENTERS_AREA",
+      "savingThrow": {
+        "kind": "SAVING_THROW",
+        "abilities": [
+          "dexterity"
+        ],
+        "abilitySelection": "rule-specified",
+        "dc": {
+          "kind": "FIXED",
+          "value": 10
+        }
+      },
+      "outcomes": [
+        {
+          "kind": "CONDITION",
+          "when": "ON_FAILED_SAVE",
+          "condition": {
+            "targetType": "condition",
+            "id": "condition:xphb:prone"
+          }
+        }
+      ],
+      "recoveryMinutes": 10,
+      "firstEntryPerTurn": true
+    }
+  ]
+}

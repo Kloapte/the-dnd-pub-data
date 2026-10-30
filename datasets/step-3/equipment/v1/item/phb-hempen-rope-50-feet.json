@@ -25,5 +25,17 @@
   "weight": {
     "amount": 10,
     "unit": "pound"
+  },
+  "durability": {
+    "hitPoints": 2,
+    "burstCheck": {
+      "componentId": "equipment-check",
+      "kind": "D20_TEST",
+      "subtype": "ABILITY_CHECK",
+      "abilities": [
+        "strength"
+      ],
+      "dc": 17
+    }
   }
 }

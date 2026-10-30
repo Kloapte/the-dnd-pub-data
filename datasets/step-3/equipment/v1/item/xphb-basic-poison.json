@@ -17,5 +17,54 @@
     "amount": 10000,
     "unit": "copper-piece"
   },
-  "poison": true
+  "poison": true,
+  "useMechanics": [
+    {
+      "kind": "POISON_APPLICATION",
+      "activation": {
+        "timing": {
+          "kind": "bonus-action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:xphb:utilize"
+        },
+        "consumesItemOnUse": true
+      },
+      "application": {
+        "weaponCount": 1,
+        "ammunitionCount": 3
+      },
+      "eligibleDamageTypes": [
+        "PIERCING",
+        "SLASHING"
+      ],
+      "resolution": {
+        "kind": "ON_QUALIFYING_DAMAGE"
+      },
+      "outcomes": [
+        {
+          "kind": "COATING",
+          "trigger": "TARGET_TAKES_FIRE_DAMAGE",
+          "damage": {
+            "kind": "DAMAGE_ROLL",
+            "damageTypes": [
+              "poison"
+            ],
+            "base": {
+              "kind": "DICE",
+              "count": 1,
+              "die": "d4"
+            }
+          },
+          "durationMinutes": 1,
+          "when": "ON_HIT"
+        }
+      ],
+      "duration": {
+        "minutes": 1,
+        "expiresOnFirstDamage": true
+      }
+    }
+  ]
 }

@@ -29,17 +29,6 @@
   },
   "weapon": {
     "category": "martial",
-    "damage": {
-      "kind": "DAMAGE_ROLL",
-      "damageTypes": [
-        "piercing"
-      ],
-      "base": {
-        "kind": "DICE",
-        "count": 1,
-        "die": "d12"
-      }
-    },
     "properties": [
       {
         "targetType": "item-property",
@@ -56,6 +45,22 @@
         "closeTargetDistanceFeet": 5,
         "attackDisadvantage": true,
         "unmountedHandsRequired": 2
+      }
+    ],
+    "damageEntries": [
+      {
+        "usage": "MELEE",
+        "damage": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "piercing"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 1,
+            "die": "d12"
+          }
+        }
       }
     ]
   }

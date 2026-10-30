@@ -1,0 +1,44 @@
+{
+  "id": "item:xphb:healers-kit",
+  "name": "Healer's Kit",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 167,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "limitedUses": {
+    "maximumUses": 10,
+    "consumedPerUse": 1,
+    "recovery": "NONE"
+  },
+  "useMechanics": [
+    {
+      "kind": "STABILIZE_USE",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:xphb:utilize"
+        }
+      },
+      "target": {
+        "hitPoints": 0,
+        "condition": {
+          "targetType": "condition",
+          "id": "condition:xphb:unconscious"
+        }
+      },
+      "usesConsumed": 1,
+      "withoutMedicineCheck": true
+    }
+  ]
+}

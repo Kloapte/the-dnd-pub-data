@@ -1,0 +1,48 @@
+{
+  "id": "item:xphb:magnifying-glass",
+  "name": "Magnifying Glass",
+  "sourceMetadata": {
+    "source": "XPHB",
+    "page": 226,
+    "flags": {
+      "srd52": true,
+      "basicRules2024": true
+    }
+  },
+  "category": "ADVENTURING_GEAR",
+  "sourceTypeCode": "G",
+  "edition": "one",
+  "rarity": "none",
+  "checkModifiers": [
+    {
+      "modifier": {
+        "kind": "D20_ROLL_MODIFIER",
+        "roll": "ability-check",
+        "direction": "advantage",
+        "diceCount": 2,
+        "select": "higher"
+      },
+      "scope": "CHECK_TO_APPRAISE_OR_INSPECT_HIGHLY_DETAILED_ITEM"
+    }
+  ],
+  "useMechanics": [
+    {
+      "kind": "IGNITION",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:xphb:utilize"
+        }
+      },
+      "targets": [
+        "OTHER_FIRE"
+      ],
+      "requiresSunlight": true,
+      "requiresTinder": true,
+      "timeToLightOtherFireMinutes": 5
+    }
+  ]
+}

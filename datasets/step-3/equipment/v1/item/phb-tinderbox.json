@@ -25,5 +25,25 @@
   "weight": {
     "amount": 1,
     "unit": "pound"
-  }
+  },
+  "useMechanics": [
+    {
+      "kind": "IGNITION",
+      "activation": {
+        "timing": {
+          "kind": "action"
+        },
+        "action": {
+          "targetType": "action",
+          "id": "action:phb:use-an-object"
+        }
+      },
+      "targets": [
+        "TORCH",
+        "ABUNDANT_EXPOSED_FUEL"
+      ],
+      "requiresTinder": true,
+      "timeToLightOtherFireMinutes": 1
+    }
+  ]
 }

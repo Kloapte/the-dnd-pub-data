@@ -17,17 +17,6 @@
   "weaponEra": "modern",
   "weapon": {
     "category": "martial",
-    "damage": {
-      "kind": "DAMAGE_ROLL",
-      "damageTypes": [
-        "piercing"
-      ],
-      "base": {
-        "kind": "DICE",
-        "count": 2,
-        "die": "d8"
-      }
-    },
     "range": {
       "kind": "NORMAL_AND_LONG",
       "normalFeet": 80,
@@ -61,6 +50,22 @@
       "targetType": "item",
       "id": "item:xphb:firearm-bullet"
     },
-    "shotsBeforeReload": 30
+    "shotsBeforeReload": 30,
+    "damageEntries": [
+      {
+        "usage": "RANGED",
+        "damage": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "piercing"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 2,
+            "die": "d8"
+          }
+        }
+      }
+    ]
   }
 }

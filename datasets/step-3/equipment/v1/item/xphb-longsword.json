@@ -23,28 +23,6 @@
   },
   "weapon": {
     "category": "martial",
-    "damage": {
-      "kind": "DAMAGE_ROLL",
-      "damageTypes": [
-        "slashing"
-      ],
-      "base": {
-        "kind": "DICE",
-        "count": 1,
-        "die": "d8"
-      }
-    },
-    "versatileDamage": {
-      "kind": "DAMAGE_ROLL",
-      "damageTypes": [
-        "slashing"
-      ],
-      "base": {
-        "kind": "DICE",
-        "count": 1,
-        "die": "d10"
-      }
-    },
     "properties": [
       {
         "targetType": "item-property",
@@ -55,6 +33,36 @@
       {
         "targetType": "item-mastery",
         "id": "item-mastery:xphb:sap"
+      }
+    ],
+    "damageEntries": [
+      {
+        "usage": "ONE_HANDED",
+        "damage": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "slashing"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 1,
+            "die": "d8"
+          }
+        }
+      },
+      {
+        "usage": "TWO_HANDED",
+        "damage": {
+          "kind": "DAMAGE_ROLL",
+          "damageTypes": [
+            "slashing"
+          ],
+          "base": {
+            "kind": "DICE",
+            "count": 1,
+            "die": "d10"
+          }
+        }
       }
     ]
   }
